@@ -1,34 +1,31 @@
 <template>
 	<!-- 根据 MasterGo 封面设计还原（FRAME 名称：封面） -->
 	<section class="cover" :style="coverStyle">
-		<!-- 左上：catalogue 文案 -->
-		<button ref="catalogueEl" class="catalogue" type="button" @click="toggleCatalogue" aria-haspopup="true" :aria-expanded="showCatalogue ? 'true' : 'false'">catalogue</button>
+		<!-- 左上：CATALOGUE 块（标题与子项为一个整体） -->
+		<div class="catalogue-wrap" :class="{ 'is-open': showCatalogue }">
+			<button class="catalogue-head" type="button" @click="toggleCatalogue" :aria-expanded="showCatalogue ? 'true' : 'false'">CATALOGUE</button>
+			<ul v-if="showCatalogue" class="catalogue-list" role="list">
+				<li class="catalogue-item">Industry Background</li>
+				<li class="catalogue-item">Market Demand</li>
+				<li class="catalogue-item">Business Model</li>
+				<li class="catalogue-item">Team Composition</li>
+				<li class="catalogue-item">Product Introduction</li>
+			</ul>
+		</div>
 
 		<!-- 右上：圆形按钮（白底），覆盖一张图作为图标 -->
 		<button class="corner-btn" aria-label="version">
 			<img class="corner-btn__icon" alt="version" :src="yihaiLogo" />
 		</button>
 
-		<!-- Catalogue Panel -->
-		<transition name="fade">
-			<div v-if="showCatalogue" class="catalogue-panel" :style="panelStyle" role="dialog" aria-label="Catalogue">
-				<h3 class="catalogue-title">CATALOGUE</h3>
-				<ul class="catalogue-list">
-					<li class="catalogue-item">Industry Background</li>
-					<li class="catalogue-item">Market Demand</li>
-					<li class="catalogue-item">Business Model</li>
-					<li class="catalogue-item">Team Composition</li>
-					<li class="catalogue-item">Product Introduction</li>
-				</ul>
-			</div>
-		</transition>
+
 
 		<!-- 中心区域留空（按要求：首页中间不显示文字） -->
 	</section>
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 import coverBg from '../assets/微信图片_20250912104117_7221_12.png'
 import yihaiLogo from '../assets/yihai.svg'
 
@@ -37,42 +34,17 @@ const coverStyle = {
 }
 
 const showCatalogue = ref(false)
-const catalogueEl = ref(null)
-const panelStyle = reactive({ left: '98px', top: '84px' })
 
 function onKeydown(e) {
 	if (e.key === 'Escape') showCatalogue.value = false
 }
 
-function updatePanelPosition() {
-	const el = catalogueEl.value
-	if (!el) return
-	const rect = el.getBoundingClientRect()
-	// 计算在容器中的相对位置：cover 为定位容器
-	const container = el.closest('.cover')
-	const containerRect = container ? container.getBoundingClientRect() : { left: 0, top: 0 }
-	// 要求：面板与标题“实际重合”，即面板内边距之后的标题与原位置一致
-	const PADDING_LEFT = 16
-	const PADDING_TOP = 16
-	const left = rect.left - containerRect.left - PADDING_LEFT
-	const top = rect.top - containerRect.top - PADDING_TOP
-	panelStyle.left = `${Math.max(0, left)}px`
-	panelStyle.top = `${Math.max(0, top)}px`
-}
-
 function toggleCatalogue() {
 	showCatalogue.value = !showCatalogue.value
-	if (showCatalogue.value) nextTick(updatePanelPosition)
 }
 
-onMounted(() => {
-	document.addEventListener('keydown', onKeydown)
-	window.addEventListener('resize', updatePanelPosition)
-})
-onBeforeUnmount(() => {
-	document.removeEventListener('keydown', onKeydown)
-	window.removeEventListener('resize', updatePanelPosition)
-})
+onMounted(() => { document.addEventListener('keydown', onKeydown) })
+onBeforeUnmount(() => { document.removeEventListener('keydown', onKeydown) })
 </script>
 
 <style scoped>
@@ -90,18 +62,27 @@ onBeforeUnmount(() => {
 	background-position: center;
 }
 
-/* 左上 catalogue 文案（font_0:2645: family FolioLT-Light, size 20, uppercase） */
-.catalogue {
+/* 左上 catalogue 块：标题与展开后的子项同属一个容器 */
+.catalogue-wrap {
 	position: absolute;
-	top: 56px; /* 与设计相近的边距 */
+	top: 56px;
 	left: 133px;
-	color: #DCDCDC; /* paint_0:5875 */
+	color: #DCDCDC;
+}
+.catalogue-head {
+	color: #DCDCDC;
 	font-size: 20px;
 	letter-spacing: .08em;
 	text-transform: uppercase;
 	background: none;
 	border: none;
 	cursor: pointer;
+}
+.catalogue-wrap.is-open {
+	background: rgba(255,255,255,0.2);
+	backdrop-filter: blur(2px);
+	border-radius: 13px;
+	padding: 16px 16px 12px;
 }
 
 /* 右上白色圆形按钮（34px 圆 + 42px 包裹） */
@@ -134,17 +115,8 @@ onBeforeUnmount(() => {
 	object-fit: contain;
 }
 
-/* Catalogue panel (矩形 86 + 列表项) */
-.catalogue-panel {
-	position: absolute;
-	/* left/top 由 panelStyle 动态设置，使其贴合 CATALOGUE 文案位置 */
-	width: 240px;
-	border-radius: 13px;
-	background: rgba(255,255,255,0.2);
-	backdrop-filter: blur(2px);
-	padding: 16px 16px 12px;
-}
-.catalogue-title { margin: 0 0 10px; color: #DCDCDC; font-size: 20px; letter-spacing: .08em; }
+/* Catalogue panel 列表区域（容器背景由 .catalogue-wrap.is-open 提供） */
+.catalogue-panel { margin-top: 12px; width: 240px; }
 .catalogue-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
 .catalogue-item { color: #DCDCDC; font-size: 11px; line-height: 1.2; padding-bottom: 8px; border-bottom: 1px solid rgba(220,220,220,0.35); white-space: nowrap; }
 .catalogue-item:last-child { border-bottom: none; padding-bottom: 0; }
