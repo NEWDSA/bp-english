@@ -75,15 +75,14 @@
 			<!-- 右侧地图区域 -->
 			<div class="right-section">
 				<div class="map-container">
-					<div class="map-background">
-						<div class="lake-outline"></div>
-						<div class="map-markers">
-							<div class="marker marker-1"></div>
-							<div class="marker marker-2"></div>
-							<div class="marker marker-3"></div>
-						</div>
-					</div>
+					<!-- SVG 覆盖层用于精确标记点定位 -->
+					<!-- <svg class="map-overlay" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+						<circle cx="25" cy="20" r="2" class="marker-svg marker-1" />
+						<circle cx="65" cy="45" r="2" class="marker-svg marker-2" />
+						<circle cx="80" cy="70" r="2" class="marker-svg marker-3" />
+					</svg> -->
 
+					<!-- 文字标签 -->
 					<div class="map-overlays">
 						<div class="overlay-text overlay-1">Operating profit and loss statement</div>
 						<div class="overlay-text overlay-2">The case of Lake Como</div>
@@ -428,10 +427,50 @@ onMounted(() => {
 	height: 70%;
 	/* min-height: 400px; */
 	background: url('../assets/bs_map.png') center/cover no-repeat;
-	border-radius: 20px;
+	/* border-radius: 20px; */
 	overflow: hidden;
-	/* border: 1px solid pink; */
-	/* border: 1px solid rgba(0, 212, 255, 0.3); */
+	/* 3D效果 */
+	/* transform: perspective(1000px) rotateX(5deg) rotateY(-5deg); */
+	/* box-shadow: 
+		0 20px 40px rgba(0, 0, 0, 0.6),
+		0 0 60px rgba(0, 212, 255, 0.3),
+		inset 0 0 20px rgba(0, 212, 255, 0.1); */
+	/* 发光边框 */
+	/* border: 2px solid rgba(0, 212, 255, 0.4); */
+	/* 动画效果 */
+	/* animation: mapGlow 3s ease-in-out infinite alternate; */
+}
+
+/* SVG 覆盖层 */
+.map-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	z-index: 2;
+}
+
+/* SVG 标记点样式 */
+.marker-svg {
+	fill: #00d4ff;
+	filter: drop-shadow(0 0 20px rgba(0, 212, 255, 1)) 
+			drop-shadow(0 0 40px rgba(0, 212, 255, 0.8))
+			drop-shadow(0 0 60px rgba(0, 212, 255, 0.6));
+	/* animation: svgMarkerPulse 2s ease-in-out infinite; */
+}
+
+.marker-svg.marker-1 {
+	animation-delay: 0s;
+}
+
+.marker-svg.marker-2 {
+	animation-delay: 0.3s;
+}
+
+.marker-svg.marker-3 {
+	animation-delay: 0.6s;
 }
 
 .map-background {
@@ -480,33 +519,83 @@ onMounted(() => {
 
 .marker {
 	position: absolute;
-	width: 12px;
-	height: 12px;
-	background: #00d4ff;
+	width: 18px;
+	height: 18px;
+	background: radial-gradient(circle, #00d4ff 0%, #0099cc 60%, #006699 100%);
 	border-radius: 50%;
-	box-shadow: 0 0 15px rgba(0, 212, 255, 0.8);
-	animation: pulse 2s ease-in-out infinite;
+	box-shadow: 
+		inset 0 0 8px rgba(255, 255, 255, 0.4),
+		0 0 25px rgba(0, 212, 255, 1),
+		0 0 50px rgba(0, 212, 255, 0.9),
+		0 0 75px rgba(0, 212, 255, 0.7),
+		0 0 100px rgba(0, 212, 255, 0.5),
+		0 0 125px rgba(0, 212, 255, 0.3);
+	animation: markerPulse 2s ease-in-out infinite;
+	border: 2px solid rgba(255, 255, 255, 0.6);
 }
 
 .marker-1 {
-	top: 75%;
-	left: 9%;
+	top: 20%;
+	left: 25%;
+	transform: translate(-50%, -50%);
 }
 
 .marker-2 {
-	top: 40%;
-	left: 52%;
+	top: 45%;
+	left: 65%;
+	transform: translate(-50%, -50%);
 }
 
 .marker-3 {
-	top: 55%;
-	left: 60%;
+	top: 70%;
+	left: 80%;
+	transform: translate(-50%, -50%);
+}
+
+@keyframes markerPulse {
+	0%, 100% {
+		transform: translate(-50%, -50%) scale(1);
+		opacity: 1;
+		box-shadow: 
+			inset 0 0 8px rgba(255, 255, 255, 0.4),
+			0 0 25px rgba(0, 212, 255, 1),
+			0 0 50px rgba(0, 212, 255, 0.9),
+			0 0 75px rgba(0, 212, 255, 0.7),
+			0 0 100px rgba(0, 212, 255, 0.5),
+			0 0 125px rgba(0, 212, 255, 0.3);
+	}
+
+	50% {
+		transform: translate(-50%, -50%) scale(1.3);
+		opacity: 0.95;
+		box-shadow: 
+			inset 0 0 12px rgba(255, 255, 255, 0.6),
+			0 0 40px rgba(0, 212, 255, 1),
+			0 0 80px rgba(0, 212, 255, 0.95),
+			0 0 120px rgba(0, 212, 255, 0.8),
+			0 0 160px rgba(0, 212, 255, 0.6),
+			0 0 200px rgba(0, 212, 255, 0.4);
+	}
+}
+
+@keyframes svgMarkerPulse {
+	0%, 100% {
+		transform: scale(1);
+		filter: drop-shadow(0 0 20px rgba(0, 212, 255, 1)) 
+				drop-shadow(0 0 40px rgba(0, 212, 255, 0.8))
+				drop-shadow(0 0 60px rgba(0, 212, 255, 0.6));
+	}
+
+	50% {
+		transform: scale(1.3);
+		filter: drop-shadow(0 0 30px rgba(0, 212, 255, 1)) 
+				drop-shadow(0 0 60px rgba(0, 212, 255, 0.9))
+				drop-shadow(0 0 90px rgba(0, 212, 255, 0.7));
+	}
 }
 
 @keyframes pulse {
-
-	0%,
-	100% {
+	0%, 100% {
 		transform: scale(1);
 		opacity: 1;
 	}
@@ -528,29 +617,37 @@ onMounted(() => {
 
 .overlay-text {
 	position: absolute;
-	font-size: 12px;
-	font-weight: 500;
+	font-size: 13px;
+	font-weight: 600;
 	color: #ffffff;
-	text-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
-	background: rgba(0, 0, 0, 0.3);
-	padding: 5px 10px;
-	border-radius: 5px;
+	/* text-shadow: 0 0 8px rgba(0, 212, 255, 0.9); */
+	/* background: rgba(40, 40, 40, 0.8); */
+	padding: 8px 12px;
+	border-radius: 8px;
 	white-space: nowrap;
+	/* backdrop-filter: blur(5px); */
+	/* border: 1px solid rgba(255, 255, 255, 0.1); */
+	/* box-shadow: 
+		0 4px 12px rgba(0, 0, 0, 0.4),
+		0 0 20px rgba(0, 212, 255, 0.2); */
 }
 
 .overlay-1 {
-	top: 72%;
-	left: 0%;
+	top: 70%;
+	left: 20%;
+	transform: translate(-50%, -50%);
 }
 
 .overlay-2 {
-	top: 37%;
-	left: 40%;
+	top: 40%;
+	left: 54%;
+	transform: translate(-50%, -50%);
 }
 
 .overlay-3 {
-	top: 52%;
-	left: 43%;
+	top: 65%;
+	left: 70%;
+	transform: translate(-50%, -50%);
 }
 
 
