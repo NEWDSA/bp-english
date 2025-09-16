@@ -7,10 +7,10 @@
 			<div class="catalogue-head" @click="toggleCatalogue" :aria-expanded="showCatalogue ? 'true' : 'false'">CATALOGUE</div>
 			<ul v-if="showCatalogue" class="catalogue-list" role="list">
 				<li class="catalogue-item" @click="navigateToIndustry">Industry Background</li>
-				<li class="catalogue-item">Market Demand</li>
-				<li class="catalogue-item">Business Model</li>
-				<li class="catalogue-item">Team Composition</li>
-				<li class="catalogue-item">Product Introduction</li>
+				<li class="catalogue-item" @click="navigateToMarket">Market Demand</li>
+				<li class="catalogue-item" @click="navigateToBusiness">Business Model</li>
+				<li class="catalogue-item" @click="navigateToTeam">Team Composition</li>
+				<li class="catalogue-item" @click="navigateToProduct">Product Introduction</li>
 			</ul>
 		</div>
 
@@ -27,25 +27,28 @@
 						<!-- <h3 class="company-info__title">Company Mission</h3> -->
 						 <p class="company-info__title">Company Mission:</p>
 						<p class="company-info__text">Leading the innovation of water transportation</p>
-						<p class="company-info__text">Build a globally leading marine technology brand.</p>
+						<p class="company-info__text">Build a globally leading marine technology brand</p>
 					</div>
 					
 					<div class="company-info__section">
-						<h3 class="company-info__title">Company Vision</h3>
+						<!-- <h3 class="company-info__title">Company Vision:</h3> -->
+						<p class="company-info__title">Company Vision:</p>
 						<p class="company-info__text">The most rock-solid water operation platform</p>
 						<p class="company-info__text">Become the definer of the most energy-efficient and high-performance water economy</p>
 						<p class="company-info__text">Deliver the most superior watercraft in terms of performance</p>
 					</div>
 					
 					<div class="company-info__section">
-						<h3 class="company-info__title">Core Values</h3>
-						<p class="company-info__text">Cooperation, innovation, and foresight.</p>
+						<!-- <h3 class="company-info__title">Core Values</h3> -->
+						<p class="company-info__title">Core Values:</p>
+						<p class="company-info__text">Cooperation, innovation, and foresight</p>
 					</div>
 					
 					<div class="company-info__section">
-						<h3 class="company-info__title">Management Philosophy</h3>
+						<!-- <h3 class="company-info__title">Management Philosophy</h3> -->
+						<p class="company-info__title">Management Philosophy:</p>
 						<p class="company-info__text">People-oriented, customer-first</p>
-						<p class="company-info__text">Progressing hand in hand for mutual benefit and win-win cooperation.</p>
+						<p class="company-info__text">Progressing hand in hand for mutual benefit and win-win cooperation</p>
 					</div>
 				</div>
 			</div>
@@ -94,6 +97,26 @@ function toggleCompanyInfo() {
 function navigateToIndustry() {
 	showCatalogue.value = false
 	router.push('/industry-background')
+}
+
+function navigateToMarket() {
+	showCatalogue.value = false
+	router.push('/market-demand')
+}
+
+function navigateToBusiness() {
+	showCatalogue.value = false
+	router.push('/business-model')
+}
+
+function navigateToTeam() {
+	showCatalogue.value = false
+	router.push('/team-composition')
+}
+
+function navigateToProduct() {
+	showCatalogue.value = false
+	router.push('/product-introduction')
 }
 
 onMounted(() => { document.addEventListener('keydown', onKeydown) })

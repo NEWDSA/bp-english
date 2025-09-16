@@ -1,5 +1,5 @@
 <template>
-	<div class="industry-background">
+	<div class="business-model">
 		<!-- 顶部导航栏 -->
 		<nav class="top-nav">
 			<div class="nav-container">
@@ -10,12 +10,12 @@
 					</div>
 				</div>
 				<div class="nav-divider"></div>
-				
-				<div class="nav-item active">Industry Background</div>
+
+				<router-link to="/industry-background" class="nav-item">Industry Background</router-link>
 				<div class="nav-divider"></div>
 				<router-link to="/market-demand" class="nav-item">Market Demand</router-link>
 				<div class="nav-divider"></div>
-				<router-link to="/business-model" class="nav-item">Business Model</router-link>
+				<div class="nav-item active">Business Model</div>
 				<div class="nav-divider"></div>
 				<router-link to="/team-composition" class="nav-item">Team Composition</router-link>
 				<div class="nav-divider"></div>
@@ -31,37 +31,38 @@
 				<div class="chart-card">
 					<h3 class="chart-title">Revenue Model</h3>
 					<div class="chart-container">
-						<div class="chart-bars">
-							<div v-for="(data, index) in chartData" :key="index" class="bar-group">
-								<div class="bar orange" :style="{ height: data.orange + '%' }"></div>
-								<div class="bar teal" :style="{ height: data.teal + '%' }"></div>
-							</div>
-						</div>
+						<div ref="revenueChartRef" class="revenue-echart"></div>
 					</div>
 				</div>
+
 
 				<!-- 渠道策略 -->
 				<div class="strategy-card">
 					<h3 class="strategy-title">Channel Strategy</h3>
-					
+
 					<div class="strategy-section">
 						<h4 class="strategy-subtitle">Domestic (B-end water area operator)</h4>
 						<div class="strategy-content">
 							<p class="strategy-label">Positioning:</p>
-							<p class="strategy-text">To provide a full cycle hydrofoil operation solution for scenic spots, passenger transport companies, and hotels.</p>
-							
+							<p class="strategy-text">To provide a full cycle hydrofoil operation solution for scenic
+								spots, passenger transport companies, and hotels.</p>
+
 							<p class="strategy-label">Core module:</p>
-							<p class="strategy-text">Fleet operation and maintenance (equipment support)+safety management (real-time monitoring)</p>
-							<p class="strategy-text">Product operation (leasing system)+dock support (infrastructure support)</p>
+							<p class="strategy-text">Fleet operation and maintenance (equipment support)+safety
+								management (real-time monitoring)</p>
+							<p class="strategy-text">Product operation (leasing system)+dock support (infrastructure
+								support)</p>
 						</div>
 					</div>
 
 					<div class="strategy-section">
-						<h4 class="strategy-subtitle">Overseas business (C-end private enterprises/private berth users)</h4>
+						<h4 class="strategy-subtitle">Overseas business (C-end private enterprises/private berth users)
+						</h4>
 						<div class="strategy-content">
 							<p class="strategy-label">Positioning:</p>
-							<p class="strategy-text">To build an intelligent hydrofoil boat lifestyle ecosystem for middle-class private berth users.</p>
-							
+							<p class="strategy-text">To build an intelligent hydrofoil boat lifestyle ecosystem for
+								middle-class private berth users.</p>
+
 							<p class="strategy-label">Core module:</p>
 							<p class="strategy-text">Map service (navigation planning)+APP service (remote control)</p>
 							<p class="strategy-text">Additional services (customized maintenance/social functions)</p>
@@ -81,7 +82,7 @@
 							<div class="marker marker-3"></div>
 						</div>
 					</div>
-					
+
 					<div class="map-overlays">
 						<div class="overlay-text overlay-1">The case of Lake Como</div>
 						<div class="overlay-text overlay-2">Daily average number of boat tourists</div>
@@ -94,26 +95,120 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onBeforeUnmount, watchEffect } from 'vue'
 import { useRouter } from 'vue-router'
+import * as echarts from 'echarts'
 
 const router = useRouter()
 
 // 图表数据
 const chartData = ref([
-	{ orange: 20, teal: 30 },
-	{ orange: 25, teal: 35 },
-	{ orange: 30, teal: 40 },
-	{ orange: 35, teal: 45 },
-	{ orange: 40, teal: 50 },
-	{ orange: 45, teal: 55 },
-	{ orange: 50, teal: 60 },
-	{ orange: 55, teal: 65 },
-	{ orange: 60, teal: 70 },
-	{ orange: 65, teal: 75 },
-	{ orange: 70, teal: 80 },
-	{ orange: 80, teal: 90 }
+	{ orange: 70, teal: 65 },
+	{ orange: 75, teal: 70 },
+	{ orange: 80, teal: 75 },
+	{ orange: 85, teal: 85 },
+	{ orange: 90, teal: 90 },
+	{ orange: 95, teal: 95 },
+	{ orange: 100, teal: 100 },
+	{ orange: 95, teal: 65 },
+	{ orange: 100, teal: 70 },
+	{ orange: 105, teal: 75 },
+	{ orange: 110, teal: 80 },
+	{ orange: 120, teal: 90 }
 ])
+
+// ECharts: Revenue Model
+const revenueChartRef = ref(null)
+let revenueChartInstance = null
+
+function renderRevenueChart() {
+	if (!revenueChartRef.value) return
+	if (!revenueChartInstance) {
+		revenueChartInstance = echarts.init(revenueChartRef.value)
+	}
+
+	const oranges = chartData.value.map(d => d.orange)
+	const teals = chartData.value.map(d => d.teal)
+
+	const option = {
+		animation: true,
+		grid: { top: 10, bottom: 8, containLabel: false },
+		xAxis: {
+			type: 'category',
+			data: new Array(chartData.value.length).fill(''),
+			axisLine: { show: false },
+			axisTick: { show: false },
+			axisLabel: { show: false },
+			splitLine: { show: false }
+		},
+		yAxis: { type: 'value', show: false },
+		tooltip: { show: false },
+		series: [
+			{
+				name: 'Orange',
+				type: 'bar',
+				data: oranges,
+				barWidth: 15,
+				// barGap: '5%',
+				itemStyle: {
+					// borderRadius: [6, 6, 0, 0],
+					shadowColor: 'rgba(0,0,0,0.35)',
+					shadowBlur: 10,
+					shadowOffsetY: 4,
+					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+						{ offset: 0, color: '#FFC27A' },
+						{ offset: 0.35, color: '#FF9A4E' },
+						{ offset: 1, color: 'rgba(140, 98, 64, 0.65)' }
+					])
+				}
+			},
+			{
+				name: 'Teal',
+				type: 'bar',
+				data: teals,
+				barWidth: 15,
+				// barGap: '5%',
+				itemStyle: {
+					// borderRadius: [6, 6, 0, 0],
+					shadowColor: 'rgba(0,0,0,0.35)',
+					shadowBlur: 10,
+					shadowOffsetY: 4,
+					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+						{ offset: 0, color: '#3FF4FF' },
+						{ offset: 0.35, color: '#19D8F3' },
+						{ offset: 1, color: 'rgba(22, 79, 96, 0.65)' }
+					])
+				}
+			}
+		]
+	}
+
+	revenueChartInstance.setOption(option)
+	// 自适应
+	setTimeout(() => { revenueChartInstance?.resize() }, 0)
+}
+
+onMounted(() => {
+	renderRevenueChart()
+	window.addEventListener('resize', onWindowResize)
+})
+
+function onWindowResize() {
+	if (revenueChartInstance) revenueChartInstance.resize()
+}
+
+onBeforeUnmount(() => {
+	window.removeEventListener('resize', onWindowResize)
+	if (revenueChartInstance) {
+		revenueChartInstance.dispose()
+		revenueChartInstance = null
+	}
+})
+
+// 若数据变化，重绘
+watchEffect(() => {
+	if (revenueChartInstance) renderRevenueChart()
+})
 
 function goHome() {
 	router.push('/')
@@ -125,9 +220,9 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.industry-background {
+.business-model {
 	min-height: 100vh;
-	background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+	background: url('../assets/bs_bg.png') center/cover no-repeat;
 	color: #ffffff;
 	font-family: 'Arial', sans-serif;
 }
@@ -243,65 +338,44 @@ onMounted(() => {
 
 /* 图表卡片 */
 .chart-card {
-	background: rgba(255, 255, 255, 0.1);
-	backdrop-filter: blur(10px);
-	border-radius: 15px;
-	padding: 30px;
-	border: 1px solid rgba(255, 255, 255, 0.2);
+	background: rgba(255, 255, 255, 0.08);
+	backdrop-filter: blur(15px);
+	border-radius: 20px;
+	padding: 35px;
+	border: 1px solid rgba(255, 255, 255, 0.15);
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .chart-title {
-	font-size: 20px;
-	font-weight: 600;
-	margin-bottom: 20px;
+	font-size: 22px;
+	font-weight: 700;
+	margin-bottom: 25px;
 	color: #ffffff;
+	text-align: center;
+	letter-spacing: 0.5px;
 }
 
 .chart-container {
+	height: 220px;
+	display: flex;
+	align-items: end;
+	gap: 6px;
+	padding: 10px 0;
+}
+
+.revenue-echart {
+	width: 100%;
 	height: 200px;
-	display: flex;
-	align-items: end;
-	gap: 8px;
-}
-
-.chart-bars {
-	display: flex;
-	align-items: end;
-	gap: 8px;
-	height: 100%;
-	width: 100%;
-}
-
-.bar-group {
-	display: flex;
-	flex-direction: column;
-	gap: 4px;
-	flex: 1;
-	height: 100%;
-}
-
-.bar {
-	width: 100%;
-	border-radius: 2px 2px 0 0;
-	transition: all 0.3s ease;
-	min-height: 4px;
-}
-
-.bar.orange {
-	background: linear-gradient(to top, #ff6b35, #ff8c42);
-}
-
-.bar.teal {
-	background: linear-gradient(to top, #00d4ff, #0099cc);
 }
 
 /* 策略卡片 */
 .strategy-card {
-	background: rgba(255, 255, 255, 0.1);
-	backdrop-filter: blur(10px);
-	border-radius: 15px;
-	padding: 30px;
-	border: 1px solid rgba(255, 255, 255, 0.2);
+	/* background: rgba(255, 255, 255, 0.08); */
+	/* backdrop-filter: blur(15px); */
+	/* border-radius: 20px; */
+	padding: 35px;
+	/* border: 1px solid rgba(255, 255, 255, 0.15); */
+	/* box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); */
 }
 
 .strategy-title {
@@ -371,7 +445,7 @@ onMounted(() => {
 	height: 60%;
 	background: linear-gradient(45deg, transparent 30%, rgba(0, 212, 255, 0.3) 50%, transparent 70%);
 	border-radius: 50% 30% 50% 30%;
-	box-shadow: 
+	box-shadow:
 		0 0 20px rgba(0, 212, 255, 0.5),
 		inset 0 0 20px rgba(0, 212, 255, 0.2);
 	animation: glow 3s ease-in-out infinite alternate;
@@ -379,12 +453,13 @@ onMounted(() => {
 
 @keyframes glow {
 	from {
-		box-shadow: 
+		box-shadow:
 			0 0 20px rgba(0, 212, 255, 0.5),
 			inset 0 0 20px rgba(0, 212, 255, 0.2);
 	}
+
 	to {
-		box-shadow: 
+		box-shadow:
 			0 0 30px rgba(0, 212, 255, 0.8),
 			inset 0 0 30px rgba(0, 212, 255, 0.4);
 	}
@@ -424,10 +499,13 @@ onMounted(() => {
 }
 
 @keyframes pulse {
-	0%, 100% {
+
+	0%,
+	100% {
 		transform: scale(1);
 		opacity: 1;
 	}
+
 	50% {
 		transform: scale(1.2);
 		opacity: 0.8;
@@ -469,30 +547,32 @@ onMounted(() => {
 	left: 60%;
 }
 
+
 /* 响应式设计 */
 @media (max-width: 768px) {
 	.main-content {
 		flex-direction: column;
 	}
-	
+
 	.nav-container {
 		flex-wrap: wrap;
 		gap: 10px;
 	}
-	
+
 	.nav-item {
 		font-size: 12px;
 		padding: 8px 15px;
 	}
-	
-	.left-section, .right-section {
+
+	.left-section,
+	.right-section {
 		padding: 20px;
 	}
-	
+
 	.chart-container {
 		height: 150px;
 	}
-	
+
 	.map-container {
 		height: 300px;
 	}
