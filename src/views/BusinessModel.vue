@@ -25,8 +25,8 @@
 
 		<!-- 主要内容区域 -->
 		<div class="main-content">
-			<!-- 左侧内容 -->
-			<div class="left-section">
+			<!-- 左侧面板：Revenue Model + Channel Strategy -->
+			<div class="left-panel">
 				<!-- 收入模型图表 -->
 				<div class="chart-card">
 					<h3 class="chart-title">Revenue Model</h3>
@@ -72,8 +72,8 @@
 				</div>
 			</div>
 
-			<!-- 右侧地图区域 -->
-			<div class="right-section">
+			<!-- 中间面板：Lake Como 地图 -->
+			<div class="middle-panel">
 				<div class="map-container">
 					<!-- SVG 覆盖层用于精确标记点定位 -->
 					<!-- <svg class="map-overlay" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
@@ -84,9 +84,162 @@
 
 					<!-- 文字标签 -->
 					<div class="map-overlays">
-						<div class="overlay-text overlay-1">Operating profit and loss statement</div>
-						<div class="overlay-text overlay-2">The case of Lake Como</div>
-						<div class="overlay-text overlay-3">Daily average number of boat tourists</div>
+						<div class="overlay-text overlay-1" @click="showContent('profit')">Operating profit and loss statement</div>
+						<div class="overlay-text overlay-2" @click="showContent('lake')">The case of Lake Como</div>
+						<div class="overlay-text overlay-3" @click="showContent('tourists')">Daily average number of boat tourists</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- 右侧面板：详细内容 -->
+			<div class="right-panel">
+				<!-- 默认显示内容 -->
+				<!-- <div v-if="!activeContent" class="default-content">
+					<h2 class="panel-title">Business Model Details</h2>
+					<p class="panel-subtitle">Click on the map markers to view detailed information</p>
+				</div> -->
+
+				<!-- 内容面板 -->
+				<div class="content-panel" v-if="activeContent">
+					<!-- 返回按钮 -->
+					<!-- <div class="back-btn" @click="hideContent">
+						<div class="back-icon">←</div>
+						<span>Back to Map</span>
+					</div> -->
+
+					<!-- Lake Como 案例内容 -->
+					<div v-if="activeContent === 'lake'" class="lake-content">
+						<h2 class="content-title">The case of Lake Como</h2>
+						<h3 class="content-subtitle">Daily average number of tourists</h3>
+						
+						<!-- 饼图 -->
+						<div class="pie-chart-container">
+							<div class="pie-chart">
+								<div class="pie-segment peak-season">
+									<div class="segment-label">Peak Season<br>June-September<br>Daily average number of tourists<br>15000-20000 people/time</div>
+								</div>
+								<div class="pie-segment off-season">
+									<div class="segment-label">Off-Season<br>October-May<br>Daily average number of tourists<br>5000-10000 people/time</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- 描述文字 -->
+						<p class="description-text">
+							Each hotel has an average of 100 rooms, totaling 400 rooms, calculated based on the number of tourists during the off-season.
+						</p>
+
+						<!-- 柱状图 -->
+						<div class="bar-charts">
+							<div class="bar-row">
+								<div class="bar-item filled"></div>
+								<div class="bar-item filled"></div>
+								<div class="bar-item filled"></div>
+								<div class="bar-item filled"></div>
+								<div class="bar-item filled"></div>
+								<div class="bar-item filled"></div>
+								<div class="bar-item filled"></div>
+								<div class="bar-item filled"></div>
+								<div class="bar-item filled"></div>
+								<div class="bar-item filled"></div>
+								<div class="bar-item filled"></div>
+								<div class="bar-item filled"></div>
+								<div class="bar-item filled"></div>
+								<div class="bar-item filled"></div>
+								<div class="bar-item filled"></div>
+								<div class="bar-item filled"></div>
+								<div class="bar-item filled"></div>
+								<div class="bar-item filled"></div>
+								<div class="bar-item filled"></div>
+								<div class="bar-item filled"></div>
+								<div class="bar-item empty"></div>
+								<div class="bar-item empty"></div>
+								<div class="bar-item empty"></div>
+								<div class="bar-item empty"></div>
+								<div class="bar-item empty"></div>
+							</div>
+							<div class="bar-row">
+								<div class="bar-item filled"></div>
+								<div class="bar-item filled"></div>
+								<div class="bar-item filled"></div>
+								<div class="bar-item filled"></div>
+								<div class="bar-item filled"></div>
+								<div class="bar-item filled"></div>
+								<div class="bar-item filled"></div>
+								<div class="bar-item filled"></div>
+								<div class="bar-item filled"></div>
+								<div class="bar-item filled"></div>
+								<div class="bar-item filled"></div>
+								<div class="bar-item filled"></div>
+								<div class="bar-item empty"></div>
+								<div class="bar-item empty"></div>
+								<div class="bar-item empty"></div>
+								<div class="bar-item empty"></div>
+								<div class="bar-item empty"></div>
+								<div class="bar-item empty"></div>
+								<div class="bar-item empty"></div>
+								<div class="bar-item empty"></div>
+								<div class="bar-item empty"></div>
+								<div class="bar-item empty"></div>
+								<div class="bar-item empty"></div>
+								<div class="bar-item empty"></div>
+								<div class="bar-item empty"></div>
+							</div>
+							<div class="bar-row">
+								<div class="bar-item filled"></div>
+								<div class="bar-item filled"></div>
+								<div class="bar-item filled"></div>
+								<div class="bar-item filled"></div>
+								<div class="bar-item empty"></div>
+								<div class="bar-item empty"></div>
+								<div class="bar-item empty"></div>
+								<div class="bar-item empty"></div>
+								<div class="bar-item empty"></div>
+								<div class="bar-item empty"></div>
+								<div class="bar-item empty"></div>
+								<div class="bar-item empty"></div>
+								<div class="bar-item empty"></div>
+								<div class="bar-item empty"></div>
+								<div class="bar-item empty"></div>
+								<div class="bar-item empty"></div>
+								<div class="bar-item empty"></div>
+								<div class="bar-item empty"></div>
+								<div class="bar-item empty"></div>
+								<div class="bar-item empty"></div>
+								<div class="bar-item empty"></div>
+								<div class="bar-item empty"></div>
+								<div class="bar-item empty"></div>
+								<div class="bar-item empty"></div>
+								<div class="bar-item empty"></div>
+							</div>
+						</div>
+
+						<!-- 图例 -->
+						<div class="legend">
+							<div class="legend-item">
+								<span class="legend-label">Daily average number of tourists</span>
+								<span class="legend-value">10000 people</span>
+							</div>
+							<div class="legend-item">
+								<span class="legend-label">Hotel load capacity</span>
+								<span class="legend-value">1200 people</span>
+							</div>
+							<div class="legend-item">
+								<span class="legend-label">Overnight tourists (50% occupancy rate)</span>
+								<span class="legend-value">400-600 people</span>
+							</div>
+						</div>
+					</div>
+
+					<!-- 其他内容面板可以在这里添加 -->
+					<div v-if="activeContent === 'tourists'" class="tourists-content">
+						<h2 class="content-title">Daily average number of boat tourists</h2>
+						<p>Tourist data content will be displayed here.</p>
+					</div>
+
+					<div v-if="activeContent === 'profit'" class="profit-content">
+						<h2 class="content-title">Operating profit and loss statement</h2>
+						<p>Profit and loss data will be displayed here.</p>
 					</div>
 				</div>
 			</div>
@@ -101,14 +254,17 @@ import * as echarts from 'echarts'
 
 const router = useRouter()
 
+// 内容面板状态
+const activeContent = ref(null)
+
 // 图表数据
 const chartData = ref([
-	{ orange: 70, teal: 65 },
-	{ orange: 75, teal: 70 },
-	{ orange: 80, teal: 75 },
-	{ orange: 85, teal: 85 },
-	{ orange: 90, teal: 90 },
-	{ orange: 95, teal: 95 },
+	// { orange: 70, teal: 65 },
+	// { orange: 75, teal: 70 },
+	// { orange: 80, teal: 75 },
+	// { orange: 85, teal: 85 },
+	// { orange: 90, teal: 90 },
+	// { orange: 95, teal: 95 },
 	{ orange: 100, teal: 100 },
 	{ orange: 95, teal: 65 },
 	{ orange: 100, teal: 70 },
@@ -116,6 +272,18 @@ const chartData = ref([
 	{ orange: 110, teal: 80 },
 	{ orange: 120, teal: 90 }
 ])
+
+// 显示内容面板
+function showContent(contentType) {
+	console.log('点击了内容类型:', contentType)
+	activeContent.value = contentType
+	console.log('activeContent 现在是:', activeContent.value)
+}
+
+// 隐藏内容面板
+function hideContent() {
+	activeContent.value = null
+}
 
 // ECharts: Revenue Model
 const revenueChartRef = ref(null)
@@ -320,9 +488,11 @@ onMounted(() => {
 	display: flex;
 	min-height: 100vh;
 	padding-top: 80px;
+	gap: 20px;
 }
 
-.left-section {
+/* 左侧面板：Revenue Model + Channel Strategy */
+.left-panel {
 	flex: 1;
 	padding: 40px;
 	display: flex;
@@ -330,12 +500,45 @@ onMounted(() => {
 	gap: 30px;
 }
 
-.right-section {
-	flex: 1;
-	padding: 40px;
+/* 中间面板：Lake Como 地图 */
+.middle-panel {
+	flex: 1.8;
+	/* padding: 40px; */
 	display: flex;
-	align-items: stretch;
-	justify-content: left;
+	/* align-items: center; */
+	justify-content: center;
+}
+
+/* 右侧面板：详细内容 */
+.right-panel {
+	flex: 1;
+	/* padding: 40px; */
+	display: flex;
+	flex-direction: column;
+}
+
+/* 默认内容样式 */
+.default-content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	text-align: center;
+}
+
+.panel-title {
+	font-size: 24px;
+	font-weight: 700;
+	color: #ffffff;
+	margin-bottom: 15px;
+	text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
+
+.panel-subtitle {
+	font-size: 16px;
+	color: #cccccc;
+	line-height: 1.6;
 }
 
 /* 图表卡片 */
@@ -423,19 +626,13 @@ onMounted(() => {
 /* 地图容器 */
 .map-container {
 	position: relative;
-	width: 95%;
-	height: 70%;
+	width: 100%;
+	height: 50%;
 	/* min-height: 400px; */
 	background: url('../assets/bs_map.png') center/cover no-repeat;
-	/* border-radius: 20px; */
+	border-radius: 20px;
 	overflow: hidden;
-	/* 3D效果 */
-	/* transform: perspective(1000px) rotateX(5deg) rotateY(-5deg); */
-	/* box-shadow: 
-		0 20px 40px rgba(0, 0, 0, 0.6),
-		0 0 60px rgba(0, 212, 255, 0.3),
-		inset 0 0 20px rgba(0, 212, 255, 0.1); */
-	/* 发光边框 */
+	
 	/* border: 2px solid rgba(0, 212, 255, 0.4); */
 	/* 动画效果 */
 	/* animation: mapGlow 3s ease-in-out infinite alternate; */
@@ -612,7 +809,7 @@ onMounted(() => {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	pointer-events: none;
+	pointer-events: auto;
 }
 
 .overlay-text {
@@ -620,16 +817,25 @@ onMounted(() => {
 	font-size: 13px;
 	font-weight: 600;
 	color: #ffffff;
-	/* text-shadow: 0 0 8px rgba(0, 212, 255, 0.9); */
-	/* background: rgba(40, 40, 40, 0.8); */
+	text-shadow: 0 0 8px rgba(0, 212, 255, 0.9);
+	background: rgba(40, 40, 40, 0.8);
 	padding: 8px 12px;
 	border-radius: 8px;
 	white-space: nowrap;
-	/* backdrop-filter: blur(5px); */
-	/* border: 1px solid rgba(255, 255, 255, 0.1); */
-	/* box-shadow: 
+	backdrop-filter: blur(5px);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	box-shadow: 
 		0 4px 12px rgba(0, 0, 0, 0.4),
-		0 0 20px rgba(0, 212, 255, 0.2); */
+		0 0 20px rgba(0, 212, 255, 0.2);
+	cursor: pointer;
+	transition: all 0.3s ease;
+	z-index: 10;
+	pointer-events: auto;
+}
+
+.overlay-text:hover {
+	background: rgba(0, 212, 255, 0.2);
+	transform: scale(1.05);
 }
 
 .overlay-1 {
@@ -648,6 +854,178 @@ onMounted(() => {
 	top: 65%;
 	left: 70%;
 	transform: translate(-50%, -50%);
+}
+
+/* 内容面板样式 */
+.content-panel {
+	/* width: 100%; */
+	max-height: 70vh;
+	/* background: rgba(0, 0, 0, 0.9); */
+	backdrop-filter: blur(15px);
+	border-radius: 20px;
+	padding: 25px;
+	overflow-y: auto;
+	animation: slideIn 0.5s ease-out;
+	border: 1px solid rgba(0, 212, 255, 0.3);
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+	margin: 10px 5px;
+}
+
+@keyframes slideIn {
+	from {
+		opacity: 0;
+		transform: translateX(100%);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+.back-btn {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 30px;
+	cursor: pointer;
+	color: #00d4ff;
+	font-size: 16px;
+	font-weight: 600;
+	transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+	color: #ffffff;
+	transform: translateX(-5px);
+}
+
+.back-icon {
+	font-size: 20px;
+}
+
+.content-title {
+	font-size: 24px;
+	font-weight: 700;
+	color: #ffffff;
+	margin-bottom: 8px;
+	text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
+
+.content-subtitle {
+	font-size: 16px;
+	font-weight: 500;
+	color: #cccccc;
+	margin-bottom: 20px;
+}
+
+/* 饼图样式 */
+.pie-chart-container {
+	display: flex;
+	justify-content: center;
+	margin: 20px 0;
+}
+
+.pie-chart {
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	position: relative;
+	overflow: hidden;
+}
+
+.pie-segment {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 50%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.peak-season {
+	background: linear-gradient(45deg, #FF9A4E, #FFC27A);
+	clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 50%);
+}
+
+.off-season {
+	background: linear-gradient(45deg, #19D8F3, #3FF4FF);
+	clip-path: polygon(50% 50%, 100% 50%, 100% 100%, 0% 100%, 0% 50%);
+}
+
+.segment-label {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+	font-size: 12px;
+	font-weight: 600;
+	color: #ffffff;
+	text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+	line-height: 1.3;
+}
+
+.description-text {
+	font-size: 14px;
+	color: #cccccc;
+	line-height: 1.6;
+	margin: 20px 0;
+	text-align: center;
+}
+
+/* 柱状图样式 */
+.bar-charts {
+	margin: 20px 0;
+}
+
+.bar-row {
+	display: flex;
+	gap: 2px;
+	margin-bottom: 10px;
+	justify-content: center;
+}
+
+.bar-item {
+	width: 12px;
+	height: 12px;
+	border-radius: 2px;
+}
+
+.bar-item.filled {
+	background: #19D8F3;
+}
+
+.bar-item.empty {
+	background: rgba(255, 255, 255, 0.2);
+}
+
+/* 图例样式 */
+.legend {
+	margin-top: 20px;
+}
+
+.legend-item {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px 0;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.legend-item:last-child {
+	border-bottom: none;
+}
+
+.legend-label {
+	font-size: 14px;
+	color: #cccccc;
+}
+
+.legend-value {
+	font-size: 14px;
+	font-weight: 600;
+	color: #00d4ff;
 }
 
 
