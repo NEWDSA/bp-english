@@ -41,7 +41,8 @@
 					<h3 class="strategy-title">Channel Strategy</h3>
 
 					<div class="strategy-section">
-						<h4 class="strategy-subtitle">Domestic (B-end water area operator)</h4>
+						<!-- <h4 class="strategy-subtitle">Domestic (B-end water area operator)</h4> -->
+						<div class="strategy-subtitle">Domestic (B-end water area operator)</div>
 						<div class="strategy-content">
 							<p class="strategy-label">Positioning:</p>
 							<p class="strategy-text">To provide a full cycle hydrofoil operation solution for scenic
@@ -84,9 +85,9 @@
 					</div>
 
 					<div class="map-overlays">
-						<div class="overlay-text overlay-1">The case of Lake Como</div>
-						<div class="overlay-text overlay-2">Daily average number of boat tourists</div>
-						<div class="overlay-text overlay-3">Operating profit and loss statement</div>
+						<div class="overlay-text overlay-1">Operating profit and loss statement</div>
+						<div class="overlay-text overlay-2">The case of Lake Como</div>
+						<div class="overlay-text overlay-3">Daily average number of boat tourists</div>
 					</div>
 				</div>
 			</div>
@@ -222,7 +223,9 @@ onMounted(() => {
 <style scoped>
 .business-model {
 	min-height: 100vh;
-	background: url('../assets/bs_bg.png') center/cover no-repeat;
+	background: url('../assets/bs_bg.png') center/contain;
+	/* 背景色为#000000 */
+	background-color: #000000;
 	color: #ffffff;
 	font-family: 'Arial', sans-serif;
 }
@@ -332,8 +335,8 @@ onMounted(() => {
 	flex: 1;
 	padding: 40px;
 	display: flex;
-	align-items: center;
-	justify-content: center;
+	align-items: stretch;
+	justify-content: left;
 }
 
 /* 图表卡片 */
@@ -379,7 +382,7 @@ onMounted(() => {
 }
 
 .strategy-title {
-	font-size: 20px;
+	/* font-size: 20px; */
 	font-weight: 600;
 	margin-bottom: 25px;
 	color: #ffffff;
@@ -395,13 +398,13 @@ onMounted(() => {
 
 .strategy-subtitle {
 	font-size: 16px;
-	font-weight: 600;
-	color: #00d4ff;
+	/* font-weight: 600; */
+	/* color: #00d4ff; */
 	margin-bottom: 15px;
 }
 
 .strategy-content {
-	margin-left: 20px;
+	/* margin-left: 20px; */
 }
 
 .strategy-label {
@@ -421,12 +424,14 @@ onMounted(() => {
 /* 地图容器 */
 .map-container {
 	position: relative;
-	width: 100%;
-	height: 500px;
-	background: linear-gradient(45deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+	width: 95%;
+	height: 70%;
+	/* min-height: 400px; */
+	background: url('../assets/bs_map.png') center/cover no-repeat;
 	border-radius: 20px;
 	overflow: hidden;
-	border: 1px solid rgba(0, 212, 255, 0.3);
+	/* border: 1px solid pink; */
+	/* border: 1px solid rgba(0, 212, 255, 0.3); */
 }
 
 .map-background {
@@ -436,7 +441,7 @@ onMounted(() => {
 	background: radial-gradient(circle at 30% 40%, rgba(0, 212, 255, 0.1) 0%, transparent 50%);
 }
 
-.lake-outline {
+/* .lake-outline {
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -449,7 +454,7 @@ onMounted(() => {
 		0 0 20px rgba(0, 212, 255, 0.5),
 		inset 0 0 20px rgba(0, 212, 255, 0.2);
 	animation: glow 3s ease-in-out infinite alternate;
-}
+} */
 
 @keyframes glow {
 	from {
@@ -484,18 +489,18 @@ onMounted(() => {
 }
 
 .marker-1 {
-	top: 30%;
-	left: 25%;
+	top: 75%;
+	left: 9%;
 }
 
 .marker-2 {
-	top: 50%;
-	left: 50%;
+	top: 40%;
+	left: 52%;
 }
 
 .marker-3 {
-	top: 70%;
-	left: 75%;
+	top: 55%;
+	left: 60%;
 }
 
 @keyframes pulse {
@@ -530,21 +535,22 @@ onMounted(() => {
 	background: rgba(0, 0, 0, 0.3);
 	padding: 5px 10px;
 	border-radius: 5px;
+	white-space: nowrap;
 }
 
 .overlay-1 {
-	top: 20%;
-	left: 20%;
+	top: 72%;
+	left: 0%;
 }
 
 .overlay-2 {
-	top: 45%;
-	left: 45%;
+	top: 37%;
+	left: 40%;
 }
 
 .overlay-3 {
-	top: 75%;
-	left: 60%;
+	top: 52%;
+	left: 43%;
 }
 
 
