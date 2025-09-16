@@ -10,7 +10,7 @@
 					</div>
 				</div>
 				<div class="nav-divider"></div>
-				
+
 				<router-link to="/industry-background" class="nav-item">Industry Background</router-link>
 				<div class="nav-divider"></div>
 				<router-link to="/market-demand" class="nav-item">Market Demand</router-link>
@@ -27,76 +27,7 @@
 		<div class="main-content">
 			<!-- 左侧内容区域 -->
 			<div class="left-section">
-				<!-- 产品优势 -->
-				<div class="product-advantages">
-					<h3 class="section-title">Product advantages</h3>
-					<div class="advantages-content">
-						<p class="advantages-text">
-							Positioned within 5 meters, driving qualification exemption for entertainment powered boats, 
-							using hydrofoil and control algorithms to significantly reduce player entry barriers and enhance entertainment experience
-						</p>
-						<p class="product-intro">Y-H2O Product Introduction</p>
-						<p class="selling-points">
-							Selling point: 1. No need for a license to drive, low threshold for getting started; 
-							2. The purchase cost is equivalent to the price of a motorboat; 3. Intelligentization; 
-							4. High safety factor; 5. Low usage cost; 6. Better experience
-						</p>
-					</div>
-				</div>
 
-				<!-- 对比传统渡轮 -->
-				<div class="comparison-section">
-					<h3 class="section-title">Compared to traditional ferries</h3>
-				</div>
-
-				<!-- 设计与仿真技术 -->
-				<div class="design-tech-section">
-					<h3 class="section-title">Design&Simulation Technology</h3>
-				</div>
-
-				<!-- 颜色和价格 -->
-				<div class="color-price-section">
-					<h3 class="section-title">Color and Price</h3>
-					<div class="color-options">
-						<div class="color-swatch" style="background: #FFFFFF;"></div>
-						<div class="color-swatch" style="background: #3CC8C8;"></div>
-						<div class="color-swatch" style="background: #9B59B6;"></div>
-						<div class="color-swatch" style="background: #E74C3C;"></div>
-						<div class="color-swatch" style="background: #3498DB;"></div>
-						<div class="color-swatch" style="background: #34495E;"></div>
-					</div>
-					<div class="purchase-btn">
-						<div class="price-icon">¥</div>
-						<span>Please click here to contact us for purchase</span>
-					</div>
-				</div>
-
-				<!-- 产品亮点 -->
-				<div class="product-highlights">
-					<h3 class="section-title">Product Highlights</h3>
-					<div class="highlights-grid">
-						<div class="highlight-card">
-							<div class="highlight-icon">🚢</div>
-							<h4 class="highlight-title">Unmanned Systems</h4>
-							<p class="highlight-desc">The third mock examination switching+sliding rail expansion<br>Electromagnetic locking structure, spring damping indicating limit</p>
-						</div>
-						<div class="highlight-card">
-							<div class="highlight-icon">👥</div>
-							<h4 class="highlight-title">Team Members</h4>
-							<p class="highlight-desc">U/C-shaped wing design: The front wing (U-shaped) and rear wing (C-shaped) feature streamlined surfaces optimized for fluid dynamics<br>Resistance quick assembly system: Reduced transportation volume, with on-site assembly efficiency increased by 50%</p>
-						</div>
-						<div class="highlight-card">
-							<div class="highlight-icon">🤖</div>
-							<h4 class="highlight-title">Adaptive hydrofoil control algorithm</h4>
-							<p class="highlight-desc">AI adaptive algorithm<br>Multi sensor fusion: integrating radar, vision, and positioning systems to achieve obstacle avoidance and navigation monitoring</p>
-						</div>
-						<div class="highlight-card">
-							<div class="highlight-icon">🔧</div>
-							<h4 class="highlight-title">Modular detachable hull</h4>
-							<p class="highlight-desc">Embedded locking design: The hydrofoil and hull are seamlessly integrated through assembly/connection frames to ensure structural strength; Quick disassembly interface: Standardized positioning and installation holes, supporting hydrofoil replacement or storage within 10 minutes</p>
-						</div>
-					</div>
-				</div>
 			</div>
 
 			<!-- 中间3D产品展示区域 -->
@@ -104,95 +35,13 @@
 				<div class="product-3d-showcase">
 					<div class="boat-3d-model">
 						<!-- 3D船体模型 -->
-						<div class="boat-hull">
-							<div class="boat-seats">
-								<div class="seat seat-1"></div>
-								<div class="seat seat-2"></div>
-								<div class="seat seat-3"></div>
-							</div>
-							<div class="boat-bow-light"></div>
-						</div>
-						<div class="hydrofoils">
-							<div class="hydrofoil front"></div>
-							<div class="hydrofoil rear"></div>
-						</div>
+						<img src="../assets/white_bot.png" alt="YU Hydrofoil Boat" class="boat-image" />
 					</div>
 				</div>
 			</div>
 
 			<!-- 右侧产品规格区域 -->
 			<div class="right-section">
-				<div class="product-specs-panel">
-					<h3 class="specs-title">Ship name: YU</h3>
-					
-					<!-- 主要尺寸 -->
-					<div class="spec-group">
-						<div class="spec-header">
-							<h4 class="spec-category">Principal dimension:</h4>
-							<div class="dropdown-arrow">▼</div>
-						</div>
-						<div class="spec-details">
-							<div class="spec-row">
-								<span class="spec-label">Total length</span>
-								<span class="spec-value">4.90 m</span>
-							</div>
-							<div class="spec-row">
-								<span class="spec-label">Total width</span>
-								<span class="spec-value">3.40 m</span>
-							</div>
-							<div class="spec-row">
-								<span class="spec-label">Draft</span>
-								<span class="spec-value">1.20 m</span>
-							</div>
-							<div class="spec-row">
-								<span class="spec-label">Person capacity</span>
-								<span class="spec-value">3-5 people</span>
-							</div>
-						</div>
-					</div>
-
-					<!-- 动力、速度和续航 -->
-					<div class="spec-group">
-						<div class="spec-header">
-							<h4 class="spec-category">Power, speed, and range:</h4>
-							<div class="dropdown-arrow">▼</div>
-						</div>
-						<div class="spec-details">
-							<div class="spec-row">
-								<span class="spec-label">Cruising speed</span>
-								<span class="spec-value">15/30 sections (kt)</span>
-							</div>
-							<div class="spec-row">
-								<span class="spec-label">Maximum speed</span>
-								<span class="spec-value">18/33 sections (kt)</span>
-							</div>
-							<div class="spec-row">
-								<span class="spec-label">Endurance</span>
-								<span class="spec-value">2.5 hours (standard operating conditions)</span>
-							</div>
-							<div class="spec-row">
-								<span class="spec-label">Propulsion power</span>
-								<span class="spec-value">20kw/40 kw</span>
-							</div>
-							<div class="spec-row">
-								<span class="spec-label">Charging method</span>
-								<span class="spec-value">Equipped with dedicated charging stations</span>
-							</div>
-							<div class="spec-row">
-								<span class="spec-label">Charging station</span>
-								<span class="spec-value">380V 60A</span>
-							</div>
-							<div class="spec-row">
-								<span class="spec-label">Charging time</span>
-								<span class="spec-value">1.5 hours</span>
-							</div>
-							<div class="spec-row">
-								<span class="spec-label">Charging power</span>
-								<span class="spec-value">≤20kw</span>
-							</div>
-						</div>
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>
@@ -216,14 +65,15 @@ onMounted(() => {
 <style scoped>
 .product-introduction {
 	min-height: 100vh;
-	background: #233439;
+	background: url('../assets/bp_bg.png') center/cover no-repeat;
+	background-attachment: fixed;
 	color: #ffffff;
 	font-family: 'Arial', sans-serif;
 	position: relative;
 	overflow: hidden;
 }
 
-/* 海洋背景 */
+/* 添加半透明遮罩层以增强文字可读性 */
 .product-introduction::before {
 	content: '';
 	position: absolute;
@@ -231,9 +81,8 @@ onMounted(() => {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background: url('https://image-resource.mastergo.com/158461235620048/158461235620054/8885c4e0bc747601bbffb1820ad9772c.png') center/cover;
-	opacity: 0.5;
-	z-index: -1;
+	background: rgba(0, 0, 0, 0.3);
+	z-index: 0;
 }
 
 /* 顶部导航栏 */
@@ -244,7 +93,7 @@ onMounted(() => {
 	right: 0;
 	background: rgba(0, 0, 0, 0.8);
 	backdrop-filter: blur(10px);
-	z-index: 1000;
+	z-index: 1001;
 	padding: 15px 0;
 }
 
@@ -325,22 +174,26 @@ onMounted(() => {
 /* 主要内容区域 */
 .main-content {
 	display: flex;
-	min-height: 100vh;
+	height: calc(100vh - 80px);
 	padding-top: 80px;
 	gap: 20px;
+	position: relative;
+	z-index: 1;
+	overflow: hidden;
 }
 
 .left-section {
 	flex: 1;
-	padding: 40px;
+	padding: 20px;
 	display: flex;
 	flex-direction: column;
-	gap: 30px;
+	gap: 20px;
+	overflow-y: auto;
 }
 
 .center-section {
 	flex: 1.5;
-	padding: 40px;
+	padding: 20px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -348,10 +201,11 @@ onMounted(() => {
 
 .right-section {
 	flex: 1;
-	padding: 40px;
+	padding: 20px;
 	display: flex;
 	align-items: flex-start;
 	justify-content: center;
+	overflow-y: auto;
 }
 
 /* 左侧内容样式 */
@@ -376,18 +230,19 @@ onMounted(() => {
 
 /* 产品优势 */
 .product-advantages {
-	background: rgba(255, 255, 255, 0.1);
-	backdrop-filter: blur(10px);
+	background: rgba(255, 255, 255, 0.15);
+	backdrop-filter: blur(15px);
 	border-radius: 15px;
-	padding: 30px;
-	border: 1px solid rgba(255, 255, 255, 0.2);
-	margin-bottom: 30px;
+	padding: 20px;
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	margin-bottom: 20px;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .advantages-content {
 	background: rgba(0, 0, 0, 0.3);
 	border-radius: 10px;
-	padding: 20px;
+	padding: 15px;
 }
 
 .advantages-text {
@@ -411,23 +266,26 @@ onMounted(() => {
 }
 
 /* 对比和设计技术部分 */
-.comparison-section, .design-tech-section {
-	background: rgba(255, 255, 255, 0.1);
-	backdrop-filter: blur(10px);
+.comparison-section,
+.design-tech-section {
+	background: rgba(255, 255, 255, 0.15);
+	backdrop-filter: blur(15px);
 	border-radius: 15px;
-	padding: 30px;
-	border: 1px solid rgba(255, 255, 255, 0.2);
-	margin-bottom: 30px;
+	padding: 20px;
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	margin-bottom: 20px;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 /* 颜色和价格部分 */
 .color-price-section {
-	background: rgba(255, 255, 255, 0.1);
-	backdrop-filter: blur(10px);
+	background: rgba(255, 255, 255, 0.15);
+	backdrop-filter: blur(15px);
 	border-radius: 15px;
-	padding: 30px;
-	border: 1px solid rgba(255, 255, 255, 0.2);
-	margin-bottom: 30px;
+	padding: 20px;
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	margin-bottom: 20px;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .color-options {
@@ -474,11 +332,12 @@ onMounted(() => {
 
 /* 产品亮点 */
 .product-highlights {
-	background: rgba(255, 255, 255, 0.1);
-	backdrop-filter: blur(10px);
+	background: rgba(255, 255, 255, 0.15);
+	backdrop-filter: blur(15px);
 	border-radius: 15px;
-	padding: 30px;
-	border: 1px solid rgba(255, 255, 255, 0.2);
+	padding: 20px;
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .highlights-grid {
@@ -531,107 +390,49 @@ onMounted(() => {
 .boat-3d-model {
 	position: relative;
 	width: 400px;
-	height: 200px;
-	transform: rotateX(10deg) rotateY(-15deg);
+	height: 250px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transform: rotateX(5deg) rotateY(-10deg);
 	animation: boatFloat 4s ease-in-out infinite;
 }
 
-.boat-hull {
-	position: relative;
+.boat-image {
 	width: 100%;
-	height: 80px;
-	background: linear-gradient(135deg, #E8E8E8 0%, #C0C0C0 50%, #A0A0A0 100%);
-	border-radius: 40px 20px 40px 20px;
-	box-shadow: 
-		0 10px 30px rgba(0, 0, 0, 0.3),
-		inset 0 2px 10px rgba(255, 255, 255, 0.3);
+	height: 100%;
+	object-fit: contain;
+	filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+	transition: all 0.3s ease;
 }
 
-.boat-seats {
-	position: absolute;
-	top: 15px;
-	left: 50%;
-	transform: translateX(-50%);
-	display: flex;
-	gap: 15px;
-}
-
-.seat {
-	width: 25px;
-	height: 20px;
-	background: linear-gradient(135deg, #FF9A4E 0%, #FF7A2E 100%);
-	border-radius: 5px;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.boat-bow-light {
-	position: absolute;
-	top: 20px;
-	left: 20px;
-	width: 15px;
-	height: 8px;
-	background: linear-gradient(90deg, #3FF4FF 0%, #00D4FF 100%);
-	border-radius: 50%;
-	box-shadow: 0 0 20px rgba(63, 244, 255, 0.8);
-	animation: lightPulse 2s ease-in-out infinite;
-}
-
-.hydrofoils {
-	position: absolute;
-	top: 60px;
-	left: 0;
-	width: 100%;
-	height: 40px;
-}
-
-.hydrofoil {
-	position: absolute;
-	width: 60px;
-	height: 8px;
-	background: linear-gradient(90deg, #3CC8C8 0%, #2A9D9D 100%);
-	border-radius: 4px;
-	box-shadow: 0 2px 10px rgba(60, 200, 200, 0.3);
-}
-
-.hydrofoil.front {
-	left: 50px;
-	top: 10px;
-	transform: rotate(-5deg);
-}
-
-.hydrofoil.rear {
-	right: 50px;
-	top: 20px;
-	transform: rotate(5deg);
+.boat-image:hover {
+	transform: scale(1.05);
+	filter: drop-shadow(0 15px 40px rgba(0, 0, 0, 0.4));
 }
 
 @keyframes boatFloat {
-	0%, 100% {
-		transform: rotateX(10deg) rotateY(-15deg) translateY(0px);
-	}
-	50% {
-		transform: rotateX(10deg) rotateY(-15deg) translateY(-15px);
-	}
-}
 
-@keyframes lightPulse {
-	0%, 100% {
-		box-shadow: 0 0 20px rgba(63, 244, 255, 0.8);
+	0%,
+	100% {
+		transform: rotateX(5deg) rotateY(-10deg) translateY(0px);
 	}
+
 	50% {
-		box-shadow: 0 0 30px rgba(63, 244, 255, 1);
+		transform: rotateX(5deg) rotateY(-10deg) translateY(-10px);
 	}
 }
 
 /* 右侧产品规格面板 */
 .product-specs-panel {
-	background: rgba(100, 100, 100, 0.3);
-	backdrop-filter: blur(15px);
+	background: rgba(100, 100, 100, 0.4);
+	backdrop-filter: blur(20px);
 	border-radius: 10px;
-	padding: 30px;
-	border: 1px solid rgba(255, 255, 255, 0.2);
+	padding: 20px;
+	border: 1px solid rgba(255, 255, 255, 0.3);
 	width: 100%;
 	max-width: 400px;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .specs-title {
@@ -702,33 +503,34 @@ onMounted(() => {
 	.main-content {
 		flex-direction: column;
 	}
-	
+
 	.nav-container {
 		flex-wrap: wrap;
 		gap: 10px;
 	}
-	
+
 	.nav-item {
 		font-size: 12px;
 		padding: 8px 15px;
 	}
-	
-	.left-section, .center-section, .right-section {
+
+	.left-section,
+	.center-section,
+	.right-section {
 		padding: 20px;
 	}
-	
+
 	.highlights-grid {
 		grid-template-columns: 1fr;
 	}
-	
+
 	.boat-3d-model {
 		width: 300px;
-		height: 150px;
+		height: 180px;
 	}
-	
+
 	.product-specs-panel {
 		max-width: 100%;
 	}
 }
 </style>
-
