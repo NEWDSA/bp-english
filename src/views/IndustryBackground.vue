@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import EChartsComponent from '../components/EChartsComponent.vue';
 import GlobeComponent from '../components/GlobeComponent.vue';
 
@@ -13,17 +14,24 @@ const chartData = ref([
 ])
 
 const navItems = ref([
-  { id: 1, name: 'Industry Background', active: true },
-  { id: 2, name: 'Market Demand', active: false },
-  { id: 3, name: 'Business Model', active: false },
-  { id: 4, name: 'Team Composition', active: false },
-  { id: 5, name: 'Product Introduction', active: false }
+  { id: 1, name: 'Industry Background', path: '/industry-background', active: true },
+  { id: 2, name: 'Market Demand', path: '/market-demand', active: false },
+  { id: 3, name: 'Business Model', path: '/business-model', active: false },
+  { id: 4, name: 'Team Composition', path: '/team-composition', active: false },
+  { id: 5, name: 'Product Introduction', path: '/product-introduction', active: false }
 ])
+
+const router = useRouter()
 
 const setActiveNav = (itemId) => {
   navItems.value.forEach(item => {
     item.active = item.id === itemId
   })
+
+  const navItem = navItems.value.find(item => item.id === itemId)
+  if (navItem) {
+    router.push(navItem.path)
+  }
 }
 </script>
 
@@ -31,12 +39,10 @@ const setActiveNav = (itemId) => {
   <div class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900 relative">
     <!-- Floating Navigation Bar -->
     <div class="absolute top-8 left-8 z-20">
-      <div class="bg-gray-800/30 backdrop-blur-md rounded-lg border border-gray-700/50 px-6 py-3">
+      <div class="bg-gray-800/30 backdrop-blur-md rounded-lg border-gray-700/50 px-6 py-3 border-t border-b">
         <div class="flex items-center space-x-1">
           <!-- Logo -->
-          <div class="w-6 h-6 bg-white rounded-sm flex items-center justify-center mr-4">
-            <div class="w-3 h-3 bg-gray-800"></div>
-          </div>
+          <img src="../assets/nav_back.png" alt="Logo" class="w-6 h-6 mr-4" />
 
           <!-- Navigation Items -->
           <div class="flex items-center space-x-0">
@@ -44,8 +50,10 @@ const setActiveNav = (itemId) => {
               <span
                 @click="setActiveNav(item.id)"
                 :class="[
-                  'px-3 py-1 cursor-pointer text-xs transition-colors duration-200',
-                  item.active ? 'text-white font-medium' : 'text-gray-400 hover:text-gray-300'
+                  'px-3 py-1 cursor-pointer text-[18px] transition-all duration-200 h-full flex items-center',
+                  item.active
+                    ? 'text-white font-medium bg-[#3CC8C8]/30 -my-3 border-t border-b border-[#3CC8C8]'
+                    : 'text-gray-400 hover:text-gray-300'
                 ]">
                 {{ item.name }}
               </span>
@@ -64,8 +72,8 @@ const setActiveNav = (itemId) => {
           <!-- Page Title -->
           <div class="mb-6 xl:mb-8">
             <div class="flex items-center text-white mb-6">
-              <div class="w-3 h-3 border border-gray-400/60 rounded-sm mr-3"></div>
-              <h1 class="text-sm xl:text-base font-normal text-gray-300 tracking-wide">Industry Background - Global</h1>
+              <img src="../assets/icon-1.png" alt="Icon" class="w-[27px] h-[28px] mr-3" />
+              <h1 class="text-[20px] font-normal text-gray-300 tracking-wide">Industry Background - Global</h1>
             </div>
           </div>
 
