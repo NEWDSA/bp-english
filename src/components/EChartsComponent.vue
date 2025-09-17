@@ -1,5 +1,29 @@
 <template>
-  <div ref="chartRef" class="w-full h-full bg-gray-900/50 rounded-xl"></div>
+  <div
+    ref="chartRef"
+    class="w-full h-full bg-gray-900/50 rounded-xl relative overflow-hidden"
+    :class="{ 'cursor-pointer': !isDetailed }"
+  >
+    <!-- Clickable indicator overlay -->
+    <div
+      v-if="!isDetailed"
+      class="absolute inset-0 bg-gradient-to-r from-cyan-500/5 to-blue-500/5 opacity-0 hover:opacity-100 transition-all duration-300 rounded-xl pointer-events-none"
+      :class="{ 'animate-pulse-slow': isHovered }"
+    >
+      <!-- Corner indicators -->
+      <div class="absolute top-2 left-2 w-1 h-1 bg-cyan-400 rounded-full animate-ping"></div>
+      <div class="absolute top-2 right-2 w-1 h-1 bg-cyan-400 rounded-full animate-ping animation-delay-200"></div>
+      <div class="absolute bottom-2 left-2 w-1 h-1 bg-cyan-400 rounded-full animate-ping animation-delay-400"></div>
+      <div class="absolute bottom-2 right-2 w-1 h-1 bg-cyan-400 rounded-full animate-ping animation-delay-600"></div>
+
+      <!-- Center hint text -->
+      <div class="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+        <div class="bg-cyan-600/20 backdrop-blur-sm px-3 py-1 rounded-full border border-cyan-400/30">
+          <span class="text-cyan-300 text-xs font-medium">Click to view details</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -10,15 +34,23 @@ const props = defineProps({
   chartType: {
     type: String,
     default: 'line'
+  },
+  isDetailed: {
+    type: Boolean,
+    default: false
   }
 })
 
+const emit = defineEmits(['chart-click'])
+
 const chartRef = ref(null)
+const isHovered = ref(false)
 let chartInstance = null
 let resizeObserver = null
 
 const generateRandomData = (count = 6) => {
-  return Array.from({ length: count }, () => Math.floor(Math.random() * 100) + 20)
+  const dataCount = props.isDetailed ? 12 : count
+  return Array.from({ length: dataCount }, () => Math.floor(Math.random() * 100) + 20)
 }
 
 const getChartOptions = () => {
@@ -31,8 +63,10 @@ const getChartOptions = () => {
     { type: 'linear', x: 0, y: 0, x2: 0, y2: 1, colorStops: [{ offset: 0, color: '#ef4444' }, { offset: 1, color: '#dc2626' }] }
   ]
 
-  const baseTextStyle = { color: '#e5e7eb', fontSize: 12 }
-  const gridStyle = { left: '8%', right: '8%', top: '12%', bottom: '12%' }
+  const baseTextStyle = { color: '#e5e7eb', fontSize: props.isDetailed ? 14 : 12 }
+  const gridStyle = props.isDetailed
+    ? { left: '5%', right: '5%', top: '8%', bottom: '8%' }
+    : { left: '8%', right: '8%', top: '12%', bottom: '12%' }
 
   switch (props.chartType) {
     case 'bar':
@@ -46,7 +80,9 @@ const getChartOptions = () => {
         },
         xAxis: {
           type: 'category',
-          data: ['2019', '2020', '2021', '2022'],
+          data: props.isDetailed
+            ? ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025']
+            : ['2019', '2020', '2021', '2022'],
           axisLabel: {
             color: '#e5e7eb',
             fontSize: 12,
@@ -90,7 +126,9 @@ const getChartOptions = () => {
         series: [
           {
             name: 'Series 1',
-            data: [45, 52, 48, 58],
+            data: props.isDetailed
+              ? data.slice(0, 8)
+              : [45, 52, 48, 58],
             type: 'bar',
             itemStyle: {
               color: {
@@ -127,7 +165,9 @@ const getChartOptions = () => {
           },
           {
             name: 'Series 2',
-            data: [38, 45, 55, 65],
+            data: props.isDetailed
+              ? data.slice(8, 16)
+              : [38, 45, 55, 65],
             type: 'bar',
             itemStyle: {
               color: {
@@ -199,7 +239,9 @@ const getChartOptions = () => {
         grid: gridStyle,
         xAxis: {
           type: 'category',
-          data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+          data: props.isDetailed
+            ? ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
           axisLabel: baseTextStyle,
           axisLine: { lineStyle: { color: '#374151' } },
           splitLine: { show: false }
@@ -211,7 +253,7 @@ const getChartOptions = () => {
           splitLine: { lineStyle: { color: '#374151', type: 'dashed' } }
         },
         series: [{
-          data: data.slice(0, 6),
+          data: props.isDetailed ? data.slice(0, 12) : data.slice(0, 6),
           type: 'line',
           areaStyle: {
             color: { type: 'linear', x: 0, y: 0, x2: 0, y2: 1, colorStops: [
@@ -244,7 +286,7 @@ const getChartOptions = () => {
         },
         series: [{
           type: 'scatter',
-          data: data.slice(0, 15).map((value, index) => [index * 6 + Math.random() * 8, value]),
+          data: data.slice(0, props.isDetailed ? 30 : 15).map((value, index) => [index * 6 + Math.random() * 8, value]),
           itemStyle: {
             color: '#f59e0b',
             shadowBlur: 5,
@@ -295,7 +337,9 @@ const getChartOptions = () => {
         grid: gridStyle,
         xAxis: {
           type: 'category',
-          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+          data: props.isDetailed
+            ? ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Week 8', 'Week 9', 'Week 10', 'Week 11', 'Week 12']
+            : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
           axisLabel: baseTextStyle,
           axisLine: { lineStyle: { color: '#374151' } },
           splitLine: { show: false }
@@ -307,7 +351,7 @@ const getChartOptions = () => {
           splitLine: { lineStyle: { color: '#374151', type: 'dashed' } }
         },
         series: [{
-          data: data.slice(0, 6),
+          data: props.isDetailed ? data.slice(0, 12) : data.slice(0, 6),
           type: 'line',
           smooth: true,
           itemStyle: { color: '#10b981', borderColor: '#fff', borderWidth: 2 },
@@ -376,6 +420,12 @@ onMounted(async () => {
     // Start initialization with a small delay
     setTimeout(() => initWithRetry(), 100)
 
+    // Add mouse event listeners for hover effects
+    if (chartRef.value && !props.isDetailed) {
+      chartRef.value.addEventListener('mouseenter', handleMouseEnter)
+      chartRef.value.addEventListener('mouseleave', handleMouseLeave)
+    }
+
   } catch (error) {
     console.error('Error in chart mount hook:', error)
   }
@@ -412,6 +462,30 @@ const initChart = () => {
     const options = getChartOptions()
     chartInstance.setOption(options, true)
 
+    // Add click event listener only for non-detailed charts
+    if (!props.isDetailed) {
+      // Listen to click events on the entire chart container
+      chartInstance.getZr().on('click', (event) => {
+        // Get the DOM element position
+        const rect = chartRef.value.getBoundingClientRect()
+
+        // Convert click coordinates to chart coordinates
+        const pointInChart = chartInstance.convertFromPixel('grid', [event.offsetX - rect.left, event.offsetY - rect.top])
+
+        // Emit click event regardless of whether it's on a data point
+        emit('chart-click', {
+          chartType: props.chartType,
+          params: {
+            event: event,
+            offsetX: event.offsetX,
+            offsetY: event.offsetY,
+            // Include coordinates in case needed
+            pointInChart: pointInChart
+          }
+        })
+      })
+    }
+
     // Force immediate resize to ensure proper sizing
     setTimeout(() => {
       if (chartInstance && !chartInstance.isDisposed()) {
@@ -440,6 +514,12 @@ onUnmounted(() => {
   // Remove resize listener
   window.removeEventListener('resize', handleResize)
 
+  // Remove mouse event listeners
+  if (chartRef.value) {
+    chartRef.value.removeEventListener('mouseenter', handleMouseEnter)
+    chartRef.value.removeEventListener('mouseleave', handleMouseLeave)
+  }
+
   // Disconnect ResizeObserver
   if (resizeObserver) {
     resizeObserver.disconnect()
@@ -451,6 +531,20 @@ onUnmounted(() => {
     chartInstance = null
   }
 })
+
+// Handle mouse enter
+const handleMouseEnter = () => {
+  if (!props.isDetailed) {
+    isHovered.value = true
+  }
+}
+
+// Handle mouse leave
+const handleMouseLeave = () => {
+  if (!props.isDetailed) {
+    isHovered.value = false
+  }
+}
 
 // Handle resize
 const handleResize = () => {
@@ -470,3 +564,32 @@ const handleResize = () => {
 
 // Listen for window resize - moved to the main onMounted hook
 </script>
+
+<style scoped>
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.02);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 2s ease-in-out infinite;
+}
+
+.animation-delay-200 {
+  animation-delay: 0.2s;
+}
+
+.animation-delay-400 {
+  animation-delay: 0.4s;
+}
+
+.animation-delay-600 {
+  animation-delay: 0.6s;
+}
+</style>

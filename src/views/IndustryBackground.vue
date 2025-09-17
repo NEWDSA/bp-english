@@ -3,6 +3,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import EChartsComponent from '../components/EChartsComponent.vue';
 import GlobeComponent from '../components/GlobeComponent.vue';
 import Navigation from '../components/Navigation.vue';
+import ChartModal from '../components/ChartModal.vue';
 
 const chartData = ref([
   { title: 'Global Yacht Sales', subtitle: 'Market size and trends', type: 'line', id: 'yacht-sales' },
@@ -22,6 +23,8 @@ const navItems = ref([
 ])
 
 const showSummary = ref(false)
+const showChartModal = ref(false)
+const selectedChart = ref({ title: '', type: '' })
 
 // Calculate chart height dynamically
 const chartContainerHeight = ref('0px')
@@ -54,6 +57,27 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('resize', calculateChartHeight)
 })
+
+// Handle chart click event
+const handleChartClick = (chartInfo) => {
+  selectedChart.value = {
+    title: getChartTitle(chartInfo.chartType),
+    type: chartInfo.chartType
+  }
+  showChartModal.value = true
+}
+
+// Get chart title based on chart type
+const getChartTitle = (chartType) => {
+  const titles = {
+    'bar': 'Global small yacht manufacturing industry',
+    'area': 'Global small yacht sales market size',
+    'line': 'Global market size of water outdoor sports equipment (growth rate)',
+    'scatter': 'Global market size of water outdoor sports equipment',
+    'pie': 'Age structure of global shipowners'
+  }
+  return titles[chartType] || 'Chart Details'
+}
 </script>
 
 <template>
@@ -83,7 +107,7 @@ onUnmounted(() => {
                 <h3 class="text-sm text-gray-300">Global small yacht manufacturing industry</h3>
               </div>
               <div :style="{ height: chartHeight }">
-                <EChartsComponent chart-type="bar" />
+                <EChartsComponent chart-type="bar" @chart-click="handleChartClick" />
               </div>
             </div>
 
@@ -94,7 +118,7 @@ onUnmounted(() => {
                 <h3 class="text-sm text-gray-300">Global small yacht sales market size</h3>
               </div>
               <div :style="{ height: chartHeight }">
-                <EChartsComponent chart-type="area" />
+                <EChartsComponent chart-type="area" @chart-click="handleChartClick" />
               </div>
             </div>
 
@@ -105,7 +129,7 @@ onUnmounted(() => {
                 <h3 class="text-sm text-gray-300">Global market size of water outdoor sports equipment<br/>(growth rate)</h3>
               </div>
               <div :style="{ height: chartHeight }">
-                <EChartsComponent chart-type="line" />
+                <EChartsComponent chart-type="line" @chart-click="handleChartClick" />
               </div>
             </div>
 
@@ -116,7 +140,7 @@ onUnmounted(() => {
                 <h3 class="text-sm text-gray-300">Global market size of water outdoor sports equipment</h3>
               </div>
               <div :style="{ height: chartHeight }">
-                <EChartsComponent chart-type="scatter" />
+                <EChartsComponent chart-type="scatter" @chart-click="handleChartClick" />
               </div>
             </div>
 
@@ -127,7 +151,7 @@ onUnmounted(() => {
                 <h3 class="text-sm text-gray-300">Global ship leasing market size</h3>
               </div>
               <div :style="{ height: chartHeight }">
-                <EChartsComponent chart-type="bar" />
+                <EChartsComponent chart-type="bar" @chart-click="handleChartClick" />
               </div>
             </div>
 
@@ -138,7 +162,7 @@ onUnmounted(() => {
                 <h3 class="text-sm text-gray-300">Age structure of global shipowners</h3>
               </div>
               <div :style="{ height: chartHeight }">
-                <EChartsComponent chart-type="pie" />
+                <EChartsComponent chart-type="pie" @chart-click="handleChartClick" />
               </div>
             </div>
           </div>
@@ -215,6 +239,14 @@ onUnmounted(() => {
       <div class="absolute top-3/4 right-1/3 w-1 h-1 bg-purple-400 rounded-full animate-ping animation-delay-2000"></div>
       <div class="absolute bottom-1/4 left-1/3 w-1 h-1 bg-cyan-400 rounded-full animate-ping animation-delay-4000"></div>
     </div>
+
+    <!-- Chart Modal -->
+    <ChartModal
+      :is-visible="showChartModal"
+      :title="selectedChart.title"
+      :chart-type="selectedChart.type"
+      @close="showChartModal = false"
+    />
   </div>
 </template>
 
