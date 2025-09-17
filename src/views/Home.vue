@@ -144,6 +144,7 @@ onBeforeUnmount(() => { document.removeEventListener('keydown', onKeydown) })
 	top: 56px;
 	left: 133px;
 	color: #DCDCDC;
+	z-index: 20;
 }
 .catalogue-head {
 	color: #DCDCDC;
@@ -155,6 +156,8 @@ onBeforeUnmount(() => { document.removeEventListener('keydown', onKeydown) })
 	cursor: pointer;
 	position: relative;
 	transition: all 0.3s ease;
+	padding: 8px 16px;
+	border-radius: 8px;
 }
 
 .catalogue-head::after {
@@ -172,15 +175,23 @@ onBeforeUnmount(() => { document.removeEventListener('keydown', onKeydown) })
 	width: 100%;
 }
 
+.catalogue-head:hover {
+	background: rgba(255,255,255,0.1);
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(255,255,255,0.2);
+}
+
 /* 当catalogue展开时，移除悬停效果 */
 .catalogue-wrap.is-open .catalogue-head:hover::after {
 	width: 0;
 }
 .catalogue-wrap.is-open {
-	background: rgba(255,255,255,0.2);
-	backdrop-filter: blur(2px);
-	border-radius: 13px;
+	background: rgba(255,255,255,0.15);
+	backdrop-filter: blur(10px);
+	border-radius: 16px;
 	padding: 16px 16px 12px;
+	border: 1px solid rgba(255,255,255,0.2);
+	box-shadow: 0 8px 32px rgba(0,0,0,0.3);
 }
 
 /* 右上白色圆形按钮（34px 圆 + 42px 包裹） */
@@ -195,6 +206,7 @@ onBeforeUnmount(() => { document.removeEventListener('keydown', onKeydown) })
 	padding: 0;
 	cursor: pointer;
 	outline: none;
+	transition: all 0.3s ease;
 }
 
 .corner-btn:focus {
@@ -204,6 +216,15 @@ onBeforeUnmount(() => { document.removeEventListener('keydown', onKeydown) })
 .corner-btn:focus-visible {
 	outline: none;
 }
+
+.corner-btn:hover {
+	transform: scale(1.1);
+}
+
+.corner-btn:active {
+	transform: scale(0.95);
+}
+
 .corner-btn::before {
 	content: '';
 	position: absolute;
@@ -213,32 +234,82 @@ onBeforeUnmount(() => { document.removeEventListener('keydown', onKeydown) })
 	height: 34px;
 	border-radius: 50%;
 	background: #FFFFFF; /* paint_0:2639 */
+	transition: all 0.3s ease;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
+
+.corner-btn:hover::before {
+	box-shadow: 0 4px 16px rgba(255,255,255,0.3);
+}
+
 .corner-btn__icon {
 	position: relative;
 	width: 42px;
 	height: 42px;
 	display: block;
 	object-fit: contain;
+	transition: transform 0.3s ease;
+}
+
+.corner-btn:hover .corner-btn__icon {
+	transform: rotate(10deg);
 }
 
 /* Catalogue panel 列表区域（容器背景由 .catalogue-wrap.is-open 提供） */
 .catalogue-panel { margin-top: 12px; width: 240px; }
-.catalogue-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
-.catalogue-item { 
-	color: #DCDCDC; 
-	font-size: 11px; 
-	line-height: 1.2; 
-	padding-bottom: 8px; 
-	border-bottom: 1px solid rgba(220,220,220,0.35); 
-	white-space: nowrap; 
+.catalogue-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	animation: slideDown 0.3s ease-out;
+}
+.catalogue-item {
+	color: #DCDCDC;
+	font-size: 11px;
+	line-height: 1.2;
+	padding: 10px 12px;
+	border-bottom: 1px solid rgba(220,220,220,0.35);
+	white-space: nowrap;
 	cursor: pointer;
-	transition: color 0.3s ease;
+	transition: all 0.3s ease;
+	border-radius: 8px;
+	position: relative;
+	overflow: hidden;
 }
 .catalogue-item:hover {
 	color: #ffffff;
+	background: rgba(255,255,255,0.1);
+	transform: translateX(5px);
+}
+.catalogue-item::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 3px;
+	background: linear-gradient(135deg, #646cff, #535bf2);
+	transform: scaleY(0);
+	transition: transform 0.3s ease;
+}
+.catalogue-item:hover::before {
+	transform: scaleY(1);
 }
 .catalogue-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+@keyframes slideDown {
+	from {
+		opacity: 0;
+		transform: translateY(-10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
 
 /* fade transition */
 .fade-enter-active, .fade-leave-active { transition: opacity .3s ease; }
@@ -299,17 +370,72 @@ onBeforeUnmount(() => { document.removeEventListener('keydown', onKeydown) })
 		width: 95%;
 		padding: 20px;
 	}
-	
+
 	.company-info__content {
 		padding: 30px 20px;
 	}
-	
+
 	.company-info__title {
 		font-size: 16px;
 	}
-	
+
 	.company-info__text {
 		font-size: 13px;
+	}
+
+	/* 移动端导航优化 */
+	.catalogue-wrap {
+		top: 20px;
+		left: 20px;
+	}
+
+	.catalogue-head {
+		font-size: 16px;
+		padding: 6px 12px;
+	}
+
+	.corner-btn {
+		top: 20px;
+		right: 20px;
+		width: 36px;
+		height: 36px;
+	}
+
+	.corner-btn::before {
+		top: 3px;
+		left: 3px;
+		width: 30px;
+		height: 30px;
+	}
+
+	.corner-btn__icon {
+		width: 36px;
+		height: 36px;
+	}
+
+	.catalogue-list {
+		gap: 8px;
+	}
+
+	.catalogue-item {
+		font-size: 10px;
+		padding: 8px 10px;
+	}
+}
+
+@media (max-width: 480px) {
+	.catalogue-wrap {
+		top: 15px;
+		left: 15px;
+	}
+
+	.corner-btn {
+		top: 15px;
+		right: 15px;
+	}
+
+	.catalogue-head {
+		font-size: 14px;
 	}
 }
 </style>
