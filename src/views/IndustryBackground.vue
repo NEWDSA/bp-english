@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import EChartsComponent from '../components/EChartsComponent.vue';
 import GlobeComponent from '../components/GlobeComponent.vue';
 import Navigation from '../components/Navigation.vue';
@@ -22,6 +22,38 @@ const navItems = ref([
 ])
 
 const showSummary = ref(false)
+
+// Calculate chart height dynamically
+const chartContainerHeight = ref('0px')
+const chartHeight = ref('0px')
+
+const calculateChartHeight = () => {
+  // Navigation height (pt-24 = 6rem = 96px)
+  const navHeight = 84
+  // Page title section height (mt-5 + mb-6 + content height ≈ 80px)
+  const titleHeight = 82
+  // Padding bottom (pb-8 = 2rem = 32px)
+  const paddingBottom = 32
+  // Grid gap (gap-4 between 3 rows = 8px * 2 = 16px for mobile, gap-6 for desktop)
+  const gridGap = window.innerWidth >= 1024 ? 12 * 2 : 8 * 2 // 2 gaps between 3 rows
+  const gridTitle = 56 * 3
+
+  console.log(navHeight, titleHeight, paddingBottom, gridGap)
+
+  const availableHeight = window.innerHeight - navHeight - titleHeight - paddingBottom - gridGap - gridTitle
+  const calculatedChartHeight = Math.floor(availableHeight / 3) // 3 rows of charts
+
+  chartHeight.value = `${calculatedChartHeight}px`
+}
+
+onMounted(() => {
+  calculateChartHeight()
+  window.addEventListener('resize', calculateChartHeight)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', calculateChartHeight)
+})
 </script>
 
 <template>
@@ -43,14 +75,14 @@ const showSummary = ref(false)
           </div>
 
           <!-- Charts Grid -->
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 xl:gap-6 flex-1 overflow-hidden">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 xl:gap-6">
             <!-- Chart 1: Global small yacht manufacturing industry -->
             <div class="text-white">
               <div class="flex items-center mb-4">
                 <div class="w-2 h-2 bg-cyan-400 rounded-full mr-3"></div>
                 <h3 class="text-sm text-gray-300">Global small yacht manufacturing industry</h3>
               </div>
-              <div class="h-full min-h-[200px] max-h-[300px]">
+              <div :style="{ height: chartHeight }">
                 <EChartsComponent chart-type="bar" />
               </div>
             </div>
@@ -61,7 +93,7 @@ const showSummary = ref(false)
                 <div class="w-2 h-2 bg-cyan-400 rounded-full mr-3"></div>
                 <h3 class="text-sm text-gray-300">Global small yacht sales market size</h3>
               </div>
-              <div class="h-full min-h-[200px] max-h-[300px]">
+              <div :style="{ height: chartHeight }">
                 <EChartsComponent chart-type="area" />
               </div>
             </div>
@@ -72,7 +104,7 @@ const showSummary = ref(false)
                 <div class="w-2 h-2 bg-cyan-400 rounded-full mr-3"></div>
                 <h3 class="text-sm text-gray-300">Global market size of water outdoor sports equipment<br/>(growth rate)</h3>
               </div>
-              <div class="h-full min-h-[200px] max-h-[300px]">
+              <div :style="{ height: chartHeight }">
                 <EChartsComponent chart-type="line" />
               </div>
             </div>
@@ -83,7 +115,7 @@ const showSummary = ref(false)
                 <div class="w-2 h-2 bg-cyan-400 rounded-full mr-3"></div>
                 <h3 class="text-sm text-gray-300">Global market size of water outdoor sports equipment</h3>
               </div>
-              <div class="h-full min-h-[200px] max-h-[300px]">
+              <div :style="{ height: chartHeight }">
                 <EChartsComponent chart-type="scatter" />
               </div>
             </div>
@@ -94,7 +126,7 @@ const showSummary = ref(false)
                 <div class="w-2 h-2 bg-cyan-400 rounded-full mr-3"></div>
                 <h3 class="text-sm text-gray-300">Global ship leasing market size</h3>
               </div>
-              <div class="h-full min-h-[200px] max-h-[300px]">
+              <div :style="{ height: chartHeight }">
                 <EChartsComponent chart-type="bar" />
               </div>
             </div>
@@ -105,7 +137,7 @@ const showSummary = ref(false)
                 <div class="w-2 h-2 bg-cyan-400 rounded-full mr-3"></div>
                 <h3 class="text-sm text-gray-300">Age structure of global shipowners</h3>
               </div>
-              <div class="h-full min-h-[200px] max-h-[300px]">
+              <div :style="{ height: chartHeight }">
                 <EChartsComponent chart-type="pie" />
               </div>
             </div>
@@ -113,7 +145,7 @@ const showSummary = ref(false)
         </div>
 
         <!-- Right Side - Globe -->
-        <div class="w-[50vw] h-[78vh] flex flex-col items-center justify-center">
+        <div class="w-[50vw] h-[80vh] flex flex-col items-center justify-center mt-10">
           <div class="relative w-full h-full aspect-square">
             <!-- Summary Button -->
             <div class="absolute top-0 right-0 z-10">

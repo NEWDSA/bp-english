@@ -1,5 +1,5 @@
 <template>
-  <div ref="chartRef" class="w-full h-full bg-gray-900/50 rounded-xl" style="min-height: 240px;"></div>
+  <div ref="chartRef" class="w-full h-full bg-gray-900/50 rounded-xl"></div>
 </template>
 
 <script setup>
@@ -32,17 +32,17 @@ const getChartOptions = () => {
   ]
 
   const baseTextStyle = { color: '#e5e7eb', fontSize: 12 }
-  const gridStyle = { left: '10%', right: '10%', top: '15%', bottom: '15%' }
+  const gridStyle = { left: '8%', right: '8%', top: '12%', bottom: '12%' }
 
   switch (props.chartType) {
     case 'bar':
       return {
         backgroundColor: 'transparent',
         grid: {
-          left: '8%',
-          right: '8%',
-          top: '15%',
-          bottom: '15%'
+          left: '6%',
+          right: '6%',
+          top: '10%',
+          bottom: '10%'
         },
         xAxis: {
           type: 'category',
@@ -266,9 +266,9 @@ const getChartOptions = () => {
             { name: 'Support', max: 100 },
             { name: 'Technology', max: 100 }
           ],
-          radius: '70%',
-          nameGap: 10,
-          name: { color: '#e5e7eb', fontSize: 12 },
+          radius: '65%',
+          nameGap: 8,
+          name: { color: '#e5e7eb', fontSize: 11 },
           splitLine: { lineStyle: { color: '#374151' } },
           splitArea: { show: false },
           axisLine: { lineStyle: { color: '#374151' } }
@@ -350,6 +350,7 @@ onMounted(async () => {
       try {
         // Check if the element has dimensions
         const rect = chartRef.value.getBoundingClientRect()
+        console.log(`Chart container dimensions: ${rect.width}x${rect.height}`)
         if (rect.width === 0 || rect.height === 0) {
           console.warn('Chart container has zero dimensions, retrying...', attempts + 1)
           setTimeout(() => initWithRetry(attempts + 1), 150)
