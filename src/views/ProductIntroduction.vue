@@ -42,21 +42,53 @@
 						<!-- 颜色选择区域 -->
 						<div class="color-price-content">
 							<div class="color-options">
-								<div class="color-swatch white" @click="changeBoatColor('white')" :class="{ active: selectedColor === 'white' }" style="background: #FFFFFF;"></div>
-								<div class="color-swatch gray" @click="changeBoatColor('gray')" :class="{ active: selectedColor === 'gray' }" style="background: #87CEEB;"></div>
-								<div class="color-swatch blue" @click="changeBoatColor('blue')" :class="{ active: selectedColor === 'blue' }" style="background: #4682B4;"></div>
-								<div class="color-swatch purple" @click="changeBoatColor('purple')" :class="{ active: selectedColor === 'purple' }" style="background: #DDA0DD;"></div>
-								<div class="color-swatch red" @click="changeBoatColor('red')" :class="{ active: selectedColor === 'red' }" style="background: #FF4500;"></div>
-								<div class="color-swatch brown" @click="changeBoatColor('brown')" :class="{ active: selectedColor === 'brown' }" style="background: #8B7355;"></div>
+								<div class="color-swatch white" @click="changeBoatColor('white')" :class="{ active: selectedColor === 'white' }" :style="{ backgroundImage: `url(${colorBackgrounds.white})` }"></div>
+								<div class="color-swatch green" @click="changeBoatColor('green')" :class="{ active: selectedColor === 'green' }" :style="{ backgroundImage: `url(${colorBackgrounds.green})` }"></div>
+								<div class="color-swatch blue" @click="changeBoatColor('blue')" :class="{ active: selectedColor === 'blue' }" :style="{ backgroundImage: `url(${colorBackgrounds.blue})` }"></div>
+								<div class="color-swatch purple" @click="changeBoatColor('purple')" :class="{ active: selectedColor === 'purple' }" :style="{ backgroundImage: `url(${colorBackgrounds.purple})` }"></div>
+								<div class="color-swatch red" @click="changeBoatColor('red')" :class="{ active: selectedColor === 'red' }" :style="{ backgroundImage: `url(${colorBackgrounds.red})` }"></div>
+								<div class="color-swatch black" @click="changeBoatColor('black')" :class="{ active: selectedColor === 'black' }" :style="{ backgroundImage: `url(${colorBackgrounds.black})` }"></div>
 							</div>
 							<div class="purchase-btn">
-								<span class="price-display">{{ currentPrice }}</span>
+								<img :src="priceImg" alt="Price" class="price-icon" />
 								<span class="purchase-text">Please click here to contact us for purchase</span>
 							</div>
 						</div>
 					</div>
-					<div class="left-nav-item">
+					<div class="left-nav-item product-highlights-section">
 						<span class="nav-text">Product Highlights</span>
+						<!-- 产品亮点卡片 -->
+						<div class="highlights-content">
+							<div class="highlights-grid">
+								<div class="highlight-card unmanned-systems" @mouseenter="showTooltip('unmanned')" @mouseleave="hideTooltip">
+									<div v-if="activeTooltip !== 'unmanned'">
+										<img :src="wheel1Img" alt="Unmanned Systems" class="highlight-icon" />
+										<div class="highlight-title">Unmanned Systems</div>
+									</div>
+									<!-- 悬停时显示的详细信息 -->
+									<div v-if="activeTooltip === 'unmanned'" class="card-content">
+										<p>The third mock examination switching</p>
+										<p>+ lifting rail expansion</p>
+										<p>Electromagnetic locking structure spring</p>
+										<p>damping increasing limit</p>
+									</div>
+								</div>
+								<div class="highlight-card">
+									<img :src="wheel2Img" alt="Team Members" class="highlight-icon" />
+									<div class="highlight-title">Team Members</div>
+									<!-- <div class="highlight-desc">Expert engineering and design team</div> -->
+								</div>
+								<div class="highlight-card">
+									<img :src="wheel1Img" alt="Adaptive hydrofoil" class="highlight-icon" />
+									<div class="highlight-title">Adaptive hydrofoil control algorithm</div>
+								</div>
+								<div class="highlight-card">
+									<img :src="wheel2Img" alt="Modular detachable hull" class="highlight-icon" />
+									<div class="highlight-title">Modular detachable hull</div>
+									<!-- <div class="highlight-desc">Easy maintenance and upgrade design</div> -->
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -155,49 +187,80 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
-// 导入图片资源
-import whiteBotImg from '../assets/white_boat.png'
+// 导入船只图片资源
+import whiteBoatImg from '../assets/white_boat.png'
+import greenBoatImg from '../assets/green_boat.png'
 import blueBoatImg from '../assets/blue_boat.png'
+import purpleBoatImg from '../assets/purple_boat.png'
+import redBoatImg from '../assets/red_boat.png'
+import blackBoatImg from '../assets/black_boat.png'
+
+// 导入颜色背景图片资源
+import whiteBdImg from '../assets/white_bd.png'
+import greenBdImg from '../assets/green_bd.png'
+import blueBdImg from '../assets/blue_bd.png'
+import purpleBdImg from '../assets/purple_bd.png'
+import redBdImg from '../assets/red_bd.png'
+import blackBdImg from '../assets/black_bd.png'
+
+// 导入价格图标
+import priceImg from '../assets/price.png'
+
+// 导入产品亮点图标
+import wheel1Img from '../assets/wheel1.png'
+import wheel2Img from '../assets/wheel2.png'
 
 const router = useRouter()
 
 // 颜色选择状态
 const selectedColor = ref('white')
 
+// 悬停提示状态
+const activeTooltip = ref(null)
+
 // 船只图片映射
 const boatImages = {
-	'white': whiteBotImg,
-	'gray': blueBoatImg,
+	'white': whiteBoatImg,
+	'green': greenBoatImg,
 	'blue': blueBoatImg,
-	'purple': whiteBotImg,
-	'red': whiteBotImg,
-	'brown': whiteBotImg
+	'purple': purpleBoatImg,
+	'red': redBoatImg,
+	'black': blackBoatImg
 }
 
-// 颜色价格映射
-const colorPrices = {
-	'white': '¥ 2,800,000',
-	'gray': '¥ 3,000,000',
-	'blue': '¥ 3,200,000',
-	'purple': '¥ 3,500,000',
-	'red': '¥ 3,800,000',
-	'brown': '¥ 3,300,000'
+// 颜色背景图片映射
+const colorBackgrounds = {
+	'white': whiteBdImg,
+	'green': greenBdImg,
+	'blue': blueBdImg,
+	'purple': purpleBdImg,
+	'red': redBdImg,
+	'black': blackBdImg
 }
 
 // 计算当前船只图片
 const currentBoatImage = computed(() => {
+	console.log('当前选择的颜色:', selectedColor.value)
+	console.log('对应的图片:', boatImages[selectedColor.value])
 	return boatImages[selectedColor.value] || boatImages['white']
-})
-
-// 计算当前价格
-const currentPrice = computed(() => {
-	return colorPrices[selectedColor.value] || colorPrices['white']
 })
 
 // 切换船只颜色
 function changeBoatColor(color) {
+	console.log('点击了颜色:', color)
 	selectedColor.value = color
-	console.log('切换到颜色:', color)
+	console.log('selectedColor更新为:', selectedColor.value)
+	console.log('currentBoatImage应该是:', currentBoatImage.value)
+}
+
+// 显示悬停提示
+function showTooltip(type) {
+	activeTooltip.value = type
+}
+
+// 隐藏悬停提示
+function hideTooltip() {
+	activeTooltip.value = null
 }
 
 function goHome() {
@@ -320,7 +383,7 @@ onMounted(() => {
 /* 左侧导航列表定位 */
 .left-nav-list {
 	position: absolute;
-	left: 20px;
+	left: 100px;
 	top: 50%;
 	transform: translateY(-50%);
 }
@@ -336,7 +399,7 @@ onMounted(() => {
 /* 右侧产品规格面板 */
 .product-specs-panel {
 	position: absolute;
-	right: 20px;
+	right: 100px;
 	top: 50%;
 	transform: translateY(-50%);
 	background-color: rgba(100, 100, 100, 0.3);
@@ -356,14 +419,15 @@ onMounted(() => {
 	padding-left: 20px;
 	min-height: 60vh;
 	justify-content: space-around;
+	z-index: 9999;
 }
 
 .left-nav-list::before {
 	content: '';
 	position: absolute;
 	left: 0;
-	top: -10px;
-	bottom: -10px;
+	top: 30px;
+	bottom: -42px;
 	width: 2px;
 	background: rgba(255, 255, 255, 0.8);
 }
@@ -411,6 +475,29 @@ onMounted(() => {
 	transform: translateY(80px) translateX(0);
 }
 
+/* 产品亮点区域特殊样式 */
+.product-highlights-section {
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 15px;
+	position: relative;
+	transform: translateY(70px);
+}
+
+.highlights-content {
+	position: absolute;
+	left: 200px;
+	top: -10px;
+	z-index: 50;
+}
+
+.highlights-grid {
+	display: flex;
+	flex-direction: row;
+	gap: 8px;
+	flex-wrap: nowrap;
+}
+
 /* 颜色价格区域的伪类元素特殊定位 */
 .color-price-section::before {
 	content: '';
@@ -430,6 +517,7 @@ onMounted(() => {
 	gap: 20px;
 	width: 100%;
 	align-items: center;
+	margin-left: 80px;
 }
 
 /* 左侧内容样式 */
@@ -517,16 +605,24 @@ onMounted(() => {
 	grid-template-columns: repeat(3, 1fr);
 	gap: 8px;
 	width: 100%;
-	max-width: 200px;
+	max-width: 260px;
+	position: relative;
+	z-index: 100;
 }
 
 .color-swatch {
-	width: 60px;
+	width: 80px;
 	height: 25px;
 	border-radius: 8px;
 	border: 2px solid rgba(255, 255, 255, 0.3);
 	cursor: pointer;
 	transition: all 0.3s ease;
+	position: relative;
+	z-index: 101;
+	pointer-events: auto;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
 }
 
 .color-swatch:hover {
@@ -546,6 +642,7 @@ onMounted(() => {
 	align-items: center;
 	gap: 10px;
 	background: rgba(255, 255, 255, 0.8);
+	margin-left: 80px;
 	color: #000000;
 	padding: 15px 25px;
 	border-radius: 8px;
@@ -558,11 +655,10 @@ onMounted(() => {
 	transform: translateY(-2px);
 }
 
-.price-display {
-	font-size: 18px;
-	font-weight: bold;
-	color: #00d4ff;
-	margin-right: 10px;
+.price-icon {
+	width: 20px;
+	height: 20px;
+	object-fit: contain;
 }
 
 .purchase-text {
@@ -580,18 +676,19 @@ onMounted(() => {
 	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
-.highlights-grid {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 20px;
-}
 
 .highlight-card {
-	background: rgba(255, 255, 255, 0.5);
-	border-radius: 10px;
-	padding: 20px;
+	background: rgba(255, 255, 255, 0.8);
+	border-radius: 15px;
+	padding: 15px;
 	text-align: center;
 	transition: all 0.3s ease;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	flex-shrink: 0;
+	/* min-width: 200px; */
 }
 
 .highlight-card:hover {
@@ -600,21 +697,59 @@ onMounted(() => {
 }
 
 .highlight-icon {
-	font-size: 32px;
-	margin-bottom: 15px;
+	width: 180px;
+	height: 90px;
+	/* margin-bottom: 12px; */
+	object-fit: cover;
 }
 
 .highlight-title {
-	font-size: 16px;
+	font-size: 11px;
 	font-weight: 600;
 	color: #000000;
-	margin-bottom: 10px;
+	margin-bottom: 3px;
+	text-align: center;
+	line-height: 1.2;
 }
 
 .highlight-desc {
-	font-size: 12px;
-	color: #000000;
-	line-height: 1.5;
+	font-size: 9px;
+	color: #666666;
+	line-height: 1.3;
+	text-align: center;
+}
+
+/* 卡片内容样式 */
+.card-content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	width: 100%;
+	height: 100%;
+	padding: 8px;
+	animation: fadeInUp 0.3s ease-out;
+}
+
+.card-content p {
+	margin: 0;
+	padding: 2px 0;
+	font-size: 11px;
+	color: #333333;
+	line-height: 1.4;
+	text-align: left;
+	width: 100%;
+}
+
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 /* 3D产品展示区域 */
