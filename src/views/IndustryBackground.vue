@@ -20,35 +20,37 @@ const navItems = ref([
   { id: 4, name: 'Team Composition', path: '/team-composition', active: false },
   { id: 5, name: 'Product Introduction', path: '/product-introduction', active: false }
 ])
+
+const showSummary = ref(false)
 </script>
 
 <template>
   <div class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900 relative">
-    <!-- navItems -->
+    <!-- navItems: 导航栏 -->
     <Navigation :nav-items="navItems" />
 
     <!-- Main Content -->
-    <div class="w-full px-4 sm:px-8 pt-24 pb-8 min-h-screen">
-      <div class="flex flex-col xl:flex-row gap-8 xl:gap-12 h-full">
+    <div class="w-full px-4 sm:px-8 pt-24 pb-8 min-h-screen overflow-hidden">
+      <div class="flex flex-col xl:flex-row gap-8 xl:gap-12 h-full overflow-hidden">
         <!-- Left Side - Page Title and Charts -->
-        <div class="w-full xl:w-1/2">
+        <div class="w-full xl:w-1/2 flex flex-col h-full">
           <!-- Page Title -->
-          <div class="mb-6 xl:mb-8">
-            <div class="flex items-center text-white mb-6">
+          <div class="mt-5 mb-6 xl:mb-8 flex-shrink-0">
+            <div class="flex items-center text-white">
               <img src="../assets/icon-1.png" alt="Icon" class="w-[27px] h-[28px] mr-3" />
-              <h1 class="text-[20px] font-normal text-gray-300 tracking-wide">Industry Background - Global</h1>
+              <p class="text-[20px] font-bold text-gray-300 tracking-wide">Industry Background - Global</p>
             </div>
           </div>
 
           <!-- Charts Grid -->
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 xl:gap-8">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 xl:gap-6 flex-1 overflow-hidden">
             <!-- Chart 1: Global small yacht manufacturing industry -->
             <div class="text-white">
               <div class="flex items-center mb-4">
                 <div class="w-2 h-2 bg-cyan-400 rounded-full mr-3"></div>
                 <h3 class="text-sm text-gray-300">Global small yacht manufacturing industry</h3>
               </div>
-              <div class="h-[240px] xl:h-[300px] 2xl:h-[350px]">
+              <div class="h-full min-h-[200px] max-h-[300px]">
                 <EChartsComponent chart-type="bar" />
               </div>
             </div>
@@ -59,7 +61,7 @@ const navItems = ref([
                 <div class="w-2 h-2 bg-cyan-400 rounded-full mr-3"></div>
                 <h3 class="text-sm text-gray-300">Global small yacht sales market size</h3>
               </div>
-              <div class="h-[240px] xl:h-[300px] 2xl:h-[350px]">
+              <div class="h-full min-h-[200px] max-h-[300px]">
                 <EChartsComponent chart-type="area" />
               </div>
             </div>
@@ -70,7 +72,7 @@ const navItems = ref([
                 <div class="w-2 h-2 bg-cyan-400 rounded-full mr-3"></div>
                 <h3 class="text-sm text-gray-300">Global market size of water outdoor sports equipment<br/>(growth rate)</h3>
               </div>
-              <div class="h-[240px] xl:h-[300px] 2xl:h-[350px]">
+              <div class="h-full min-h-[200px] max-h-[300px]">
                 <EChartsComponent chart-type="line" />
               </div>
             </div>
@@ -81,7 +83,7 @@ const navItems = ref([
                 <div class="w-2 h-2 bg-cyan-400 rounded-full mr-3"></div>
                 <h3 class="text-sm text-gray-300">Global market size of water outdoor sports equipment</h3>
               </div>
-              <div class="h-[240px] xl:h-[300px] 2xl:h-[350px]">
+              <div class="h-full min-h-[200px] max-h-[300px]">
                 <EChartsComponent chart-type="scatter" />
               </div>
             </div>
@@ -92,7 +94,7 @@ const navItems = ref([
                 <div class="w-2 h-2 bg-cyan-400 rounded-full mr-3"></div>
                 <h3 class="text-sm text-gray-300">Global ship leasing market size</h3>
               </div>
-              <div class="h-[240px] xl:h-[300px] 2xl:h-[350px]">
+              <div class="h-full min-h-[200px] max-h-[300px]">
                 <EChartsComponent chart-type="bar" />
               </div>
             </div>
@@ -103,7 +105,7 @@ const navItems = ref([
                 <div class="w-2 h-2 bg-cyan-400 rounded-full mr-3"></div>
                 <h3 class="text-sm text-gray-300">Age structure of global shipowners</h3>
               </div>
-              <div class="h-[240px] xl:h-[300px] 2xl:h-[350px]">
+              <div class="h-full min-h-[200px] max-h-[300px]">
                 <EChartsComponent chart-type="pie" />
               </div>
             </div>
@@ -115,7 +117,39 @@ const navItems = ref([
           <div class="relative w-full h-full aspect-square">
             <!-- Summary Button -->
             <div class="absolute top-0 right-0 z-10">
-              <button class="bg-gray-700 text-white px-4 py-2 text-sm xl:text-base rounded hover:bg-gray-600 transition-colors">Summary</button>
+              <button
+                @mouseenter="showSummary = true"
+                @mouseleave="showSummary = false"
+                @click="showSummary = !showSummary"
+                class="button-focus bg-gradient-to-r from-cyan-600 to-blue-600 text-white px-6 py-3 text-sm xl:text-base rounded-lg hover:from-cyan-500 hover:to-blue-500 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/25 animate-pulse focus:outline-none focus:ring-0 focus:border-0"
+              >
+                Summary
+              </button>
+
+              <!-- Summary Popup -->
+              <div
+                v-show="showSummary"
+                class="absolute top-full right-0 mt-5 w-96 bg-gray-800/95 backdrop-blur-sm border border-cyan-500/30 rounded-lg p-4 shadow-2xl transform transition-all duration-300 origin-top-right"
+                :class="showSummary ? 'animate-in fade-in-90 slide-in-from-top-2' : 'animate-out fade-out-90 slide-out-to-top-2'"
+              >
+                <div class="relative">
+                  <!-- Arrow -->
+                  <div class="absolute -top-4 right-4 w-4 h-4 bg-gray-800/95 border-t border-l border-cyan-500/30 transform rotate-45"></div>
+
+                  <!-- Content -->
+                  <div class="text-gray-100 text-sm leading-relaxed">
+                    <p class="mb-3">
+                      The global small yacht industry is developing towards electrification, intelligence, sharing, and youthfulness.
+                    </p>
+                    <p class="mb-3">
+                      The global small yacht and related water leisure industry will show strong growth momentum by 2030, and the overall market size is expected to reach nearly 80 billion US dollars in economic volume by 2030.
+                    </p>
+                    <p>
+                      Technological innovation and sustainable development concepts will reshape the industry's competitive landscape.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <!-- Globe -->
@@ -125,7 +159,7 @@ const navItems = ref([
           </div>
 
           <!-- Legend -->
-          <div class="mt-8 space-y-2">
+          <!-- <div class="mt-8 space-y-2">
             <div class="flex items-center">
               <div class="w-4 h-3 bg-cyan-600 mr-3"></div>
               <span class="text-white text-sm">Bar Chart</span>
@@ -138,7 +172,7 @@ const navItems = ref([
               <div class="w-4 h-3 bg-gray-500 mr-3"></div>
               <span class="text-white text-sm">Ocean</span>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -158,11 +192,47 @@ const navItems = ref([
   50% { opacity: 0.5; }
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.animate-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-out {
+  animation: fadeIn 0.3s ease-out reverse;
+}
+
 .animation-delay-2000 {
   animation-delay: 2s;
 }
 
 .animation-delay-4000 {
   animation-delay: 4s;
+}
+
+/* Custom animation classes */
+.fade-in-90 {
+  animation-duration: 0.3s;
+  animation-fill-mode: both;
+}
+
+.slide-in-from-top-2 {
+  animation-name: slideIn;
+}
+
+.slide-out-to-top-2 {
+  animation-name: slideIn;
+  animation-direction: reverse;
+}
+.button-focus {
+  outline: none !important;
 }
 </style>

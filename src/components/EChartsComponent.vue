@@ -38,28 +38,131 @@ const getChartOptions = () => {
     case 'bar':
       return {
         backgroundColor: 'transparent',
-        grid: gridStyle,
+        grid: {
+          left: '8%',
+          right: '8%',
+          top: '15%',
+          bottom: '15%'
+        },
         xAxis: {
           type: 'category',
-          data: ['Q1', 'Q2', 'Q3', 'Q4'],
-          axisLabel: baseTextStyle,
-          axisLine: { lineStyle: { color: '#374151' } },
+          data: ['2019', '2020', '2021', '2022'],
+          axisLabel: {
+            color: '#e5e7eb',
+            fontSize: 12,
+            fontWeight: 500
+          },
+          axisLine: {
+            lineStyle: {
+              color: '#374151',
+              width: 1
+            }
+          },
+          axisTick: {
+            show: false
+          },
           splitLine: { show: false }
         },
         yAxis: {
           type: 'value',
-          axisLabel: baseTextStyle,
-          axisLine: { lineStyle: { color: '#374151' } },
-          splitLine: { lineStyle: { color: '#374151', type: 'dashed' } }
+          axisLabel: {
+            color: '#e5e7eb',
+            fontSize: 12,
+            fontWeight: 500
+          },
+          axisLine: {
+            lineStyle: {
+              color: '#374151',
+              width: 1
+            }
+          },
+          splitLine: {
+            lineStyle: {
+              color: '#374151',
+              type: 'dashed',
+              opacity: 0.5
+            }
+          },
+          axisTick: {
+            show: false
+          }
         },
-        series: [{
-          data: data.slice(0, 4),
-          type: 'bar',
-          itemStyle: { color: gradientColors[0] },
-          emphasis: { itemStyle: { color: gradientColors[1] } },
-          barWidth: '60%',
-          animationDuration: 1000
-        }]
+        series: [
+          {
+            name: 'Series 1',
+            data: [45, 52, 48, 58],
+            type: 'bar',
+            itemStyle: {
+              color: {
+                type: 'linear',
+                x: 0,
+                y: 0,
+                x2: 0,
+                y2: 1,
+                colorStops: [
+                  { offset: 0, color: '#06b6d4' },
+                  { offset: 1, color: '#0891b2' }
+                ]
+              },
+              borderRadius: [4, 4, 0, 0]
+            },
+            emphasis: {
+              itemStyle: {
+                color: {
+                  type: 'linear',
+                  x: 0,
+                  y: 0,
+                  x2: 0,
+                  y2: 1,
+                  colorStops: [
+                    { offset: 0, color: '#10b981' },
+                    { offset: 1, color: '#059669' }
+                  ]
+                }
+              }
+            },
+            barWidth: '15%',
+            barGap: '30%',
+            animationDuration: 1000
+          },
+          {
+            name: 'Series 2',
+            data: [38, 45, 55, 65],
+            type: 'bar',
+            itemStyle: {
+              color: {
+                type: 'linear',
+                x: 0,
+                y: 0,
+                x2: 0,
+                y2: 1,
+                colorStops: [
+                  { offset: 0, color: '#8b5cf6' },
+                  { offset: 1, color: '#7c3aed' }
+                ]
+              },
+              borderRadius: [4, 4, 0, 0]
+            },
+            emphasis: {
+              itemStyle: {
+                color: {
+                  type: 'linear',
+                  x: 0,
+                  y: 0,
+                  x2: 0,
+                  y2: 1,
+                  colorStops: [
+                    { offset: 0, color: '#a855f7' },
+                    { offset: 1, color: '#9333ea' }
+                  ]
+                }
+              }
+            },
+            barWidth: '15%',
+            barGap: '30%',
+            animationDuration: 1000
+          }
+        ]
       }
 
     case 'pie':

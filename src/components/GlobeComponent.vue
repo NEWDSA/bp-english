@@ -79,7 +79,7 @@ onMounted(async () => {
 
         // Set point of view and controls like reference (with delay)
         setTimeout(() => {
-          globe.pointOfView({ altitude: 3.5 })
+          globe.pointOfView({ altitude: 1.66 })
 
           // Configure controls after globe is fully initialized
           try {
@@ -142,8 +142,8 @@ onUnmounted(() => {
 const handleResize = () => {
   if (globe && globeContainer.value) {
     const containerRect = globeContainer.value.getBoundingClientRect()
-    const newWidth = Math.min(containerRect.width, containerRect.height)
-    const newHeight = newWidth
+    const newWidth = containerRect.width
+    const newHeight = containerRect.height
 
     if (newWidth !== currentWidth || newHeight !== currentHeight) {
       currentWidth = newWidth
