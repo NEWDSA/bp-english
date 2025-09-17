@@ -3,23 +3,14 @@
     ref="chartRef"
     class="w-full h-full bg-gray-900/50 rounded-xl relative overflow-hidden"
     :class="{ 'cursor-pointer': !isDetailed }"
-  >
-    <!-- Clickable indicator overlay -->
-    <div
-      v-if="!isDetailed"
-      class="absolute inset-0 bg-gradient-to-r from-cyan-500/5 to-blue-500/5 opacity-0 hover:opacity-100 transition-all duration-300 rounded-xl pointer-events-none"
-      :class="{ 'animate-pulse-slow': isHovered }"
     >
-      <!-- Corner indicators -->
-      <div class="absolute top-2 left-2 w-1 h-1 bg-cyan-400 rounded-full animate-ping"></div>
-      <div class="absolute top-2 right-2 w-1 h-1 bg-cyan-400 rounded-full animate-ping animation-delay-200"></div>
-      <div class="absolute bottom-2 left-2 w-1 h-1 bg-cyan-400 rounded-full animate-ping animation-delay-400"></div>
-      <div class="absolute bottom-2 right-2 w-1 h-1 bg-cyan-400 rounded-full animate-ping animation-delay-600"></div>
-
-      <!-- Center hint text -->
-      <div class="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
-        <div class="bg-cyan-600/20 backdrop-blur-sm px-3 py-1 rounded-full border border-cyan-400/30">
-          <span class="text-cyan-300 text-xs font-medium">Click to view details</span>
+    <!-- CSS-only hover overlay -->
+    <div class="absolute inset-0 opacity-0 hover:opacity-100 transition-all duration-300 rounded-xl pointer-events-none">
+      <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 rounded-xl"></div>
+      <div class="absolute inset-0 rounded-xl border-2 border-cyan-400/30 shadow-lg shadow-cyan-400/20"></div>
+      <div class="absolute inset-0 flex items-center justify-center">
+        <div class="bg-gray-800/90 backdrop-blur-sm px-4 py-2 rounded-lg border border-cyan-400/40 shadow-lg">
+          <span class="text-cyan-300 text-sm font-medium">Click to view details</span>
         </div>
       </div>
     </div>
@@ -44,7 +35,6 @@ const props = defineProps({
 const emit = defineEmits(['chart-click'])
 
 const chartRef = ref(null)
-const isHovered = ref(false)
 let chartInstance = null
 let resizeObserver = null
 
@@ -420,12 +410,6 @@ onMounted(async () => {
     // Start initialization with a small delay
     setTimeout(() => initWithRetry(), 100)
 
-    // Add mouse event listeners for hover effects
-    if (chartRef.value && !props.isDetailed) {
-      chartRef.value.addEventListener('mouseenter', handleMouseEnter)
-      chartRef.value.addEventListener('mouseleave', handleMouseLeave)
-    }
-
   } catch (error) {
     console.error('Error in chart mount hook:', error)
   }
@@ -514,12 +498,6 @@ onUnmounted(() => {
   // Remove resize listener
   window.removeEventListener('resize', handleResize)
 
-  // Remove mouse event listeners
-  if (chartRef.value) {
-    chartRef.value.removeEventListener('mouseenter', handleMouseEnter)
-    chartRef.value.removeEventListener('mouseleave', handleMouseLeave)
-  }
-
   // Disconnect ResizeObserver
   if (resizeObserver) {
     resizeObserver.disconnect()
@@ -532,19 +510,6 @@ onUnmounted(() => {
   }
 })
 
-// Handle mouse enter
-const handleMouseEnter = () => {
-  if (!props.isDetailed) {
-    isHovered.value = true
-  }
-}
-
-// Handle mouse leave
-const handleMouseLeave = () => {
-  if (!props.isDetailed) {
-    isHovered.value = false
-  }
-}
 
 // Handle resize
 const handleResize = () => {
@@ -566,30 +531,18 @@ const handleResize = () => {
 </script>
 
 <style scoped>
-@keyframes pulse-slow {
-  0%, 100% {
-    opacity: 0.3;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.8;
-    transform: scale(1.02);
-  }
+/* CSS-only hover effects */
+.cursor-pointer {
+  position: relative;
+  transition: all 0.3s ease;
 }
 
-.animate-pulse-slow {
-  animation: pulse-slow 2s ease-in-out infinite;
+.cursor-pointer:hover {
+  transform: scale(1.02);
 }
 
-.animation-delay-200 {
-  animation-delay: 0.2s;
-}
-
-.animation-delay-400 {
-  animation-delay: 0.4s;
-}
-
-.animation-delay-600 {
-  animation-delay: 0.6s;
+/* Ensure ECharts canvas doesn't block mouse events */
+:deep(canvas) {
+  pointer-events: none;
 }
 </style>
