@@ -28,7 +28,7 @@
 			<!-- 左侧面板：Revenue Model + Channel Strategy -->
 			<div class="left-panel">
 				<!-- 收入模型图表 -->
-				<div class="chart-card">
+				<div class="chart-card" @click="showContent('revenue')">
 					<h3 class="chart-title">Revenue Model</h3>
 					<div class="chart-container">
 						<div ref="revenueChartRef" class="revenue-echart"></div>
@@ -84,13 +84,27 @@
 
 					<!-- 文字标签 -->
 					<div class="map-overlays">
-						<div class="overlay-text overlay-1" @click="showContent('profit')">Operating profit and loss statement</div>
+						<div class="overlay-text overlay-1" @click="showContent('profit')">Operating profit and loss
+							statement</div>
 						<div class="overlay-text overlay-2" @click="showContent('lake')">The case of Lake Como</div>
-						<div class="overlay-text overlay-3" @click="showContent('tourists')">Daily average number of boat tourists</div>
+						<div class="overlay-text overlay-3" @click="showContent('tourists')">Daily average number of
+							boat tourists</div>
 					</div>
 				</div>
 			</div>
 
+			<!-- 弹窗的巨大表格 -->
+			<div v-if="activeContent === 'revenue'" class="popup-table-container">
+				<div class="popup-table">
+					<table>
+						<tr>
+							<th>Column 1</th>
+							<th>Column 2</th>
+							<th>Column 3</th>
+						</tr>
+					</table>
+				</div>
+			</div>
 			<!-- 右侧面板：详细内容 -->
 			<div class="right-panel">
 				<!-- 默认显示内容 -->
@@ -111,22 +125,25 @@
 					<div v-if="activeContent === 'lake'" class="lake-content">
 						<h2 class="content-title">The case of Lake Como</h2>
 						<h3 class="content-subtitle">Daily average number of tourists</h3>
-						
+
 						<!-- 饼图 -->
 						<div class="pie-chart-container">
 							<div class="pie-chart">
 								<div class="pie-segment peak-season">
-									<div class="segment-label">Peak Season<br>June-September<br>Daily average number of tourists<br>15000-20000 people/time</div>
+									<div class="segment-label">Peak Season<br>June-September<br>Daily average number of
+										tourists<br>15000-20000 people/time</div>
 								</div>
 								<div class="pie-segment off-season">
-									<div class="segment-label">Off-Season<br>October-May<br>Daily average number of tourists<br>5000-10000 people/time</div>
+									<div class="segment-label">Off-Season<br>October-May<br>Daily average number of
+										tourists<br>5000-10000 people/time</div>
 								</div>
 							</div>
 						</div>
 
 						<!-- 描述文字 -->
 						<p class="description-text">
-							Each hotel has an average of 100 rooms, totaling 400 rooms, calculated based on the number of tourists during the off-season.
+							Each hotel has an average of 100 rooms, totaling 400 rooms, calculated based on the number
+							of tourists during the off-season.
 						</p>
 
 						<!-- 柱状图 -->
@@ -632,7 +649,7 @@ onMounted(() => {
 	background: url('../assets/bs_map.png') center/cover no-repeat;
 	border-radius: 20px;
 	overflow: hidden;
-	
+
 	/* border: 2px solid rgba(0, 212, 255, 0.4); */
 	/* 动画效果 */
 	/* animation: mapGlow 3s ease-in-out infinite alternate; */
@@ -652,9 +669,7 @@ onMounted(() => {
 /* SVG 标记点样式 */
 .marker-svg {
 	fill: #00d4ff;
-	filter: drop-shadow(0 0 20px rgba(0, 212, 255, 1)) 
-			drop-shadow(0 0 40px rgba(0, 212, 255, 0.8))
-			drop-shadow(0 0 60px rgba(0, 212, 255, 0.6));
+	filter: drop-shadow(0 0 20px rgba(0, 212, 255, 1)) drop-shadow(0 0 40px rgba(0, 212, 255, 0.8)) drop-shadow(0 0 60px rgba(0, 212, 255, 0.6));
 	/* animation: svgMarkerPulse 2s ease-in-out infinite; */
 }
 
@@ -720,7 +735,7 @@ onMounted(() => {
 	height: 18px;
 	background: radial-gradient(circle, #00d4ff 0%, #0099cc 60%, #006699 100%);
 	border-radius: 50%;
-	box-shadow: 
+	box-shadow:
 		inset 0 0 8px rgba(255, 255, 255, 0.4),
 		0 0 25px rgba(0, 212, 255, 1),
 		0 0 50px rgba(0, 212, 255, 0.9),
@@ -750,10 +765,12 @@ onMounted(() => {
 }
 
 @keyframes markerPulse {
-	0%, 100% {
+
+	0%,
+	100% {
 		transform: translate(-50%, -50%) scale(1);
 		opacity: 1;
-		box-shadow: 
+		box-shadow:
 			inset 0 0 8px rgba(255, 255, 255, 0.4),
 			0 0 25px rgba(0, 212, 255, 1),
 			0 0 50px rgba(0, 212, 255, 0.9),
@@ -765,7 +782,7 @@ onMounted(() => {
 	50% {
 		transform: translate(-50%, -50%) scale(1.3);
 		opacity: 0.95;
-		box-shadow: 
+		box-shadow:
 			inset 0 0 12px rgba(255, 255, 255, 0.6),
 			0 0 40px rgba(0, 212, 255, 1),
 			0 0 80px rgba(0, 212, 255, 0.95),
@@ -776,23 +793,23 @@ onMounted(() => {
 }
 
 @keyframes svgMarkerPulse {
-	0%, 100% {
+
+	0%,
+	100% {
 		transform: scale(1);
-		filter: drop-shadow(0 0 20px rgba(0, 212, 255, 1)) 
-				drop-shadow(0 0 40px rgba(0, 212, 255, 0.8))
-				drop-shadow(0 0 60px rgba(0, 212, 255, 0.6));
+		filter: drop-shadow(0 0 20px rgba(0, 212, 255, 1)) drop-shadow(0 0 40px rgba(0, 212, 255, 0.8)) drop-shadow(0 0 60px rgba(0, 212, 255, 0.6));
 	}
 
 	50% {
 		transform: scale(1.3);
-		filter: drop-shadow(0 0 30px rgba(0, 212, 255, 1)) 
-				drop-shadow(0 0 60px rgba(0, 212, 255, 0.9))
-				drop-shadow(0 0 90px rgba(0, 212, 255, 0.7));
+		filter: drop-shadow(0 0 30px rgba(0, 212, 255, 1)) drop-shadow(0 0 60px rgba(0, 212, 255, 0.9)) drop-shadow(0 0 90px rgba(0, 212, 255, 0.7));
 	}
 }
 
 @keyframes pulse {
-	0%, 100% {
+
+	0%,
+	100% {
 		transform: scale(1);
 		opacity: 1;
 	}
@@ -817,25 +834,16 @@ onMounted(() => {
 	font-size: 13px;
 	font-weight: 600;
 	color: #ffffff;
-	text-shadow: 0 0 8px rgba(0, 212, 255, 0.9);
-	background: rgba(40, 40, 40, 0.8);
+	background: transparent;
 	padding: 8px 12px;
-	border-radius: 8px;
 	white-space: nowrap;
-	backdrop-filter: blur(5px);
-	border: 1px solid rgba(255, 255, 255, 0.1);
-	box-shadow: 
-		0 4px 12px rgba(0, 0, 0, 0.4),
-		0 0 20px rgba(0, 212, 255, 0.2);
 	cursor: pointer;
-	transition: all 0.3s ease;
 	z-index: 10;
 	pointer-events: auto;
 }
 
 .overlay-text:hover {
-	background: rgba(0, 212, 255, 0.2);
-	transform: scale(1.05);
+	/* 移除所有hover效果 */
 }
 
 .overlay-1 {
@@ -876,6 +884,7 @@ onMounted(() => {
 		opacity: 0;
 		transform: translateX(100%);
 	}
+
 	to {
 		opacity: 1;
 		transform: translateX(0);
