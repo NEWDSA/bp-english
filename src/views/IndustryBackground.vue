@@ -1,8 +1,8 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
 import EChartsComponent from '../components/EChartsComponent.vue';
 import GlobeComponent from '../components/GlobeComponent.vue';
+import Navigation from '../components/Navigation.vue';
 
 const chartData = ref([
   { title: 'Global Yacht Sales', subtitle: 'Market size and trends', type: 'line', id: 'yacht-sales' },
@@ -20,49 +20,12 @@ const navItems = ref([
   { id: 4, name: 'Team Composition', path: '/team-composition', active: false },
   { id: 5, name: 'Product Introduction', path: '/product-introduction', active: false }
 ])
-
-const router = useRouter()
-
-const setActiveNav = (itemId) => {
-  navItems.value.forEach(item => {
-    item.active = item.id === itemId
-  })
-
-  const navItem = navItems.value.find(item => item.id === itemId)
-  if (navItem) {
-    router.push(navItem.path)
-  }
-}
 </script>
 
 <template>
   <div class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900 relative">
-    <!-- Floating Navigation Bar -->
-    <div class="absolute top-8 left-8 z-20">
-      <div class="bg-gray-800/30 backdrop-blur-md rounded-lg border-gray-700/50 px-6 py-3 border-t border-b">
-        <div class="flex items-center space-x-1">
-          <!-- Logo -->
-          <img src="../assets/nav_back.png" alt="Logo" class="w-6 h-6 mr-4" />
-
-          <!-- Navigation Items -->
-          <div class="flex items-center space-x-0">
-            <div v-for="(item, index) in navItems" :key="item.id" class="flex items-center">
-              <span
-                @click="setActiveNav(item.id)"
-                :class="[
-                  'px-3 py-1 cursor-pointer text-[18px] transition-all duration-200 h-full flex items-center',
-                  item.active
-                    ? 'text-white font-medium bg-[#3CC8C8]/30 -my-3 border-t border-b border-[#3CC8C8]'
-                    : 'text-gray-400 hover:text-gray-300'
-                ]">
-                {{ item.name }}
-              </span>
-              <span v-if="index < navItems.length - 1" class="text-gray-600 mx-2">|</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <!-- navItems -->
+    <Navigation :nav-items="navItems" />
 
     <!-- Main Content -->
     <div class="w-full px-4 sm:px-8 pt-24 pb-8 min-h-screen">
