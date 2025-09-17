@@ -18,7 +18,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, nextTick } from 'vue'
+import { ref, onMounted, onUnmounted, nextTick, watch } from 'vue'
 import * as echarts from 'echarts'
 
 const props = defineProps({
@@ -29,6 +29,10 @@ const props = defineProps({
   isDetailed: {
     type: Boolean,
     default: false
+  },
+  selectedCity: {
+    type: Object,
+    default: null
   }
 })
 
@@ -40,6 +44,21 @@ let resizeObserver = null
 
 const generateRandomData = (count = 6) => {
   const dataCount = props.isDetailed ? 12 : count
+
+  // If a city is selected, generate data based on city characteristics
+  if (props.selectedCity) {
+    const citySeed = props.selectedCity.city.length + props.selectedCity.country.length
+    const baseValue = (citySeed * 7) % 50 + 30 // Base value between 30-80
+
+    return Array.from({ length: dataCount }, (_, index) => {
+      // Generate data with some variance based on city and position
+      const variance = Math.sin(index * 0.5 + citySeed) * 20
+      const trend = index * 2 // Slight upward trend
+      return Math.floor(baseValue + variance + trend + Math.random() * 10)
+    })
+  }
+
+  // Default random data
   return Array.from({ length: dataCount }, () => Math.floor(Math.random() * 100) + 20)
 }
 
@@ -528,6 +547,15 @@ const handleResize = () => {
 }
 
 // Listen for window resize - moved to the main onMounted hook
+
+// Watch for selected city changes and update chart data
+watch(() => props.selectedCity, (newCity) => {
+  if (chartInstance && !chartInstance.isDisposed()) {
+    const newOptions = getChartOptions()
+    chartInstance.setOption(newOptions, true)
+    console.log(`Chart updated for city: ${newCity ? newCity.city : 'None'}`)
+  }
+}, { deep: true })
 </script>
 
 <style scoped>

@@ -25,6 +25,7 @@ const navItems = ref([
 const showSummary = ref(false)
 const showChartModal = ref(false)
 const selectedChart = ref({ title: '', type: '' })
+const selectedCity = ref(null)
 
 // Calculate chart height dynamically
 const chartContainerHeight = ref('0px')
@@ -78,6 +79,12 @@ const getChartTitle = (chartType) => {
   }
   return titles[chartType] || 'Chart Details'
 }
+
+// Handle city click event from globe
+const handleCityClick = (cityInfo) => {
+  selectedCity.value = cityInfo
+  console.log('City selected:', cityInfo.city, cityInfo.country)
+}
 </script>
 
 <template>
@@ -107,7 +114,7 @@ const getChartTitle = (chartType) => {
                 <h3 class="text-sm text-gray-300">Global small yacht manufacturing industry</h3>
               </div>
               <div :style="{ height: chartHeight }">
-                <EChartsComponent chart-type="bar" @chart-click="handleChartClick" />
+                <EChartsComponent chart-type="bar" :selected-city="selectedCity" @chart-click="handleChartClick" />
               </div>
             </div>
 
@@ -118,7 +125,7 @@ const getChartTitle = (chartType) => {
                 <h3 class="text-sm text-gray-300">Global small yacht sales market size</h3>
               </div>
               <div :style="{ height: chartHeight }">
-                <EChartsComponent chart-type="area" @chart-click="handleChartClick" />
+                <EChartsComponent chart-type="area" :selected-city="selectedCity" @chart-click="handleChartClick" />
               </div>
             </div>
 
@@ -129,7 +136,7 @@ const getChartTitle = (chartType) => {
                 <h3 class="text-sm text-gray-300">Global market size of water outdoor sports equipment<br/>(growth rate)</h3>
               </div>
               <div :style="{ height: chartHeight }">
-                <EChartsComponent chart-type="line" @chart-click="handleChartClick" />
+                <EChartsComponent chart-type="line" :selected-city="selectedCity" @chart-click="handleChartClick" />
               </div>
             </div>
 
@@ -140,7 +147,7 @@ const getChartTitle = (chartType) => {
                 <h3 class="text-sm text-gray-300">Global market size of water outdoor sports equipment</h3>
               </div>
               <div :style="{ height: chartHeight }">
-                <EChartsComponent chart-type="scatter" @chart-click="handleChartClick" />
+                <EChartsComponent chart-type="scatter" :selected-city="selectedCity" @chart-click="handleChartClick" />
               </div>
             </div>
 
@@ -151,7 +158,7 @@ const getChartTitle = (chartType) => {
                 <h3 class="text-sm text-gray-300">Global ship leasing market size</h3>
               </div>
               <div :style="{ height: chartHeight }">
-                <EChartsComponent chart-type="bar" @chart-click="handleChartClick" />
+                <EChartsComponent chart-type="bar" :selected-city="selectedCity" @chart-click="handleChartClick" />
               </div>
             </div>
 
@@ -162,7 +169,7 @@ const getChartTitle = (chartType) => {
                 <h3 class="text-sm text-gray-300">Age structure of global shipowners</h3>
               </div>
               <div :style="{ height: chartHeight }">
-                <EChartsComponent chart-type="pie" @chart-click="handleChartClick" />
+                <EChartsComponent chart-type="pie" :selected-city="selectedCity" @chart-click="handleChartClick" />
               </div>
             </div>
           </div>
@@ -171,8 +178,14 @@ const getChartTitle = (chartType) => {
         <!-- Right Side - Globe -->
         <div class="w-[50vw] h-[80vh] flex flex-col items-center justify-center mt-10">
           <div class="relative w-full h-full aspect-square">
-            <!-- Summary Button -->
-            <div class="absolute top-0 right-0 z-10">
+            <!-- Selected City Indicator & Summary Button -->
+            <div class="absolute top-0 right-0 z-10 flex flex-col items-end space-y-3">
+              <!-- Selected City Display -->
+              <div v-if="selectedCity" class="bg-gray-800/90 backdrop-blur-sm border border-cyan-500/30 rounded-lg px-4 py-2 text-white text-sm">
+                <span class="text-cyan-400 font-medium">Selected:</span> {{ selectedCity.city }}, {{ selectedCity.country }}
+              </div>
+
+              <!-- Summary Button -->
               <button
                 @mouseenter="showSummary = true"
                 @mouseleave="showSummary = false"
@@ -181,8 +194,10 @@ const getChartTitle = (chartType) => {
               >
                 Summary
               </button>
+            </div>
 
-              <!-- Summary Popup -->
+            <!-- Summary Popup -->
+            <div class="relative">
               <div
                 v-show="showSummary"
                 class="absolute top-full right-0 mt-5 w-96 bg-gray-800/95 backdrop-blur-sm border border-cyan-500/30 rounded-lg p-4 shadow-2xl transform transition-all duration-300 origin-top-right"
@@ -210,7 +225,7 @@ const getChartTitle = (chartType) => {
 
             <!-- Globe -->
             <div class="absolute inset-0 flex items-center justify-center">
-              <GlobeComponent />
+              <GlobeComponent @city-click="handleCityClick" />
             </div>
           </div>
 

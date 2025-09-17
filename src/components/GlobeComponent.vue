@@ -10,6 +10,8 @@ import Globe from 'globe.gl'
 import * as satellite from '../assets/satellite.mjs'
 import { csvParseRows } from '../assets/d3-dsv.mjs'
 
+const emit = defineEmits(['city-click'])
+
 const globeContainer = ref(null)
 const timeLog = ref(null)
 const satelliteCount = ref(null)
@@ -63,6 +65,15 @@ onMounted(async () => {
           .pointsData([])
           .pointAltitude('size')
           .pointColor('color')
+          .onPointClick(point => {
+            emit('city-click', {
+              city: point.city,
+              country: point.country,
+              name: point.name,
+              lat: point.lat,
+              lng: point.lng
+            })
+          })
           .labelsData([])
           .labelLat('lat')
           .labelLng('lng')
@@ -246,17 +257,17 @@ const loadAirlineData = () => {
   const mockAirports = [
     { name: 'Los Angeles International Airport', city: 'Los Angeles', country: 'United States', lat: 33.9425, lng: -118.4081 },
     { name: 'John F. Kennedy International Airport', city: 'New York', country: 'United States', lat: 40.6413, lng: -73.7781 },
-    { name: 'London Heathrow Airport', city: 'London', country: 'United Kingdom', lat: 51.4700, lng: -0.4543 },
+    // { name: 'London Heathrow Airport', city: 'London', country: 'United Kingdom', lat: 51.4700, lng: -0.4543 },
     { name: 'Charles de Gaulle Airport', city: 'Paris', country: 'France', lat: 49.0097, lng: 2.5479 },
     { name: 'Tokyo Haneda Airport', city: 'Tokyo', country: 'Japan', lat: 35.5494, lng: 139.7798 },
     { name: 'Dubai International Airport', city: 'Dubai', country: 'United Arab Emirates', lat: 25.2532, lng: 55.3657 },
     { name: 'Singapore Changi Airport', city: 'Singapore', country: 'Singapore', lat: 1.3644, lng: 103.9915 },
     { name: 'Sydney Kingsford Smith Airport', city: 'Sydney', country: 'Australia', lat: -33.9399, lng: 151.1753 },
-    { name: 'Frankfurt Airport', city: 'Frankfurt', country: 'Germany', lat: 50.0379, lng: 8.5622 },
+    // { name: 'Frankfurt Airport', city: 'Frankfurt', country: 'Germany', lat: 50.0379, lng: 8.5622 },
     { name: 'Beijing Capital International Airport', city: 'Beijing', country: 'China', lat: 40.0799, lng: 116.6031 },
     { name: 'Hong Kong International Airport', city: 'Hong Kong', country: 'China', lat: 22.3080, lng: 113.9185 },
     { name: 'Amsterdam Airport Schiphol', city: 'Amsterdam', country: 'Netherlands', lat: 52.3105, lng: 4.7683 },
-    { name: 'Zurich Airport', city: 'Zurich', country: 'Switzerland', lat: 47.4647, lng: 8.5492 },
+    // { name: 'Zurich Airport', city: 'Zurich', country: 'Switzerland', lat: 47.4647, lng: 8.5492 },
     { name: 'Toronto Pearson International Airport', city: 'Toronto', country: 'Canada', lat: 43.6777, lng: -79.6248 },
     { name: 'São Paulo–Guarulhos International Airport', city: 'São Paulo', country: 'Brazil', lat: -23.4356, lng: -46.4731 }
   ]
@@ -308,7 +319,10 @@ const loadAirlineData = () => {
       lat: +d.lat,
       lng: +d.lng,
       size: 0.05,
-      color: 'orange'
+      color: 'orange',
+      city: d.city,
+      country: d.country,
+      name: d.name
     }))
 
     // Process airports for labels data
