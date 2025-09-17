@@ -10,7 +10,7 @@
 					</div>
 				</div>
 				<div class="nav-divider"></div>
-				
+
 				<router-link to="/industry-background" class="nav-item">Industry Background</router-link>
 				<div class="nav-divider"></div>
 				<router-link to="/market-demand" class="nav-item">Market Demand</router-link>
@@ -25,76 +25,126 @@
 
 		<!-- 主要内容区域 -->
 		<div class="main-content">
-			<!-- 左侧内容 -->
+			<!-- 左侧内容区域 -->
 			<div class="left-section">
-				<!-- 产品特性 -->
-				<div class="product-features">
-					<h3 class="product-title">Product Features</h3>
-					<div class="features-grid">
-						<div class="feature-card">
-							<div class="feature-icon">⚡</div>
-							<h4 class="feature-name">High Performance</h4>
-							<p class="feature-desc">Advanced hydrofoil technology for superior speed and efficiency</p>
-						</div>
-						<div class="feature-card">
-							<div class="feature-icon">🔋</div>
-							<h4 class="feature-name">Eco-Friendly</h4>
-							<p class="feature-desc">Zero-emission electric propulsion system</p>
-						</div>
-						<div class="feature-card">
-							<div class="feature-icon">📱</div>
-							<h4 class="feature-name">Smart Control</h4>
-							<p class="feature-desc">Intuitive mobile app for remote monitoring and control</p>
-						</div>
-						<div class="feature-card">
-							<div class="feature-icon">🛡️</div>
-							<h4 class="feature-name">Safety First</h4>
-							<p class="feature-desc">Advanced safety systems and real-time monitoring</p>
+				<div class="left-nav-list">
+					<div class="left-nav-item">
+						<span class="nav-text">Product advantages</span>
+					</div>
+					<div class="left-nav-item">
+						<span class="nav-text">Compared to traditional ferries</span>
+					</div>
+					<div class="left-nav-item">
+						<span class="nav-text">Design&Simulation Technology</span>
+					</div>
+					<div class="left-nav-item color-price-section">
+						<span class="nav-text">Color and Price</span>
+						<!-- 颜色选择区域 -->
+						<div class="color-price-content">
+							<div class="color-options">
+								<div class="color-swatch white" @click="changeBoatColor('white')" :class="{ active: selectedColor === 'white' }" style="background: #FFFFFF;"></div>
+								<div class="color-swatch gray" @click="changeBoatColor('gray')" :class="{ active: selectedColor === 'gray' }" style="background: #87CEEB;"></div>
+								<div class="color-swatch blue" @click="changeBoatColor('blue')" :class="{ active: selectedColor === 'blue' }" style="background: #4682B4;"></div>
+								<div class="color-swatch purple" @click="changeBoatColor('purple')" :class="{ active: selectedColor === 'purple' }" style="background: #DDA0DD;"></div>
+								<div class="color-swatch red" @click="changeBoatColor('red')" :class="{ active: selectedColor === 'red' }" style="background: #FF4500;"></div>
+								<div class="color-swatch brown" @click="changeBoatColor('brown')" :class="{ active: selectedColor === 'brown' }" style="background: #8B7355;"></div>
+							</div>
+							<div class="purchase-btn">
+								<span class="price-display">{{ currentPrice }}</span>
+								<span class="purchase-text">Please click here to contact us for purchase</span>
+							</div>
 						</div>
 					</div>
-				</div>
-
-				<!-- 技术规格 -->
-				<div class="tech-specs">
-					<h3 class="specs-title">Technical Specifications</h3>
-					<div class="specs-list">
-						<div class="spec-item">
-							<span class="spec-label">Max Speed:</span>
-							<span class="spec-value">45 knots</span>
-						</div>
-						<div class="spec-item">
-							<span class="spec-label">Range:</span>
-							<span class="spec-value">150 nautical miles</span>
-						</div>
-						<div class="spec-item">
-							<span class="spec-label">Capacity:</span>
-							<span class="spec-value">8 passengers</span>
-						</div>
-						<div class="spec-item">
-							<span class="spec-label">Battery Life:</span>
-							<span class="spec-value">6-8 hours</span>
-						</div>
+					<div class="left-nav-item">
+						<span class="nav-text">Product Highlights</span>
 					</div>
 				</div>
 			</div>
 
-			<!-- 右侧展示区域 -->
+			<!-- 中间3D产品展示区域 -->
+			<div class="center-section">
+				<div class="product-3d-showcase">
+					<div class="boat-3d-model">
+						<!-- 3D船体模型 -->
+						<img :src="currentBoatImage" alt="YU Hydrofoil Boat" class="boat-image" />
+					</div>
+				</div>
+			</div>
+
+			<!-- 右侧产品规格区域 -->
 			<div class="right-section">
-				<div class="product-showcase">
-					<h3 class="showcase-title">Product Showcase</h3>
-					<div class="product-image">
-						<div class="product-3d">
-							<div class="boat-outline"></div>
-							<div class="boat-details">
-								<div class="detail detail-1"></div>
-								<div class="detail detail-2"></div>
-								<div class="detail detail-3"></div>
+				<div class="product-specs-panel">
+					<!-- <h3 class="specs-title">Ship name: YU</h3> -->
+					<div style="background-color: rgba(100, 100, 100, 1);padding: 10px;border-radius: 10px 10px 0 0;">
+						<span class="specs-title">Ship name: YU</span>
+					</div>
+					<!-- 主要尺寸 -->
+					<div class="spec-group">
+						<div class="spec-header">
+							<h4 class="spec-category">Principal dimension:</h4>
+							<div class="dropdown-arrow">▼</div>
+						</div>
+						<div class="spec-details">
+							<div class="spec-row">
+								<span class="spec-label">Total length</span>
+								<span class="spec-value">4.90 m</span>
+							</div>
+							<div class="spec-row">
+								<span class="spec-label">Total width</span>
+								<span class="spec-value">3.40 m</span>
+							</div>
+							<div class="spec-row">
+								<span class="spec-label">Draft</span>
+								<span class="spec-value">1.20 m</span>
+							</div>
+							<div class="spec-row">
+								<span class="spec-label">Person capacity</span>
+								<span class="spec-value">3-5 people</span>
 							</div>
 						</div>
 					</div>
-					<div class="product-info">
-						<h4 class="product-name">Hydrofoil Pro Series</h4>
-						<p class="product-tagline">The future of water transportation</p>
+
+					<!-- 动力、速度和续航 -->
+					<div class="spec-group">
+						<div class="spec-header">
+							<!-- <h4 class="spec-category">Power, speed, and range:</h4> -->
+							<span class="spec-category">Power, speed, and range:</span>
+							<div class="dropdown-arrow">▼</div>
+						</div>
+						<div class="spec-details">
+							<div class="spec-row">
+								<span class="spec-label">Cruising speed</span>
+								<span class="spec-value">15/30 sections (kt)</span>
+							</div>
+							<div class="spec-row">
+								<span class="spec-label">Maximum speed</span>
+								<span class="spec-value">18/33 sections(kt)</span>
+							</div>
+							<div class="spec-row">
+								<span class="spec-label">Endurance</span>
+								<span class="spec-value">2.5 hours (standard operating conditions)</span>
+							</div>
+							<div class="spec-row">
+								<span class="spec-label">Propulsion power</span>
+								<span class="spec-value">20kw/40 kw</span>
+							</div>
+							<div class="spec-row">
+								<span class="spec-label">Charging method</span>
+								<span class="spec-value">Equipped with dedicated charging stations</span>
+							</div>
+							<div class="spec-row">
+								<span class="spec-label">Charging station</span>
+								<span class="spec-value">380V 60A</span>
+							</div>
+							<div class="spec-row">
+								<span class="spec-label">Charging time</span>
+								<span class="spec-value">1.5 hours</span>
+							</div>
+							<div class="spec-row">
+								<span class="spec-label">Charging power</span>
+								<span class="spec-value">≤20kw</span>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -103,10 +153,52 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
+// 导入图片资源
+import whiteBotImg from '../assets/white_boat.png'
+import blueBoatImg from '../assets/blue_boat.png'
 
 const router = useRouter()
+
+// 颜色选择状态
+const selectedColor = ref('white')
+
+// 船只图片映射
+const boatImages = {
+	'white': whiteBotImg,
+	'gray': blueBoatImg,
+	'blue': blueBoatImg,
+	'purple': whiteBotImg,
+	'red': whiteBotImg,
+	'brown': whiteBotImg
+}
+
+// 颜色价格映射
+const colorPrices = {
+	'white': '¥ 2,800,000',
+	'gray': '¥ 3,000,000',
+	'blue': '¥ 3,200,000',
+	'purple': '¥ 3,500,000',
+	'red': '¥ 3,800,000',
+	'brown': '¥ 3,300,000'
+}
+
+// 计算当前船只图片
+const currentBoatImage = computed(() => {
+	return boatImages[selectedColor.value] || boatImages['white']
+})
+
+// 计算当前价格
+const currentPrice = computed(() => {
+	return colorPrices[selectedColor.value] || colorPrices['white']
+})
+
+// 切换船只颜色
+function changeBoatColor(color) {
+	selectedColor.value = color
+	console.log('切换到颜色:', color)
+}
 
 function goHome() {
 	router.push('/')
@@ -120,9 +212,24 @@ onMounted(() => {
 <style scoped>
 .product-introduction {
 	min-height: 100vh;
-	background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+	background: url('../assets/bp_bg.png') center/cover no-repeat;
+	background-attachment: fixed;
 	color: #ffffff;
 	font-family: 'Arial', sans-serif;
+	position: relative;
+	overflow: hidden;
+}
+
+/* 添加半透明遮罩层以增强文字可读性 */
+.product-introduction::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.3);
+	z-index: 0;
 }
 
 /* 顶部导航栏 */
@@ -133,7 +240,7 @@ onMounted(() => {
 	right: 0;
 	background: rgba(0, 0, 0, 0.8);
 	backdrop-filter: blur(10px);
-	z-index: 1000;
+	z-index: 1001;
 	padding: 15px 0;
 }
 
@@ -164,16 +271,6 @@ onMounted(() => {
 
 .nav-item.active {
 	color: #00d4ff;
-}
-
-.nav-item.active::after {
-	content: '';
-	position: absolute;
-	bottom: -5px;
-	left: 0;
-	right: 0;
-	height: 2px;
-	background: #00d4ff;
 }
 
 .nav-divider {
@@ -213,222 +310,424 @@ onMounted(() => {
 
 /* 主要内容区域 */
 .main-content {
-	display: flex;
-	min-height: 100vh;
+	position: relative;
+	height: calc(100vh - 80px);
 	padding-top: 80px;
+	z-index: 1;
+	overflow: hidden;
 }
 
-.left-section {
-	flex: 1;
-	padding: 40px;
+/* 左侧导航列表定位 */
+.left-nav-list {
+	position: absolute;
+	left: 20px;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+/* 中间3D产品展示定位 */
+.product-3d-showcase {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+/* 右侧产品规格面板 */
+.product-specs-panel {
+	position: absolute;
+	right: 20px;
+	top: 50%;
+	transform: translateY(-50%);
+	background-color: rgba(100, 100, 100, 0.3);
+	backdrop-filter: blur(20px);
+	border-radius: 10px;
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	width: 100%;
+	max-width: 350px;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* 左侧导航列表样式 */
+.left-nav-list {
 	display: flex;
 	flex-direction: column;
-	gap: 30px;
+	gap: 40px;
+	padding-left: 20px;
+	min-height: 60vh;
+	justify-content: space-around;
 }
 
-.right-section {
-	flex: 1;
-	padding: 40px;
+.left-nav-list::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: -10px;
+	bottom: -10px;
+	width: 2px;
+	background: rgba(255, 255, 255, 0.8);
+}
+
+.left-nav-item {
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	position: relative;
+	cursor: pointer;
+	transition: all 0.3s ease;
 }
 
-/* Product Introduction 页面样式 */
-.product-features, .tech-specs {
-	background: rgba(255, 255, 255, 0.1);
-	backdrop-filter: blur(10px);
-	border-radius: 15px;
-	padding: 30px;
-	border: 1px solid rgba(255, 255, 255, 0.2);
-	margin-bottom: 30px;
+.left-nav-item::before {
+	content: '';
+	position: absolute;
+	left: -20px;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 15px;
+	height: 2px;
+	background: rgba(255, 255, 255, 0.8);
+	z-index: 2;
 }
 
-.product-title, .specs-title {
+.left-nav-item:hover .nav-text {
+	color: #00d4ff;
+	transform: translateX(5px);
+}
+
+.nav-line {
+	display: none;
+}
+
+.nav-text {
+	font-size: 16px;
+	font-weight: 500;
+	color: #FFFFFF;
+	transition: all 0.3s ease;
+	white-space: nowrap;
+}
+
+/* 颜色价格区域特殊样式 */
+.color-price-section {
+	gap: 15px;
+	transform: translateY(80px) translateX(0);
+}
+
+/* 颜色价格区域的伪类元素特殊定位 */
+.color-price-section::before {
+	content: '';
+	position: absolute;
+	left: -20px; /* 保持与文字的正常距离 */
+	top: 50%;
+	transform: translateY(-50%);
+	width: 15px;
+	height: 2px;
+	background: rgba(255, 255, 255, 0.8);
+	z-index: 2;
+}
+
+.color-price-content {
+	display: flex;
+	flex-direction: row;
+	gap: 20px;
+	width: 100%;
+	align-items: center;
+}
+
+/* 左侧内容样式 */
+.section-title {
 	font-size: 20px;
 	font-weight: 600;
-	margin-bottom: 25px;
-	color: #ffffff;
+	margin-bottom: 20px;
+	color: #DCDCDC;
+	position: relative;
 }
 
-.features-grid {
+.section-title::after {
+	content: '';
+	position: absolute;
+	left: -30px;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 2px;
+	height: 40px;
+	background: #FFFFFF;
+}
+
+/* 产品优势 */
+.product-advantages {
+	background: rgba(255, 255, 255, 0.15);
+	backdrop-filter: blur(15px);
+	border-radius: 15px;
+	padding: 20px;
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	margin-bottom: 20px;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.advantages-content {
+	background: rgba(0, 0, 0, 0.3);
+	border-radius: 10px;
+	padding: 15px;
+}
+
+.advantages-text {
+	font-size: 12px;
+	color: #DCDCDC;
+	line-height: 1.6;
+	margin-bottom: 15px;
+}
+
+.product-intro {
+	font-size: 20px;
+	color: #DCDCDC;
+	font-weight: 600;
+	margin-bottom: 10px;
+}
+
+.selling-points {
+	font-size: 12px;
+	color: #DCDCDC;
+	line-height: 1.6;
+}
+
+/* 对比和设计技术部分 */
+.comparison-section,
+.design-tech-section {
+	background: rgba(255, 255, 255, 0.15);
+	backdrop-filter: blur(15px);
+	border-radius: 15px;
+	padding: 20px;
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	margin-bottom: 20px;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* 颜色和价格部分 */
+.color-price-section {
+	/* background: rgba(255, 255, 255, 0.15); */
+	/* backdrop-filter: blur(15px); */
+	border-radius: 15px;
+	/* padding: 20px; */
+	/* border: 1px solid rgba(255, 255, 255, 0.3); */
+	margin-bottom: 20px;
+	/* box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); */
+}
+
+.color-options {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 8px;
+	width: 100%;
+	max-width: 200px;
+}
+
+.color-swatch {
+	width: 60px;
+	height: 25px;
+	border-radius: 8px;
+	border: 2px solid rgba(255, 255, 255, 0.3);
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+.color-swatch:hover {
+	transform: scale(1.1);
+	border-color: #3CC8C8;
+}
+
+.color-swatch.active {
+	border-color: #00d4ff;
+	border-width: 3px;
+	transform: scale(1.1);
+	box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
+
+.purchase-btn {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	background: rgba(255, 255, 255, 0.8);
+	color: #000000;
+	padding: 15px 25px;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+.purchase-btn:hover {
+	background: rgba(255, 255, 255, 1);
+	transform: translateY(-2px);
+}
+
+.price-display {
+	font-size: 18px;
+	font-weight: bold;
+	color: #00d4ff;
+	margin-right: 10px;
+}
+
+.purchase-text {
+	font-size: 14px;
+	color: #000000;
+}
+
+/* 产品亮点 */
+.product-highlights {
+	background: rgba(255, 255, 255, 0.15);
+	backdrop-filter: blur(15px);
+	border-radius: 15px;
+	padding: 20px;
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.highlights-grid {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	gap: 20px;
 }
 
-.feature-card {
+.highlight-card {
+	background: rgba(255, 255, 255, 0.5);
+	border-radius: 10px;
 	padding: 20px;
-	background: rgba(0, 212, 255, 0.1);
-	border-radius: 15px;
-	border: 1px solid rgba(0, 212, 255, 0.3);
 	text-align: center;
 	transition: all 0.3s ease;
 }
 
-.feature-card:hover {
-	background: rgba(0, 212, 255, 0.2);
+.highlight-card:hover {
+	background: rgba(255, 255, 255, 0.7);
 	transform: translateY(-5px);
 }
 
-.feature-icon {
+.highlight-icon {
 	font-size: 32px;
 	margin-bottom: 15px;
 }
 
-.feature-name {
+.highlight-title {
 	font-size: 16px;
 	font-weight: 600;
-	color: #ffffff;
+	color: #000000;
 	margin-bottom: 10px;
 }
 
-.feature-desc {
-	font-size: 14px;
-	color: #cccccc;
+.highlight-desc {
+	font-size: 12px;
+	color: #000000;
 	line-height: 1.5;
 }
 
-.specs-list {
-	display: flex;
-	flex-direction: column;
-	gap: 15px;
-}
-
-.spec-item {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 15px;
-	background: rgba(255, 255, 255, 0.05);
-	border-radius: 10px;
-	border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.spec-label {
-	font-size: 14px;
-	color: #cccccc;
-}
-
-.spec-value {
-	font-size: 16px;
-	font-weight: 600;
-	color: #00d4ff;
-}
-
-.product-showcase {
-	background: rgba(255, 255, 255, 0.1);
-	backdrop-filter: blur(10px);
-	border-radius: 20px;
-	padding: 30px;
-	border: 1px solid rgba(0, 212, 255, 0.3);
-	height: 500px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-}
-
-.showcase-title {
-	font-size: 20px;
-	font-weight: 600;
-	color: #ffffff;
-	margin-bottom: 30px;
-}
-
-.product-image {
-	width: 100%;
-	height: 300px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin-bottom: 30px;
-}
-
-.product-3d {
-	position: relative;
-	width: 200px;
-	height: 100px;
-}
-
-.boat-outline {
+/* 3D产品展示区域 */
+.product-3d-showcase {
 	width: 100%;
 	height: 100%;
-	background: linear-gradient(45deg, transparent 30%, rgba(0, 212, 255, 0.3) 50%, transparent 70%);
-	border-radius: 50px 20px 50px 20px;
-	box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
-	animation: boatFloat 3s ease-in-out infinite;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	perspective: 1000px;
+}
+
+.boat-3d-model {
+	position: relative;
+	width: 650px;
+	height: 420px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transform: rotateX(5deg) rotateY(-10deg);
+	animation: boatFloat 4s ease-in-out infinite;
+}
+
+.boat-image {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+	transition: all 0.3s ease;
+}
+
+.boat-image:hover {
+	transform: scale(1.05);
+	filter: drop-shadow(0 15px 40px rgba(0, 0, 0, 0.4));
 }
 
 @keyframes boatFloat {
-	0%, 100% {
-		transform: translateY(0px);
+
+	0%,
+	100% {
+		transform: rotateX(5deg) rotateY(-10deg) translateY(0px);
 	}
+
 	50% {
-		transform: translateY(-10px);
+		transform: rotateX(5deg) rotateY(-10deg) translateY(-10px);
 	}
 }
 
-.boat-details {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
+
+.specs-title {
+	font-size: 20px;
+	font-weight: 400;
+	color: #FFFFFF;
+	/* margin-bottom: 20px; */
+	text-align: left;
 }
 
-.detail {
-	position: absolute;
-	width: 8px;
-	height: 8px;
-	background: #00d4ff;
-	border-radius: 50%;
-	box-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
-	animation: pulse 2s ease-in-out infinite;
+.spec-group {
+	padding: 8px;
 }
 
-.detail-1 {
-	top: 20%;
-	left: 20%;
-	animation-delay: 0s;
+.spec-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	/* margin-bottom: 10px; */
+	cursor: pointer;
+	/* background: rgba(0, 0, 0, 0.3); */
+	/* padding: 8px 12px; */
+	border-radius: 5px;
 }
 
-.detail-2 {
-	top: 30%;
-	right: 20%;
-	animation-delay: 0.5s;
+.spec-category {
+	font-size: 14px;
+	font-weight: 400;
+	color: #FFFFFF;
 }
 
-.detail-3 {
-	bottom: 20%;
-	left: 50%;
-	animation-delay: 1s;
+.dropdown-arrow {
+	color: #FFFFFF;
+	font-size: 12px;
+	transition: transform 0.3s ease;
 }
 
-@keyframes pulse {
-	0%, 100% {
-		transform: scale(1);
-		opacity: 1;
-	}
-	50% {
-		transform: scale(1.2);
-		opacity: 0.8;
-	}
+.spec-details {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
 }
 
-.product-name {
-	font-size: 24px;
-	font-weight: 700;
-	color: #ffffff;
-	margin-bottom: 10px;
-	text-align: center;
+.spec-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 4px 0;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.product-tagline {
-	font-size: 16px;
-	color: #00d4ff;
-	text-align: center;
-	opacity: 0.8;
+.spec-row:last-child {
+	border-bottom: none;
+}
+
+.spec-label {
+	font-size: 12px;
+	color: #FFFFFF;
+	flex: 1;
+}
+
+.spec-value {
+	font-size: 12px;
+	color: #FFFFFF;
+	font-weight: 600;
+	text-align: right;
 }
 
 /* 响应式设计 */
@@ -436,23 +735,34 @@ onMounted(() => {
 	.main-content {
 		flex-direction: column;
 	}
-	
+
 	.nav-container {
 		flex-wrap: wrap;
 		gap: 10px;
 	}
-	
+
 	.nav-item {
 		font-size: 12px;
 		padding: 8px 15px;
 	}
-	
-	.left-section, .right-section {
+
+	.left-section,
+	.center-section,
+	.right-section {
 		padding: 20px;
 	}
-	
-	.features-grid {
+
+	.highlights-grid {
 		grid-template-columns: 1fr;
+	}
+
+	.boat-3d-model {
+		width: 350px;
+		height: 220px;
+	}
+
+	.product-specs-panel {
+		max-width: 100%;
 	}
 }
 </style>
