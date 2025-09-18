@@ -82,19 +82,44 @@
 										<p>damping increasing limit</p>
 									</div>
 								</div>
-								<div class="highlight-card">
-									<img :src="wheel2Img" alt="Team Members" class="highlight-icon" />
-									<div class="highlight-title">Team Members</div>
-									<!-- <div class="highlight-desc">Expert engineering and design team</div> -->
+								<div class="highlight-card team-members" @mouseenter="showTooltip('team')" @mouseleave="hideTooltip">
+									<div v-if="activeTooltip !== 'team'">
+										<img :src="wheel2Img" alt="Team Members" class="highlight-icon" />
+										<div class="highlight-title">Team Members</div>
+									</div>
+									<!-- 悬停时显示的详细信息 -->
+									<div v-if="activeTooltip === 'team'" class="card-content">
+										<p><strong>U/C-shaped wing design:</strong></p>
+										<p>The front wing (U-shaped) and rear wing (C-shaped) feature streamlined surfaces optimized for fluid dynamics.</p>
+										<p><strong>Resistance quick assembly system:</strong></p>
+										<p>Reduced transportation volume, with on-site assembly efficiency increased by 50%.</p>
+									</div>
 								</div>
-								<div class="highlight-card">
-									<img :src="wheel1Img" alt="Adaptive hydrofoil" class="highlight-icon" />
-									<div class="highlight-title">Adaptive hydrofoil control algorithm</div>
+								<div class="highlight-card adaptive-algorithm" @mouseenter="showTooltip('adaptive')" @mouseleave="hideTooltip">
+									<div v-if="activeTooltip !== 'adaptive'">
+										<img :src="AutoSettingImg" alt="Adaptive hydrofoil" class="highlight-icon" />
+										<div class="highlight-title">Adaptive hydrofoil control algorithm</div>
+									</div>
+									<!-- 悬停时显示的详细信息 -->
+									<div v-if="activeTooltip === 'adaptive'" class="card-content">
+										<p><strong>Advanced control system:</strong></p>
+										<p>Real-time adjustment of hydrofoil angles based on water conditions and vessel performance.</p>
+										<p><strong>Machine learning integration:</strong></p>
+										<p>Continuous optimization through AI-powered analysis of operational data.</p>
+									</div>
 								</div>
-								<div class="highlight-card">
-									<img :src="wheel2Img" alt="Modular detachable hull" class="highlight-icon" />
-									<div class="highlight-title">Modular detachable hull</div>
-									<!-- <div class="highlight-desc">Easy maintenance and upgrade design</div> -->
+								<div class="highlight-card modular-hull" @mouseenter="showTooltip('modular')" @mouseleave="hideTooltip">
+									<div v-if="activeTooltip !== 'modular'">
+										<img :src="modularImg" alt="Modular detachable hull" class="highlight-icon" />
+										<div class="highlight-title">Modular detachable hull</div>
+									</div>
+									<!-- 悬停时显示的详细信息 -->
+									<div v-if="activeTooltip === 'modular'" class="card-content">
+										<p><strong>Quick assembly design:</strong></p>
+										<p>Modular components allow for rapid assembly and disassembly in under 30 minutes.</p>
+										<p><strong>Transportation efficiency:</strong></p>
+										<p>Reduced shipping costs by 60% through compact modular packaging.</p>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -218,6 +243,8 @@ import priceImg from '../assets/price.png'
 // 导入产品亮点图标
 import wheel1Img from '../assets/wheel1.png'
 import wheel2Img from '../assets/wheel2.png'
+import modularImg from '../assets/modular.png'
+import AutoSettingImg from '../assets/auto_setting.png'
 
 const router = useRouter()
 
@@ -438,10 +465,10 @@ onUnmounted(() => {
 /* 主要内容区域 */
 .main-content {
 	position: relative;
-	height: calc(100vh - 80px);
+	height: calc(100vh - 80px + 100px);
 	padding-top: 80px;
 	z-index: 1;
-	overflow: hidden;
+	overflow: visible;
 }
 
 /* 左侧导航列表定位 */
@@ -449,7 +476,7 @@ onUnmounted(() => {
 	position: absolute;
 	left: 100px;
 	top: 50%;
-	transform: translateY(-50%);
+	transform: translateY(-50%) translateY(100px);
 }
 
 /* 中间3D产品展示定位 */
@@ -741,44 +768,54 @@ onUnmounted(() => {
 
 
 .highlight-card {
-	background: rgba(255, 255, 255, 0.8);
-	border-radius: 15px;
-	padding: 15px;
+	background: rgba(255, 255, 255, 0.4);
+	border-radius: 12px;
+	padding: 12px;
 	text-align: center;
 	transition: all 0.3s ease;
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-start;
+	justify-content: center;
 	align-items: center;
 	flex-shrink: 0;
-	/* min-width: 200px; */
+	min-width: 140px;
+	height: 120px;
+	transform: scale(0.8);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .highlight-card:hover {
-	background: rgba(255, 255, 255, 0.7);
-	transform: translateY(-5px);
+	background: rgba(255, 255, 255, 0.6);
+	transform: scale(0.8) translateY(-8px);
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+	border-color: rgba(0, 212, 255, 0.3);
 }
 
 .highlight-icon {
-	width: 180px;
-	height: 90px;
-	/* margin-bottom: 12px; */
-	object-fit: cover;
+	width: 120px;
+	height: 80px;
+	margin-bottom: 8px;
+	object-fit: contain;
+	border-radius: 8px;
+	background: rgba(255, 255, 255, 0.1);
+	padding: 8px;
 }
 
 .highlight-title {
 	font-size: 11px;
 	font-weight: 600;
-	color: #000000;
-	margin-bottom: 3px;
+	color: #333333;
+	margin-bottom: 4px;
 	text-align: center;
-	line-height: 1.2;
+	line-height: 1.3;
+	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
 }
 
 .highlight-desc {
-	font-size: 9px;
+	font-size: 8px;
 	color: #666666;
-	line-height: 1.3;
+	line-height: 1.2;
 	text-align: center;
 }
 
@@ -792,16 +829,20 @@ onUnmounted(() => {
 	height: 100%;
 	padding: 8px;
 	animation: fadeInUp 0.3s ease-out;
+	box-sizing: border-box;
+	overflow: hidden;
 }
 
 .card-content p {
 	margin: 0;
-	padding: 2px 0;
+	padding: 3px 0;
 	font-size: 11px;
 	color: #333333;
 	line-height: 1.4;
 	text-align: left;
 	width: 100%;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
 }
 
 @keyframes fadeInUp {
