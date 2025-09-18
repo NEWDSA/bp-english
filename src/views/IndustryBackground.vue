@@ -186,27 +186,26 @@ const handleCityClick = (cityInfo) => {
               </div>
 
               <!-- Summary Button -->
-              <button
+              <div
                 @mouseenter="showSummary = true"
                 @mouseleave="showSummary = false"
-                @click="showSummary = !showSummary"
-                class="button-focus bg-gradient-to-r from-cyan-600 to-blue-600 text-white px-6 py-3 text-sm xl:text-base rounded-lg hover:from-cyan-500 hover:to-blue-500 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/25 animate-pulse focus:outline-none focus:ring-0 focus:border-0"
+                class="relative"
               >
-                Summary
-              </button>
-            </div>
+                <button
+                  @click="showSummary = !showSummary"
+                  class="button-focus bg-gradient-to-r from-cyan-600 to-blue-600 text-white px-6 py-3 text-sm xl:text-base rounded-lg hover:from-cyan-500 hover:to-blue-500 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/25 animate-pulse focus:outline-none focus:ring-0 focus:border-0"
+                >
+                  Summary
+                </button>
 
-            <!-- Summary Popup -->
-            <div class="relative">
-              <div
-                v-show="showSummary"
-                class="absolute top-full right-0 mt-5 w-96 bg-gray-800/95 backdrop-blur-sm border border-cyan-500/30 rounded-lg p-4 shadow-2xl transform transition-all duration-300 origin-top-right"
-                :class="showSummary ? 'animate-in fade-in-90 slide-in-from-top-2' : 'animate-out fade-out-90 slide-out-to-top-2'"
-              >
-                <div class="relative">
-                  <!-- Arrow -->
-                  <div class="absolute -top-4 right-4 w-4 h-4 bg-gray-800/95 border-t border-l border-cyan-500/30 transform rotate-45"></div>
-
+                <!-- Summary Popup -->
+                <div
+                  v-show="showSummary"
+                  @mouseenter="showSummary = true"
+                  @mouseleave="showSummary = false"
+                  class="absolute top-full z-9999999 right-0 mt-6 w-96 bg-gray-800/95 backdrop-blur-sm border border-cyan-500/30 rounded-lg p-4 shadow-2xl transform transition-all duration-300 origin-top-right"
+                  :class="showSummary ? 'animate-in fade-in-90 slide-in-from-top-2' : 'animate-out fade-out-90 slide-out-to-top-2'"
+                >
                   <!-- Content -->
                   <div class="text-gray-100 text-sm leading-relaxed">
                     <p class="mb-3">
