@@ -28,6 +28,15 @@
 			<!-- 左侧内容区域 -->
 			<div class="left-section">
 				<div class="left-nav-list">
+					<!-- 动态连接线 -->
+					<div 
+						class="main-vertical-line" 
+						:style="{ 
+							top: lineTop, 
+							height: lineHeight 
+						}"
+					></div>
+					
 					<div class="left-nav-item">
 						<span class="nav-text">Product advantages</span>
 					</div>
@@ -185,7 +194,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, onUnmounted, computed, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 // 导入船只图片资源
 import whiteBoatImg from '../assets/white_boat.png'
@@ -217,6 +226,43 @@ const selectedColor = ref('white')
 
 // 悬停提示状态
 const activeTooltip = ref(null)
+
+// 连接线高度计算
+const lineHeight = ref('calc(100% - 60px)')
+const lineTop = ref('30px')
+
+// 动态计算连接线位置
+const calculateLinePosition = () => {
+	nextTick(() => {
+		const navList = document.querySelector('.left-nav-list')
+		if (!navList) return
+		
+		const items = navList.querySelectorAll('.left-nav-item')
+		if (items.length < 2) return
+		
+		const firstItem = items[0]
+		const lastItem = items[items.length - 1]
+		
+		const firstItemRect = firstItem.getBoundingClientRect()
+		const lastItemRect = lastItem.getBoundingClientRect()
+		const navListRect = navList.getBoundingClientRect()
+		
+		// 计算第一个项目的水平线位置相对于导航列表的位置
+		const firstItemTop = firstItemRect.top - navListRect.top + firstItemRect.height / 2
+		
+		// 计算最后一个项目的水平线位置相对于导航列表的位置
+		const lastItemTop = lastItemRect.top - navListRect.top + lastItemRect.height / 2
+		
+		// 设置连接线的起始位置和高度
+		lineTop.value = `${firstItemTop}px`
+		lineHeight.value = `${lastItemTop - firstItemTop}px`
+	})
+}
+
+// 监听窗口大小变化
+const handleResize = () => {
+	calculateLinePosition()
+}
 
 // 船只图片映射
 const boatImages = {
@@ -269,6 +315,23 @@ function goHome() {
 
 onMounted(() => {
 	// 页面加载完成后的初始化逻辑
+	calculateLinePosition()
+	
+	// 监听窗口大小变化
+	window.addEventListener('resize', handleResize)
+	
+	// 监听浏览器缩放
+	window.addEventListener('wheel', (e) => {
+		if (e.ctrlKey) {
+			// 延迟执行，等待缩放完成
+			setTimeout(calculateLinePosition, 100)
+		}
+	})
+})
+
+// 组件卸载时清理事件监听器
+onUnmounted(() => {
+	window.removeEventListener('resize', handleResize)
 })
 </script>
 
@@ -276,6 +339,7 @@ onMounted(() => {
 .product-introduction {
 	min-height: 100vh;
 	background: url('../assets/bp_bg.png') center/cover no-repeat;
+	height: auto;
 	background-attachment: fixed;
 	color: #ffffff;
 	font-family: 'Arial', sans-serif;
@@ -415,21 +479,22 @@ onMounted(() => {
 .left-nav-list {
 	display: flex;
 	flex-direction: column;
-	gap: 40px;
+	gap: 60px;
 	padding-left: 20px;
+	padding-top: 30px;
+	padding-bottom: 30px;
 	min-height: 60vh;
-	justify-content: space-around;
+	justify-content: flex-start;
 	z-index: 9999;
 }
 
-.left-nav-list::before {
-	content: '';
+/* 动态连接线样式 */
+.main-vertical-line {
 	position: absolute;
 	left: 0;
-	top: 30px;
-	bottom: -42px;
 	width: 2px;
 	background: rgba(255, 255, 255, 0.8);
+	z-index: 1;
 }
 
 .left-nav-item {
@@ -449,7 +514,7 @@ onMounted(() => {
 	width: 15px;
 	height: 2px;
 	background: rgba(255, 255, 255, 0.8);
-	z-index: 2;
+	z-index: 3;
 }
 
 .left-nav-item:hover .nav-text {
@@ -472,7 +537,6 @@ onMounted(() => {
 /* 颜色价格区域特殊样式 */
 .color-price-section {
 	gap: 15px;
-	transform: translateY(80px) translateX(0);
 }
 
 /* 产品亮点区域特殊样式 */
@@ -481,7 +545,6 @@ onMounted(() => {
 	align-items: flex-start;
 	gap: 15px;
 	position: relative;
-	transform: translateY(70px);
 }
 
 .highlights-content {
