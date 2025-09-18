@@ -37,8 +37,22 @@
 						}"
 					></div>
 					
-					<div class="left-nav-item">
+					<div class="left-nav-item product-advantages-item" @mouseenter="showTooltip('advantages')" @mouseleave="hideTooltip">
 						<span class="nav-text">Product advantages</span>
+						<!-- 悬停时显示的详细信息 -->
+						<div v-if="activeTooltip === 'advantages'" class="advantages-tooltip">
+							<div class="tooltip-content">
+								<p><strong>Positioned within 5 meters, driving qualification exemption for entertainment powered boats, using hydrofoil and control algorithms to significantly reduce player entry barriers and enhance entertainment experience</strong></p>
+								<p><strong>Y-H2O Product Introduction</strong></p>
+								<p><strong>Selling point:</strong></p>
+								<p>1. No need for a license to drive, low threshold for getting started</p>
+								<p>2. The purchase cost is equivalent to the price of a motorboat</p>
+								<p>3. Intelligentization</p>
+								<p>4. High safety factor</p>
+								<p>5. Low usage cost</p>
+								<p>6. Better experience</p>
+							</div>
+						</div>
 					</div>
 					<div class="left-nav-item">
 						<span class="nav-text">Compared to traditional ferries</span>
@@ -831,6 +845,44 @@ onUnmounted(() => {
 	animation: fadeInUp 0.3s ease-out;
 	box-sizing: border-box;
 	overflow: hidden;
+}
+
+/* 产品优势悬停提示样式 */
+.product-advantages-item {
+	position: relative;
+}
+
+.advantages-tooltip {
+	position: absolute;
+	left: 200px;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 1000;
+	width: 400px;
+	background: rgba(255, 255, 255, 0.9);
+	backdrop-filter: blur(10px);
+	border-radius: 12px;
+	padding: 20px;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	/* animation: fadeInUp 0.3s ease-out; */
+}
+
+.tooltip-content p {
+	margin: 0;
+	padding: 4px 0;
+	font-size: 12px;
+	color: #333333;
+	line-height: 1.4;
+	text-align: left;
+	width: 100%;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+}
+
+.tooltip-content p strong {
+	color: #000000;
+	font-weight: 600;
 }
 
 .card-content p {
