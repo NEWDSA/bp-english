@@ -68,6 +68,7 @@ onMounted(async () => {
           .pointAltitude(d => d.altitude || 0.01)
           .pointColor('color')
           .pointRadius(d => d.size || 0.3)
+          .pointLabel('')
           .onPointClick(point => {
             emit('city-click', {
               city: point.city,
@@ -350,32 +351,31 @@ const loadAirlineData = () => {
         color: ['red', 'white', 'blue', 'green'][Math.round(Math.random() * 3)]
       }))
 
-    // Process airports for points data with custom icon styling
+    // Process airports for points data with native point styling
     const pointsData = mockAirports.map(d => ({
       lat: +d.lat,
       lng: +d.lng,
       size: 0.8, // Larger base size
-      color: '#06b6d4', // Cyan color for the main point
+      color: 'red', // Red color for the main point
       city: d.city,
       country: d.country,
       name: d.name,
-      // Additional properties for multi-layered effect
-      altitude: 0.01,
-      label: `
-        <div style="display: flex; flex-direction: column; align-items: center;">
-          <img src="/src/assets/icon-2.png" width="40" height="40" alt="${d.city} airport" />
-          <div style="margin-top: 8px; padding: 4px 8px; background-color: rgba(0, 0, 0, 0.8); border: 2px solid #06b6d4; border-radius: 4px; color: white; font-size: 24px; white-space: nowrap; font-family: system-ui, -apple-system, sans-serif;">
-            ${d.city}
-          </div>
-        </div>
-      `
+      altitude: 0.005
     }))
 
-    // Process airports for labels data
+    // Process airports for custom text labels
     const labelsData = mockAirports.map(d => ({
       lat: +d.lat,
       lng: +d.lng,
-      label: d.city
+      city: d.city,
+      country: d.country,
+      name: d.name,
+      altitude: 0.01,
+      label: `
+        <div style="margin-top: 84px; padding: 4px 8px; background-color: rgba(0, 0, 0, 0.8); border: 2px solid #06b6d4; border-radius: 4px; color: white; font-size: 16px; white-space: nowrap; font-family: system-ui, -apple-system, sans-serif;">
+          ${d.city}
+        </div>
+      `
     }))
 
     console.log(`Loaded ${arcsData.length} flight routes, ${pointsData.length} airports, and ${labelsData.length} labels`)
@@ -383,7 +383,8 @@ const loadAirlineData = () => {
     // Update globe with airline data like reference code
     globe
       .arcsData(arcsData)
-      .htmlElementsData(pointsData)
+      .pointsData(pointsData)
+      .htmlElementsData(labelsData)
 
   } catch (error) {
     console.error('Error loading airline data:', error)
