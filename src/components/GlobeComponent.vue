@@ -94,19 +94,22 @@ onMounted(async () => {
                 lng: d.lng
               })
             })
+            // Add hover events to control globe rotation
+            el.addEventListener('mouseenter', () => {
+              const controls = globe.controls()
+              if (controls) {
+                controls.autoRotate = false
+              }
+            })
+            el.addEventListener('mouseleave', () => {
+              const controls = globe.controls()
+              if (controls) {
+                controls.autoRotate = true
+              }
+            })
             return el
           })
           .htmlAltitude(d => d.altitude || 0.01)
-          .labelsData([])
-          .labelLat('lat')
-          .labelLng('lng')
-          .labelText('label')
-          .labelSize(1.8)
-          .labelDotRadius(0.1)
-          .labelColor(() => 'rgba(255, 255, 255, 0.95)')
-          .labelResolution(4)
-          .labelAltitude(0.05)
-          .labelIncludeDot(false)
 
         // Mount to container
         globe(globeContainer.value)
@@ -358,7 +361,14 @@ const loadAirlineData = () => {
       name: d.name,
       // Additional properties for multi-layered effect
       altitude: 0.01,
-      label: `<img src="/src/assets/icon-2.png" width="40" height="40" alt="${d.city} airport" />`
+      label: `
+        <div style="display: flex; flex-direction: column; align-items: center;">
+          <img src="/src/assets/icon-2.png" width="40" height="40" alt="${d.city} airport" />
+          <div style="margin-top: 8px; padding: 4px 8px; background-color: rgba(0, 0, 0, 0.8); border: 2px solid #06b6d4; border-radius: 4px; color: white; font-size: 24px; white-space: nowrap; font-family: system-ui, -apple-system, sans-serif;">
+            ${d.city}
+          </div>
+        </div>
+      `
     }))
 
     // Process airports for labels data
@@ -374,7 +384,6 @@ const loadAirlineData = () => {
     globe
       .arcsData(arcsData)
       .htmlElementsData(pointsData)
-      .labelsData(labelsData)
 
   } catch (error) {
     console.error('Error loading airline data:', error)
