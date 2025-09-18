@@ -1,5 +1,19 @@
 <template>
 	<div class="team-composition">
+		<!-- 背景视频 -->
+		<div class="video-background">
+			<video 
+				autoplay 
+				muted 
+				loop 
+				playsinline
+				class="background-video"
+			>
+				<source src="../assets/team_bg.mp4" type="video/mp4">
+			</video>
+			<div class="video-overlay"></div>
+		</div>
+
 		<!-- 顶部导航栏 -->
 		<nav class="top-nav">
 			<div class="nav-container">
@@ -25,100 +39,81 @@
 
 		<!-- 主要内容区域 -->
 		<div class="main-content">
-			<!-- 左侧内容 -->
-			<div class="left-section">
-				<!-- 团队结构 -->
-				<div class="team-structure">
-					<h3 class="team-title">Team Structure</h3>
-					<div class="team-grid">
-						<div class="team-member">
-							<div class="member-avatar"></div>
-							<div class="member-info">
-								<h4 class="member-name">CEO & Founder</h4>
-								<p class="member-role">Strategic Leadership</p>
-							</div>
+			<!-- 上半部分 - 水平布局 -->
+			<div class="top-section">
+				<!-- 左侧内容 - 创始人信息 -->
+				<div class="left-section">
+					<!-- 创始人标题 -->
+					<div class="founder-header">
+						<h1 class="founder-title">Founder & CEO</h1>
+						<h2 class="founder-name">Kevin</h2>
+					</div>
+
+					<!-- 工作经验 -->
+					<div class="info-section">
+						<div class="section-icon">
+							<img src="/src/assets/work.png" alt="Work Experience" class="icon-image" />
 						</div>
-						<div class="team-member">
-							<div class="member-avatar"></div>
-							<div class="member-info">
-								<h4 class="member-name">CTO</h4>
-								<p class="member-role">Technology Innovation</p>
-							</div>
+						<h3 class="section-title">Work Experience</h3>
+					</div>
+
+					<!-- 教育背景 -->
+					<div class="info-section">
+						<div class="section-icon">
+							<img src="/src/assets/edu.png" alt="Educational Background" class="icon-image" />
 						</div>
-						<div class="team-member">
-							<div class="member-avatar"></div>
-							<div class="member-info">
-								<h4 class="member-name">COO</h4>
-								<p class="member-role">Operations Management</p>
-							</div>
+						<h3 class="section-title">Educational Background</h3>
+					</div>
+
+					<!-- 代表作品 -->
+					<div class="info-section">
+						<div class="section-icon">
+							<img src="/src/assets/video.png" alt="Representative works" class="icon-image" />
 						</div>
-						<div class="team-member">
-							<div class="member-avatar"></div>
-							<div class="member-info">
-								<h4 class="member-name">CFO</h4>
-								<p class="member-role">Financial Strategy</p>
-							</div>
-						</div>
+						<h3 class="section-title">Representative works (Delivered)</h3>
 					</div>
 				</div>
 
-				<!-- 核心能力 -->
-				<div class="capabilities-card">
-					<h3 class="capabilities-title">Core Capabilities</h3>
-					<div class="capabilities-list">
-						<div class="capability-item">
-							<div class="capability-icon">🚀</div>
-							<div class="capability-text">Innovation & R&D</div>
+				<!-- 右侧内容 -->
+				<div class="right-section">
+					<!-- 上方信息区域 -->
+					<div class="top-info">
+						<div class="info-item">
+							<h3 class="info-title">Who we are?</h3>
 						</div>
-						<div class="capability-item">
-							<div class="capability-icon">⚙️</div>
-							<div class="capability-text">Engineering Excellence</div>
-						</div>
-						<div class="capability-item">
-							<div class="capability-icon">🌊</div>
-							<div class="capability-text">Marine Technology</div>
-						</div>
-						<div class="capability-item">
-							<div class="capability-icon">📊</div>
-							<div class="capability-text">Data Analytics</div>
+						<div class="info-item">
+							<h3 class="info-title">Investment Highlights</h3>
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<!-- 右侧图表区域 -->
-			<div class="right-section">
-				<div class="team-chart">
-					<h3 class="chart-title">Team Experience</h3>
-					<div class="experience-bars">
-						<div class="exp-bar">
-							<div class="exp-label">Marine Engineering</div>
-							<div class="exp-progress">
-								<div class="exp-fill" style="width: 90%"></div>
-							</div>
-							<div class="exp-value">90%</div>
+			<!-- 底部团队成员区域 -->
+			<div class="bottom-section">
+				<div class="team-members-grid">
+					<h3 class="members-title">Team Members</h3>
+					<div class="members-avatars">
+						<div class="member-avatar cfo">
+							<div class="avatar-label">CFO</div>
 						</div>
-						<div class="exp-bar">
-							<div class="exp-label">Technology Development</div>
-							<div class="exp-progress">
-								<div class="exp-fill" style="width: 85%"></div>
-							</div>
-							<div class="exp-value">85%</div>
+						<div class="member-avatar coo">
+							<div class="avatar-label">COO</div>
 						</div>
-						<div class="exp-bar">
-							<div class="exp-label">Business Strategy</div>
-							<div class="exp-progress">
-								<div class="exp-fill" style="width: 80%"></div>
-							</div>
-							<div class="exp-value">80%</div>
+						<div class="member-avatar engineer">
+							<div class="avatar-label">Engineer</div>
 						</div>
-						<div class="exp-bar">
-							<div class="exp-label">Market Operations</div>
-							<div class="exp-progress">
-								<div class="exp-fill" style="width: 75%"></div>
-							</div>
-							<div class="exp-value">75%</div>
+						<div class="member-avatar founder">
+							<div class="avatar-label">Founder/Engineer</div>
 						</div>
+						<div class="member-avatar engineer2">
+							<div class="avatar-label">Founder/Engineer</div>
+						</div>
+						<div class="member-avatar strategy">
+							<div class="avatar-label">Strategy/Service</div>
+						</div>
+					</div>
+					<div class="team-description">
+						<p>Team members gather top talents in the four core fields of ship engineering, intelligent systems, corporate internal control, finance, taxation, and legal affairs.</p>
 					</div>
 				</div>
 			</div>
@@ -144,9 +139,38 @@ onMounted(() => {
 <style scoped>
 .team-composition {
 	min-height: 100vh;
-	background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
 	color: #ffffff;
 	font-family: 'Arial', sans-serif;
+	position: relative;
+	overflow: hidden;
+}
+
+/* 背景视频样式 */
+.video-background {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -2;
+	overflow: hidden;
+}
+
+.background-video {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
+}
+
+.video-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(135deg, rgba(26, 26, 46, 0.7) 0%, rgba(22, 33, 62, 0.6) 50%, rgba(15, 52, 96, 0.8) 100%);
+	z-index: -1;
 }
 
 /* 顶部导航栏 */
@@ -238,8 +262,16 @@ onMounted(() => {
 /* 主要内容区域 */
 .main-content {
 	display: flex;
+	flex-direction: column;
 	min-height: 100vh;
 	padding-top: 80px;
+}
+
+/* 上半部分 - 水平布局 */
+.top-section {
+	display: flex;
+	flex: 1;
+	min-height: 60vh;
 }
 
 .left-section {
@@ -254,167 +286,187 @@ onMounted(() => {
 	flex: 1;
 	padding: 40px;
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: center;
 }
 
-/* Team Composition 页面样式 */
-.team-structure, .capabilities-card {
-	background: rgba(255, 255, 255, 0.1);
-	backdrop-filter: blur(10px);
-	border-radius: 15px;
-	padding: 30px;
-	border: 1px solid rgba(255, 255, 255, 0.2);
-	margin-bottom: 30px;
+/* 底部团队成员区域 */
+.bottom-section {
+	padding: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 40vh;
 }
 
-.team-title, .capabilities-title {
-	font-size: 20px;
-	font-weight: 600;
-	margin-bottom: 25px;
+/* 创始人信息样式 */
+.founder-header {
+	margin-bottom: 60px;
+}
+
+.founder-title {
+	font-size: 48px;
+	font-weight: 300;
 	color: #ffffff;
+	margin-bottom: 10px;
+	line-height: 1.2;
 }
 
-.team-grid {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 20px;
+.founder-name {
+	font-size: 36px;
+	font-weight: 400;
+	color: #ffffff;
+	margin-bottom: 0;
 }
 
-.team-member {
+.info-section {
 	display: flex;
 	align-items: center;
 	gap: 15px;
-	padding: 15px;
-	background: rgba(0, 212, 255, 0.1);
-	border-radius: 10px;
-	border: 1px solid rgba(0, 212, 255, 0.3);
-	transition: all 0.3s ease;
+	/* margin-bottom: 40px;
+	padding: 20px 0; */
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.team-member:hover {
-	background: rgba(0, 212, 255, 0.2);
-	transform: translateY(-2px);
+.section-icon {
+	font-size: 24px;
+	width: 40px;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: rgba(255, 255, 255, 0.1);
+	border-radius: 8px;
+}
+
+.icon-image {
+	width: 24px;
+	height: 24px;
+	object-fit: contain;
+	filter: brightness(0) invert(1);
+}
+
+.section-title {
+	font-size: 18px;
+	font-weight: 500;
+	color: #ffffff;
+	margin: 0;
+}
+
+/* 右侧内容样式 */
+.top-info {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 40px;
+}
+
+.info-item {
+	flex: 1;
+	margin: 0 10px;
+}
+
+.info-title {
+	font-size: 16px;
+	font-weight: 500;
+	color: #ffffff;
+	text-align: right;
+	margin: 0;
+}
+
+/* 团队成员网格样式 */
+.team-members-grid {
+	background: rgba(255, 255, 255, 0.05);
+	border-radius: 15px;
+	padding: 40px;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	max-width: 800px;
+	width: 100%;
+}
+
+.members-title {
+	font-size: 24px;
+	font-weight: 600;
+	color: #ffffff;
+	margin-bottom: 40px;
+	text-align: center;
+}
+
+.members-avatars {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(2, 1fr);
+	gap: 30px;
+	margin-bottom: 40px;
+	justify-items: center;
+	max-width: 600px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .member-avatar {
-	width: 50px;
-	height: 50px;
-	background: linear-gradient(45deg, #00d4ff, #0099cc);
+	width: 80px;
+	height: 80px;
 	border-radius: 50%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 20px;
-	color: #ffffff;
-}
-
-.member-name {
-	font-size: 16px;
-	font-weight: 600;
-	color: #ffffff;
-	margin-bottom: 5px;
-}
-
-.member-role {
-	font-size: 14px;
-	color: #cccccc;
-}
-
-.capabilities-list {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 15px;
-}
-
-.capability-item {
-	display: flex;
-	align-items: center;
-	gap: 15px;
-	padding: 15px;
-	background: rgba(255, 255, 255, 0.05);
-	border-radius: 10px;
-	border: 1px solid rgba(255, 255, 255, 0.1);
+	position: relative;
+	border: 3px solid rgba(255, 255, 255, 0.3);
+	background-size: cover;
+	background-position: center;
 	transition: all 0.3s ease;
 }
 
-.capability-item:hover {
-	background: rgba(0, 212, 255, 0.1);
-	transform: translateX(5px);
+.member-avatar:hover {
+	transform: scale(1.1);
+	border-color: #00d4ff;
 }
 
-.capability-icon {
-	font-size: 24px;
+.member-avatar.cfo {
+	background: linear-gradient(45deg, #ff6b6b, #ee5a24);
 }
 
-.capability-text {
-	font-size: 14px;
+.member-avatar.coo {
+	background: linear-gradient(45deg, #4834d4, #686de0);
+}
+
+.member-avatar.engineer {
+	background: linear-gradient(45deg, #00d2d3, #01a3a4);
+}
+
+.member-avatar.founder {
+	background: linear-gradient(45deg, #ff9ff3, #f368e0);
+}
+
+.member-avatar.engineer2 {
+	background: linear-gradient(45deg, #feca57, #ff9f43);
+}
+
+.member-avatar.strategy {
+	background: linear-gradient(45deg, #48dbfb, #0abde3);
+}
+
+.avatar-label {
+	position: absolute;
+	bottom: -25px;
+	left: 50%;
+	transform: translateX(-50%);
+	font-size: 10px;
 	color: #ffffff;
+	text-align: center;
+	white-space: nowrap;
 	font-weight: 500;
 }
 
-.team-chart {
-	background: rgba(255, 255, 255, 0.1);
-	backdrop-filter: blur(10px);
-	border-radius: 20px;
-	padding: 30px;
-	border: 1px solid rgba(0, 212, 255, 0.3);
-	height: 500px;
-}
-
-.chart-title {
-	font-size: 20px;
-	font-weight: 600;
-	color: #ffffff;
-	margin-bottom: 30px;
-}
-
-.experience-bars {
-	display: flex;
-	flex-direction: column;
-	gap: 20px;
-	height: calc(100% - 60px);
-}
-
-.exp-bar {
-	display: flex;
-	align-items: center;
-	gap: 15px;
-}
-
-.exp-label {
+.team-description {
+	text-align: center;
+	color: #cccccc;
 	font-size: 14px;
-	color: #ffffff;
-	width: 120px;
-	flex-shrink: 0;
-}
-
-.exp-progress {
-	flex: 1;
-	height: 8px;
-	background: rgba(255, 255, 255, 0.1);
-	border-radius: 4px;
-	overflow: hidden;
-}
-
-.exp-fill {
-	height: 100%;
-	background: linear-gradient(90deg, #00d4ff, #0099cc);
-	border-radius: 4px;
-	transition: width 1s ease;
-}
-
-.exp-value {
-	font-size: 14px;
-	font-weight: 600;
-	color: #00d4ff;
-	width: 40px;
-	text-align: right;
+	line-height: 1.6;
+	max-width: 400px;
+	margin: 0 auto;
 }
 
 /* 响应式设计 */
 @media (max-width: 768px) {
-	.main-content {
+	.top-section {
 		flex-direction: column;
 	}
 	
@@ -432,12 +484,22 @@ onMounted(() => {
 		padding: 20px;
 	}
 	
-	.team-grid {
-		grid-template-columns: 1fr;
+	.bottom-section {
+		padding: 20px;
 	}
 	
-	.capabilities-list {
-		grid-template-columns: 1fr;
+	.members-avatars {
+		grid-template-columns: repeat(2, 1fr);
+		grid-template-rows: repeat(3, 1fr);
+		gap: 20px;
+	}
+	
+	.founder-title {
+		font-size: 36px;
+	}
+	
+	.founder-name {
+		font-size: 28px;
 	}
 }
 </style>
