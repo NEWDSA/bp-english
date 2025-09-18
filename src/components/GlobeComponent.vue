@@ -7,6 +7,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 import Globe from 'globe.gl'
+import * as THREE from 'three'
 import * as satellite from '../assets/satellite.mjs'
 import { csvParseRows } from '../assets/d3-dsv.mjs'
 
@@ -64,8 +65,9 @@ onMounted(async () => {
           .arcDashInitialGap(() => Math.random() * 5)
           .arcDashAnimateTime(2000)
           .pointsData([])
-          .pointAltitude('size')
+          .pointAltitude(d => d.altitude || 0.01)
           .pointColor('color')
+          .pointRadius(d => d.size || 0.3)
           .onPointClick(point => {
             emit('city-click', {
               city: point.city,
@@ -75,6 +77,26 @@ onMounted(async () => {
               lng: point.lng
             })
           })
+          .htmlElementsData([])
+          .htmlLat('lat')
+          .htmlLng('lng')
+          .htmlElement(d => {
+            const el = document.createElement('div')
+            el.innerHTML = d.label
+            el.style.pointerEvents = 'auto'
+            el.style.cursor = 'pointer'
+            el.addEventListener('click', () => {
+              emit('city-click', {
+                city: d.city,
+                country: d.country,
+                name: d.name,
+                lat: d.lat,
+                lng: d.lng
+              })
+            })
+            return el
+          })
+          .htmlAltitude(d => d.altitude || 0.01)
           .labelsData([])
           .labelLat('lat')
           .labelLng('lng')
@@ -325,15 +347,18 @@ const loadAirlineData = () => {
         color: ['red', 'white', 'blue', 'green'][Math.round(Math.random() * 3)]
       }))
 
-    // Process airports for points data like reference code
+    // Process airports for points data with custom icon styling
     const pointsData = mockAirports.map(d => ({
       lat: +d.lat,
       lng: +d.lng,
-      size: 0.05,
-      color: 'orange',
+      size: 0.8, // Larger base size
+      color: '#06b6d4', // Cyan color for the main point
       city: d.city,
       country: d.country,
-      name: d.name
+      name: d.name,
+      // Additional properties for multi-layered effect
+      altitude: 0.01,
+      label: `<img src="/src/assets/icon-2.png" width="40" height="40" alt="${d.city} airport" />`
     }))
 
     // Process airports for labels data
@@ -348,11 +373,8 @@ const loadAirlineData = () => {
     // Update globe with airline data like reference code
     globe
       .arcsData(arcsData)
-      // .pointsData(pointsData)
+      .htmlElementsData(pointsData)
       .labelsData(labelsData)
-
-    // Create custom markers for airports
-    createCustomMarkers(pointsData)
 
   } catch (error) {
     console.error('Error loading airline data:', error)
@@ -380,21 +402,20 @@ const createCustomMarkers = (pointsData) => {
     markerElement.style.cursor = 'pointer'
     markerElement.style.zIndex = '1000'
 
-    // Create icon image
-    const iconImage = document.createElement('img')
-    iconImage.src = '/src/assets/icon-2.png'
-    iconImage.style.width = '20px'
-    iconImage.style.height = '20px'
-    iconImage.style.display = 'block'
-    iconImage.style.objectFit = 'contain'
-    iconImage.style.marginLeft = '2px'
-    iconImage.style.marginTop = '2px'
+    // Create icon image element
+    const iconElement = document.createElement('img')
+    iconElement.src = '/src/assets/icon-2.png'
+    iconElement.style.width = '40px'
+    iconElement.style.height = '40px'
+    iconElement.style.position = 'relative'
+    iconElement.style.display = 'block'
+    iconElement.alt = `${point.city} airport icon`
 
     // Create label with black semi-transparent background and cyan border
     const labelElement = document.createElement('div')
     labelElement.textContent = point.city
     labelElement.style.position = 'absolute'
-    labelElement.style.top = '30px'
+    labelElement.style.top = '50px'
     labelElement.style.left = '50%'
     labelElement.style.transform = 'translateX(-50%)'
     labelElement.style.backgroundColor = 'rgba(0, 0, 0, 0.8)'
@@ -417,7 +438,8 @@ const createCustomMarkers = (pointsData) => {
       })
     })
 
-    markerElement.appendChild(iconImage)
+    // Build the marker structure
+    markerElement.appendChild(iconElement)
     markerElement.appendChild(labelElement)
     globeContainer.value.appendChild(markerElement)
 
