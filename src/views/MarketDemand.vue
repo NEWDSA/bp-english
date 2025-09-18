@@ -52,38 +52,38 @@ const handleCountryHover = (country) => {
 	</nav>
 
     <!-- Main Content Container -->
-    <div class="flex">
+    <div class="flex flex-col lg:flex-row flex-1 min-h-0">
       <!-- Left Content -->
-      <div class="w-1/3 flex items-center justify-center relative">
+      <div class="flex-1 flex items-center justify-center relative min-w-0">
         <!-- Circle Container -->
-        <div class="relative w-[830px] h-[830px]">
+        <div class="relative w-[830px] h-[830px] max-w-full max-h-full" style="transform: scale(min(1, calc(100vw / 3 / 830px), calc((100vh - 200px) / 830px)))">
           <!-- 830x830 white circle -->
           <div class="ring"></div>
 
           <!-- Icons positioned along the circle -->
           <div class="absolute top-0 left-0 w-full h-full">
             <!-- Icon 6 - 30 degrees -->
-            <div class="absolute w-[196px] h-[100px] transition-all duration-300 hover:scale-110 hover:shadow-lg" style="top: 70px; left: 124px;">
+            <div class="absolute w-[294px] h-[150px] transition-all duration-300 hover:scale-110 hover:shadow-lg" style="top: 70px; left: 74px;">
               <img src="/src/assets/icon-6.png" alt="板块一" class="w-full h-full object-contain" />
             </div>
 
             <!-- Icon 7 - 60 degrees -->
-            <div class="absolute w-[244px] h-[100px] transition-all duration-300 hover:scale-110 hover:shadow-lg" style="top: 170px; left: 187px;">
+            <div class="absolute w-[366px] h-[150px] transition-all duration-300 hover:scale-110 hover:shadow-lg" style="top: 170px; left: 137px;">
               <img src="/src/assets/icon-7.png" alt="板块二" class="w-full h-full object-contain" />
             </div>
 
             <!-- Icon 8 - 90 degrees -->
-            <div class="absolute w-[210px] h-[70px] transition-all duration-300 hover:scale-110 hover:shadow-lg" style="top: 300px; left: 212px;">
+            <div class="absolute w-[315px] h-[105px] transition-all duration-300 hover:scale-110 hover:shadow-lg" style="top: 300px; left: 160px;">
               <img src="/src/assets/icon-8.png" alt="板块三" class="w-full h-full object-contain" />
             </div>
 
             <!-- Icon 9 - 120 degrees -->
-            <div class="absolute w-[206px] h-[56px] transition-all duration-300 hover:scale-110 hover:shadow-lg" style="top: 430px; left: 184px;">
+            <div class="absolute w-[309px] h-[84px] transition-all duration-300 hover:scale-110 hover:shadow-lg" style="top: 430px; left: 132px;">
               <img src="/src/assets/icon-9.png" alt="板块四" class="w-full h-full object-contain" />
             </div>
 
             <!-- Icon 10 - 150 degrees -->
-            <div class="absolute w-[210px] h-[62px] transition-all duration-300 hover:scale-110 hover:shadow-lg" style="top: 540px; left: 98px;">
+            <div class="absolute w-[315px] h-[93px] transition-all duration-300 hover:scale-110 hover:shadow-lg" style="top: 540px; left: 46px;">
               <img src="/src/assets/icon-10.png" alt="板块五" class="w-full h-full object-contain" />
             </div>
           </div>
@@ -91,16 +91,16 @@ const handleCountryHover = (country) => {
       </div>
 
       <!-- Middle Content-->
-      <div class="w-1/3 flex items-start justify-center p-8">
-        <div class="text-white max-w-lg">
+      <div class="flex-1 flex items-start justify-center p-4 lg:p-8 min-w-0">
+        <div class="text-white w-full max-w-lg">
           <div class="bg-white/10 backdrop-blur-sm rounded-lg shadow-lg border border-white/20 p-6">
             <div class="space-y-4">
               <div class="mb-6">
                 <div class="flex items-center mb-2">
                   <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-                  <h3 class="text-lg font-semibold text-white">Target Customers:</h3>
+                  <h3 class="text-xl font-semibold text-white">Target Customers:</h3>
                 </div>
-                <div class="text-sm space-y-2 ml-5">
+                <div class="text-base space-y-2 ml-5">
                   <p>High end resort groups, emerging shipping companies, yacht clubs</p>
                   <p>Seed users: Local tourism operators and start-up technology companies</p>
                 </div>
@@ -109,9 +109,9 @@ const handleCountryHover = (country) => {
               <div class="mb-6">
                 <div class="flex items-center mb-2">
                   <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-                  <h3 class="text-lg font-semibold text-white">Requirements:</h3>
+                  <h3 class="text-xl font-semibold text-white">Requirements:</h3>
                 </div>
-                <div class="text-sm space-y-2 ml-5">
+                <div class="text-base space-y-2 ml-5">
                   <p>Highly concerned about cost-effectiveness and operating costs of products</p>
                   <p>Ships need to adapt to high temperature and high salinity tropical marine environments with strong corrosion resistance</p>
                   <p>Requirements for product multifunctionality (connectivity and sightseeing needs)</p>
@@ -121,9 +121,9 @@ const handleCountryHover = (country) => {
               <div class="mb-6">
                 <div class="flex items-center mb-2">
                   <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-                  <h3 class="text-lg font-semibold text-white">Type:</h3>
+                  <h3 class="text-xl font-semibold text-white">Type:</h3>
                 </div>
-                <p class="text-sm leading-relaxed ml-5">
+                <p class="text-base leading-relaxed ml-5">
                   High end private yachts, island shuttle ships, and offshore transport ships are mainly purchased from the B-end
                 </p>
               </div>
@@ -131,9 +131,9 @@ const handleCountryHover = (country) => {
               <div>
                 <div class="flex items-center mb-2">
                   <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-                  <h3 class="text-lg font-semibold text-white">Market Opportunity:</h3>
+                  <h3 class="text-xl font-semibold text-white">Market Opportunity:</h3>
                 </div>
-                <div class="text-sm space-y-2 ml-5">
+                <div class="text-base space-y-2 ml-5">
                   <p>Southeast Asia's island tourism industry is recovering rapidly, driving demand for new transportation tools</p>
                   <p>Growth of regional trade and "Belt and Road" initiative promote green offshore shipping development</p>
                   <p>Infrastructure upgrading increases demand for port dredging and engineering construction ships</p>
@@ -145,8 +145,8 @@ const handleCountryHover = (country) => {
       </div>
 
       <!-- Right Content -->
-      <div class="w-1/3 flex items-start justify-center p-8">
-        <div class="text-white max-w-lg">
+      <div class="flex-1 flex items-start justify-center p-4 lg:p-8 min-w-0">
+        <div class="text-white w-full max-w-lg">
           <div class="bg-cover bg-center bg-no-repeat rounded-[10px] shadow-xl border border-white/20 overflow-hidden bg-white/10 transition-all duration-300 hover:shadow-2xl hover:scale-105"
                style="background-image: url('/src/assets/icon-4.png'); background-blend-mode: overlay;">
 
@@ -154,8 +154,8 @@ const handleCountryHover = (country) => {
             <div class="bg-white/10 p-6 border-b border-white/20 shadow-inner">
               <div class="flex items-center justify-between">
                 <div class="flex-1">
-                  <h2 class="text-2xl font-bold mb-1">Mr Chen</h2>
-                  <p class="text-sm opacity-90">General Manager of Yacht Club</p>
+                  <h2 class="text-3xl font-bold mb-1">Mr Chen</h2>
+                  <p class="text-base opacity-90">General Manager of Yacht Club</p>
                 </div>
                 <div class="ml-4">
                   <img src="/src/assets/icon-5.png" alt="Mr Chen" class="w-[92px] h-[92px] rounded-[10px] object-cover shadow-xl" />
@@ -166,16 +166,16 @@ const handleCountryHover = (country) => {
             <!-- Requirements Content -->
             <div class="bg-white/10 p-6 shadow-inner">
               <div class="space-y-4">
-                <p class="text-sm leading-relaxed">
+                <p class="text-base leading-relaxed">
                   To operate yacht rental, water transportation, and water sports businesses in Dameisha, Shenzhen, it is necessary to introduce new products to enrich the tourist experience.
                 </p>
 
                 <div>
-                  <h3 class="text-lg font-semibold mb-3 flex items-center">
+                  <h3 class="text-xl font-semibold mb-3 flex items-center">
                     <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
                     Core Requirements:
                   </h3>
-                  <div class="text-sm space-y-2 ml-5">
+                  <div class="text-base space-y-2 ml-5">
                     <p>• The product is innovative and has recognition</p>
                     <p>• Efficient and energy-saving, easy to operate</p>
                     <p>• Environmental Protection and Scenic Area Protection Requirements</p>
@@ -236,21 +236,38 @@ const handleCountryHover = (country) => {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	gap: 20px;
+	gap: 12px;
 	max-width: 1200px;
 	margin: 0 auto;
-	padding: 0 20px;
+	padding: 0 12px;
+	flex-wrap: wrap;
+}
+
+@media (min-width: 1024px) {
+	.nav-container {
+		gap: 20px;
+		padding: 0 20px;
+		flex-wrap: nowrap;
+	}
 }
 
 .nav-item {
-	padding: 10px 20px;
+	padding: 8px 12px;
 	cursor: pointer;
 	transition: all 0.3s ease;
 	position: relative;
-	font-size: 14px;
+	font-size: 12px;
 	font-weight: 500;
 	text-decoration: none;
 	color: #ffffff;
+	text-align: center;
+}
+
+@media (min-width: 1024px) {
+	.nav-item {
+		padding: 10px 20px;
+		font-size: 14px;
+	}
 }
 
 .nav-item:hover {
@@ -299,19 +316,57 @@ const handleCountryHover = (country) => {
 }
 
 .gallery-item:nth-child(1) {
-  left: calc(50% - 642px);
+  left: calc(50% - min(642px, 45vw));
 }
 
 .gallery-item:nth-child(2) {
-  left: calc(50% - 318px);
+  left: calc(50% - min(318px, 22.5vw));
 }
 
 .gallery-item:nth-child(3) {
-  left: calc(50% + 6px);
+  left: calc(50% + min(6px, 0.5vw));
 }
 
 .gallery-item:nth-child(4) {
-  left: calc(50% + 330px);
+  left: calc(50% + min(330px, 23.5vw));
+}
+
+@media (max-width: 1440px) {
+  .gallery-item {
+    width: min(312px, 20vw);
+    height: min(125px, 8vh);
+  }
+
+  .gallery-item:hover {
+    height: min(175px, 12vh);
+  }
+}
+
+@media (max-width: 1024px) {
+  .gallery-item {
+    width: min(280px, 22vw);
+    height: min(110px, 7vh);
+  }
+
+  .gallery-item:hover {
+    height: min(150px, 10vh);
+  }
+
+  .gallery-item:nth-child(1) {
+    left: calc(50% - min(420px, 42vw));
+  }
+
+  .gallery-item:nth-child(2) {
+    left: calc(50% - min(145px, 14vw));
+  }
+
+  .gallery-item:nth-child(3) {
+    left: calc(50% + min(5px, 0.5vw));
+  }
+
+  .gallery-item:nth-child(4) {
+    left: calc(50% + min(155px, 15vw));
+  }
 }
 
 .gallery-item:hover {
