@@ -54,7 +54,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="left-nav-item">
+					<div class="left-nav-item" @click="showComparisonModal">
 						<span class="nav-text">Compared to traditional ferries</span>
 					</div>
 					<div class="left-nav-item">
@@ -229,6 +229,114 @@
 				</div>
 			</div>
 		</div>
+
+		<!-- 对比表格模态框 -->
+		<div v-if="showComparison" class="modal-overlay" @click="hideComparisonModal">
+			<div class="comparison-modal" @click.stop>
+				<div class="comparison-container">
+					<!-- 左侧：指标列表区域 -->
+					<div class="metrics-section">
+						<div class="metrics-list">
+							<div class="metric-title">How can the new generation of water taxis address the pain points of traditional water transportation</div>
+							<div class="metric-item">Speed (of a ship or aircraft)</div>
+							<div class="metric-item">Power-to-speed ratio (kw/kt)</div>
+							<div class="metric-item">Voyage (nautical miles)</div>
+							<div class="metric-item">Trim angle control</div>
+							<div class="metric-item">Stability</div>
+							<div class="metric-item">Noise level</div>
+							<div class="metric-item">Procurement cost (per vessel)</div>
+							<div class="metric-item">Payback period</div>
+							<div class="metric-item">Economic benefits (annual)</div>
+						</div>
+					</div>
+
+					<!-- 右侧：智能水翼船区域 -->
+					<div class="hydrofoil-section">
+						<div class="section-header">
+							<h3>Intelligent hydrofoil boat</h3>
+							<div class="boat-image">
+								<img :src="currentBoatImage" alt="Intelligent hydrofoil boat" />
+							</div>
+						</div>
+						<div class="data-list">
+							<div class="data-item">
+								<div class="data-value">20kt</div>
+							</div>
+							<div class="data-item">
+								<div class="data-value">1:1</div>
+							</div>
+							<div class="data-item">
+								<div class="data-value">75</div>
+							</div>
+							<div class="data-item">
+								<div class="data-value">≤1°</div>
+							</div>
+							<div class="data-item">
+								<div class="data-value">excellent</div>
+							</div>
+							<div class="data-item">
+								<div class="data-value">65dB</div>
+							</div>
+							<div class="data-item">
+								<div class="data-value">100,000 $</div>
+							</div>
+							<div class="data-item">
+								<div class="data-value">0.86 years</div>
+							</div>
+							<div class="data-item">
+								<div class="data-value">46,000 $</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- 中间：VS分隔区域 -->
+					<div class="vs-section">
+						<div class="vs-icon">VS</div>
+					</div>
+
+					<!-- 右侧：传统渡轮区域 -->
+					<div class="traditional-section">
+						<div class="section-header">
+							<h3>Traditional ferry</h3>
+						</div>
+						<div class="data-list">
+							<div class="data-item">
+								<div class="data-value">Sections 10-20</div>
+							</div>
+							<div class="data-item">
+								<div class="data-value">0.35-0.40</div>
+							</div>
+							<div class="data-item">
+								<div class="data-value"><100 (short distance) / 2000+ (long distance)</div>
+							</div>
+							<div class="data-item">
+								<div class="data-value">±2.5°</div>
+							</div>
+							<div class="data-item">
+								<div class="data-value">Bumpiness</div>
+							</div>
+							<div class="data-item">
+								<div class="data-value">65-85 dB (inside the cabin)</div>
+							</div>
+							<div class="data-item">
+								<div class="data-value">844,000-2,108,000 $</div>
+							</div>
+							<div class="data-item">
+								<div class="data-value">3-7 years</div>
+							</div>
+							<div class="data-item">
+								<div class="data-value">281,000 $ (200 passenger seats)</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- 底部对勾图标 -->
+				<div class="comparison-footer">
+					<div class="checkmark">✓</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -267,6 +375,9 @@ const selectedColor = ref('white')
 
 // 悬停提示状态
 const activeTooltip = ref(null)
+
+// 对比表格模态框状态
+const showComparison = ref(false)
 
 // 连接线高度计算
 const lineHeight = ref('calc(100% - 60px)')
@@ -348,6 +459,16 @@ function showTooltip(type) {
 // 隐藏悬停提示
 function hideTooltip() {
 	activeTooltip.value = null
+}
+
+// 显示对比表格模态框
+function showComparisonModal() {
+	showComparison.value = true
+}
+
+// 隐藏对比表格模态框
+function hideComparisonModal() {
+	showComparison.value = false
 }
 
 function goHome() {
@@ -479,10 +600,10 @@ onUnmounted(() => {
 /* 主要内容区域 */
 .main-content {
 	position: relative;
-	height: calc(100vh - 80px + 100px);
+	height: 100vh;
 	padding-top: 80px;
 	z-index: 1;
-	overflow: visible;
+	overflow: hidden;
 }
 
 /* 左侧导航列表定位 */
@@ -883,6 +1004,239 @@ onUnmounted(() => {
 .tooltip-content p strong {
 	color: #000000;
 	font-weight: 600;
+}
+
+/* 对比表格模态框样式 */
+.modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.8);
+	backdrop-filter: blur(5px);
+	z-index: 10000;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.comparison-modal {
+	background: rgba(255, 255, 255, 0.95);
+	backdrop-filter: blur(20px);
+	border-radius: 20px;
+	padding: 20px;
+	max-width: 85vw;
+	max-height: 52vh;
+	overflow: visible;
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	position: relative;
+}
+
+.modal-header {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+.close-btn {
+	background: none;
+	border: none;
+	font-size: 32px;
+	color: #666666;
+	cursor: pointer;
+	padding: 0;
+	width: 40px;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+	background: rgba(0, 0, 0, 0.1);
+	color: #000000;
+}
+
+/* 三个独立div的对比容器 */
+.comparison-container {
+	display: flex;
+	gap: 20px;
+	align-items: flex-start;
+	/* margin-bottom: 20px; */
+}
+
+/* 左侧：指标列表区域 */
+.metrics-section {
+	width: 200px;
+	display: flex;
+	flex-direction: column;
+}
+
+.metrics-list {
+	display: flex;
+	flex-direction: column;
+}
+
+.metric-title {
+	font-size: 14px;
+	font-weight: 600;
+	color: #333333;
+	padding: 10px 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	text-align: center;
+	margin-bottom: 8px;
+	line-height: 1.3;
+}
+
+.metric-item {
+	font-size: 12px;
+	font-weight: 600;
+	color: #333333;
+	padding: 8px 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	text-align: center;
+}
+
+.metric-item:last-child {
+	border-bottom: none;
+}
+
+/* 中间：智能水翼船区域 */
+.hydrofoil-section {
+	width: 250px;
+	display: flex;
+	flex-direction: column;
+	background: rgba(255, 255, 255, 0.1);
+	/* border: 1px solid rgba(255, 255, 255, 0.3); */
+	background:#ffffff;
+	border-radius: 15px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	padding: 15px 15px 20px 15px;
+	transform: translateY(-50px);
+	z-index: 10;
+}
+
+.section-header {
+	text-align: center;
+	margin-bottom: 15px;
+}
+
+.section-header h3 {
+	font-size: 14px;
+	font-weight: 600;
+	color: #333333;
+	margin: 0 0 10px 0;
+}
+
+.hydrofoil-section .section-header h3 {
+	color: #20B2AA;
+}
+
+.boat-image {
+	width: 80px;
+	height: 60px;
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.boat-image img {
+	/* width: 100%; */
+	width: 150px;
+	height: 100%;
+	object-fit: contain;
+}
+
+.data-list {
+	display: flex;
+	flex-direction: column;
+	gap: 0;
+}
+
+.data-item {
+	padding: 8px 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	text-align: center;
+}
+
+.data-item:last-child {
+	border-bottom: none;
+}
+
+.data-value {
+	font-size: 12px;
+	font-weight: 600;
+	color: #333333;
+}
+
+/* 中间：VS分隔区域 */
+.vs-section {
+	position: absolute;
+	width: 35px;
+	height: 35px;
+	z-index: 20;
+	left: calc(200px + 250px + 20px);
+	/* top: calc(50% - 30px); */
+	top: 10%;
+	transform: translateY(-50%);
+}
+
+.vs-icon {
+	position: absolute;
+	background: #20B2AA;
+	color: white;
+	font-size: 12px;
+	font-weight: bold;
+	border-radius: 50%;
+	width: 35px;
+	height: 35px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 2px 8px rgba(32, 178, 170, 0.3);
+	left: 0;
+	top: 0;
+}
+
+/* 右侧：传统渡轮区域 */
+.traditional-section {
+	width: 200px;
+	display: flex;
+	flex-direction: column;
+}
+
+.traditional-section .data-value {
+	color: #666666;
+}
+
+/* 底部对勾图标 */
+.comparison-footer {
+	display: flex;
+	justify-content: center;
+	margin-top: -70px;
+	padding-top: -70px;
+	z-index: 1000;
+	/* border-top: 2px solid rgba(0, 0, 0, 0.1); */
+}
+
+.checkmark {
+	background: #4CAF50;
+	color: white;
+	font-size: 20px;
+	font-weight: bold;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 1000;
 }
 
 .card-content p {
