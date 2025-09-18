@@ -25,7 +25,7 @@ const handleCountryHover = (country) => {
 </script>
 
 <template>
-  <div class="bg-center bg-no-repeat relative flex flex-col"
+  <div class="bg-center bg-no-repeat relative flex flex-col min-h-screen w-full"
        style="background: url('/src/assets/icon-3.png'); background-size: 100% 100%;">
     <!-- Navigation -->
     <!-- 顶部导航栏 -->
@@ -189,28 +189,28 @@ const handleCountryHover = (country) => {
     </div>
 
     <!-- Bottom Content: Image Gallery -->
-    <div class="h-[175px]">
-      <div class="flex justify-center gap-6">
+    <div class="fixed bottom-4 left-0 right-0 h-[175px]">
+      <div class="relative w-full h-full">
         <!-- Image 1 -->
-        <div class="relative w-[312px] h-[125px] overflow-hidden rounded-lg shadow-xl transition-all duration-300 hover:h-[175px] self-end">
+        <div class="gallery-item">
           <img src="/src/assets/img/view-1.png" alt="Gallery Image 1" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
           <div class="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
         </div>
 
         <!-- Image 2 -->
-        <div class="relative w-[312px] h-[125px] overflow-hidden rounded-lg shadow-xl transition-all duration-300 hover:h-[175px] self-end">
+        <div class="gallery-item">
           <img src="/src/assets/img/view-2.png" alt="Gallery Image 2" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
           <div class="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
         </div>
 
         <!-- Image 3 -->
-        <div class="relative w-[312px] h-[125px] overflow-hidden rounded-lg shadow-xl transition-all duration-300 hover:h-[175px] self-end">
+        <div class="gallery-item">
           <img src="/src/assets/img/view-3.png" alt="Gallery Image 3" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
           <div class="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
         </div>
 
         <!-- Image 4 -->
-        <div class="relative w-[312px] h-[125px] overflow-hidden rounded-lg shadow-xl transition-all duration-300 hover:h-[175px] self-end">
+        <div class="gallery-item">
           <img src="/src/assets/img/view-4.png" alt="Gallery Image 4" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
           <div class="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
         </div>
@@ -285,5 +285,36 @@ const handleCountryHover = (country) => {
 	height: 600px;
 	border: 3px solid white;
 	border-radius: 50%;
+}
+
+.gallery-item {
+  position: absolute;
+  bottom: 0;
+  width: 312px;
+  height: 125px;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  transition: height 0.3s ease;
+}
+
+.gallery-item:nth-child(1) {
+  left: calc(50% - 642px);
+}
+
+.gallery-item:nth-child(2) {
+  left: calc(50% - 318px);
+}
+
+.gallery-item:nth-child(3) {
+  left: calc(50% + 6px);
+}
+
+.gallery-item:nth-child(4) {
+  left: calc(50% + 330px);
+}
+
+.gallery-item:hover {
+  height: 175px;
 }
 </style>
