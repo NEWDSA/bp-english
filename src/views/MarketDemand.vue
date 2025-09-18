@@ -22,6 +22,45 @@ const handleCountryHover = (country) => {
   console.log('Country hovered:', country.name)
   // 可以在这里添加更多处理逻辑，比如更新其他组件的状态
 }
+
+// Modal state
+const showModal = ref(false)
+const currentImageIndex = ref(0)
+const currentImages = ref([])
+
+// Image sets for each gallery item
+const imageSets = {
+  1: ['/src/assets/img/view-1.png', '/src/assets/img/view-2.png', '/src/assets/img/view-3.png'],
+  2: ['/src/assets/img/view-2.png', '/src/assets/img/view-3.png', '/src/assets/img/view-4.png'],
+  3: ['/src/assets/img/view-3.png', '/src/assets/img/view-4.png', '/src/assets/img/view-1.png'],
+  4: ['/src/assets/img/view-4.png', '/src/assets/img/view-1.png', '/src/assets/img/view-2.png']
+}
+
+const openModal = (imageSet, index = 0) => {
+  currentImages.value = imageSets[imageSet]
+  currentImageIndex.value = index
+  showModal.value = true
+  // Prevent body scroll when modal is open
+  document.body.style.overflow = 'hidden'
+}
+
+const closeModal = () => {
+  showModal.value = false
+  // Restore body scroll
+  document.body.style.overflow = 'auto'
+}
+
+const prevImage = () => {
+  if (currentImageIndex.value > 0) {
+    currentImageIndex.value--
+  }
+}
+
+const nextImage = () => {
+  if (currentImageIndex.value < currentImages.value.length - 1) {
+    currentImageIndex.value++
+  }
+}
 </script>
 
 <template>
@@ -52,7 +91,7 @@ const handleCountryHover = (country) => {
 	</nav>
 
     <!-- Main Content Container -->
-    <div class="flex flex-col lg:flex-row flex-1 min-h-0">
+    <div class="flex flex-col lg:flex-row flex-1 min-h-0" style="padding-top: 71px;">
       <!-- Left Content -->
       <div class="flex-1 flex items-center justify-center relative min-w-0">
         <!-- Circle Container -->
@@ -91,16 +130,16 @@ const handleCountryHover = (country) => {
       </div>
 
       <!-- Middle Content-->
-      <div class="flex-1 flex items-start justify-center p-4 lg:p-8 min-w-0">
-        <div class="text-white w-full max-w-lg">
-          <div class="bg-white/10 backdrop-blur-sm rounded-lg shadow-lg border border-white/20 p-6">
+      <div class="flex-2 flex items-start justify-center px-0 py-4 lg:py-6 min-w-0">
+        <div class="text-white w-full max-w-4xl">
+          <div class="bg-white/10 backdrop-blur-sm rounded-lg shadow-lg border border-white/20 p-4 lg:p-6">
             <div class="space-y-4">
               <div class="mb-6">
                 <div class="flex items-center mb-2">
                   <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-                  <h3 class="text-xl font-semibold text-white">Target Customers:</h3>
+                  <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Target Customers:</h3>
                 </div>
-                <div class="text-base space-y-2 ml-5">
+                <div class="text-sm lg:text-base space-y-2 ml-5">
                   <p>High end resort groups, emerging shipping companies, yacht clubs</p>
                   <p>Seed users: Local tourism operators and start-up technology companies</p>
                 </div>
@@ -109,9 +148,9 @@ const handleCountryHover = (country) => {
               <div class="mb-6">
                 <div class="flex items-center mb-2">
                   <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-                  <h3 class="text-xl font-semibold text-white">Requirements:</h3>
+                  <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Requirements:</h3>
                 </div>
-                <div class="text-base space-y-2 ml-5">
+                <div class="text-sm lg:text-base space-y-2 ml-5">
                   <p>Highly concerned about cost-effectiveness and operating costs of products</p>
                   <p>Ships need to adapt to high temperature and high salinity tropical marine environments with strong corrosion resistance</p>
                   <p>Requirements for product multifunctionality (connectivity and sightseeing needs)</p>
@@ -121,9 +160,9 @@ const handleCountryHover = (country) => {
               <div class="mb-6">
                 <div class="flex items-center mb-2">
                   <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-                  <h3 class="text-xl font-semibold text-white">Type:</h3>
+                  <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Type:</h3>
                 </div>
-                <p class="text-base leading-relaxed ml-5">
+                <p class="text-sm lg:text-base leading-relaxed ml-5">
                   High end private yachts, island shuttle ships, and offshore transport ships are mainly purchased from the B-end
                 </p>
               </div>
@@ -131,9 +170,9 @@ const handleCountryHover = (country) => {
               <div>
                 <div class="flex items-center mb-2">
                   <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-                  <h3 class="text-xl font-semibold text-white">Market Opportunity:</h3>
+                  <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Market Opportunity:</h3>
                 </div>
-                <div class="text-base space-y-2 ml-5">
+                <div class="text-sm lg:text-base space-y-2 ml-5">
                   <p>Southeast Asia's island tourism industry is recovering rapidly, driving demand for new transportation tools</p>
                   <p>Growth of regional trade and "Belt and Road" initiative promote green offshore shipping development</p>
                   <p>Infrastructure upgrading increases demand for port dredging and engineering construction ships</p>
@@ -145,40 +184,39 @@ const handleCountryHover = (country) => {
       </div>
 
       <!-- Right Content -->
-      <div class="flex-1 flex items-start justify-center p-4 lg:p-8 min-w-0">
-        <div class="text-white w-full max-w-lg">
-          <div class="bg-cover bg-center bg-no-repeat rounded-[10px] shadow-xl border border-white/20 overflow-hidden bg-white/10 transition-all duration-300 hover:shadow-2xl hover:scale-105"
+      <div class="flex-1 flex items-start justify-center px-0 py-4 lg:py-6 min-w-0">
+        <div class="text-white w-full max-w-4xl px-4 lg:px-6">
+          <div class="bg-cover bg-center bg-no-repeat rounded-[10px] shadow-xl border border-white/20 overflow-hidden bg-white/10"
                style="background-image: url('/src/assets/icon-4.png'); background-blend-mode: overlay;">
 
             <!-- Person Introduction Header -->
-            <div class="bg-white/10 p-6 border-b border-white/20 shadow-inner">
+            <div class="bg-white/10 p-4 border-b border-white/20 shadow-inner">
               <div class="flex items-center justify-between">
                 <div class="flex-1">
-                  <h2 class="text-3xl font-bold mb-1">Mr Chen</h2>
-                  <p class="text-base opacity-90">General Manager of Yacht Club</p>
+                  <h2 class="text-2xl lg:text-1xl font-bold mb-1">Mr Chen</h2>
+                  <p class="text-sm lg:text-base opacity-90">General Manager of Yacht Club</p>
                 </div>
-                <div class="ml-4">
-                  <img src="/src/assets/icon-5.png" alt="Mr Chen" class="w-[92px] h-[92px] rounded-[10px] object-cover shadow-xl" />
+                <div class="ml-2 lg:ml-4">
+                  <img src="/src/assets/icon-5.png" alt="Mr Chen" class="w-[72px] h-[72px] lg:w-[92px] lg:h-[92px] rounded-[10px] object-cover shadow-xl" />
                 </div>
               </div>
             </div>
 
             <!-- Requirements Content -->
-            <div class="bg-white/10 p-6 shadow-inner">
+            <div class="bg-white/10 p-4 shadow-inner">
               <div class="space-y-4">
-                <p class="text-base leading-relaxed">
+                <p class="text-sm lg:text-base leading-relaxed">
                   To operate yacht rental, water transportation, and water sports businesses in Dameisha, Shenzhen, it is necessary to introduce new products to enrich the tourist experience.
                 </p>
 
                 <div>
-                  <h3 class="text-xl font-semibold mb-3 flex items-center">
-                    <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+                  <h3 class="text-lg lg:text-xl font-semibold mb-3 flex items-center">
                     Core Requirements:
                   </h3>
-                  <div class="text-base space-y-2 ml-5">
-                    <p>• The product is innovative and has recognition</p>
-                    <p>• Efficient and energy-saving, easy to operate</p>
-                    <p>• Environmental Protection and Scenic Area Protection Requirements</p>
+                  <div class="text-sm lg:text-base space-y-2">
+                    <p class="border-b border-white/20">The product is innovative and has recognition</p>
+                    <p class="border-b border-white/20">Efficient and energy-saving, easy to operate</p>
+                    <p>Environmental Protection and Scenic Area Protection Requirements</p>
                   </div>
                 </div>
               </div>
@@ -192,27 +230,76 @@ const handleCountryHover = (country) => {
     <div class="fixed bottom-4 left-0 right-0 h-[175px]">
       <div class="relative w-full h-full">
         <!-- Image 1 -->
-        <div class="gallery-item">
-          <img src="/src/assets/img/view-1.png" alt="Gallery Image 1" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
-          <div class="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+        <div class="gallery-item" @click="openModal(1)">
+          <img src="/src/assets/img/view-1.png" alt="Gallery Image 1" class="w-full h-full object-cover" />
+          <div class="image-mask absolute inset-0 bg-black/30 flex items-center justify-center transition-opacity duration-300">
+            <div class="text-content bg-black/50 px-4 py-2 rounded">
+              <p class="text-white text-sm font-medium">Gallery Image 1</p>
+            </div>
+          </div>
         </div>
 
         <!-- Image 2 -->
-        <div class="gallery-item">
-          <img src="/src/assets/img/view-2.png" alt="Gallery Image 2" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
-          <div class="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+        <div class="gallery-item" @click="openModal(2)">
+          <img src="/src/assets/img/view-2.png" alt="Gallery Image 2" class="w-full h-full object-cover" />
+          <div class="image-mask absolute inset-0 bg-black/30 flex items-center justify-center transition-opacity duration-300">
+            <div class="text-content bg-black/50 px-4 py-2 rounded">
+              <p class="text-white text-sm font-medium">Gallery Image 2</p>
+            </div>
+          </div>
         </div>
 
         <!-- Image 3 -->
-        <div class="gallery-item">
-          <img src="/src/assets/img/view-3.png" alt="Gallery Image 3" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
-          <div class="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+        <div class="gallery-item" @click="openModal(3)">
+          <img src="/src/assets/img/view-3.png" alt="Gallery Image 3" class="w-full h-full object-cover" />
+          <div class="image-mask absolute inset-0 bg-black/30 flex items-center justify-center transition-opacity duration-300">
+            <div class="text-content bg-black/50 px-4 py-2 rounded">
+              <p class="text-white text-sm font-medium">Gallery Image 3</p>
+            </div>
+          </div>
         </div>
 
         <!-- Image 4 -->
-        <div class="gallery-item">
-          <img src="/src/assets/img/view-4.png" alt="Gallery Image 4" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
-          <div class="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+        <div class="gallery-item" @click="openModal(4)">
+          <img src="/src/assets/img/view-4.png" alt="Gallery Image 4" class="w-full h-full object-cover" />
+          <div class="image-mask absolute inset-0 bg-black/30 flex items-center justify-center transition-opacity duration-300">
+            <div class="text-content bg-black/50 px-4 py-2 rounded">
+              <p class="text-white text-sm font-medium">Gallery Image 4</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Image Gallery Modal -->
+    <div v-if="showModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4" @click="closeModal">
+      <div class="relative max-w-4xl max-h-[90vh] w-full" @click.stop>
+        <!-- Close Button -->
+        <button @click="closeModal" class="absolute top-4 right-4 text-gray-300 bg-black/50 hover:bg-black/70 rounded-full p-2 z-10 transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="gray" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+
+        <!-- Navigation Buttons -->
+        <button v-if="currentImageIndex > 0" @click.stop="prevImage" class="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-300 bg-black/50 hover:bg-black/70 rounded-full p-3 z-10 transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="gray" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+
+        <button v-if="currentImageIndex < currentImages.length - 1" @click.stop="nextImage" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-300 bg-black/50 hover:bg-black/70 rounded-full p-3 z-10 transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="gray" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+
+        <!-- Current Image -->
+        <img :src="currentImages[currentImageIndex]" :alt="`Gallery Image ${currentImageIndex + 1}`" class="w-full h-full object-contain rounded-lg" />
+
+        <!-- Image Counter -->
+        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white bg-black/50 px-4 py-2 rounded-full text-sm">
+          {{ currentImageIndex + 1 }} / {{ currentImages.length }}
         </div>
       </div>
     </div>
@@ -222,13 +309,13 @@ const handleCountryHover = (country) => {
 <style scoped>
 /* 顶部导航栏 */
 .top-nav {
-	/* position: fixed; */
+	position: fixed;
 	top: 0;
 	left: 0;
 	right: 0;
 	background: rgba(0, 0, 0, 0.8);
 	backdrop-filter: blur(10px);
-	z-index: 1000;
+	z-index: 40;
 	padding: 15px 0;
 }
 
@@ -296,8 +383,8 @@ const handleCountryHover = (country) => {
 
 .ring {
   position: absolute;
-  left: -360px;
-  top: 32px;
+  left: -400px;
+  top: 50px;
 	width: 600px;
 	height: 600px;
 	border: 3px solid white;
@@ -311,7 +398,8 @@ const handleCountryHover = (country) => {
   height: 125px;
   overflow: hidden;
   border-radius: 8px;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+  border: 2px solid rgba(128, 128, 128, 0.5);
   transition: height 0.3s ease;
 }
 
@@ -371,5 +459,44 @@ const handleCountryHover = (country) => {
 
 .gallery-item:hover {
   height: 175px;
+}
+
+.gallery-item:hover .image-mask {
+  opacity: 0;
+}
+
+.gallery-item {
+  cursor: pointer;
+}
+
+/* Middle Content responsive font sizes */
+@media (max-width: 1024px) {
+  .text-responsive-title {
+    font-size: 1.125rem;
+  }
+
+  .text-responsive-content {
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .text-responsive-title {
+    font-size: 1rem;
+  }
+
+  .text-responsive-content {
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .text-responsive-title {
+    font-size: 0.875rem;
+  }
+
+  .text-responsive-content {
+    font-size: 0.8rem;
+  }
 }
 </style>
