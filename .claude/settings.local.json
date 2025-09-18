@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/16215/Desktop/**)",
+      "Bash(npm run dev:*)",
+      "Bash(npm run lint)",
+      "Bash(npm run)",
+      "Bash(npm run build:*)",
+      "Bash(npm install:*)",
+      "Bash(curl:*)",
+      "WebFetch(domain:globe.gl)",
+      "WebSearch",
+      "Read(//c/Users/kk/Desktop/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

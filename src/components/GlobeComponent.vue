@@ -19,6 +19,7 @@ let globe = null
 let animationId = null
 let currentWidth = 0
 let currentHeight = 0
+let customMarkers = []
 
 // Constants like reference code
 const EARTH_RADIUS_KM = 6371
@@ -105,6 +106,9 @@ onMounted(async () => {
           } catch (error) {
             console.warn('Could not configure controls:', error)
           }
+
+          // Add render listener after globe is initialized
+          addRenderListener()
         }, 500)
 
         console.log('Globe initialized, loading satellite data...')
@@ -143,6 +147,13 @@ onUnmounted(() => {
   if (animationId) {
     cancelAnimationFrame(animationId)
   }
+
+  // Clear custom markers
+  customMarkers.forEach(marker => {
+    if (marker.element && marker.element.parentNode) {
+      marker.element.parentNode.removeChild(marker.element)
+    }
+  })
 
   if (globe) {
     globe._destructor()
@@ -337,11 +348,143 @@ const loadAirlineData = () => {
     // Update globe with airline data like reference code
     globe
       .arcsData(arcsData)
-      .pointsData(pointsData)
+      // .pointsData(pointsData)
       .labelsData(labelsData)
+
+    // Create custom markers for airports
+    createCustomMarkers(pointsData)
 
   } catch (error) {
     console.error('Error loading airline data:', error)
+  }
+}
+
+// Create custom markers for airport points
+const createCustomMarkers = (pointsData) => {
+  // Clear existing markers
+  customMarkers.forEach(marker => {
+    if (marker.element && marker.element.parentNode) {
+      marker.element.parentNode.removeChild(marker.element)
+    }
+  })
+  customMarkers = []
+
+  console.log('Creating custom markers for points:', pointsData.length)
+
+  pointsData.forEach((point, index) => {
+    // Create marker container
+    const markerElement = document.createElement('div')
+    markerElement.style.position = 'absolute'
+    markerElement.style.transform = 'translate(-50%, -50%)'
+    markerElement.style.pointerEvents = 'auto'
+    markerElement.style.cursor = 'pointer'
+    markerElement.style.zIndex = '1000'
+
+    // Create icon image
+    const iconImage = document.createElement('img')
+    iconImage.src = '/src/assets/icon-2.png'
+    iconImage.style.width = '20px'
+    iconImage.style.height = '20px'
+    iconImage.style.display = 'block'
+    iconImage.style.objectFit = 'contain'
+    iconImage.style.marginLeft = '2px'
+    iconImage.style.marginTop = '2px'
+
+    // Create label with black semi-transparent background and cyan border
+    const labelElement = document.createElement('div')
+    labelElement.textContent = point.city
+    labelElement.style.position = 'absolute'
+    labelElement.style.top = '30px'
+    labelElement.style.left = '50%'
+    labelElement.style.transform = 'translateX(-50%)'
+    labelElement.style.backgroundColor = 'rgba(0, 0, 0, 0.8)'
+    labelElement.style.border = '2px solid #06b6d4'
+    labelElement.style.borderRadius = '4px'
+    labelElement.style.color = 'white'
+    labelElement.style.padding = '2px 6px'
+    labelElement.style.fontSize = '10px'
+    labelElement.style.whiteSpace = 'nowrap'
+    labelElement.style.fontFamily = 'system-ui, -apple-system, sans-serif'
+
+    // Add click event
+    markerElement.addEventListener('click', () => {
+      emit('city-click', {
+        city: point.city,
+        country: point.country,
+        name: point.name,
+        lat: point.lat,
+        lng: point.lng
+      })
+    })
+
+    markerElement.appendChild(iconImage)
+    markerElement.appendChild(labelElement)
+    globeContainer.value.appendChild(markerElement)
+
+    console.log(`Created marker for ${point.city} at index ${index}`)
+
+    customMarkers.push({
+      element: markerElement,
+      point: point,
+      index: index
+    })
+  })
+
+  // Update marker positions
+  updateMarkerPositions()
+}
+
+// Update marker positions based on globe projection
+const updateMarkerPositions = () => {
+  if (!globe || !globeContainer.value) return
+
+  const containerRect = globeContainer.value.getBoundingClientRect()
+
+  customMarkers.forEach((marker, index) => {
+    try {
+      // Get coordinates from globe using 3D projection
+      const vector = globe.getPointPos(marker.point.lat, marker.point.lng, 0.01)
+
+      if (vector) {
+        // Get camera and project 3D to 2D
+        const camera = globe.camera()
+        vector.project(camera)
+
+        // Convert to screen coordinates
+        const x = (vector.x + 1) * containerRect.width / 2
+        const y = (-vector.y + 1) * containerRect.height / 2
+
+        // Only show if in front of camera
+        if (vector.z < 1) {
+          marker.element.style.left = `${x}px`
+          marker.element.style.top = `${y}px`
+          marker.element.style.display = 'block'
+        } else {
+          marker.element.style.display = 'none'
+        }
+      } else {
+        marker.element.style.display = 'none'
+      }
+    } catch (error) {
+      marker.element.style.display = 'none'
+    }
+  })
+}
+
+// Update markers on globe rotation
+const onGlobeRender = () => {
+  updateMarkerPositions()
+}
+
+// Add render listener to update markers continuously
+const addRenderListener = () => {
+  if (globe) {
+    // Add animation loop to continuously update markers
+    const animate = () => {
+      updateMarkerPositions()
+      requestAnimationFrame(animate)
+    }
+    animate()
   }
 }
 </script>
