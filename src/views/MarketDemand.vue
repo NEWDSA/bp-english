@@ -40,10 +40,20 @@ const isCollapsed = (angle) => {
   return (normalizedAngle >= 0 && normalizedAngle <= 30) || (normalizedAngle >= 150 && normalizedAngle <= 210)
 }
 
+const shouldHide = (angle) => {
+  const normalizedAngle = ((angle + rotation.value) % 360 + 360) % 360
+  return normalizedAngle > 180 && normalizedAngle < 360
+}
+
 const handleWheel = (e) => {
   e.preventDefault()
   const delta = e.deltaY > 0 ? 15 : -15
-  rotation.value += delta
+  const newRotation = rotation.value + delta
+
+  // 限制旋转范围：逆时针最大到-180度，顺时针最大到180度
+  if (newRotation >= -180 && newRotation <= 180) {
+    rotation.value = newRotation
+  }
 }
 
 const handleMouseDown = (e) => {
@@ -56,7 +66,12 @@ const handleMouseMove = (e) => {
   if (!isDragging.value) return
 
   const deltaX = e.clientX - startX.value
-  rotation.value = startRotation.value + deltaX * 0.5
+  const newRotation = startRotation.value + deltaX * 0.5
+
+  // 限制旋转范围：逆时针最大到-180度，顺时针最大到180度
+  if (newRotation >= -180 && newRotation <= 180) {
+    rotation.value = newRotation
+  }
 }
 
 const handleMouseUp = () => {
@@ -100,7 +115,9 @@ onUnmounted(() => {
             class="absolute top-1/2 left-1/2 origin-center transition-all duration-300 ease-out"
             :style="{
               transform: `translate(-50%, -50%) rotate(${country.angle + rotation}deg) translateY(-160px) rotate(-${country.angle + rotation}deg)`,
-              transformOrigin: 'center center'
+              transformOrigin: 'center center',
+              visibility: shouldHide(country.angle) ? 'hidden' : 'visible',
+              opacity: shouldHide(country.angle) ? 0 : 1
             }"
           >
             <div
