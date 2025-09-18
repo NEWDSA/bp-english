@@ -92,19 +92,6 @@
 					</div>
 				</div>
 			</div>
-
-			<!-- 弹窗的巨大表格 -->
-			<div v-if="activeContent === 'revenue'" class="popup-table-container">
-				<div class="popup-table">
-					<table>
-						<tr>
-							<th>Column 1</th>
-							<th>Column 2</th>
-							<th>Column 3</th>
-						</tr>
-					</table>
-				</div>
-			</div>
 			<!-- 右侧面板：详细内容 -->
 			<div class="right-panel">
 				<!-- 默认显示内容 -->
@@ -113,15 +100,43 @@
 					<p class="panel-subtitle">Click on the map markers to view detailed information</p>
 				</div> -->
 
-				<!-- 内容面板 -->
-				<div class="content-panel" v-if="activeContent">
-					<!-- 返回按钮 -->
-					<!-- <div class="back-btn" @click="hideContent">
-						<div class="back-icon">←</div>
-						<span>Back to Map</span>
-					</div> -->
+				<!-- Revenue Model 弹窗 -->
+			<div class="revenue-modal" v-if="activeContent === 'revenue'" @click="hideContent">
+				<div class="revenue-modal-content" @click.stop>
+					<div class="modal-header">
+						<h2 class="modal-title">Revenue Model Analysis</h2>
+						<button class="close-btn" @click="hideContent">×</button>
+					</div>
+					<div class="charts-grid">
+						<div class="chart-item">
+							<h3 class="chart-item-title">Annual Revenue Growth</h3>
+							<div ref="chart1Ref" class="modal-chart"></div>
+						</div>
+						<div class="chart-item">
+							<h3 class="chart-item-title">Revenue by Product Line</h3>
+							<div ref="chart2Ref" class="modal-chart"></div>
+						</div>
+						<div class="chart-item">
+							<h3 class="chart-item-title">Market Share Distribution</h3>
+							<div ref="chart3Ref" class="modal-chart"></div>
+						</div>
+						<div class="chart-item">
+							<h3 class="chart-item-title">Profit Margin Trends</h3>
+							<div ref="chart4Ref" class="modal-chart"></div>
+						</div>
+					</div>
+				</div>
+			</div>
 
-					<!-- Lake Como 案例内容 -->
+				<!-- 内容面板 -->
+			<div class="content-panel" v-if="activeContent && activeContent !== 'revenue'">
+				<!-- 返回按钮 -->
+				<!-- <div class="back-btn" @click="hideContent">
+					<div class="back-icon">←</div>
+					<span>Back to Map</span>
+			</div> -->
+
+				<!-- Lake Como 案例内容 -->
 					<div v-if="activeContent === 'lake'" class="lake-content">
 						<h2 class="content-title">The case of Lake Como</h2>
 						<h3 class="content-subtitle">Daily average number of tourists</h3>
@@ -265,7 +280,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount, watchEffect } from 'vue'
+import { ref, onMounted, onBeforeUnmount, watchEffect, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import * as echarts from 'echarts'
 
@@ -291,10 +306,16 @@ const chartData = ref([
 ])
 
 // 显示内容面板
-function showContent(contentType) {
+async function showContent(contentType) {
 	console.log('点击了内容类型:', contentType)
 	activeContent.value = contentType
 	console.log('activeContent 现在是:', activeContent.value)
+	
+	// 如果是revenue类型，渲染模态框图表
+	if (contentType === 'revenue') {
+		await nextTick()
+		renderModalCharts()
+	}
 }
 
 // 隐藏内容面板
@@ -305,6 +326,16 @@ function hideContent() {
 // ECharts: Revenue Model
 const revenueChartRef = ref(null)
 let revenueChartInstance = null
+
+// Revenue Modal Charts
+const chart1Ref = ref(null)
+const chart2Ref = ref(null)
+const chart3Ref = ref(null)
+const chart4Ref = ref(null)
+let chart1Instance = null
+let chart2Instance = null
+let chart3Instance = null
+let chart4Instance = null
 
 function renderRevenueChart() {
 	if (!revenueChartRef.value) return
@@ -373,6 +404,237 @@ function renderRevenueChart() {
 	setTimeout(() => { revenueChartInstance?.resize() }, 0)
 }
 
+// 渲染模态框图表
+function renderModalCharts() {
+	// Chart 1: 左上角 - 年度数据柱状图（蓝色和橙色）
+	if (chart1Ref.value) {
+		// 销毁旧实例
+		if (chart1Instance) {
+			chart1Instance.dispose()
+		}
+		// 重新创建实例
+		chart1Instance = echarts.init(chart1Ref.value)
+		const option1 = {
+			title: {
+				text: 'What the cost of a single ship is 200000 yuan, Profit when each sales volume is achieved',
+				textStyle: { fontSize: 12, color: '#333' },
+				top: 10
+			},
+			grid: { top: 60, bottom: 60, left: 40, right: 40 },
+			legend: {
+				data: ['Annual breakeven sales volume (units)', 'Gross profit margin'],
+				bottom: 10,
+				textStyle: { fontSize: 10 }
+			},
+			xAxis: {
+				type: 'category',
+				data: ['13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32'],
+				axisLabel: { color: '#666', fontSize: 10 }
+			},
+			yAxis: {
+				type: 'value',
+				axisLabel: { color: '#666', fontSize: 10 }
+			},
+			series: [
+				{
+					name: 'Annual breakeven sales volume (units)',
+					type: 'bar',
+					data: [45, 48, 52, 55, 58, 62, 65, 68, 72, 75, 78, 82, 85, 88, 92, 95, 98, 102, 105, 108],
+					itemStyle: { color: '#00d4ff' }
+				},
+				{
+					name: 'Gross profit margin',
+					type: 'bar',
+					data: [25, 28, 32, 35, 38, 42, 45, 48, 52, 55, 58, 62, 65, 68, 72, 75, 78, 82, 85, 88],
+					itemStyle: { color: '#FFC27A' }
+				}
+			]
+		}
+		chart1Instance.setOption(option1)
+	}
+
+	// Chart 2: 右上角 - 年度数据柱状图（蓝色和橙色）
+	if (chart2Ref.value) {
+		// 销毁旧实例
+		if (chart2Instance) {
+			chart2Instance.dispose()
+		}
+		// 重新创建实例
+		chart2Instance = echarts.init(chart2Ref.value)
+		const option2 = {
+			title: {
+				text: 'What the cost of a single ship is 200000 yuan, Profit when each sales volume is achieved',
+				textStyle: { fontSize: 12, color: '#333' },
+				top: 10
+			},
+			grid: { top: 60, bottom: 60, left: 40, right: 40 },
+			legend: {
+				data: ['Annual breakeven sales volume (units)', 'Gross profit margin'],
+				bottom: 10,
+				textStyle: { fontSize: 10 }
+			},
+			xAxis: {
+				type: 'category',
+				data: ['13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'],
+				axisLabel: { color: '#666', fontSize: 10 }
+			},
+			yAxis: {
+				type: 'value',
+				axisLabel: { color: '#666', fontSize: 10 }
+			},
+			series: [
+				{
+					name: 'Annual breakeven sales volume (units)',
+					type: 'bar',
+					data: [18, 22, 25, 28, 32, 35, 38, 42, 45, 48, 52, 55],
+					itemStyle: { color: '#00d4ff' }
+				},
+				{
+					name: 'Gross profit margin',
+					type: 'bar',
+					data: [12, 15, 18, 22, 25, 28, 32, 35, 38, 42, 45, 48],
+					itemStyle: { color: '#FFC27A' }
+				}
+			]
+		}
+		chart2Instance.setOption(option2)
+	}
+
+	// Chart 3: 左下角 - 面积图
+	if (chart3Ref.value) {
+		// 销毁旧实例
+		if (chart3Instance) {
+			chart3Instance.dispose()
+		}
+		// 重新创建实例
+		chart3Instance = echarts.init(chart3Ref.value)
+		const option3 = {
+			title: {
+				text: 'What the cost of a single ship is 200000 yuan, Profit when each sales volume is achieved',
+				textStyle: { fontSize: 12, color: '#333' },
+				top: 10
+			},
+			grid: { top: 60, bottom: 60, left: 40, right: 40 },
+			legend: {
+				data: ['Annual breakeven sales volume (units)', 'Gross profit margin'],
+				bottom: 10,
+				textStyle: { fontSize: 10 }
+			},
+			xAxis: {
+				type: 'category',
+				data: ['13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32'],
+				axisLabel: { color: '#666', fontSize: 10 }
+			},
+			yAxis: {
+				type: 'value',
+				axisLabel: { color: '#666', fontSize: 10, formatter: '{value}%' }
+			},
+			series: [
+				{
+					name: 'Annual breakeven sales volume (units)',
+					type: 'line',
+					data: [42, 45, 48, 52, 55, 58, 62, 65, 68, 72, 75, 78, 82, 85, 88, 92, 95, 98, 102, 105],
+					smooth: true,
+					lineStyle: { color: '#00d4ff' },
+					itemStyle: { color: '#00d4ff' },
+					areaStyle: {
+						color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+							{ offset: 0, color: 'rgba(0, 212, 255, 0.6)' },
+							{ offset: 1, color: 'rgba(0, 212, 255, 0.1)' }
+						])
+					}
+				},
+				{
+					name: 'Gross profit margin',
+					type: 'line',
+					data: [22, 25, 28, 32, 35, 38, 42, 45, 48, 52, 55, 58, 62, 65, 68, 72, 75, 78, 82, 85],
+					smooth: true,
+					lineStyle: { color: '#FFC27A' },
+					itemStyle: { color: '#FFC27A' },
+					areaStyle: {
+						color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+							{ offset: 0, color: 'rgba(255, 194, 122, 0.6)' },
+							{ offset: 1, color: 'rgba(255, 194, 122, 0.1)' }
+						])
+					}
+				}
+			]
+		}
+		chart3Instance.setOption(option3)
+	}
+
+	// Chart 4: 右下角 - 面积图
+	if (chart4Ref.value) {
+		// 销毁旧实例
+		if (chart4Instance) {
+			chart4Instance.dispose()
+		}
+		// 重新创建实例
+		chart4Instance = echarts.init(chart4Ref.value)
+		const option4 = {
+			title: {
+				text: 'What the cost of a single ship is 200000 yuan, Profit when each sales volume is achieved',
+				textStyle: { fontSize: 12, color: '#333' },
+				top: 10
+			},
+			grid: { top: 60, bottom: 60, left: 40, right: 40 },
+			legend: {
+				data: ['Annual breakeven sales volume (units)', 'Gross profit margin'],
+				bottom: 10,
+				textStyle: { fontSize: 10 }
+			},
+			xAxis: {
+				type: 'category',
+				data: ['13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'],
+				axisLabel: { color: '#666', fontSize: 10 }
+			},
+			yAxis: {
+				type: 'value',
+				axisLabel: { color: '#666', fontSize: 10, formatter: '{value}%' }
+			},
+			series: [
+				{
+					name: 'Annual breakeven sales volume (units)',
+					type: 'line',
+					data: [15, 18, 22, 25, 28, 32, 35, 38, 42, 45, 48, 52],
+					smooth: true,
+					lineStyle: { color: '#00d4ff' },
+					itemStyle: { color: '#00d4ff' },
+					areaStyle: {
+						color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+							{ offset: 0, color: 'rgba(0, 212, 255, 0.6)' },
+							{ offset: 1, color: 'rgba(0, 212, 255, 0.1)' }
+						])
+					}
+				},
+				{
+					name: 'Gross profit margin',
+					type: 'line',
+					data: [8, 12, 15, 18, 22, 25, 28, 32, 35, 38, 42, 45],
+					smooth: true,
+					lineStyle: { color: '#FFC27A' },
+					itemStyle: { color: '#FFC27A' },
+					areaStyle: {
+						color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+							{ offset: 0, color: 'rgba(255, 194, 122, 0.6)' },
+							{ offset: 1, color: 'rgba(255, 194, 122, 0.1)' }
+						])
+					}
+				}
+			]
+		}
+		chart4Instance.setOption(option4)
+	}
+
+	// 自适应调整
+	setTimeout(() => {
+		chart1Instance?.resize()
+		chart2Instance?.resize()
+		chart3Instance?.resize()
+		chart4Instance?.resize()
+	}, 100)
+}
+
 onMounted(() => {
 	renderRevenueChart()
 	window.addEventListener('resize', onWindowResize)
@@ -387,6 +649,22 @@ onBeforeUnmount(() => {
 	if (revenueChartInstance) {
 		revenueChartInstance.dispose()
 		revenueChartInstance = null
+	}
+	if (chart1Instance) {
+		chart1Instance.dispose()
+		chart1Instance = null
+	}
+	if (chart2Instance) {
+		chart2Instance.dispose()
+		chart2Instance = null
+	}
+	if (chart3Instance) {
+		chart3Instance.dispose()
+		chart3Instance = null
+	}
+	if (chart4Instance) {
+		chart4Instance.dispose()
+		chart4Instance = null
 	}
 })
 
@@ -503,18 +781,21 @@ onMounted(() => {
 /* 主要内容区域 */
 .main-content {
 	display: flex;
-	min-height: 100vh;
+	height: calc(100vh - 80px);
+	max-height: calc(100vh - 80px);
 	padding-top: 80px;
 	gap: 20px;
+	overflow: hidden;
 }
 
 /* 左侧面板：Revenue Model + Channel Strategy */
 .left-panel {
 	flex: 1;
-	padding: 40px;
+	padding: 20px;
 	display: flex;
 	flex-direction: column;
-	gap: 30px;
+	gap: 15px;
+	overflow-y: auto;
 }
 
 /* 中间面板：Lake Como 地图 */
@@ -532,6 +813,7 @@ onMounted(() => {
 	/* padding: 40px; */
 	display: flex;
 	flex-direction: column;
+	overflow: hidden;
 }
 
 /* 默认内容样式 */
@@ -562,32 +844,35 @@ onMounted(() => {
 .chart-card {
 	background: rgba(255, 255, 255, 0.08);
 	backdrop-filter: blur(15px);
-	border-radius: 20px;
-	padding: 35px;
+	border-radius: 15px;
+	padding: 20px;
 	border: 1px solid rgba(255, 255, 255, 0.15);
 	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+	flex-shrink: 0;
+	overflow: hidden;
 }
 
 .chart-title {
-	font-size: 22px;
+	font-size: 18px;
 	font-weight: 700;
-	margin-bottom: 25px;
+	margin-bottom: 15px;
 	color: #ffffff;
 	text-align: center;
 	letter-spacing: 0.5px;
 }
 
 .chart-container {
-	height: 220px;
+	height: 120px;
 	display: flex;
 	align-items: end;
 	gap: 6px;
-	padding: 10px 0;
+	padding: 5px 0;
+	overflow: hidden;
 }
 
 .revenue-echart {
 	width: 100%;
-	height: 200px;
+	height: 110px;
 }
 
 /* 策略卡片 */
@@ -595,20 +880,22 @@ onMounted(() => {
 	/* background: rgba(255, 255, 255, 0.08); */
 	/* backdrop-filter: blur(15px); */
 	/* border-radius: 20px; */
-	padding: 35px;
+	padding: 15px;
 	/* border: 1px solid rgba(255, 255, 255, 0.15); */
 	/* box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); */
+	flex: 1;
+	overflow-y: auto;
 }
 
 .strategy-title {
-	/* font-size: 20px; */
+	font-size: 16px;
 	font-weight: 600;
-	margin-bottom: 25px;
+	margin-bottom: 15px;
 	color: #ffffff;
 }
 
 .strategy-section {
-	margin-bottom: 25px;
+	margin-bottom: 15px;
 }
 
 .strategy-section:last-child {
@@ -616,10 +903,10 @@ onMounted(() => {
 }
 
 .strategy-subtitle {
-	font-size: 16px;
+	font-size: 14px;
 	/* font-weight: 600; */
 	/* color: #00d4ff; */
-	margin-bottom: 15px;
+	margin-bottom: 10px;
 }
 
 .strategy-content {
@@ -627,25 +914,25 @@ onMounted(() => {
 }
 
 .strategy-label {
-	font-size: 14px;
+	font-size: 12px;
 	font-weight: 600;
 	color: #ffffff;
-	margin: 10px 0 5px 0;
+	margin: 8px 0 3px 0;
 }
 
 .strategy-text {
-	font-size: 13px;
-	line-height: 1.6;
+	font-size: 11px;
+	line-height: 1.4;
 	color: #cccccc;
-	margin: 5px 0;
+	margin: 3px 0;
 }
 
 /* 地图容器 */
 .map-container {
 	position: relative;
 	width: 100%;
-	height: 50%;
-	/* min-height: 400px; */
+	height: 100%;
+	max-height: calc(100vh - 160px);
 	background: url('../assets/bs_map.png') center/cover no-repeat;
 	border-radius: 20px;
 	overflow: hidden;
@@ -872,7 +1159,7 @@ onMounted(() => {
 	backdrop-filter: blur(15px);
 	border-radius: 20px;
 	padding: 25px;
-	overflow-y: auto;
+	overflow: hidden;
 	animation: slideIn 0.5s ease-out;
 	border: 1px solid rgba(0, 212, 255, 0.3);
 	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
@@ -1037,6 +1324,116 @@ onMounted(() => {
 	color: #00d4ff;
 }
 
+
+/* Revenue Modal 样式 */
+.revenue-modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.8);
+	backdrop-filter: blur(10px);
+	z-index: 1000;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	animation: fadeIn 0.3s ease-out;
+}
+
+.revenue-modal-content {
+	background: #ffffff;
+	border-radius: 20px;
+	width: 90vw;
+	max-width: 1200px;
+	height: 80vh;
+	max-height: 800px;
+	padding: 30px;
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+}
+
+.modal-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 30px;
+	padding-bottom: 20px;
+	border-bottom: 2px solid #f0f0f0;
+}
+
+.modal-title {
+	font-size: 28px;
+	font-weight: 700;
+	color: #333333;
+	margin: 0;
+}
+
+.close-btn {
+	background: none;
+	border: none;
+	font-size: 32px;
+	color: #999999;
+	cursor: pointer;
+	padding: 0;
+	width: 40px;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+	background: #f5f5f5;
+	color: #333333;
+}
+
+.charts-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr 1fr;
+	gap: 30px;
+	flex: 1;
+	overflow: hidden;
+}
+
+.chart-item {
+	background: #fafafa;
+	border-radius: 15px;
+	padding: 20px;
+	border: 1px solid #e0e0e0;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+.chart-item-title {
+	font-size: 16px;
+	font-weight: 600;
+	color: #333333;
+	margin: 0 0 15px 0;
+	text-align: center;
+}
+
+.modal-chart {
+	flex: 1;
+	min-height: 0;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: scale(0.9);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
 
 /* 响应式设计 */
 @media (max-width: 768px) {
