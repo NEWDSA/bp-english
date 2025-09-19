@@ -113,9 +113,9 @@ const nextImage = () => {
               <!-- White dot 10x10 -->
               <div class="w-[10px] h-[10px] bg-white rounded-full dot-container-dot relative"></div>
               <!-- Map image icon-6.png 100x100 -->
-              <img src="/src/assets/map/icon-6.png" alt="板块一" class="w-[100px] h-[100px] object-contain ml-[10px] icon-image" />
+              <img src="/src/assets/map/icon-6.png" alt="板块一" class="w-[100px] h-[100px] object-contain ml-[40px] icon-image" />
               <!-- Positioning dot icon-11.png 8x11 -->
-              <img src="/src/assets/map/icon-11.png" alt="定位点" class="w-[8px] h-[11px] object-contain mx-1" />
+              <img src="/src/assets/map/icon-11.png" alt="定位点" class="w-[8px] h-[11px] object-contain ml-1 mr-2 icon-dot" />
               <!-- Location name -->
               <span class="text-white text-sm font-medium ml-1 shadow-lg icon-text">Italian</span>
             </div>
@@ -567,13 +567,24 @@ const nextImage = () => {
 .icon-text {
   transform: scale(1);
   transition: transform 0.3s ease;
+  color: #cccccc;
+}
+
+.icon-dot {
+  transform: scale(1);
+  transition: transform 0.3s ease;
 }
 
 .icon-6-container:hover .icon-image {
-  transform: scale(1.2);
+  transform: scale(1.4);
 }
 
 .icon-6-container:hover .icon-text {
-  transform: scale(1.2);
+  transform: scale(1.4);
+  color: white;
+}
+
+.icon-6-container:hover .icon-dot {
+  transform: scale(1.4);
 }
 </style>
