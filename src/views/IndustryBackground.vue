@@ -4,6 +4,8 @@ import EChartsComponent from '../components/EChartsComponent.vue';
 import GlobeComponent from '../components/GlobeComponent.vue';
 import Navigation from '../components/Navigation.vue';
 import ChartModal from '../components/ChartModal.vue';
+import { useRouter } from 'vue-router'
+const router = useRouter()
 
 const chartData = ref([
   { title: 'Global Yacht Sales', subtitle: 'Market size and trends', type: 'line', id: 'yacht-sales' },
@@ -26,6 +28,11 @@ const showSummary = ref(false)
 const showChartModal = ref(false)
 const selectedChart = ref({ title: '', type: '' })
 const selectedCity = ref(null)
+
+// nav
+const goHome = () => {
+	router.push('/')
+}
 
 // Calculate chart height dynamically
 const chartContainerHeight = ref('0px')
@@ -90,7 +97,29 @@ const handleCityClick = (cityInfo) => {
 <template>
   <div class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900 relative">
     <!-- navItems: 导航栏 -->
-    <Navigation :nav-items="navItems" />
+    <!-- <Navigation :nav-items="navItems" /> -->
+    <!-- 顶部导航栏 -->
+    <nav class="top-nav">
+      <div class="nav-container">
+        <!-- 返回首页按钮 -->
+        <div class="home-btn" @click="goHome">
+          <div class="home-icon">
+            <img src="../assets/nav_back.png" alt="Home" />
+          </div>
+        </div>
+        <div class="nav-divider"></div>
+
+        <div class="nav-item active">Industry Background</div>
+        <div class="nav-divider"></div>
+        <router-link to="/market-demand" class="nav-item">Market Demand</router-link>
+        <div class="nav-divider"></div>
+        <router-link to="/business-model" class="nav-item">Business Model</router-link>
+        <div class="nav-divider"></div>
+        <router-link to="/team-composition" class="nav-item">Team Composition</router-link>
+        <div class="nav-divider"></div>
+        <router-link to="/product-introduction" class="nav-item">Product Introduction</router-link>
+      </div>
+    </nav>
 
     <!-- Main Content -->
     <div class="w-full px-4 sm:px-8 pt-24 pb-8 min-h-screen overflow-hidden">
@@ -98,7 +127,7 @@ const handleCityClick = (cityInfo) => {
         <!-- Left Side - Page Title and Charts -->
         <div class="w-full xl:w-1/2 flex flex-col h-full">
           <!-- Page Title -->
-          <div class="mt-5 mb-6 xl:mb-8 flex-shrink-0">
+          <div class="mt-1 mb-6 xl:mb-8 flex-shrink-0">
             <div class="flex items-center text-white">
               <img src="../assets/icon-1.png" alt="Icon" class="w-[27px] h-[28px] mr-3" />
               <p class="text-[20px] font-bold text-gray-300 tracking-wide">Industry Background - Global</p>
@@ -313,4 +342,108 @@ const handleCityClick = (cityInfo) => {
 .button-focus {
   outline: none !important;
 }
+
+/* 顶部导航栏.start */
+.home-btn {
+	cursor: pointer;
+	transition: all 0.3s ease;
+	padding: 5px;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.1);
+	backdrop-filter: blur(10px);
+}
+
+.home-btn:hover {
+	background: rgba(0, 212, 255, 0.2);
+	transform: scale(1.1);
+}
+
+.home-icon {
+	width: 20px;
+	height: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.home-icon img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+
+.top-nav {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	background: rgba(0, 0, 0, 0.8);
+	backdrop-filter: blur(10px);
+	z-index: 40;
+	padding: 15px 0;
+}
+
+.nav-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 12px;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 12px;
+	flex-wrap: wrap;
+}
+
+@media (min-width: 1024px) {
+	.nav-container {
+		gap: 20px;
+		padding: 0 20px;
+		flex-wrap: nowrap;
+	}
+}
+
+.nav-item {
+	padding: 8px 12px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	position: relative;
+	font-size: 12px;
+	font-weight: 500;
+	text-decoration: none;
+	color: #ffffff;
+	text-align: center;
+}
+
+@media (min-width: 1024px) {
+	.nav-item {
+		padding: 10px 20px;
+		font-size: 14px;
+	}
+}
+
+.nav-item:hover {
+	color: #00d4ff;
+}
+
+.nav-item.active {
+	color: #00d4ff;
+}
+
+.nav-item.active::after {
+	content: '';
+	position: absolute;
+	bottom: -5px;
+	left: 0;
+	right: 0;
+	height: 2px;
+	background: #00d4ff;
+}
+
+.nav-divider {
+	width: 1px;
+	height: 20px;
+	background: rgba(255, 255, 255, 0.3);
+}
+/* 顶部导航栏.start */
+
 </style>

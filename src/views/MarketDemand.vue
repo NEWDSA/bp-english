@@ -2,6 +2,8 @@
 import { ref } from 'vue'
 import Navigation from '../components/Navigation.vue'
 import CountryCircle from '../components/CountryCircle.vue'
+import { useRouter } from 'vue-router'
+const router = useRouter()
 
 const countries = ref([
   { id: 1, name: 'USA', image: '/countries/usa.png', angle: 0 },
@@ -27,6 +29,11 @@ const handleCountryHover = (country) => {
 const showModal = ref(false)
 const currentImageIndex = ref(0)
 const currentImages = ref([])
+
+// nav
+const goHome = () => {
+	router.push('/')
+}
 
 // Image sets for each gallery item
 const imageSets = {
@@ -68,61 +75,61 @@ const nextImage = () => {
        style="background: url('/src/assets/icon-3.png'); background-size: 100% 100%;">
     <!-- Navigation -->
     <!-- 顶部导航栏 -->
-	<nav class="top-nav">
-		<div class="nav-container">
-			<!-- 返回首页按钮 -->
-			<div class="home-btn" @click="goHome">
-				<div class="home-icon">
-					<img src="../assets/nav_back.png" alt="Home" />
-				</div>
-			</div>
-			<div class="nav-divider"></div>
+    <nav class="top-nav">
+      <div class="nav-container">
+        <!-- 返回首页按钮 -->
+        <div class="home-btn" @click="goHome">
+          <div class="home-icon">
+            <img src="../assets/nav_back.png" alt="Home" />
+          </div>
+        </div>
+        <div class="nav-divider"></div>
 
-			<router-link to="/industry-background" class="nav-item">Industry Background</router-link>
-			<div class="nav-divider"></div>
-			<div class="nav-item active">Market Demand</div>
-			<div class="nav-divider"></div>
-			<router-link to="/business-model" class="nav-item">Business Model</router-link>
-			<div class="nav-divider"></div>
-			<router-link to="/team-composition" class="nav-item">Team Composition</router-link>
-			<div class="nav-divider"></div>
-			<router-link to="/product-introduction" class="nav-item">Product Introduction</router-link>
-		</div>
-	</nav>
+        <router-link to="/industry-background" class="nav-item">Industry Background</router-link>
+        <div class="nav-divider"></div>
+        <div class="nav-item active">Market Demand</div>
+        <div class="nav-divider"></div>
+        <router-link to="/business-model" class="nav-item">Business Model</router-link>
+        <div class="nav-divider"></div>
+        <router-link to="/team-composition" class="nav-item">Team Composition</router-link>
+        <div class="nav-divider"></div>
+        <router-link to="/product-introduction" class="nav-item">Product Introduction</router-link>
+      </div>
+    </nav>
 
     <!-- Main Content Container -->
     <div class="flex flex-col lg:flex-row flex-1 min-h-0" style="padding-top: 71px;">
       <!-- Left Content -->
       <div class="flex-1 flex items-center justify-center relative min-w-0">
         <!-- Circle Container -->
-        <div class="relative w-[830px] h-[830px] max-w-full max-h-full" style="transform: scale(min(1, calc(100vw / 3 / 830px), calc((100vh - 200px) / 830px)))">
+        <div class="relative w-[830px] h-[830px] max-w-full max-h-full" style="transform: scale(min(1, calc(100vw / 3 / 830px), calc((100vh - 200px) / 830px))); transform-origin: center;">
           <!-- 830x830 white circle -->
           <div class="ring"></div>
 
           <!-- Icons positioned along the circle -->
           <div class="absolute top-0 left-0 w-full h-full">
             <!-- Icon 6 - 30 degrees -->
-            <div class="absolute w-[294px] h-[150px] transition-all duration-300 hover:scale-110 hover:shadow-lg" style="top: 70px; left: 74px;">
+            <div class="absolute w-[196px] h-[100px] transition-all duration-300 hover:scale-110 hover:shadow-lg" style="top: 100px; left: 106px;">
               <img src="/src/assets/icon-6.png" alt="板块一" class="w-full h-full object-contain" />
             </div>
 
             <!-- Icon 7 - 60 degrees -->
-            <div class="absolute w-[366px] h-[150px] transition-all duration-300 hover:scale-110 hover:shadow-lg" style="top: 170px; left: 137px;">
+            <div class="absolute w-[243px] h-[100px] transition-all duration-300 hover:scale-110 hover:shadow-lg" style="top: 200px; left: 165px;">
               <img src="/src/assets/icon-7.png" alt="板块二" class="w-full h-full object-contain" />
             </div>
 
             <!-- Icon 8 - 90 degrees -->
-            <div class="absolute w-[315px] h-[105px] transition-all duration-300 hover:scale-110 hover:shadow-lg" style="top: 300px; left: 160px;">
+            <div class="absolute w-[211px] h-[70px] transition-all duration-300 hover:scale-110 hover:shadow-lg" style="top: 320px; left: 197px;">
               <img src="/src/assets/icon-8.png" alt="板块三" class="w-full h-full object-contain" />
             </div>
 
             <!-- Icon 9 - 120 degrees -->
-            <div class="absolute w-[309px] h-[84px] transition-all duration-300 hover:scale-110 hover:shadow-lg" style="top: 430px; left: 132px;">
+            <div class="absolute w-[206px] h-[55px] transition-all duration-300 hover:scale-110 hover:shadow-lg" style="top: 450px; left: 197px;">
               <img src="/src/assets/icon-9.png" alt="板块四" class="w-full h-full object-contain" />
             </div>
 
             <!-- Icon 10 - 150 degrees -->
-            <div class="absolute w-[315px] h-[93px] transition-all duration-300 hover:scale-110 hover:shadow-lg" style="top: 540px; left: 46px;">
+            <div class="absolute w-[209px] h-[62px] transition-all duration-300 hover:scale-110 hover:shadow-lg" style="top: 580px; left: 156px;">
               <img src="/src/assets/icon-10.png" alt="板块五" class="w-full h-full object-contain" />
             </div>
           </div>
@@ -308,6 +315,33 @@ const nextImage = () => {
 
 <style scoped>
 /* 顶部导航栏 */
+.home-btn {
+	cursor: pointer;
+	transition: all 0.3s ease;
+	padding: 5px;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.1);
+	backdrop-filter: blur(10px);
+}
+
+.home-btn:hover {
+	background: rgba(0, 212, 255, 0.2);
+	transform: scale(1.1);
+}
+
+.home-icon {
+	width: 20px;
+	height: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.home-icon img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
 .top-nav {
 	position: fixed;
 	top: 0;
@@ -383,10 +417,10 @@ const nextImage = () => {
 
 .ring {
   position: absolute;
-  left: -400px;
-  top: 50px;
-	width: 600px;
-	height: 600px;
+  left: -600px;
+  top: 0px;
+	width: 830px;
+	height: 830px;
 	border: 3px solid white;
 	border-radius: 50%;
 }
