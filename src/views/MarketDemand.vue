@@ -139,7 +139,7 @@ const nextImage = () => {
               <!-- Map image icon-8.png 100x100 -->
               <img src="/src/assets/map/icon-8.png" alt="板块三" class="w-[100px] h-[100px] object-contain ml-[40px] icon-image" />
               <!-- Positioning dot icon-11.png 8x11 -->
-              <img src="/src/assets/map/icon-11.png" alt="定位点" class="w-[8px] h-[11px] object-contain ml-1 mr-2 icon-dot" />
+              <img src="/src/assets/map/icon-11.png" alt="定位点" class="w-[8px] h-[11px] object-contain ml-2 mr-2 icon-dot" />
               <!-- Location name -->
               <span class="text-white text-sm font-medium ml-1 shadow-lg icon-text">China</span>
             </div>
@@ -590,17 +590,20 @@ const nextImage = () => {
 .icon-image {
   transform: scale(1);
   transition: transform 0.3s ease;
+  transform-origin: center;
 }
 
 .icon-text {
   transform: scale(1);
   transition: transform 0.3s ease;
   color: #cccccc;
+  transform-origin: left;
 }
 
 .icon-dot {
   transform: scale(1);
   transition: transform 0.3s ease;
+  transform-origin: left;
 }
 
 .icon-6-container:hover .icon-image {
