@@ -28,10 +28,33 @@
 			<!-- 左侧内容区域 -->
 			<div class="left-section">
 				<div class="left-nav-list">
-					<div class="left-nav-item">
+					<!-- 动态连接线 -->
+					<div 
+						class="main-vertical-line" 
+						:style="{ 
+							top: lineTop, 
+							height: lineHeight 
+						}"
+					></div>
+					
+					<div class="left-nav-item product-advantages-item" @mouseenter="showTooltip('advantages')" @mouseleave="hideTooltip">
 						<span class="nav-text">Product advantages</span>
+						<!-- 悬停时显示的详细信息 -->
+						<div v-if="activeTooltip === 'advantages'" class="advantages-tooltip">
+							<div class="tooltip-content">
+								<p><strong>Positioned within 5 meters, driving qualification exemption for entertainment powered boats, using hydrofoil and control algorithms to significantly reduce player entry barriers and enhance entertainment experience</strong></p>
+								<p><strong>Y-H2O Product Introduction</strong></p>
+								<p><strong>Selling point:</strong></p>
+								<p>1. No need for a license to drive, low threshold for getting started</p>
+								<p>2. The purchase cost is equivalent to the price of a motorboat</p>
+								<p>3. Intelligentization</p>
+								<p>4. High safety factor</p>
+								<p>5. Low usage cost</p>
+								<p>6. Better experience</p>
+							</div>
+						</div>
 					</div>
-					<div class="left-nav-item">
+					<div class="left-nav-item" @click="showComparisonModal">
 						<span class="nav-text">Compared to traditional ferries</span>
 					</div>
 					<div class="left-nav-item">
@@ -42,21 +65,78 @@
 						<!-- 颜色选择区域 -->
 						<div class="color-price-content">
 							<div class="color-options">
-								<div class="color-swatch white" @click="changeBoatColor('white')" :class="{ active: selectedColor === 'white' }" style="background: #FFFFFF;"></div>
-								<div class="color-swatch gray" @click="changeBoatColor('gray')" :class="{ active: selectedColor === 'gray' }" style="background: #87CEEB;"></div>
-								<div class="color-swatch blue" @click="changeBoatColor('blue')" :class="{ active: selectedColor === 'blue' }" style="background: #4682B4;"></div>
-								<div class="color-swatch purple" @click="changeBoatColor('purple')" :class="{ active: selectedColor === 'purple' }" style="background: #DDA0DD;"></div>
-								<div class="color-swatch red" @click="changeBoatColor('red')" :class="{ active: selectedColor === 'red' }" style="background: #FF4500;"></div>
-								<div class="color-swatch brown" @click="changeBoatColor('brown')" :class="{ active: selectedColor === 'brown' }" style="background: #8B7355;"></div>
+								<div class="color-swatch white" @click="changeBoatColor('white')" :class="{ active: selectedColor === 'white' }" :style="{ backgroundImage: `url(${colorBackgrounds.white})` }"></div>
+								<div class="color-swatch green" @click="changeBoatColor('green')" :class="{ active: selectedColor === 'green' }" :style="{ backgroundImage: `url(${colorBackgrounds.green})` }"></div>
+								<div class="color-swatch blue" @click="changeBoatColor('blue')" :class="{ active: selectedColor === 'blue' }" :style="{ backgroundImage: `url(${colorBackgrounds.blue})` }"></div>
+								<div class="color-swatch purple" @click="changeBoatColor('purple')" :class="{ active: selectedColor === 'purple' }" :style="{ backgroundImage: `url(${colorBackgrounds.purple})` }"></div>
+								<div class="color-swatch red" @click="changeBoatColor('red')" :class="{ active: selectedColor === 'red' }" :style="{ backgroundImage: `url(${colorBackgrounds.red})` }"></div>
+								<div class="color-swatch black" @click="changeBoatColor('black')" :class="{ active: selectedColor === 'black' }" :style="{ backgroundImage: `url(${colorBackgrounds.black})` }"></div>
 							</div>
 							<div class="purchase-btn">
-								<span class="price-display">{{ currentPrice }}</span>
+								<img :src="priceImg" alt="Price" class="price-icon" />
 								<span class="purchase-text">Please click here to contact us for purchase</span>
 							</div>
 						</div>
 					</div>
-					<div class="left-nav-item">
+					<div class="left-nav-item product-highlights-section">
 						<span class="nav-text">Product Highlights</span>
+						<!-- 产品亮点卡片 -->
+						<div class="highlights-content">
+							<div class="highlights-grid">
+								<div class="highlight-card unmanned-systems" @mouseenter="showTooltip('unmanned')" @mouseleave="hideTooltip">
+									<div v-if="activeTooltip !== 'unmanned'">
+										<img :src="wheel1Img" alt="Unmanned Systems" class="highlight-icon" />
+										<div class="highlight-title">Unmanned Systems</div>
+									</div>
+									<!-- 悬停时显示的详细信息 -->
+									<div v-if="activeTooltip === 'unmanned'" class="card-content">
+										<p>The third mock examination switching</p>
+										<p>+ lifting rail expansion</p>
+										<p>Electromagnetic locking structure spring</p>
+										<p>damping increasing limit</p>
+									</div>
+								</div>
+								<div class="highlight-card team-members" @mouseenter="showTooltip('team')" @mouseleave="hideTooltip">
+									<div v-if="activeTooltip !== 'team'">
+										<img :src="wheel2Img" alt="Team Members" class="highlight-icon" />
+										<div class="highlight-title">Team Members</div>
+									</div>
+									<!-- 悬停时显示的详细信息 -->
+									<div v-if="activeTooltip === 'team'" class="card-content">
+										<p><strong>U/C-shaped wing design:</strong></p>
+										<p>The front wing (U-shaped) and rear wing (C-shaped) feature streamlined surfaces optimized for fluid dynamics.</p>
+										<p><strong>Resistance quick assembly system:</strong></p>
+										<p>Reduced transportation volume, with on-site assembly efficiency increased by 50%.</p>
+									</div>
+								</div>
+								<div class="highlight-card adaptive-algorithm" @mouseenter="showTooltip('adaptive')" @mouseleave="hideTooltip">
+									<div v-if="activeTooltip !== 'adaptive'">
+										<img :src="AutoSettingImg" alt="Adaptive hydrofoil" class="highlight-icon" />
+										<div class="highlight-title">Adaptive hydrofoil control algorithm</div>
+									</div>
+									<!-- 悬停时显示的详细信息 -->
+									<div v-if="activeTooltip === 'adaptive'" class="card-content">
+										<p><strong>Advanced control system:</strong></p>
+										<p>Real-time adjustment of hydrofoil angles based on water conditions and vessel performance.</p>
+										<p><strong>Machine learning integration:</strong></p>
+										<p>Continuous optimization through AI-powered analysis of operational data.</p>
+									</div>
+								</div>
+								<div class="highlight-card modular-hull" @mouseenter="showTooltip('modular')" @mouseleave="hideTooltip">
+									<div v-if="activeTooltip !== 'modular'">
+										<img :src="modularImg" alt="Modular detachable hull" class="highlight-icon" />
+										<div class="highlight-title">Modular detachable hull</div>
+									</div>
+									<!-- 悬停时显示的详细信息 -->
+									<div v-if="activeTooltip === 'modular'" class="card-content">
+										<p><strong>Quick assembly design:</strong></p>
+										<p>Modular components allow for rapid assembly and disassembly in under 30 minutes.</p>
+										<p><strong>Transportation efficiency:</strong></p>
+										<p>Reduced shipping costs by 60% through compact modular packaging.</p>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -149,55 +229,246 @@
 				</div>
 			</div>
 		</div>
+
+		<!-- 对比表格模态框 -->
+		<div v-if="showComparison" class="modal-overlay" @click="hideComparisonModal">
+			<div class="comparison-modal" @click.stop>
+				<div class="comparison-container">
+					<!-- 左侧：指标列表区域 -->
+					<div class="metrics-section">
+						<div class="metrics-list">
+							<div class="metric-title">How can the new generation of water taxis address the pain points of traditional water transportation</div>
+							<div class="metric-item">Speed (of a ship or aircraft)</div>
+							<div class="metric-item">Power-to-speed ratio (kw/kt)</div>
+							<div class="metric-item">Voyage (nautical miles)</div>
+							<div class="metric-item">Trim angle control</div>
+							<div class="metric-item">Stability</div>
+							<div class="metric-item">Noise level</div>
+							<div class="metric-item">Procurement cost (per vessel)</div>
+							<div class="metric-item">Payback period</div>
+							<div class="metric-item">Economic benefits (annual)</div>
+						</div>
+					</div>
+
+					<!-- 右侧：智能水翼船区域 -->
+					<div class="hydrofoil-section">
+						<div class="section-header">
+							<h3>Intelligent hydrofoil boat</h3>
+							<div class="boat-image">
+								<img :src="currentBoatImage" alt="Intelligent hydrofoil boat" />
+							</div>
+						</div>
+						<div class="data-list">
+							<div class="data-item">
+								<div class="data-value">20kt</div>
+							</div>
+							<div class="data-item">
+								<div class="data-value">1:1</div>
+							</div>
+							<div class="data-item">
+								<div class="data-value">75</div>
+							</div>
+							<div class="data-item">
+								<div class="data-value">≤1°</div>
+							</div>
+							<div class="data-item">
+								<div class="data-value">excellent</div>
+							</div>
+							<div class="data-item">
+								<div class="data-value">65dB</div>
+							</div>
+							<div class="data-item">
+								<div class="data-value">100,000 $</div>
+							</div>
+							<div class="data-item">
+								<div class="data-value">0.86 years</div>
+							</div>
+							<div class="data-item">
+								<div class="data-value">46,000 $</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- 中间：VS分隔区域 -->
+					<div class="vs-section">
+						<div class="vs-icon">VS</div>
+					</div>
+
+					<!-- 右侧：传统渡轮区域 -->
+					<div class="traditional-section">
+						<div class="section-header">
+							<h3>Traditional ferry</h3>
+						</div>
+						<div class="data-list">
+							<div class="data-item">
+								<div class="data-value">Sections 10-20</div>
+							</div>
+							<div class="data-item">
+								<div class="data-value">0.35-0.40</div>
+							</div>
+							<div class="data-item">
+								<div class="data-value"><100 (short distance) / 2000+ (long distance)</div>
+							</div>
+							<div class="data-item">
+								<div class="data-value">±2.5°</div>
+							</div>
+							<div class="data-item">
+								<div class="data-value">Bumpiness</div>
+							</div>
+							<div class="data-item">
+								<div class="data-value">65-85 dB (inside the cabin)</div>
+							</div>
+							<div class="data-item">
+								<div class="data-value">844,000-2,108,000 $</div>
+							</div>
+							<div class="data-item">
+								<div class="data-value">3-7 years</div>
+							</div>
+							<div class="data-item">
+								<div class="data-value">281,000 $ (200 passenger seats)</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- 底部对勾图标 -->
+				<div class="comparison-footer">
+					<div class="checkmark">✓</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, onUnmounted, computed, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
-// 导入图片资源
-import whiteBotImg from '../assets/white_boat.png'
+// 导入船只图片资源
+import whiteBoatImg from '../assets/white_boat.png'
+import greenBoatImg from '../assets/green_boat.png'
 import blueBoatImg from '../assets/blue_boat.png'
+import purpleBoatImg from '../assets/purple_boat.png'
+import redBoatImg from '../assets/red_boat.png'
+import blackBoatImg from '../assets/black_boat.png'
+
+// 导入颜色背景图片资源
+import whiteBdImg from '../assets/white_bd.png'
+import greenBdImg from '../assets/green_bd.png'
+import blueBdImg from '../assets/blue_bd.png'
+import purpleBdImg from '../assets/purple_bd.png'
+import redBdImg from '../assets/red_bd.png'
+import blackBdImg from '../assets/black_bd.png'
+
+// 导入价格图标
+import priceImg from '../assets/price.png'
+
+// 导入产品亮点图标
+import wheel1Img from '../assets/wheel1.png'
+import wheel2Img from '../assets/wheel2.png'
+import modularImg from '../assets/modular.png'
+import AutoSettingImg from '../assets/auto_setting.png'
 
 const router = useRouter()
 
 // 颜色选择状态
 const selectedColor = ref('white')
 
-// 船只图片映射
-const boatImages = {
-	'white': whiteBotImg,
-	'gray': blueBoatImg,
-	'blue': blueBoatImg,
-	'purple': whiteBotImg,
-	'red': whiteBotImg,
-	'brown': whiteBotImg
+// 悬停提示状态
+const activeTooltip = ref(null)
+
+// 对比表格模态框状态
+const showComparison = ref(false)
+
+// 连接线高度计算
+const lineHeight = ref('calc(100% - 60px)')
+const lineTop = ref('30px')
+
+// 动态计算连接线位置
+const calculateLinePosition = () => {
+	nextTick(() => {
+		const navList = document.querySelector('.left-nav-list')
+		if (!navList) return
+		
+		const items = navList.querySelectorAll('.left-nav-item')
+		if (items.length < 2) return
+		
+		const firstItem = items[0]
+		const lastItem = items[items.length - 1]
+		
+		const firstItemRect = firstItem.getBoundingClientRect()
+		const lastItemRect = lastItem.getBoundingClientRect()
+		const navListRect = navList.getBoundingClientRect()
+		
+		// 计算第一个项目的水平线位置相对于导航列表的位置
+		const firstItemTop = firstItemRect.top - navListRect.top + firstItemRect.height / 2
+		
+		// 计算最后一个项目的水平线位置相对于导航列表的位置
+		const lastItemTop = lastItemRect.top - navListRect.top + lastItemRect.height / 2
+		
+		// 设置连接线的起始位置和高度
+		lineTop.value = `${firstItemTop}px`
+		lineHeight.value = `${lastItemTop - firstItemTop}px`
+	})
 }
 
-// 颜色价格映射
-const colorPrices = {
-	'white': '¥ 2,800,000',
-	'gray': '¥ 3,000,000',
-	'blue': '¥ 3,200,000',
-	'purple': '¥ 3,500,000',
-	'red': '¥ 3,800,000',
-	'brown': '¥ 3,300,000'
+// 监听窗口大小变化
+const handleResize = () => {
+	calculateLinePosition()
+}
+
+// 船只图片映射
+const boatImages = {
+	'white': whiteBoatImg,
+	'green': greenBoatImg,
+	'blue': blueBoatImg,
+	'purple': purpleBoatImg,
+	'red': redBoatImg,
+	'black': blackBoatImg
+}
+
+// 颜色背景图片映射
+const colorBackgrounds = {
+	'white': whiteBdImg,
+	'green': greenBdImg,
+	'blue': blueBdImg,
+	'purple': purpleBdImg,
+	'red': redBdImg,
+	'black': blackBdImg
 }
 
 // 计算当前船只图片
 const currentBoatImage = computed(() => {
+	console.log('当前选择的颜色:', selectedColor.value)
+	console.log('对应的图片:', boatImages[selectedColor.value])
 	return boatImages[selectedColor.value] || boatImages['white']
-})
-
-// 计算当前价格
-const currentPrice = computed(() => {
-	return colorPrices[selectedColor.value] || colorPrices['white']
 })
 
 // 切换船只颜色
 function changeBoatColor(color) {
+	console.log('点击了颜色:', color)
 	selectedColor.value = color
-	console.log('切换到颜色:', color)
+	console.log('selectedColor更新为:', selectedColor.value)
+	console.log('currentBoatImage应该是:', currentBoatImage.value)
+}
+
+// 显示悬停提示
+function showTooltip(type) {
+	activeTooltip.value = type
+}
+
+// 隐藏悬停提示
+function hideTooltip() {
+	activeTooltip.value = null
+}
+
+// 显示对比表格模态框
+function showComparisonModal() {
+	showComparison.value = true
+}
+
+// 隐藏对比表格模态框
+function hideComparisonModal() {
+	showComparison.value = false
 }
 
 function goHome() {
@@ -206,6 +477,23 @@ function goHome() {
 
 onMounted(() => {
 	// 页面加载完成后的初始化逻辑
+	calculateLinePosition()
+	
+	// 监听窗口大小变化
+	window.addEventListener('resize', handleResize)
+	
+	// 监听浏览器缩放
+	window.addEventListener('wheel', (e) => {
+		if (e.ctrlKey) {
+			// 延迟执行，等待缩放完成
+			setTimeout(calculateLinePosition, 100)
+		}
+	})
+})
+
+// 组件卸载时清理事件监听器
+onUnmounted(() => {
+	window.removeEventListener('resize', handleResize)
 })
 </script>
 
@@ -213,6 +501,7 @@ onMounted(() => {
 .product-introduction {
 	min-height: 100vh;
 	background: url('../assets/bp_bg.png') center/cover no-repeat;
+	height: auto;
 	background-attachment: fixed;
 	color: #ffffff;
 	font-family: 'Arial', sans-serif;
@@ -311,7 +600,7 @@ onMounted(() => {
 /* 主要内容区域 */
 .main-content {
 	position: relative;
-	height: calc(100vh - 80px);
+	height: 100vh;
 	padding-top: 80px;
 	z-index: 1;
 	overflow: hidden;
@@ -320,9 +609,9 @@ onMounted(() => {
 /* 左侧导航列表定位 */
 .left-nav-list {
 	position: absolute;
-	left: 20px;
+	left: 100px;
 	top: 50%;
-	transform: translateY(-50%);
+	transform: translateY(-50%) translateY(100px);
 }
 
 /* 中间3D产品展示定位 */
@@ -336,7 +625,7 @@ onMounted(() => {
 /* 右侧产品规格面板 */
 .product-specs-panel {
 	position: absolute;
-	right: 20px;
+	right: 100px;
 	top: 50%;
 	transform: translateY(-50%);
 	background-color: rgba(100, 100, 100, 0.3);
@@ -352,20 +641,22 @@ onMounted(() => {
 .left-nav-list {
 	display: flex;
 	flex-direction: column;
-	gap: 40px;
+	gap: 60px;
 	padding-left: 20px;
+	padding-top: 30px;
+	padding-bottom: 30px;
 	min-height: 60vh;
-	justify-content: space-around;
+	justify-content: flex-start;
+	z-index: 9999;
 }
 
-.left-nav-list::before {
-	content: '';
+/* 动态连接线样式 */
+.main-vertical-line {
 	position: absolute;
 	left: 0;
-	top: -10px;
-	bottom: -10px;
 	width: 2px;
 	background: rgba(255, 255, 255, 0.8);
+	z-index: 1;
 }
 
 .left-nav-item {
@@ -385,7 +676,7 @@ onMounted(() => {
 	width: 15px;
 	height: 2px;
 	background: rgba(255, 255, 255, 0.8);
-	z-index: 2;
+	z-index: 3;
 }
 
 .left-nav-item:hover .nav-text {
@@ -408,7 +699,29 @@ onMounted(() => {
 /* 颜色价格区域特殊样式 */
 .color-price-section {
 	gap: 15px;
-	transform: translateY(80px) translateX(0);
+}
+
+/* 产品亮点区域特殊样式 */
+.product-highlights-section {
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 15px;
+	position: relative;
+}
+
+.highlights-content {
+	position: absolute;
+	left: 200px;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 50;
+}
+
+.highlights-grid {
+	display: flex;
+	flex-direction: row;
+	gap: 8px;
+	flex-wrap: nowrap;
 }
 
 /* 颜色价格区域的伪类元素特殊定位 */
@@ -430,6 +743,7 @@ onMounted(() => {
 	gap: 20px;
 	width: 100%;
 	align-items: center;
+	margin-left: 80px;
 }
 
 /* 左侧内容样式 */
@@ -517,16 +831,24 @@ onMounted(() => {
 	grid-template-columns: repeat(3, 1fr);
 	gap: 8px;
 	width: 100%;
-	max-width: 200px;
+	max-width: 260px;
+	position: relative;
+	z-index: 100;
 }
 
 .color-swatch {
-	width: 60px;
+	width: 80px;
 	height: 25px;
 	border-radius: 8px;
 	border: 2px solid rgba(255, 255, 255, 0.3);
 	cursor: pointer;
 	transition: all 0.3s ease;
+	position: relative;
+	z-index: 101;
+	pointer-events: auto;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
 }
 
 .color-swatch:hover {
@@ -546,6 +868,7 @@ onMounted(() => {
 	align-items: center;
 	gap: 10px;
 	background: rgba(255, 255, 255, 0.8);
+	margin-left: 80px;
 	color: #000000;
 	padding: 15px 25px;
 	border-radius: 8px;
@@ -558,11 +881,10 @@ onMounted(() => {
 	transform: translateY(-2px);
 }
 
-.price-display {
-	font-size: 18px;
-	font-weight: bold;
-	color: #00d4ff;
-	margin-right: 10px;
+.price-icon {
+	width: 20px;
+	height: 20px;
+	object-fit: contain;
 }
 
 .purchase-text {
@@ -580,41 +902,485 @@ onMounted(() => {
 	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
-.highlights-grid {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 20px;
-}
 
 .highlight-card {
-	background: rgba(255, 255, 255, 0.5);
-	border-radius: 10px;
-	padding: 20px;
+	background: rgba(255, 255, 255, 0.4);
+	border-radius: 12px;
+	padding: 12px;
 	text-align: center;
 	transition: all 0.3s ease;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	flex-shrink: 0;
+	min-width: 140px;
+	height: 120px;
+	transform: scale(0.8);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .highlight-card:hover {
-	background: rgba(255, 255, 255, 0.7);
-	transform: translateY(-5px);
+	background: rgba(255, 255, 255, 0.6);
+	transform: scale(0.8) translateY(-8px);
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+	border-color: rgba(0, 212, 255, 0.3);
 }
 
 .highlight-icon {
-	font-size: 32px;
-	margin-bottom: 15px;
+	width: 120px;
+	height: 80px;
+	margin-bottom: 8px;
+	object-fit: contain;
+	border-radius: 8px;
+	background: rgba(255, 255, 255, 0.1);
+	padding: 8px;
 }
 
 .highlight-title {
-	font-size: 16px;
+	font-size: 11px;
 	font-weight: 600;
-	color: #000000;
-	margin-bottom: 10px;
+	color: #333333;
+	margin-bottom: 4px;
+	text-align: center;
+	line-height: 1.3;
+	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
 }
 
 .highlight-desc {
+	font-size: 8px;
+	color: #666666;
+	line-height: 1.2;
+	text-align: center;
+}
+
+/* 卡片内容样式 */
+.card-content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	width: 100%;
+	height: 100%;
+	padding: 8px;
+	animation: fadeInUp 0.3s ease-out;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+
+/* 产品优势悬停提示样式 */
+.product-advantages-item {
+	position: relative;
+}
+
+.advantages-tooltip {
+	position: absolute;
+	left: 200px;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 1000;
+	width: 400px;
+	background: rgba(255, 255, 255, 0.9);
+	backdrop-filter: blur(10px);
+	border-radius: 12px;
+	padding: 20px;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	/* animation: fadeInUp 0.3s ease-out; */
+}
+
+.tooltip-content p {
+	margin: 0;
+	padding: 4px 0;
 	font-size: 12px;
+	color: #333333;
+	line-height: 1.4;
+	text-align: left;
+	width: 100%;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+}
+
+.tooltip-content p strong {
 	color: #000000;
-	line-height: 1.5;
+	font-weight: 600;
+}
+
+/* 对比表格模态框样式 */
+.modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.8);
+	backdrop-filter: blur(5px);
+	z-index: 10000;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.comparison-modal {
+	background: rgba(255, 255, 255, 0.95);
+	backdrop-filter: blur(20px);
+	border-radius: 20px;
+	padding: 20px;
+	max-width: 85vw;
+	/* max-height: 52vh; */
+	height: 440px;
+	overflow: visible;
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	position: relative;
+	width: auto;
+	min-width: 320px;
+}
+
+/* 响应式媒体查询 */
+@media (max-width: 1400px) {
+	.comparison-modal {
+		max-width: 90vw;
+		max-height: 60vh;
+		padding: 15px;
+	}
+}
+
+@media (max-width: 1200px) {
+	.comparison-modal {
+		max-width: 95vw;
+		max-height: 65vh;
+		padding: 12px;
+	}
+}
+
+@media (max-width: 992px) {
+	.comparison-modal {
+		max-width: 98vw;
+		max-height: 70vh;
+		padding: 10px;
+		border-radius: 15px;
+	}
+}
+
+.modal-header {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+.close-btn {
+	background: none;
+	border: none;
+	font-size: 32px;
+	color: #666666;
+	cursor: pointer;
+	padding: 0;
+	width: 40px;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+	background: rgba(0, 0, 0, 0.1);
+	color: #000000;
+}
+
+/* 三个独立div的对比容器 */
+.comparison-container {
+	display: flex;
+	gap: 20px;
+	align-items: flex-start;
+	/* margin-bottom: 20px; */
+}
+
+/* 响应式布局调整 */
+@media (max-width: 1400px) {
+	.comparison-container {
+		gap: 15px;
+	}
+}
+
+@media (max-width: 1200px) {
+	.comparison-container {
+		gap: 12px;
+	}
+}
+
+@media (max-width: 992px) {
+	.comparison-container {
+		gap: 8px;
+		flex-direction: column;
+		align-items: center;
+	}
+}
+
+/* 左侧：指标列表区域 */
+.metrics-section {
+	width: 200px;
+	display: flex;
+	flex-direction: column;
+}
+
+/* 中间：智能水翼船区域 */
+.hydrofoil-section {
+	width: 250px;
+	display: flex;
+	flex-direction: column;
+	background: rgba(255, 255, 255, 0.1);
+	/* border: 1px solid rgba(255, 255, 255, 0.3); */
+	background:#ffffff;
+	border-radius: 15px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	padding: 15px 15px 20px 15px;
+	transform: translateY(-50px);
+	z-index: 10;
+}
+
+/* 右侧：传统渡轮区域 */
+.traditional-section {
+	width: 200px;
+	display: flex;
+	flex-direction: column;
+}
+
+/* 响应式宽度调整 */
+@media (max-width: 1400px) {
+	.metrics-section, .traditional-section {
+		width: 180px;
+	}
+	.hydrofoil-section {
+		width: 220px;
+		padding: 12px;
+	}
+}
+
+@media (max-width: 1200px) {
+	.metrics-section, .traditional-section {
+		width: 160px;
+	}
+	.hydrofoil-section {
+		width: 200px;
+		padding: 10px;
+	}
+}
+
+@media (max-width: 992px) {
+	.metrics-section, .traditional-section {
+		width: 100%;
+		max-width: 300px;
+	}
+	.hydrofoil-section {
+		width: 100%;
+		max-width: 320px;
+		transform: translateY(0);
+		margin: 10px 0;
+	}
+}
+
+.metrics-list {
+	display: flex;
+	flex-direction: column;
+}
+
+.metric-title {
+	font-size: 14px;
+	font-weight: 600;
+	color: #333333;
+	padding: 10px 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	text-align: center;
+	margin-bottom: 8px;
+	line-height: 1.3;
+}
+
+.metric-item {
+	font-size: 12px;
+	font-weight: 600;
+	color: #333333;
+	padding: 8px 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	text-align: center;
+}
+
+.metric-item:last-child {
+	border-bottom: none;
+}
+
+.section-header {
+	text-align: center;
+	margin-bottom: 15px;
+}
+
+.section-header h3 {
+	font-size: 14px;
+	font-weight: 600;
+	color: #333333;
+	margin: 0 0 10px 0;
+}
+
+.hydrofoil-section .section-header h3 {
+	color: #20B2AA;
+}
+
+.boat-image {
+	width: 80px;
+	height: 60px;
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.boat-image img {
+	/* width: 100%; */
+	width: 150px;
+	height: 100%;
+	object-fit: contain;
+}
+
+.data-list {
+	display: flex;
+	flex-direction: column;
+	gap: 0;
+}
+
+.data-item {
+	padding: 8px 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	text-align: center;
+}
+
+.data-item:last-child {
+	border-bottom: none;
+}
+
+.data-value {
+	font-size: 12px;
+	font-weight: 600;
+	color: #333333;
+}
+
+/* 中间：VS分隔区域 */
+.vs-section {
+	position: absolute;
+	width: 35px;
+	height: 35px;
+	z-index: 20;
+	left: calc(200px + 250px + 20px);
+	/* top: calc(50% - 30px); */
+	top: 10%;
+	transform: translateY(-50%);
+}
+
+/* VS分隔区域响应式调整 */
+@media (max-width: 1400px) {
+	.vs-section {
+		left: calc(180px + 220px + 15px);
+		width: 30px;
+		height: 30px;
+	}
+}
+
+@media (max-width: 1200px) {
+	.vs-section {
+		left: calc(160px + 200px + 12px);
+		width: 28px;
+		height: 28px;
+	}
+}
+
+@media (max-width: 992px) {
+	.vs-section {
+		position: relative;
+		left: auto;
+		top: auto;
+		transform: none;
+		margin: 10px auto;
+		width: 35px;
+		height: 35px;
+	}
+}
+
+.vs-icon {
+	position: absolute;
+	background: #20B2AA;
+	color: white;
+	font-size: 12px;
+	font-weight: bold;
+	border-radius: 50%;
+	width: 35px;
+	height: 35px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 2px 8px rgba(32, 178, 170, 0.3);
+	left: 0;
+	top: 0;
+}
+
+/* 右侧：传统渡轮区域 */
+.traditional-section {
+	width: 200px;
+	display: flex;
+	flex-direction: column;
+}
+
+.traditional-section .data-value {
+	color: #666666;
+}
+
+/* 底部对勾图标 */
+.comparison-footer {
+	display: flex;
+	justify-content: center;
+	margin-top: -70px;
+	padding-top: -70px;
+	z-index: 1000;
+	/* border-top: 2px solid rgba(0, 0, 0, 0.1); */
+}
+
+.checkmark {
+	background: #4CAF50;
+	color: white;
+	font-size: 20px;
+	font-weight: bold;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 1000;
+}
+
+.card-content p {
+	margin: 0;
+	padding: 3px 0;
+	font-size: 11px;
+	color: #333333;
+	line-height: 1.4;
+	text-align: left;
+	width: 100%;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+}
+
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 /* 3D产品展示区域 */
