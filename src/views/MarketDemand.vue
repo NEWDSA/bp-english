@@ -130,7 +130,7 @@ const nextImage = () => {
       </div>
 
       <!-- Middle Content-->
-      <div class="flex-2 flex items-start justify-center px-0 py-4 lg:py-6 min-w-0">
+      <div class="flex-2 flex items-start justify-center px-0 py-4 lg:py-8 min-w-0">
         <div class="text-white w-full max-w-4xl">
           <div class="bg-white/10 backdrop-blur-sm rounded-lg shadow-lg border border-white/20 p-4 lg:p-6">
             <div class="space-y-4">
@@ -184,8 +184,8 @@ const nextImage = () => {
       </div>
 
       <!-- Right Content -->
-      <div class="flex-1 flex items-start justify-center px-0 py-4 lg:py-6 min-w-0">
-        <div class="text-white w-full max-w-4xl px-4 lg:px-6">
+      <div class="flex-1 flex items-start justify-center px-0 py-4 lg:py-8 min-w-0">
+        <div class="text-white w-full max-w-4xl px-8 lg:px-8">
           <div class="bg-cover bg-center bg-no-repeat rounded-[10px] shadow-xl border border-white/20 overflow-hidden bg-white/10"
                style="background-image: url('/src/assets/icon-4.png'); background-blend-mode: overlay;">
 
