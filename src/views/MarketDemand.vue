@@ -109,7 +109,7 @@ const nextImage = () => {
           <!-- Icons positioned along the circle -->
           <div class="absolute top-0 left-0 w-full h-full">
             <!-- Icon 6 - 30 degrees -->
-            <div class="absolute icon-6-container transition-all duration-300 flex items-center cursor-pointer" style="top: 100px; left: 128px;">
+            <div class="absolute icon-6-container transition-all duration-300 flex items-center cursor-pointer" style="top: 70px; left: 100px;">
               <!-- White dot 10x10 -->
               <div class="w-[10px] h-[10px] bg-white rounded-full dot-container-dot relative"></div>
               <!-- Map image icon-6.png 100x100 -->
@@ -121,23 +121,51 @@ const nextImage = () => {
             </div>
 
             <!-- Icon 7 - 60 degrees -->
-            <div class="absolute w-[243px] h-[100px] transition-all duration-300 hover:scale-110 hover:shadow-lg" style="top: 200px; left: 165px;">
-              <img src="/src/assets/icon-7.png" alt="板块二" class="w-full h-full object-contain" />
+            <div class="absolute icon-7-container transition-all duration-300 flex items-center cursor-pointer" style="top: 180px; left: 180px;">
+              <!-- White dot 10x10 -->
+              <div class="w-[10px] h-[10px] bg-white rounded-full dot-container-dot relative"></div>
+              <!-- Map image icon-7.png 100x100 -->
+              <img src="/src/assets/map/icon-7.png" alt="板块二" class="w-[100px] h-[100px] object-contain ml-[40px] icon-image" />
+              <!-- Positioning dot icon-11.png 8x11 -->
+              <img src="/src/assets/map/icon-11.png" alt="定位点" class="w-[8px] h-[11px] object-contain ml-1 mr-2 icon-dot" />
+              <!-- Location name -->
+              <span class="text-white text-sm font-medium ml-1 shadow-lg icon-text">Southeast Asia</span>
             </div>
 
             <!-- Icon 8 - 90 degrees -->
-            <div class="absolute w-[211px] h-[70px] transition-all duration-300 hover:scale-110 hover:shadow-lg" style="top: 320px; left: 197px;">
-              <img src="/src/assets/icon-8.png" alt="板块三" class="w-full h-full object-contain" />
+            <div class="absolute icon-8-container transition-all duration-300 flex items-center cursor-pointer" style="top: 320px; left: 221px;">
+              <!-- White dot 10x10 -->
+              <div class="w-[10px] h-[10px] bg-white rounded-full dot-container-dot relative"></div>
+              <!-- Map image icon-8.png 100x100 -->
+              <img src="/src/assets/map/icon-8.png" alt="板块三" class="w-[100px] h-[100px] object-contain ml-[40px] icon-image" />
+              <!-- Positioning dot icon-11.png 8x11 -->
+              <img src="/src/assets/map/icon-11.png" alt="定位点" class="w-[8px] h-[11px] object-contain ml-1 mr-2 icon-dot" />
+              <!-- Location name -->
+              <span class="text-white text-sm font-medium ml-1 shadow-lg icon-text">China</span>
             </div>
 
             <!-- Icon 9 - 120 degrees -->
-            <div class="absolute w-[206px] h-[55px] transition-all duration-300 hover:scale-110 hover:shadow-lg" style="top: 450px; left: 197px;">
-              <img src="/src/assets/icon-9.png" alt="板块四" class="w-full h-full object-contain" />
+            <div class="absolute icon-9-container transition-all duration-300 flex items-center cursor-pointer" style="top: 460px; left: 213px;">
+              <!-- White dot 10x10 -->
+              <div class="w-[10px] h-[10px] bg-white rounded-full dot-container-dot relative"></div>
+              <!-- Map image icon-9.png 100x100 -->
+              <img src="/src/assets/map/icon-9.png" alt="板块四" class="w-[100px] h-[100px] object-contain ml-[40px] icon-image" />
+              <!-- Positioning dot icon-11.png 8x11 -->
+              <img src="/src/assets/map/icon-11.png" alt="定位点" class="w-[8px] h-[11px] object-contain ml-1 mr-2 icon-dot" />
+              <!-- Location name -->
+              <span class="text-white text-sm font-medium ml-1 shadow-lg icon-text">America</span>
             </div>
 
             <!-- Icon 10 - 150 degrees -->
-            <div class="absolute w-[209px] h-[62px] transition-all duration-300 hover:scale-110 hover:shadow-lg" style="top: 580px; left: 156px;">
-              <img src="/src/assets/icon-10.png" alt="板块五" class="w-full h-full object-contain" />
+            <div class="absolute icon-10-container transition-all duration-300 flex items-center cursor-pointer" style="top: 600px; left: 150px;">
+              <!-- White dot 10x10 -->
+              <div class="w-[10px] h-[10px] bg-white rounded-full dot-container-dot relative"></div>
+              <!-- Map image icon-10.png 100x100 -->
+              <img src="/src/assets/map/icon-10.png" alt="板块五" class="w-[100px] h-[100px] object-contain ml-[40px] icon-image" />
+              <!-- Positioning dot icon-11.png 8x11 -->
+              <img src="/src/assets/map/icon-11.png" alt="定位点" class="w-[8px] h-[11px] object-contain ml-1 mr-2 icon-dot" />
+              <!-- Location name -->
+              <span class="text-white text-sm font-medium ml-1 shadow-lg icon-text">Middle East</span>
             </div>
           </div>
         </div>
@@ -585,6 +613,74 @@ const nextImage = () => {
 }
 
 .icon-6-container:hover .icon-dot {
+  transform: scale(1.4);
+}
+
+.icon-7-container:hover .dot-container-dot::after {
+  opacity: 1;
+}
+
+.icon-7-container:hover .icon-image {
+  transform: scale(1.4);
+}
+
+.icon-7-container:hover .icon-text {
+  transform: scale(1.4);
+  color: white;
+}
+
+.icon-7-container:hover .icon-dot {
+  transform: scale(1.4);
+}
+
+.icon-8-container:hover .dot-container-dot::after {
+  opacity: 1;
+}
+
+.icon-8-container:hover .icon-image {
+  transform: scale(1.4);
+}
+
+.icon-8-container:hover .icon-text {
+  transform: scale(1.4);
+  color: white;
+}
+
+.icon-8-container:hover .icon-dot {
+  transform: scale(1.4);
+}
+
+.icon-9-container:hover .dot-container-dot::after {
+  opacity: 1;
+}
+
+.icon-9-container:hover .icon-image {
+  transform: scale(1.4);
+}
+
+.icon-9-container:hover .icon-text {
+  transform: scale(1.4);
+  color: white;
+}
+
+.icon-9-container:hover .icon-dot {
+  transform: scale(1.4);
+}
+
+.icon-10-container:hover .dot-container-dot::after {
+  opacity: 1;
+}
+
+.icon-10-container:hover .icon-image {
+  transform: scale(1.4);
+}
+
+.icon-10-container:hover .icon-text {
+  transform: scale(1.4);
+  color: white;
+}
+
+.icon-10-container:hover .icon-dot {
   transform: scale(1.4);
 }
 </style>
