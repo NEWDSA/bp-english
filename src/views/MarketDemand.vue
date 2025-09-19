@@ -256,8 +256,8 @@ const nextImage = () => {
                     Core Requirements:
                   </h3>
                   <div class="text-sm lg:text-base space-y-2">
-                    <p class="border-b border-white/20">The product is innovative and has recognition</p>
-                    <p class="border-b border-white/20">Efficient and energy-saving, easy to operate</p>
+                    <p class="border-b pb-2 border-white/20">The product is innovative and has recognition</p>
+                    <p class="border-b pb-2 border-white/20">Efficient and energy-saving, easy to operate</p>
                     <p>Environmental Protection and Scenic Area Protection Requirements</p>
                   </div>
                 </div>
