@@ -1,21 +1,1071 @@
 <script setup>
-import { ref } from 'vue'
-import Navigation from '../components/Navigation.vue';
+import { ref, onMounted } from 'vue'
+import Navigation from '../components/Navigation.vue'
+import CountryCircle from '../components/CountryCircle.vue'
+import { useRouter } from 'vue-router'
+const router = useRouter()
 
-const navItems = ref([
-  { id: 1, name: 'Industry Background', path: '/industry-background', active: false },
-  { id: 2, name: 'Market Demand', path: '/market-demand', active: true },
-  { id: 3, name: 'Business Model', path: '/business-model', active: false },
-  { id: 4, name: 'Team Composition', path: '/team-composition', active: false },
-  { id: 5, name: 'Product Introduction', path: '/product-introduction', active: false }
+// State to track active icon
+const activeIcon = ref('icon-8')
+
+// Initialize with default content
+onMounted(() => {
+  updateMiddleContent('china')
+  updateRightContent('default')
+})
+
+const countries = ref([
+  { id: 1, name: 'USA', image: '/countries/usa.png', angle: 0 },
+  { id: 2, name: 'UK', image: '/countries/uk.png', angle: 30 },
+  { id: 3, name: 'Germany', image: '/countries/germany.png', angle: 60 },
+  { id: 4, name: 'France', image: '/countries/france.png', angle: 90 },
+  { id: 5, name: 'Japan', image: '/countries/japan.png', angle: 120 },
+//   { id: 6, name: 'Australia', image: '/countries/australia.png', angle: 150 },
+//   { id: 7, name: 'Canada', image: '/countries/canada.png', angle: 180 },
+//   { id: 8, name: 'Brazil', image: '/countries/brazil.png', angle: 210 },
+//   { id: 9, name: 'India', image: '/countries/india.png', angle: 240 },
+//   { id: 10, name: 'China', image: '/countries/china.png', angle: 270 },
+//   { id: 11, name: 'South Korea', image: '/countries/south-korea.png', angle: 300 },
+//   { id: 12, name: 'Singapore', image: '/countries/singapore.png', angle: 330 }
 ])
+
+const handleCountryHover = (country) => {
+  console.log('Country hovered:', country.name)
+  // 可以在这里添加更多处理逻辑，比如更新其他组件的状态
+}
+
+// Function to handle icon activation
+const activateIcon = (iconName, middleContent, rightContent) => {
+  // Remove active class from current active icon
+  const currentActive = document.querySelector('.icon-container.active-icon')
+  if (currentActive) {
+    currentActive.classList.remove('active-icon')
+  }
+
+  // Add active class to new icon
+  const newActive = document.querySelector(`.${iconName}`)
+  if (newActive) {
+    newActive.classList.add('active-icon')
+  }
+
+  // Update content
+  updateMiddleContent(middleContent)
+  updateRightContent(rightContent)
+  activeIcon.value = iconName
+}
+
+const middleContent = ref('')
+const rightContent = ref('')
+
+const updateMiddleContent = (contentType) => {
+  if (contentType === 'european') {
+    middleContent.value = `
+      <div class="mb-6">
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Core customers:</h3>
+        </div>
+        <div class="text-sm lg:text-base space-y-2 ml-5">
+          <p>tourism platforms, environmental logistics companies, high-end camping resorts</p>
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Seed users: </h3>
+          <p>technology elites and environmental pioneers, industry KOLs</p>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Basic information and requirements:</h3>
+        </div>
+        <div class="text-sm lg:text-base space-y-2 ml-5">
+          <p>There are extremely high requirements for the environmental performance of ships, which comply with strict EU environmental regulations</p>
+          <p>Emphasize innovative technology experience and pursue high performance and security, while also requiring a comprehensive after-sales and maintenance network</p>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Type:</h3>
+        </div>
+        <p class="text-sm lg:text-base leading-relaxed ml-5">
+          High end sightseeing boat, green logistics boat, high-tech leisure boat, catering to both B-end procurement and C-end high-end consumers.
+        </p>
+      </div>
+
+      <div>
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Market opportunity:</h3>
+        </div>
+        <div class="text-sm lg:text-base space-y-2 ml-5">
+          <p>The European Union is one of the world's largest markets for large LNG carriers, with a market share of approximately 30%.</p>
+          <p>The tourism economy in the Mediterranean and Nordic islands is developed, and there is a stable demand for green and efficient sea transportation tools.</p>
+          <p>The EU's "Green Agreement" drives the upgrade of traditional shipping, providing huge subsidies and policy benefits for new energy ships.</p>
+          <p>The water sports culture is profound, and 67% of the general public prefer leisure and</p>
+        </div>
+      </div>
+    `
+  } else if (contentType === 'middle-east') {
+    // Middle East market content
+    middleContent.value = `
+      <div class="mb-6">
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Core customers:</h3>
+        </div>
+        <div class="text-sm lg:text-base space-y-2 ml-5">
+          <p>Royal affiliated enterprises, national energy companies, high-end tourism development groups</p>
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Seed users:</h3>
+          <p> Wealthy class, high-tech enterprises</p>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Basic information and requirements:</h3>
+        </div>
+        <div class="text-sm lg:text-base space-y-2 ml-5">
+          <p>Pursuing ultimate luxury, customization, and high performance, with low price sensitivity</p>
+          <p>As a symbol of identity and a 'mobile luxury palace', ships need to be designed to highlight their nobility</p>
+          <p>Need to adapt to high temperature environments and meet specific religious and cultural customs</p>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Type:</h3>
+        </div>
+        <p class="text-sm lg:text-base leading-relaxed ml-5">
+          Mainly targeting the B-end market, government and state-owned enterprises, and some C-end users
+        </p>
+      </div>
+
+      <div>
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Market opportunity:</h3>
+        </div>
+        <div class="text-sm lg:text-base space-y-2 ml-5">
+          <p>LNG expansion plans in countries such as Qatar and Saudi Arabia have generated a demand for high-end, green shipping solutions.</p>
+          <p>Saudi Arabia's "2030 Vision" vigorously develops tourism and logistics industries, and large-scale tourism projects in the Red Sea require supporting maritime transportation.</p>
+          <p>The wealthy class is vast and an important sales market for top luxury yachts worldwide.</p>
+        </div>
+      </div>
+    `
+  } else if (contentType === 'usa') {
+    // USA market content
+    middleContent.value = `
+      <div class="mb-6">
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Core customers:</h3>
+        </div>
+        <div class="text-sm lg:text-base space-y-2 ml-5">
+          <p>National Park Service, large boat rental chain brands, diving service companies</p>
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Seed users:</h3>
+          <p> yacht and water sports operators</p>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Basic information and needs:</h3>
+        </div>
+        <div class="text-sm lg:text-base space-y-2 ml-5">
+          <p>preference for high displacement and high-performance boats (8% of high-end users) and comfortable and safe leisure and entertainment boats (67% of general users)</p>
+          <p>Emphasize brand reputation and entertainment attributes, and have high requirements for the convenience and flexibility of leasing services</p>
+          <p>The demand for financing purchase and leasing solutions is widespread among C-end users</p>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Type:</h3>
+        </div>
+        <p class="text-sm lg:text-base leading-relaxed ml-5">
+          High horsepower sports speedboat, family leisure boat, park shuttle boat, with a high market share in the C-end market.
+        </p>
+      </div>
+
+      <div>
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Market opportunity:</h3>
+        </div>
+        <div class="text-sm lg:text-base space-y-2 ml-5">
+          <p>The United States is the world's largest yacht consumer market, with a water sports equipment market size of $79.9 billion by 2023.</p>
+          <p>There are numerous national parks and private lakes, and there are a large number of government orders for the upgrading of green transportation within the scenic areas.</p>
+          <p>The demand for outdoor leisure and entertainment continues to be strong, and the rental market is active.</p>
+        </div>
+      </div>
+    `
+  } else if (contentType === 'china') {
+    // China market content
+    middleContent.value = `
+      <div class="mb-6">
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Core customers:</h3>
+        </div>
+        <div class="text-sm lg:text-base space-y-2 ml-5">
+          <p>local governments and large state-owned enterprises</p>
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Seed users: </h3>
+          <p>Yacht and water sports operators</p>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Basic information and requirements:</h3>
+        </div>
+        <div class="text-sm lg:text-base space-y-2 ml-5">
+          <p>The cost-effectiveness of higher products requires environmental protection and intelligent technology, which is easy to manage</p>
+          <p>Comprehensive after-sales service</p>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Type:</h3>
+        </div>
+        <p class="text-sm lg:text-base leading-relaxed ml-5">
+          Mainly targeting the B-end market, government and state-owned enterprises, and some C-end users
+        </p>
+      </div>
+
+      <div>
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Market opportunity:</h3>
+        </div>
+        <div class="text-sm lg:text-base space-y-2 ml-5">
+          <p>China is the "core engine" of global shipbuilding, with a global share of over 45% in ship exports by 2024.</p>
+          <p>The demand for gas powered boats in the market has significantly increased.</p>
+          <p>The green and intelligent transformation of inland and coastal vessels is a clear direction, and the plan is to achieve comprehensive green and intelligent transformation of inland vessels by 2030.</p>
+          <p>The "the Belt and Road" initiative has deepened cooperation with Southeast Asia, the Middle East and other places, bringing demand for engineering ships related to infrastructure.</p>
+        </div>
+      </div>
+    `
+  } else if (contentType === 'southeast-asia') {
+    // Southeast Asia market content
+    middleContent.value = `
+      <div class="mb-6">
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Core customers:</h3>
+        </div>
+        <div class="text-sm lg:text-base space-y-2 ml-5">
+          <p>High end resort groups, emerging shipping companies, yacht clubs</p>
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Seed users:</h3>
+          <p> Local tourism operators and start-up technology companies</p>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Basic information and requirements:</h3>
+        </div>
+        <div class="text-sm lg:text-base space-y-2 ml-5">
+          <p>Highly concerned about the cost-effectiveness and operating costs of products</p>
+          <p>Ships need to adapt to high temperature and high salinity tropical marine environments with strong corrosion resistance</p>
+          <p>There are requirements for the product's multifunctionality (such as being able to meet both connectivity and sightseeing needs)</p>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Type:</h3>
+        </div>
+        <p class="text-sm lg:text-base leading-relaxed ml-5">
+          High end private yachts, island shuttle ships, and offshore transport ships are mainly purchased from the B-end.
+        </p>
+      </div>
+
+      <div>
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Market opportunity:</h3>
+        </div>
+        <div class="text-sm lg:text-base space-y-2 ml-5">
+          <p>Southeast Asia's island tourism industry is recovering rapidly, and the development of new vacation projects is driving demand for new transportation tools.</p>
+          <p>The growth of regional trade and the deepening of the "the Belt and Road" initiative promote the development of green offshore shipping.</p>
+          <p>The upgrading of infrastructure in various countries has led to an increase in demand for ships related to port dredging and engineering construction.</p>
+        </div>
+      </div>
+    `
+  } else if (contentType === 'default') {
+    // Reset to original content
+    middleContent.value = `
+      <div class="mb-6">
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Target Customers:</h3>
+        </div>
+        <div class="text-sm lg:text-base space-y-2 ml-5">
+          <p>High end resort groups, emerging shipping companies, yacht clubs</p>
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Seed users: </h3>
+          <p>Local tourism operators and start-up technology companies</p>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Requirements:</h3>
+        </div>
+        <div class="text-sm lg:text-base space-y-2 ml-5">
+          <p>Highly concerned about cost-effectiveness and operating costs of products</p>
+          <p>Ships need to adapt to high temperature and high salinity tropical marine environments with strong corrosion resistance</p>
+          <p>Requirements for product multifunctionality (connectivity and sightseeing needs)</p>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Type:</h3>
+        </div>
+        <p class="text-sm lg:text-base leading-relaxed ml-5">
+          High end private yachts, island shuttle ships, and offshore transport ships are mainly purchased from the B-end
+        </p>
+      </div>
+
+      <div>
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Market Opportunity:</h3>
+        </div>
+        <div class="text-sm lg:text-base space-y-2 ml-5">
+          <p>Southeast Asia's island tourism industry is recovering rapidly, driving demand for new transportation tools</p>
+          <p>Growth of regional trade and "Belt and Road" initiative promote green offshore shipping development</p>
+          <p>Infrastructure upgrading increases demand for port dredging and engineering construction ships</p>
+        </div>
+      </div>
+    `
+  }
+}
+
+const updateRightContent = (contentType) => {
+  if (contentType === 'european') {
+    rightContent.value = {
+      name: 'Marco Schmidt',
+      title: 'Partner of high-end camping resort',
+      bio: 'Operating multiple ecological resorts in Norwegian fjords and the Greek island of Mikonos, providing guests with unique sea sightseeing and island shuttle services, committed to creating a zero carbon footprint travel experience.',
+      requirements: [
+        'Zero emissions, fully electric, in compliance with local environmental regulations',
+        'Quiet and stable, enhancing the sightseeing experience',
+        'Strong cold resistance in winter, suitable for Nordic climate',
+        'The brand has an environmentally friendly tone and can serve as a marketing highlight'
+      ],
+      backgroundImage: '/src/assets/icon-6-2.png',
+      personImage: '/src/assets/icon-6-1.png'
+    }
+  } else if (contentType === 'southeast-asia') {
+    rightContent.value = {
+      name: 'Banyan Tree Group',
+      title: 'High end resort operator',
+      bio: 'Resorts in Phuket, Bali, and other places need to provide transportation services between private islands, coral reefs, and main hotels for guests, pursuing a unique luxury experience.',
+      requirements: [
+        'Design modern luxury that matches the brand tone and is suitable for taking photos and clocking in',
+        'Smooth and quiet operation, enhancing guest experience',
+        'Green environmental protection, as a highlight of corporate social responsibility (CSR) promotion',
+        'High reliability, avoiding the impact of faults on guest travel'
+      ],
+      backgroundImage: '/src/assets/icon-7-2.png',
+      personImage: '/src/assets/icon-7-1.png'
+    }
+  } else if (contentType === 'usa') {
+    rightContent.value = {
+      name: 'Sarah Johnson',
+      title: 'Founder of a leasing company',
+      bio: 'Operating water sports equipment and boat rentals in the Florida Keys, our clients are mostly family vacationers and diving enthusiasts, hoping to provide new options that are more environmentally friendly and easy to operate.',
+      requirements: [
+        'Easy to operate, easy for beginners to get started in a short period of time',
+        'Durable and sturdy, able to adapt to high-frequency rental use',
+        'Low maintenance costs and convenient supply of components',
+        'Equipped with practical functions such as diving platform and surfboard rack'
+      ],
+      backgroundImage: '/src/assets/icon-9-2.png',
+      personImage: '/src/assets/icon-9-1.png'
+    }
+  } else if (contentType === 'middle-east') {
+    rightContent.value = {
+      name: 'Sheikh Ahmed Al Maktoum',
+      title: 'Senior executive of a royal affiliated investment company in Dubai',
+      bio: 'Passionate about water sports and high-tech products, plans to purchase a batch of new boats for its private island and yacht club for entertaining VIPs and family entertainment.',
+      requirements: [
+        'Top tier design and craftsmanship, showcasing identity and status',
+        'Equipped with the latest technology and excellent performance',
+        'Highly personalized customization is possible',
+        'Provide top-notch global after-sales service and crew training support'
+      ],
+      backgroundImage: '/src/assets/icon-10-2.png',
+      personImage: '/src/assets/icon-10-1.png'
+    }
+  } else {
+    // Default content (Mr Chen)
+    rightContent.value = {
+      name: 'Mr Chen',
+      title: 'General Manager of Yacht Club',
+      bio: 'To operate yacht rental, water transportation, and water sports businesses in Dameisha, Shenzhen, it is necessary to introduce new products to enrich the tourist experience.',
+      requirements: [
+        'The product is innovative and has recognition',
+        'Efficient and energy-saving, easy to operate',
+        'Environmental Protection and Scenic Area Protection Requirements'
+      ],
+      backgroundImage: '/src/assets/icon-4.png',
+      personImage: '/src/assets/icon-5.png'
+    }
+  }
+}
+
+// Modal state
+const showModal = ref(false)
+const currentImageIndex = ref(0)
+const currentImages = ref([])
+
+// nav
+const goHome = () => {
+	router.push('/')
+}
+
+// Image sets for each gallery item
+const imageSets = {
+  1: ['/src/assets/img/view-1.png', '/src/assets/img/view-2.png', '/src/assets/img/view-3.png'],
+  2: ['/src/assets/img/view-2.png', '/src/assets/img/view-3.png', '/src/assets/img/view-4.png'],
+  3: ['/src/assets/img/view-3.png', '/src/assets/img/view-4.png', '/src/assets/img/view-1.png'],
+  4: ['/src/assets/img/view-4.png', '/src/assets/img/view-1.png', '/src/assets/img/view-2.png']
+}
+
+const openModal = (imageSet, index = 0) => {
+  currentImages.value = imageSets[imageSet]
+  currentImageIndex.value = index
+  showModal.value = true
+  // Prevent body scroll when modal is open
+  document.body.style.overflow = 'hidden'
+}
+
+const closeModal = () => {
+  showModal.value = false
+  // Restore body scroll
+  document.body.style.overflow = 'auto'
+}
+
+const prevImage = () => {
+  if (currentImageIndex.value > 0) {
+    currentImageIndex.value--
+  }
+}
+
+const nextImage = () => {
+  if (currentImageIndex.value < currentImages.value.length - 1) {
+    currentImageIndex.value++
+  }
+}
 </script>
 
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900 relative">
-    <!-- navItems: 导航栏 -->
-    <Navigation :nav-items="navItems" />
+  <div class="bg-center bg-no-repeat relative flex flex-col min-h-screen w-full"
+       style="background: url('/src/assets/icon-3.png'); background-size: 100% 100%;">
+    <!-- Navigation -->
+    <!-- 顶部导航栏 -->
+    <nav class="top-nav">
+      <div class="nav-container">
+        <!-- 返回首页按钮 -->
+        <div class="home-btn" @click="goHome">
+          <div class="home-icon">
+            <img src="../assets/nav_back.png" alt="Home" />
+          </div>
+        </div>
+        <div class="nav-divider"></div>
 
+        <router-link to="/industry-background" class="nav-item">Industry Background</router-link>
+        <div class="nav-divider"></div>
+        <div class="nav-item active">Market Demand</div>
+        <div class="nav-divider"></div>
+        <router-link to="/business-model" class="nav-item">Business Model</router-link>
+        <div class="nav-divider"></div>
+        <router-link to="/team-composition" class="nav-item">Team Composition</router-link>
+        <div class="nav-divider"></div>
+        <router-link to="/product-introduction" class="nav-item">Product Introduction</router-link>
+      </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <div class="flex flex-col lg:flex-row flex-1 min-h-0" style="padding-top: 71px;">
+      <!-- Left Content -->
+      <div class="flex-1 flex items-center justify-center relative min-w-0">
+        <!-- Circle Container -->
+        <div class="relative w-[830px] h-[830px] max-w-full max-h-full" style="transform: scale(min(1.5, calc(100vw / 3 / 600px), calc((100vh - 200px) / 600px))); transform-origin: left;">
+          <!-- 830x830 white circle -->
+          <div class="ring"></div>
+
+          <!-- Icons positioned along the circle -->
+          <div class="absolute top-0 left-0 w-full h-full">
+            <!-- Icon 6 - 30 degrees -->
+            <div class="absolute icon-6-container icon-container transition-all duration-300 flex items-center cursor-pointer" style="top: 70px; left: 100px;" @click="activateIcon('icon-6-container', 'european', 'european')" @mouseenter="activateIcon('icon-6-container', 'european', 'european')" @mouseleave="activateIcon('icon-8-container', 'china', 'default')">
+              <!-- White dot 10x10 -->
+              <div class="w-[10px] h-[10px] bg-white rounded-full dot-container-dot relative"></div>
+              <!-- Map image icon-6.png 100x100 -->
+              <img src="/src/assets/icon-6.png" alt="板块一" class="w-[100px] h-[100px] object-contain ml-[40px] icon-image" />
+              <!-- Positioning dot icon-11.png 8x11 -->
+              <img src="/src/assets/icon-11.png" alt="定位点" class="w-[8px] h-[11px] object-contain ml-1 mr-2 icon-dot" />
+              <!-- Location name -->
+              <span class="text-white text-sm font-medium ml-1 shadow-lg icon-text">Italian</span>
+            </div>
+
+            <!-- Icon 7 - 60 degrees -->
+            <div class="absolute icon-7-container icon-container transition-all duration-300 flex items-center cursor-pointer" style="top: 180px; left: 180px;" @click="activateIcon('icon-7-container', 'southeast-asia', 'southeast-asia')" @mouseenter="activateIcon('icon-7-container', 'southeast-asia', 'southeast-asia')" @mouseleave="activateIcon('icon-8-container', 'china', 'default')">
+              <!-- White dot 10x10 -->
+              <div class="w-[10px] h-[10px] bg-white rounded-full dot-container-dot relative"></div>
+              <!-- Map image icon-7.png 100x100 -->
+              <img src="/src/assets/icon-7.png" alt="板块二" class="w-[100px] h-[100px] object-contain ml-[40px] icon-image" />
+              <!-- Positioning dot icon-11.png 8x11 -->
+              <img src="/src/assets/icon-11.png" alt="定位点" class="w-[8px] h-[11px] object-contain ml-1 mr-2 icon-dot" />
+              <!-- Location name -->
+              <span class="text-white text-sm font-medium ml-1 shadow-lg icon-text">Southeast Asia</span>
+            </div>
+
+            <!-- Icon 8 - 90 degrees -->
+            <div class="absolute icon-8-container icon-container transition-all duration-300 flex items-center cursor-pointer active-icon" style="top: 320px; left: 221px;" @click="activateIcon('icon-8-container', 'china', 'default')" @mouseenter="activateIcon('icon-8-container', 'china', 'default')" @mouseleave="activateIcon('icon-8-container', 'china', 'default')">
+              <!-- White dot 10x10 -->
+              <div class="w-[10px] h-[10px] bg-white rounded-full dot-container-dot relative"></div>
+              <!-- Map image icon-8.png 100x100 -->
+              <img src="/src/assets/icon-8.png" alt="板块三" class="w-[100px] h-[100px] object-contain ml-[40px] icon-image" />
+              <!-- Positioning dot icon-11.png 8x11 -->
+              <img src="/src/assets/icon-11.png" alt="定位点" class="w-[8px] h-[11px] object-contain ml-2 mr-2 icon-dot" />
+              <!-- Location name -->
+              <span class="text-white text-sm font-medium ml-1 shadow-lg icon-text">China</span>
+            </div>
+
+            <!-- Icon 9 - 120 degrees -->
+            <div class="absolute icon-9-container icon-container transition-all duration-300 flex items-center cursor-pointer" style="top: 460px; left: 213px;" @click="activateIcon('icon-9-container', 'usa', 'usa')" @mouseenter="activateIcon('icon-9-container', 'usa', 'usa')" @mouseleave="activateIcon('icon-8-container', 'china', 'default')">
+              <!-- White dot 10x10 -->
+              <div class="w-[10px] h-[10px] bg-white rounded-full dot-container-dot relative"></div>
+              <!-- Map image icon-9.png 100x100 -->
+              <img src="/src/assets/icon-9.png" alt="板块四" class="w-[100px] h-[100px] object-contain ml-[40px] icon-image" />
+              <!-- Positioning dot icon-11.png 8x11 -->
+              <img src="/src/assets/icon-11.png" alt="定位点" class="w-[8px] h-[11px] object-contain ml-1 mr-2 icon-dot" />
+              <!-- Location name -->
+              <span class="text-white text-sm font-medium ml-1 shadow-lg icon-text">America</span>
+            </div>
+
+            <!-- Icon 10 - 150 degrees -->
+            <div class="absolute icon-10-container icon-container transition-all duration-300 flex items-center cursor-pointer" style="top: 600px; left: 150px;" @click="activateIcon('icon-10-container', 'middle-east', 'middle-east')" @mouseenter="activateIcon('icon-10-container', 'middle-east', 'middle-east')" @mouseleave="activateIcon('icon-8-container', 'china', 'default')">
+              <!-- White dot 10x10 -->
+              <div class="w-[10px] h-[10px] bg-white rounded-full dot-container-dot relative"></div>
+              <!-- Map image icon-10.png 100x100 -->
+              <img src="/src/assets/icon-10.png" alt="板块五" class="w-[100px] h-[100px] object-contain ml-[40px] icon-image" />
+              <!-- Positioning dot icon-11.png 8x11 -->
+              <img src="/src/assets/icon-11.png" alt="定位点" class="w-[8px] h-[11px] object-contain ml-1 mr-2 icon-dot" />
+              <!-- Location name -->
+              <span class="text-white text-sm font-medium ml-1 shadow-lg icon-text">Middle East</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Middle Content-->
+      <div class="flex-2 flex items-start justify-center px-0 py-4 lg:py-8 min-w-0">
+        <div class="text-white w-full max-w-4xl">
+          <div class="bg-white/10 backdrop-blur-sm rounded-lg shadow-lg border border-white/20 p-4 lg:p-6">
+            <div class="space-y-4" v-html="middleContent"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Content -->
+      <div class="flex-1 flex items-start justify-center px-0 py-4 lg:py-8 min-w-0">
+        <div class="text-white w-full max-w-4xl px-8 lg:px-8">
+          <div class="bg-cover bg-center bg-no-repeat rounded-[10px] shadow-xl border border-white/20 overflow-hidden bg-white/10"
+               :style="`background-image: url('${rightContent.backgroundImage}'); background-blend-mode: overlay;`">
+
+            <!-- Person Introduction Header -->
+            <div class="bg-white/10 p-4 border-b border-white/20 shadow-inner">
+              <div class="flex items-center justify-between">
+                <div class="flex-1">
+                  <h2 class="text-2xl lg:text-1xl font-bold mb-1">{{ rightContent.name }}</h2>
+                  <p class="text-sm lg:text-base opacity-90">{{ rightContent.title }}</p>
+                </div>
+                <div class="ml-2 lg:ml-4">
+                  <img :src="rightContent.personImage" :alt="rightContent.name" class="w-[72px] h-[72px] lg:w-[92px] lg:h-[92px] rounded-[10px] object-cover shadow-xl" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Requirements Content -->
+            <div class="bg-white/10 p-4 shadow-inner">
+              <div class="space-y-4">
+                <p class="text-sm lg:text-base leading-relaxed">
+                  {{ rightContent.bio }}
+                </p>
+
+                <div>
+                  <h3 class="text-lg lg:text-xl font-semibold mb-3 flex items-center">
+                    Core Requirements:
+                  </h3>
+                  <div class="text-sm lg:text-base space-y-2">
+                    <p v-for="(requirement, index) in rightContent.requirements" :key="index" :class="{'border-b pb-2 border-white/20': index < rightContent.requirements.length - 1}">
+                      {{ requirement }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Content: Image Gallery -->
+    <div class="fixed bottom-4 left-0 right-0 h-[175px]">
+      <div class="relative w-full h-full">
+        <!-- Image 1 -->
+        <div class="gallery-item" @click="openModal(1)">
+          <img src="/src/assets/img/view-1.png" alt="Gallery Image 1" class="w-full h-full object-cover" />
+          <div class="image-mask absolute inset-0 bg-black/30 flex items-center justify-center transition-opacity duration-300">
+            <div class="text-content bg-black/50 px-4 py-2 rounded">
+              <p class="text-white text-sm font-medium">Gallery Image 1</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Image 2 -->
+        <div class="gallery-item" @click="openModal(2)">
+          <img src="/src/assets/img/view-2.png" alt="Gallery Image 2" class="w-full h-full object-cover" />
+          <div class="image-mask absolute inset-0 bg-black/30 flex items-center justify-center transition-opacity duration-300">
+            <div class="text-content bg-black/50 px-4 py-2 rounded">
+              <p class="text-white text-sm font-medium">Gallery Image 2</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Image 3 -->
+        <div class="gallery-item" @click="openModal(3)">
+          <img src="/src/assets/img/view-3.png" alt="Gallery Image 3" class="w-full h-full object-cover" />
+          <div class="image-mask absolute inset-0 bg-black/30 flex items-center justify-center transition-opacity duration-300">
+            <div class="text-content bg-black/50 px-4 py-2 rounded">
+              <p class="text-white text-sm font-medium">Gallery Image 3</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Image 4 -->
+        <div class="gallery-item" @click="openModal(4)">
+          <img src="/src/assets/img/view-4.png" alt="Gallery Image 4" class="w-full h-full object-cover" />
+          <div class="image-mask absolute inset-0 bg-black/30 flex items-center justify-center transition-opacity duration-300">
+            <div class="text-content bg-black/50 px-4 py-2 rounded">
+              <p class="text-white text-sm font-medium">Gallery Image 4</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Image Gallery Modal -->
+    <div v-if="showModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4" @click="closeModal">
+      <div class="relative max-w-4xl max-h-[90vh] w-full" @click.stop>
+        <!-- Close Button -->
+        <button @click="closeModal" class="absolute top-4 right-4 text-gray-300 bg-black/50 hover:bg-black/70 rounded-full p-2 z-10 transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="gray" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+
+        <!-- Navigation Buttons -->
+        <button v-if="currentImageIndex > 0" @click.stop="prevImage" class="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-300 bg-black/50 hover:bg-black/70 rounded-full p-3 z-10 transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="gray" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+
+        <button v-if="currentImageIndex < currentImages.length - 1" @click.stop="nextImage" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-300 bg-black/50 hover:bg-black/70 rounded-full p-3 z-10 transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="gray" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+
+        <!-- Current Image -->
+        <img :src="currentImages[currentImageIndex]" :alt="`Gallery Image ${currentImageIndex + 1}`" class="w-full h-full object-contain rounded-lg" />
+
+        <!-- Image Counter -->
+        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white bg-black/50 px-4 py-2 rounded-full text-sm">
+          {{ currentImageIndex + 1 }} / {{ currentImages.length }}
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
+<style scoped>
+/* 顶部导航栏 */
+.home-btn {
+	cursor: pointer;
+	transition: all 0.3s ease;
+	padding: 5px;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.1);
+	backdrop-filter: blur(10px);
+}
+
+.home-btn:hover {
+	background: rgba(0, 212, 255, 0.2);
+	transform: scale(1.1);
+}
+
+.home-icon {
+	width: 20px;
+	height: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.home-icon img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+.top-nav {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	background: rgba(0, 0, 0, 0.8);
+	backdrop-filter: blur(10px);
+	z-index: 40;
+	padding: 15px 0;
+}
+
+.nav-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 12px;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 12px;
+	flex-wrap: wrap;
+}
+
+@media (min-width: 1024px) {
+	.nav-container {
+		gap: 20px;
+		padding: 0 20px;
+		flex-wrap: nowrap;
+	}
+}
+
+.nav-item {
+	padding: 8px 12px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	position: relative;
+	font-size: 12px;
+	font-weight: 500;
+	text-decoration: none;
+	color: #ffffff;
+	text-align: center;
+}
+
+@media (min-width: 1024px) {
+	.nav-item {
+		padding: 10px 20px;
+		font-size: 14px;
+	}
+}
+
+.nav-item:hover {
+	color: #00d4ff;
+}
+
+.nav-item.active {
+	color: #00d4ff;
+}
+
+.nav-item.active::after {
+	content: '';
+	position: absolute;
+	bottom: -5px;
+	left: 0;
+	right: 0;
+	height: 2px;
+	background: #00d4ff;
+}
+
+.nav-divider {
+	width: 1px;
+	height: 20px;
+	background: rgba(255, 255, 255, 0.3);
+}
+
+.ring {
+  position: absolute;
+  left: -600px;
+  top: 0px;
+	width: 830px;
+	height: 830px;
+	border: 3px solid white;
+	border-radius: 50%;
+}
+
+.gallery-item {
+  position: absolute;
+  bottom: 0;
+  width: 312px;
+  height: 125px;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+  border: 2px solid rgba(128, 128, 128, 0.5);
+  transition: height 0.3s ease;
+}
+
+.gallery-item:nth-child(1) {
+  left: calc(50% - min(642px, 45vw));
+}
+
+.gallery-item:nth-child(2) {
+  left: calc(50% - min(318px, 22.5vw));
+}
+
+.gallery-item:nth-child(3) {
+  left: calc(50% + min(6px, 0.5vw));
+}
+
+.gallery-item:nth-child(4) {
+  left: calc(50% + min(330px, 23.5vw));
+}
+
+@media (max-width: 1440px) {
+  .gallery-item {
+    width: min(312px, 20vw);
+    height: min(125px, 8vh);
+  }
+
+  .gallery-item:hover {
+    height: min(175px, 12vh);
+  }
+}
+
+@media (max-width: 1024px) {
+  .gallery-item {
+    width: min(280px, 22vw);
+    height: min(110px, 7vh);
+  }
+
+  .gallery-item:hover {
+    height: min(150px, 10vh);
+  }
+
+  .gallery-item:nth-child(1) {
+    left: calc(50% - min(420px, 42vw));
+  }
+
+  .gallery-item:nth-child(2) {
+    left: calc(50% - min(145px, 14vw));
+  }
+
+  .gallery-item:nth-child(3) {
+    left: calc(50% + min(5px, 0.5vw));
+  }
+
+  .gallery-item:nth-child(4) {
+    left: calc(50% + min(155px, 15vw));
+  }
+}
+
+.gallery-item:hover {
+  height: 175px;
+}
+
+.gallery-item:hover .image-mask {
+  opacity: 0;
+}
+
+.gallery-item {
+  cursor: pointer;
+}
+
+/* Middle Content responsive font sizes */
+@media (max-width: 1024px) {
+  .text-responsive-title {
+    font-size: 1.125rem;
+  }
+
+  .text-responsive-content {
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .text-responsive-title {
+    font-size: 1rem;
+  }
+
+  .text-responsive-content {
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .text-responsive-title {
+    font-size: 0.875rem;
+  }
+
+  .text-responsive-content {
+    font-size: 0.8rem;
+  }
+}
+
+.dot-container-dot::after {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border: 1px solid white;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.icon-6-container:hover .dot-container-dot::after {
+  opacity: 1;
+}
+
+.icon-image {
+  transform: scale(1);
+  transition: transform 0.3s ease;
+  transform-origin: center;
+}
+
+.icon-text {
+  transform: scale(1);
+  transition: transform 0.3s ease;
+  color: #cccccc;
+  transform-origin: left;
+}
+
+.icon-dot {
+  transform: scale(1);
+  transition: transform 0.3s ease;
+  transform-origin: left;
+}
+
+.icon-6-container:hover .icon-image {
+  transform: scale(1.4);
+}
+
+.icon-6-container:hover .icon-text {
+  transform: scale(1.4);
+  color: white;
+}
+
+.icon-6-container:hover .icon-dot {
+  transform: scale(1.4);
+}
+
+.icon-7-container:hover .dot-container-dot::after {
+  opacity: 1;
+}
+
+.icon-7-container:hover .icon-image {
+  transform: scale(1.4);
+}
+
+.icon-7-container:hover .icon-text {
+  transform: scale(1.4);
+  color: white;
+}
+
+.icon-7-container:hover .icon-dot {
+  transform: scale(1.4);
+}
+
+.icon-8-container:hover .dot-container-dot::after {
+  opacity: 1;
+}
+
+.icon-8-container:hover .icon-image {
+  transform: scale(1.4);
+}
+
+.icon-8-container:hover .icon-text {
+  transform: scale(1.4);
+  color: white;
+}
+
+.icon-8-container:hover .icon-dot {
+  transform: scale(1.4);
+}
+
+.icon-9-container:hover .dot-container-dot::after {
+  opacity: 1;
+}
+
+.icon-9-container:hover .icon-image {
+  transform: scale(1.4);
+}
+
+.icon-9-container:hover .icon-text {
+  transform: scale(1.4);
+  color: white;
+}
+
+.icon-9-container:hover .icon-dot {
+  transform: scale(1.4);
+}
+
+.icon-10-container:hover .dot-container-dot::after {
+  opacity: 1;
+}
+
+.icon-10-container:hover .icon-image {
+  transform: scale(1.4);
+}
+
+.icon-10-container:hover .icon-text {
+  transform: scale(1.4);
+  color: white;
+}
+
+.icon-10-container:hover .icon-dot {
+  transform: scale(1.4);
+}
+
+/* Active state styles for default hover effect */
+.icon-container.active-icon .dot-container-dot::after {
+  opacity: 1;
+}
+
+.icon-container.active-icon .icon-image {
+  transform: scale(1.4);
+}
+
+.icon-container.active-icon .icon-text {
+  transform: scale(1.4);
+  color: white;
+}
+
+.icon-container.active-icon .icon-dot {
+  transform: scale(1.4);
+}
+</style>

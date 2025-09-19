@@ -7,6 +7,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 import Globe from 'globe.gl'
+import * as THREE from 'three'
 import * as satellite from '../assets/satellite.mjs'
 import { csvParseRows } from '../assets/d3-dsv.mjs'
 
@@ -19,6 +20,7 @@ let globe = null
 let animationId = null
 let currentWidth = 0
 let currentHeight = 0
+let customMarkers = []
 
 // Constants like reference code
 const EARTH_RADIUS_KM = 6371
@@ -63,8 +65,10 @@ onMounted(async () => {
           .arcDashInitialGap(() => Math.random() * 5)
           .arcDashAnimateTime(2000)
           .pointsData([])
-          .pointAltitude('size')
+          .pointAltitude(d => d.altitude || 0.01)
           .pointColor('color')
+          .pointRadius(d => d.size || 0.3)
+          .pointLabel('')
           .onPointClick(point => {
             emit('city-click', {
               city: point.city,
@@ -74,16 +78,39 @@ onMounted(async () => {
               lng: point.lng
             })
           })
-          .labelsData([])
-          .labelLat('lat')
-          .labelLng('lng')
-          .labelText('label')
-          .labelSize(1.8)
-          .labelDotRadius(0.1)
-          .labelColor(() => 'rgba(255, 255, 255, 0.95)')
-          .labelResolution(4)
-          .labelAltitude(0.05)
-          .labelIncludeDot(false)
+          .htmlElementsData([])
+          .htmlLat('lat')
+          .htmlLng('lng')
+          .htmlElement(d => {
+            const el = document.createElement('div')
+            el.innerHTML = d.label
+            el.style.pointerEvents = 'auto'
+            el.style.cursor = 'pointer'
+            el.addEventListener('click', () => {
+              emit('city-click', {
+                city: d.city,
+                country: d.country,
+                name: d.name,
+                lat: d.lat,
+                lng: d.lng
+              })
+            })
+            // Add hover events to control globe rotation
+            el.addEventListener('mouseenter', () => {
+              const controls = globe.controls()
+              if (controls) {
+                controls.autoRotate = false
+              }
+            })
+            el.addEventListener('mouseleave', () => {
+              const controls = globe.controls()
+              if (controls) {
+                controls.autoRotate = true
+              }
+            })
+            return el
+          })
+          .htmlAltitude(d => d.altitude || 0.01)
 
         // Mount to container
         globe(globeContainer.value)
@@ -105,6 +132,9 @@ onMounted(async () => {
           } catch (error) {
             console.warn('Could not configure controls:', error)
           }
+
+          // Add render listener after globe is initialized
+          addRenderListener()
         }, 500)
 
         console.log('Globe initialized, loading satellite data...')
@@ -143,6 +173,13 @@ onUnmounted(() => {
   if (animationId) {
     cancelAnimationFrame(animationId)
   }
+
+  // Clear custom markers
+  customMarkers.forEach(marker => {
+    if (marker.element && marker.element.parentNode) {
+      marker.element.parentNode.removeChild(marker.element)
+    }
+  })
 
   if (globe) {
     globe._destructor()
@@ -314,22 +351,31 @@ const loadAirlineData = () => {
         color: ['red', 'white', 'blue', 'green'][Math.round(Math.random() * 3)]
       }))
 
-    // Process airports for points data like reference code
+    // Process airports for points data with native point styling
     const pointsData = mockAirports.map(d => ({
       lat: +d.lat,
       lng: +d.lng,
-      size: 0.05,
-      color: 'orange',
+      size: 0.8, // Larger base size
+      color: 'red', // Red color for the main point
       city: d.city,
       country: d.country,
-      name: d.name
+      name: d.name,
+      altitude: 0.005
     }))
 
-    // Process airports for labels data
+    // Process airports for custom text labels
     const labelsData = mockAirports.map(d => ({
       lat: +d.lat,
       lng: +d.lng,
-      label: d.city
+      city: d.city,
+      country: d.country,
+      name: d.name,
+      altitude: 0.01,
+      label: `
+        <div style="margin-top: 84px; padding: 4px 8px; background-color: rgba(0, 0, 0, 0.8); border: 2px solid #06b6d4; border-radius: 4px; color: white; font-size: 16px; white-space: nowrap; font-family: system-ui, -apple-system, sans-serif;">
+          ${d.city}
+        </div>
+      `
     }))
 
     console.log(`Loaded ${arcsData.length} flight routes, ${pointsData.length} airports, and ${labelsData.length} labels`)
@@ -338,10 +384,139 @@ const loadAirlineData = () => {
     globe
       .arcsData(arcsData)
       .pointsData(pointsData)
-      .labelsData(labelsData)
+      .htmlElementsData(labelsData)
 
   } catch (error) {
     console.error('Error loading airline data:', error)
+  }
+}
+
+// Create custom markers for airport points
+const createCustomMarkers = (pointsData) => {
+  // Clear existing markers
+  customMarkers.forEach(marker => {
+    if (marker.element && marker.element.parentNode) {
+      marker.element.parentNode.removeChild(marker.element)
+    }
+  })
+  customMarkers = []
+
+  console.log('Creating custom markers for points:', pointsData.length)
+
+  pointsData.forEach((point, index) => {
+    // Create marker container
+    const markerElement = document.createElement('div')
+    markerElement.style.position = 'absolute'
+    markerElement.style.transform = 'translate(-50%, -50%)'
+    markerElement.style.pointerEvents = 'auto'
+    markerElement.style.cursor = 'pointer'
+    markerElement.style.zIndex = '1000'
+
+    // Create icon image element
+    const iconElement = document.createElement('img')
+    iconElement.src = '/src/assets/icon-2.png'
+    iconElement.style.width = '40px'
+    iconElement.style.height = '40px'
+    iconElement.style.position = 'relative'
+    iconElement.style.display = 'block'
+    iconElement.alt = `${point.city} airport icon`
+
+    // Create label with black semi-transparent background and cyan border
+    const labelElement = document.createElement('div')
+    labelElement.textContent = point.city
+    labelElement.style.position = 'absolute'
+    labelElement.style.top = '50px'
+    labelElement.style.left = '50%'
+    labelElement.style.transform = 'translateX(-50%)'
+    labelElement.style.backgroundColor = 'rgba(0, 0, 0, 0.8)'
+    labelElement.style.border = '2px solid #06b6d4'
+    labelElement.style.borderRadius = '4px'
+    labelElement.style.color = 'white'
+    labelElement.style.padding = '2px 6px'
+    labelElement.style.fontSize = '10px'
+    labelElement.style.whiteSpace = 'nowrap'
+    labelElement.style.fontFamily = 'system-ui, -apple-system, sans-serif'
+
+    // Add click event
+    markerElement.addEventListener('click', () => {
+      emit('city-click', {
+        city: point.city,
+        country: point.country,
+        name: point.name,
+        lat: point.lat,
+        lng: point.lng
+      })
+    })
+
+    // Build the marker structure
+    markerElement.appendChild(iconElement)
+    markerElement.appendChild(labelElement)
+    globeContainer.value.appendChild(markerElement)
+
+    console.log(`Created marker for ${point.city} at index ${index}`)
+
+    customMarkers.push({
+      element: markerElement,
+      point: point,
+      index: index
+    })
+  })
+
+  // Update marker positions
+  updateMarkerPositions()
+}
+
+// Update marker positions based on globe projection
+const updateMarkerPositions = () => {
+  if (!globe || !globeContainer.value) return
+
+  const containerRect = globeContainer.value.getBoundingClientRect()
+
+  customMarkers.forEach((marker, index) => {
+    try {
+      // Get coordinates from globe using 3D projection
+      const vector = globe.getPointPos(marker.point.lat, marker.point.lng, 0.01)
+
+      if (vector) {
+        // Get camera and project 3D to 2D
+        const camera = globe.camera()
+        vector.project(camera)
+
+        // Convert to screen coordinates
+        const x = (vector.x + 1) * containerRect.width / 2
+        const y = (-vector.y + 1) * containerRect.height / 2
+
+        // Only show if in front of camera
+        if (vector.z < 1) {
+          marker.element.style.left = `${x}px`
+          marker.element.style.top = `${y}px`
+          marker.element.style.display = 'block'
+        } else {
+          marker.element.style.display = 'none'
+        }
+      } else {
+        marker.element.style.display = 'none'
+      }
+    } catch (error) {
+      marker.element.style.display = 'none'
+    }
+  })
+}
+
+// Update markers on globe rotation
+const onGlobeRender = () => {
+  updateMarkerPositions()
+}
+
+// Add render listener to update markers continuously
+const addRenderListener = () => {
+  if (globe) {
+    // Add animation loop to continuously update markers
+    const animate = () => {
+      updateMarkerPositions()
+      requestAnimationFrame(animate)
+    }
+    animate()
   }
 }
 </script>
