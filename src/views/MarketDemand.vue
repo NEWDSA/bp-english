@@ -102,7 +102,7 @@ const nextImage = () => {
       <!-- Left Content -->
       <div class="flex-1 flex items-center justify-center relative min-w-0">
         <!-- Circle Container -->
-        <div class="relative w-[830px] h-[830px] max-w-full max-h-full" style="transform: scale(min(1, calc(100vw / 3 / 830px), calc((100vh - 200px) / 830px))); transform-origin: center;">
+        <div class="relative w-[830px] h-[830px] max-w-full max-h-full" style="transform: scale(min(1.5, calc(100vw / 3 / 600px), calc((100vh - 200px) / 600px))); transform-origin: left;">
           <!-- 830x830 white circle -->
           <div class="ring"></div>
 
