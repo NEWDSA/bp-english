@@ -1,9 +1,15 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import Navigation from '../components/Navigation.vue'
 import CountryCircle from '../components/CountryCircle.vue'
 import { useRouter } from 'vue-router'
 const router = useRouter()
+
+// Initialize with default content
+onMounted(() => {
+  updateMiddleContent('default')
+  updateRightContent('default')
+})
 
 const countries = ref([
   { id: 1, name: 'USA', image: '/countries/usa.png', angle: 0 },
@@ -23,6 +29,374 @@ const countries = ref([
 const handleCountryHover = (country) => {
   console.log('Country hovered:', country.name)
   // 可以在这里添加更多处理逻辑，比如更新其他组件的状态
+}
+
+const middleContent = ref('')
+const rightContent = ref('')
+
+const updateMiddleContent = (contentType) => {
+  if (contentType === 'european') {
+    middleContent.value = `
+      <div class="mb-6">
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Core customers:</h3>
+        </div>
+        <div class="text-sm lg:text-base space-y-2 ml-5">
+          <p>tourism platforms, environmental logistics companies, high-end camping resorts</p>
+          <p>Seed users: technology elites and environmental pioneers, industry KOLs</p>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Basic information and requirements:</h3>
+        </div>
+        <div class="text-sm lg:text-base space-y-2 ml-5">
+          <p>There are extremely high requirements for the environmental performance of ships, which comply with strict EU environmental regulations</p>
+          <p>Emphasize innovative technology experience and pursue high performance and security, while also requiring a comprehensive after-sales and maintenance network</p>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Type:</h3>
+        </div>
+        <p class="text-sm lg:text-base leading-relaxed ml-5">
+          High end sightseeing boat, green logistics boat, high-tech leisure boat, catering to both B-end procurement and C-end high-end consumers.
+        </p>
+      </div>
+
+      <div>
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Market opportunity:</h3>
+        </div>
+        <div class="text-sm lg:text-base space-y-2 ml-5">
+          <p>The European Union is one of the world's largest markets for large LNG carriers, with a market share of approximately 30%.</p>
+          <p>The tourism economy in the Mediterranean and Nordic islands is developed, and there is a stable demand for green and efficient sea transportation tools.</p>
+          <p>The EU's "Green Agreement" drives the upgrade of traditional shipping, providing huge subsidies and policy benefits for new energy ships.</p>
+          <p>The water sports culture is profound, and 67% of the general public prefer leisure and</p>
+        </div>
+      </div>
+    `
+  } else if (contentType === 'middle-east') {
+    // Middle East market content
+    middleContent.value = `
+      <div class="mb-6">
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Core customers:</h3>
+        </div>
+        <div class="text-sm lg:text-base space-y-2 ml-5">
+          <p>Royal affiliated enterprises, national energy companies, high-end tourism development groups</p>
+          <p>Seed users: Wealthy class, high-tech enterprises</p>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Basic information and requirements:</h3>
+        </div>
+        <div class="text-sm lg:text-base space-y-2 ml-5">
+          <p>Pursuing ultimate luxury, customization, and high performance, with low price sensitivity</p>
+          <p>As a symbol of identity and a 'mobile luxury palace', ships need to be designed to highlight their nobility</p>
+          <p>Need to adapt to high temperature environments and meet specific religious and cultural customs</p>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Type:</h3>
+        </div>
+        <p class="text-sm lg:text-base leading-relaxed ml-5">
+          Mainly targeting the B-end market, government and state-owned enterprises, and some C-end users
+        </p>
+      </div>
+
+      <div>
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Market opportunity:</h3>
+        </div>
+        <div class="text-sm lg:text-base space-y-2 ml-5">
+          <p>LNG expansion plans in countries such as Qatar and Saudi Arabia have generated a demand for high-end, green shipping solutions.</p>
+          <p>Saudi Arabia's "2030 Vision" vigorously develops tourism and logistics industries, and large-scale tourism projects in the Red Sea require supporting maritime transportation.</p>
+          <p>The wealthy class is vast and an important sales market for top luxury yachts worldwide.</p>
+        </div>
+      </div>
+    `
+  } else if (contentType === 'usa') {
+    // USA market content
+    middleContent.value = `
+      <div class="mb-6">
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Core customers:</h3>
+        </div>
+        <div class="text-sm lg:text-base space-y-2 ml-5">
+          <p>National Park Service, large boat rental chain brands, diving service companies</p>
+          <p>Seed users: yacht and water sports operators</p>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Basic information and needs:</h3>
+        </div>
+        <div class="text-sm lg:text-base space-y-2 ml-5">
+          <p>preference for high displacement and high-performance boats (8% of high-end users) and comfortable and safe leisure and entertainment boats (67% of general users)</p>
+          <p>Emphasize brand reputation and entertainment attributes, and have high requirements for the convenience and flexibility of leasing services</p>
+          <p>The demand for financing purchase and leasing solutions is widespread among C-end users</p>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Type:</h3>
+        </div>
+        <p class="text-sm lg:text-base leading-relaxed ml-5">
+          High horsepower sports speedboat, family leisure boat, park shuttle boat, with a high market share in the C-end market.
+        </p>
+      </div>
+
+      <div>
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Market opportunity:</h3>
+        </div>
+        <div class="text-sm lg:text-base space-y-2 ml-5">
+          <p>The United States is the world's largest yacht consumer market, with a water sports equipment market size of $79.9 billion by 2023.</p>
+          <p>There are numerous national parks and private lakes, and there are a large number of government orders for the upgrading of green transportation within the scenic areas.</p>
+          <p>The demand for outdoor leisure and entertainment continues to be strong, and the rental market is active.</p>
+        </div>
+      </div>
+    `
+  } else if (contentType === 'china') {
+    // China market content
+    middleContent.value = `
+      <div class="mb-6">
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Core customers:</h3>
+        </div>
+        <div class="text-sm lg:text-base space-y-2 ml-5">
+          <p>local governments and large state-owned enterprises</p>
+          <p>Seed users: Yacht and water sports operators</p>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Basic information and requirements:</h3>
+        </div>
+        <div class="text-sm lg:text-base space-y-2 ml-5">
+          <p>The cost-effectiveness of higher products requires environmental protection and intelligent technology, which is easy to manage</p>
+          <p>Comprehensive after-sales service</p>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Type:</h3>
+        </div>
+        <p class="text-sm lg:text-base leading-relaxed ml-5">
+          Mainly targeting the B-end market, government and state-owned enterprises, and some C-end users
+        </p>
+      </div>
+
+      <div>
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Market opportunity:</h3>
+        </div>
+        <div class="text-sm lg:text-base space-y-2 ml-5">
+          <p>China is the "core engine" of global shipbuilding, with a global share of over 45% in ship exports by 2024.</p>
+          <p>The demand for gas powered boats in the market has significantly increased.</p>
+          <p>The green and intelligent transformation of inland and coastal vessels is a clear direction, and the plan is to achieve comprehensive green and intelligent transformation of inland vessels by 2030.</p>
+          <p>The "the Belt and Road" initiative has deepened cooperation with Southeast Asia, the Middle East and other places, bringing demand for engineering ships related to infrastructure.</p>
+        </div>
+      </div>
+    `
+  } else if (contentType === 'southeast-asia') {
+    // Southeast Asia market content
+    middleContent.value = `
+      <div class="mb-6">
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Core customers:</h3>
+        </div>
+        <div class="text-sm lg:text-base space-y-2 ml-5">
+          <p>High end resort groups, emerging shipping companies, yacht clubs</p>
+          <p>Seed users: Local tourism operators and start-up technology companies</p>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Basic information and requirements:</h3>
+        </div>
+        <div class="text-sm lg:text-base space-y-2 ml-5">
+          <p>Highly concerned about the cost-effectiveness and operating costs of products</p>
+          <p>Ships need to adapt to high temperature and high salinity tropical marine environments with strong corrosion resistance</p>
+          <p>There are requirements for the product's multifunctionality (such as being able to meet both connectivity and sightseeing needs)</p>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Type:</h3>
+        </div>
+        <p class="text-sm lg:text-base leading-relaxed ml-5">
+          High end private yachts, island shuttle ships, and offshore transport ships are mainly purchased from the B-end.
+        </p>
+      </div>
+
+      <div>
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Market opportunity:</h3>
+        </div>
+        <div class="text-sm lg:text-base space-y-2 ml-5">
+          <p>Southeast Asia's island tourism industry is recovering rapidly, and the development of new vacation projects is driving demand for new transportation tools.</p>
+          <p>The growth of regional trade and the deepening of the "the Belt and Road" initiative promote the development of green offshore shipping.</p>
+          <p>The upgrading of infrastructure in various countries has led to an increase in demand for ships related to port dredging and engineering construction.</p>
+        </div>
+      </div>
+    `
+  } else if (contentType === 'default') {
+    // Reset to original content
+    middleContent.value = `
+      <div class="mb-6">
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Target Customers:</h3>
+        </div>
+        <div class="text-sm lg:text-base space-y-2 ml-5">
+          <p>High end resort groups, emerging shipping companies, yacht clubs</p>
+          <p>Seed users: Local tourism operators and start-up technology companies</p>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Requirements:</h3>
+        </div>
+        <div class="text-sm lg:text-base space-y-2 ml-5">
+          <p>Highly concerned about cost-effectiveness and operating costs of products</p>
+          <p>Ships need to adapt to high temperature and high salinity tropical marine environments with strong corrosion resistance</p>
+          <p>Requirements for product multifunctionality (connectivity and sightseeing needs)</p>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Type:</h3>
+        </div>
+        <p class="text-sm lg:text-base leading-relaxed ml-5">
+          High end private yachts, island shuttle ships, and offshore transport ships are mainly purchased from the B-end
+        </p>
+      </div>
+
+      <div>
+        <div class="flex items-center mb-2">
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Market Opportunity:</h3>
+        </div>
+        <div class="text-sm lg:text-base space-y-2 ml-5">
+          <p>Southeast Asia's island tourism industry is recovering rapidly, driving demand for new transportation tools</p>
+          <p>Growth of regional trade and "Belt and Road" initiative promote green offshore shipping development</p>
+          <p>Infrastructure upgrading increases demand for port dredging and engineering construction ships</p>
+        </div>
+      </div>
+    `
+  }
+}
+
+const updateRightContent = (contentType) => {
+  if (contentType === 'european') {
+    rightContent.value = {
+      name: 'Marco Schmidt',
+      title: 'Partner of high-end camping resort',
+      bio: 'Operating multiple ecological resorts in Norwegian fjords and the Greek island of Mikonos, providing guests with unique sea sightseeing and island shuttle services, committed to creating a zero carbon footprint travel experience.',
+      requirements: [
+        'Zero emissions, fully electric, in compliance with local environmental regulations',
+        'Quiet and stable, enhancing the sightseeing experience',
+        'Strong cold resistance in winter, suitable for Nordic climate',
+        'The brand has an environmentally friendly tone and can serve as a marketing highlight'
+      ],
+      backgroundImage: '/src/assets/map/icon-6-2.png',
+      personImage: '/src/assets/map/icon-6-1.png'
+    }
+  } else if (contentType === 'southeast-asia') {
+    rightContent.value = {
+      name: 'Banyan Tree Group',
+      title: 'High end resort operator',
+      bio: 'Resorts in Phuket, Bali, and other places need to provide transportation services between private islands, coral reefs, and main hotels for guests, pursuing a unique luxury experience.',
+      requirements: [
+        'Design modern luxury that matches the brand tone and is suitable for taking photos and clocking in',
+        'Smooth and quiet operation, enhancing guest experience',
+        'Green environmental protection, as a highlight of corporate social responsibility (CSR) promotion',
+        'High reliability, avoiding the impact of faults on guest travel'
+      ],
+      backgroundImage: '/src/assets/map/icon-7-2.png',
+      personImage: '/src/assets/map/icon-7-1.png'
+    }
+  } else if (contentType === 'usa') {
+    rightContent.value = {
+      name: 'Sarah Johnson',
+      title: 'Founder of a leasing company',
+      bio: 'Operating water sports equipment and boat rentals in the Florida Keys, our clients are mostly family vacationers and diving enthusiasts, hoping to provide new options that are more environmentally friendly and easy to operate.',
+      requirements: [
+        'Easy to operate, easy for beginners to get started in a short period of time',
+        'Durable and sturdy, able to adapt to high-frequency rental use',
+        'Low maintenance costs and convenient supply of components',
+        'Equipped with practical functions such as diving platform and surfboard rack'
+      ],
+      backgroundImage: '/src/assets/map/icon-9-2.png',
+      personImage: '/src/assets/map/icon-9-1.png'
+    }
+  } else if (contentType === 'middle-east') {
+    rightContent.value = {
+      name: 'Sheikh Ahmed Al Maktoum',
+      title: 'Senior executive of a royal affiliated investment company in Dubai',
+      bio: 'Passionate about water sports and high-tech products, plans to purchase a batch of new boats for its private island and yacht club for entertaining VIPs and family entertainment.',
+      requirements: [
+        'Top tier design and craftsmanship, showcasing identity and status',
+        'Equipped with the latest technology and excellent performance',
+        'Highly personalized customization is possible',
+        'Provide top-notch global after-sales service and crew training support'
+      ],
+      backgroundImage: '/src/assets/map/icon-10-2.png',
+      personImage: '/src/assets/map/icon-10-1.png'
+    }
+  } else {
+    // Default content (Mr Chen)
+    rightContent.value = {
+      name: 'Mr Chen',
+      title: 'General Manager of Yacht Club',
+      bio: 'To operate yacht rental, water transportation, and water sports businesses in Dameisha, Shenzhen, it is necessary to introduce new products to enrich the tourist experience.',
+      requirements: [
+        'The product is innovative and has recognition',
+        'Efficient and energy-saving, easy to operate',
+        'Environmental Protection and Scenic Area Protection Requirements'
+      ],
+      backgroundImage: '/src/assets/icon-4.png',
+      personImage: '/src/assets/icon-5.png'
+    }
+  }
 }
 
 // Modal state
@@ -109,7 +483,7 @@ const nextImage = () => {
           <!-- Icons positioned along the circle -->
           <div class="absolute top-0 left-0 w-full h-full">
             <!-- Icon 6 - 30 degrees -->
-            <div class="absolute icon-6-container transition-all duration-300 flex items-center cursor-pointer" style="top: 70px; left: 100px;">
+            <div class="absolute icon-6-container transition-all duration-300 flex items-center cursor-pointer" style="top: 70px; left: 100px;" @click="updateMiddleContent('european'); updateRightContent('european')" @mouseenter="updateMiddleContent('european'); updateRightContent('european')" @mouseleave="updateMiddleContent('default'); updateRightContent('default')">
               <!-- White dot 10x10 -->
               <div class="w-[10px] h-[10px] bg-white rounded-full dot-container-dot relative"></div>
               <!-- Map image icon-6.png 100x100 -->
@@ -121,7 +495,7 @@ const nextImage = () => {
             </div>
 
             <!-- Icon 7 - 60 degrees -->
-            <div class="absolute icon-7-container transition-all duration-300 flex items-center cursor-pointer" style="top: 180px; left: 180px;">
+            <div class="absolute icon-7-container transition-all duration-300 flex items-center cursor-pointer" style="top: 180px; left: 180px;" @click="updateMiddleContent('southeast-asia'); updateRightContent('southeast-asia')" @mouseenter="updateMiddleContent('southeast-asia'); updateRightContent('southeast-asia')" @mouseleave="updateMiddleContent('default'); updateRightContent('default')">
               <!-- White dot 10x10 -->
               <div class="w-[10px] h-[10px] bg-white rounded-full dot-container-dot relative"></div>
               <!-- Map image icon-7.png 100x100 -->
@@ -133,7 +507,7 @@ const nextImage = () => {
             </div>
 
             <!-- Icon 8 - 90 degrees -->
-            <div class="absolute icon-8-container transition-all duration-300 flex items-center cursor-pointer" style="top: 320px; left: 221px;">
+            <div class="absolute icon-8-container transition-all duration-300 flex items-center cursor-pointer" style="top: 320px; left: 221px;" @click="updateMiddleContent('china'); updateRightContent('default')" @mouseenter="updateMiddleContent('china'); updateRightContent('default')" @mouseleave="updateMiddleContent('default'); updateRightContent('default')">
               <!-- White dot 10x10 -->
               <div class="w-[10px] h-[10px] bg-white rounded-full dot-container-dot relative"></div>
               <!-- Map image icon-8.png 100x100 -->
@@ -145,7 +519,7 @@ const nextImage = () => {
             </div>
 
             <!-- Icon 9 - 120 degrees -->
-            <div class="absolute icon-9-container transition-all duration-300 flex items-center cursor-pointer" style="top: 460px; left: 213px;">
+            <div class="absolute icon-9-container transition-all duration-300 flex items-center cursor-pointer" style="top: 460px; left: 213px;" @click="updateMiddleContent('usa'); updateRightContent('usa')" @mouseenter="updateMiddleContent('usa'); updateRightContent('usa')" @mouseleave="updateMiddleContent('default'); updateRightContent('default')">
               <!-- White dot 10x10 -->
               <div class="w-[10px] h-[10px] bg-white rounded-full dot-container-dot relative"></div>
               <!-- Map image icon-9.png 100x100 -->
@@ -157,7 +531,7 @@ const nextImage = () => {
             </div>
 
             <!-- Icon 10 - 150 degrees -->
-            <div class="absolute icon-10-container transition-all duration-300 flex items-center cursor-pointer" style="top: 600px; left: 150px;">
+            <div class="absolute icon-10-container transition-all duration-300 flex items-center cursor-pointer" style="top: 600px; left: 150px;" @click="updateMiddleContent('middle-east'); updateRightContent('middle-east')" @mouseenter="updateMiddleContent('middle-east'); updateRightContent('middle-east')" @mouseleave="updateMiddleContent('default'); updateRightContent('default')">
               <!-- White dot 10x10 -->
               <div class="w-[10px] h-[10px] bg-white rounded-full dot-container-dot relative"></div>
               <!-- Map image icon-10.png 100x100 -->
@@ -175,52 +549,7 @@ const nextImage = () => {
       <div class="flex-2 flex items-start justify-center px-0 py-4 lg:py-8 min-w-0">
         <div class="text-white w-full max-w-4xl">
           <div class="bg-white/10 backdrop-blur-sm rounded-lg shadow-lg border border-white/20 p-4 lg:p-6">
-            <div class="space-y-4">
-              <div class="mb-6">
-                <div class="flex items-center mb-2">
-                  <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-                  <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Target Customers:</h3>
-                </div>
-                <div class="text-sm lg:text-base space-y-2 ml-5">
-                  <p>High end resort groups, emerging shipping companies, yacht clubs</p>
-                  <p>Seed users: Local tourism operators and start-up technology companies</p>
-                </div>
-              </div>
-
-              <div class="mb-6">
-                <div class="flex items-center mb-2">
-                  <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-                  <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Requirements:</h3>
-                </div>
-                <div class="text-sm lg:text-base space-y-2 ml-5">
-                  <p>Highly concerned about cost-effectiveness and operating costs of products</p>
-                  <p>Ships need to adapt to high temperature and high salinity tropical marine environments with strong corrosion resistance</p>
-                  <p>Requirements for product multifunctionality (connectivity and sightseeing needs)</p>
-                </div>
-              </div>
-
-              <div class="mb-6">
-                <div class="flex items-center mb-2">
-                  <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-                  <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Type:</h3>
-                </div>
-                <p class="text-sm lg:text-base leading-relaxed ml-5">
-                  High end private yachts, island shuttle ships, and offshore transport ships are mainly purchased from the B-end
-                </p>
-              </div>
-
-              <div>
-                <div class="flex items-center mb-2">
-                  <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-                  <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Market Opportunity:</h3>
-                </div>
-                <div class="text-sm lg:text-base space-y-2 ml-5">
-                  <p>Southeast Asia's island tourism industry is recovering rapidly, driving demand for new transportation tools</p>
-                  <p>Growth of regional trade and "Belt and Road" initiative promote green offshore shipping development</p>
-                  <p>Infrastructure upgrading increases demand for port dredging and engineering construction ships</p>
-                </div>
-              </div>
-            </div>
+            <div class="space-y-4" v-html="middleContent"></div>
           </div>
         </div>
       </div>
@@ -229,17 +558,17 @@ const nextImage = () => {
       <div class="flex-1 flex items-start justify-center px-0 py-4 lg:py-8 min-w-0">
         <div class="text-white w-full max-w-4xl px-8 lg:px-8">
           <div class="bg-cover bg-center bg-no-repeat rounded-[10px] shadow-xl border border-white/20 overflow-hidden bg-white/10"
-               style="background-image: url('/src/assets/icon-4.png'); background-blend-mode: overlay;">
+               :style="`background-image: url('${rightContent.backgroundImage}'); background-blend-mode: overlay;`">
 
             <!-- Person Introduction Header -->
             <div class="bg-white/10 p-4 border-b border-white/20 shadow-inner">
               <div class="flex items-center justify-between">
                 <div class="flex-1">
-                  <h2 class="text-2xl lg:text-1xl font-bold mb-1">Mr Chen</h2>
-                  <p class="text-sm lg:text-base opacity-90">General Manager of Yacht Club</p>
+                  <h2 class="text-2xl lg:text-1xl font-bold mb-1">{{ rightContent.name }}</h2>
+                  <p class="text-sm lg:text-base opacity-90">{{ rightContent.title }}</p>
                 </div>
                 <div class="ml-2 lg:ml-4">
-                  <img src="/src/assets/icon-5.png" alt="Mr Chen" class="w-[72px] h-[72px] lg:w-[92px] lg:h-[92px] rounded-[10px] object-cover shadow-xl" />
+                  <img :src="rightContent.personImage" :alt="rightContent.name" class="w-[72px] h-[72px] lg:w-[92px] lg:h-[92px] rounded-[10px] object-cover shadow-xl" />
                 </div>
               </div>
             </div>
@@ -248,7 +577,7 @@ const nextImage = () => {
             <div class="bg-white/10 p-4 shadow-inner">
               <div class="space-y-4">
                 <p class="text-sm lg:text-base leading-relaxed">
-                  To operate yacht rental, water transportation, and water sports businesses in Dameisha, Shenzhen, it is necessary to introduce new products to enrich the tourist experience.
+                  {{ rightContent.bio }}
                 </p>
 
                 <div>
@@ -256,9 +585,9 @@ const nextImage = () => {
                     Core Requirements:
                   </h3>
                   <div class="text-sm lg:text-base space-y-2">
-                    <p class="border-b pb-2 border-white/20">The product is innovative and has recognition</p>
-                    <p class="border-b pb-2 border-white/20">Efficient and energy-saving, easy to operate</p>
-                    <p>Environmental Protection and Scenic Area Protection Requirements</p>
+                    <p v-for="(requirement, index) in rightContent.requirements" :key="index" :class="{'border-b pb-2 border-white/20': index < rightContent.requirements.length - 1}">
+                      {{ requirement }}
+                    </p>
                   </div>
                 </div>
               </div>
