@@ -109,8 +109,15 @@ const nextImage = () => {
           <!-- Icons positioned along the circle -->
           <div class="absolute top-0 left-0 w-full h-full">
             <!-- Icon 6 - 30 degrees -->
-            <div class="absolute w-[196px] h-[100px] transition-all duration-300 hover:scale-110 hover:shadow-lg" style="top: 100px; left: 106px;">
-              <img src="/src/assets/icon-6.png" alt="板块一" class="w-full h-full object-contain" />
+            <div class="absolute icon-6-container transition-all duration-300 flex items-center cursor-pointer" style="top: 100px; left: 128px;">
+              <!-- White dot 10x10 -->
+              <div class="w-[10px] h-[10px] bg-white rounded-full dot-container-dot relative"></div>
+              <!-- Map image icon-6.png 100x100 -->
+              <img src="/src/assets/map/icon-6.png" alt="板块一" class="w-[100px] h-[100px] object-contain ml-[10px] icon-image" />
+              <!-- Positioning dot icon-11.png 8x11 -->
+              <img src="/src/assets/map/icon-11.png" alt="定位点" class="w-[8px] h-[11px] object-contain mx-1" />
+              <!-- Location name -->
+              <span class="text-white text-sm font-medium ml-1 shadow-lg icon-text">Italian</span>
             </div>
 
             <!-- Icon 7 - 60 degrees -->
@@ -532,5 +539,41 @@ const nextImage = () => {
   .text-responsive-content {
     font-size: 0.8rem;
   }
+}
+
+.dot-container-dot::after {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border: 1px solid white;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.icon-6-container:hover .dot-container-dot::after {
+  opacity: 1;
+}
+
+.icon-image {
+  transform: scale(1);
+  transition: transform 0.3s ease;
+}
+
+.icon-text {
+  transform: scale(1);
+  transition: transform 0.3s ease;
+}
+
+.icon-6-container:hover .icon-image {
+  transform: scale(1.2);
+}
+
+.icon-6-container:hover .icon-text {
+  transform: scale(1.2);
 }
 </style>
