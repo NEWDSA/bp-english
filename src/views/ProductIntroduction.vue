@@ -1032,6 +1032,34 @@ onUnmounted(() => {
 	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 	border: 1px solid rgba(255, 255, 255, 0.3);
 	position: relative;
+	width: auto;
+	min-width: 320px;
+}
+
+/* 响应式媒体查询 */
+@media (max-width: 1400px) {
+	.comparison-modal {
+		max-width: 90vw;
+		max-height: 60vh;
+		padding: 15px;
+	}
+}
+
+@media (max-width: 1200px) {
+	.comparison-modal {
+		max-width: 95vw;
+		max-height: 65vh;
+		padding: 12px;
+	}
+}
+
+@media (max-width: 992px) {
+	.comparison-modal {
+		max-width: 98vw;
+		max-height: 70vh;
+		padding: 10px;
+		border-radius: 15px;
+	}
 }
 
 .modal-header {
@@ -1070,11 +1098,88 @@ onUnmounted(() => {
 	/* margin-bottom: 20px; */
 }
 
+/* 响应式布局调整 */
+@media (max-width: 1400px) {
+	.comparison-container {
+		gap: 15px;
+	}
+}
+
+@media (max-width: 1200px) {
+	.comparison-container {
+		gap: 12px;
+	}
+}
+
+@media (max-width: 992px) {
+	.comparison-container {
+		gap: 8px;
+		flex-direction: column;
+		align-items: center;
+	}
+}
+
 /* 左侧：指标列表区域 */
 .metrics-section {
 	width: 200px;
 	display: flex;
 	flex-direction: column;
+}
+
+/* 中间：智能水翼船区域 */
+.hydrofoil-section {
+	width: 250px;
+	display: flex;
+	flex-direction: column;
+	background: rgba(255, 255, 255, 0.1);
+	/* border: 1px solid rgba(255, 255, 255, 0.3); */
+	background:#ffffff;
+	border-radius: 15px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	padding: 15px 15px 20px 15px;
+	transform: translateY(-50px);
+	z-index: 10;
+}
+
+/* 右侧：传统渡轮区域 */
+.traditional-section {
+	width: 200px;
+	display: flex;
+	flex-direction: column;
+}
+
+/* 响应式宽度调整 */
+@media (max-width: 1400px) {
+	.metrics-section, .traditional-section {
+		width: 180px;
+	}
+	.hydrofoil-section {
+		width: 220px;
+		padding: 12px;
+	}
+}
+
+@media (max-width: 1200px) {
+	.metrics-section, .traditional-section {
+		width: 160px;
+	}
+	.hydrofoil-section {
+		width: 200px;
+		padding: 10px;
+	}
+}
+
+@media (max-width: 992px) {
+	.metrics-section, .traditional-section {
+		width: 100%;
+		max-width: 300px;
+	}
+	.hydrofoil-section {
+		width: 100%;
+		max-width: 320px;
+		transform: translateY(0);
+		margin: 10px 0;
+	}
 }
 
 .metrics-list {
@@ -1104,21 +1209,6 @@ onUnmounted(() => {
 
 .metric-item:last-child {
 	border-bottom: none;
-}
-
-/* 中间：智能水翼船区域 */
-.hydrofoil-section {
-	width: 250px;
-	display: flex;
-	flex-direction: column;
-	background: rgba(255, 255, 255, 0.1);
-	/* border: 1px solid rgba(255, 255, 255, 0.3); */
-	background:#ffffff;
-	border-radius: 15px;
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-	padding: 15px 15px 20px 15px;
-	transform: translateY(-50px);
-	z-index: 10;
 }
 
 .section-header {
@@ -1185,6 +1275,35 @@ onUnmounted(() => {
 	/* top: calc(50% - 30px); */
 	top: 10%;
 	transform: translateY(-50%);
+}
+
+/* VS分隔区域响应式调整 */
+@media (max-width: 1400px) {
+	.vs-section {
+		left: calc(180px + 220px + 15px);
+		width: 30px;
+		height: 30px;
+	}
+}
+
+@media (max-width: 1200px) {
+	.vs-section {
+		left: calc(160px + 200px + 12px);
+		width: 28px;
+		height: 28px;
+	}
+}
+
+@media (max-width: 992px) {
+	.vs-section {
+		position: relative;
+		left: auto;
+		top: auto;
+		transform: none;
+		margin: 10px auto;
+		width: 35px;
+		height: 35px;
+	}
 }
 
 .vs-icon {

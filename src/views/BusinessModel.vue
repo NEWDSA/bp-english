@@ -138,21 +138,12 @@
 
 				<!-- Lake Como 案例内容 -->
 					<div v-if="activeContent === 'lake'" class="lake-content">
-						<h2 class="content-title">The case of Lake Como</h2>
+						<h3 class="content-title">The case of Lake Como</h3>
 						<h3 class="content-subtitle">Daily average number of tourists</h3>
 
-						<!-- 饼图 -->
+						<!-- ECharts 圆环图 -->
 						<div class="pie-chart-container">
-							<div class="pie-chart">
-								<div class="pie-segment peak-season">
-									<div class="segment-label">Peak Season<br>June-September<br>Daily average number of
-										tourists<br>15000-20000 people/time</div>
-								</div>
-								<div class="pie-segment off-season">
-									<div class="segment-label">Off-Season<br>October-May<br>Daily average number of
-										tourists<br>5000-10000 people/time</div>
-								</div>
-							</div>
+							<div ref="pieChartRef" class="pie-chart-echarts"></div>
 						</div>
 
 						<!-- 描述文字 -->
@@ -311,10 +302,16 @@ async function showContent(contentType) {
 	activeContent.value = contentType
 	console.log('activeContent 现在是:', activeContent.value)
 	
+	// 等待DOM更新
+	await nextTick()
+	
 	// 如果是revenue类型，渲染模态框图表
 	if (contentType === 'revenue') {
-		await nextTick()
 		renderModalCharts()
+	}
+	// 如果是lake类型，渲染饼图
+	else if (contentType === 'lake') {
+		renderPieChart()
 	}
 }
 
@@ -326,6 +323,10 @@ function hideContent() {
 // ECharts: Revenue Model
 const revenueChartRef = ref(null)
 let revenueChartInstance = null
+
+// Lake Como Pie Chart
+const pieChartRef = ref(null)
+let pieChartInstance = null
 
 // Revenue Modal Charts
 const chart1Ref = ref(null)
@@ -635,13 +636,92 @@ function renderModalCharts() {
 	}, 100)
 }
 
+// Lake Como Pie Chart
+function renderPieChart() {
+	if (!pieChartRef.value) return
+	if (!pieChartInstance) {
+		pieChartInstance = echarts.init(pieChartRef.value)
+	}
+
+	const option = {
+		tooltip: {
+			trigger: 'item',
+			formatter: '{b}: {d}%'
+		},
+		series: [
+			{
+				name: 'Tourist Distribution',
+				type: 'pie',
+				radius: ['30%', '80%'], // 圆环图，调整内外半径
+				center: ['50%', '50%'],
+				avoidLabelOverlap: false,
+				label: {
+					show: false // 隐藏默认标签
+				},
+				labelLine: {
+					show: false
+				},
+				data: [
+					{
+						value: 65,
+						name: 'Peak Season',
+						itemStyle: {
+							color: new echarts.graphic.LinearGradient(0, 0, 1, 1, [
+								{ offset: 0, color: '#FFC27A' },
+								{ offset: 1, color: '#FF9A4E' }
+							])
+						}
+					},
+					{
+						value: 35,
+						name: 'Off-Season',
+						itemStyle: {
+							color: new echarts.graphic.LinearGradient(0, 0, 1, 1, [
+								{ offset: 0, color: '#3FF4FF' },
+								{ offset: 1, color: '#19D8F3' }
+							])
+						}
+					}
+				],
+				emphasis: {
+					itemStyle: {
+						shadowBlur: 10,
+						shadowOffsetX: 0,
+						shadowColor: 'rgba(0, 0, 0, 0.5)'
+					}
+				}
+			}
+		],
+		// 添加自定义图形和文字
+		graphic: [
+			{
+				type: 'text',
+				left: 'center',
+				top: 'center',
+				style: {
+					text: 'Peak Season\nJune-September\nDaily average number of tourists\n15000-20000 people/time',
+					textAlign: 'center',
+					fill: '#333',
+					fontSize: 8,
+					fontWeight: 'bold',
+					lineHeight: 10
+				}
+			}
+		]
+	}
+	
+	pieChartInstance.setOption(option)
+}
+
 onMounted(() => {
 	renderRevenueChart()
+	renderPieChart()
 	window.addEventListener('resize', onWindowResize)
 })
 
 function onWindowResize() {
 	if (revenueChartInstance) revenueChartInstance.resize()
+	if (pieChartInstance) pieChartInstance.resize()
 }
 
 onBeforeUnmount(() => {
@@ -649,6 +729,10 @@ onBeforeUnmount(() => {
 	if (revenueChartInstance) {
 		revenueChartInstance.dispose()
 		revenueChartInstance = null
+	}
+	if (pieChartInstance) {
+		pieChartInstance.dispose()
+		pieChartInstance = null
 	}
 	if (chart1Instance) {
 		chart1Instance.dispose()
@@ -784,33 +868,41 @@ onMounted(() => {
 	height: calc(100vh - 80px);
 	max-height: calc(100vh - 80px);
 	padding-top: 80px;
-	gap: 20px;
+	gap: 15px;
 	overflow: hidden;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 /* 左侧面板：Revenue Model + Channel Strategy */
 .left-panel {
-	flex: 1;
-	padding: 20px;
+	flex: 0 0 280px;
+	min-width: 280px;
+	max-width: 320px;
+	padding: 15px;
 	display: flex;
 	flex-direction: column;
-	gap: 15px;
-	overflow-y: auto;
+	gap: 12px;
+	overflow: hidden;
+	height: calc(100vh - 80px);
 }
 
 /* 中间面板：Lake Como 地图 */
 .middle-panel {
-	flex: 1.8;
-	/* padding: 40px; */
+	flex: 1;
+	min-width: 400px;
+	padding: 15px;
 	display: flex;
-	/* align-items: center; */
+	align-items: center;
 	justify-content: center;
 }
 
 /* 右侧面板：详细内容 */
 .right-panel {
-	flex: 1;
-	/* padding: 40px; */
+	flex: 0 0 280px;
+	min-width: 280px;
+	max-width: 320px;
+	padding: 15px;
 	display: flex;
 	flex-direction: column;
 	overflow: hidden;
@@ -844,58 +936,55 @@ onMounted(() => {
 .chart-card {
 	background: rgba(255, 255, 255, 0.08);
 	backdrop-filter: blur(15px);
-	border-radius: 15px;
-	padding: 20px;
+	border-radius: 12px;
+	padding: 15px;
 	border: 1px solid rgba(255, 255, 255, 0.15);
 	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 	flex-shrink: 0;
 	overflow: hidden;
+	margin-bottom: 8px;
 }
 
 .chart-title {
-	font-size: 18px;
+	font-size: 16px;
 	font-weight: 700;
-	margin-bottom: 15px;
+	margin-bottom: 12px;
 	color: #ffffff;
 	text-align: center;
 	letter-spacing: 0.5px;
 }
 
 .chart-container {
-	height: 120px;
+	height: 100px;
 	display: flex;
 	align-items: end;
-	gap: 6px;
+	gap: 5px;
 	padding: 5px 0;
 	overflow: hidden;
 }
 
 .revenue-echart {
 	width: 100%;
-	height: 110px;
+	height: 90px;
 }
 
 /* 策略卡片 */
 .strategy-card {
-	/* background: rgba(255, 255, 255, 0.08); */
-	/* backdrop-filter: blur(15px); */
-	/* border-radius: 20px; */
-	padding: 15px;
-	/* border: 1px solid rgba(255, 255, 255, 0.15); */
-	/* box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); */
+	padding: 10px;
 	flex: 1;
 	overflow-y: auto;
+	max-height: calc(100vh - 280px);
 }
 
 .strategy-title {
-	font-size: 16px;
+	font-size: 13px;
 	font-weight: 600;
-	margin-bottom: 15px;
+	margin-bottom: 10px;
 	color: #ffffff;
 }
 
 .strategy-section {
-	margin-bottom: 15px;
+	margin-bottom: 10px;
 }
 
 .strategy-section:last-child {
@@ -903,10 +992,10 @@ onMounted(() => {
 }
 
 .strategy-subtitle {
-	font-size: 14px;
+	font-size: 12px;
 	/* font-weight: 600; */
 	/* color: #00d4ff; */
-	margin-bottom: 10px;
+	margin-bottom: 8px;
 }
 
 .strategy-content {
@@ -914,17 +1003,17 @@ onMounted(() => {
 }
 
 .strategy-label {
-	font-size: 12px;
+	font-size: 10px;
 	font-weight: 600;
 	color: #ffffff;
-	margin: 8px 0 3px 0;
+	margin: 6px 0 2px 0;
 }
 
 .strategy-text {
-	font-size: 11px;
-	line-height: 1.4;
+	font-size: 9px;
+	line-height: 1.3;
 	color: #cccccc;
-	margin: 3px 0;
+	margin: 2px 0;
 }
 
 /* 地图容器 */
@@ -932,14 +1021,10 @@ onMounted(() => {
 	position: relative;
 	width: 100%;
 	height: 100%;
-	max-height: calc(100vh - 160px);
+	max-height: calc(100vh - 140px);
 	background: url('../assets/bs_map.png') center/cover no-repeat;
-	border-radius: 20px;
+	border-radius: 15px;
 	overflow: hidden;
-
-	/* border: 2px solid rgba(0, 212, 255, 0.4); */
-	/* 动画效果 */
-	/* animation: mapGlow 3s ease-in-out infinite alternate; */
 }
 
 /* SVG 覆盖层 */
@@ -1153,17 +1238,21 @@ onMounted(() => {
 
 /* 内容面板样式 */
 .content-panel {
-	/* width: 100%; */
-	max-height: 70vh;
-	/* background: rgba(0, 0, 0, 0.9); */
+	width: 386px;
+	height: 495px;
 	backdrop-filter: blur(15px);
-	border-radius: 20px;
-	padding: 25px;
-	overflow: hidden;
-	animation: slideIn 0.5s ease-out;
+	border-radius: 15px;
+	padding: 20px;
+	overflow-y: auto;
+	/* animation: slideIn 0.5s ease-out; */
 	border: 1px solid rgba(0, 212, 255, 0.3);
 	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-	margin: 10px 5px;
+	margin: 5px;
+	position: fixed;
+	top: 50%;
+	right: 20px;
+	transform: translateY(-50%);
+	z-index: 1000;
 }
 
 @keyframes slideIn {
@@ -1214,52 +1303,16 @@ onMounted(() => {
 	margin-bottom: 20px;
 }
 
-/* 饼图样式 */
+/* ECharts 圆环图样式 */
 .pie-chart-container {
 	display: flex;
 	justify-content: center;
 	margin: 20px 0;
 }
 
-.pie-chart {
-	width: 150px;
-	height: 150px;
-	border-radius: 50%;
-	position: relative;
-	overflow: hidden;
-}
-
-.pie-segment {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 50%);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.peak-season {
-	background: linear-gradient(45deg, #FF9A4E, #FFC27A);
-	clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 50%);
-}
-
-.off-season {
-	background: linear-gradient(45deg, #19D8F3, #3FF4FF);
-	clip-path: polygon(50% 50%, 100% 50%, 100% 100%, 0% 100%, 0% 50%);
-}
-
-.segment-label {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	text-align: center;
-	font-size: 12px;
-	font-weight: 600;
-	color: #ffffff;
-	text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
-	line-height: 1.3;
+.pie-chart-echarts {
+	width: 100px;
+	height: 100px;
 }
 
 .description-text {
@@ -1421,7 +1474,8 @@ onMounted(() => {
 
 .modal-chart {
 	flex: 1;
-	min-height: 0;
+	min-height: 100px;
+	max-height: 100px;
 }
 
 @keyframes fadeIn {
@@ -1436,32 +1490,285 @@ onMounted(() => {
 }
 
 /* 响应式设计 */
-@media (max-width: 768px) {
+/* 大屏幕 (1920px+) */
+@media (min-width: 1920px) {
+	.main-content {
+		gap: 25px;
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+	
+	.left-panel, .right-panel {
+		flex: 0 0 350px;
+		min-width: 350px;
+		max-width: 400px;
+		padding: 20px;
+	}
+	
+	.middle-panel {
+		min-width: 600px;
+		padding: 20px;
+	}
+	
+	.chart-card {
+		padding: 20px;
+		margin-bottom: 12px;
+	}
+	
+	.chart-title {
+		font-size: 18px;
+		margin-bottom: 15px;
+	}
+	
+	.chart-container {
+		height: 130px;
+	}
+	
+	.revenue-echart {
+		height: 120px;
+	}
+	
+	.content-panel {
+		width: 420px;
+		height: 550px;
+		right: 25px;
+	}
+}
+
+/* 中等屏幕 (1400px-1919px) */
+@media (min-width: 1400px) and (max-width: 1919px) {
+	.main-content {
+		gap: 18px;
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+	
+	.left-panel, .right-panel {
+		flex: 0 0 300px;
+		min-width: 300px;
+		max-width: 340px;
+		padding: 18px;
+	}
+	
+	.middle-panel {
+		min-width: 500px;
+		padding: 18px;
+	}
+	
+	.content-panel {
+		width: 360px;
+		height: 470px;
+		right: 18px;
+	}
+}
+
+/* 小屏幕 (1200px-1399px) */
+@media (min-width: 1200px) and (max-width: 1399px) {
+	.main-content {
+		gap: 12px;
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+	
+	.left-panel, .right-panel {
+		flex: 0 0 260px;
+		min-width: 260px;
+		max-width: 280px;
+		padding: 12px;
+	}
+	
+	.middle-panel {
+		min-width: 400px;
+		padding: 12px;
+	}
+	
+	.chart-card {
+		padding: 12px;
+		margin-bottom: 6px;
+	}
+	
+	.chart-title {
+		font-size: 14px;
+		margin-bottom: 10px;
+	}
+	
+	.chart-container {
+		height: 80px;
+	}
+	
+	.revenue-echart {
+		height: 70px;
+	}
+	
+	.strategy-title {
+		font-size: 12px;
+	}
+	
+	.strategy-label {
+		font-size: 9px;
+		margin: 5px 0 1px 0;
+	}
+	
+	.strategy-text {
+		font-size: 8px;
+		line-height: 1.2;
+		margin: 1px 0;
+	}
+	
+	.strategy-subtitle {
+		font-size: 11px;
+		margin-bottom: 6px;
+	}
+	
+	.content-panel {
+		width: 340px;
+		height: 450px;
+		right: 12px;
+	}
+}
+
+/* 平板和小笔记本 (992px-1199px) */
+@media (min-width: 992px) and (max-width: 1199px) {
 	.main-content {
 		flex-direction: column;
+		gap: 15px;
+		height: auto;
+		max-height: none;
+		padding: 80px 15px 20px;
 	}
+	
+	.left-panel, .right-panel, .middle-panel {
+		flex: none;
+		width: 100%;
+		min-width: auto;
+		max-width: none;
+		padding: 15px;
+	}
+	
+	.left-panel {
+		order: 1;
+		max-height: 300px;
+		overflow-y: auto;
+	}
+	
+	.middle-panel {
+		order: 2;
+		height: 400px;
+	}
+	
+	.right-panel {
+		order: 3;
+		max-height: 400px;
+		overflow-y: auto;
+	}
+	
+	.map-container {
+		max-height: 350px;
+	}
+	
+	.content-panel {
+		width: 320px;
+		height: 400px;
+		right: 15px;
+	}
+}
 
+/* 手机屏幕 (768px以下) */
+@media (max-width: 991px) {
+	.main-content {
+		flex-direction: column;
+		gap: 10px;
+		height: auto;
+		max-height: none;
+		padding: 80px 10px 20px;
+	}
+	
+	.left-panel, .right-panel, .middle-panel {
+		flex: none;
+		width: 100%;
+		min-width: auto;
+		max-width: none;
+		padding: 10px;
+	}
+	
+	.left-panel {
+		order: 1;
+		max-height: 250px;
+		overflow-y: auto;
+	}
+	
+	.middle-panel {
+		order: 2;
+		height: 300px;
+	}
+	
+	.right-panel {
+		order: 3;
+		max-height: 300px;
+		overflow-y: auto;
+	}
+	
 	.nav-container {
 		flex-wrap: wrap;
-		gap: 10px;
+		gap: 8px;
+		padding: 0 10px;
 	}
 
 	.nav-item {
 		font-size: 12px;
-		padding: 8px 15px;
-	}
-
-	.left-section,
-	.right-section {
-		padding: 20px;
+		padding: 6px 12px;
 	}
 
 	.chart-container {
-		height: 150px;
+		height: 100px;
 	}
 
 	.map-container {
-		height: 300px;
+		max-height: 250px;
+		border-radius: 10px;
+	}
+	
+	.content-panel {
+		width: 280px;
+		height: 350px;
+		padding: 15px;
+		border-radius: 10px;
+		right: 10px;
+		position: fixed;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+	
+	.chart-card {
+		padding: 10px;
+		border-radius: 8px;
+		margin-bottom: 5px;
+	}
+	
+	.chart-title {
+		font-size: 13px;
+		margin-bottom: 8px;
+	}
+	
+	.strategy-title {
+		font-size: 11px;
+		margin-bottom: 6px;
+	}
+	
+	.strategy-label {
+		font-size: 9px;
+		margin: 4px 0 1px 0;
+	}
+	
+	.strategy-text {
+		font-size: 8px;
+		line-height: 1.2;
+		margin: 1px 0;
+	}
+	
+	.strategy-subtitle {
+		font-size: 10px;
+		margin-bottom: 6px;
 	}
 }
 </style>
