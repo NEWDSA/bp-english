@@ -84,10 +84,10 @@
 
 					<!-- 文字标签 -->
 					<div class="map-overlays">
-						<div class="overlay-text overlay-1" @click="showContent('profit')">Operating profit and loss
+						<div class="overlay-text overlay-1">Operating profit and loss
 							statement</div>
 						<div class="overlay-text overlay-2" @click="showContent('lake')">The case of Lake Como</div>
-						<div class="overlay-text overlay-3" @click="showContent('tourists')">Daily average number of
+						<div class="overlay-text overlay-3" >Daily average number of
 							boat tourists</div>
 					</div>
 				</div>
@@ -138,8 +138,9 @@
 
 				<!-- Lake Como 案例内容 -->
 					<div v-if="activeContent === 'lake'" class="lake-content">
-						<h3 class="content-title">The case of Lake Como</h3>
-						<h3 class="content-subtitle">Daily average number of tourists</h3>
+						<!-- <h3 class="content-title">The case of Lake Como</h3> -->
+						<div class="content-title">The case of Lake Como</div>
+						<div class="content-subtitle">Daily average number of tourists</div>
 
 						<!-- ECharts 圆环图 -->
 						<div class="pie-chart-container">
@@ -256,12 +257,12 @@
 
 					<!-- 其他内容面板可以在这里添加 -->
 					<div v-if="activeContent === 'tourists'" class="tourists-content">
-						<h2 class="content-title">Daily average number of boat tourists</h2>
+						<div class="content-title">Daily average number of boat tourists</div>
 						<p>Tourist data content will be displayed here.</p>
 					</div>
 
 					<div v-if="activeContent === 'profit'" class="profit-content">
-						<h2 class="content-title">Operating profit and loss statement</h2>
+						<div class="content-title">Operating profit and loss statement</div>
 						<p>Profit and loss data will be displayed here.</p>
 					</div>
 				</div>
@@ -652,34 +653,60 @@ function renderPieChart() {
 			{
 				name: 'Tourist Distribution',
 				type: 'pie',
-				radius: ['30%', '80%'], // 圆环图，调整内外半径
+				radius: '50%', // 圆环图，调整内外半径
 				center: ['50%', '50%'],
+				startAngle: 90, // 从12点钟位置开始
 				avoidLabelOverlap: false,
-				label: {
-					show: false // 隐藏默认标签
-				},
-				labelLine: {
-					show: false
-				},
+				itemGap: 10, // 扇形之间的间隔
 				data: [
 					{
-						value: 65,
+						value: 35,
 						name: 'Peak Season',
 						itemStyle: {
-							color: new echarts.graphic.LinearGradient(0, 0, 1, 1, [
-								{ offset: 0, color: '#FFC27A' },
-								{ offset: 1, color: '#FF9A4E' }
-							])
+							color: '#FF9A4E' // 橙色
+						},
+						label: {
+							show: true,
+							position: 'outside',
+							formatter: 'Peak Season\nJune-September\nDaily average number of tourists\n15000-20000 people/time',
+							fontSize: 8,
+							// fontWeight: 'bold',
+							color: '#ffffff',
+							lineHeight: 12
+						},
+						labelLine: {
+							show: true,
+							length: 10,
+							length2: 5,
+							lineStyle: {
+								color: '#FF9A4E',
+								width: 1
+							}
 						}
 					},
 					{
-						value: 35,
+						value: 65,
 						name: 'Off-Season',
 						itemStyle: {
-							color: new echarts.graphic.LinearGradient(0, 0, 1, 1, [
-								{ offset: 0, color: '#3FF4FF' },
-								{ offset: 1, color: '#19D8F3' }
-							])
+							color: '#00d4ff' // 青色
+						},
+						label: {
+							show: true,
+							position: 'outside',
+							formatter: 'Off-Season\nOctober-May\nDaily average number of tourists\n5000-10000 people/time',
+							fontSize: 8,
+							// fontWeight: 'bold',
+							color: '#ffffff',
+							lineHeight: 12
+						},
+						labelLine: {
+							show: true,
+							length: 10,
+							length2: 5,
+							lineStyle: {
+								color: '#00d4ff',
+								width: 1
+							}
 						}
 					}
 				],
@@ -689,22 +716,6 @@ function renderPieChart() {
 						shadowOffsetX: 0,
 						shadowColor: 'rgba(0, 0, 0, 0.5)'
 					}
-				}
-			}
-		],
-		// 添加自定义图形和文字
-		graphic: [
-			{
-				type: 'text',
-				left: 'center',
-				top: 'center',
-				style: {
-					text: 'Peak Season\nJune-September\nDaily average number of tourists\n15000-20000 people/time',
-					textAlign: 'center',
-					fill: '#333',
-					fontSize: 8,
-					fontWeight: 'bold',
-					lineHeight: 10
 				}
 			}
 		]
@@ -999,7 +1010,7 @@ onMounted(() => {
 }
 
 .strategy-content {
-	/* margin-left: 20px; */
+	margin-left: 0;
 }
 
 .strategy-label {
@@ -1215,7 +1226,7 @@ onMounted(() => {
 }
 
 .overlay-text:hover {
-	/* 移除所有hover效果 */
+	color: #00d4ff;
 }
 
 .overlay-1 {
@@ -1238,15 +1249,17 @@ onMounted(() => {
 
 /* 内容面板样式 */
 .content-panel {
-	width: 386px;
-	height: 495px;
-	backdrop-filter: blur(15px);
-	border-radius: 15px;
-	padding: 20px;
-	overflow-y: auto;
+	width: 480px;
+	height: 520px;
+	/* backdrop-filter: blur(15px); */
+	/* border-radius: 15px; */
+	/* padding: 25px; */
+	/* overflow-y: auto; */
 	/* animation: slideIn 0.5s ease-out; */
 	border: 1px solid rgba(0, 212, 255, 0.3);
+	background: rgba(255, 255, 255, 0.005);
 	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+	padding: 10px;
 	margin: 5px;
 	position: fixed;
 	top: 50%;
@@ -1289,15 +1302,15 @@ onMounted(() => {
 }
 
 .content-title {
-	font-size: 24px;
-	font-weight: 700;
+	font-size: 13px;
+	/* font-weight: 700; */
 	color: #ffffff;
 	margin-bottom: 8px;
 	text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
 }
 
 .content-subtitle {
-	font-size: 16px;
+	font-size: 13px;
 	font-weight: 500;
 	color: #cccccc;
 	margin-bottom: 20px;
@@ -1311,12 +1324,12 @@ onMounted(() => {
 }
 
 .pie-chart-echarts {
-	width: 100px;
-	height: 100px;
+	width: 120%;
+	height: 120px;
 }
 
 .description-text {
-	font-size: 14px;
+	font-size: 12px;
 	color: #cccccc;
 	line-height: 1.6;
 	margin: 20px 0;
@@ -1358,8 +1371,8 @@ onMounted(() => {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 10px 0;
-	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	/* padding: 10px 0; */
+	/* border-bottom: 1px solid rgba(255, 255, 255, 0.1); */
 }
 
 .legend-item:last-child {
@@ -1367,12 +1380,12 @@ onMounted(() => {
 }
 
 .legend-label {
-	font-size: 14px;
+	font-size: 12px;
 	color: #cccccc;
 }
 
 .legend-value {
-	font-size: 14px;
+	font-size: 12px;
 	font-weight: 600;
 	color: #00d4ff;
 }
@@ -1529,8 +1542,8 @@ onMounted(() => {
 	}
 	
 	.content-panel {
-		width: 420px;
-		height: 550px;
+		width: 510px;
+		height: 580px;
 		right: 25px;
 	}
 }
@@ -1556,8 +1569,8 @@ onMounted(() => {
 	}
 	
 	.content-panel {
-		width: 360px;
-		height: 470px;
+		width: 420px;
+		height: 500px;
 		right: 18px;
 	}
 }
@@ -1621,8 +1634,8 @@ onMounted(() => {
 	}
 	
 	.content-panel {
-		width: 340px;
-		height: 450px;
+		width: 390px;
+		height: 480px;
 		right: 12px;
 	}
 }
@@ -1667,8 +1680,8 @@ onMounted(() => {
 	}
 	
 	.content-panel {
-		width: 320px;
-		height: 400px;
+		width: 350px;
+		height: 420px;
 		right: 15px;
 	}
 }
@@ -1729,8 +1742,8 @@ onMounted(() => {
 	}
 	
 	.content-panel {
-		width: 280px;
-		height: 350px;
+		width: 320px;
+		height: 380px;
 		padding: 15px;
 		border-radius: 10px;
 		right: 10px;
@@ -1769,6 +1782,19 @@ onMounted(() => {
 	.strategy-subtitle {
 		font-size: 10px;
 		margin-bottom: 6px;
+	}
+}
+
+/* 超小屏幕 (480px以下) */
+@media (max-width: 480px) {
+	.content-panel {
+		width: 90vw;
+		max-width: 300px;
+		height: 70vh;
+		max-height: 380px;
+		right: 5px;
+		left: 5px;
+		transform: translateY(-50%);
 	}
 }
 </style>

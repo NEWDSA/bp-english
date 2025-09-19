@@ -296,7 +296,7 @@ onMounted(() => {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	min-height: 40vh;
+	/* min-height: 40vh; */
 }
 
 /* 创始人信息样式 */
