@@ -712,7 +712,8 @@ onUnmounted(() => {
 .highlights-content {
 	position: absolute;
 	left: 200px;
-	top: -10px;
+	top: 50%;
+	transform: translateY(-50%);
 	z-index: 50;
 }
 
