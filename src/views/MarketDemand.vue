@@ -5,9 +5,12 @@ import CountryCircle from '../components/CountryCircle.vue'
 import { useRouter } from 'vue-router'
 const router = useRouter()
 
+// State to track active icon
+const activeIcon = ref('icon-8')
+
 // Initialize with default content
 onMounted(() => {
-  updateMiddleContent('default')
+  updateMiddleContent('china')
   updateRightContent('default')
 })
 
@@ -31,6 +34,26 @@ const handleCountryHover = (country) => {
   // 可以在这里添加更多处理逻辑，比如更新其他组件的状态
 }
 
+// Function to handle icon activation
+const activateIcon = (iconName, middleContent, rightContent) => {
+  // Remove active class from current active icon
+  const currentActive = document.querySelector('.icon-container.active-icon')
+  if (currentActive) {
+    currentActive.classList.remove('active-icon')
+  }
+
+  // Add active class to new icon
+  const newActive = document.querySelector(`.${iconName}`)
+  if (newActive) {
+    newActive.classList.add('active-icon')
+  }
+
+  // Update content
+  updateMiddleContent(middleContent)
+  updateRightContent(rightContent)
+  activeIcon.value = iconName
+}
+
 const middleContent = ref('')
 const rightContent = ref('')
 
@@ -44,7 +67,9 @@ const updateMiddleContent = (contentType) => {
         </div>
         <div class="text-sm lg:text-base space-y-2 ml-5">
           <p>tourism platforms, environmental logistics companies, high-end camping resorts</p>
-          <p>Seed users: technology elites and environmental pioneers, industry KOLs</p>
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Seed users: </h3>
+          <p>technology elites and environmental pioneers, industry KOLs</p>
         </div>
       </div>
 
@@ -92,7 +117,9 @@ const updateMiddleContent = (contentType) => {
         </div>
         <div class="text-sm lg:text-base space-y-2 ml-5">
           <p>Royal affiliated enterprises, national energy companies, high-end tourism development groups</p>
-          <p>Seed users: Wealthy class, high-tech enterprises</p>
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Seed users:</h3>
+          <p> Wealthy class, high-tech enterprises</p>
         </div>
       </div>
 
@@ -140,7 +167,9 @@ const updateMiddleContent = (contentType) => {
         </div>
         <div class="text-sm lg:text-base space-y-2 ml-5">
           <p>National Park Service, large boat rental chain brands, diving service companies</p>
-          <p>Seed users: yacht and water sports operators</p>
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Seed users:</h3>
+          <p> yacht and water sports operators</p>
         </div>
       </div>
 
@@ -188,7 +217,9 @@ const updateMiddleContent = (contentType) => {
         </div>
         <div class="text-sm lg:text-base space-y-2 ml-5">
           <p>local governments and large state-owned enterprises</p>
-          <p>Seed users: Yacht and water sports operators</p>
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Seed users: </h3>
+          <p>Yacht and water sports operators</p>
         </div>
       </div>
 
@@ -236,7 +267,9 @@ const updateMiddleContent = (contentType) => {
         </div>
         <div class="text-sm lg:text-base space-y-2 ml-5">
           <p>High end resort groups, emerging shipping companies, yacht clubs</p>
-          <p>Seed users: Local tourism operators and start-up technology companies</p>
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Seed users:</h3>
+          <p> Local tourism operators and start-up technology companies</p>
         </div>
       </div>
 
@@ -284,7 +317,9 @@ const updateMiddleContent = (contentType) => {
         </div>
         <div class="text-sm lg:text-base space-y-2 ml-5">
           <p>High end resort groups, emerging shipping companies, yacht clubs</p>
-          <p>Seed users: Local tourism operators and start-up technology companies</p>
+          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 class="text-base lg:text-lg xl:text-xl font-semibold text-white">Seed users: </h3>
+          <p>Local tourism operators and start-up technology companies</p>
         </div>
       </div>
 
@@ -337,8 +372,8 @@ const updateRightContent = (contentType) => {
         'Strong cold resistance in winter, suitable for Nordic climate',
         'The brand has an environmentally friendly tone and can serve as a marketing highlight'
       ],
-      backgroundImage: '/src/assets/map/icon-6-2.png',
-      personImage: '/src/assets/map/icon-6-1.png'
+      backgroundImage: '/src/assets/icon-6-2.png',
+      personImage: '/src/assets/icon-6-1.png'
     }
   } else if (contentType === 'southeast-asia') {
     rightContent.value = {
@@ -351,8 +386,8 @@ const updateRightContent = (contentType) => {
         'Green environmental protection, as a highlight of corporate social responsibility (CSR) promotion',
         'High reliability, avoiding the impact of faults on guest travel'
       ],
-      backgroundImage: '/src/assets/map/icon-7-2.png',
-      personImage: '/src/assets/map/icon-7-1.png'
+      backgroundImage: '/src/assets/icon-7-2.png',
+      personImage: '/src/assets/icon-7-1.png'
     }
   } else if (contentType === 'usa') {
     rightContent.value = {
@@ -365,8 +400,8 @@ const updateRightContent = (contentType) => {
         'Low maintenance costs and convenient supply of components',
         'Equipped with practical functions such as diving platform and surfboard rack'
       ],
-      backgroundImage: '/src/assets/map/icon-9-2.png',
-      personImage: '/src/assets/map/icon-9-1.png'
+      backgroundImage: '/src/assets/icon-9-2.png',
+      personImage: '/src/assets/icon-9-1.png'
     }
   } else if (contentType === 'middle-east') {
     rightContent.value = {
@@ -379,8 +414,8 @@ const updateRightContent = (contentType) => {
         'Highly personalized customization is possible',
         'Provide top-notch global after-sales service and crew training support'
       ],
-      backgroundImage: '/src/assets/map/icon-10-2.png',
-      personImage: '/src/assets/map/icon-10-1.png'
+      backgroundImage: '/src/assets/icon-10-2.png',
+      personImage: '/src/assets/icon-10-1.png'
     }
   } else {
     // Default content (Mr Chen)
@@ -483,61 +518,61 @@ const nextImage = () => {
           <!-- Icons positioned along the circle -->
           <div class="absolute top-0 left-0 w-full h-full">
             <!-- Icon 6 - 30 degrees -->
-            <div class="absolute icon-6-container transition-all duration-300 flex items-center cursor-pointer" style="top: 70px; left: 100px;" @click="updateMiddleContent('european'); updateRightContent('european')" @mouseenter="updateMiddleContent('european'); updateRightContent('european')" @mouseleave="updateMiddleContent('default'); updateRightContent('default')">
+            <div class="absolute icon-6-container icon-container transition-all duration-300 flex items-center cursor-pointer" style="top: 70px; left: 100px;" @click="activateIcon('icon-6-container', 'european', 'european')" @mouseenter="activateIcon('icon-6-container', 'european', 'european')" @mouseleave="activateIcon('icon-8-container', 'china', 'default')">
               <!-- White dot 10x10 -->
               <div class="w-[10px] h-[10px] bg-white rounded-full dot-container-dot relative"></div>
               <!-- Map image icon-6.png 100x100 -->
-              <img src="/src/assets/map/icon-6.png" alt="板块一" class="w-[100px] h-[100px] object-contain ml-[40px] icon-image" />
+              <img src="/src/assets/icon-6.png" alt="板块一" class="w-[100px] h-[100px] object-contain ml-[40px] icon-image" />
               <!-- Positioning dot icon-11.png 8x11 -->
-              <img src="/src/assets/map/icon-11.png" alt="定位点" class="w-[8px] h-[11px] object-contain ml-1 mr-2 icon-dot" />
+              <img src="/src/assets/icon-11.png" alt="定位点" class="w-[8px] h-[11px] object-contain ml-1 mr-2 icon-dot" />
               <!-- Location name -->
               <span class="text-white text-sm font-medium ml-1 shadow-lg icon-text">Italian</span>
             </div>
 
             <!-- Icon 7 - 60 degrees -->
-            <div class="absolute icon-7-container transition-all duration-300 flex items-center cursor-pointer" style="top: 180px; left: 180px;" @click="updateMiddleContent('southeast-asia'); updateRightContent('southeast-asia')" @mouseenter="updateMiddleContent('southeast-asia'); updateRightContent('southeast-asia')" @mouseleave="updateMiddleContent('default'); updateRightContent('default')">
+            <div class="absolute icon-7-container icon-container transition-all duration-300 flex items-center cursor-pointer" style="top: 180px; left: 180px;" @click="activateIcon('icon-7-container', 'southeast-asia', 'southeast-asia')" @mouseenter="activateIcon('icon-7-container', 'southeast-asia', 'southeast-asia')" @mouseleave="activateIcon('icon-8-container', 'china', 'default')">
               <!-- White dot 10x10 -->
               <div class="w-[10px] h-[10px] bg-white rounded-full dot-container-dot relative"></div>
               <!-- Map image icon-7.png 100x100 -->
-              <img src="/src/assets/map/icon-7.png" alt="板块二" class="w-[100px] h-[100px] object-contain ml-[40px] icon-image" />
+              <img src="/src/assets/icon-7.png" alt="板块二" class="w-[100px] h-[100px] object-contain ml-[40px] icon-image" />
               <!-- Positioning dot icon-11.png 8x11 -->
-              <img src="/src/assets/map/icon-11.png" alt="定位点" class="w-[8px] h-[11px] object-contain ml-1 mr-2 icon-dot" />
+              <img src="/src/assets/icon-11.png" alt="定位点" class="w-[8px] h-[11px] object-contain ml-1 mr-2 icon-dot" />
               <!-- Location name -->
               <span class="text-white text-sm font-medium ml-1 shadow-lg icon-text">Southeast Asia</span>
             </div>
 
             <!-- Icon 8 - 90 degrees -->
-            <div class="absolute icon-8-container transition-all duration-300 flex items-center cursor-pointer" style="top: 320px; left: 221px;" @click="updateMiddleContent('china'); updateRightContent('default')" @mouseenter="updateMiddleContent('china'); updateRightContent('default')" @mouseleave="updateMiddleContent('default'); updateRightContent('default')">
+            <div class="absolute icon-8-container icon-container transition-all duration-300 flex items-center cursor-pointer active-icon" style="top: 320px; left: 221px;" @click="activateIcon('icon-8-container', 'china', 'default')" @mouseenter="activateIcon('icon-8-container', 'china', 'default')" @mouseleave="activateIcon('icon-8-container', 'china', 'default')">
               <!-- White dot 10x10 -->
               <div class="w-[10px] h-[10px] bg-white rounded-full dot-container-dot relative"></div>
               <!-- Map image icon-8.png 100x100 -->
-              <img src="/src/assets/map/icon-8.png" alt="板块三" class="w-[100px] h-[100px] object-contain ml-[40px] icon-image" />
+              <img src="/src/assets/icon-8.png" alt="板块三" class="w-[100px] h-[100px] object-contain ml-[40px] icon-image" />
               <!-- Positioning dot icon-11.png 8x11 -->
-              <img src="/src/assets/map/icon-11.png" alt="定位点" class="w-[8px] h-[11px] object-contain ml-2 mr-2 icon-dot" />
+              <img src="/src/assets/icon-11.png" alt="定位点" class="w-[8px] h-[11px] object-contain ml-2 mr-2 icon-dot" />
               <!-- Location name -->
               <span class="text-white text-sm font-medium ml-1 shadow-lg icon-text">China</span>
             </div>
 
             <!-- Icon 9 - 120 degrees -->
-            <div class="absolute icon-9-container transition-all duration-300 flex items-center cursor-pointer" style="top: 460px; left: 213px;" @click="updateMiddleContent('usa'); updateRightContent('usa')" @mouseenter="updateMiddleContent('usa'); updateRightContent('usa')" @mouseleave="updateMiddleContent('default'); updateRightContent('default')">
+            <div class="absolute icon-9-container icon-container transition-all duration-300 flex items-center cursor-pointer" style="top: 460px; left: 213px;" @click="activateIcon('icon-9-container', 'usa', 'usa')" @mouseenter="activateIcon('icon-9-container', 'usa', 'usa')" @mouseleave="activateIcon('icon-8-container', 'china', 'default')">
               <!-- White dot 10x10 -->
               <div class="w-[10px] h-[10px] bg-white rounded-full dot-container-dot relative"></div>
               <!-- Map image icon-9.png 100x100 -->
-              <img src="/src/assets/map/icon-9.png" alt="板块四" class="w-[100px] h-[100px] object-contain ml-[40px] icon-image" />
+              <img src="/src/assets/icon-9.png" alt="板块四" class="w-[100px] h-[100px] object-contain ml-[40px] icon-image" />
               <!-- Positioning dot icon-11.png 8x11 -->
-              <img src="/src/assets/map/icon-11.png" alt="定位点" class="w-[8px] h-[11px] object-contain ml-1 mr-2 icon-dot" />
+              <img src="/src/assets/icon-11.png" alt="定位点" class="w-[8px] h-[11px] object-contain ml-1 mr-2 icon-dot" />
               <!-- Location name -->
               <span class="text-white text-sm font-medium ml-1 shadow-lg icon-text">America</span>
             </div>
 
             <!-- Icon 10 - 150 degrees -->
-            <div class="absolute icon-10-container transition-all duration-300 flex items-center cursor-pointer" style="top: 600px; left: 150px;" @click="updateMiddleContent('middle-east'); updateRightContent('middle-east')" @mouseenter="updateMiddleContent('middle-east'); updateRightContent('middle-east')" @mouseleave="updateMiddleContent('default'); updateRightContent('default')">
+            <div class="absolute icon-10-container icon-container transition-all duration-300 flex items-center cursor-pointer" style="top: 600px; left: 150px;" @click="activateIcon('icon-10-container', 'middle-east', 'middle-east')" @mouseenter="activateIcon('icon-10-container', 'middle-east', 'middle-east')" @mouseleave="activateIcon('icon-8-container', 'china', 'default')">
               <!-- White dot 10x10 -->
               <div class="w-[10px] h-[10px] bg-white rounded-full dot-container-dot relative"></div>
               <!-- Map image icon-10.png 100x100 -->
-              <img src="/src/assets/map/icon-10.png" alt="板块五" class="w-[100px] h-[100px] object-contain ml-[40px] icon-image" />
+              <img src="/src/assets/icon-10.png" alt="板块五" class="w-[100px] h-[100px] object-contain ml-[40px] icon-image" />
               <!-- Positioning dot icon-11.png 8x11 -->
-              <img src="/src/assets/map/icon-11.png" alt="定位点" class="w-[8px] h-[11px] object-contain ml-1 mr-2 icon-dot" />
+              <img src="/src/assets/icon-11.png" alt="定位点" class="w-[8px] h-[11px] object-contain ml-1 mr-2 icon-dot" />
               <!-- Location name -->
               <span class="text-white text-sm font-medium ml-1 shadow-lg icon-text">Middle East</span>
             </div>
@@ -1013,6 +1048,24 @@ const nextImage = () => {
 }
 
 .icon-10-container:hover .icon-dot {
+  transform: scale(1.4);
+}
+
+/* Active state styles for default hover effect */
+.icon-container.active-icon .dot-container-dot::after {
+  opacity: 1;
+}
+
+.icon-container.active-icon .icon-image {
+  transform: scale(1.4);
+}
+
+.icon-container.active-icon .icon-text {
+  transform: scale(1.4);
+  color: white;
+}
+
+.icon-container.active-icon .icon-dot {
   transform: scale(1.4);
 }
 </style>
