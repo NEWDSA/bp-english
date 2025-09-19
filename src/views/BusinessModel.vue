@@ -74,22 +74,7 @@
 
 			<!-- 中间面板：Lake Como 地图 -->
 			<div class="middle-panel">
-				<div class="map-container">
-					<!-- SVG 覆盖层用于精确标记点定位 -->
-					<!-- <svg class="map-overlay" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
-						<circle cx="25" cy="20" r="2" class="marker-svg marker-1" />
-						<circle cx="65" cy="45" r="2" class="marker-svg marker-2" />
-						<circle cx="80" cy="70" r="2" class="marker-svg marker-3" />
-					</svg> -->
-
-					<!-- 文字标签 -->
-					<div class="map-overlays">
-						<div class="overlay-text overlay-1">Operating profit and loss
-							statement</div>
-						<div class="overlay-text overlay-2" @click="showContent('lake')">The case of Lake Como</div>
-						<div class="overlay-text overlay-3" >Daily average number of
-							boat tourists</div>
-					</div>
+				<div class="map-container" @click="showContent('lake')">
 				</div>
 			</div>
 			<!-- 右侧面板：详细内容 -->
@@ -906,7 +891,24 @@ onMounted(() => {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	position: relative;
 }
+
+.map-container {
+	position: absolute;
+	top: 40%;
+	left: 50%;
+	transform: translate(-50%, -40%);
+	width: min(100px, 80vw);
+	height: min(100px, 80vw);
+	max-width: 100px;
+	max-height: 100px;
+
+	overflow: hidden;
+	cursor: pointer;
+}
+
+
 
 /* 右侧面板：详细内容 */
 .right-panel {
@@ -1025,17 +1027,6 @@ onMounted(() => {
 	line-height: 1.3;
 	color: #cccccc;
 	margin: 2px 0;
-}
-
-/* 地图容器 */
-.map-container {
-	position: relative;
-	width: 100%;
-	height: 100%;
-	max-height: calc(100vh - 140px);
-	background: url('../assets/bs_map.png') center/cover no-repeat;
-	border-radius: 15px;
-	overflow: hidden;
 }
 
 /* SVG 覆盖层 */
