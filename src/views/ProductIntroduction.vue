@@ -379,7 +379,7 @@
 			</div>
 
 			<!-- Design&Simulation Technology 第二个弹窗 -->
-			<div v-if="showSimulationModal" class="modal-overlay" @click="hideSimulationModal">
+			<!-- <div v-if="showSimulationModal" class="modal-overlay" @click="hideSimulationModal">
 				<div class="simulation-modal" @click.stop>
 					<div class="simulation-modal-content">
 						<div class="simulation-title">Breakthrough verification of energy efficiency and stability of
@@ -428,97 +428,10 @@
 								<div style="color: #000000;">2.Stability improvement:</div>
 								<div style="color: #000000;">With a simulated wave height of 0.5m and an angle of 45°, the hydrofoil boat maintains a more stable and comfortable navigation posture, with the crew barely feeling the vessel's trim. In contrast, conventional boats experience a trim of up to 8° under these sea conditions, making the crew extremely uncomfortable.</div>
 							</div>
-
-							<!-- 左侧区域：水翼船数据 - 3个div -->
-							<!-- <div class="left-section"> -->
-							<!-- 左上：水翼船仿真视频 -->
-							<!-- <div class="simulation-video-container">
-									<div class="simulation-label">Hydrofoil Boat</div>
-									<video autoplay muted loop playsinline class="simulation-video">
-										<source src="../assets/sea_wave.mp4" type="video/mp4">
-									</video>
-								</div> -->
-
-							<!-- 左中：纵倾角图表图片 -->
-							<!-- <div class="chart-image-container">
-									<div class="chart-image">
-										<img src="../assets/微信图片_20250912104117_7221_12.png"
-											alt="Heave and Pitch Chart" />
-									</div>
-								</div> -->
-
-							<!-- 左下：有效功率图表图片 -->
-							<!-- <div class="chart-image-container">
-									<div class="chart-image">
-										<img src="../assets/微信图片_20250912104117_7221_12.png"
-											alt="Resistance and Power Chart" />
-									</div>
-								</div> -->
-							<!-- </div> -->
-
-							<!-- 中间区域：VS分隔 -->
-							<!-- <div class="middle-divider">
-								<div class="divider-item">
-									<div>Speed: 18kt</div>
-								</div>
-								<div class="divider-item">
-									<div>Wave Length: 5.0m</div>
-								</div>
-								<div class="divider-item">
-									<div>Wave Height: 0.5m</div>
-								</div>
-								<div class="divider-item">
-									<div>Wave Angle: 45°</div>
-								</div>
-							</div> -->
-
-							<!-- 右侧区域：传统船数据 - 3个div -->
-							<!-- <div class="right-section"> -->
-							<!-- 右上：传统船仿真视频 -->
-							<!-- <div class="simulation-video-container">
-									<div class="simulation-label">Traditional Boat</div>
-									<video autoplay muted loop playsinline class="simulation-video">
-										<source src="../assets/sea_wave.mp4" type="video/mp4">
-									</video>
-								</div> -->
-
-							<!-- 右中：纵倾角图表图片 -->
-							<!-- <div class="chart-image-container">
-									<div class="chart-image">
-										<img src="../assets/微信图片_20250912104117_7221_12.png"
-											alt="Traditional Heave and Pitch Chart" />
-									</div>
-								</div> -->
-
-							<!-- 右下：有效功率图表图片 -->
-							<!-- <div class="chart-image-container">
-									<div class="chart-image">
-										<img src="../assets/微信图片_20250912104117_7221_12.png"
-											alt="Traditional Resistance and Power Chart" />
-									</div>
-								</div> -->
-							<!-- </div> -->
-
-							<!-- 最右侧区域：结论部分 -->
-							<!-- <div class="conclusion-section">
-								<div class="conclusion-title">Conclusion:</div>
-								<div class="conclusion-item">
-									<strong>Energy Efficiency Reduction:</strong>
-									At a speed of 18kt, the hydrofoil boat exhibits a 55% reduction in water resistance
-									and a 75% reduction in propulsion power compared to a conventional hull.
-								</div>
-								<div class="conclusion-item">
-									<strong>Stability Enhancement:</strong>
-									With a simulated wave height of 0.5m and an angle of 45°, the hydrofoil boat
-									maintains a more stable and comfortable navigation posture, with the crew barely
-									feeling the vessel's trim. In contrast, conventional boats experience a trim of up
-									to 8° under these sea conditions, making the crew extremely uncomfortable.
-								</div>
-							</div> -->
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> -->
 		</div>
 </template>
 
