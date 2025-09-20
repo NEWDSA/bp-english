@@ -8,6 +8,7 @@
 import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 import Globe from 'globe.gl'
 import * as THREE from 'three'
+import icon2 from '../assets/icon-2.png'
 import * as satellite from '../assets/satellite.mjs'
 import { csvParseRows } from '../assets/d3-dsv.mjs'
 
@@ -414,7 +415,7 @@ const createCustomMarkers = (pointsData) => {
 
     // Create icon image element
     const iconElement = document.createElement('img')
-    iconElement.src = '/src/assets/icon-2.png'
+    iconElement.src = icon2
     iconElement.style.width = '40px'
     iconElement.style.height = '40px'
     iconElement.style.position = 'relative'

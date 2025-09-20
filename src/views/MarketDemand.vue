@@ -1,5 +1,16 @@
 <script setup>
 import { ref, onMounted } from 'vue'
+import icon5 from '../assets/icon-5.png'
+import icon3 from '../assets/icon-3.png'
+import icon4 from '../assets/icon-4.png'
+import icon6_1 from '../assets/icon-6-1.png'
+import icon6_2 from '../assets/icon-6-2.png'
+import icon7_1 from '../assets/icon-7-1.png'
+import icon7_2 from '../assets/icon-7-2.png'
+import icon9_1 from '../assets/icon-9-1.png'
+import icon9_2 from '../assets/icon-9-2.png'
+import icon10_1 from '../assets/icon-10-1.png'
+import icon10_2 from '../assets/icon-10-2.png'
 import Navigation from '../components/Navigation.vue'
 import CountryCircle from '../components/CountryCircle.vue'
 import { useRouter } from 'vue-router'
@@ -372,8 +383,8 @@ const updateRightContent = (contentType) => {
         'Strong cold resistance in winter, suitable for Nordic climate',
         'The brand has an environmentally friendly tone and can serve as a marketing highlight'
       ],
-      backgroundImage: '/src/assets/icon-6-2.png',
-      personImage: '/src/assets/icon-6-1.png'
+      backgroundImage: icon6_2,
+      personImage: icon6_1
     }
   } else if (contentType === 'southeast-asia') {
     rightContent.value = {
@@ -386,8 +397,8 @@ const updateRightContent = (contentType) => {
         'Green environmental protection, as a highlight of corporate social responsibility (CSR) promotion',
         'High reliability, avoiding the impact of faults on guest travel'
       ],
-      backgroundImage: '/src/assets/icon-7-2.png',
-      personImage: '/src/assets/icon-7-1.png'
+      backgroundImage: icon7_2,
+      personImage: icon7_1
     }
   } else if (contentType === 'usa') {
     rightContent.value = {
@@ -400,8 +411,8 @@ const updateRightContent = (contentType) => {
         'Low maintenance costs and convenient supply of components',
         'Equipped with practical functions such as diving platform and surfboard rack'
       ],
-      backgroundImage: '/src/assets/icon-9-2.png',
-      personImage: '/src/assets/icon-9-1.png'
+      backgroundImage: icon9_2,
+      personImage: icon9_1
     }
   } else if (contentType === 'middle-east') {
     rightContent.value = {
@@ -414,8 +425,8 @@ const updateRightContent = (contentType) => {
         'Highly personalized customization is possible',
         'Provide top-notch global after-sales service and crew training support'
       ],
-      backgroundImage: '/src/assets/icon-10-2.png',
-      personImage: '/src/assets/icon-10-1.png'
+      backgroundImage: icon10_2,
+      personImage: icon10_1
     }
   } else {
     // Default content (Mr Chen)
@@ -428,8 +439,8 @@ const updateRightContent = (contentType) => {
         'Efficient and energy-saving, easy to operate',
         'Environmental Protection and Scenic Area Protection Requirements'
       ],
-      backgroundImage: '/src/assets/icon-4.png',
-      personImage: '/src/assets/icon-5.png'
+      backgroundImage: icon4,
+      personImage: icon5
     }
   }
 }
@@ -444,12 +455,17 @@ const goHome = () => {
 	router.push('/')
 }
 
+import view1 from '../assets/img/view-1.png'
+import view2 from '../assets/img/view-2.png'
+import view3 from '../assets/img/view-3.png'
+import view4 from '../assets/img/view-4.png'
+
 // Image sets for each gallery item
 const imageSets = {
-  1: ['/src/assets/img/view-1.png', '/src/assets/img/view-2.png', '/src/assets/img/view-3.png'],
-  2: ['/src/assets/img/view-2.png', '/src/assets/img/view-3.png', '/src/assets/img/view-4.png'],
-  3: ['/src/assets/img/view-3.png', '/src/assets/img/view-4.png', '/src/assets/img/view-1.png'],
-  4: ['/src/assets/img/view-4.png', '/src/assets/img/view-1.png', '/src/assets/img/view-2.png']
+  1: [view1, view2, view3],
+  2: [view2, view3, view4],
+  3: [view3, view4, view1],
+  4: [view4, view1, view2]
 }
 
 const openModal = (imageSet, index = 0) => {
@@ -481,7 +497,7 @@ const nextImage = () => {
 
 <template>
   <div class="bg-center bg-no-repeat relative flex flex-col min-h-screen w-full"
-       style="background: url('/src/assets/icon-3.png'); background-size: 100% 100%;">
+       :style="`background: url('${icon3}'); background-size: 100% 100%;`">
     <!-- Navigation -->
     <!-- 顶部导航栏 -->
     <nav class="top-nav">
