@@ -459,13 +459,21 @@ import view1 from '../assets/img/view-1.png'
 import view2 from '../assets/img/view-2.png'
 import view3 from '../assets/img/view-3.png'
 import view4 from '../assets/img/view-4.png'
+import view5 from '../assets/img/view-5.png'
+import view6 from '../assets/img/view-6.png'
+import view7 from '../assets/img/view-7.png'
+import view8 from '../assets/img/view-8.png'
+import view9 from '../assets/img/view-9.png'
+import view10 from '../assets/img/view-10.png'
+import view11 from '../assets/img/view-11.png'
+import view12 from '../assets/img/view-12.png'
 
 // Image sets for each gallery item
 const imageSets = {
-  1: [view1, view2, view3],
-  2: [view2, view3, view4],
-  3: [view3, view4, view1],
-  4: [view4, view1, view2]
+  1: [view5, view4, view6],
+  2: [view2, view1, view3],
+  3: [view10, view11, view12],
+  4: [view8, view7, view9]
 }
 
 const openModal = (imageSet, index = 0) => {
@@ -523,7 +531,7 @@ const nextImage = () => {
     </nav>
 
     <!-- Main Content Container -->
-    <div class="flex flex-col lg:flex-row flex-1 min-h-0" style="padding-top: 71px;">
+    <div class="flex flex-col lg:flex-row mt-[71px] main-content-container">
       <!-- Left Content -->
       <div class="flex-1 flex items-center justify-center relative min-w-0">
         <!-- Circle Container -->
@@ -596,49 +604,52 @@ const nextImage = () => {
         </div>
       </div>
 
-      <!-- Middle Content-->
-      <div class="flex-2 flex items-start justify-center px-0 py-4 lg:py-8 min-w-0">
-        <div class="text-white w-full max-w-4xl">
-          <div class="bg-white/10 backdrop-blur-sm rounded-lg shadow-lg border border-white/20 p-4 lg:p-6">
-            <div class="space-y-4" v-html="middleContent"></div>
+      <!-- Content Scroll Container (for Middle and Right Content) -->
+      <div class="flex-3 flex flex-col lg:flex-row content-scroll-container">
+        <!-- Middle Content-->
+        <div class="flex-1 flex items-start justify-center px-0 py-4 lg:py-8 min-w-0">
+          <div class="text-white w-full max-w-4xl">
+            <div class="bg-white/10 backdrop-blur-sm rounded-lg shadow-lg border border-white/20 p-4 lg:p-6">
+              <div class="space-y-4" v-html="middleContent"></div>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- Right Content -->
-      <div class="flex-1 flex items-start justify-center px-0 py-4 lg:py-8 min-w-0">
-        <div class="text-white w-full max-w-4xl px-8 lg:px-8">
-          <div class="bg-cover bg-center bg-no-repeat rounded-[10px] shadow-xl border border-white/20 overflow-hidden bg-white/10"
-               :style="`background-image: url('${rightContent.backgroundImage}'); background-blend-mode: overlay;`">
+        <!-- Right Content -->
+        <div class="flex-1 flex items-start justify-center px-0 py-4 lg:py-8 min-w-0">
+          <div class="text-white w-full max-w-4xl px-8 lg:px-8">
+            <div class="bg-cover bg-center bg-no-repeat rounded-[10px] shadow-xl border border-white/20 overflow-hidden bg-white/10"
+                 :style="`background-image: url('${rightContent.backgroundImage}'); background-blend-mode: overlay;`">
 
-            <!-- Person Introduction Header -->
-            <div class="bg-white/10 p-4 border-b border-white/20 shadow-inner">
-              <div class="flex items-center justify-between">
-                <div class="flex-1">
-                  <h2 class="text-2xl lg:text-1xl font-bold mb-1">{{ rightContent.name }}</h2>
-                  <p class="text-sm lg:text-base opacity-90">{{ rightContent.title }}</p>
-                </div>
-                <div class="ml-2 lg:ml-4">
-                  <img :src="rightContent.personImage" :alt="rightContent.name" class="w-[72px] h-[72px] lg:w-[92px] lg:h-[92px] rounded-[10px] object-cover shadow-xl" />
+              <!-- Person Introduction Header -->
+              <div class="bg-white/10 p-4 border-b border-white/20 shadow-inner">
+                <div class="flex items-center justify-between">
+                  <div class="flex-1">
+                    <h2 class="text-2xl lg:text-1xl font-bold mb-1">{{ rightContent.name }}</h2>
+                    <p class="text-sm lg:text-base opacity-90">{{ rightContent.title }}</p>
+                  </div>
+                  <div class="ml-2 lg:ml-4">
+                    <img :src="rightContent.personImage" :alt="rightContent.name" class="w-[72px] h-[72px] lg:w-[92px] lg:h-[92px] rounded-[10px] object-cover shadow-xl" />
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <!-- Requirements Content -->
-            <div class="bg-white/10 p-4 shadow-inner">
-              <div class="space-y-4">
-                <p class="text-sm lg:text-base leading-relaxed">
-                  {{ rightContent.bio }}
-                </p>
+              <!-- Requirements Content -->
+              <div class="bg-white/10 p-4 shadow-inner">
+                <div class="space-y-4">
+                  <p class="text-sm lg:text-base leading-relaxed">
+                    {{ rightContent.bio }}
+                  </p>
 
-                <div>
-                  <h3 class="text-lg lg:text-xl font-semibold mb-3 flex items-center">
-                    Core Requirements:
-                  </h3>
-                  <div class="text-sm lg:text-base space-y-2">
-                    <p v-for="(requirement, index) in rightContent.requirements" :key="index" :class="{'border-b pb-2 border-white/20': index < rightContent.requirements.length - 1}">
-                      {{ requirement }}
-                    </p>
+                  <div>
+                    <h3 class="text-lg lg:text-xl font-semibold mb-3 flex items-center">
+                      Core Requirements:
+                    </h3>
+                    <div class="text-sm lg:text-base space-y-2">
+                      <p v-for="(requirement, index) in rightContent.requirements" :key="index" :class="{'border-b pb-2 border-white/20': index < rightContent.requirements.length - 1}">
+                        {{ requirement }}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -649,44 +660,44 @@ const nextImage = () => {
     </div>
 
     <!-- Bottom Content: Image Gallery -->
-    <div class="fixed bottom-4 left-0 right-0 h-[175px]">
+    <div class="fixed bottom-0 left-0 right-0 h-[175px] overflow-x-auto bottom-gallery">
       <div class="relative w-full h-full">
         <!-- Image 1 -->
         <div class="gallery-item" @click="openModal(1)">
-          <img src="/src/assets/img/view-1.png" alt="Gallery Image 1" class="w-full h-full object-cover" />
+          <img src="/src/assets/img/view-5.png" alt="Inter island transportation" class="w-full h-full object-cover" />
           <div class="image-mask absolute inset-0 bg-black/30 flex items-center justify-center transition-opacity duration-300">
-            <div class="text-content bg-black/50 px-4 py-2 rounded">
-              <p class="text-white text-sm font-medium">Gallery Image 1</p>
+            <div class="text-content bg-black/50 px-4 py-2 rounded w-full text-center">
+              <p class="text-white text-sm font-medium">Inter island transportation</p>
             </div>
           </div>
         </div>
 
         <!-- Image 2 -->
         <div class="gallery-item" @click="openModal(2)">
-          <img src="/src/assets/img/view-2.png" alt="Gallery Image 2" class="w-full h-full object-cover" />
+          <img src="/src/assets/img/view-2.png" alt="Urban water system transportation" class="w-full h-full object-cover" />
           <div class="image-mask absolute inset-0 bg-black/30 flex items-center justify-center transition-opacity duration-300">
-            <div class="text-content bg-black/50 px-4 py-2 rounded">
-              <p class="text-white text-sm font-medium">Gallery Image 2</p>
+            <div class="text-content bg-black/50 px-4 py-2 rounded w-full text-center">
+              <p class="text-white text-sm font-medium">Urban water system transportation</p>
             </div>
           </div>
         </div>
 
         <!-- Image 3 -->
         <div class="gallery-item" @click="openModal(3)">
-          <img src="/src/assets/img/view-3.png" alt="Gallery Image 3" class="w-full h-full object-cover" />
+          <img src="/src/assets/img/view-10.png" alt="Water sports and fishing" class="w-full h-full object-cover" />
           <div class="image-mask absolute inset-0 bg-black/30 flex items-center justify-center transition-opacity duration-300">
-            <div class="text-content bg-black/50 px-4 py-2 rounded">
-              <p class="text-white text-sm font-medium">Gallery Image 3</p>
+            <div class="text-content bg-black/50 px-4 py-2 rounded w-full text-center">
+              <p class="text-white text-sm font-medium">Water sports and fishing</p>
             </div>
           </div>
         </div>
 
         <!-- Image 4 -->
         <div class="gallery-item" @click="openModal(4)">
-          <img src="/src/assets/img/view-4.png" alt="Gallery Image 4" class="w-full h-full object-cover" />
+          <img src="/src/assets/img/view-8.png" alt="Tourist attraction" class="w-full h-full object-cover" />
           <div class="image-mask absolute inset-0 bg-black/30 flex items-center justify-center transition-opacity duration-300">
-            <div class="text-content bg-black/50 px-4 py-2 rounded">
-              <p class="text-white text-sm font-medium">Gallery Image 4</p>
+            <div class="text-content bg-black/50 px-4 py-2 rounded w-full text-center">
+              <p class="text-white text-sm font-medium">Tourist attraction</p>
             </div>
           </div>
         </div>
@@ -694,8 +705,8 @@ const nextImage = () => {
     </div>
 
     <!-- Image Gallery Modal -->
-    <div v-if="showModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4" @click="closeModal">
-      <div class="relative max-w-4xl max-h-[90vh] w-full" @click.stop>
+    <div v-if="showModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-16" @click="closeModal">
+      <div class="relative w-full h-full" @click.stop>
         <!-- Close Button -->
         <button @click="closeModal" class="absolute top-4 right-4 text-gray-300 bg-black/50 hover:bg-black/70 rounded-full p-2 z-10 transition-colors">
           <svg class="w-6 h-6" fill="none" stroke="gray" viewBox="0 0 24 24">
@@ -866,44 +877,6 @@ const nextImage = () => {
 
 .gallery-item:nth-child(4) {
   left: calc(50% + min(330px, 23.5vw));
-}
-
-@media (max-width: 1440px) {
-  .gallery-item {
-    width: min(312px, 20vw);
-    height: min(125px, 8vh);
-  }
-
-  .gallery-item:hover {
-    height: min(175px, 12vh);
-  }
-}
-
-@media (max-width: 1024px) {
-  .gallery-item {
-    width: min(280px, 22vw);
-    height: min(110px, 7vh);
-  }
-
-  .gallery-item:hover {
-    height: min(150px, 10vh);
-  }
-
-  .gallery-item:nth-child(1) {
-    left: calc(50% - min(420px, 42vw));
-  }
-
-  .gallery-item:nth-child(2) {
-    left: calc(50% - min(145px, 14vw));
-  }
-
-  .gallery-item:nth-child(3) {
-    left: calc(50% + min(5px, 0.5vw));
-  }
-
-  .gallery-item:nth-child(4) {
-    left: calc(50% + min(155px, 15vw));
-  }
 }
 
 .gallery-item:hover {
@@ -1083,5 +1056,42 @@ const nextImage = () => {
 
 .icon-container.active-icon .icon-dot {
   transform: scale(1.4);
+}
+
+/* Main content container height calculation */
+.main-content-container {
+  height: calc(100vh - 71px - 175px);
+}
+
+/* Content scroll container for Middle and Right Content */
+.content-scroll-container {
+  flex: 3;
+  height: 100%;
+  overflow-y: auto;
+  padding-right: 8px;
+  gap: 16px;
+}
+
+/* Custom scrollbar styling */
+.content-scroll-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.content-scroll-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.content-scroll-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.content-scroll-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.content-scroll-container::-webkit-scrollbar-corner {
+  background: transparent;
 }
 </style>
