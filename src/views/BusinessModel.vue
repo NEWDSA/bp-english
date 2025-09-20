@@ -86,44 +86,38 @@
 				</div> -->
 
 				<!-- Revenue Model 弹窗 -->
-			<div class="revenue-modal" v-if="activeContent === 'revenue'" @click="hideContent">
-				<div class="revenue-modal-content" @click.stop>
-					<div class="modal-header">
-						<h2 class="modal-title">Revenue Model Analysis</h2>
-						<button class="close-btn" @click="hideContent">×</button>
-					</div>
-					<div class="charts-grid">
-						<div class="chart-item">
-							<h3 class="chart-item-title">Annual Revenue Growth</h3>
-							<div ref="chart1Ref" class="modal-chart"></div>
+				<div class="revenue-modal" v-if="activeContent === 'revenue'" @click="hideContent">
+					<div class="revenue-modal-content" @click.stop>
+						<div class="modal-header">
+							<h2 class="modal-title">Revenue Model Analysis</h2>
+							<button class="close-btn" @click="hideContent">×</button>
 						</div>
-						<div class="chart-item">
-							<h3 class="chart-item-title">Revenue by Product Line</h3>
-							<div ref="chart2Ref" class="modal-chart"></div>
-						</div>
-						<div class="chart-item">
-							<h3 class="chart-item-title">Market Share Distribution</h3>
-							<div ref="chart3Ref" class="modal-chart"></div>
-						</div>
-						<div class="chart-item">
-							<h3 class="chart-item-title">Profit Margin Trends</h3>
-							<div ref="chart4Ref" class="modal-chart"></div>
+						<div class="charts-grid">
+							<div class="chart-item">
+								<h3 class="chart-item-title">Annual Revenue Growth</h3>
+								<div ref="chart1Ref" class="modal-chart"></div>
+							</div>
+							<div class="chart-item">
+								<h3 class="chart-item-title">Revenue by Product Line</h3>
+								<div ref="chart2Ref" class="modal-chart"></div>
+							</div>
+							<div class="chart-item">
+								<h3 class="chart-item-title">Market Share Distribution</h3>
+								<div ref="chart3Ref" class="modal-chart"></div>
+							</div>
+							<div class="chart-item">
+								<h3 class="chart-item-title">Profit Margin Trends</h3>
+								<div ref="chart4Ref" class="modal-chart"></div>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-
 				<!-- 内容面板 -->
-			<div class="content-panel" v-if="activeContent && activeContent !== 'revenue'">
-				<!-- 返回按钮 -->
-				<!-- <div class="back-btn" @click="hideContent">
-					<div class="back-icon">←</div>
-					<span>Back to Map</span>
-			</div> -->
+				<div class="content-panel" v-if="activeContent && activeContent !== 'revenue'">
 
-				<!-- Lake Como 案例内容 -->
-					<div v-if="activeContent === 'lake'" class="lake-content">
-						<!-- <h3 class="content-title">The case of Lake Como</h3> -->
+					<!-- Lake Como 案例内容 -->
+					<div v-if="activeContent === 'lake' && !showLakeDetail" class="lake-content"
+						@click="showLakeDetailPanel">
 						<div class="content-title">The case of Lake Como</div>
 						<div class="content-subtitle">Daily average number of tourists</div>
 
@@ -240,6 +234,234 @@
 						</div>
 					</div>
 
+					<!-- Lake详情面板 -->
+					<div v-if="activeContent === 'lake' && showLakeDetail" class="lake-content"
+						@click="hideContent">
+						<!-- Transportation Demand 部分 -->
+						<div class="transportation-demand-section">
+							<div>Daily average number of boat tourists</div>
+							<div class="section-title">Transportation Demand</div>
+
+							<!-- ECharts 半环形图 -->
+							<div class="demand-chart-container">
+								<div ref="demandChartRef" class="demand-chart-echarts"></div>
+							</div>
+
+							<!-- 描述文字 -->
+							<div class="demand-description">
+								<p>Each ship has a passenger capacity of 4 people</p>
+								<p>The total demand for hydrofoil boats is 25-38</p>
+							</div>
+						</div>
+
+						<!-- 游客数据部分 -->
+						<div class="tourist-data-section">
+							<div class="section-title">The daily average number of tourists taking boats on Lake Como,
+								calculated based on the peak and off peak seasons</div>
+
+							<!-- 柱状图 -->
+							<div class="bar-charts">
+								<!-- 第一行：11个filled + 4个empty = 15个方块 -->
+								<div class="bar-row">
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+								</div>
+								<div class="bar-row">
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+								</div>
+								<div class="bar-row">
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+								</div>
+								<div class="bar-row">
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+								</div>
+								<div class="bar-row">
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+									<div class="bar-item empty"></div>
+								</div>
+								<div class="bar-row">
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+									<div class="bar-item filled"></div>
+								</div>
+							</div>
+
+							<!-- 详细数据列表 -->
+							<div class="data-list">
+								<div class="data-item">
+									<span class="data-label">Proportion of boat tourists during the off-season
+										(7.5%)</span>
+									<span class="data-value">750 people</span>
+								</div>
+								<div class="data-item">
+									<span class="data-label">During the off-season, tourists staying overnight use boats
+										(75%)</span>
+									<span class="data-value">450 people</span>
+								</div>
+								<div class="data-item">
+									<span class="data-label">Proportion of boat tourists during peak season
+										(7.5%)</span>
+									<span class="data-value">1312 people</span>
+								</div>
+								<div class="data-item">
+									<span class="data-label">Tourists staying overnight during peak season use boats
+										(75%)</span>
+									<span class="data-value">900 people</span>
+								</div>
+								<div class="data-item">
+									<span class="data-label">Average daily number of boat tourists during the
+										off-season</span>
+									<span class="data-value">1200 people</span>
+								</div>
+								<div class="data-item">
+									<span class="data-label">Average daily number of boat tourists during peak
+										season</span>
+									<span class="data-value">2212 people</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
 					<!-- 其他内容面板可以在这里添加 -->
 					<div v-if="activeContent === 'tourists'" class="tourists-content">
 						<div class="content-title">Daily average number of boat tourists</div>
@@ -265,6 +487,7 @@ const router = useRouter()
 
 // 内容面板状态
 const activeContent = ref(null)
+const showLakeDetail = ref(false)
 
 // 图表数据
 const chartData = ref([
@@ -287,10 +510,10 @@ async function showContent(contentType) {
 	console.log('点击了内容类型:', contentType)
 	activeContent.value = contentType
 	console.log('activeContent 现在是:', activeContent.value)
-	
+
 	// 等待DOM更新
 	await nextTick()
-	
+
 	// 如果是revenue类型，渲染模态框图表
 	if (contentType === 'revenue') {
 		renderModalCharts()
@@ -298,12 +521,31 @@ async function showContent(contentType) {
 	// 如果是lake类型，渲染饼图
 	else if (contentType === 'lake') {
 		renderPieChart()
+		// 如果显示详情面板，也渲染需求图表
+		if (showLakeDetail.value) {
+			renderDemandChart()
+		}
 	}
 }
 
 // 隐藏内容面板
 function hideContent() {
 	activeContent.value = null
+	showLakeDetail.value = false
+}
+
+// 显示Lake详情面板
+function showLakeDetailPanel() {
+	showLakeDetail.value = true
+	// 等待DOM更新后渲染需求图表
+	nextTick(() => {
+		renderDemandChart()
+	})
+}
+
+// 隐藏Lake详情面板
+function hideLakeDetailPanel() {
+	showLakeDetail.value = false
 }
 
 // ECharts: Revenue Model
@@ -313,6 +555,10 @@ let revenueChartInstance = null
 // Lake Como Pie Chart
 const pieChartRef = ref(null)
 let pieChartInstance = null
+
+// Transportation Demand Chart
+const demandChartRef = ref(null)
+let demandChartInstance = null
 
 // Revenue Modal Charts
 const chart1Ref = ref(null)
@@ -625,9 +871,15 @@ function renderModalCharts() {
 // Lake Como Pie Chart
 function renderPieChart() {
 	if (!pieChartRef.value) return
-	if (!pieChartInstance) {
-		pieChartInstance = echarts.init(pieChartRef.value)
+	
+	// 如果实例已存在，先销毁（因为DOM可能已经被v-if销毁了）
+	if (pieChartInstance) {
+		pieChartInstance.dispose()
+		pieChartInstance = null
 	}
+	
+	// 重新创建实例
+	pieChartInstance = echarts.init(pieChartRef.value)
 
 	const option = {
 		tooltip: {
@@ -705,8 +957,138 @@ function renderPieChart() {
 			}
 		]
 	}
-	
+
 	pieChartInstance.setOption(option)
+	
+	// 确保图表正确显示
+	setTimeout(() => {
+		if (pieChartInstance) {
+			pieChartInstance.resize()
+		}
+	}, 100)
+}
+
+// Transportation Demand Chart
+function renderDemandChart() {
+	if (!demandChartRef.value) return
+	
+	// 如果实例已存在，先销毁（因为DOM可能已经被v-if销毁了）
+	if (demandChartInstance) {
+		demandChartInstance.dispose()
+		demandChartInstance = null
+	}
+	
+	// 重新创建实例
+	demandChartInstance = echarts.init(demandChartRef.value)
+
+	const option = {
+		tooltip: {
+			trigger: 'item',
+			formatter: '{b}: {d}%'
+		},
+		series: [
+			{
+				name: 'Transportation Demand',
+				type: 'pie',
+				radius: ['40%', '70%'], // 环形图
+				center: ['50%', '80%'], // 调整中心点位置，让图表显示在下半部分
+				startAngle: 180, // 从180度开始，实现半圆
+				endAngle: 360, // 到360度结束，实现半圆
+				avoidLabelOverlap: false,
+				itemGap: 8,
+				data: [
+					{
+						value: 25,
+						name: '10-25',
+						itemStyle: {
+							color: '#FF9A4E' // 橙色
+						},
+						label: {
+							show: true,
+							position: 'outside',
+							formatter: '10-25\nConnection Requirements',
+							fontSize: 10,
+							color: '#ffffff',
+							lineHeight: 14
+						},
+						labelLine: {
+							show: true,
+							length: 15,
+							length2: 8,
+							lineStyle: {
+								color: '#FF9A4E',
+								width: 1
+							}
+						}
+					},
+					{
+						value: 35,
+						name: '15-20',
+						itemStyle: {
+							color: '#00d4ff' // 青色
+						},
+						label: {
+							show: true,
+							position: 'outside',
+							formatter: '15-20\nDaily transportation demand\nin the lake area',
+							fontSize: 10,
+							color: '#ffffff',
+							lineHeight: 14
+						},
+						labelLine: {
+							show: true,
+							length: 15,
+							length2: 8,
+							lineStyle: {
+								color: '#00d4ff',
+								width: 1
+							}
+						}
+					},
+					{
+						value: 40,
+						name: 'Other Requirements',
+						itemStyle: {
+							color: '#ffffff' // 白色
+						},
+						label: {
+							show: true,
+							position: 'outside',
+							formatter: 'Other Requirements',
+							fontSize: 10,
+							color: '#ffffff',
+							lineHeight: 14
+						},
+						labelLine: {
+							show: true,
+							length: 15,
+							length2: 8,
+							lineStyle: {
+								color: '#ffffff',
+								width: 1
+							}
+						}
+					}
+				],
+				emphasis: {
+					itemStyle: {
+						shadowBlur: 10,
+						shadowOffsetX: 0,
+						shadowColor: 'rgba(0, 0, 0, 0.5)'
+					}
+				}
+			}
+		]
+	}
+	
+	demandChartInstance.setOption(option)
+	
+	// 确保图表正确显示
+	setTimeout(() => {
+		if (demandChartInstance) {
+			demandChartInstance.resize()
+		}
+	}, 100)
 }
 
 onMounted(() => {
@@ -718,6 +1100,7 @@ onMounted(() => {
 function onWindowResize() {
 	if (revenueChartInstance) revenueChartInstance.resize()
 	if (pieChartInstance) pieChartInstance.resize()
+	if (demandChartInstance) demandChartInstance.resize()
 }
 
 onBeforeUnmount(() => {
@@ -745,6 +1128,10 @@ onBeforeUnmount(() => {
 	if (chart4Instance) {
 		chart4Instance.dispose()
 		chart4Instance = null
+	}
+	if (demandChartInstance) {
+		demandChartInstance.dispose()
+		demandChartInstance = null
 	}
 })
 
@@ -990,7 +1377,7 @@ onMounted(() => {
 }
 
 .strategy-title {
-	font-size: 13px;
+	font-size: 15px;
 	font-weight: 600;
 	margin-bottom: 10px;
 	color: #ffffff;
@@ -1005,9 +1392,9 @@ onMounted(() => {
 }
 
 .strategy-subtitle {
-	font-size: 12px;
-	/* font-weight: 600; */
-	/* color: #00d4ff; */
+	font-size: 13px;
+	font-weight: 500;
+	color: #ffffff;
 	margin-bottom: 8px;
 }
 
@@ -1016,17 +1403,17 @@ onMounted(() => {
 }
 
 .strategy-label {
-	font-size: 10px;
+	font-size: 12px;
 	font-weight: 600;
 	color: #ffffff;
-	margin: 6px 0 2px 0;
+	margin: 6px 0 3px 0;
 }
 
 .strategy-text {
-	font-size: 9px;
+	font-size: 11px;
 	line-height: 1.3;
 	color: #cccccc;
-	margin: 2px 0;
+	margin: 3px 0;
 }
 
 /* SVG 覆盖层 */
@@ -1241,7 +1628,7 @@ onMounted(() => {
 /* 内容面板样式 */
 .content-panel {
 	width: 480px;
-	height: 520px;
+	/* height: 520px; */
 	/* backdrop-filter: blur(15px); */
 	/* border-radius: 15px; */
 	/* padding: 25px; */
@@ -1258,6 +1645,81 @@ onMounted(() => {
 	transform: translateY(-50%);
 	z-index: 1000;
 }
+
+
+
+.section-title {
+	font-size: 14px;
+	/* font-weight: 600; */
+	color: #ffffff;
+	margin-bottom: 15px;
+	/* text-align: center; */
+	/* background: rgba(0, 212, 255, 0.8); */
+	padding: 8px 12px;
+	/* border-radius: 4px; */
+}
+
+/* 需求图表容器 */
+.demand-chart-container {
+	display: flex;
+	justify-content: center;
+	margin: 20px 0;
+}
+
+.demand-chart-container .demand-chart-echarts {
+	width: 90%;
+	height: 90px;
+}
+
+/* 需求描述 */
+.demand-description {
+	margin-top: 10px;
+}
+
+.demand-description p {
+	font-size: 11px;
+	color: #cccccc;
+	line-height: 1.4;
+	margin: 5px 0;
+	text-align: center;
+}
+
+/* 游客数据部分 */
+.tourist-data-section {
+	margin-top: 15px;
+}
+
+/* 数据列表 */
+.data-list {
+	margin-top: 15px;
+}
+
+.data-item {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 8px 0;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.data-item:last-child {
+	border-bottom: none;
+}
+
+.data-label {
+	font-size: 11px;
+	color: #ffffff;
+	flex: 1;
+	line-height: 1.3;
+}
+
+.data-value {
+	font-size: 11px;
+	font-weight: 600;
+	color: #00d4ff;
+	margin-left: 10px;
+}
+
 
 @keyframes slideIn {
 	from {
@@ -1487,6 +1949,7 @@ onMounted(() => {
 		opacity: 0;
 		transform: scale(0.9);
 	}
+
 	to {
 		opacity: 1;
 		transform: scale(1);
@@ -1501,40 +1964,62 @@ onMounted(() => {
 		padding-left: 20px;
 		padding-right: 20px;
 	}
-	
-	.left-panel, .right-panel {
+
+	.left-panel,
+	.right-panel {
 		flex: 0 0 350px;
 		min-width: 350px;
 		max-width: 400px;
 		padding: 20px;
 	}
-	
+
 	.middle-panel {
 		min-width: 600px;
 		padding: 20px;
 	}
-	
+
 	.chart-card {
 		padding: 20px;
 		margin-bottom: 12px;
 	}
-	
+
 	.chart-title {
-		font-size: 18px;
+		font-size: 20px;
 		margin-bottom: 15px;
 	}
-	
+
 	.chart-container {
 		height: 130px;
 	}
-	
+
 	.revenue-echart {
 		height: 120px;
 	}
-	
+
+	.strategy-title {
+		font-size: 17px;
+		margin-bottom: 12px;
+	}
+
+	.strategy-subtitle {
+		font-size: 15px;
+		margin-bottom: 10px;
+	}
+
+	.strategy-label {
+		font-size: 14px;
+		margin: 8px 0 5px 0;
+	}
+
+	.strategy-text {
+		font-size: 13px;
+		line-height: 1.4;
+		margin: 5px 0;
+	}
+
 	.content-panel {
 		width: 510px;
-		height: 580px;
+		/* height: 580px; */
 		right: 25px;
 	}
 }
@@ -1546,22 +2031,44 @@ onMounted(() => {
 		padding-left: 15px;
 		padding-right: 15px;
 	}
-	
-	.left-panel, .right-panel {
+
+	.left-panel,
+	.right-panel {
 		flex: 0 0 300px;
 		min-width: 300px;
 		max-width: 340px;
 		padding: 18px;
 	}
-	
+
 	.middle-panel {
 		min-width: 500px;
 		padding: 18px;
 	}
-	
+
+	.strategy-title {
+		font-size: 16px;
+		margin-bottom: 11px;
+	}
+
+	.strategy-subtitle {
+		font-size: 14px;
+		margin-bottom: 9px;
+	}
+
+	.strategy-label {
+		font-size: 13px;
+		margin: 7px 0 4px 0;
+	}
+
+	.strategy-text {
+		font-size: 12px;
+		line-height: 1.35;
+		margin: 4px 0;
+	}
+
 	.content-panel {
 		width: 420px;
-		height: 500px;
+		/* height: 500px; */
 		right: 18px;
 	}
 }
@@ -1573,60 +2080,62 @@ onMounted(() => {
 		padding-left: 10px;
 		padding-right: 10px;
 	}
-	
-	.left-panel, .right-panel {
+
+	.left-panel,
+	.right-panel {
 		flex: 0 0 260px;
 		min-width: 260px;
 		max-width: 280px;
 		padding: 12px;
 	}
-	
+
 	.middle-panel {
 		min-width: 400px;
 		padding: 12px;
 	}
-	
+
 	.chart-card {
 		padding: 12px;
 		margin-bottom: 6px;
 	}
-	
+
 	.chart-title {
-		font-size: 14px;
+		font-size: 16px;
 		margin-bottom: 10px;
 	}
-	
+
 	.chart-container {
 		height: 80px;
 	}
-	
+
 	.revenue-echart {
 		height: 70px;
 	}
-	
+
 	.strategy-title {
-		font-size: 12px;
+		font-size: 15px;
+		margin-bottom: 9px;
 	}
-	
-	.strategy-label {
-		font-size: 9px;
-		margin: 5px 0 1px 0;
-	}
-	
-	.strategy-text {
-		font-size: 8px;
-		line-height: 1.2;
-		margin: 1px 0;
-	}
-	
+
 	.strategy-subtitle {
-		font-size: 11px;
-		margin-bottom: 6px;
+		font-size: 13px;
+		margin-bottom: 7px;
 	}
-	
+
+	.strategy-label {
+		font-size: 12px;
+		margin: 6px 0 2px 0;
+	}
+
+	.strategy-text {
+		font-size: 11px;
+		line-height: 1.3;
+		margin: 2px 0;
+	}
+
 	.content-panel {
 		width: 390px;
-		height: 480px;
+		/* height: 480px; */
 		right: 12px;
 	}
 }
@@ -1640,39 +2149,62 @@ onMounted(() => {
 		max-height: none;
 		padding: 80px 15px 20px;
 	}
-	
-	.left-panel, .right-panel, .middle-panel {
+
+	.left-panel,
+	.right-panel,
+	.middle-panel {
 		flex: none;
 		width: 100%;
 		min-width: auto;
 		max-width: none;
 		padding: 15px;
 	}
-	
+
 	.left-panel {
 		order: 1;
 		max-height: 300px;
 		overflow-y: auto;
 	}
-	
+
 	.middle-panel {
 		order: 2;
 		height: 400px;
 	}
-	
+
 	.right-panel {
 		order: 3;
 		max-height: 400px;
 		overflow-y: auto;
 	}
-	
+
 	.map-container {
 		max-height: 350px;
 	}
-	
+
+	.strategy-title {
+		font-size: 14px;
+		margin-bottom: 8px;
+	}
+
+	.strategy-subtitle {
+		font-size: 12px;
+		margin-bottom: 6px;
+	}
+
+	.strategy-label {
+		font-size: 11px;
+		margin: 5px 0 2px 0;
+	}
+
+	.strategy-text {
+		font-size: 10px;
+		line-height: 1.25;
+		margin: 2px 0;
+	}
+
 	.content-panel {
 		width: 350px;
-		height: 420px;
+		/* height: 420px; */
 		right: 15px;
 	}
 }
@@ -1686,32 +2218,34 @@ onMounted(() => {
 		max-height: none;
 		padding: 80px 10px 20px;
 	}
-	
-	.left-panel, .right-panel, .middle-panel {
+
+	.left-panel,
+	.right-panel,
+	.middle-panel {
 		flex: none;
 		width: 100%;
 		min-width: auto;
 		max-width: none;
 		padding: 10px;
 	}
-	
+
 	.left-panel {
 		order: 1;
 		max-height: 250px;
 		overflow-y: auto;
 	}
-	
+
 	.middle-panel {
 		order: 2;
 		height: 300px;
 	}
-	
+
 	.right-panel {
 		order: 3;
 		max-height: 300px;
 		overflow-y: auto;
 	}
-	
+
 	.nav-container {
 		flex-wrap: wrap;
 		gap: 8px;
@@ -1731,10 +2265,10 @@ onMounted(() => {
 		max-height: 250px;
 		border-radius: 10px;
 	}
-	
+
 	.content-panel {
 		width: 320px;
-		height: 380px;
+		/* height: 380px; */
 		padding: 15px;
 		border-radius: 10px;
 		right: 10px;
@@ -1742,37 +2276,37 @@ onMounted(() => {
 		top: 50%;
 		transform: translateY(-50%);
 	}
-	
+
 	.chart-card {
 		padding: 10px;
 		border-radius: 8px;
 		margin-bottom: 5px;
 	}
-	
+
 	.chart-title {
 		font-size: 13px;
 		margin-bottom: 8px;
 	}
-	
+
 	.strategy-title {
-		font-size: 11px;
+		font-size: 13px;
 		margin-bottom: 6px;
 	}
-	
+
+	.strategy-subtitle {
+		font-size: 11px;
+		margin-bottom: 5px;
+	}
+
 	.strategy-label {
-		font-size: 9px;
+		font-size: 10px;
 		margin: 4px 0 1px 0;
 	}
-	
+
 	.strategy-text {
-		font-size: 8px;
+		font-size: 9px;
 		line-height: 1.2;
 		margin: 1px 0;
-	}
-	
-	.strategy-subtitle {
-		font-size: 10px;
-		margin-bottom: 6px;
 	}
 }
 
@@ -1781,8 +2315,8 @@ onMounted(() => {
 	.content-panel {
 		width: 90vw;
 		max-width: 300px;
-		height: 70vh;
-		max-height: 380px;
+		/* height: 70vh; */
+		/* max-height: 380px; */
 		right: 5px;
 		left: 5px;
 		transform: translateY(-50%);
