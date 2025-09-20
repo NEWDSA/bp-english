@@ -1,16 +1,17 @@
 <template>
 	<div class="team-composition">
-		<!-- 背景视频 -->
+		<!-- 背景视频/图片 -->
 		<div class="video-background">
-			<video 
-				autoplay 
-				muted 
-				loop 
-				playsinline
-				class="background-video"
-			>
+			<video v-if="!isCeoBackground && !isCfoBackground && !isCooBackground && !isEngineerBackground && !isInteractionEngineerBackground && !isStructuralEngineerBackground && !isStrategicPlannerBackground" autoplay muted loop playsinline class="background-video">
 				<source src="../assets/team_bg.mp4" type="video/mp4">
 			</video>
+			<img v-if="isCeoBackground" src="../assets/ceo_bg.png" alt="CEO Background" class="background-image">
+			<img v-if="isCfoBackground" src="../assets/cfo_bg.png" alt="CFO Background" class="background-image">
+			<img v-if="isCooBackground" src="../assets/coo_bg.png" alt="COO Background" class="background-image">
+			<img v-if="isEngineerBackground" src="../assets/engineer_bg.png" alt="Engineer Background" class="background-image">
+			<img v-if="isInteractionEngineerBackground" src="../assets/interactionEngineer_bg.png" alt="Interaction Engineer Background" class="background-image">
+			<img v-if="isStructuralEngineerBackground" src="../assets/structuralEngineer_bg.png" alt="Structural Engineer Background" class="background-image">
+			<img v-if="isStrategicPlannerBackground" src="../assets/strategicPlanner_bg.png" alt="Strategic Planner Background" class="background-image">
 			<div class="video-overlay"></div>
 		</div>
 
@@ -24,7 +25,7 @@
 					</div>
 				</div>
 				<div class="nav-divider"></div>
-				
+
 				<router-link to="/industry-background" class="nav-item">Industry Background</router-link>
 				<div class="nav-divider"></div>
 				<router-link to="/market-demand" class="nav-item">Market Demand</router-link>
@@ -45,12 +46,12 @@
 				<div class="left-section">
 					<!-- 创始人标题 -->
 					<div class="founder-header">
-						<h1 class="founder-title">Founder & CEO</h1>
-						<h2 class="founder-name">Kevin</h2>
+						<h1 class="founder-title">{{ getCurrentMemberTitle() }}</h1>
+						<h2 class="founder-name">{{ getCurrentMemberName() }}</h2>
 					</div>
 
 					<!-- 工作经验 -->
-					<div class="info-section">
+					<div v-if="!isEngineerBackground" class="info-section" @mouseenter="showTooltipWithType('work')" @mouseleave="hideTooltip">
 						<div class="section-icon">
 							<img src="/src/assets/work.png" alt="Work Experience" class="icon-image" />
 						</div>
@@ -58,7 +59,7 @@
 					</div>
 
 					<!-- 教育背景 -->
-					<div class="info-section">
+					<div v-if="!isEngineerBackground" class="info-section" @mouseenter="showTooltipWithType('education')" @mouseleave="hideTooltip">
 						<div class="section-icon">
 							<img src="/src/assets/edu.png" alt="Educational Background" class="icon-image" />
 						</div>
@@ -66,11 +67,19 @@
 					</div>
 
 					<!-- 代表作品 -->
-					<div class="info-section">
+					<div v-if="!isEngineerBackground" class="info-section" @mouseenter="showTooltipWithType('works')" @mouseleave="hideTooltip">
 						<div class="section-icon">
 							<img src="/src/assets/video.png" alt="Representative works" class="icon-image" />
 						</div>
 						<h3 class="section-title">Representative works (Delivered)</h3>
+					</div>
+
+					<!-- 工程师专用 - 主要职责 -->
+					<div v-if="isEngineerBackground" class="info-section" @mouseenter="showTooltip('engineer')" @mouseleave="hideTooltip">
+						<div class="section-icon">
+							<img src="/src/assets/work.png" alt="Mainly Responsible For" class="icon-image" />
+						</div>
+						<h3 class="section-title">mainly responsible for</h3>
 					</div>
 				</div>
 
@@ -91,31 +100,67 @@
 			<!-- 底部团队成员区域 -->
 			<div class="bottom-section">
 				<div class="team-members-grid">
-					<h3 class="members-title">Team Members</h3>
-					<div class="members-avatars">
-						<div class="member-avatar cfo">
-							<div class="avatar-label">CFO</div>
-						</div>
-						<div class="member-avatar coo">
-							<div class="avatar-label">COO</div>
-						</div>
-						<div class="member-avatar engineer">
-							<div class="avatar-label">Engineer</div>
-						</div>
-						<div class="member-avatar founder">
-							<div class="avatar-label">Founder/Engineer</div>
-						</div>
-						<div class="member-avatar engineer2">
-							<div class="avatar-label">Founder/Engineer</div>
-						</div>
-						<div class="member-avatar strategy">
-							<div class="avatar-label">Strategy/Service</div>
-						</div>
+					<!-- Team Members -->
+					<div class="team-members-title">Team Members</div>
+					<!-- CEO -->
+					<div
+						style="width: 100px;height: 100px;display: flex;flex-direction: column;align-items: center;justify-content: center;cursor: pointer;"
+						@click="toggleCeoBackground">
+						<span style="text-align: center;">CEO</span>
+						<img class="member-avatar" src="../assets/ceo.png" alt="CEO"></img>
 					</div>
-					<div class="team-description">
-						<p>Team members gather top talents in the four core fields of ship engineering, intelligent systems, corporate internal control, finance, taxation, and legal affairs.</p>
+					<div
+						style="width: 100px;height: 100px;display: flex;flex-direction: column;align-items: center;justify-content: center;cursor: pointer;"
+						@click="toggleCfoBackground">
+						<span style="text-align: center;">CFO</span>
+						<img class="member-avatar" src="../assets/cfo.png" alt="CFO" lass="member-avatar"></img>
 					</div>
+					<div
+						style="width: 100px;height: 100px;display: flex;flex-direction: column;align-items: center;justify-content: center;cursor: pointer;"
+						@click="toggleCooBackground">
+						<span style="text-align: center;">COO</span>
+						<img class="member-avatar" src="../assets/coo.png" alt="COO"></img>
+					</div>
+					<div
+						style="width: 100px;height: 100px;display: flex;flex-direction: column;align-items: center;justify-content: center;cursor: pointer;"
+						@click="toggleEngineerBackground">
+						<span style="text-align: center;">Engineer</span>
+						<img class="member-avatar" src="../assets/engineer.png" alt="Engineer"></img>
+					</div>
+					<div
+						style="width: 100px;height: 100px;display: flex;flex-direction: column;align-items: center;justify-content: center;cursor: pointer;"
+						@click="toggleInteractionEngineerBackground">
+						<span style="text-align: center; font-size: 14px;">Interaction Engineer</span>
+
+						<img class="member-avatar" src="../assets/interactionEngineer.png" alt="Founder"></img>
+					</div>
+					<div
+						style="width: 100px;height: 100px;display: flex;flex-direction: column;align-items: center;justify-content: center;cursor: pointer;"
+						@click="toggleStructuralEngineerBackground">
+						<span style="text-align: center; font-size: 14px;">Structural Engineer</span>
+
+						<img class="member-avatar" src="../assets/structuralEnginner.png" alt="Strategy"></img>
+					</div>
+					<div
+						style="width: 100px;height: 100px;display: flex;flex-direction: column;align-items: center;justify-content: center;cursor: pointer;"
+						@click="toggleStrategicPlannerBackground">
+						<span style="text-align: center; font-size: 14px;">Strategic Planner</span>
+
+						<img class="member-avatar" src="../assets/strategicPlanner.png" alt="Strategy"></img>
+					</div>
+					<div style="width: 200px;">Team members gather top talents in the four core fields of ship
+						engineering, intelligent systems, corporate internal control, finance, taxation, and legal
+						affairs.</div>
 				</div>
+
+			</div>
+		</div>
+
+		<!-- 气泡窗 - 固定在屏幕中央 -->
+		<div v-if="activeTooltip" class="info-tooltip" :class="activeTooltip">
+			<div class="tooltip-content">
+				<h4 class="tooltip-title">{{ getTooltipTitle(activeTooltip) }}</h4>
+				<p class="tooltip-description">{{ getTooltipDescription(activeTooltip) }}</p>
 			</div>
 		</div>
 	</div>
@@ -126,10 +171,202 @@ import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
+const activeTooltip = ref(null)
+const currentInfoType = ref('work') // 当前显示的信息类型：work, education, works
+const isCeoBackground = ref(false)
+const isCfoBackground = ref(false)
+const isCooBackground = ref(false)
+const isEngineerBackground = ref(false)
+const isInteractionEngineerBackground = ref(false)
+const isStructuralEngineerBackground = ref(false)
+const isStrategicPlannerBackground = ref(false)
 
 function goHome() {
 	router.push('/')
 }
+
+function showTooltip(memberType) {
+	activeTooltip.value = memberType
+}
+
+function showTooltipWithType(infoType) {
+	currentInfoType.value = infoType
+	activeTooltip.value = infoType
+}
+
+function hideTooltip() {
+	activeTooltip.value = null
+}
+
+// 获取当前成员信息的方法
+function getCurrentMemberTitle() {
+	const currentMember = getCurrentActiveMember()
+	const titles = {
+		ceo: 'Founder & CEO',
+		cfo: 'CFO',
+		coo: 'COO',
+		engineer: 'Engineer',
+		interactionEngineer: 'Interaction Engineer',
+		structuralEngineer: 'Structural Engineer',
+		strategicPlanner: 'Strategic Planner'
+	}
+	return titles[currentMember] || 'Team Member'
+}
+
+function getCurrentMemberName() {
+	const currentMember = getCurrentActiveMember()
+	const names = {
+		ceo: 'Kevin',
+		cfo: 'Liang Gong',
+		coo: 'David',
+		engineer: 'Ben',
+		interactionEngineer: 'Mike',
+		structuralEngineer: 'Tom',
+		strategicPlanner: 'John'
+	}
+	return names[currentMember] || 'Team Member'
+}
+
+function getCurrentActiveMember() {
+	if (isCeoBackground.value) return 'ceo'
+	if (isCfoBackground.value) return 'cfo'
+	if (isCooBackground.value) return 'coo'
+	if (isEngineerBackground.value) return 'engineer'
+	if (isInteractionEngineerBackground.value) return 'interactionEngineer'
+	if (isStructuralEngineerBackground.value) return 'structuralEngineer'
+	if (isStrategicPlannerBackground.value) return 'strategicPlanner'
+	return 'ceo' // 默认返回CEO
+}
+
+function getTooltipTitle(tooltipType) {
+	const titles = {
+		work: 'Work Experience',
+		education: 'Educational Background',
+		works: 'Representative Works',
+		coo: 'Work Experience',
+		cooEducation: 'Educational Background',
+		cfo: 'Work Experience',
+		cfoEducation: 'Educational Background',
+		engineer: 'mainly responsible for',
+		engineerEducation: 'Educational Background',
+		engineerWorks: 'Representative Works'
+	}
+	return titles[tooltipType] || ''
+}
+
+function getTooltipDescription(tooltipType) {
+	const descriptions = {
+		work: '• Over 10 years of experience in ship design work\n• 2015-2017 Ferrari Group, Italy - Quality Control and After sales Manager\n• 2020/10-2022/10 School of Design and Art, China Academy of Art - Industrial Design Teacher\n• Hangzhou Yihai Ship Design Co., Ltd. - General Manager/Legal Representative\n• Yushui Flying (Shenzhen) Technology Co., Ltd. - General Manager',
+		education: '• Undergraduate: China Academy of Art - Industrial Design\n• Graduate student: Genoa Milan Polytechnic Joint Training Master\'s Degree - Ship and Yacht Design\n• PhD: University of Kuala Lumpur - Ship and Ocean Engineering',
+		works: 'Led the development of revolutionary hydrofoil systems for commercial vessels, including the award-winning "OceanGlide" series. Successfully delivered 15+ major maritime projects with 99.5% client satisfaction rate.',
+		coo: '• Over 10 years of experience in ship design work\n• 2015-2017 Ferrari Group, Italy - Quality Control and After sales Manager\n• 2020/10-2022/10 School of Design and Art, China Academy of Art - Industrial Design Teacher\n• Hangzhou Yihai Ship Design Co., Ltd. - General Manager/Legal Representative\n• Yushui Flying (Shenzhen) Technology Co., Ltd. - General Manager',
+		cooEducation: '• Undergraduate: China Academy of Art - Industrial Design\n• Graduate student: Genoa Milan Polytechnic Joint Training Master\'s Degree - Ship and Yacht Design\n• PhD: University of Kuala Lumpur - Ship and Ocean Engineering',
+		cfo: '• Founding Partner of Micro Light Innovation Investment\n• Responsible for tax laws, investment and financing, and financial strategy\n• Expert in financial planning and risk management\n• Oversees all financial operations and compliance',
+		cfoEducation: '• Master of Law, China University of Political Science and Law\n• Master of Finance from Stanford University in the United States',
+		engineer: '• Responsible for performance testing and optimization\n• CNC structural engineer\n• Software and hardware embedded engineer\n• Material research and innovation',
+		engineerEducation: '• Bachelor of Engineering in Mechanical Engineering\n• Master of Science in Materials Science and Engineering\n• Advanced certifications in CNC programming and embedded systems\n• Specialized training in performance optimization and testing',
+		engineerWorks: '• Developed advanced CNC machining systems for precision manufacturing\n• Created embedded software solutions for industrial automation\n• Led material research projects resulting in 3 patent applications\n• Optimized performance testing protocols improving efficiency by 40%'
+	}
+	return descriptions[tooltipType] || ''
+}
+
+function toggleCeoBackground() {
+	isCeoBackground.value = !isCeoBackground.value
+	// 关闭其他所有背景
+	isCfoBackground.value = false
+	isCooBackground.value = false
+	isEngineerBackground.value = false
+	isInteractionEngineerBackground.value = false
+	isStructuralEngineerBackground.value = false
+	isStrategicPlannerBackground.value = false
+}
+
+function toggleCfoBackground() {
+	isCfoBackground.value = !isCfoBackground.value
+	// 关闭其他所有背景
+	isCeoBackground.value = false
+	isCooBackground.value = false
+	isEngineerBackground.value = false
+	isInteractionEngineerBackground.value = false
+	isStructuralEngineerBackground.value = false
+	isStrategicPlannerBackground.value = false
+	// 根据当前信息类型显示CFO的tooltip
+	if (currentInfoType.value === 'education') {
+		activeTooltip.value = 'cfoEducation'
+	} else {
+		activeTooltip.value = 'cfo'
+	}
+}
+
+function toggleCooBackground() {
+	isCooBackground.value = !isCooBackground.value
+	// 关闭其他所有背景
+	isCeoBackground.value = false
+	isCfoBackground.value = false
+	isEngineerBackground.value = false
+	isInteractionEngineerBackground.value = false
+	isStructuralEngineerBackground.value = false
+	isStrategicPlannerBackground.value = false
+	// 根据当前信息类型显示COO的tooltip
+	if (currentInfoType.value === 'education') {
+		activeTooltip.value = 'cooEducation'
+	} else {
+		activeTooltip.value = 'coo'
+	}
+}
+
+function toggleEngineerBackground() {
+	isEngineerBackground.value = !isEngineerBackground.value
+	// 关闭其他所有背景
+	isCeoBackground.value = false
+	isCfoBackground.value = false
+	isCooBackground.value = false
+	isInteractionEngineerBackground.value = false
+	isStructuralEngineerBackground.value = false
+	isStrategicPlannerBackground.value = false
+	// 根据当前信息类型显示工程师的tooltip
+	if (currentInfoType.value === 'education') {
+		activeTooltip.value = 'engineerEducation'
+	} else if (currentInfoType.value === 'works') {
+		activeTooltip.value = 'engineerWorks'
+	} else {
+		activeTooltip.value = 'engineer'
+	}
+}
+
+function toggleInteractionEngineerBackground() {
+	isInteractionEngineerBackground.value = !isInteractionEngineerBackground.value
+	// 关闭其他所有背景
+	isCeoBackground.value = false
+	isCfoBackground.value = false
+	isCooBackground.value = false
+	isEngineerBackground.value = false
+	isStructuralEngineerBackground.value = false
+	isStrategicPlannerBackground.value = false
+}
+
+function toggleStructuralEngineerBackground() {
+	isStructuralEngineerBackground.value = !isStructuralEngineerBackground.value
+	// 关闭其他所有背景
+	isCeoBackground.value = false
+	isCfoBackground.value = false
+	isCooBackground.value = false
+	isEngineerBackground.value = false
+	isInteractionEngineerBackground.value = false
+	isStrategicPlannerBackground.value = false
+}
+
+function toggleStrategicPlannerBackground() {
+	isStrategicPlannerBackground.value = !isStrategicPlannerBackground.value
+	// 关闭其他所有背景
+	isCeoBackground.value = false
+	isCfoBackground.value = false
+	isCooBackground.value = false
+	isEngineerBackground.value = false
+	isInteractionEngineerBackground.value = false
+	isStructuralEngineerBackground.value = false
+}
+
 
 onMounted(() => {
 	// 页面加载完成后的初始化逻辑
@@ -137,6 +374,18 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.team-members-title {
+	font-size: 16px;
+	font-weight: 600;
+	color: #ffffff;
+	margin-bottom: 8px;
+	text-align: left;
+	/* //文字不换行 */
+	white-space: nowrap;
+	/* overflow: hidden; */
+	/* text-overflow: ellipsis; */
+}
+
 .team-composition {
 	min-height: 100vh;
 	color: #ffffff;
@@ -157,6 +406,13 @@ onMounted(() => {
 }
 
 .background-video {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
+}
+
+.background-image {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
@@ -263,15 +519,17 @@ onMounted(() => {
 .main-content {
 	display: flex;
 	flex-direction: column;
-	min-height: 100vh;
+	height: 100vh;
 	padding-top: 80px;
+	overflow: hidden;
 }
 
 /* 上半部分 - 水平布局 */
 .top-section {
 	display: flex;
 	flex: 1;
-	min-height: 60vh;
+	height: calc(100vh - 80px - 30vh);
+	overflow: hidden;
 }
 
 .left-section {
@@ -292,11 +550,13 @@ onMounted(() => {
 
 /* 底部团队成员区域 */
 .bottom-section {
-	padding: 40px;
+	padding: 15px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	/* min-height: 40vh; */
+	height: 30vh;
+	max-height: 30vh;
+	overflow: hidden;
 }
 
 /* 创始人信息样式 */
@@ -326,6 +586,15 @@ onMounted(() => {
 	/* margin-bottom: 40px;
 	padding: 20px 0; */
 	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	cursor: pointer;
+	transition: all 0.3s ease;
+	/* padding: 10px 0; */
+}
+
+.info-section:hover {
+	background: rgba(255, 255, 255, 0.05);
+	border-radius: 8px;
+	padding: 10px;
 }
 
 .section-icon {
@@ -353,6 +622,61 @@ onMounted(() => {
 	margin: 0;
 }
 
+/* 信息气泡窗样式 - 固定在屏幕中央 */
+.info-tooltip {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: rgba(0, 0, 0, 0.7);
+	backdrop-filter: blur(15px);
+	border: 2px solid rgba(0, 212, 255, 0.3);
+	border-radius: 20px;
+	padding: 30px;
+	max-width: 450px;
+	max-height: 70vh;
+	width: 90%;
+	z-index: 9999;
+	box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+	animation: tooltipFadeIn 0.4s ease-out;
+	overflow-y: auto;
+	pointer-events: auto;
+}
+
+@keyframes tooltipFadeIn {
+	from {
+		opacity: 0;
+		transform: translate(-50%, -50%) scale(0.7);
+	}
+	to {
+		opacity: 1;
+		transform: translate(-50%, -50%) scale(1);
+	}
+}
+
+.tooltip-content {
+	color: #ffffff;
+	text-align: center;
+}
+
+.tooltip-title {
+	font-size: 22px;
+	font-weight: 700;
+	color: #00d4ff;
+	margin: 0 0 20px 0;
+	text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
+
+.tooltip-description {
+	font-size: 16px;
+	color: #ffffff;
+	margin: 0;
+	text-align: left;
+	line-height: 1.8;
+	opacity: 0.95;
+	white-space: pre-line;
+}
+
 /* 右侧内容样式 */
 .top-info {
 	display: flex;
@@ -377,18 +701,29 @@ onMounted(() => {
 .team-members-grid {
 	background: rgba(255, 255, 255, 0.05);
 	border-radius: 15px;
-	padding: 40px;
+	padding: 10px;
 	border: 1px solid rgba(255, 255, 255, 0.1);
-	max-width: 800px;
+	/* max-width: 800px; */
 	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	gap: 20px;
+}
+
+.team-members-content {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	flex: 1;
 }
 
 .members-title {
-	font-size: 24px;
+	font-size: 16px;
 	font-weight: 600;
 	color: #ffffff;
-	margin-bottom: 40px;
-	text-align: center;
+	margin-bottom: 8px;
+	text-align: left;
 }
 
 .members-avatars {
@@ -396,27 +731,28 @@ onMounted(() => {
 	grid-template-columns: repeat(3, 1fr);
 	grid-template-rows: repeat(2, 1fr);
 	gap: 30px;
-	margin-bottom: 40px;
+	margin-bottom: 20px;
 	justify-items: center;
 	max-width: 600px;
-	margin-left: auto;
-	margin-right: auto;
 }
 
 .member-avatar {
-	width: 80px;
-	height: 80px;
-	border-radius: 50%;
+	width: 98px;
+	height: 133px;
+	/* height: 100px; */
+	border-radius: 12px;
 	position: relative;
-	border: 3px solid rgba(255, 255, 255, 0.3);
-	background-size: cover;
+	border: 2px solid transparent;
+	/* background-size: cover; */
 	background-position: center;
 	transition: all 0.3s ease;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .member-avatar:hover {
-	transform: scale(1.1);
-	border-color: #00d4ff;
+	transform: scale(1.05);
+	border: 2px solid #00d4ff;
+	box-shadow: 0 8px 25px rgba(0, 212, 255, 0.3);
 }
 
 .member-avatar.cfo {
@@ -445,10 +781,10 @@ onMounted(() => {
 
 .avatar-label {
 	position: absolute;
-	bottom: -25px;
+	bottom: -12px;
 	left: 50%;
 	transform: translateX(-50%);
-	font-size: 10px;
+	font-size: 7px;
 	color: #ffffff;
 	text-align: center;
 	white-space: nowrap;
@@ -456,48 +792,52 @@ onMounted(() => {
 }
 
 .team-description {
-	text-align: center;
+	text-align: left;
 	color: #cccccc;
-	font-size: 14px;
-	line-height: 1.6;
-	max-width: 400px;
-	margin: 0 auto;
+	font-size: 9px;
+	line-height: 1.2;
+	max-width: 300px;
+	flex: 1;
+	display: flex;
+	align-items: center;
 }
+
 
 /* 响应式设计 */
 @media (max-width: 768px) {
 	.top-section {
 		flex-direction: column;
 	}
-	
+
 	.nav-container {
 		flex-wrap: wrap;
 		gap: 10px;
 	}
-	
+
 	.nav-item {
 		font-size: 12px;
 		padding: 8px 15px;
 	}
-	
-	.left-section, .right-section {
+
+	.left-section,
+	.right-section {
 		padding: 20px;
 	}
-	
+
 	.bottom-section {
 		padding: 20px;
 	}
-	
+
 	.members-avatars {
 		grid-template-columns: repeat(2, 1fr);
 		grid-template-rows: repeat(3, 1fr);
 		gap: 20px;
 	}
-	
+
 	.founder-title {
 		font-size: 36px;
 	}
-	
+
 	.founder-name {
 		font-size: 28px;
 	}

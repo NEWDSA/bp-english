@@ -28,7 +28,8 @@
 			<!-- 左侧面板：Revenue Model + Channel Strategy -->
 			<div class="left-panel">
 				<!-- 收入模型图表 -->
-				<div class="chart-card" @click="showContent('revenue')">
+				<div class="chart-card revenue-hover-card" :class="{ 'revenue-selected': isRevenueSelected }"
+					@click="showContent('revenue')">
 					<h3 class="chart-title">Revenue Model</h3>
 					<div class="chart-container">
 						<div ref="revenueChartRef" class="revenue-echart"></div>
@@ -89,25 +90,43 @@
 				<div class="revenue-modal" v-if="activeContent === 'revenue'" @click="hideContent">
 					<div class="revenue-modal-content" @click.stop>
 						<div class="modal-header">
-							<h2 class="modal-title">Revenue Model Analysis</h2>
+							<!-- <h2 class="modal-title">Revenue Model Analysis</h2> -->
 							<button class="close-btn" @click="hideContent">×</button>
 						</div>
 						<div class="charts-grid">
 							<div class="chart-item">
-								<h3 class="chart-item-title">Annual Revenue Growth</h3>
+								<!-- <h3 class="chart-item-title">Annual Revenue Growth</h3> -->
 								<div ref="chart1Ref" class="modal-chart"></div>
 							</div>
 							<div class="chart-item">
-								<h3 class="chart-item-title">Revenue by Product Line</h3>
+								<!-- <h3 class="chart-item-title">Revenue by Product Line</h3> -->
 								<div ref="chart2Ref" class="modal-chart"></div>
 							</div>
+							<div class="chart-item text-center">
+								<span
+									style="color: black; display: flex; align-items: center; justify-content: center; height: 100%; text-align: center; line-height: 1.4; font-size: 12px; padding: 10px; word-wrap: break-word;">Transportation
+									cost: By reducing size,configuration, replacing materials,
+									and reducing sales costs, the costcontrol goal can be achieved, andthe construction
+									cost of a singlevessel needs to be controlled below
+									220000
+									Suggested sales strategy: Fixed single</span>
+							</div>
 							<div class="chart-item">
-								<h3 class="chart-item-title">Market Share Distribution</h3>
+								<!-- <h3 class="chart-item-title">Market Share Distribution</h3> -->
 								<div ref="chart3Ref" class="modal-chart"></div>
 							</div>
 							<div class="chart-item">
-								<h3 class="chart-item-title">Profit Margin Trends</h3>
+								<!-- <h3 class="chart-item-title">Profit Margin Trends</h3> -->
 								<div ref="chart4Ref" class="modal-chart"></div>
+							</div>
+							<div class="chart-item text-center">
+								<span
+									style="color: black; display: flex; align-items: center; justify-content: center; height: 100%; text-align: center; line-height: 1.4; font-size: 12px; padding: 10px; word-wrap: break-word;">Transportation
+									cost: By reducing size,configuration, replacing materials,
+									High end version: By addingconfigurations and other additionaldevices, the user
+									experience isimproved, thereby increasing grossprofit margin and selling
+									price;Compared to similar products, thereis room for further improvement ingross
+									profit margin.</span>
 							</div>
 						</div>
 					</div>
@@ -235,16 +254,28 @@
 					</div>
 
 					<!-- Lake详情面板 -->
-					<div v-if="activeContent === 'lake' && showLakeDetail" class="lake-content"
-						@click="hideContent">
+					<div v-if="activeContent === 'lake' && showLakeDetail" class="lake-content" @click="hideContent">
 						<!-- Transportation Demand 部分 -->
 						<div class="transportation-demand-section">
-							<div>Daily average number of boat tourists</div>
+							<div class="main-title">Daily average number of boat tourists</div>
 							<div class="section-title">Transportation Demand</div>
 
 							<!-- ECharts 半环形图 -->
 							<div class="demand-chart-container">
 								<div ref="demandChartRef" class="demand-chart-echarts"></div>
+								<!-- 引导线连接的文字 -->
+								<div class="chart-labels">
+									<div class="chart-label-left">
+										<div class="label-text">Daily transportation demand</div>
+										<div class="label-text">in the lake area</div>
+									</div>
+									<div class="chart-label-right">
+										<div class="label-text">Connection Requirements</div>
+									</div>
+									<div class="chart-label-bottom">
+										<div class="label-text">Other Requirements</div>
+									</div>
+								</div>
 							</div>
 
 							<!-- 描述文字 -->
@@ -488,6 +519,7 @@ const router = useRouter()
 // 内容面板状态
 const activeContent = ref(null)
 const showLakeDetail = ref(false)
+const isRevenueSelected = ref(false)
 
 // 图表数据
 const chartData = ref([
@@ -511,6 +543,13 @@ async function showContent(contentType) {
 	activeContent.value = contentType
 	console.log('activeContent 现在是:', activeContent.value)
 
+	// 设置选中状态
+	if (contentType === 'revenue') {
+		isRevenueSelected.value = true
+	} else {
+		isRevenueSelected.value = false
+	}
+
 	// 等待DOM更新
 	await nextTick()
 
@@ -532,6 +571,7 @@ async function showContent(contentType) {
 function hideContent() {
 	activeContent.value = null
 	showLakeDetail.value = false
+	isRevenueSelected.value = false
 }
 
 // 显示Lake详情面板
@@ -649,8 +689,8 @@ function renderModalCharts() {
 		chart1Instance = echarts.init(chart1Ref.value)
 		const option1 = {
 			title: {
-				text: 'What the cost of a single ship is 200000 yuan, Profit when each sales volume is achieved',
-				textStyle: { fontSize: 12, color: '#333' },
+				text: 'When the cost of a single ship is 28,000$,break even sales volume is achieved',
+				textStyle: { fontSize: 10, color: '#333' },
 				top: 10
 			},
 			grid: { top: 60, bottom: 60, left: 40, right: 40 },
@@ -661,29 +701,61 @@ function renderModalCharts() {
 			},
 			xAxis: {
 				type: 'category',
-				data: ['13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32'],
-				axisLabel: { color: '#666', fontSize: 10 }
+				// data: ['13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32'],
+				axisLabel: { color: '#666', fontSize: 10 },
+				axisLabel: { show: false },
+				axisTick: { show: false },
+				axisLine: { show: false },
+				splitLine: { show: false }
 			},
+			// xAxis: {
+			// 	type: 'value',
+			// 	axisLabel: { show: false },
+			// 	axisTick: { show: false },
+			// 	axisLine: { show: false },
+			// 	splitLine: { show: false }
+			// },
 			yAxis: {
 				type: 'value',
-				axisLabel: { color: '#666', fontSize: 10 }
+				axisLabel: { show: false },
+				axisTick: { show: false },
+				axisLine: { show: false },
+				splitLine: { show: false }
 			},
 			series: [
 				{
 					name: 'Annual breakeven sales volume (units)',
 					type: 'bar',
 					data: [45, 48, 52, 55, 58, 62, 65, 68, 72, 75, 78, 82, 85, 88, 92, 95, 98, 102, 105, 108],
-					itemStyle: { color: '#00d4ff' }
+					itemStyle: { color: '#00d4ff' },
+					label: {
+						show: true,
+						position: 'top',
+						fontSize: 8,
+						color: '#333',
+						formatter: '{c}'
+					}
 				},
 				{
 					name: 'Gross profit margin',
 					type: 'bar',
 					data: [25, 28, 32, 35, 38, 42, 45, 48, 52, 55, 58, 62, 65, 68, 72, 75, 78, 82, 85, 88],
-					itemStyle: { color: '#FFC27A' }
+					itemStyle: { color: '#FFC27A' },
+					label: {
+						show: true,
+						position: 'top',
+						fontSize: 8,
+						color: '#333',
+						formatter: '{c}%'
+					}
 				}
 			]
 		}
 		chart1Instance.setOption(option1)
+		// 确保图表正确显示
+		setTimeout(() => {
+			chart1Instance?.resize()
+		}, 50)
 	}
 
 	// Chart 2: 右上角 - 年度数据柱状图（蓝色和橙色）
@@ -696,8 +768,8 @@ function renderModalCharts() {
 		chart2Instance = echarts.init(chart2Ref.value)
 		const option2 = {
 			title: {
-				text: 'What the cost of a single ship is 200000 yuan, Profit when each sales volume is achieved',
-				textStyle: { fontSize: 12, color: '#333' },
+				text: 'When the cost of a single ship is 31,000$, break even sales volume is achieved',
+				textStyle: { fontSize: 10, color: '#333' },
 				top: 10
 			},
 			grid: { top: 60, bottom: 60, left: 40, right: 40 },
@@ -708,29 +780,53 @@ function renderModalCharts() {
 			},
 			xAxis: {
 				type: 'category',
-				data: ['13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'],
-				axisLabel: { color: '#666', fontSize: 10 }
+				// data: ['13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'],
+				axisLabel: { show: false },
+				axisTick: { show: false },
+				axisLine: { show: false },
+				splitLine: { show: false }
 			},
 			yAxis: {
 				type: 'value',
-				axisLabel: { color: '#666', fontSize: 10 }
+				axisLabel: { show: false },
+				axisTick: { show: false },
+				axisLine: { show: false },
+				splitLine: { show: false }
 			},
 			series: [
 				{
 					name: 'Annual breakeven sales volume (units)',
 					type: 'bar',
 					data: [18, 22, 25, 28, 32, 35, 38, 42, 45, 48, 52, 55],
-					itemStyle: { color: '#00d4ff' }
+					itemStyle: { color: '#00d4ff' },
+					label: {
+						show: true,
+						position: 'top',
+						fontSize: 8,
+						color: '#333',
+						formatter: '{c}'
+					}
 				},
 				{
 					name: 'Gross profit margin',
 					type: 'bar',
 					data: [12, 15, 18, 22, 25, 28, 32, 35, 38, 42, 45, 48],
-					itemStyle: { color: '#FFC27A' }
+					itemStyle: { color: '#FFC27A' },
+					label: {
+						show: true,
+						position: 'top',
+						fontSize: 8,
+						color: '#333',
+						formatter: '{c}%'
+					}
 				}
 			]
 		}
 		chart2Instance.setOption(option2)
+		// 确保图表正确显示
+		setTimeout(() => {
+			chart2Instance?.resize()
+		}, 50)
 	}
 
 	// Chart 3: 左下角 - 面积图
@@ -743,8 +839,8 @@ function renderModalCharts() {
 		chart3Instance = echarts.init(chart3Ref.value)
 		const option3 = {
 			title: {
-				text: 'What the cost of a single ship is 200000 yuan, Profit when each sales volume is achieved',
-				textStyle: { fontSize: 12, color: '#333' },
+				text: 'When the cost of a single ship is 35,000$,break even sales volume is achieved',
+				textStyle: { fontSize: 10, color: '#333' },
 				top: 10
 			},
 			grid: { top: 60, bottom: 60, left: 40, right: 40 },
@@ -756,11 +852,17 @@ function renderModalCharts() {
 			xAxis: {
 				type: 'category',
 				data: ['13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32'],
-				axisLabel: { color: '#666', fontSize: 10 }
+				axisLabel: { show: false },
+				axisTick: { show: false },
+				axisLine: { show: false },
+				splitLine: { show: false }
 			},
 			yAxis: {
 				type: 'value',
-				axisLabel: { color: '#666', fontSize: 10, formatter: '{value}%' }
+				axisLabel: { show: false },
+				axisTick: { show: false },
+				axisLine: { show: false },
+				splitLine: { show: false }
 			},
 			series: [
 				{
@@ -768,8 +870,17 @@ function renderModalCharts() {
 					type: 'line',
 					data: [42, 45, 48, 52, 55, 58, 62, 65, 68, 72, 75, 78, 82, 85, 88, 92, 95, 98, 102, 105],
 					smooth: true,
-					lineStyle: { color: '#00d4ff' },
-					itemStyle: { color: '#00d4ff' },
+					symbol: 'circle',
+					symbolSize: 6,
+					lineStyle: {
+						color: '#00d4ff',
+						width: 3
+					},
+					itemStyle: {
+						color: '#00d4ff',
+						borderWidth: 2,
+						borderColor: '#ffffff'
+					},
 					areaStyle: {
 						color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
 							{ offset: 0, color: 'rgba(0, 212, 255, 0.6)' },
@@ -782,8 +893,17 @@ function renderModalCharts() {
 					type: 'line',
 					data: [22, 25, 28, 32, 35, 38, 42, 45, 48, 52, 55, 58, 62, 65, 68, 72, 75, 78, 82, 85],
 					smooth: true,
-					lineStyle: { color: '#FFC27A' },
-					itemStyle: { color: '#FFC27A' },
+					symbol: 'circle',
+					symbolSize: 6,
+					lineStyle: {
+						color: '#FFC27A',
+						width: 3
+					},
+					itemStyle: {
+						color: '#FFC27A',
+						borderWidth: 2,
+						borderColor: '#ffffff'
+					},
 					areaStyle: {
 						color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
 							{ offset: 0, color: 'rgba(255, 194, 122, 0.6)' },
@@ -794,6 +914,10 @@ function renderModalCharts() {
 			]
 		}
 		chart3Instance.setOption(option3)
+		// 确保图表正确显示
+		setTimeout(() => {
+			chart3Instance?.resize()
+		}, 50)
 	}
 
 	// Chart 4: 右下角 - 面积图
@@ -806,8 +930,8 @@ function renderModalCharts() {
 		chart4Instance = echarts.init(chart4Ref.value)
 		const option4 = {
 			title: {
-				text: 'What the cost of a single ship is 200000 yuan, Profit when each sales volume is achieved',
-				textStyle: { fontSize: 12, color: '#333' },
+				text: 'When the cost of a single ship is 41,000$,break even sales volume is achieved',
+				textStyle: { fontSize: 10, color: '#333' },
 				top: 10
 			},
 			grid: { top: 60, bottom: 60, left: 40, right: 40 },
@@ -819,11 +943,17 @@ function renderModalCharts() {
 			xAxis: {
 				type: 'category',
 				data: ['13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'],
-				axisLabel: { color: '#666', fontSize: 10 }
+				axisLabel: { show: false },
+				axisTick: { show: false },
+				axisLine: { show: false },
+				splitLine: { show: false }
 			},
 			yAxis: {
 				type: 'value',
-				axisLabel: { color: '#666', fontSize: 10, formatter: '{value}%' }
+				axisLabel: { show: false },
+				axisTick: { show: false },
+				axisLine: { show: false },
+				splitLine: { show: false }
 			},
 			series: [
 				{
@@ -831,8 +961,17 @@ function renderModalCharts() {
 					type: 'line',
 					data: [15, 18, 22, 25, 28, 32, 35, 38, 42, 45, 48, 52],
 					smooth: true,
-					lineStyle: { color: '#00d4ff' },
-					itemStyle: { color: '#00d4ff' },
+					symbol: 'circle',
+					symbolSize: 6,
+					lineStyle: {
+						color: '#00d4ff',
+						width: 3
+					},
+					itemStyle: {
+						color: '#00d4ff',
+						borderWidth: 2,
+						borderColor: '#ffffff'
+					},
 					areaStyle: {
 						color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
 							{ offset: 0, color: 'rgba(0, 212, 255, 0.6)' },
@@ -845,8 +984,17 @@ function renderModalCharts() {
 					type: 'line',
 					data: [8, 12, 15, 18, 22, 25, 28, 32, 35, 38, 42, 45],
 					smooth: true,
-					lineStyle: { color: '#FFC27A' },
-					itemStyle: { color: '#FFC27A' },
+					symbol: 'circle',
+					symbolSize: 6,
+					lineStyle: {
+						color: '#FFC27A',
+						width: 3
+					},
+					itemStyle: {
+						color: '#FFC27A',
+						borderWidth: 2,
+						borderColor: '#ffffff'
+					},
 					areaStyle: {
 						color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
 							{ offset: 0, color: 'rgba(255, 194, 122, 0.6)' },
@@ -857,6 +1005,10 @@ function renderModalCharts() {
 			]
 		}
 		chart4Instance.setOption(option4)
+		// 确保图表正确显示
+		setTimeout(() => {
+			chart4Instance?.resize()
+		}, 50)
 	}
 
 	// 自适应调整
@@ -871,13 +1023,13 @@ function renderModalCharts() {
 // Lake Como Pie Chart
 function renderPieChart() {
 	if (!pieChartRef.value) return
-	
+
 	// 如果实例已存在，先销毁（因为DOM可能已经被v-if销毁了）
 	if (pieChartInstance) {
 		pieChartInstance.dispose()
 		pieChartInstance = null
 	}
-	
+
 	// 重新创建实例
 	pieChartInstance = echarts.init(pieChartRef.value)
 
@@ -949,9 +1101,18 @@ function renderPieChart() {
 				],
 				emphasis: {
 					itemStyle: {
-						shadowBlur: 10,
+						shadowBlur: 15,
 						shadowOffsetX: 0,
-						shadowColor: 'rgba(0, 0, 0, 0.5)'
+						shadowOffsetY: 0,
+						shadowColor: 'rgba(0, 0, 0, 0.8)',
+						borderWidth: 3,
+						borderColor: '#ffffff'
+					},
+					label: {
+						show: true,
+						fontSize: 12,
+						fontWeight: 'bold',
+						color: '#ffffff'
 					}
 				}
 			}
@@ -959,7 +1120,7 @@ function renderPieChart() {
 	}
 
 	pieChartInstance.setOption(option)
-	
+
 	// 确保图表正确显示
 	setTimeout(() => {
 		if (pieChartInstance) {
@@ -971,13 +1132,13 @@ function renderPieChart() {
 // Transportation Demand Chart
 function renderDemandChart() {
 	if (!demandChartRef.value) return
-	
+
 	// 如果实例已存在，先销毁（因为DOM可能已经被v-if销毁了）
 	if (demandChartInstance) {
 		demandChartInstance.dispose()
 		demandChartInstance = null
 	}
-	
+
 	// 重新创建实例
 	demandChartInstance = echarts.init(demandChartRef.value)
 
@@ -990,37 +1151,13 @@ function renderDemandChart() {
 			{
 				name: 'Transportation Demand',
 				type: 'pie',
-				radius: ['40%', '70%'], // 环形图
+				radius: ['30%', '60%'], // 环形图
 				center: ['50%', '80%'], // 调整中心点位置，让图表显示在下半部分
 				startAngle: 180, // 从180度开始，实现半圆
 				endAngle: 360, // 到360度结束，实现半圆
 				avoidLabelOverlap: false,
 				itemGap: 8,
 				data: [
-					{
-						value: 25,
-						name: '10-25',
-						itemStyle: {
-							color: '#FF9A4E' // 橙色
-						},
-						label: {
-							show: true,
-							position: 'outside',
-							formatter: '10-25\nConnection Requirements',
-							fontSize: 10,
-							color: '#ffffff',
-							lineHeight: 14
-						},
-						labelLine: {
-							show: true,
-							length: 15,
-							length2: 8,
-							lineStyle: {
-								color: '#FF9A4E',
-								width: 1
-							}
-						}
-					},
 					{
 						value: 35,
 						name: '15-20',
@@ -1029,11 +1166,11 @@ function renderDemandChart() {
 						},
 						label: {
 							show: true,
-							position: 'outside',
-							formatter: '15-20\nDaily transportation demand\nin the lake area',
+							position: 'inside',
+							formatter: '15-20',
 							fontSize: 10,
 							color: '#ffffff',
-							lineHeight: 14
+							fontWeight: 'bold'
 						},
 						labelLine: {
 							show: true,
@@ -1046,6 +1183,30 @@ function renderDemandChart() {
 						}
 					},
 					{
+						value: 25,
+						name: '10-25',
+						itemStyle: {
+							color: '#FF9A4E' // 橙色
+						},
+						label: {
+							show: true,
+							position: 'inside',
+							formatter: '10-25',
+							fontSize: 10,
+							color: '#ffffff',
+							fontWeight: 'bold'
+						},
+						labelLine: {
+							show: true,
+							length: 15,
+							length2: 8,
+							lineStyle: {
+								color: '#FF9A4E',
+								width: 1
+							}
+						}
+					},
+					{
 						value: 40,
 						name: 'Other Requirements',
 						itemStyle: {
@@ -1053,11 +1214,11 @@ function renderDemandChart() {
 						},
 						label: {
 							show: true,
-							position: 'outside',
-							formatter: 'Other Requirements',
+							position: 'inside',
+							formatter: '',
 							fontSize: 10,
 							color: '#ffffff',
-							lineHeight: 14
+							fontWeight: 'bold'
 						},
 						labelLine: {
 							show: true,
@@ -1072,17 +1233,26 @@ function renderDemandChart() {
 				],
 				emphasis: {
 					itemStyle: {
-						shadowBlur: 10,
+						shadowBlur: 15,
 						shadowOffsetX: 0,
-						shadowColor: 'rgba(0, 0, 0, 0.5)'
+						shadowOffsetY: 0,
+						shadowColor: 'rgba(0, 0, 0, 0.8)',
+						borderWidth: 3,
+						borderColor: '#ffffff'
+					},
+					label: {
+						show: true,
+						fontSize: 12,
+						fontWeight: 'bold',
+						color: '#ffffff'
 					}
 				}
 			}
 		]
 	}
-	
+
 	demandChartInstance.setOption(option)
-	
+
 	// 确保图表正确显示
 	setTimeout(() => {
 		if (demandChartInstance) {
@@ -1343,6 +1513,102 @@ onMounted(() => {
 	flex-shrink: 0;
 	overflow: hidden;
 	margin-bottom: 8px;
+	transition: all 0.3s ease;
+	cursor: pointer;
+	position: relative;
+}
+
+/* Revenue Model 选中状态 */
+.revenue-selected {
+	border: 2px solid #00d4ff;
+	background: rgba(0, 212, 255, 0.1);
+	box-shadow:
+		0 8px 32px rgba(0, 0, 0, 0.3),
+		0 0 20px rgba(0, 212, 255, 0.4),
+		0 0 40px rgba(0, 212, 255, 0.2),
+		inset 0 0 20px rgba(0, 212, 255, 0.1);
+	transform: scale(1.02);
+}
+
+/* Revenue Model 选中时的光晕效果 */
+.revenue-selected::before {
+	content: '';
+	position: absolute;
+	top: -2px;
+	left: -2px;
+	right: -2px;
+	bottom: -2px;
+	background: linear-gradient(45deg,
+			rgba(0, 212, 255, 0.3) 0%,
+			rgba(0, 212, 255, 0.1) 25%,
+			rgba(0, 212, 255, 0.3) 50%,
+			rgba(0, 212, 255, 0.1) 75%,
+			rgba(0, 212, 255, 0.3) 100%);
+	border-radius: 14px;
+	z-index: -1;
+	animation: revenueGlow 2s ease-in-out infinite;
+}
+
+/* Revenue Model 悬停效果 */
+.revenue-hover-card:hover {
+	border: 1px solid rgba(0, 212, 255, 0.5);
+	background: rgba(0, 212, 255, 0.05);
+	box-shadow:
+		0 8px 32px rgba(0, 0, 0, 0.3),
+		0 0 15px rgba(0, 212, 255, 0.2);
+	transform: translateY(-2px);
+}
+
+/* Revenue Model 选中时的标题效果 */
+.revenue-selected .chart-title {
+	color: #00d4ff;
+	text-shadow: 0 0 10px rgba(0, 212, 255, 0.6);
+	animation: titleGlow 1.5s ease-in-out infinite alternate;
+}
+
+/* Revenue Model 点击效果 */
+.revenue-hover-card:active {
+	transform: scale(0.98);
+	transition: transform 0.1s ease;
+}
+
+/* Revenue Model 选中时的图表容器效果 */
+.revenue-selected .chart-container {
+	position: relative;
+}
+
+.revenue-selected .chart-container::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: linear-gradient(45deg,
+			transparent 0%,
+			rgba(0, 212, 255, 0.1) 50%,
+			transparent 100%);
+	border-radius: 8px;
+	animation: chartShimmer 2s ease-in-out infinite;
+	pointer-events: none;
+}
+
+/* 图表闪烁效果 */
+@keyframes chartShimmer {
+	0% {
+		opacity: 0;
+		transform: translateX(-100%);
+	}
+
+	50% {
+		opacity: 1;
+		transform: translateX(0%);
+	}
+
+	100% {
+		opacity: 0;
+		transform: translateX(100%);
+	}
 }
 
 .chart-title {
@@ -1377,9 +1643,9 @@ onMounted(() => {
 }
 
 .strategy-title {
-	font-size: 15px;
+	font-size: 16px;
 	font-weight: 600;
-	margin-bottom: 10px;
+	margin-bottom: 8px;
 	color: #ffffff;
 }
 
@@ -1392,10 +1658,10 @@ onMounted(() => {
 }
 
 .strategy-subtitle {
-	font-size: 13px;
+	font-size: 15px;
 	font-weight: 500;
 	color: #ffffff;
-	margin-bottom: 8px;
+	margin-bottom: 6px;
 }
 
 .strategy-content {
@@ -1403,17 +1669,17 @@ onMounted(() => {
 }
 
 .strategy-label {
-	font-size: 12px;
+	font-size: 14px;
 	font-weight: 600;
 	color: #ffffff;
-	margin: 6px 0 3px 0;
+	margin: 4px 0 2px 0;
 }
 
 .strategy-text {
-	font-size: 11px;
+	font-size: 12px;
 	line-height: 1.3;
 	color: #cccccc;
-	margin: 3px 0;
+	margin: 2px 0;
 }
 
 /* SVG 覆盖层 */
@@ -1479,6 +1745,35 @@ onMounted(() => {
 		box-shadow:
 			0 0 30px rgba(0, 212, 255, 0.8),
 			inset 0 0 30px rgba(0, 212, 255, 0.4);
+	}
+}
+
+/* Revenue Model 光晕动画 */
+@keyframes revenueGlow {
+	0% {
+		opacity: 0.3;
+		transform: scale(1);
+	}
+
+	50% {
+		opacity: 0.6;
+		transform: scale(1.01);
+	}
+
+	100% {
+		opacity: 0.3;
+		transform: scale(1);
+	}
+}
+
+/* 标题发光动画 */
+@keyframes titleGlow {
+	0% {
+		text-shadow: 0 0 10px rgba(0, 212, 255, 0.6);
+	}
+
+	100% {
+		text-shadow: 0 0 20px rgba(0, 212, 255, 0.9), 0 0 30px rgba(0, 212, 255, 0.6);
 	}
 }
 
@@ -1648,57 +1943,100 @@ onMounted(() => {
 
 
 
+.main-title {
+	font-size: 13px;
+	font-weight: 600;
+	color: #ffffff;
+	margin-bottom: 8px;
+}
+
 .section-title {
-	font-size: 14px;
+	font-size: 11px;
 	/* font-weight: 600; */
 	color: #ffffff;
-	margin-bottom: 15px;
+	margin-bottom: 10px;
 	/* text-align: center; */
 	/* background: rgba(0, 212, 255, 0.8); */
-	padding: 8px 12px;
+	padding: 6px 10px;
 	/* border-radius: 4px; */
 }
 
 /* 需求图表容器 */
 .demand-chart-container {
+	position: relative;
 	display: flex;
 	justify-content: center;
 	margin: 20px 0;
 }
 
 .demand-chart-container .demand-chart-echarts {
-	width: 90%;
-	height: 90px;
+	width: 100%;
+	height: 160px;
+}
+
+.chart-labels {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+}
+
+.chart-label-left {
+	position: absolute;
+	left: 20px;
+	top: 40%;
+	transform: translateY(-50%);
+}
+
+.chart-label-right {
+	position: absolute;
+	right: 20px;
+	top: 20%;
+}
+
+.chart-label-bottom {
+	position: absolute;
+	right: 20px;
+	bottom: 20px;
+}
+
+.label-text {
+	color: #ffffff;
+	font-size: 12px;
+	line-height: 1.2;
+	margin: 2px 0;
 }
 
 /* 需求描述 */
 .demand-description {
-	margin-top: 10px;
+	margin-top: 8px;
 }
 
 .demand-description p {
-	font-size: 11px;
+	font-size: 9px;
 	color: #cccccc;
-	line-height: 1.4;
-	margin: 5px 0;
+	line-height: 1.3;
+	margin: 3px 0;
 	text-align: center;
 }
 
 /* 游客数据部分 */
 .tourist-data-section {
-	margin-top: 15px;
+	margin-top: 12px;
 }
 
 /* 数据列表 */
 .data-list {
-	margin-top: 15px;
+	margin-top: 12px;
 }
 
 .data-item {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 8px 0;
+	padding: 6px 0;
 	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -1707,17 +2045,17 @@ onMounted(() => {
 }
 
 .data-label {
-	font-size: 11px;
+	font-size: 9px;
 	color: #ffffff;
 	flex: 1;
-	line-height: 1.3;
+	line-height: 1.2;
 }
 
 .data-value {
-	font-size: 11px;
+	font-size: 9px;
 	font-weight: 600;
 	color: #00d4ff;
-	margin-left: 10px;
+	margin-left: 8px;
 }
 
 
@@ -1863,11 +2201,11 @@ onMounted(() => {
 .revenue-modal-content {
 	background: #ffffff;
 	border-radius: 20px;
-	width: 90vw;
-	max-width: 1200px;
+	width: 95vw;
+	max-width: 1400px;
 	height: 80vh;
-	max-height: 800px;
-	padding: 30px;
+	max-height: 700px;
+	padding: 25px;
 	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 	overflow: hidden;
 	display: flex;
@@ -1880,7 +2218,7 @@ onMounted(() => {
 	align-items: center;
 	margin-bottom: 30px;
 	padding-bottom: 20px;
-	border-bottom: 2px solid #f0f0f0;
+	/* border-bottom: 2px solid #f0f0f0; */
 }
 
 .modal-title {
@@ -1913,9 +2251,9 @@ onMounted(() => {
 
 .charts-grid {
 	display: grid;
-	grid-template-columns: 1fr 1fr;
+	grid-template-columns: 1fr 1fr 1fr;
 	grid-template-rows: 1fr 1fr;
-	gap: 30px;
+	gap: 20px;
 	flex: 1;
 	overflow: hidden;
 }
@@ -1923,11 +2261,13 @@ onMounted(() => {
 .chart-item {
 	background: #fafafa;
 	border-radius: 15px;
-	padding: 20px;
+	padding: 15px;
 	border: 1px solid #e0e0e0;
 	display: flex;
 	flex-direction: column;
 	overflow: hidden;
+	min-height: 200px;
+	width: 100%;
 }
 
 .chart-item-title {
@@ -1940,8 +2280,9 @@ onMounted(() => {
 
 .modal-chart {
 	flex: 1;
-	min-height: 100px;
-	max-height: 100px;
+	min-height: 150px;
+	max-height: 200px;
+	width: 100%;
 }
 
 @keyframes fadeIn {
@@ -1997,30 +2338,39 @@ onMounted(() => {
 	}
 
 	.strategy-title {
-		font-size: 17px;
-		margin-bottom: 12px;
+		font-size: 13px;
+		margin-bottom: 8px;
 	}
 
 	.strategy-subtitle {
-		font-size: 15px;
-		margin-bottom: 10px;
+		font-size: 12px;
+		margin-bottom: 8px;
 	}
 
 	.strategy-label {
-		font-size: 14px;
-		margin: 8px 0 5px 0;
+		font-size: 11px;
+		margin: 5px 0 3px 0;
 	}
 
 	.strategy-text {
-		font-size: 13px;
-		line-height: 1.4;
-		margin: 5px 0;
+		font-size: 10px;
+		line-height: 1.3;
+		margin: 3px 0;
 	}
 
 	.content-panel {
 		width: 510px;
 		/* height: 580px; */
 		right: 25px;
+	}
+
+	/* 大屏幕下的 Revenue Model 效果优化 */
+	.revenue-selected {
+		transform: scale(1.03);
+	}
+
+	.revenue-selected::before {
+		animation: revenueGlow 1.5s ease-in-out infinite;
 	}
 }
 
@@ -2046,30 +2396,35 @@ onMounted(() => {
 	}
 
 	.strategy-title {
-		font-size: 16px;
-		margin-bottom: 11px;
+		font-size: 12px;
+		margin-bottom: 8px;
 	}
 
 	.strategy-subtitle {
-		font-size: 14px;
-		margin-bottom: 9px;
+		font-size: 11px;
+		margin-bottom: 6px;
 	}
 
 	.strategy-label {
-		font-size: 13px;
-		margin: 7px 0 4px 0;
+		font-size: 10px;
+		margin: 4px 0 2px 0;
 	}
 
 	.strategy-text {
-		font-size: 12px;
-		line-height: 1.35;
-		margin: 4px 0;
+		font-size: 9px;
+		line-height: 1.2;
+		margin: 2px 0;
 	}
 
 	.content-panel {
 		width: 420px;
 		/* height: 500px; */
 		right: 18px;
+	}
+
+	/* 中等屏幕下的 Revenue Model 效果 */
+	.revenue-selected {
+		transform: scale(1.02);
 	}
 }
 
@@ -2113,30 +2468,39 @@ onMounted(() => {
 	}
 
 	.strategy-title {
-		font-size: 15px;
-		margin-bottom: 9px;
+		font-size: 11px;
+		margin-bottom: 6px;
 	}
 
 	.strategy-subtitle {
-		font-size: 13px;
-		margin-bottom: 7px;
+		font-size: 10px;
+		margin-bottom: 5px;
 	}
 
 	.strategy-label {
-		font-size: 12px;
-		margin: 6px 0 2px 0;
+		font-size: 9px;
+		margin: 3px 0 1px 0;
 	}
 
 	.strategy-text {
-		font-size: 11px;
-		line-height: 1.3;
-		margin: 2px 0;
+		font-size: 8px;
+		line-height: 1.2;
+		margin: 1px 0;
 	}
 
 	.content-panel {
 		width: 390px;
 		/* height: 480px; */
 		right: 12px;
+	}
+
+	/* 小屏幕下的 Revenue Model 效果 */
+	.revenue-selected {
+		transform: scale(1.01);
+	}
+
+	.revenue-selected::before {
+		animation: revenueGlow 2.5s ease-in-out infinite;
 	}
 }
 
@@ -2182,30 +2546,39 @@ onMounted(() => {
 	}
 
 	.strategy-title {
-		font-size: 14px;
-		margin-bottom: 8px;
+		font-size: 10px;
+		margin-bottom: 5px;
 	}
 
 	.strategy-subtitle {
-		font-size: 12px;
-		margin-bottom: 6px;
+		font-size: 9px;
+		margin-bottom: 4px;
 	}
 
 	.strategy-label {
-		font-size: 11px;
-		margin: 5px 0 2px 0;
+		font-size: 8px;
+		margin: 2px 0 1px 0;
 	}
 
 	.strategy-text {
-		font-size: 10px;
-		line-height: 1.25;
-		margin: 2px 0;
+		font-size: 7px;
+		line-height: 1.2;
+		margin: 1px 0;
 	}
 
 	.content-panel {
 		width: 350px;
 		/* height: 420px; */
 		right: 15px;
+	}
+
+	/* 平板下的 Revenue Model 效果 */
+	.revenue-selected {
+		transform: scale(1.01);
+	}
+
+	.revenue-selected::before {
+		animation: revenueGlow 3s ease-in-out infinite;
 	}
 }
 
@@ -2289,24 +2662,37 @@ onMounted(() => {
 	}
 
 	.strategy-title {
-		font-size: 13px;
-		margin-bottom: 6px;
+		font-size: 9px;
+		margin-bottom: 4px;
 	}
 
 	.strategy-subtitle {
-		font-size: 11px;
-		margin-bottom: 5px;
+		font-size: 8px;
+		margin-bottom: 3px;
 	}
 
 	.strategy-label {
-		font-size: 10px;
-		margin: 4px 0 1px 0;
+		font-size: 7px;
+		margin: 2px 0 1px 0;
 	}
 
 	.strategy-text {
-		font-size: 9px;
-		line-height: 1.2;
+		font-size: 6px;
+		line-height: 1.1;
 		margin: 1px 0;
+	}
+
+	/* 手机下的 Revenue Model 效果 */
+	.revenue-selected {
+		transform: scale(1.005);
+	}
+
+	.revenue-selected::before {
+		animation: revenueGlow 3.5s ease-in-out infinite;
+	}
+
+	.revenue-selected .chart-title {
+		animation: titleGlow 2s ease-in-out infinite alternate;
 	}
 }
 
@@ -2320,6 +2706,15 @@ onMounted(() => {
 		right: 5px;
 		left: 5px;
 		transform: translateY(-50%);
+	}
+
+	/* 超小屏幕下的 Revenue Model 效果 */
+	.revenue-selected {
+		transform: scale(1.002);
+	}
+
+	.revenue-selected::before {
+		animation: revenueGlow 4s ease-in-out infinite;
 	}
 }
 </style>
