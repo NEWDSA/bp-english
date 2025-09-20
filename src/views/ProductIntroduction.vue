@@ -1,5 +1,13 @@
 <template>
 	<div class="product-introduction">
+		<!-- 背景视频 -->
+		<div class="video-background">
+			<video autoplay muted loop playsinline class="background-video">
+				<source src="../assets/sea_wave.mp4" type="video/mp4">
+			</video>
+			<div class="video-overlay"></div>
+		</div>
+
 		<!-- 顶部导航栏 -->
 		<nav class="top-nav">
 			<div class="nav-container">
@@ -29,20 +37,20 @@
 			<div class="left-section">
 				<div class="left-nav-list">
 					<!-- 动态连接线 -->
-					<div 
-						class="main-vertical-line" 
-						:style="{ 
-							top: lineTop, 
-							height: lineHeight 
-						}"
-					></div>
-					
-					<div class="left-nav-item product-advantages-item" @mouseenter="showTooltip('advantages')" @mouseleave="hideTooltip">
+					<div class="main-vertical-line" :style="{
+						top: lineTop,
+						height: lineHeight
+					}"></div>
+
+					<div class="left-nav-item product-advantages-item" @mouseenter="showTooltip('advantages')"
+						@mouseleave="hideTooltip">
 						<span class="nav-text">Product advantages</span>
 						<!-- 悬停时显示的详细信息 -->
 						<div v-if="activeTooltip === 'advantages'" class="advantages-tooltip">
 							<div class="tooltip-content">
-								<p><strong>Positioned within 5 meters, driving qualification exemption for entertainment powered boats, using hydrofoil and control algorithms to significantly reduce player entry barriers and enhance entertainment experience</strong></p>
+								<p><strong>Positioned within 5 meters, driving qualification exemption for entertainment
+										powered boats, using hydrofoil and control algorithms to significantly reduce
+										player entry barriers and enhance entertainment experience</strong></p>
 								<p><strong>Y-H2O Product Introduction</strong></p>
 								<p><strong>Selling point:</strong></p>
 								<p>1. No need for a license to drive, low threshold for getting started</p>
@@ -57,7 +65,7 @@
 					<div class="left-nav-item" @click="showComparisonModal">
 						<span class="nav-text">Compared to traditional ferries</span>
 					</div>
-					<div class="left-nav-item">
+					<div class="left-nav-item" @click="showDesignModal = true">
 						<span class="nav-text">Design&Simulation Technology</span>
 					</div>
 					<div class="left-nav-item color-price-section">
@@ -65,12 +73,24 @@
 						<!-- 颜色选择区域 -->
 						<div class="color-price-content">
 							<div class="color-options">
-								<div class="color-swatch white" @click="changeBoatColor('white')" :class="{ active: selectedColor === 'white' }" :style="{ backgroundImage: `url(${colorBackgrounds.white})` }"></div>
-								<div class="color-swatch green" @click="changeBoatColor('green')" :class="{ active: selectedColor === 'green' }" :style="{ backgroundImage: `url(${colorBackgrounds.green})` }"></div>
-								<div class="color-swatch blue" @click="changeBoatColor('blue')" :class="{ active: selectedColor === 'blue' }" :style="{ backgroundImage: `url(${colorBackgrounds.blue})` }"></div>
-								<div class="color-swatch purple" @click="changeBoatColor('purple')" :class="{ active: selectedColor === 'purple' }" :style="{ backgroundImage: `url(${colorBackgrounds.purple})` }"></div>
-								<div class="color-swatch red" @click="changeBoatColor('red')" :class="{ active: selectedColor === 'red' }" :style="{ backgroundImage: `url(${colorBackgrounds.red})` }"></div>
-								<div class="color-swatch black" @click="changeBoatColor('black')" :class="{ active: selectedColor === 'black' }" :style="{ backgroundImage: `url(${colorBackgrounds.black})` }"></div>
+								<div class="color-swatch white" @click="changeBoatColor('white')"
+									:class="{ active: selectedColor === 'white' }"
+									:style="{ backgroundImage: `url(${colorBackgrounds.white})` }"></div>
+								<div class="color-swatch green" @click="changeBoatColor('green')"
+									:class="{ active: selectedColor === 'green' }"
+									:style="{ backgroundImage: `url(${colorBackgrounds.green})` }"></div>
+								<div class="color-swatch blue" @click="changeBoatColor('blue')"
+									:class="{ active: selectedColor === 'blue' }"
+									:style="{ backgroundImage: `url(${colorBackgrounds.blue})` }"></div>
+								<div class="color-swatch purple" @click="changeBoatColor('purple')"
+									:class="{ active: selectedColor === 'purple' }"
+									:style="{ backgroundImage: `url(${colorBackgrounds.purple})` }"></div>
+								<div class="color-swatch red" @click="changeBoatColor('red')"
+									:class="{ active: selectedColor === 'red' }"
+									:style="{ backgroundImage: `url(${colorBackgrounds.red})` }"></div>
+								<div class="color-swatch black" @click="changeBoatColor('black')"
+									:class="{ active: selectedColor === 'black' }"
+									:style="{ backgroundImage: `url(${colorBackgrounds.black})` }"></div>
 							</div>
 							<div class="purchase-btn">
 								<img :src="priceImg" alt="Price" class="price-icon" />
@@ -83,7 +103,8 @@
 						<!-- 产品亮点卡片 -->
 						<div class="highlights-content">
 							<div class="highlights-grid">
-								<div class="highlight-card unmanned-systems" @mouseenter="showTooltip('unmanned')" @mouseleave="hideTooltip">
+								<div class="highlight-card unmanned-systems" @mouseenter="showTooltip('unmanned')"
+									@mouseleave="hideTooltip">
 									<div v-if="activeTooltip !== 'unmanned'">
 										<img :src="wheel1Img" alt="Unmanned Systems" class="highlight-icon" />
 										<div class="highlight-title">Unmanned Systems</div>
@@ -96,7 +117,8 @@
 										<p>damping increasing limit</p>
 									</div>
 								</div>
-								<div class="highlight-card team-members" @mouseenter="showTooltip('team')" @mouseleave="hideTooltip">
+								<div class="highlight-card team-members" @mouseenter="showTooltip('team')"
+									@mouseleave="hideTooltip">
 									<div v-if="activeTooltip !== 'team'">
 										<img :src="wheel2Img" alt="Team Members" class="highlight-icon" />
 										<div class="highlight-title">Team Members</div>
@@ -104,12 +126,15 @@
 									<!-- 悬停时显示的详细信息 -->
 									<div v-if="activeTooltip === 'team'" class="card-content">
 										<p><strong>U/C-shaped wing design:</strong></p>
-										<p>The front wing (U-shaped) and rear wing (C-shaped) feature streamlined surfaces optimized for fluid dynamics.</p>
+										<p>The front wing (U-shaped) and rear wing (C-shaped) feature streamlined
+											surfaces optimized for fluid dynamics.</p>
 										<p><strong>Resistance quick assembly system:</strong></p>
-										<p>Reduced transportation volume, with on-site assembly efficiency increased by 50%.</p>
+										<p>Reduced transportation volume, with on-site assembly efficiency increased by
+											50%.</p>
 									</div>
 								</div>
-								<div class="highlight-card adaptive-algorithm" @mouseenter="showTooltip('adaptive')" @mouseleave="hideTooltip">
+								<div class="highlight-card adaptive-algorithm" @mouseenter="showTooltip('adaptive')"
+									@mouseleave="hideTooltip">
 									<div v-if="activeTooltip !== 'adaptive'">
 										<img :src="AutoSettingImg" alt="Adaptive hydrofoil" class="highlight-icon" />
 										<div class="highlight-title">Adaptive hydrofoil control algorithm</div>
@@ -117,12 +142,14 @@
 									<!-- 悬停时显示的详细信息 -->
 									<div v-if="activeTooltip === 'adaptive'" class="card-content">
 										<p><strong>Advanced control system:</strong></p>
-										<p>Real-time adjustment of hydrofoil angles based on water conditions and vessel performance.</p>
+										<p>Real-time adjustment of hydrofoil angles based on water conditions and vessel
+											performance.</p>
 										<p><strong>Machine learning integration:</strong></p>
 										<p>Continuous optimization through AI-powered analysis of operational data.</p>
 									</div>
 								</div>
-								<div class="highlight-card modular-hull" @mouseenter="showTooltip('modular')" @mouseleave="hideTooltip">
+								<div class="highlight-card modular-hull" @mouseenter="showTooltip('modular')"
+									@mouseleave="hideTooltip">
 									<div v-if="activeTooltip !== 'modular'">
 										<img :src="modularImg" alt="Modular detachable hull" class="highlight-icon" />
 										<div class="highlight-title">Modular detachable hull</div>
@@ -130,7 +157,8 @@
 									<!-- 悬停时显示的详细信息 -->
 									<div v-if="activeTooltip === 'modular'" class="card-content">
 										<p><strong>Quick assembly design:</strong></p>
-										<p>Modular components allow for rapid assembly and disassembly in under 30 minutes.</p>
+										<p>Modular components allow for rapid assembly and disassembly in under 30
+											minutes.</p>
 										<p><strong>Transportation efficiency:</strong></p>
 										<p>Reduced shipping costs by 60% through compact modular packaging.</p>
 									</div>
@@ -237,7 +265,8 @@
 					<!-- 左侧：指标列表区域 -->
 					<div class="metrics-section">
 						<div class="metrics-list">
-							<div class="metric-title">How can the new generation of water taxis address the pain points of traditional water transportation</div>
+							<div class="metric-title">How can the new generation of water taxis address the pain points
+								of traditional water transportation</div>
 							<div class="metric-item">Speed (of a ship or aircraft)</div>
 							<div class="metric-item">Power-to-speed ratio (kw/kt)</div>
 							<div class="metric-item">Voyage (nautical miles)</div>
@@ -307,37 +336,190 @@
 								<div class="data-value">0.35-0.40</div>
 							</div>
 							<div class="data-item">
-								<div class="data-value"><100 (short distance) / 2000+ (long distance)</div>
-							</div>
-							<div class="data-item">
-								<div class="data-value">±2.5°</div>
-							</div>
-							<div class="data-item">
-								<div class="data-value">Bumpiness</div>
-							</div>
-							<div class="data-item">
-								<div class="data-value">65-85 dB (inside the cabin)</div>
-							</div>
-							<div class="data-item">
-								<div class="data-value">844,000-2,108,000 $</div>
-							</div>
-							<div class="data-item">
-								<div class="data-value">3-7 years</div>
-							</div>
-							<div class="data-item">
-								<div class="data-value">281,000 $ (200 passenger seats)</div>
+								<div class="data-value">
+									<100 (short distance) / 2000+ (long distance)</div>
+								</div>
+								<div class="data-item">
+									<div class="data-value">±2.5°</div>
+								</div>
+								<div class="data-item">
+									<div class="data-value">Bumpiness</div>
+								</div>
+								<div class="data-item">
+									<div class="data-value">65-85 dB (inside the cabin)</div>
+								</div>
+								<div class="data-item">
+									<div class="data-value">844,000-2,108,000 $</div>
+								</div>
+								<div class="data-item">
+									<div class="data-value">3-7 years</div>
+								</div>
+								<div class="data-item">
+									<div class="data-value">281,000 $ (200 passenger seats)</div>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
 
-				<!-- 底部对勾图标 -->
-				<div class="comparison-footer">
-					<div class="checkmark">✓</div>
+					<!-- 底部对勾图标 -->
+					<div class="comparison-footer">
+						<div class="checkmark">✓</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Design&Simulation Technology 第一个弹窗 -->
+			<div v-if="showDesignModal" class="modal-overlay" @click="hideDesignModal">
+				<div class="design-modal" @click.stop>
+					<div class="design-modal-content">
+						<img src="../assets/dm.png" alt="Design&Simulation Technology" class="design-image"
+							@click="showSimulationModalFunc" />
+					</div>
+				</div>
+			</div>
+
+			<!-- Design&Simulation Technology 第二个弹窗 -->
+			<div v-if="showSimulationModal" class="modal-overlay" @click="hideSimulationModal">
+				<div class="simulation-modal" @click.stop>
+					<div class="simulation-modal-content">
+						<div class="simulation-title">Breakthrough verification of energy efficiency and stability of
+							hydrofoil system</div>
+						<div class="simulation-comparison">
+							<div style="width: 200px;height: 200px;border: 1px solid pink;">
+								<video autoplay muted loop playsinline class="simulation-video">
+									<source src="../assets/sea_wave.mp4" type="video/mp4">
+								</video>
+							</div>
+							<div
+								style="width: 200px;height: 200px;border: 1px solid pink;display: flex;flex-direction: column;flex-wrap: wrap;justify-content: center;align-items: center;">
+								<div style="color: #000000;">Speed: 18kt</div>
+								<div style="color: #000000;">Wave Length: 5.0m</div>
+								<div style="color: #000000;">Wave Height: 0.5m</div>
+								<div style="color: #000000;">Wave Angle: 45°</div>
+							</div>
+							<div style="width: 200px;height: 200px;border: 1px solid pink;">
+								<video autoplay muted loop playsinline class="simulation-video">
+									<source src="../assets/sea_wave.mp4" type="video/mp4">
+								</video>
+							</div>
+							<div style="width: 200px;height: 200px;border: 1px solid pink;"></div>
+							<div
+								style="width: 200px;height: 200px;border: 1px solid pink;display: flex;flex-direction: column;flex-wrap: wrap;justify-content: center;align-items: center;">
+								<div style="color: #000000;">Trim Angle</div>
+								<div style="color: #000000;">-1.25°~0.85°</div>
+								<div style="color: #000000;">VS</div>
+								<div style="color: #000000;">-7°~-8.5°</div>
+							</div>
+							<div style="width: 200px;height: 200px;border: 1px solid pink;">
+							</div>
+							<div style="width: 200px;height: 200px;border: 1px solid pink;">
+							</div>
+							<div style="width: 200px;height: 200px;border: 1px solid pink;display: flex;flex-direction: column;flex-wrap: wrap;justify-content: center;align-items: center;">
+								<div style="color: #000000;">Effective Power</div>
+								<div style="color: #000000;">25kw</div>
+								<div style="color: #000000;">VS</div>
+								<div style="color: #000000;">90kw</div>
+							</div>
+							<div style="width: 200px;height: 200px;border: 1px solid pink;"></div>
+							<div
+								style="width: 200px;height: 630px;border: 1px solid pink;grid-column: 4;grid-row: 1 / 4;display: flex;flex-direction: column;flex-wrap: wrap;justify-content: center;align-items: center;text-align: center;">
+								<div style="color: #000000;">Conclusion:</div>
+								<div style="color: #000000;">1.Energy efficiency reduction: At a speed of 18kt, the hydrofoil boat exhibits a 55% reduction in water resistance and a 75% reduction in propulsion power compared to a conventional hull.</div>
+								<div style="color: #000000;">2.Stability improvement:</div>
+								<div style="color: #000000;">With a simulated wave height of 0.5m and an angle of 45°, the hydrofoil boat maintains a more stable and comfortable navigation posture, with the crew barely feeling the vessel's trim. In contrast, conventional boats experience a trim of up to 8° under these sea conditions, making the crew extremely uncomfortable.</div>
+							</div>
+
+							<!-- 左侧区域：水翼船数据 - 3个div -->
+							<!-- <div class="left-section"> -->
+							<!-- 左上：水翼船仿真视频 -->
+							<!-- <div class="simulation-video-container">
+									<div class="simulation-label">Hydrofoil Boat</div>
+									<video autoplay muted loop playsinline class="simulation-video">
+										<source src="../assets/sea_wave.mp4" type="video/mp4">
+									</video>
+								</div> -->
+
+							<!-- 左中：纵倾角图表图片 -->
+							<!-- <div class="chart-image-container">
+									<div class="chart-image">
+										<img src="../assets/微信图片_20250912104117_7221_12.png"
+											alt="Heave and Pitch Chart" />
+									</div>
+								</div> -->
+
+							<!-- 左下：有效功率图表图片 -->
+							<!-- <div class="chart-image-container">
+									<div class="chart-image">
+										<img src="../assets/微信图片_20250912104117_7221_12.png"
+											alt="Resistance and Power Chart" />
+									</div>
+								</div> -->
+							<!-- </div> -->
+
+							<!-- 中间区域：VS分隔 -->
+							<!-- <div class="middle-divider">
+								<div class="divider-item">
+									<div>Speed: 18kt</div>
+								</div>
+								<div class="divider-item">
+									<div>Wave Length: 5.0m</div>
+								</div>
+								<div class="divider-item">
+									<div>Wave Height: 0.5m</div>
+								</div>
+								<div class="divider-item">
+									<div>Wave Angle: 45°</div>
+								</div>
+							</div> -->
+
+							<!-- 右侧区域：传统船数据 - 3个div -->
+							<!-- <div class="right-section"> -->
+							<!-- 右上：传统船仿真视频 -->
+							<!-- <div class="simulation-video-container">
+									<div class="simulation-label">Traditional Boat</div>
+									<video autoplay muted loop playsinline class="simulation-video">
+										<source src="../assets/sea_wave.mp4" type="video/mp4">
+									</video>
+								</div> -->
+
+							<!-- 右中：纵倾角图表图片 -->
+							<!-- <div class="chart-image-container">
+									<div class="chart-image">
+										<img src="../assets/微信图片_20250912104117_7221_12.png"
+											alt="Traditional Heave and Pitch Chart" />
+									</div>
+								</div> -->
+
+							<!-- 右下：有效功率图表图片 -->
+							<!-- <div class="chart-image-container">
+									<div class="chart-image">
+										<img src="../assets/微信图片_20250912104117_7221_12.png"
+											alt="Traditional Resistance and Power Chart" />
+									</div>
+								</div> -->
+							<!-- </div> -->
+
+							<!-- 最右侧区域：结论部分 -->
+							<!-- <div class="conclusion-section">
+								<div class="conclusion-title">Conclusion:</div>
+								<div class="conclusion-item">
+									<strong>Energy Efficiency Reduction:</strong>
+									At a speed of 18kt, the hydrofoil boat exhibits a 55% reduction in water resistance
+									and a 75% reduction in propulsion power compared to a conventional hull.
+								</div>
+								<div class="conclusion-item">
+									<strong>Stability Enhancement:</strong>
+									With a simulated wave height of 0.5m and an angle of 45°, the hydrofoil boat
+									maintains a more stable and comfortable navigation posture, with the crew barely
+									feeling the vessel's trim. In contrast, conventional boats experience a trim of up
+									to 8° under these sea conditions, making the crew extremely uncomfortable.
+								</div>
+							</div> -->
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 </template>
 
 <script setup>
@@ -379,6 +561,10 @@ const activeTooltip = ref(null)
 // 对比表格模态框状态
 const showComparison = ref(false)
 
+// Design&Simulation Technology 弹窗状态
+const showDesignModal = ref(false)
+const showSimulationModal = ref(false)
+
 // 连接线高度计算
 const lineHeight = ref('calc(100% - 60px)')
 const lineTop = ref('30px')
@@ -388,23 +574,23 @@ const calculateLinePosition = () => {
 	nextTick(() => {
 		const navList = document.querySelector('.left-nav-list')
 		if (!navList) return
-		
+
 		const items = navList.querySelectorAll('.left-nav-item')
 		if (items.length < 2) return
-		
+
 		const firstItem = items[0]
 		const lastItem = items[items.length - 1]
-		
+
 		const firstItemRect = firstItem.getBoundingClientRect()
 		const lastItemRect = lastItem.getBoundingClientRect()
 		const navListRect = navList.getBoundingClientRect()
-		
+
 		// 计算第一个项目的水平线位置相对于导航列表的位置
 		const firstItemTop = firstItemRect.top - navListRect.top + firstItemRect.height / 2
-		
+
 		// 计算最后一个项目的水平线位置相对于导航列表的位置
 		const lastItemTop = lastItemRect.top - navListRect.top + lastItemRect.height / 2
-		
+
 		// 设置连接线的起始位置和高度
 		lineTop.value = `${firstItemTop}px`
 		lineHeight.value = `${lastItemTop - firstItemTop}px`
@@ -471,6 +657,22 @@ function hideComparisonModal() {
 	showComparison.value = false
 }
 
+// 显示仿真技术弹窗
+function showSimulationModalFunc() {
+	showDesignModal.value = false
+	showSimulationModal.value = true
+}
+
+// 隐藏设计弹窗
+function hideDesignModal() {
+	showDesignModal.value = false
+}
+
+// 隐藏仿真技术弹窗
+function hideSimulationModal() {
+	showSimulationModal.value = false
+}
+
 function goHome() {
 	router.push('/')
 }
@@ -478,10 +680,10 @@ function goHome() {
 onMounted(() => {
 	// 页面加载完成后的初始化逻辑
 	calculateLinePosition()
-	
+
 	// 监听窗口大小变化
 	window.addEventListener('resize', handleResize)
-	
+
 	// 监听浏览器缩放
 	window.addEventListener('wheel', (e) => {
 		if (e.ctrlKey) {
@@ -500,13 +702,39 @@ onUnmounted(() => {
 <style scoped>
 .product-introduction {
 	min-height: 100vh;
-	background: url('../assets/bp_bg.png') center/cover no-repeat;
 	height: auto;
-	background-attachment: fixed;
 	color: #ffffff;
 	font-family: 'Arial', sans-serif;
 	position: relative;
 	overflow: hidden;
+}
+
+/* 视频背景样式 */
+.video-background {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -2;
+	overflow: hidden;
+}
+
+.background-video {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
+}
+
+.video-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(135deg, rgba(26, 26, 46, 0.7) 0%, rgba(22, 33, 62, 0.6) 50%, rgba(15, 52, 96, 0.8) 100%);
+	z-index: -1;
 }
 
 /* 添加半透明遮罩层以增强文字可读性 */
@@ -728,7 +956,8 @@ onUnmounted(() => {
 .color-price-section::before {
 	content: '';
 	position: absolute;
-	left: -20px; /* 保持与文字的正常距离 */
+	left: -20px;
+	/* 保持与文字的正常距离 */
 	top: 50%;
 	transform: translateY(-50%);
 	width: 15px;
@@ -1135,7 +1364,7 @@ onUnmounted(() => {
 	flex-direction: column;
 	background: rgba(255, 255, 255, 0.1);
 	/* border: 1px solid rgba(255, 255, 255, 0.3); */
-	background:#ffffff;
+	background: #ffffff;
 	border-radius: 15px;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 	padding: 15px 15px 20px 15px;
@@ -1152,9 +1381,12 @@ onUnmounted(() => {
 
 /* 响应式宽度调整 */
 @media (max-width: 1400px) {
-	.metrics-section, .traditional-section {
+
+	.metrics-section,
+	.traditional-section {
 		width: 180px;
 	}
+
 	.hydrofoil-section {
 		width: 220px;
 		padding: 12px;
@@ -1162,9 +1394,12 @@ onUnmounted(() => {
 }
 
 @media (max-width: 1200px) {
-	.metrics-section, .traditional-section {
+
+	.metrics-section,
+	.traditional-section {
 		width: 160px;
 	}
+
 	.hydrofoil-section {
 		width: 200px;
 		padding: 10px;
@@ -1172,10 +1407,13 @@ onUnmounted(() => {
 }
 
 @media (max-width: 992px) {
-	.metrics-section, .traditional-section {
+
+	.metrics-section,
+	.traditional-section {
 		width: 100%;
 		max-width: 300px;
 	}
+
 	.hydrofoil-section {
 		width: 100%;
 		max-width: 320px;
@@ -1377,6 +1615,7 @@ onUnmounted(() => {
 		opacity: 0;
 		transform: translateY(10px);
 	}
+
 	to {
 		opacity: 1;
 		transform: translateY(0);
@@ -1426,6 +1665,326 @@ onUnmounted(() => {
 
 	50% {
 		transform: rotateX(5deg) rotateY(-10deg) translateY(-10px);
+	}
+}
+
+/* Design&Simulation Technology 弹窗样式 */
+.design-modal {
+	background: rgba(255, 255, 255, 0.95);
+	backdrop-filter: blur(20px);
+	border-radius: 20px;
+	padding: 20px;
+	max-width: 80vw;
+	max-height: 80vh;
+	overflow: auto;
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	position: relative;
+	width: auto;
+	min-width: 320px;
+}
+
+.design-modal-content {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+}
+
+.design-image {
+	max-width: 100%;
+	max-height: 70vh;
+	object-fit: contain;
+	cursor: pointer;
+	transition: transform 0.3s ease;
+}
+
+.design-image:hover {
+	transform: scale(1.02);
+}
+
+/* 仿真技术对比弹窗样式 */
+.simulation-modal {
+	background: transparent;
+	backdrop-filter: none;
+	border-radius: 0;
+	padding: 20px;
+	max-width: 95vw;
+	/* max-height: 90vh; */
+	overflow: auto;
+	box-shadow: none;
+	border: none;
+	position: relative;
+	width: auto;
+	min-width: 320px;
+}
+
+.simulation-modal-content {
+	width: 100%;
+	height: 100%;
+}
+
+.simulation-title {
+	font-size: 20px;
+	/* font-weight: 600; */
+	color: #ffffff;
+	text-align: center;
+	margin-bottom: 25px;
+	line-height: 1.3;
+}
+
+.simulation-comparison {
+	display: grid;
+	grid-template-columns: repeat(4, 200px);
+	grid-template-rows: repeat(3, 200px);
+	gap: 15px;
+	height: 100%;
+	/* width: 680px; */
+	/* border: 2px solid #ff0000; */
+	border-radius: 10px;
+	padding: 20px;
+	background: rgba(255, 255, 255, 0.95);
+}
+
+/* 左侧区域：水翼船数据 */
+.left-section {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+
+/* 右侧区域：传统船数据 */
+.right-section {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+
+/* 中间VS分隔 */
+.vs-divider {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 40px;
+	flex-shrink: 0;
+}
+
+.vs-text {
+	font-size: 18px;
+	font-weight: bold;
+	color: #20B2AA;
+	background: rgba(32, 178, 170, 0.1);
+	padding: 10px;
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* 中间分隔区域 - 显示参数信息 */
+.middle-divider {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	width: 40px;
+	flex-shrink: 0;
+	gap: 8px;
+	height: 100%;
+	min-height: 100%;
+}
+
+.divider-item {
+	font-size: 10px;
+	font-weight: 500;
+	color: #000000;
+	/* background: rgba(255, 255, 255, 0.2); */
+	padding: 4px 8px;
+	/* border-radius: 4px; */
+	text-align: center;
+	white-space: nowrap;
+	backdrop-filter: blur(5px);
+	/* border: 1px solid rgba(255, 255, 255, 0.3); */
+	flex: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* 仿真视频容器 */
+.simulation-video-container {
+	background: rgba(240, 248, 255, 0.8);
+	border-radius: 15px;
+	padding: 15px;
+	border: 1px solid rgba(0, 212, 255, 0.3);
+	text-align: center;
+}
+
+.simulation-label {
+	font-size: 16px;
+	font-weight: 600;
+	color: #333333;
+	margin-bottom: 10px;
+}
+
+.simulation-video {
+	width: 100%;
+	height: 200px;
+	object-fit: cover;
+	border-radius: 10px;
+	margin-bottom: 10px;
+}
+
+/* .video-params {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	justify-content: center;
+} */
+
+.param-item {
+	font-size: 11px;
+	color: #666666;
+	background: rgba(255, 255, 255, 0.7);
+	padding: 4px 8px;
+	border-radius: 4px;
+}
+
+/* 图表图片容器 */
+.chart-image-container {
+	background: rgba(245, 245, 245, 0.8);
+	border-radius: 15px;
+	padding: 15px;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.chart-title {
+	font-size: 14px;
+	font-weight: 600;
+	color: #333333;
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+.chart-image {
+	width: 100%;
+	height: 150px;
+	margin-bottom: 10px;
+}
+
+.chart-image img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	border-radius: 8px;
+}
+
+.chart-comparison {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 11px;
+	color: #666666;
+}
+
+.chart-comparison .vs-text {
+	font-size: 12px;
+	font-weight: bold;
+	color: #20B2AA;
+	background: none;
+	padding: 0;
+	width: auto;
+	height: auto;
+}
+
+/* 结论部分 */
+.conclusion-section {
+	flex: 1;
+	background: rgba(245, 245, 245, 0.8);
+	border-radius: 15px;
+	padding: 20px;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	max-width: 300px;
+}
+
+.conclusion-title {
+	font-size: 16px;
+	font-weight: 600;
+	color: #333333;
+	margin-bottom: 15px;
+}
+
+.conclusion-item {
+	margin-bottom: 15px;
+	font-size: 11px;
+	line-height: 1.4;
+	color: #666666;
+}
+
+.conclusion-item strong {
+	color: #333333;
+	font-weight: 600;
+}
+
+/* 响应式调整 */
+@media (max-width: 1200px) {
+	.simulation-comparison {
+		flex-direction: column;
+		gap: 15px;
+	}
+
+	.left-section,
+	.right-section {
+		flex-direction: row;
+		gap: 10px;
+	}
+
+	.vs-divider {
+		width: 100%;
+		height: 40px;
+	}
+
+	.conclusion-section {
+		max-width: 100%;
+	}
+}
+
+@media (max-width: 768px) {
+
+	.design-modal,
+	.simulation-modal {
+		max-width: 95vw;
+		max-height: 90vh;
+		padding: 15px;
+	}
+
+	.simulation-title {
+		font-size: 18px;
+		margin-bottom: 20px;
+	}
+
+	.left-section,
+	.right-section {
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	.simulation-video {
+		height: 150px;
+	}
+
+	.chart-image {
+		height: 120px;
+	}
+
+	.conclusion-section {
+		padding: 15px;
 	}
 }
 
