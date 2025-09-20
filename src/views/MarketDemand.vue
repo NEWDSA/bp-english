@@ -507,7 +507,7 @@ const nextImage = () => {
   <div class="bg-center bg-no-repeat relative flex flex-col min-h-screen w-full"
        :style="`background: url('${icon3}'); background-size: 100% 100%;`">
     <!-- Navigation -->
-    <!-- 顶部导航栏 -->
+   <!-- 顶部导航栏 -->
     <nav class="top-nav">
       <div class="nav-container">
         <!-- 返回首页按钮 -->
@@ -531,13 +531,13 @@ const nextImage = () => {
     </nav>
 
     <!-- Main Content Container -->
-    <div class="flex flex-col lg:flex-row mt-[71px] main-content-container">
+    <div class="flex flex-col lg:flex-row mt-[71px] main-content-container" style="height: calc(100vh - 71px - 175px);">
       <!-- Left Content -->
       <div class="flex-1 flex items-center justify-center relative min-w-0">
         <!-- Circle Container -->
         <div class="relative w-[830px] h-[830px] max-w-full max-h-full" style="transform: scale(min(1.5, calc(100vw / 3 / 600px), calc((100vh - 200px) / 600px))); transform-origin: left;">
           <!-- 830x830 white circle -->
-          <div class="ring"></div>
+          <div class="absolute left-[-600px] top-0 w-[830px] h-[830px] border-3 border-white rounded-full ring"></div>
 
           <!-- Icons positioned along the circle -->
           <div class="absolute top-0 left-0 w-full h-full">
@@ -605,7 +605,7 @@ const nextImage = () => {
       </div>
 
       <!-- Content Scroll Container (for Middle and Right Content) -->
-      <div class="flex-3 flex flex-col lg:flex-row content-scroll-container">
+      <div class="flex-3 flex flex-col lg:flex-row gap-4 h-full overflow-y-auto pr-2 content-scroll-container">
         <!-- Middle Content-->
         <div class="flex-1 flex items-start justify-center px-0 py-4 lg:py-8 min-w-0">
           <div class="text-white w-full max-w-4xl">
@@ -663,7 +663,7 @@ const nextImage = () => {
     <div class="fixed bottom-0 left-0 right-0 h-[175px] overflow-x-auto bottom-gallery">
       <div class="relative w-full h-full">
         <!-- Image 1 -->
-        <div class="gallery-item" @click="openModal(1)">
+        <div class="absolute bottom-0 w-[312px] h-[125px] overflow-hidden rounded-lg shadow-[0_20px_25px_-5px_rgba(0,0,0,0.3),0_10px_10px_-5px_rgba(0,0,0,0.2)] border-2 border-gray-400/50 transition-all duration-300 cursor-pointer left-[calc(50%-min(642px,45vw))] gallery-item" @click="openModal(1)">
           <img src="/src/assets/img/view-5.png" alt="Inter island transportation" class="w-full h-full object-cover" />
           <div class="image-mask absolute inset-0 bg-black/30 flex items-center justify-center transition-opacity duration-300">
             <div class="text-content bg-black/50 px-4 py-2 rounded w-full text-center">
@@ -673,7 +673,7 @@ const nextImage = () => {
         </div>
 
         <!-- Image 2 -->
-        <div class="gallery-item" @click="openModal(2)">
+        <div class="absolute bottom-0 w-[312px] h-[125px] overflow-hidden rounded-lg shadow-[0_20px_25px_-5px_rgba(0,0,0,0.3),0_10px_10px_-5px_rgba(0,0,0,0.2)] border-2 border-gray-400/50 transition-all duration-300 cursor-pointer left-[calc(50%-min(318px,22.5vw))] gallery-item" @click="openModal(2)">
           <img src="/src/assets/img/view-2.png" alt="Urban water system transportation" class="w-full h-full object-cover" />
           <div class="image-mask absolute inset-0 bg-black/30 flex items-center justify-center transition-opacity duration-300">
             <div class="text-content bg-black/50 px-4 py-2 rounded w-full text-center">
@@ -683,7 +683,7 @@ const nextImage = () => {
         </div>
 
         <!-- Image 3 -->
-        <div class="gallery-item" @click="openModal(3)">
+        <div class="absolute bottom-0 w-[312px] h-[125px] overflow-hidden rounded-lg shadow-[0_20px_25px_-5px_rgba(0,0,0,0.3),0_10px_10px_-5px_rgba(0,0,0,0.2)] border-2 border-gray-400/50 transition-all duration-300 cursor-pointer left-[calc(50%+min(6px,0.5vw))] gallery-item" @click="openModal(3)">
           <img src="/src/assets/img/view-10.png" alt="Water sports and fishing" class="w-full h-full object-cover" />
           <div class="image-mask absolute inset-0 bg-black/30 flex items-center justify-center transition-opacity duration-300">
             <div class="text-content bg-black/50 px-4 py-2 rounded w-full text-center">
@@ -693,7 +693,7 @@ const nextImage = () => {
         </div>
 
         <!-- Image 4 -->
-        <div class="gallery-item" @click="openModal(4)">
+        <div class="absolute bottom-0 w-[312px] h-[125px] overflow-hidden rounded-lg shadow-[0_20px_25px_-5px_rgba(0,0,0,0.3),0_10px_10px_-5px_rgba(0,0,0,0.2)] border-2 border-gray-400/50 transition-all duration-300 cursor-pointer left-[calc(50%+min(330px,23.5vw))] gallery-item" @click="openModal(4)">
           <img src="/src/assets/img/view-8.png" alt="Tourist attraction" class="w-full h-full object-cover" />
           <div class="image-mask absolute inset-0 bg-black/30 flex items-center justify-center transition-opacity duration-300">
             <div class="text-content bg-black/50 px-4 py-2 rounded w-full text-center">
@@ -740,7 +740,7 @@ const nextImage = () => {
 </template>
 
 <style scoped>
-/* 顶部导航栏 */
+/* 顶部导航栏.start */
 .home-btn {
 	cursor: pointer;
 	transition: all 0.3s ease;
@@ -768,6 +768,7 @@ const nextImage = () => {
 	height: 100%;
 	object-fit: contain;
 }
+
 .top-nav {
 	position: fixed;
 	top: 0;
@@ -840,93 +841,25 @@ const nextImage = () => {
 	height: 20px;
 	background: rgba(255, 255, 255, 0.3);
 }
+/* 顶部导航栏.start */
 
-.ring {
-  position: absolute;
-  left: -600px;
-  top: 0px;
-	width: 830px;
-	height: 830px;
-	border: 3px solid white;
-	border-radius: 50%;
-}
 
-.gallery-item {
-  position: absolute;
-  bottom: 0;
-  width: 312px;
-  height: 125px;
-  overflow: hidden;
-  border-radius: 8px;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
-  border: 2px solid rgba(128, 128, 128, 0.5);
-  transition: height 0.3s ease;
-}
 
-.gallery-item:nth-child(1) {
-  left: calc(50% - min(642px, 45vw));
-}
-
-.gallery-item:nth-child(2) {
-  left: calc(50% - min(318px, 22.5vw));
-}
-
-.gallery-item:nth-child(3) {
-  left: calc(50% + min(6px, 0.5vw));
-}
-
-.gallery-item:nth-child(4) {
-  left: calc(50% + min(330px, 23.5vw));
-}
-
+/* Hover effects for gallery items */
 .gallery-item:hover {
-  height: 175px;
+  height: 11rem !important;
 }
 
 .gallery-item:hover .image-mask {
-  opacity: 0;
+  opacity: 0 !important;
 }
 
-.gallery-item {
-  cursor: pointer;
-}
-
-/* Middle Content responsive font sizes */
-@media (max-width: 1024px) {
-  .text-responsive-title {
-    font-size: 1.125rem;
-  }
-
-  .text-responsive-content {
-    font-size: 0.875rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .text-responsive-title {
-    font-size: 1rem;
-  }
-
-  .text-responsive-content {
-    font-size: 0.875rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .text-responsive-title {
-    font-size: 0.875rem;
-  }
-
-  .text-responsive-content {
-    font-size: 0.8rem;
-  }
-}
-
+/* Dot container animation */
 .dot-container-dot::after {
   content: '';
   position: absolute;
-  width: 30px;
-  height: 30px;
+  width: 1.875rem;
+  height: 1.875rem;
   border: 1px solid white;
   border-radius: 50%;
   top: 50%;
@@ -936,155 +869,71 @@ const nextImage = () => {
   transition: opacity 0.3s ease;
 }
 
-.icon-6-container:hover .dot-container-dot::after {
-  opacity: 1;
-}
-
-.icon-image {
-  transform: scale(1);
-  transition: transform 0.3s ease;
-  transform-origin: center;
-}
-
-.icon-text {
-  transform: scale(1);
-  transition: transform 0.3s ease;
-  color: #cccccc;
-  transform-origin: left;
-}
-
-.icon-dot {
-  transform: scale(1);
-  transition: transform 0.3s ease;
-  transform-origin: left;
-}
-
-.icon-6-container:hover .icon-image {
-  transform: scale(1.4);
-}
-
-.icon-6-container:hover .icon-text {
-  transform: scale(1.4);
-  color: white;
-}
-
-.icon-6-container:hover .icon-dot {
-  transform: scale(1.4);
-}
-
-.icon-7-container:hover .dot-container-dot::after {
-  opacity: 1;
-}
-
-.icon-7-container:hover .icon-image {
-  transform: scale(1.4);
-}
-
-.icon-7-container:hover .icon-text {
-  transform: scale(1.4);
-  color: white;
-}
-
-.icon-7-container:hover .icon-dot {
-  transform: scale(1.4);
-}
-
-.icon-8-container:hover .dot-container-dot::after {
-  opacity: 1;
-}
-
-.icon-8-container:hover .icon-image {
-  transform: scale(1.4);
-}
-
-.icon-8-container:hover .icon-text {
-  transform: scale(1.4);
-  color: white;
-}
-
-.icon-8-container:hover .icon-dot {
-  transform: scale(1.4);
-}
-
-.icon-9-container:hover .dot-container-dot::after {
-  opacity: 1;
-}
-
-.icon-9-container:hover .icon-image {
-  transform: scale(1.4);
-}
-
-.icon-9-container:hover .icon-text {
-  transform: scale(1.4);
-  color: white;
-}
-
-.icon-9-container:hover .icon-dot {
-  transform: scale(1.4);
-}
-
+/* Hover effects for icon containers */
+.icon-6-container:hover .dot-container-dot::after,
+.icon-7-container:hover .dot-container-dot::after,
+.icon-8-container:hover .dot-container-dot::after,
+.icon-9-container:hover .dot-container-dot::after,
 .icon-10-container:hover .dot-container-dot::after {
-  opacity: 1;
+  opacity: 1 !important;
 }
 
+.icon-6-container:hover .icon-image,
+.icon-7-container:hover .icon-image,
+.icon-8-container:hover .icon-image,
+.icon-9-container:hover .icon-image,
 .icon-10-container:hover .icon-image {
-  transform: scale(1.4);
+  transform: scale(1.4) !important;
 }
 
+.icon-6-container:hover .icon-text,
+.icon-7-container:hover .icon-text,
+.icon-8-container:hover .icon-text,
+.icon-9-container:hover .icon-text,
 .icon-10-container:hover .icon-text {
-  transform: scale(1.4);
-  color: white;
+  transform: scale(1.4) !important;
+  color: white !important;
 }
 
+.icon-6-container:hover .icon-dot,
+.icon-7-container:hover .icon-dot,
+.icon-8-container:hover .icon-dot,
+.icon-9-container:hover .icon-dot,
 .icon-10-container:hover .icon-dot {
-  transform: scale(1.4);
+  transform: scale(1.4) !important;
 }
 
-/* Active state styles for default hover effect */
+/* Active state styles */
 .icon-container.active-icon .dot-container-dot::after {
-  opacity: 1;
+  opacity: 1 !important;
 }
 
 .icon-container.active-icon .icon-image {
-  transform: scale(1.4);
+  transform: scale(1.4) !important;
 }
 
 .icon-container.active-icon .icon-text {
-  transform: scale(1.4);
-  color: white;
+  transform: scale(1.4) !important;
+  color: white !important;
 }
 
 .icon-container.active-icon .icon-dot {
-  transform: scale(1.4);
-}
-
-/* Main content container height calculation */
-.main-content-container {
-  height: calc(100vh - 71px - 175px);
-}
-
-/* Content scroll container for Middle and Right Content */
-.content-scroll-container {
-  flex: 3;
-  height: 100%;
-  overflow-y: auto;
-  padding-right: 8px;
-  gap: 16px;
+  transform: scale(1.4) !important;
 }
 
 /* Custom scrollbar styling */
 .content-scroll-container::-webkit-scrollbar {
-  width: 6px;
+  width: 0.375rem;
 }
 
 .content-scroll-container::-webkit-scrollbar-track {
   background: rgba(255, 255, 255, 0.1);
-  border-radius: 3px;
+  border-radius: 0.188rem;
 }
 
 .content-scroll-container::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.3);
-  border-radius: 3px;
+  border-radius: 0.188rem;
 }
 
 .content-scroll-container::-webkit-scrollbar-thumb:hover {
