@@ -1,6 +1,16 @@
 <template>
 	<!-- 根据 MasterGo 封面设计还原（FRAME 名称：封面） -->
-	<section class="cover" :style="coverStyle">
+	<section class="cover">
+		<!-- 视频背景 -->
+		<video
+			class="cover-video"
+			autoplay
+			muted
+			loop
+			playsinline
+		>
+			<source :src="homeVideo" type="video/mp4">
+		</video>
 		<!-- 左上：CATALOGUE 块（标题与子项为一个整体） -->
 		<div class="catalogue-wrap" :class="{ 'is-open': showCatalogue }">
 			<!-- <button class="catalogue-head" type="button" @click="toggleCatalogue" :aria-expanded="showCatalogue ? 'true' : 'false'">CATALOGUE</button> -->
@@ -59,14 +69,10 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { useRouter } from 'vue-router'
-import coverBg from '../assets/微信图片_20250912104117_7221_12.png'
+import homeVideo from '../assets/home.mp4'
 import yihaiLogo from '../assets/yihai.svg'
 
 const router = useRouter()
-
-const coverStyle = {
-	backgroundImage: `url(${coverBg})`
-}
 
 const showCatalogue = ref(false)
 const showCompanyInfo = ref(false)
@@ -132,10 +138,21 @@ onBeforeUnmount(() => { document.removeEventListener('keydown', onKeydown) })
 	align-items: center;
 	justify-content: center;
 	background-color: #3B4756;
-	/* 叠加背景图（paint_0:2637），设计中有约 0.62 透明度 */
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center;
+	overflow: hidden;
+}
+
+/* 视频背景样式 */
+.cover-video {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	min-width: 100%;
+	min-height: 100%;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	z-index: 1;
 }
 
 /* 左上 catalogue 块：标题与展开后的子项同属一个容器 */
@@ -158,6 +175,8 @@ onBeforeUnmount(() => { document.removeEventListener('keydown', onKeydown) })
 	transition: all 0.3s ease;
 	padding: 8px 16px;
 	border-radius: 8px;
+	font-weight: bold;
+	text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
 }
 
 .catalogue-head::after {
@@ -207,6 +226,7 @@ onBeforeUnmount(() => { document.removeEventListener('keydown', onKeydown) })
 	cursor: pointer;
 	outline: none;
 	transition: all 0.3s ease;
+	z-index: 20;
 }
 
 .corner-btn:focus {
@@ -278,6 +298,8 @@ onBeforeUnmount(() => { document.removeEventListener('keydown', onKeydown) })
 	border-radius: 8px;
 	position: relative;
 	overflow: hidden;
+	font-weight: bold;
+	text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
 }
 .catalogue-item:hover {
 	color: #ffffff;
@@ -334,6 +356,9 @@ onBeforeUnmount(() => { document.removeEventListener('keydown', onKeydown) })
 	/* box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); */
 	color: #FFFFFF;
 	text-align: center;
+	transform: scale(1.3);
+	font-weight: bold;
+	text-shadow: 2px 2px 6px rgba(0,0,0,0.9);
 }
 
 .company-info__section {
