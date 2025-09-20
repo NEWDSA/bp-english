@@ -221,25 +221,60 @@ const getChartOptions = () => {
           type: 'pie',
           radius: ['40%', '70%'],
           center: ['50%', '50%'],
-          data: data.slice(0, 4).map((value, index) => ({
-            value,
-            name: `Segment ${index + 1}`,
-            itemStyle: {
-              color: gradientColors[index] || colors[index],
-              borderColor: '#1f2937',
-              borderWidth: 2
-            }
-          })),
+          data: [
+            { value: 30, name: '18-34', itemStyle: { color: '#06b6d4' } },
+            { value: 40, name: '35-50', itemStyle: { color: '#10b981' } },
+            { value: 20, name: '51-65', itemStyle: { color: '#f59e0b' } },
+            { value: 10, name: '>65', itemStyle: { color: '#ef4444' } }
+          ],
           label: {
             color: '#e5e7eb',
             fontSize: 11,
-            formatter: '{b}: {c}%'
+            formatter: '{c}%'
           },
           emphasis: {
             itemStyle: { shadowBlur: 10, shadowColor: 'rgba(0,0,0,0.5)' }
           },
           animationDuration: 1000
-        }]
+        }],
+        graphic: [
+          {
+            type: 'text',
+            left: 'center',
+            top: 'center',
+            style: {
+              text: '35-50',
+              fontSize: 16,
+              fontWeight: 'bold',
+              fill: '#e5e7eb',
+              textAlign: 'center',
+              textVerticalAlign: 'middle'
+            },
+            z: 100
+          }
+        ],
+        legend: {
+          orient: 'vertical',
+          left: '5%',
+          bottom: '5%',
+          data: ['18-34', '35-50', '51-65', '>65'],
+          textStyle: {
+            color: '#e5e7eb',
+            fontSize: 12
+          },
+          itemWidth: 10,
+          itemHeight: 10,
+          itemGap: 8,
+          formatter: function(name) {
+            const dataMap = {
+              '18-34': '18-34',
+              '35-50': '35-50',
+              '51-65': '51-65',
+              '>65': '>65'
+            }
+            return dataMap[name] || name
+          }
+        }
       }
 
     case 'area':
