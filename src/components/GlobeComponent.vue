@@ -291,47 +291,53 @@ const startTimeAnimation = (satData) => {
 
 // Load airline data function like reference code
 const loadAirlineData = () => {
-  // Create mock airport data (in real app, would fetch from airports.dat)
+  // Create mock airport data for specific regions (one per country)
   const mockAirports = [
-    { name: 'Los Angeles International Airport', city: 'Los Angeles', country: 'United States', lat: 33.9425, lng: -118.4081 },
-    { name: 'John F. Kennedy International Airport', city: 'New York', country: 'United States', lat: 40.6413, lng: -73.7781 },
-    // { name: 'London Heathrow Airport', city: 'London', country: 'United Kingdom', lat: 51.4700, lng: -0.4543 },
-    { name: 'Charles de Gaulle Airport', city: 'Paris', country: 'France', lat: 49.0097, lng: 2.5479 },
-    { name: 'Tokyo Haneda Airport', city: 'Tokyo', country: 'Japan', lat: 35.5494, lng: 139.7798 },
-    { name: 'Dubai International Airport', city: 'Dubai', country: 'United Arab Emirates', lat: 25.2532, lng: 55.3657 },
-    { name: 'Singapore Changi Airport', city: 'Singapore', country: 'Singapore', lat: 1.3644, lng: 103.9915 },
-    { name: 'Sydney Kingsford Smith Airport', city: 'Sydney', country: 'Australia', lat: -33.9399, lng: 151.1753 },
-    // { name: 'Frankfurt Airport', city: 'Frankfurt', country: 'Germany', lat: 50.0379, lng: 8.5622 },
-    { name: 'Beijing Capital International Airport', city: 'Beijing', country: 'China', lat: 40.0799, lng: 116.6031 },
-    { name: 'Hong Kong International Airport', city: 'Hong Kong', country: 'China', lat: 22.3080, lng: 113.9185 },
-    { name: 'Amsterdam Airport Schiphol', city: 'Amsterdam', country: 'Netherlands', lat: 52.3105, lng: 4.7683 },
-    // { name: 'Zurich Airport', city: 'Zurich', country: 'Switzerland', lat: 47.4647, lng: 8.5492 },
-    { name: 'Toronto Pearson International Airport', city: 'Toronto', country: 'Canada', lat: 43.6777, lng: -79.6248 },
-    { name: 'São Paulo–Guarulhos International Airport', city: 'São Paulo', country: 'Brazil', lat: -23.4356, lng: -46.4731 }
+    // China
+    { name: 'Beijing Capital International Airport', city: 'Beijing', country: 'China', region: 'Asia', lat: 40.0799, lng: 116.6031 },
+
+    // Southeast Asia (one per country)
+    { name: 'Singapore Changi Airport', city: 'Singapore', country: 'Singapore', region: 'Southeast Asia', lat: 1.3644, lng: 103.9915 },
+
+    // Italy
+    { name: 'Rome Fiumicino Airport', city: 'Rome', country: 'Italy', region: 'Europe', lat: 41.8003, lng: 12.2389 },
+
+    // America (one per country)
+    { name: 'Los Angeles International Airport', city: 'Los Angeles', country: 'United States', region: 'America', lat: 33.9425, lng: -118.4081 },
+
+    // Middle East (one per country)
+    { name: 'Dubai International Airport', city: 'Dubai', country: 'United Arab Emirates', region: 'Middle East', lat: 25.2532, lng: 55.3657 },
+
+    // Europe (consolidated as one region)
+    // { name: 'London Heathrow Airport', city: 'London', country: 'Europe', region: 'Europe', lat: 51.4700, lng: -0.4543 }
   ]
 
-  // Create mock route data (in real app, would fetch from routes.dat)
+  // Create mock route data for the selected regions
   const mockRoutes = [
-    { airline: 'American Airlines', srcAirport: 'Los Angeles International Airport', dstAirport: 'John F. Kennedy International Airport' },
-    { airline: 'British Airways', srcAirport: 'London Heathrow Airport', dstAirport: 'John F. Kennedy International Airport' },
-    { airline: 'Air France', srcAirport: 'Charles de Gaulle Airport', dstAirport: 'Los Angeles International Airport' },
-    { airline: 'Japan Airlines', srcAirport: 'Tokyo Haneda Airport', dstAirport: 'Los Angeles International Airport' },
+    // Southeast Asia routes
+    { airline: 'Singapore Airlines', srcAirport: 'Singapore Changi Airport', dstAirport: 'Kuala Lumpur International Airport' },
+    { airline: 'Thai Airways', srcAirport: 'Bangkok Suvarnabhumi Airport', dstAirport: 'Singapore Changi Airport' },
+    { airline: 'Garuda Indonesia', srcAirport: 'Jakarta Soekarno-Hatta Airport', dstAirport: 'Singapore Changi Airport' },
+    { airline: 'Philippine Airlines', srcAirport: 'Manila Ninoy Aquino Airport', dstAirport: 'Beijing Capital International Airport' },
+
+    // America routes
+    { airline: 'United Airlines', srcAirport: 'Los Angeles International Airport', dstAirport: 'Mexico City International Airport' },
+    { airline: 'LATAM Airlines', srcAirport: 'São Paulo–Guarulhos International Airport', dstAirport: 'Los Angeles International Airport' },
+
+    // Middle East routes
+    { airline: 'Emirates', srcAirport: 'Dubai International Airport', dstAirport: 'Doha Hamad International Airport' },
+    { airline: 'Qatar Airways', srcAirport: 'Doha Hamad International Airport', dstAirport: 'Riyadh King Khalid International Airport' },
+    { airline: 'El Al', srcAirport: 'Tel Aviv Ben Gurion Airport', dstAirport: 'London Heathrow Airport' },
+
+    // Intercontinental routes
     { airline: 'Emirates', srcAirport: 'Dubai International Airport', dstAirport: 'London Heathrow Airport' },
-    { airline: 'Singapore Airlines', srcAirport: 'Singapore Changi Airport', dstAirport: 'Tokyo Haneda Airport' },
-    { airline: 'Qantas', srcAirport: 'Sydney Kingsford Smith Airport', dstAirport: 'Los Angeles International Airport' },
-    { airline: 'Lufthansa', srcAirport: 'Frankfurt Airport', dstAirport: 'John F. Kennedy International Airport' },
-    { airline: 'Air China', srcAirport: 'Beijing Capital International Airport', dstAirport: 'Los Angeles International Airport' },
-    { airline: 'Cathay Pacific', srcAirport: 'Hong Kong International Airport', dstAirport: 'London Heathrow Airport' },
-    { airline: 'KLM', srcAirport: 'Amsterdam Airport Schiphol', dstAirport: 'John F. Kennedy International Airport' },
-    { airline: 'Swiss International Air Lines', srcAirport: 'Zurich Airport', dstAirport: 'Singapore Changi Airport' },
-    { airline: 'Air Canada', srcAirport: 'Toronto Pearson International Airport', dstAirport: 'London Heathrow Airport' },
-    { airline: 'LATAM Airlines', srcAirport: 'São Paulo–Guarulhos International Airport', dstAirport: 'John F. Kennedy International Airport' },
-    { airline: 'Emirates', srcAirport: 'Dubai International Airport', dstAirport: 'Sydney Kingsford Smith Airport' },
-    { airline: 'Singapore Airlines', srcAirport: 'Singapore Changi Airport', dstAirport: 'Frankfurt Airport' },
-    { airline: 'British Airways', srcAirport: 'London Heathrow Airport', dstAirport: 'Dubai International Airport' },
-    { airline: 'Air France', srcAirport: 'Charles de Gaulle Airport', dstAirport: 'Tokyo Haneda Airport' },
-    { airline: 'Lufthansa', srcAirport: 'Frankfurt Airport', dstAirport: 'Beijing Capital International Airport' },
-    { airline: 'Cathay Pacific', srcAirport: 'Hong Kong International Airport', dstAirport: 'Sydney Kingsford Smith Airport' }
+    { airline: 'Cathay Pacific', srcAirport: 'Beijing Capital International Airport', dstAirport: 'London Heathrow Airport' },
+    { airline: 'Air France', srcAirport: 'London Heathrow Airport', dstAirport: 'Los Angeles International Airport' },
+    { airline: 'Singapore Airlines', srcAirport: 'Singapore Changi Airport', dstAirport: 'London Heathrow Airport' },
+    { airline: 'Qatar Airways', srcAirport: 'Doha Hamad International Airport', dstAirport: 'Rome Fiumicino Airport' },
+    { airline: 'Turkish Airlines', srcAirport: 'London Heathrow Airport', dstAirport: 'Beijing Capital International Airport' },
+    { airline: 'British Airways', srcAirport: 'London Heathrow Airport', dstAirport: 'Los Angeles International Airport' },
+    { airline: 'Lufthansa', srcAirport: 'London Heathrow Airport', dstAirport: 'Rome Fiumicino Airport' }
   ]
 
   try {
@@ -374,7 +380,7 @@ const loadAirlineData = () => {
       altitude: 0.01,
       label: `
         <div style="margin-top: 84px; padding: 4px 8px; background-color: rgba(0, 0, 0, 0.8); border: 2px solid #06b6d4; border-radius: 4px; color: white; font-size: 16px; white-space: nowrap; font-family: system-ui, -apple-system, sans-serif;">
-          ${d.city}
+          ${d.country}
         </div>
       `
     }))
@@ -424,7 +430,7 @@ const createCustomMarkers = (pointsData) => {
 
     // Create label with black semi-transparent background and cyan border
     const labelElement = document.createElement('div')
-    labelElement.textContent = point.city
+    labelElement.textContent = point.country
     labelElement.style.position = 'absolute'
     labelElement.style.top = '50px'
     labelElement.style.left = '50%'
