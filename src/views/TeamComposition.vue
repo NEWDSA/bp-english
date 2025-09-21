@@ -103,50 +103,33 @@
 					<!-- Team Members -->
 					<div class="team-members-title">Team Members</div>
 					<!-- CEO -->
-					<div
-						style="width: 100px;height: 100px;display: flex;flex-direction: column;align-items: center;justify-content: center;cursor: pointer;"
-						@click="toggleCeoBackground">
-						<span style="text-align: center;">CEO</span>
-						<img class="member-avatar" src="../assets/ceo.png" alt="CEO"></img>
+					<div class="member-card" @click="toggleCeoBackground">
+						<div class="member-role">CEO</div>
+						<img class="member-avatar" src="../assets/ceo.png" alt="CEO" />
 					</div>
-					<div
-						style="width: 100px;height: 100px;display: flex;flex-direction: column;align-items: center;justify-content: center;cursor: pointer;"
-						@click="toggleCfoBackground">
-						<span style="text-align: center;">CFO</span>
-						<img class="member-avatar" src="../assets/cfo.png" alt="CFO" lass="member-avatar"></img>
+					<div class="member-card" @click="toggleCfoBackground">
+						<div class="member-role">CFO</div>
+						<img class="member-avatar" src="../assets/cfo.png" alt="CFO" />
 					</div>
-					<div
-						style="width: 100px;height: 100px;display: flex;flex-direction: column;align-items: center;justify-content: center;cursor: pointer;"
-						@click="toggleCooBackground">
-						<span style="text-align: center;">COO</span>
-						<img class="member-avatar" src="../assets/coo.png" alt="COO"></img>
+					<div class="member-card" @click="toggleCooBackground">
+						<div class="member-role">COO</div>
+						<img class="member-avatar" src="../assets/coo.png" alt="COO" />
 					</div>
-					<div
-						style="width: 100px;height: 100px;display: flex;flex-direction: column;align-items: center;justify-content: center;cursor: pointer;"
-						@click="toggleEngineerBackground">
-						<span style="text-align: center;">Engineer</span>
-						<img class="member-avatar" src="../assets/engineer.png" alt="Engineer"></img>
+					<div class="member-card" @click="toggleEngineerBackground">
+						<div class="member-role">Engineer</div>
+						<img class="member-avatar" src="../assets/engineer.png" alt="Engineer" />
 					</div>
-					<div
-						style="width: 100px;height: 100px;display: flex;flex-direction: column;align-items: center;justify-content: center;cursor: pointer;"
-						@click="toggleInteractionEngineerBackground">
-						<span style="text-align: center; font-size: 14px;">Interaction Engineer</span>
-
-						<img class="member-avatar" src="../assets/interactionEngineer.png" alt="Founder"></img>
+					<div class="member-card" @click="toggleInteractionEngineerBackground">
+						<div class="member-role">Interaction Engineer</div>
+						<img class="member-avatar" src="../assets/interactionEngineer.png" alt="Interaction Engineer" />
 					</div>
-					<div
-						style="width: 100px;height: 100px;display: flex;flex-direction: column;align-items: center;justify-content: center;cursor: pointer;"
-						@click="toggleStructuralEngineerBackground">
-						<span style="text-align: center; font-size: 14px;">Structural Engineer</span>
-
-						<img class="member-avatar" src="../assets/structuralEnginner.png" alt="Strategy"></img>
+					<div class="member-card" @click="toggleStructuralEngineerBackground">
+						<div class="member-role">Structural Engineer</div>
+						<img class="member-avatar" src="../assets/structuralEnginner.png" alt="Structural Engineer" />
 					</div>
-					<div
-						style="width: 100px;height: 100px;display: flex;flex-direction: column;align-items: center;justify-content: center;cursor: pointer;"
-						@click="toggleStrategicPlannerBackground">
-						<span style="text-align: center; font-size: 14px;">Strategic Planner</span>
-
-						<img class="member-avatar" src="../assets/strategicPlanner.png" alt="Strategy"></img>
+					<div class="member-card" @click="toggleStrategicPlannerBackground">
+						<div class="member-role">Strategic Planner</div>
+						<img class="member-avatar" src="../assets/strategicPlanner.png" alt="Strategic Planner" />
 					</div>
 					<div style="width: 200px;">Team members gather top talents in the four core fields of ship
 						engineering, intelligent systems, corporate internal control, finance, taxation, and legal
@@ -692,8 +675,8 @@ onMounted(() => {
 
 /* 右侧内容样式 */
 .top-info {
-	display: flex;
-	justify-content: space-between;
+	/* display: flex;
+	justify-content: space-between; */
 	margin-bottom: 40px;
 }
 
@@ -703,7 +686,7 @@ onMounted(() => {
 }
 
 .info-title {
-	font-size: 16px;
+	font-size: 18px;
 	font-weight: 500;
 	color: #ffffff;
 	text-align: right;
@@ -717,6 +700,7 @@ onMounted(() => {
 	padding: 10px;
 	border: 1px solid rgba(255, 255, 255, 0.1);
 	/* max-width: 800px; */
+	justify-content: center;
 	width: 100%;
 	height: 100%;
 	display: flex;
@@ -753,7 +737,7 @@ onMounted(() => {
 	width: 98px;
 	height: 133px;
 	/* height: 100px; */
-	border-radius: 12px;
+	/* border-radius: 12px; */
 	position: relative;
 	border: 2px solid transparent;
 	/* background-size: cover; */
@@ -813,6 +797,46 @@ onMounted(() => {
 	flex: 1;
 	display: flex;
 	align-items: center;
+}
+
+/* 成员卡片外框样式 */
+.member-card {
+	width: 120px;
+	padding: 10px 10px 12px 10px;
+	border-radius: 16px;
+	background: rgba(0, 0, 0, 0.25);
+	backdrop-filter: blur(6px);
+	border: 1px solid rgba(255, 255, 255, 0.18);
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), inset 0 0 0 1px rgba(0, 212, 255, 0.15);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.member-card:hover {
+	box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45), 0 0 20px rgba(0, 212, 255, 0.35);
+	transform: translateY(-3px);
+}
+
+/* 职位胶囊标签 */
+.member-role {
+	color: #e6faff;
+	font-size: 12px;
+	font-weight: 700;
+	margin-bottom: 8px;
+	text-shadow: 0 0 8px rgba(0, 212, 255, 0.5);
+	display: block;
+	width: 100%;
+	text-align: center;
+}
+
+/* 统一头像尺寸与边框 */
+.member-card .member-avatar {
+	width: 86px;
+	height: 116px;
+	border-radius: 12px;
+	border: 2px solid rgba(255, 255, 255, 0.25);
+	box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
 }
 
 
