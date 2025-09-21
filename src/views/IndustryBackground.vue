@@ -273,7 +273,7 @@ const handleCityClick = (cityInfo) => {
                   v-show="showSummary"
                   @mouseenter="showSummary = true"
                   @mouseleave="showSummary = false"
-                  class="absolute top-full z-9999999 right-0 mt-6 w-96 bg-gray-800/95 backdrop-blur-sm border border-cyan-500/30 rounded-lg p-4 shadow-2xl transform transition-all duration-300 origin-top-right"
+                  class="absolute top-full z-9999999 right-0 mt-6 w-[480px] bg-gray-800/95 backdrop-blur-sm border border-cyan-500/30 rounded-lg p-4 shadow-2xl transform transition-all duration-300 origin-top-right"
                   :class="showSummary ? 'animate-in fade-in-90 slide-in-from-top-2' : 'animate-out fade-out-90 slide-out-to-top-2'"
                 >
                   <!-- Content -->

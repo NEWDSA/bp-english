@@ -68,7 +68,131 @@ const generateRegionData = (country) => {
 const getChartOptions = () => {
   const data = generateRegionData()
   const axisVisible = props.isDetailed
+  const hasRegionSelected = props.selectedCity && props.selectedCity.country
 
+  // If region is selected, show vertical line chart style
+  if (hasRegionSelected) {
+    return {
+      backgroundColor: 'transparent',
+      grid: {
+        left: '8%',
+        right: '8%',
+        top: '15%',
+        bottom: '15%'
+      },
+      xAxis: {
+        type: 'category',
+        data: props.isDetailed
+          ? ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025']
+          : ['', '', '', '', '', '', ''],
+        axisLabel: {
+          show: axisVisible,
+          color: '#64748b',
+          fontSize: 10
+        },
+        axisLine: {
+          show: axisVisible,
+          lineStyle: { color: '#374151' }
+        },
+        axisTick: { show: false },
+        splitLine: { show: false }
+      },
+      yAxis: {
+        type: 'value',
+        max: 100,
+        axisLabel: {
+          show: axisVisible,
+          color: '#64748b',
+          fontSize: 10
+        },
+        axisLine: {
+          show: axisVisible,
+          lineStyle: { color: '#374151' }
+        },
+        axisTick: { show: false },
+        splitLine: {
+          show: axisVisible,
+          lineStyle: {
+            color: 'rgba(100, 116, 139, 0.2)',
+            type: 'dashed'
+          }
+        }
+      },
+      series: [
+        // Vertical bars as lines
+        {
+          name: 'Vertical Lines',
+          type: 'bar',
+          data: data,
+          barWidth: 2,
+          itemStyle: {
+            color: '#22d3ee',
+            borderRadius: [1, 1, 0, 0]
+          },
+          z: 1,
+          animationDuration: 1000,
+          animationEasing: 'cubicOut'
+        },
+        // Area fill
+        {
+          name: 'Area',
+          type: 'line',
+          data: data,
+          areaStyle: {
+            color: {
+              type: 'linear',
+              x: 0,
+              y: 0,
+              x2: 0,
+              y2: 1,
+              colorStops: [
+                { offset: 0, color: 'rgba(34, 211, 238, 0.6)' },
+                { offset: 0.5, color: 'rgba(34, 211, 238, 0.3)' },
+                { offset: 1, color: 'rgba(34, 211, 238, 0.05)' }
+              ]
+            }
+          },
+          lineStyle: {
+            color: '#22d3ee',
+            width: 2,
+            shadowBlur: 6,
+            shadowColor: 'rgba(34, 211, 238, 0.3)'
+          },
+          symbol: 'circle',
+          symbolSize: 6,
+          itemStyle: {
+            color: '#ffffff',
+            borderColor: '#22d3ee',
+            borderWidth: 2,
+            shadowBlur: 8,
+            shadowColor: 'rgba(34, 211, 238, 0.6)'
+          },
+          label: {
+            show: props.isDetailed,
+            position: 'top',
+            color: '#374151',
+            fontSize: 11,
+            fontWeight: 'bold',
+            distance: 8,
+            formatter: '{c}'
+          },
+          emphasis: {
+            itemStyle: {
+              shadowBlur: 15,
+              shadowColor: 'rgba(34, 211, 238, 0.9)',
+              borderWidth: 3
+            }
+          },
+          smooth: false,
+          z: 2,
+          animationDuration: 1500,
+          animationEasing: 'cubicOut'
+        }
+      ]
+    }
+  }
+
+  // Default capsule bar style when no region is selected
   return {
     backgroundColor: 'transparent',
     grid: {
