@@ -1927,14 +1927,14 @@ onMounted(() => {
 
 
 .main-title {
-	font-size: 13px;
+	font-size: 15px;
 	font-weight: 600;
 	color: #ffffff;
 	margin-bottom: 8px;
 }
 
 .section-title {
-	font-size: 11px;
+	font-size: 13px;
 	/* font-weight: 600; */
 	color: #ffffff;
 	margin-bottom: 10px;
@@ -1987,7 +1987,7 @@ onMounted(() => {
 
 .label-text {
 	color: #ffffff;
-	font-size: 12px;
+	font-size: 14px;
 	line-height: 1.2;
 	margin: 2px 0;
 }
@@ -1998,7 +1998,7 @@ onMounted(() => {
 }
 
 .demand-description p {
-	font-size: 9px;
+	font-size: 11px;
 	color: #cccccc;
 	line-height: 1.3;
 	margin: 3px 0;
@@ -2028,14 +2028,14 @@ onMounted(() => {
 }
 
 .data-label {
-	font-size: 9px;
+	font-size: 11px;
 	color: #ffffff;
 	flex: 1;
 	line-height: 1.2;
 }
 
 .data-value {
-	font-size: 9px;
+	font-size: 11px;
 	font-weight: 600;
 	color: #00d4ff;
 	margin-left: 8px;
@@ -2076,7 +2076,7 @@ onMounted(() => {
 }
 
 .content-title {
-	font-size: 13px;
+	font-size: 15px;
 	/* font-weight: 700; */
 	color: #ffffff;
 	margin-bottom: 8px;
@@ -2084,7 +2084,7 @@ onMounted(() => {
 }
 
 .content-subtitle {
-	font-size: 13px;
+	font-size: 15px;
 	font-weight: 500;
 	color: #cccccc;
 	margin-bottom: 20px;
@@ -2103,7 +2103,7 @@ onMounted(() => {
 }
 
 .description-text {
-	font-size: 12px;
+	font-size: 14px;
 	color: #cccccc;
 	line-height: 1.6;
 	margin: 20px 0;
@@ -2154,12 +2154,12 @@ onMounted(() => {
 }
 
 .legend-label {
-	font-size: 12px;
+	font-size: 14px;
 	color: #cccccc;
 }
 
 .legend-value {
-	font-size: 12px;
+	font-size: 14px;
 	font-weight: 600;
 	color: #00d4ff;
 }
