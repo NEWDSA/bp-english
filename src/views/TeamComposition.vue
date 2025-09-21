@@ -38,8 +38,8 @@
 			</div>
 		</nav>
 
-		<!-- 主要内容区域 -->
-		<div class="main-content">
+        <!-- 主要内容区域 -->
+        <div class="main-content" :class="{ panelsOpen: hasAnyPanelOpen }">
 			<!-- 上半部分 - 水平布局 -->
 			<div class="top-section">
 				<!-- 左侧内容 - 创始人信息 -->
@@ -50,36 +50,41 @@
 						<h2 class="founder-name">{{ getCurrentMemberName() }}</h2>
 					</div>
 
-					<!-- 工作经验 -->
-					<div v-if="!isEngineerBackground && hasActiveMember" class="info-section" @mouseenter="showTooltipWithType('work')" @mouseleave="hideTooltip">
+					<!-- 工作经验（点击展开） -->
+					<div v-if="hasActiveMember" class="info-section" :class="{ active: expanded.work }" @click="togglePanel('work')">
 						<div class="section-icon">
 							<img src="/src/assets/work.png" alt="Work Experience" class="icon-image" />
 						</div>
 						<h3 class="section-title">Work Experience</h3>
 					</div>
+					<div v-if="hasActiveMember" class="expand-panel" :class="{ open: expanded.work }">
+						<p class="expand-text">{{ memberContent.work }}</p>
+					</div>
 
-					<!-- 教育背景 -->
-					<div v-if="!isEngineerBackground && hasActiveMember" class="info-section" @mouseenter="showTooltipWithType('education')" @mouseleave="hideTooltip">
+					<!-- 教育背景（点击展开） -->
+					<div v-if="hasActiveMember" class="info-section" :class="{ active: expanded.education }" @click="togglePanel('education')">
 						<div class="section-icon">
 							<img src="/src/assets/edu.png" alt="Educational Background" class="icon-image" />
 						</div>
 						<h3 class="section-title">Educational Background</h3>
 					</div>
+					<div v-if="hasActiveMember" class="expand-panel" :class="{ open: expanded.education }">
+						<p class="expand-text">{{ memberContent.education }}</p>
+					</div>
 
-					<!-- 代表作品 -->
-					<div v-if="!isEngineerBackground && hasActiveMember" class="info-section" @mouseenter="showTooltipWithType('works')" @mouseleave="hideTooltip">
+					<!-- 代表作品（点击展开） -->
+					<div v-if="hasActiveMember" class="info-section" :class="{ active: expanded.works }" @click="togglePanel('works')">
 						<div class="section-icon">
 							<img src="/src/assets/video.png" alt="Representative works" class="icon-image" />
 						</div>
 						<h3 class="section-title">Representative works (Delivered)</h3>
 					</div>
-
-					<!-- 工程师专用 - 主要职责 -->
-					<div v-if="isEngineerBackground && hasActiveMember" class="info-section" @mouseenter="showTooltip('engineer')" @mouseleave="hideTooltip">
-						<div class="section-icon">
-							<img src="/src/assets/work.png" alt="Mainly Responsible For" class="icon-image" />
+					<div v-if="hasActiveMember" class="expand-panel" :class="{ open: expanded.works }">
+						<div class="works-grid">
+							<div v-for="(img, idx) in memberContent.worksImages" :key="idx" class="work-card">
+								<img :src="img" alt="work" />
+							</div>
 						</div>
-						<h3 class="section-title">mainly responsible for</h3>
 					</div>
 				</div>
 
@@ -88,18 +93,22 @@
 					<!-- 上方信息区域 -->
 					<div class="top-info">
 						<div class="info-item">
-							<h3 class="info-title">Who we are?</h3>
+							<div class="info-frame">
+								<h3 class="info-title">Who we are?</h3>
+							</div>
 						</div>
 						<div class="info-item">
-							<h3 class="info-title">Investment Highlights</h3>
+							<div class="info-frame">
+								<h3 class="info-title">Investment Highlights</h3>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<!-- 底部团队成员区域 -->
-			<div class="bottom-section">
-				<div class="team-members-grid">
+            <!-- 底部团队成员区域 -->
+            <div class="bottom-section" :class="{ collapsed: hasAnyPanelOpen }">
+				<div v-if="!hasAnyPanelOpen" class="team-members-grid">
 					<!-- Team Members -->
 					<div class="team-members-title">Team Members</div>
 					<!-- CEO -->
@@ -135,6 +144,8 @@
 						engineering, intelligent systems, corporate internal control, finance, taxation, and legal
 						affairs.</div>
 				</div>
+				<!-- 折叠时显示的恢复入口 -->
+				<div v-else class="team-toggle" @click="closeAllPanels">Team Members</div>
 
 			</div>
 		</div>
@@ -155,7 +166,7 @@ import { useRouter } from 'vue-router'
 
 const router = useRouter()
 const activeTooltip = ref(null)
-const currentInfoType = ref('work') // 当前显示的信息类型：work, education, works
+const currentInfoType = ref('work') // 兼容旧逻辑的占位
 const isCeoBackground = ref(false)
 const isCfoBackground = ref(false)
 const isCooBackground = ref(false)
@@ -163,6 +174,14 @@ const isEngineerBackground = ref(false)
 const isInteractionEngineerBackground = ref(false)
 const isStructuralEngineerBackground = ref(false)
 const isStrategicPlannerBackground = ref(false)
+
+// 展开面板状态
+const expanded = ref({ work: false, education: false, works: false })
+
+// 当前成员内容
+const memberContent = ref({ work: '', education: '', worksImages: [] })
+
+const hasAnyPanelOpen = computed(() => expanded.value.work || expanded.value.education || expanded.value.works)
 
 // 计算是否有活跃的成员被选中
 const hasActiveMember = computed(() => {
@@ -186,6 +205,20 @@ function showTooltipWithType(infoType) {
 
 function hideTooltip() {
 	activeTooltip.value = null
+}
+
+function togglePanel(type) {
+    // 单选：展开一个，其它关闭
+    expanded.value.work = false
+    expanded.value.education = false
+    expanded.value.works = false
+    expanded.value[type] = true
+}
+
+function closeAllPanels() {
+    expanded.value.work = false
+    expanded.value.education = false
+    expanded.value.works = false
 }
 
 // 获取当前成员信息的方法
@@ -268,6 +301,7 @@ function getTooltipDescription(tooltipType) {
 
 function toggleCeoBackground() {
 	isCeoBackground.value = !isCeoBackground.value
+    syncMemberContent()
 	// 关闭其他所有背景
 	isCfoBackground.value = false
 	isCooBackground.value = false
@@ -279,6 +313,7 @@ function toggleCeoBackground() {
 
 function toggleCfoBackground() {
 	isCfoBackground.value = !isCfoBackground.value
+    syncMemberContent()
 	// 关闭其他所有背景
 	isCeoBackground.value = false
 	isCooBackground.value = false
@@ -296,6 +331,7 @@ function toggleCfoBackground() {
 
 function toggleCooBackground() {
 	isCooBackground.value = !isCooBackground.value
+    syncMemberContent()
 	// 关闭其他所有背景
 	isCeoBackground.value = false
 	isCfoBackground.value = false
@@ -313,6 +349,7 @@ function toggleCooBackground() {
 
 function toggleEngineerBackground() {
 	isEngineerBackground.value = !isEngineerBackground.value
+    syncMemberContent()
 	// 关闭其他所有背景
 	isCeoBackground.value = false
 	isCfoBackground.value = false
@@ -332,6 +369,7 @@ function toggleEngineerBackground() {
 
 function toggleInteractionEngineerBackground() {
 	isInteractionEngineerBackground.value = !isInteractionEngineerBackground.value
+    syncMemberContent()
 	// 关闭其他所有背景
 	isCeoBackground.value = false
 	isCfoBackground.value = false
@@ -343,6 +381,7 @@ function toggleInteractionEngineerBackground() {
 
 function toggleStructuralEngineerBackground() {
 	isStructuralEngineerBackground.value = !isStructuralEngineerBackground.value
+    syncMemberContent()
 	// 关闭其他所有背景
 	isCeoBackground.value = false
 	isCfoBackground.value = false
@@ -354,6 +393,7 @@ function toggleStructuralEngineerBackground() {
 
 function toggleStrategicPlannerBackground() {
 	isStrategicPlannerBackground.value = !isStrategicPlannerBackground.value
+    syncMemberContent()
 	// 关闭其他所有背景
 	isCeoBackground.value = false
 	isCfoBackground.value = false
@@ -361,6 +401,37 @@ function toggleStrategicPlannerBackground() {
 	isEngineerBackground.value = false
 	isInteractionEngineerBackground.value = false
 	isStructuralEngineerBackground.value = false
+}
+
+function syncMemberContent() {
+    const key = getCurrentActiveMember()
+    // 简单示例数据，可替换为真实内容
+    const dataMap = {
+        ceo: {
+            work: '• 10+ years ship design\n• Ferrari Group QC & After-sales\n• China Academy of Art - Industrial Design Teacher',
+            education: '• BFA CAA\n• Joint Master: Genoa/Milan Poly - Ship & Yacht\n• PhD UNIKL - Ship & Ocean',
+            worksImages: [
+                '/src/assets/work1.png',
+                '/src/assets/work2.png',
+                '/src/assets/work3.png',
+                '/src/assets/work4.png'
+            ]
+        },
+        cfo: {
+            work: '• Founding Partner of Micro Light Investment\n• Finance strategy & compliance',
+            education: '• Master of Law (CUPL)\n• Master of Finance (Stanford)',
+            worksImages: []
+        },
+        coo: { work: '• Ops leadership', education: '• MBA', worksImages: [] },
+        engineer: { work: '• Performance testing & optimization', education: '• ME & Materials', worksImages: [] },
+        interactionEngineer: { work: '• Interaction systems', education: '• HCI', worksImages: [] },
+        structuralEngineer: { work: '• Structural analysis', education: '• CE', worksImages: [] },
+        strategicPlanner: { work: '• Strategy & planning', education: '• Economics', worksImages: [] }
+    }
+
+    if (key && dataMap[key]) {
+        memberContent.value = dataMap[key]
+    }
 }
 
 
@@ -520,6 +591,10 @@ onMounted(() => {
 	overflow: hidden;
 }
 
+.main-content.panelsOpen .top-section {
+	height: calc(100vh - 80px - 10vh);
+}
+
 /* 上半部分 - 水平布局 */
 .top-section {
 	display: flex;
@@ -555,6 +630,28 @@ onMounted(() => {
 	overflow: hidden;
 }
 
+.bottom-section.collapsed {
+	height: 8vh;
+	max-height: 8vh;
+	opacity: 0.9;
+	transition: height 0.3s ease;
+}
+
+.team-toggle {
+	background: rgba(0, 0, 0, 0.4);
+	color: #ffffff;
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	border-radius: 12px;
+	padding: 10px 16px;
+	cursor: pointer;
+	backdrop-filter: blur(6px);
+	transition: all 0.2s ease;
+}
+.team-toggle:hover {
+	background: rgba(0, 212, 255, 0.2);
+	box-shadow: 0 0 14px rgba(0, 212, 255, 0.4);
+}
+
 /* 创始人信息样式 */
 .founder-header {
 	margin-bottom: 60px;
@@ -583,14 +680,42 @@ onMounted(() => {
 	padding: 20px 0; */
 	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 	cursor: pointer;
-	transition: all 0.3s ease;
 	/* padding: 10px 0; */
 }
 
-.info-section:hover {
-	background: rgba(255, 255, 255, 0.05);
-	border-radius: 8px;
-	padding: 10px;
+/* 展开面板样式 */
+.expand-panel {
+	display: none;
+	overflow: hidden;
+	padding: 0 8px;
+}
+.expand-panel.open {
+	display: block;
+	max-height: none;
+	padding: 8px;
+}
+
+.expand-text {
+	font-size: 16px;
+	color: #ffffff;
+	line-height: 1.8;
+	opacity: 0.9;
+}
+.works-grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 12px;
+}
+.work-card {
+	background: rgba(0, 0, 0, 0.25);
+	border: 1px solid rgba(255, 255, 255, 0.15);
+	border-radius: 10px;
+	overflow: hidden;
+}
+.work-card img {
+	width: 100%;
+	height: 100px;
+	object-fit: cover;
 }
 
 .section-icon {
@@ -616,6 +741,14 @@ onMounted(() => {
 	font-weight: 500;
 	color: #ffffff;
 	margin: 0;
+}
+
+/* 选中态样式（轻微高亮及左侧线） */
+.info-section.active {
+	background: rgba(0, 212, 255, 0.08);
+	border-left: 3px solid #00d4ff;
+	border-radius: 8px;
+	padding: 10px;
 }
 
 /* 信息气泡窗样式 - 固定在屏幕中央 */
