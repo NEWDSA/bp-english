@@ -31,7 +31,7 @@
 
 		<!-- 中心区域：公司信息内容 -->
 		<transition name="fade">
-			<div v-if="showCompanyInfo" class="company-info">
+			<div v-if="showCompanyInfo" class="company-info" @click="hideCompanyInfo">
 				<div class="company-info__content">
 					<div class="company-info__section">
 						<!-- <h3 class="company-info__title">Company Mission</h3> -->
@@ -39,7 +39,7 @@
 						<p class="company-info__text">Leading the innovation of water transportation</p>
 						<p class="company-info__text">Build a globally leading marine technology brand</p>
 					</div>
-					
+
 					<div class="company-info__section">
 						<!-- <h3 class="company-info__title">Company Vision:</h3> -->
 						<p class="company-info__title">Company Vision:</p>
@@ -47,13 +47,13 @@
 						<p class="company-info__text">Become the definer of the most energy-efficient and high-performance water economy</p>
 						<p class="company-info__text">Deliver the most superior watercraft in terms of performance</p>
 					</div>
-					
+
 					<div class="company-info__section">
 						<!-- <h3 class="company-info__title">Core Values</h3> -->
 						<p class="company-info__title">Core Values:</p>
 						<p class="company-info__text">Cooperation, innovation, and foresight</p>
 					</div>
-					
+
 					<div class="company-info__section">
 						<!-- <h3 class="company-info__title">Management Philosophy</h3> -->
 						<p class="company-info__title">Management Philosophy:</p>
@@ -98,6 +98,10 @@ function toggleCompanyInfo() {
 	if (showCompanyInfo.value) {
 		showCatalogue.value = false
 	}
+}
+
+function hideCompanyInfo() {
+	showCompanyInfo.value = false
 }
 
 function navigateToIndustry() {
@@ -153,6 +157,19 @@ onBeforeUnmount(() => { document.removeEventListener('keydown', onKeydown) })
 	height: 100%;
 	object-fit: cover;
 	z-index: 1;
+}
+
+/* 视频背景黑色遮罩 */
+.cover::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.1);
+	z-index: 2;
+	pointer-events: none;
 }
 
 /* 左上 catalogue 块：标题与展开后的子项同属一个容器 */
@@ -288,7 +305,7 @@ onBeforeUnmount(() => { document.removeEventListener('keydown', onKeydown) })
 }
 .catalogue-item {
 	color: #DCDCDC;
-	font-size: 11px;
+	font-size: 14px;
 	line-height: 1.2;
 	padding: 10px 12px;
 	border-bottom: 1px solid rgba(220,220,220,0.35);
@@ -320,7 +337,10 @@ onBeforeUnmount(() => { document.removeEventListener('keydown', onKeydown) })
 .catalogue-item:hover::before {
 	transform: scaleY(1);
 }
-.catalogue-item:last-child { border-bottom: none; padding-bottom: 0; }
+.catalogue-item:last-child {
+	border-bottom: none;
+	padding-bottom: 10px;
+}
 
 @keyframes slideDown {
 	from {
@@ -334,26 +354,29 @@ onBeforeUnmount(() => { document.removeEventListener('keydown', onKeydown) })
 }
 
 /* fade transition */
-.fade-enter-active, .fade-leave-active { transition: opacity .3s ease; }
+.fade-enter-active, .fade-leave-active { transition: opacity .01s ease; }
 .fade-enter-from, .fade-leave-to { opacity: 0; }
 
 /* 公司信息内容样式 */
 .company-info {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
 	z-index: 10;
-	max-width: 800px;
-	width: 90%;
+	background: rgba(0, 0, 0, 0.5);
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .company-info__content {
-	/* background: rgba(255, 255, 255, 0.95); */
-	/* backdrop-filter: blur(10px); */
-	/* border-radius: 20px; */
+	background: rgba(255, 255, 255, 0.01);
+	backdrop-filter: blur(10px);
+	border-radius: 20px;
 	padding: 40px;
-	/* box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); */
+	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 	color: #FFFFFF;
 	text-align: center;
 	transform: scale(1.3);
