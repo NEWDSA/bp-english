@@ -38,28 +38,35 @@ const chartRef = ref(null)
 let chartInstance = null
 let resizeObserver = null
 
-const generateRandomData = (count = 6) => {
-  const dataCount = props.isDetailed ? 12 : count
+const generateRegionData = (country) => {
+  const dataCount = props.isDetailed ? 8 : 7
 
-  // If a city is selected, generate data based on city characteristics
-  if (props.selectedCity) {
-    const citySeed = props.selectedCity.city.length + props.selectedCity.country.length
-    const baseValue = (citySeed * 7) % 50 + 30 // Base value between 30-80
-
-    return Array.from({ length: dataCount }, (_, index) => {
-      // Generate data with some variance based on city and position
-      const variance = Math.sin(index * 0.5 + citySeed) * 20
-      const trend = index * 2 // Slight upward trend
-      return Math.floor(baseValue + variance + trend + Math.random() * 10)
-    })
+  // Define consistent data for each region
+  const regionData = {
+    'China': [45, 52, 48, 65, 72, 68, 78, 82],
+    'Singapore': [35, 42, 46, 55, 62, 58, 68, 75],
+    'Italy': [42, 48, 44, 58, 65, 62, 72, 79],
+    'United States': [38, 45, 49, 62, 69, 65, 75, 81],
+    'United Arab Emirates': [33, 39, 43, 48, 55, 52, 61, 68],
+    'global': [40, 47, 51, 58, 65, 61, 71, 77]
   }
 
-  // Default random data
-  return Array.from({ length: dataCount }, () => Math.floor(Math.random() * 100) + 20)
+  let selectedData = regionData['global'] // default
+
+  if (props.selectedCity && props.selectedCity.country) {
+    const country = props.selectedCity.country
+    if (regionData[country]) {
+      selectedData = regionData[country]
+    } else if (country === 'Thailand' || country === 'Indonesia' || country === 'Malaysia') {
+      selectedData = regionData['Singapore'] // Southeast Asia uses Singapore data
+    }
+  }
+
+  return selectedData.slice(0, dataCount)
 }
 
 const getChartOptions = () => {
-  const data = generateRandomData()
+  const data = generateRegionData()
   const axisVisible = props.isDetailed
 
   return {
@@ -95,9 +102,7 @@ const getChartOptions = () => {
     series: [
       {
         name: 'Capsule Bars',
-        data: props.isDetailed
-          ? data.slice(0, 8)
-          : [25, 35, 45, 55, 65, 75, 85],
+        data: data,
         type: 'bar',
         barWidth: '24px',
         barGap: '20%',
@@ -122,6 +127,15 @@ const getChartOptions = () => {
           shadowColor: 'rgba(56, 189, 248, 0.4)',
           shadowOffsetY: 0
         },
+        label: {
+          show: props.isDetailed,
+          position: 'top',
+          color: '#374151',
+          fontSize: 12,
+          fontWeight: 'bold',
+          distance: 8,
+          formatter: '{c}'
+        },
         emphasis: {
           itemStyle: {
             shadowBlur: 20,
@@ -137,7 +151,7 @@ const getChartOptions = () => {
         name: 'Segment Lines',
         type: 'scatter',
         data: (() => {
-          const barData = props.isDetailed ? data.slice(0, 8) : [25, 35, 45, 55, 65, 75, 85]
+          const barData = data
           const lineData = []
 
           barData.forEach((value, barIndex) => {

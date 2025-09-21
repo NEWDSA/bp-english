@@ -38,34 +38,59 @@ const chartRef = ref(null)
 let chartInstance = null
 let resizeObserver = null
 
-const generateRandomData = (count = 6) => {
-  const dataCount = props.isDetailed ? 12 : count
+const generateRegionData = () => {
+  const dataCount = props.isDetailed ? 8 : 6
 
-  // If a city is selected, generate data based on city characteristics
-  if (props.selectedCity) {
-    const citySeed = props.selectedCity.city.length + props.selectedCity.country.length
-    const baseValue = (citySeed * 7) % 50 + 30 // Base value between 30-80
-
-    return Array.from({ length: dataCount }, (_, index) => {
-      // Generate data with some variance based on city and position
-      const variance = Math.sin(index * 0.5 + citySeed) * 20
-      const trend = index * 2 // Slight upward trend
-      return Math.floor(baseValue + variance + trend + Math.random() * 10)
-    })
+  // Define consistent data for each region
+  const regionData = {
+    'China': {
+      detailed: [55, 62, 68, 75, 82, 78, 85, 92],
+      simple: [58, 65, 72, 78, 85, 91]
+    },
+    'Singapore': {
+      detailed: [48, 54, 60, 66, 72, 68, 75, 82],
+      simple: [50, 56, 62, 68, 74, 80]
+    },
+    'Italy': {
+      detailed: [52, 58, 64, 70, 76, 72, 79, 86],
+      simple: [54, 60, 66, 72, 78, 84]
+    },
+    'United States': {
+      detailed: [46, 52, 58, 65, 72, 68, 75, 82],
+      simple: [48, 54, 60, 67, 74, 80]
+    },
+    'United Arab Emirates': {
+      detailed: [42, 48, 54, 60, 66, 62, 69, 76],
+      simple: [44, 50, 56, 62, 68, 74]
+    },
+    'global': {
+      detailed: [50, 56, 62, 68, 74, 70, 77, 84],
+      simple: [52, 58, 64, 70, 76, 82]
+    }
   }
 
-  // Default random data
-  return Array.from({ length: dataCount }, () => Math.floor(Math.random() * 100) + 20)
+  let selectedData = regionData['global'] // default
+
+  if (props.selectedCity && props.selectedCity.country) {
+    const country = props.selectedCity.country
+    if (regionData[country]) {
+      selectedData = regionData[country]
+    } else if (country === 'Thailand' || country === 'Indonesia' || country === 'Malaysia') {
+      selectedData = regionData['Singapore'] // Southeast Asia uses Singapore data
+    }
+  }
+
+  return props.isDetailed ? selectedData.detailed : selectedData.simple
 }
 
 const getChartOptions = () => {
-  const data = generateRandomData()
+  const data = generateRegionData()
   const axisVisible = props.isDetailed
   const dataCount = props.isDetailed ? 8 : 6
 
   // Normalize data to percentages for progress bars
-  const maxValue = Math.max(...data.slice(0, dataCount))
-  const normalizedData = data.slice(0, dataCount).map(value => value / maxValue * 100)
+  const maxValue = Math.max(...data)
+  const normalizedData = data.map(value => value / maxValue * 100)
 
   return {
     backgroundColor: 'transparent',
@@ -80,16 +105,40 @@ const getChartOptions = () => {
       type: 'value',
       min: 0,
       max: 100,
-      axisLabel: { show: false },
-      axisLine: { show: false },
+      axisLabel: {
+        show: props.isDetailed,
+        color: '#64748b',
+        fontSize: 10,
+        formatter: '{value}%'
+      },
+      axisLine: {
+        show: props.isDetailed,
+        lineStyle: { color: '#374151' }
+      },
       axisTick: { show: false },
-      splitLine: { show: false }
+      splitLine: {
+        show: props.isDetailed,
+        lineStyle: {
+          color: 'rgba(100, 116, 139, 0.2)',
+          type: 'dashed'
+        }
+      }
     },
     yAxis: {
       type: 'category',
-      data: Array.from({ length: dataCount }, (_, i) => ``),
-      axisLabel: { show: false },
-      axisLine: { show: false },
+      data: props.isDetailed
+        ? ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6', 'Item 7', 'Item 8']
+        : Array.from({ length: dataCount }, (_, i) => ``),
+      axisLabel: {
+        show: props.isDetailed,
+        color: '#64748b',
+        fontSize: 10,
+        margin: 12
+      },
+      axisLine: {
+        show: props.isDetailed,
+        lineStyle: { color: '#374151' }
+      },
       axisTick: { show: false },
       splitLine: { show: false },
       inverse: true
@@ -149,7 +198,13 @@ const getChartOptions = () => {
             value: Math.round(value) + '%'
           })),
           label: {
-            show: false
+            show: props.isDetailed,
+            position: 'right',
+            color: '#374151',
+            fontSize: 11,
+            fontWeight: 'bold',
+            distance: 15,
+            formatter: '{c}'
           },
           z: 3,
           animationDuration: 2000,

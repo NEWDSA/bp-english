@@ -38,31 +38,56 @@ const chartRef = ref(null)
 let chartInstance = null
 let resizeObserver = null
 
-const generateRandomData = (count = 6) => {
-  const dataCount = props.isDetailed ? 12 : count
+const generateRegionData = () => {
+  const dataCount = props.isDetailed ? 8 : 6
 
-  // If a city is selected, generate data based on city characteristics
-  if (props.selectedCity) {
-    const citySeed = props.selectedCity.city.length + props.selectedCity.country.length
-    const baseValue = (citySeed * 7) % 50 + 30 // Base value between 30-80
-
-    return Array.from({ length: dataCount }, (_, index) => {
-      // Generate data with some variance based on city and position
-      const variance = Math.sin(index * 0.5 + citySeed) * 20
-      const trend = index * 2 // Slight upward trend
-      return Math.floor(baseValue + variance + trend + Math.random() * 10)
-    })
+  // Define consistent data for each region
+  const regionData = {
+    'China': {
+      detailed: [42, 48, 55, 62, 68, 75, 82, 88],
+      simple: [45, 52, 58, 65, 72, 78]
+    },
+    'Singapore': {
+      detailed: [38, 42, 48, 54, 60, 66, 72, 78],
+      simple: [40, 45, 50, 56, 62, 68]
+    },
+    'Italy': {
+      detailed: [40, 44, 50, 56, 62, 68, 74, 80],
+      simple: [42, 47, 52, 58, 64, 70]
+    },
+    'United States': {
+      detailed: [36, 42, 48, 55, 62, 69, 76, 83],
+      simple: [38, 44, 50, 57, 64, 71]
+    },
+    'United Arab Emirates': {
+      detailed: [32, 38, 44, 50, 56, 62, 68, 74],
+      simple: [35, 40, 46, 52, 58, 64]
+    },
+    'global': {
+      detailed: [40, 46, 52, 58, 64, 70, 76, 82],
+      simple: [42, 48, 54, 60, 66, 72]
+    }
   }
 
-  // Default random data
-  return Array.from({ length: dataCount }, () => Math.floor(Math.random() * 100) + 20)
+  let selectedData = regionData['global'] // default
+
+  if (props.selectedCity && props.selectedCity.country) {
+    const country = props.selectedCity.country
+    if (regionData[country]) {
+      selectedData = regionData[country]
+    } else if (country === 'Thailand' || country === 'Indonesia' || country === 'Malaysia') {
+      selectedData = regionData['Singapore'] // Southeast Asia uses Singapore data
+    }
+  }
+
+  return props.isDetailed ? selectedData.detailed : selectedData.simple
 }
 
 const getChartOptions = () => {
-  const data = generateRandomData()
+  const data = generateRegionData()
   const axisVisible = props.isDetailed
   const dataCount = props.isDetailed ? 8 : 6
-  const chartData = data.slice(0, dataCount)
+  const chartData = data
 
   return {
     backgroundColor: 'transparent',
@@ -74,18 +99,35 @@ const getChartOptions = () => {
     },
     xAxis: {
       type: 'category',
-      data: Array.from({ length: dataCount }, (_, i) => ``),
-      axisLabel: { show: false },
-      axisLine: { show: false },
+      data: props.isDetailed
+        ? ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Week 8']
+        : Array.from({ length: dataCount }, (_, i) => ``),
+      axisLabel: {
+        show: props.isDetailed,
+        color: '#64748b',
+        fontSize: 10,
+        margin: 12
+      },
+      axisLine: { show: props.isDetailed, lineStyle: { color: '#374151' } },
       axisTick: { show: false },
       splitLine: { show: false }
     },
     yAxis: {
       type: 'value',
-      axisLabel: { show: false },
-      axisLine: { show: false },
+      axisLabel: {
+        show: props.isDetailed,
+        color: '#64748b',
+        fontSize: 10
+      },
+      axisLine: { show: props.isDetailed, lineStyle: { color: '#374151' } },
       axisTick: { show: false },
-      splitLine: { show: false }
+      splitLine: {
+        show: props.isDetailed,
+        lineStyle: {
+          color: 'rgba(100, 116, 139, 0.2)',
+          type: 'dashed'
+        }
+      }
     },
     series: [
       // Vertical lines from bottom
@@ -134,6 +176,15 @@ const getChartOptions = () => {
           shadowBlur: 8,
           shadowColor: 'rgba(34, 211, 238, 0.6)'
         },
+        label: {
+          show: props.isDetailed,
+          position: 'top',
+          color: '#374151',
+          fontSize: 11,
+          fontWeight: 'bold',
+          distance: 8,
+          formatter: '{c}'
+        },
         emphasis: {
           itemStyle: {
             shadowBlur: 15,
@@ -146,12 +197,12 @@ const getChartOptions = () => {
         animationDuration: 1500,
         animationEasing: 'cubicOut'
       },
-      // Top connection points
+      // Top connection points (for enhanced interaction)
       {
         name: 'Points',
         type: 'scatter',
         data: chartData.map((value, index) => [index, value]),
-        symbolSize: 10,
+        symbolSize: 0, // Hidden in detailed mode since area chart already has points
         symbol: 'circle',
         itemStyle: {
           color: '#ffffff',

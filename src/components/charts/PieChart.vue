@@ -39,20 +39,68 @@ let chartInstance = null
 let resizeObserver = null
 
 const getChartOptions = () => {
-  const ageGroups = [
-    { value: 15, name: '18-24', color: '#f59e0b' },
-    { value: 25, name: '25-34', color: '#22d3ee' },
-    { value: 35, name: '35-50', color: '#10b981' },
-    { value: 15, name: '51-65', color: '#3b82f6' },
-    { value: 10, name: '>65', color: '#8b5cf6' }
-  ]
+  // Define region-specific age group data
+  const getRegionAgeData = () => {
+    const regionAgeData = {
+      'China': [
+        { value: 25, name: '18-34', color: '#22d3ee' },
+        { value: 45, name: '35-50', color: '#f59e0b' },
+        { value: 25, name: '51-65', color: '#fbbf24' },
+        { value: 5, name: '≥65', color: '#3b82f6' }
+      ],
+      'Singapore': [
+        { value: 35, name: '18-34', color: '#22d3ee' },
+        { value: 38, name: '35-50', color: '#f59e0b' },
+        { value: 22, name: '51-65', color: '#fbbf24' },
+        { value: 5, name: '≥65', color: '#3b82f6' }
+      ],
+      'Italy': [
+        { value: 28, name: '18-34', color: '#22d3ee' },
+        { value: 42, name: '35-50', color: '#f59e0b' },
+        { value: 20, name: '51-65', color: '#fbbf24' },
+        { value: 10, name: '≥65', color: '#3b82f6' }
+      ],
+      'United States': [
+        { value: 32, name: '18-34', color: '#22d3ee' },
+        { value: 38, name: '35-50', color: '#f59e0b' },
+        { value: 23, name: '51-65', color: '#fbbf24' },
+        { value: 7, name: '≥65', color: '#3b82f6' }
+      ],
+      'United Arab Emirates': [
+        { value: 40, name: '18-34', color: '#22d3ee' },
+        { value: 35, name: '35-50', color: '#f59e0b' },
+        { value: 20, name: '51-65', color: '#fbbf24' },
+        { value: 5, name: '≥65', color: '#3b82f6' }
+      ],
+      'global': [
+        { value: 30, name: '18-34', color: '#22d3ee' },
+        { value: 40, name: '35-50', color: '#f59e0b' },
+        { value: 20, name: '51-65', color: '#fbbf24' },
+        { value: 10, name: '≥65', color: '#3b82f6' }
+      ]
+    }
+
+    if (props.selectedCity && props.selectedCity.country) {
+      const country = props.selectedCity.country
+      if (regionAgeData[country]) {
+        return regionAgeData[country]
+      } else if (country === 'Thailand' || country === 'Indonesia' || country === 'Malaysia') {
+        return regionAgeData['Singapore'] // Southeast Asia uses Singapore data
+      }
+    }
+
+    return regionAgeData['global']
+  }
+
+  const ageGroups = getRegionAgeData()
 
   // Find the largest segment for center display
   const maxSegment = ageGroups.reduce((max, current) =>
     current.value > max.value ? current : max
   )
 
-  return {
+  // Base configuration for simple mode
+  let baseConfig = {
     backgroundColor: 'transparent',
     series: [
       {
@@ -72,7 +120,7 @@ const getChartOptions = () => {
               y2: 1,
               colorStops: [
                 { offset: 0, color: item.color },
-                { offset: 1, color: item.color + '80' } // Add transparency
+                { offset: 1, color: item.color + '80' }
               ]
             },
             borderRadius: 5,
@@ -97,7 +145,6 @@ const getChartOptions = () => {
       }
     ],
     graphic: [
-      // Center text - main age group
       {
         type: 'text',
         left: 'center',
@@ -133,6 +180,73 @@ const getChartOptions = () => {
       itemGap: 20
     }
   }
+
+  // Enhanced configuration for detailed mode
+  if (props.isDetailed) {
+    // Add title
+    baseConfig.title = {
+      text: 'Age structure of global shipowners',
+      left: 'center',
+      top: '5%',
+      textStyle: {
+        color: '#64748b',
+        fontSize: 16,
+        fontWeight: 'normal'
+      }
+    }
+
+    // Update series for detailed mode with percentage labels
+    baseConfig.series[0].label = {
+      show: true,
+      position: 'outside',
+      formatter: '{c}%',
+      color: '#64748b',
+      fontSize: 14,
+      fontWeight: 'bold',
+      lineHeight: 20
+    }
+
+    baseConfig.series[0].labelLine = {
+      show: true,
+      length: 15,
+      length2: 20,
+      lineStyle: {
+        color: '#64748b',
+        width: 1
+      }
+    }
+
+    // Update legend position and style for detailed mode
+    baseConfig.legend = {
+      orient: 'horizontal',
+      left: 'center',
+      bottom: '5%',
+      data: ageGroups.map(item => ({
+        name: item.name,
+        icon: 'circle',
+        textStyle: {
+          color: '#64748b',
+          fontSize: 12
+        }
+      })),
+      itemWidth: 8,
+      itemHeight: 8,
+      itemGap: 25,
+      textStyle: {
+        color: '#64748b',
+        fontSize: 12
+      }
+    }
+
+    // Adjust center position to accommodate title
+    baseConfig.series[0].center = ['50%', '50%']
+    baseConfig.series[0].radius = ['45%', '60%']
+
+    // Update graphic text position
+    baseConfig.graphic[0].top = '50%'
+  }
+
+  return baseConfig
 }
 
 onMounted(async () => {

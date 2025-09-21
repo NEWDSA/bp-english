@@ -80,14 +80,45 @@ const handleChartClick = (chartInfo) => {
   showChartModal.value = true
 }
 
-// Get chart title based on chart type
+// Get chart title based on chart type and region
 const getChartTitle = (chartType) => {
   const titles = {
-    'bar': 'Global small yacht manufacturing industry',
-    'area': 'Global small yacht sales market size',
-    'line': 'Global market size of water outdoor sports equipment (growth rate)',
-    'scatter': 'Global market size of water outdoor sports equipment',
-    'pie': 'Age structure of global shipowners'
+    'bar': isChinaSelected.value ? "China's small yacht manufacturing industry" :
+           isSoutheastAsiaSelected.value ? "Small yacht manufacturing industry in Southeast Asia" :
+           isItalySelected.value ? "Italian small yacht manufacturing industry" :
+           isAmericaSelected.value ? "Small yacht manufacturing industry in the United States" :
+           isMiddleEastSelected.value ? "Small yacht manufacturing industry in the Middle East" :
+           "Global small yacht manufacturing industry",
+    'area': isChinaSelected.value ? "China's Small Yacht Sales Market" :
+            isSoutheastAsiaSelected.value ? "Water sports equipment in Southeast Asia" :
+            isItalySelected.value ? "Italian small yacht sales market" :
+            isAmericaSelected.value ? "Size of the Small Yacht Sales Market in the United States" :
+            isMiddleEastSelected.value ? "Scale of Small Yacht Sales Market in the Middle East" :
+            "Global small yacht sales market size",
+    'line': (isChinaSelected.value ? "Water sports equipment in China" :
+             isSoutheastAsiaSelected.value ? "Water sports equipment in Southeast Asia" :
+             isItalySelected.value ? "Water sports equipment in Italy" :
+             isAmericaSelected.value ? "Water sports equipment in USA" :
+             isMiddleEastSelected.value ? "Water sports equipment in the Middle East" :
+             "Global market size of water outdoor sports equipment") + " (growth rate)",
+    'scatter': isChinaSelected.value ? "Water sports equipment in China" :
+               isSoutheastAsiaSelected.value ? "Water sports equipment in Southeast Asia" :
+               isItalySelected.value ? "Water sports equipment in Italy" :
+               isAmericaSelected.value ? "Water sports equipment in the United States" :
+               isMiddleEastSelected.value ? "Water sports equipment in the Middle East" :
+               "Global market size of water outdoor sports equipment",
+    'pie': isChinaSelected.value ? "Age structure of Chinese ship owners" :
+           isSoutheastAsiaSelected.value ? "Age structure of shipowners in Southeast Asia" :
+           isItalySelected.value ? "Age structure of Italian shipowners" :
+           isAmericaSelected.value ? "Age structure of American shipowners" :
+           isMiddleEastSelected.value ? "Age structure of shipowners in the Middle East" :
+           "Age structure of global shipowners",
+    'gradientBar': isChinaSelected.value ? "China's ship leasing market" :
+                   isSoutheastAsiaSelected.value ? "The ship leasing market in Southeast Asia" :
+                   isItalySelected.value ? "The scale of the Italian ship leasing market" :
+                   isAmericaSelected.value ? "The scale of the US ship leasing market" :
+                   isMiddleEastSelected.value ? "The scale of the ship leasing market in the Middle East" :
+                   "Global ship leasing market size"
   }
   return titles[chartType] || 'Chart Details'
 }

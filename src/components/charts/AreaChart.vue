@@ -38,28 +38,53 @@ const chartRef = ref(null)
 let chartInstance = null
 let resizeObserver = null
 
-const generateRandomData = (count = 6) => {
-  const dataCount = props.isDetailed ? 12 : count
+const generateRegionData = () => {
+  const dataCount = props.isDetailed ? 12 : 6
 
-  // If a city is selected, generate data based on city characteristics
-  if (props.selectedCity) {
-    const citySeed = props.selectedCity.city.length + props.selectedCity.country.length
-    const baseValue = (citySeed * 7) % 50 + 30 // Base value between 30-80
-
-    return Array.from({ length: dataCount }, (_, index) => {
-      // Generate data with some variance based on city and position
-      const variance = Math.sin(index * 0.5 + citySeed) * 20
-      const trend = index * 2 // Slight upward trend
-      return Math.floor(baseValue + variance + trend + Math.random() * 10)
-    })
+  // Define consistent data for each region
+  const regionData = {
+    'China': {
+      detailed: [32, 38, 45, 52, 58, 65, 72, 68, 75, 82, 88, 95],
+      simple: [35, 42, 48, 55, 62, 69]
+    },
+    'Singapore': {
+      detailed: [28, 32, 36, 42, 48, 52, 58, 62, 68, 72, 78, 84],
+      simple: [30, 35, 40, 45, 50, 56]
+    },
+    'Italy': {
+      detailed: [35, 40, 44, 48, 54, 58, 62, 66, 70, 74, 78, 82],
+      simple: [38, 42, 46, 50, 55, 60]
+    },
+    'United States': {
+      detailed: [30, 35, 40, 46, 52, 58, 64, 70, 76, 82, 88, 94],
+      simple: [33, 38, 43, 48, 54, 60]
+    },
+    'United Arab Emirates': {
+      detailed: [25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80],
+      simple: [28, 33, 38, 43, 48, 53]
+    },
+    'global': {
+      detailed: [32, 36, 42, 48, 54, 60, 66, 72, 78, 84, 90, 96],
+      simple: [35, 40, 45, 50, 56, 62]
+    }
   }
 
-  // Default random data
-  return Array.from({ length: dataCount }, () => Math.floor(Math.random() * 100) + 20)
+  let selectedData = regionData['global'] // default
+
+  if (props.selectedCity && props.selectedCity.country) {
+    const country = props.selectedCity.country
+    if (regionData[country]) {
+      selectedData = regionData[country]
+    } else if (country === 'Thailand' || country === 'Indonesia' || country === 'Malaysia') {
+      selectedData = regionData['Singapore'] // Southeast Asia uses Singapore data
+    }
+  }
+
+  return props.isDetailed ? selectedData.detailed : selectedData.simple
 }
 
 const getChartOptions = () => {
-  const data = generateRandomData()
+  const data = generateRegionData()
   const axisVisible = props.isDetailed
   const dataCount = props.isDetailed ? 12 : 6
 
@@ -104,7 +129,7 @@ const getChartOptions = () => {
       }
     },
     series: [{
-      data: data.slice(0, dataCount),
+      data: data,
       type: 'line',
       smooth: true,
       symbol: 'circle',
