@@ -500,13 +500,26 @@ import view9 from '../assets/img/view-9.png'
 import view10 from '../assets/img/view-10.png'
 import view11 from '../assets/img/view-11.png'
 import view12 from '../assets/img/view-12.png'
+import video1 from '../assets/video/3-2.mp4'
+import video2 from '../assets/video/3-1.mp4'
+import video3 from '../assets/video/3-3.mp4'
+import video4 from '../assets/video/2-2.mp4'
+import video5 from '../assets/video/2-1.mp4'
+import video6 from '../assets/video/2-3.mp4'
+import video7 from '../assets/video/2-4.mp4'
+import video8 from '../assets/video/1-1.mp4'
+import video9 from '../assets/video/1-2.mp4'
+import video10 from '../assets/video/1-4.mp4'
+import video11 from '../assets/video/4-1.mp4'
+import video12 from '../assets/video/4-2.mp4'
+import video13 from '../assets/video/4-3.mp4'
 
 // Image sets for each gallery item
 const imageSets = {
-  1: [view5, view4, view6],
-  2: [view2, view1, view3],
-  3: [view10, view11, view12],
-  4: [view8, view7, view9]
+  1: [video1, video2, video3],
+  2: [video4, video5, video6, video7],
+  3: [video8, video9, video10],
+  4: [video11, video12, video13]
 }
 
 const openModal = (imageSet, index = 0) => {
@@ -697,7 +710,15 @@ const nextImage = () => {
       <div class="relative w-full h-full">
         <!-- Image 1 -->
         <div class="gallery-item" @click="openModal(1)">
-          <img src="/src/assets/img/view-5.png" alt="Inter island transportation" class="w-full h-full object-cover" />
+          <video
+            :src="video1"
+            alt="Inter island transportation"
+            class="w-full h-full object-cover"
+            autoplay
+            muted
+            loop
+            playsinline
+          ></video>
           <div class="image-mask absolute inset-0 bg-black/30 flex items-center justify-center transition-opacity duration-300">
             <div class="text-content bg-black/50 px-4 py-2 rounded w-full text-center">
               <p class="text-white text-sm font-medium">Inter island transportation</p>
@@ -707,7 +728,15 @@ const nextImage = () => {
 
         <!-- Image 2 -->
         <div class="gallery-item" @click="openModal(2)">
-          <img src="/src/assets/img/view-2.png" alt="Urban water system transportation" class="w-full h-full object-cover" />
+          <video
+            :src="video7"
+            alt="Urban water system transportation"
+            class="w-full h-full object-cover"
+            autoplay
+            muted
+            loop
+            playsinline
+          ></video>
           <div class="image-mask absolute inset-0 bg-black/30 flex items-center justify-center transition-opacity duration-300">
             <div class="text-content bg-black/50 px-4 py-2 rounded w-full text-center">
               <p class="text-white text-sm font-medium">Urban water system transportation</p>
@@ -717,7 +746,15 @@ const nextImage = () => {
 
         <!-- Image 3 -->
         <div class="gallery-item" @click="openModal(3)">
-          <img src="/src/assets/img/view-10.png" alt="Water sports and fishing" class="w-full h-full object-cover" />
+          <video
+            :src="video8"
+            alt="Water sports and fishing"
+            class="w-full h-full object-cover"
+            autoplay
+            muted
+            loop
+            playsinline
+          ></video>
           <div class="image-mask absolute inset-0 bg-black/30 flex items-center justify-center transition-opacity duration-300">
             <div class="text-content bg-black/50 px-4 py-2 rounded w-full text-center">
               <p class="text-white text-sm font-medium">Water sports and fishing</p>
@@ -727,7 +764,15 @@ const nextImage = () => {
 
         <!-- Image 4 -->
         <div class="gallery-item" @click="openModal(4)">
-          <img src="/src/assets/img/view-8.png" alt="Tourist attraction" class="w-full h-full object-cover" />
+          <video
+            :src="video11"
+            alt="Tourist attraction"
+            class="w-full h-full object-cover"
+            autoplay
+            muted
+            loop
+            playsinline
+          ></video>
           <div class="image-mask absolute inset-0 bg-black/30 flex items-center justify-center transition-opacity duration-300">
             <div class="text-content bg-black/50 px-4 py-2 rounded w-full text-center">
               <p class="text-white text-sm font-medium">Tourist attraction</p>
@@ -761,7 +806,19 @@ const nextImage = () => {
         </button>
 
         <!-- Current Image -->
-        <img :src="currentImages[currentImageIndex]" :alt="`Gallery Image ${currentImageIndex + 1}`" class="w-full h-full object-contain rounded-lg" />
+        <template v-if="typeof currentImages[currentImageIndex] === 'string' && currentImages[currentImageIndex].endsWith('.mp4')">
+          <video
+            :src="currentImages[currentImageIndex]"
+            :alt="`Gallery Video ${currentImageIndex + 1}`"
+            class="w-full h-full object-contain rounded-lg"
+            autoplay
+            muted
+            loop
+            playsinline
+            controls
+          ></video>
+        </template>
+        <img v-else :src="currentImages[currentImageIndex]" :alt="`Gallery Image ${currentImageIndex + 1}`" class="w-full h-full object-contain rounded-lg" />
 
         <!-- Image Counter -->
         <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white bg-black/50 px-4 py-2 rounded-full text-sm">
