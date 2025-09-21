@@ -1128,10 +1128,10 @@ onMounted(() => {
 }
 
 .presentation-title {
-	font-size: clamp(2.5rem, 4.5vw, 6rem);
+	font-size: clamp(1.8rem, 3vw, 3.5rem);
 	font-weight: 700;
 	color: #ffffff;
-	margin: 0 0 clamp(2rem, 4vh, 4rem) 0;
+	margin: 0 0 clamp(1.5rem, 3vh, 2.5rem) 0;
 	text-align: center;
 }
 
@@ -1158,19 +1158,19 @@ onMounted(() => {
 }
 
 .block-title {
-	font-size: clamp(1.3rem, 2.5vw, 3rem);
+	font-size: clamp(1rem, 1.8vw, 2rem);
 	font-weight: 600;
 	color: #ffffff;
-	margin: 0 0 clamp(0.8rem, 1.5vh, 1.5rem) 0;
+	margin: 0 0 clamp(0.6rem, 1vh, 1rem) 0;
 	border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-	padding-bottom: clamp(0.3rem, 0.8vh, 0.8rem);
+	padding-bottom: clamp(0.3rem, 0.6vh, 0.6rem);
 }
 
 .block-text {
-	font-size: clamp(0.9rem, 1.4vw, 2rem);
+	font-size: clamp(0.8rem, 1.1vw, 1.3rem);
 	color: #ffffff;
 	line-height: 1.5;
-	margin: 0 0 clamp(0.8rem, 1.2vh, 1.2rem) 0;
+	margin: 0 0 clamp(0.6rem, 1vh, 1rem) 0;
 	opacity: 0.9;
 }
 
@@ -1211,7 +1211,7 @@ onMounted(() => {
 }
 
 .achievement-desc {
-	font-size: clamp(0.8rem, 1.3vw, 1.8rem);
+	font-size: clamp(0.7rem, 1vw, 1.2rem);
 	color: #ffffff;
 	line-height: 1.4;
 	opacity: 0.9;

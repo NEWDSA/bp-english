@@ -102,15 +102,6 @@
 								<!-- <h3 class="chart-item-title">Revenue by Product Line</h3> -->
 								<div ref="chart2Ref" class="modal-chart"></div>
 							</div>
-							<div class="chart-item text-center">
-								<span
-									style="color: black; display: flex; align-items: center; justify-content: center; height: 100%; text-align: center; line-height: 1.4; font-size: 12px; padding: 10px; word-wrap: break-word;">Transportation
-									cost: By reducing size,configuration, replacing materials,
-									and reducing sales costs, the costcontrol goal can be achieved, andthe construction
-									cost of a singlevessel needs to be controlled below
-									220000
-									Suggested sales strategy: Fixed single</span>
-							</div>
 							<div class="chart-item">
 								<!-- <h3 class="chart-item-title">Market Share Distribution</h3> -->
 								<div ref="chart3Ref" class="modal-chart"></div>
@@ -118,15 +109,6 @@
 							<div class="chart-item">
 								<!-- <h3 class="chart-item-title">Profit Margin Trends</h3> -->
 								<div ref="chart4Ref" class="modal-chart"></div>
-							</div>
-							<div class="chart-item text-center">
-								<span
-									style="color: black; display: flex; align-items: center; justify-content: center; height: 100%; text-align: center; line-height: 1.4; font-size: 12px; padding: 10px; word-wrap: break-word;">Transportation
-									cost: By reducing size,configuration, replacing materials,
-									High end version: By addingconfigurations and other additionaldevices, the user
-									experience isimproved, thereby increasing grossprofit margin and selling
-									price;Compared to similar products, thereis room for further improvement ingross
-									profit margin.</span>
 							</div>
 						</div>
 					</div>
@@ -1643,7 +1625,7 @@ onMounted(() => {
 }
 
 .strategy-title {
-	font-size: clamp(18px, 1.8vw, 24px);
+	font-size: clamp(16px, 1.4vw, 20px);
 	font-weight: 600;
 	margin-bottom: clamp(8px, 1vh, 12px);
 	color: #ffffff;
@@ -1658,10 +1640,10 @@ onMounted(() => {
 }
 
 .strategy-subtitle {
-	font-size: clamp(16px, 1.6vw, 20px);
+	font-size: clamp(14px, 1.3vw, 17px);
 	font-weight: 500;
 	color: #ffffff;
-	margin-bottom: clamp(8px, 1vh, 12px);
+	margin-bottom: clamp(6px, 0.8vh, 10px);
 	line-height: 1.3;
 }
 
@@ -1670,17 +1652,17 @@ onMounted(() => {
 }
 
 .strategy-label {
-	font-size: clamp(15px, 1.4vw, 18px);
+	font-size: clamp(13px, 1.2vw, 16px);
 	font-weight: 600;
 	color: #ffffff;
-	margin: clamp(6px, 0.8vh, 8px) 0 clamp(3px, 0.4vh, 5px) 0;
+	margin: clamp(5px, 0.6vh, 7px) 0 clamp(3px, 0.4vh, 4px) 0;
 }
 
 .strategy-text {
-	font-size: clamp(13px, 1.2vw, 16px);
+	font-size: clamp(11px, 1vw, 14px);
 	line-height: 1.4;
 	color: #cccccc;
-	margin: clamp(3px, 0.4vh, 5px) 0;
+	margin: clamp(3px, 0.4vh, 4px) 0;
 }
 
 /* SVG 覆盖层 */
@@ -2200,14 +2182,17 @@ onMounted(() => {
 }
 
 .revenue-modal-content {
-	background: #ffffff;
+	background: rgba(255, 255, 255, 0.1);
+	backdrop-filter: blur(25px) saturate(180%);
+	border: 1px solid rgba(255, 255, 255, 0.2);
 	border-radius: 20px;
 	width: 95vw;
 	max-width: 1400px;
 	height: 80vh;
 	max-height: 700px;
 	padding: 25px;
-	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 
+	            0 0 0 1px rgba(255, 255, 255, 0.1) inset;
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
@@ -2230,10 +2215,11 @@ onMounted(() => {
 }
 
 .close-btn {
-	background: none;
-	border: none;
+	background: rgba(255, 255, 255, 0.1);
+	backdrop-filter: blur(10px);
+	border: 1px solid rgba(255, 255, 255, 0.2);
 	font-size: 32px;
-	color: #999999;
+	color: rgba(255, 255, 255, 0.8);
 	cursor: pointer;
 	padding: 0;
 	width: 40px;
@@ -2243,16 +2229,18 @@ onMounted(() => {
 	justify-content: center;
 	border-radius: 50%;
 	transition: all 0.3s ease;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .close-btn:hover {
-	background: #f5f5f5;
-	color: #333333;
+	background: rgba(255, 255, 255, 0.2);
+	color: rgba(255, 255, 255, 1);
+	transform: scale(1.1);
 }
 
 .charts-grid {
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-columns: 1fr 1fr;
 	grid-template-rows: 1fr 1fr;
 	gap: 20px;
 	flex: 1;
@@ -2260,15 +2248,18 @@ onMounted(() => {
 }
 
 .chart-item {
-	background: #fafafa;
+	background: rgba(255, 255, 255, 0.2);
+	backdrop-filter: blur(15px) saturate(180%);
+	border: 1px solid rgba(255, 255, 255, 0.3);
 	border-radius: 15px;
 	padding: 15px;
-	border: 1px solid #e0e0e0;
 	display: flex;
 	flex-direction: column;
 	overflow: hidden;
 	min-height: 200px;
 	width: 100%;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
+	            0 0 0 1px rgba(255, 255, 255, 0.1) inset;
 }
 
 .chart-item-title {
@@ -2339,25 +2330,25 @@ onMounted(() => {
 	}
 
 	.strategy-title {
-		font-size: clamp(20px, 1.6vw, 26px);
-		margin-bottom: clamp(10px, 1.2vh, 14px);
+		font-size: clamp(17px, 1.4vw, 22px);
+		margin-bottom: clamp(8px, 1vh, 12px);
 	}
 
 	.strategy-subtitle {
-		font-size: clamp(17px, 1.4vw, 22px);
-		margin-bottom: clamp(10px, 1.2vh, 14px);
+		font-size: clamp(15px, 1.2vw, 19px);
+		margin-bottom: clamp(8px, 1vh, 12px);
 		line-height: 1.3;
 	}
 
 	.strategy-label {
-		font-size: clamp(16px, 1.3vw, 20px);
-		margin: clamp(7px, 1vh, 10px) 0 clamp(4px, 0.5vh, 6px) 0;
+		font-size: clamp(14px, 1.1vw, 17px);
+		margin: clamp(6px, 0.8vh, 8px) 0 clamp(3px, 0.4vh, 5px) 0;
 	}
 
 	.strategy-text {
-		font-size: clamp(14px, 1.1vw, 17px);
+		font-size: clamp(12px, 1vw, 15px);
 		line-height: 1.4;
-		margin: clamp(4px, 0.5vh, 6px) 0;
+		margin: clamp(3px, 0.4vh, 5px) 0;
 	}
 
 	.content-panel {
@@ -2398,25 +2389,25 @@ onMounted(() => {
 	}
 
 	.strategy-title {
-		font-size: clamp(18px, 1.5vw, 22px);
-		margin-bottom: clamp(8px, 1vh, 12px);
+		font-size: clamp(16px, 1.3vw, 19px);
+		margin-bottom: clamp(7px, 0.8vh, 10px);
 	}
 
 	.strategy-subtitle {
-		font-size: clamp(16px, 1.3vw, 19px);
-		margin-bottom: clamp(8px, 1vh, 10px);
+		font-size: clamp(14px, 1.1vw, 16px);
+		margin-bottom: clamp(6px, 0.8vh, 9px);
 		line-height: 1.3;
 	}
 
 	.strategy-label {
-		font-size: clamp(15px, 1.2vw, 17px);
-		margin: clamp(6px, 0.8vh, 8px) 0 clamp(3px, 0.4vh, 5px) 0;
+		font-size: clamp(13px, 1vw, 15px);
+		margin: clamp(5px, 0.6vh, 7px) 0 clamp(2px, 0.3vh, 4px) 0;
 	}
 
 	.strategy-text {
-		font-size: clamp(13px, 1.1vw, 15px);
+		font-size: clamp(11px, 0.9vw, 13px);
 		line-height: 1.4;
-		margin: clamp(3px, 0.4vh, 5px) 0;
+		margin: clamp(2px, 0.3vh, 4px) 0;
 	}
 
 	.content-panel {
@@ -2471,25 +2462,25 @@ onMounted(() => {
 	}
 
 	.strategy-title {
-		font-size: clamp(16px, 1.4vw, 20px);
-		margin-bottom: clamp(8px, 1vh, 10px);
+		font-size: clamp(15px, 1.2vw, 18px);
+		margin-bottom: clamp(6px, 0.8vh, 9px);
 	}
 
 	.strategy-subtitle {
-		font-size: clamp(14px, 1.2vw, 17px);
-		margin-bottom: clamp(6px, 0.8vh, 8px);
+		font-size: clamp(13px, 1vw, 15px);
+		margin-bottom: clamp(5px, 0.6vh, 7px);
 		line-height: 1.3;
 	}
 
 	.strategy-label {
-		font-size: clamp(13px, 1.1vw, 15px);
-		margin: clamp(5px, 0.6vh, 7px) 0 clamp(2px, 0.3vh, 4px) 0;
+		font-size: clamp(12px, 0.9vw, 14px);
+		margin: clamp(4px, 0.5vh, 6px) 0 clamp(2px, 0.3vh, 3px) 0;
 	}
 
 	.strategy-text {
-		font-size: clamp(11px, 1vw, 13px);
+		font-size: clamp(10px, 0.8vw, 12px);
 		line-height: 1.3;
-		margin: clamp(2px, 0.3vh, 4px) 0;
+		margin: clamp(2px, 0.3vh, 3px) 0;
 	}
 
 	.content-panel {
@@ -2550,25 +2541,25 @@ onMounted(() => {
 	}
 
 	.strategy-title {
-		font-size: clamp(14px, 1.3vw, 18px);
-		margin-bottom: clamp(6px, 0.8vh, 8px);
+		font-size: clamp(13px, 1.1vw, 16px);
+		margin-bottom: clamp(5px, 0.6vh, 7px);
 	}
 
 	.strategy-subtitle {
-		font-size: clamp(12px, 1.1vw, 15px);
-		margin-bottom: clamp(5px, 0.6vh, 7px);
+		font-size: clamp(11px, 0.9vw, 13px);
+		margin-bottom: clamp(4px, 0.5vh, 6px);
 		line-height: 1.3;
 	}
 
 	.strategy-label {
-		font-size: clamp(11px, 1vw, 13px);
-		margin: clamp(4px, 0.5vh, 6px) 0 clamp(2px, 0.3vh, 3px) 0;
+		font-size: clamp(10px, 0.8vw, 12px);
+		margin: clamp(3px, 0.4vh, 5px) 0 clamp(1px, 0.2vh, 2px) 0;
 	}
 
 	.strategy-text {
-		font-size: clamp(9px, 0.9vw, 11px);
+		font-size: clamp(9px, 0.7vw, 10px);
 		line-height: 1.3;
-		margin: clamp(2px, 0.3vh, 3px) 0;
+		margin: clamp(1px, 0.2vh, 2px) 0;
 	}
 
 	.content-panel {
@@ -2667,25 +2658,25 @@ onMounted(() => {
 	}
 
 	.strategy-title {
-		font-size: clamp(12px, 1.2vw, 16px);
-		margin-bottom: clamp(5px, 0.6vh, 7px);
+		font-size: clamp(11px, 1vw, 14px);
+		margin-bottom: clamp(4px, 0.5vh, 6px);
 	}
 
 	.strategy-subtitle {
-		font-size: clamp(10px, 1vw, 13px);
-		margin-bottom: clamp(4px, 0.5vh, 6px);
+		font-size: clamp(9px, 0.8vw, 11px);
+		margin-bottom: clamp(3px, 0.4vh, 5px);
 		line-height: 1.3;
 	}
 
 	.strategy-label {
-		font-size: clamp(9px, 0.9vw, 11px);
-		margin: clamp(3px, 0.4vh, 5px) 0 clamp(1px, 0.2vh, 2px) 0;
+		font-size: clamp(8px, 0.7vw, 10px);
+		margin: clamp(2px, 0.3vh, 4px) 0 clamp(1px, 0.1vh, 1px) 0;
 	}
 
 	.strategy-text {
-		font-size: clamp(8px, 0.8vw, 10px);
+		font-size: clamp(7px, 0.6vw, 9px);
 		line-height: 1.3;
-		margin: clamp(2px, 0.2vh, 3px) 0;
+		margin: clamp(1px, 0.1vh, 2px) 0;
 	}
 
 	/* 手机下的 Revenue Model 效果 */
