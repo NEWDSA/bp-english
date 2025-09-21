@@ -150,13 +150,6 @@
 			</div>
 		</div>
 
-		<!-- 气泡窗 - 固定在屏幕中央 -->
-		<div v-if="activeTooltip" class="info-tooltip" :class="activeTooltip">
-			<div class="tooltip-content">
-				<h4 class="tooltip-title">{{ getTooltipTitle(activeTooltip) }}</h4>
-				<p class="tooltip-description">{{ getTooltipDescription(activeTooltip) }}</p>
-			</div>
-		</div>
 	</div>
 </template>
 
@@ -165,8 +158,6 @@ import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
-const activeTooltip = ref(null)
-const currentInfoType = ref('work') // 兼容旧逻辑的占位
 const isCeoBackground = ref(false)
 const isCfoBackground = ref(false)
 const isCooBackground = ref(false)
@@ -194,18 +185,6 @@ function goHome() {
 	router.push('/')
 }
 
-function showTooltip(memberType) {
-	activeTooltip.value = memberType
-}
-
-function showTooltipWithType(infoType) {
-	currentInfoType.value = infoType
-	activeTooltip.value = infoType
-}
-
-function hideTooltip() {
-	activeTooltip.value = null
-}
 
 function togglePanel(type) {
     // 单选：展开一个，其它关闭
@@ -267,37 +246,6 @@ function getCurrentActiveMember() {
 	return null // 没有活跃成员时返回null
 }
 
-function getTooltipTitle(tooltipType) {
-	const titles = {
-		work: 'Work Experience',
-		education: 'Educational Background',
-		works: 'Representative Works',
-		coo: 'Work Experience',
-		cooEducation: 'Educational Background',
-		cfo: 'Work Experience',
-		cfoEducation: 'Educational Background',
-		engineer: 'mainly responsible for',
-		engineerEducation: 'Educational Background',
-		engineerWorks: 'Representative Works'
-	}
-	return titles[tooltipType] || ''
-}
-
-function getTooltipDescription(tooltipType) {
-	const descriptions = {
-		work: '• Over 10 years of experience in ship design work\n• 2015-2017 Ferrari Group, Italy - Quality Control and After sales Manager\n• 2020/10-2022/10 School of Design and Art, China Academy of Art - Industrial Design Teacher\n• Hangzhou Yihai Ship Design Co., Ltd. - General Manager/Legal Representative\n• Yushui Flying (Shenzhen) Technology Co., Ltd. - General Manager',
-		education: '• Undergraduate: China Academy of Art - Industrial Design\n• Graduate student: Genoa Milan Polytechnic Joint Training Master\'s Degree - Ship and Yacht Design\n• PhD: University of Kuala Lumpur - Ship and Ocean Engineering',
-		works: 'Led the development of revolutionary hydrofoil systems for commercial vessels, including the award-winning "OceanGlide" series. Successfully delivered 15+ major maritime projects with 99.5% client satisfaction rate.',
-		coo: '• Over 10 years of experience in ship design work\n• 2015-2017 Ferrari Group, Italy - Quality Control and After sales Manager\n• 2020/10-2022/10 School of Design and Art, China Academy of Art - Industrial Design Teacher\n• Hangzhou Yihai Ship Design Co., Ltd. - General Manager/Legal Representative\n• Yushui Flying (Shenzhen) Technology Co., Ltd. - General Manager',
-		cooEducation: '• Undergraduate: China Academy of Art - Industrial Design\n• Graduate student: Genoa Milan Polytechnic Joint Training Master\'s Degree - Ship and Yacht Design\n• PhD: University of Kuala Lumpur - Ship and Ocean Engineering',
-		cfo: '• Founding Partner of Micro Light Innovation Investment\n• Responsible for tax laws, investment and financing, and financial strategy\n• Expert in financial planning and risk management\n• Oversees all financial operations and compliance',
-		cfoEducation: '• Master of Law, China University of Political Science and Law\n• Master of Finance from Stanford University in the United States',
-		engineer: '• Responsible for performance testing and optimization\n• CNC structural engineer\n• Software and hardware embedded engineer\n• Material research and innovation',
-		engineerEducation: '• Bachelor of Engineering in Mechanical Engineering\n• Master of Science in Materials Science and Engineering\n• Advanced certifications in CNC programming and embedded systems\n• Specialized training in performance optimization and testing',
-		engineerWorks: '• Developed advanced CNC machining systems for precision manufacturing\n• Created embedded software solutions for industrial automation\n• Led material research projects resulting in 3 patent applications\n• Optimized performance testing protocols improving efficiency by 40%'
-	}
-	return descriptions[tooltipType] || ''
-}
 
 function toggleCeoBackground() {
 	isCeoBackground.value = !isCeoBackground.value
@@ -321,12 +269,6 @@ function toggleCfoBackground() {
 	isInteractionEngineerBackground.value = false
 	isStructuralEngineerBackground.value = false
 	isStrategicPlannerBackground.value = false
-	// 根据当前信息类型显示CFO的tooltip
-	if (currentInfoType.value === 'education') {
-		activeTooltip.value = 'cfoEducation'
-	} else {
-		activeTooltip.value = 'cfo'
-	}
 }
 
 function toggleCooBackground() {
@@ -339,12 +281,6 @@ function toggleCooBackground() {
 	isInteractionEngineerBackground.value = false
 	isStructuralEngineerBackground.value = false
 	isStrategicPlannerBackground.value = false
-	// 根据当前信息类型显示COO的tooltip
-	if (currentInfoType.value === 'education') {
-		activeTooltip.value = 'cooEducation'
-	} else {
-		activeTooltip.value = 'coo'
-	}
 }
 
 function toggleEngineerBackground() {
@@ -357,14 +293,6 @@ function toggleEngineerBackground() {
 	isInteractionEngineerBackground.value = false
 	isStructuralEngineerBackground.value = false
 	isStrategicPlannerBackground.value = false
-	// 根据当前信息类型显示工程师的tooltip
-	if (currentInfoType.value === 'education') {
-		activeTooltip.value = 'engineerEducation'
-	} else if (currentInfoType.value === 'works') {
-		activeTooltip.value = 'engineerWorks'
-	} else {
-		activeTooltip.value = 'engineer'
-	}
 }
 
 function toggleInteractionEngineerBackground() {
@@ -415,15 +343,35 @@ function syncMemberContent() {
             ]
         },
         cfo: {
-            work: '• Founding Partner of Micro Light Investment\n• Finance strategy & compliance',
-            education: '• Master of Law (CUPL)\n• Master of Finance (Stanford)',
-            worksImages: []
+            work: '• Founding Partner of Micro Light Investment\n• Tax laws, investment and financing expert\n• Financial strategy and risk management\n• Oversees all financial operations and compliance',
+            education: '• Master of Law, China University of Political Science and Law\n• Master of Finance from Stanford University',
+            worksImages: ['/src/assets/Delivered.png']
         },
-        coo: { work: '• Ops leadership', education: '• MBA', worksImages: [] },
-        engineer: { work: '• Performance testing & optimization', education: '• ME & Materials', worksImages: [] },
-        interactionEngineer: { work: '• Interaction systems', education: '• HCI', worksImages: [] },
-        structuralEngineer: { work: '• Structural analysis', education: '• CE', worksImages: [] },
-        strategicPlanner: { work: '• Strategy & planning', education: '• Economics', worksImages: [] }
+        coo: { 
+            work: '• Operations leadership and management\n• Business process optimization\n• Strategic planning and execution\n• Team coordination and development', 
+            education: '• MBA in Operations Management\n• Bachelor in Business Administration', 
+            worksImages: ['/src/assets/Delivered.png'] 
+        },
+        engineer: { 
+            work: '• Performance testing and optimization\n• CNC structural engineering\n• Software and hardware embedded systems\n• Material research and innovation', 
+            education: '• Bachelor of Engineering in Mechanical Engineering\n• Master of Science in Materials Science\n• Advanced certifications in CNC programming', 
+            worksImages: ['/src/assets/Delivered.png'] 
+        },
+        interactionEngineer: { 
+            work: '• User interaction systems design\n• UI/UX development\n• Human-computer interaction optimization\n• Interface design and testing', 
+            education: '• Master in Human-Computer Interaction\n• Bachelor in Computer Science\n• UX Design certifications', 
+            worksImages: ['/src/assets/Delivered.png'] 
+        },
+        structuralEngineer: { 
+            work: '• Structural analysis and design\n• Engineering calculations and modeling\n• Safety assessment and compliance\n• Construction oversight', 
+            education: '• Master in Civil Engineering\n• Bachelor in Structural Engineering\n• Professional Engineering License', 
+            worksImages: ['/src/assets/Delivered.png'] 
+        },
+        strategicPlanner: { 
+            work: '• Strategic planning and analysis\n• Market research and forecasting\n• Business development strategies\n• Investment planning and evaluation', 
+            education: '• Master in Economics\n• Bachelor in Business Strategy\n• Strategic Planning certifications', 
+            worksImages: ['/src/assets/Delivered.png'] 
+        }
     }
 
     if (key && dataMap[key]) {
@@ -762,60 +710,6 @@ onMounted(() => {
 	padding: 10px;
 }
 
-/* 信息气泡窗样式 - 固定在屏幕中央 */
-.info-tooltip {
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	background: rgba(0, 0, 0, 0.7);
-	backdrop-filter: blur(15px);
-	border: 2px solid rgba(0, 212, 255, 0.3);
-	border-radius: 20px;
-	padding: 30px;
-	max-width: 450px;
-	max-height: 70vh;
-	width: 90%;
-	z-index: 9999;
-	box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
-	animation: tooltipFadeIn 0.4s ease-out;
-	overflow-y: auto;
-	pointer-events: auto;
-}
-
-@keyframes tooltipFadeIn {
-	from {
-		opacity: 0;
-		transform: translate(-50%, -50%) scale(0.7);
-	}
-	to {
-		opacity: 1;
-		transform: translate(-50%, -50%) scale(1);
-	}
-}
-
-.tooltip-content {
-	color: #ffffff;
-	text-align: center;
-}
-
-.tooltip-title {
-	font-size: 22px;
-	font-weight: 700;
-	color: #00d4ff;
-	margin: 0 0 20px 0;
-	text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
-}
-
-.tooltip-description {
-	font-size: 16px;
-	color: #ffffff;
-	margin: 0;
-	text-align: left;
-	line-height: 1.8;
-	opacity: 0.95;
-	white-space: pre-line;
-}
 
 /* 右侧内容样式 */
 .top-info {
