@@ -368,76 +368,169 @@
 				</div>
 			</div>
 
-			<!-- Design&Simulation Technology 第一个弹窗 -->
+			<!-- Design&Simulation Technology 视频弹窗 -->
 			<div v-if="showDesignModal" class="modal-overlay" @click="hideDesignModal">
 				<div class="design-modal" @click.stop>
-					<div class="design-modal-content">
-						<img src="../assets/dm.png" alt="Design&Simulation Technology" class="design-image"
-							@click="showSimulationModalFunc" />
+					<div class="design-modal-header">
+						<h2 class="modal-title" @click="showSimulationModalFunc">Design & Simulation Technology</h2>
+						<button class="close-btn" @click="hideDesignModal">×</button>
+					</div>
+					<div class="videos-grid">
+						<div class="video-container">
+							<video autoplay muted loop playsinline class="simulation-video">
+								<source src="../assets/1.1.mp4" type="video/mp4">
+							</video>
+						</div>
+						<div class="video-container">
+							<video autoplay muted loop playsinline class="simulation-video">
+								<source src="../assets/1.2.mp4" type="video/mp4">
+							</video>
+						</div>
+						<div class="video-container">
+							<video autoplay muted loop playsinline class="simulation-video">
+								<source src="../assets/1.3.mp4" type="video/mp4">
+							</video>
+						</div>
+						<div class="video-container">
+							<video autoplay muted loop playsinline class="simulation-video">
+								<source src="../assets/1.4.mp4" type="video/mp4">
+							</video>
+						</div>
+						<div class="video-container">
+							<video autoplay muted loop playsinline class="simulation-video">
+								<source src="../assets/1.5.mp4" type="video/mp4">
+							</video>
+						</div>
+						<div class="video-container">
+							<video autoplay muted loop playsinline class="simulation-video">
+								<source src="../assets/1.6.mp4" type="video/mp4">
+							</video>
+						</div>
 					</div>
 				</div>
 			</div>
 
 			<!-- Design&Simulation Technology 第二个弹窗 -->
-			<!-- <div v-if="showSimulationModal" class="modal-overlay" @click="hideSimulationModal">
+			<div v-if="showSimulationModal" class="modal-overlay" @click="hideSimulationModal">
 				<div class="simulation-modal" @click.stop>
-					<div class="simulation-modal-content">
-						<div class="simulation-title">Breakthrough verification of energy efficiency and stability of
-							hydrofoil system</div>
-						<div class="simulation-comparison">
-							<div style="width: 200px;height: 200px;border: 1px solid pink;">
-								<video autoplay muted loop playsinline class="simulation-video">
-									<source src="../assets/sea_wave.mp4" type="video/mp4">
+					<div class="simulation-modal-header">
+						<h2 class="simulation-title">Breakthrough verification of energy efficiency and stability of hydrofoil system</h2>
+						<button class="close-btn" @click="hideSimulationModal">×</button>
+					</div>
+					<div class="simulation-content">
+						<div class="simulation-grid">
+							<!-- 第一行 -->
+							<!-- 左上：视频 -->
+							<div class="simulation-item video-item">
+								<video autoplay muted loop playsinline class="sim-video">
+									<source src="../assets/2.1.mp4" type="video/mp4">
 								</video>
 							</div>
-							<div
-								style="width: 200px;height: 200px;border: 1px solid pink;display: flex;flex-direction: column;flex-wrap: wrap;justify-content: center;align-items: center;">
-								<div style="color: #000000;">Speed: 18kt</div>
-								<div style="color: #000000;">Wave Length: 5.0m</div>
-								<div style="color: #000000;">Wave Height: 0.5m</div>
-								<div style="color: #000000;">Wave Angle: 45°</div>
+							
+							<!-- 中上：参数信息区域 -->
+							<div class="simulation-item text-panel">
+								<div class="text-content">
+									<div class="parameter-info">
+										<div class="param-row">Speed: 18kt</div>
+										<div class="param-row">Wave Length: 5.0m</div>
+										<div class="param-row">Wave Height: 0.5m</div>
+										<div class="param-row">Wave Angle: 45°</div>
+									</div>
+								</div>
 							</div>
-							<div style="width: 200px;height: 200px;border: 1px solid pink;">
-								<video autoplay muted loop playsinline class="simulation-video">
-									<source src="../assets/sea_wave.mp4" type="video/mp4">
+							
+							<!-- 第三列第一行：视频 -->
+							<div class="simulation-item video-item">
+								<video autoplay muted loop playsinline class="sim-video">
+									<source src="../assets/2.2.mp4" type="video/mp4">
 								</video>
 							</div>
-							<div style="width: 200px;height: 200px;border: 1px solid pink;"></div>
-							<div
-								style="width: 200px;height: 200px;border: 1px solid pink;display: flex;flex-direction: column;flex-wrap: wrap;justify-content: center;align-items: center;">
-								<div style="color: #000000;">Trim Angle</div>
-								<div style="color: #000000;">-1.25°~0.85°</div>
-								<div style="color: #000000;">VS</div>
-								<div style="color: #000000;">-7°~-8.5°</div>
+							
+							<!-- 第四列：结论面板（跨3行） -->
+							<div class="simulation-item conclusion-panel">
+								<div class="conclusion-content">
+									<div class="conclusion-title">Conclusion:</div>
+									<div class="conclusion-text">
+										<div class="conclusion-point">
+											<strong>1. Energy efficiency reduction:</strong>
+											At a speed of 18kt, the hydrofoil boat exhibits a 55% reduction in water resistance and a 75% reduction in propulsion power compared to a conventional hull.
+										</div>
+										<div class="conclusion-point">
+											<strong>2. Stability improvement:</strong>
+											With a simulated wave height of 0.5m and an angle of 45°, the hydrofoil boat maintains a more stable and comfortable navigation posture, with the crew barely feeling the vessel's trim. In contrast, conventional boats experience a trim of up to 8° under these sea conditions, making the crew extremely uncomfortable.
+										</div>
+									</div>
+								</div>
 							</div>
-							<div style="width: 200px;height: 200px;border: 1px solid pink;">
+							
+							<!-- 第二行 -->
+							<!-- 左中：波点图表 -->
+							<div class="simulation-item chart-panel">
+								<div ref="waveChartRef" class="chart-container"></div>
 							</div>
-							<div style="width: 200px;height: 200px;border: 1px solid pink;">
+							
+							<!-- 中中：Trim Angle信息区域 -->
+							<div class="simulation-item text-panel">
+								<div class="text-content">
+									<div class="parameter-info">
+										<div class="param-title">Trim Angle</div>
+										<div class="param-value">-1.25°~0.85°</div>
+										<div class="vs-divider">VS</div>
+										<div class="param-value">-7°~-8.5°</div>
+									</div>
+								</div>
 							</div>
-							<div style="width: 200px;height: 200px;border: 1px solid pink;display: flex;flex-direction: column;flex-wrap: wrap;justify-content: center;align-items: center;">
-								<div style="color: #000000;">Effective Power</div>
-								<div style="color: #000000;">25kw</div>
-								<div style="color: #000000;">VS</div>
-								<div style="color: #000000;">90kw</div>
+							
+							<!-- 第三列第二行：Trim Angle图表 -->
+							<div class="simulation-item chart-panel">
+								<div ref="trimAngleChartRef" class="chart-container"></div>
+								<div class="chart-label">
+									<div>Trim Angle</div>
+									<div>-1.25°~0.85°</div>
+									<div class="vs-text">VS</div>
+									<div>-7°~-8.5°</div>
+								</div>
 							</div>
-							<div style="width: 200px;height: 200px;border: 1px solid pink;"></div>
-							<div
-								style="width: 200px;height: 630px;border: 1px solid pink;grid-column: 4;grid-row: 1 / 4;display: flex;flex-direction: column;flex-wrap: wrap;justify-content: center;align-items: center;text-align: center;">
-								<div style="color: #000000;">Conclusion:</div>
-								<div style="color: #000000;">1.Energy efficiency reduction: At a speed of 18kt, the hydrofoil boat exhibits a 55% reduction in water resistance and a 75% reduction in propulsion power compared to a conventional hull.</div>
-								<div style="color: #000000;">2.Stability improvement:</div>
-								<div style="color: #000000;">With a simulated wave height of 0.5m and an angle of 45°, the hydrofoil boat maintains a more stable and comfortable navigation posture, with the crew barely feeling the vessel's trim. In contrast, conventional boats experience a trim of up to 8° under these sea conditions, making the crew extremely uncomfortable.</div>
+							
+							<!-- 第三行 -->
+							<!-- 左下：图表 -->
+							<div class="simulation-item chart-panel">
+								<div ref="trimAngleChart2Ref" class="chart-container"></div>
+							</div>
+							
+							<!-- 中下：Effective Power信息区域 -->
+							<div class="simulation-item text-panel">
+								<div class="text-content">
+									<div class="parameter-info">
+										<div class="param-title">Effective Power</div>
+										<div class="param-value">25kw</div>
+										<div class="vs-divider">VS</div>
+										<div class="param-value">90kw</div>
+									</div>
+								</div>
+							</div>
+							
+							<!-- 第三列第三行：Effective Power图表 -->
+							<div class="simulation-item chart-panel">
+								<div ref="powerChartRef" class="chart-container"></div>
+								<div class="chart-label">
+									<div>Effective Power</div>
+									<div>25kw</div>
+									<div class="vs-text">VS</div>
+									<div>90kw</div>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div> -->
+			</div>
 		</div>
 </template>
 
 <script setup>
 import { ref, onMounted, onUnmounted, computed, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
+import * as echarts from 'echarts'
 // 导入船只图片资源
 import whiteBoatImg from '../assets/white_boat.png'
 import greenBoatImg from '../assets/green_boat.png'
@@ -481,6 +574,20 @@ const showSimulationModal = ref(false)
 // 连接线高度计算
 const lineHeight = ref('calc(100% - 60px)')
 const lineTop = ref('30px')
+
+// ECharts图表引用
+const trimAngleChartRef = ref(null)
+const trimAngleChart2Ref = ref(null)
+const powerChartRef = ref(null)
+const waveChartRef = ref(null)
+const chart4Ref = ref(null)
+const chart5Ref = ref(null)
+let trimAngleChartInstance = null
+let trimAngleChart2Instance = null
+let powerChartInstance = null
+let waveChartInstance = null
+let chart4Instance = null
+let chart5Instance = null
 
 // 动态计算连接线位置
 const calculateLinePosition = () => {
@@ -574,6 +681,235 @@ function hideComparisonModal() {
 function showSimulationModalFunc() {
 	showDesignModal.value = false
 	showSimulationModal.value = true
+	// 等待DOM更新后渲染图表
+	nextTick(() => {
+		renderSimulationCharts()
+	})
+}
+
+// 渲染仿真图表
+function renderSimulationCharts() {
+	// 渲染Trim Angle图表
+	if (trimAngleChartRef.value) {
+		if (trimAngleChartInstance) {
+			trimAngleChartInstance.dispose()
+		}
+		trimAngleChartInstance = echarts.init(trimAngleChartRef.value)
+		
+		const trimAngleOption = {
+			grid: { top: 20, bottom: 20, left: 30, right: 30 },
+			xAxis: {
+				type: 'category',
+				data: ['0', '5', '10', '15', '20', '25', '30'],
+				axisLine: { lineStyle: { color: '#666' } },
+				axisLabel: { color: '#666', fontSize: 10 }
+			},
+			yAxis: {
+				type: 'value',
+				axisLine: { lineStyle: { color: '#666' } },
+				axisLabel: { color: '#666', fontSize: 10 },
+				splitLine: { lineStyle: { color: '#eee' } }
+			},
+			series: [
+				{
+					name: 'Hydrofoil',
+					type: 'line',
+					data: [-1.25, -1.1, -0.8, -0.5, -0.2, 0.2, 0.85],
+					smooth: true,
+					lineStyle: { color: '#00d4ff', width: 2 },
+					itemStyle: { color: '#00d4ff' }
+				},
+				{
+					name: 'Traditional',
+					type: 'line',
+					data: [-7, -7.2, -7.8, -8.1, -8.3, -8.4, -8.5],
+					smooth: true,
+					lineStyle: { color: '#ff6b6b', width: 2 },
+					itemStyle: { color: '#ff6b6b' }
+				}
+			]
+		}
+		trimAngleChartInstance.setOption(trimAngleOption)
+	}
+	
+	// 渲染Power图表
+	if (powerChartRef.value) {
+		if (powerChartInstance) {
+			powerChartInstance.dispose()
+		}
+		powerChartInstance = echarts.init(powerChartRef.value)
+		
+		const powerOption = {
+			grid: { top: 20, bottom: 20, left: 30, right: 30 },
+			xAxis: {
+				type: 'category',
+				data: ['0', '5', '10', '15', '20', '25', '30'],
+				axisLine: { lineStyle: { color: '#666' } },
+				axisLabel: { color: '#666', fontSize: 10 }
+			},
+			yAxis: {
+				type: 'value',
+				axisLine: { lineStyle: { color: '#666' } },
+				axisLabel: { color: '#666', fontSize: 10 },
+				splitLine: { lineStyle: { color: '#eee' } }
+			},
+			series: [
+				{
+					name: 'Hydrofoil',
+					type: 'line',
+					data: [25, 24, 23, 24, 25, 26, 25],
+					smooth: true,
+					lineStyle: { color: '#00d4ff', width: 2 },
+					itemStyle: { color: '#00d4ff' }
+				},
+				{
+					name: 'Traditional',
+					type: 'line',
+					data: [90, 88, 92, 95, 93, 94, 90],
+					smooth: true,
+					lineStyle: { color: '#ff6b6b', width: 2 },
+					itemStyle: { color: '#ff6b6b' }
+				}
+			]
+		}
+		powerChartInstance.setOption(powerOption)
+	}
+	
+	// 渲染第二个Trim Angle图表
+	if (trimAngleChart2Ref.value) {
+		if (trimAngleChart2Instance) {
+			trimAngleChart2Instance.dispose()
+		}
+		trimAngleChart2Instance = echarts.init(trimAngleChart2Ref.value)
+		
+		const trimAngle2Option = {
+			grid: { top: 20, bottom: 20, left: 30, right: 30 },
+			xAxis: {
+				type: 'category',
+				data: ['0', '5', '10', '15', '20', '25', '30'],
+				axisLine: { lineStyle: { color: '#666' } },
+				axisLabel: { color: '#666', fontSize: 10 }
+			},
+			yAxis: {
+				type: 'value',
+				axisLine: { lineStyle: { color: '#666' } },
+				axisLabel: { color: '#666', fontSize: 10 },
+				splitLine: { lineStyle: { color: '#eee' } }
+			},
+			series: [
+				{
+					name: 'Power Efficiency',
+					type: 'line',
+					data: [85, 87, 89, 92, 94, 96, 98],
+					smooth: true,
+					lineStyle: { color: '#4CAF50', width: 2 },
+					itemStyle: { color: '#4CAF50' },
+					areaStyle: {
+						color: {
+							type: 'linear',
+							x: 0, y: 0, x2: 0, y2: 1,
+							colorStops: [
+								{ offset: 0, color: 'rgba(76, 175, 80, 0.3)' },
+								{ offset: 1, color: 'rgba(76, 175, 80, 0.1)' }
+							]
+						}
+					}
+				}
+			]
+		}
+		trimAngleChart2Instance.setOption(trimAngle2Option)
+	}
+	
+	// 渲染波点图表
+	if (waveChartRef.value) {
+		if (waveChartInstance) {
+			waveChartInstance.dispose()
+		}
+		waveChartInstance = echarts.init(waveChartRef.value)
+		
+		const waveOption = {
+			grid: { top: 20, bottom: 20, left: 30, right: 30 },
+			xAxis: {
+				type: 'value',
+				min: 0,
+				max: 20,
+				axisLine: { lineStyle: { color: '#666' } },
+				axisLabel: { color: '#666', fontSize: 10 },
+				splitLine: { lineStyle: { color: '#eee' } }
+			},
+			yAxis: {
+				type: 'value',
+				min: 0,
+				max: 6,
+				axisLine: { lineStyle: { color: '#666' } },
+				axisLabel: { color: '#666', fontSize: 10 },
+				splitLine: { lineStyle: { color: '#eee' } }
+			},
+			series: [
+				{
+					name: 'Hydrofoil Wave Pattern',
+					type: 'scatter',
+					data: [
+						[1, 2.5], [2, 3.1], [3, 2.8], [4, 3.5], [5, 2.9],
+						[6, 3.8], [7, 3.2], [8, 4.1], [9, 3.6], [10, 4.3],
+						[11, 3.9], [12, 4.5], [13, 4.0], [14, 4.8], [15, 4.2],
+						[16, 5.1], [17, 4.6], [18, 5.3], [19, 4.9], [20, 5.5]
+					],
+					symbolSize: 6,
+					itemStyle: {
+						color: '#00d4ff',
+						borderColor: '#ffffff',
+						borderWidth: 1
+					}
+				},
+				{
+					name: 'Traditional Wave Pattern',
+					type: 'scatter',
+					data: [
+						[1, 1.8], [2, 2.3], [3, 2.0], [4, 2.7], [5, 2.1],
+						[6, 2.9], [7, 2.4], [8, 3.2], [9, 2.8], [10, 3.5],
+						[11, 3.1], [12, 3.7], [13, 3.3], [14, 4.0], [15, 3.6],
+						[16, 4.2], [17, 3.8], [18, 4.5], [19, 4.1], [20, 4.7]
+					],
+					symbolSize: 6,
+					itemStyle: {
+						color: '#ff6b6b',
+						borderColor: '#ffffff',
+						borderWidth: 1
+					}
+				}
+			]
+		}
+		waveChartInstance.setOption(waveOption)
+	}
+	
+	
+	if (chart4Ref.value) {
+		if (chart4Instance) chart4Instance.dispose()
+		chart4Instance = echarts.init(chart4Ref.value)
+		chart4Instance.setOption({
+			grid: { top: 20, bottom: 20, left: 30, right: 30 },
+			xAxis: { type: 'category', data: ['Q1', 'Q2', 'Q3', 'Q4'], axisLabel: { fontSize: 10 } },
+			yAxis: { type: 'value', axisLabel: { fontSize: 10 } },
+			series: [{ type: 'line', data: [15, 25, 35, 40], smooth: true, lineStyle: { color: '#FF9800' } }]
+		})
+	}
+	
+	if (chart5Ref.value) {
+		if (chart5Instance) chart5Instance.dispose()
+		chart5Instance = echarts.init(chart5Ref.value)
+		chart5Instance.setOption({
+			series: [{
+				type: 'pie',
+				radius: '60%',
+				data: [
+					{ value: 35, name: 'Efficiency', itemStyle: { color: '#2196F3' } },
+					{ value: 25, name: 'Performance', itemStyle: { color: '#4CAF50' } },
+					{ value: 40, name: 'Stability', itemStyle: { color: '#FF9800' } }
+				]
+			}]
+		})
+	}
 }
 
 // 隐藏设计弹窗
@@ -609,6 +945,31 @@ onMounted(() => {
 // 组件卸载时清理事件监听器
 onUnmounted(() => {
 	window.removeEventListener('resize', handleResize)
+	// 清理图表实例
+	if (trimAngleChartInstance) {
+		trimAngleChartInstance.dispose()
+		trimAngleChartInstance = null
+	}
+	if (trimAngleChart2Instance) {
+		trimAngleChart2Instance.dispose()
+		trimAngleChart2Instance = null
+	}
+	if (powerChartInstance) {
+		powerChartInstance.dispose()
+		powerChartInstance = null
+	}
+	if (waveChartInstance) {
+		waveChartInstance.dispose()
+		waveChartInstance = null
+	}
+	if (chart4Instance) {
+		chart4Instance.dispose()
+		chart4Instance = null
+	}
+	if (chart5Instance) {
+		chart5Instance.dispose()
+		chart5Instance = null
+	}
 })
 </script>
 
@@ -1156,7 +1517,7 @@ onUnmounted(() => {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: rgba(0, 0, 0, 0.8);
+	/* background: rgba(0, 0, 0, 0.8); */
 	backdrop-filter: blur(5px);
 	z-index: 10000;
 	display: flex;
@@ -1581,56 +1942,383 @@ onUnmounted(() => {
 	}
 }
 
-/* Design&Simulation Technology 弹窗样式 */
+/* Design&Simulation Technology 视频弹窗样式 */
 .design-modal {
-	background: rgba(255, 255, 255, 0.95);
-	backdrop-filter: blur(20px);
+	background: rgba(255, 255, 255, 0.1);
+	backdrop-filter: blur(25px) saturate(180%);
+	-webkit-backdrop-filter: blur(25px) saturate(180%);
 	border-radius: 20px;
-	padding: 20px;
-	max-width: 80vw;
-	max-height: 80vh;
-	overflow: auto;
-	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-	border: 1px solid rgba(255, 255, 255, 0.3);
+	padding: 40px;
+	max-width: 95vw;
+	max-height: 90vh;
+	overflow: hidden;
+	box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), 
+				0 0 0 1px rgba(255, 255, 255, 0.1),
+				inset 0 1px 0 rgba(255, 255, 255, 0.2);
+	border: 1px solid rgba(255, 255, 255, 0.2);
 	position: relative;
 	width: auto;
-	min-width: 320px;
+	min-width: 1200px;
 }
 
-.design-modal-content {
+.design-modal-header {
+	text-align: center;
+	margin-bottom: 30px;
+	position: relative;
+	padding: 20px;
+}
+
+.modal-title {
+	font-size: clamp(24px, 3vw, 36px);
+	font-weight: 600;
+	color: #ffffff;
+	margin: 0;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+.modal-title:hover {
+	color: #00d4ff;
+	text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+	transform: scale(1.02);
+}
+
+.close-btn {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	background: rgba(255, 255, 255, 0.15);
+	backdrop-filter: blur(10px);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	font-size: 20px;
+	color: #ffffff;
+	cursor: pointer;
+	padding: 8px;
+	width: 36px;
+	height: 36px;
 	display: flex;
-	justify-content: center;
 	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+	background: rgba(255, 255, 255, 0.25);
+	border-color: rgba(0, 212, 255, 0.5);
+	color: #00d4ff;
+	transform: scale(1.1);
+}
+
+.videos-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(2, auto);
+	gap: 15px;
+	max-height: 70vh;
+}
+
+.video-container {
+	position: relative;
+	background: rgba(255, 255, 255, 0.05);
+	backdrop-filter: blur(15px);
+	border-radius: 12px;
+	overflow: hidden;
+	aspect-ratio: 16/9;
+	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 
+				inset 0 1px 0 rgba(255, 255, 255, 0.1);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	transition: all 0.3s ease;
+}
+
+.video-container:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 
+				inset 0 1px 0 rgba(255, 255, 255, 0.15);
+	border-color: rgba(0, 212, 255, 0.3);
+}
+
+.simulation-video {
 	width: 100%;
 	height: 100%;
+	object-fit: cover;
+	opacity: 0.9;
+	border-radius: 12px;
+	transition: all 0.3s ease;
 }
 
-.design-image {
-	max-width: 100%;
-	max-height: 70vh;
-	object-fit: contain;
-	cursor: pointer;
-	transition: transform 0.3s ease;
-}
-
-.design-image:hover {
+.video-container:hover .simulation-video {
+	opacity: 1;
 	transform: scale(1.02);
 }
 
 /* 仿真技术对比弹窗样式 */
 .simulation-modal {
-	background: transparent;
-	backdrop-filter: none;
-	border-radius: 0;
-	padding: 20px;
+	background: rgba(255, 255, 255, 0.1);
+	backdrop-filter: blur(25px) saturate(180%);
+	-webkit-backdrop-filter: blur(25px) saturate(180%);
+	border-radius: 20px;
+	padding: 0;
 	max-width: 95vw;
-	/* max-height: 90vh; */
-	overflow: auto;
-	box-shadow: none;
-	border: none;
+	max-height: 90vh;
+	overflow: hidden;
+	box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), 
+				0 0 0 1px rgba(255, 255, 255, 0.1),
+				inset 0 1px 0 rgba(255, 255, 255, 0.2);
+	border: 1px solid rgba(255, 255, 255, 0.2);
 	position: relative;
 	width: auto;
-	min-width: 320px;
+	min-width: 1200px;
+}
+
+.simulation-modal-header {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 20px 25px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+	background: rgba(255, 255, 255, 0.05);
+	backdrop-filter: blur(10px);
+	position: relative;
+}
+
+.simulation-title {
+	font-size: clamp(18px, 2vw, 24px);
+	font-weight: 600;
+	color: #333333;
+	margin: 0;
+	line-height: 1.3;
+}
+
+.simulation-modal .close-btn {
+	position: absolute;
+	top: 20px;
+	right: 25px;
+	background: rgba(255, 255, 255, 0.2);
+	backdrop-filter: blur(10px);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	font-size: 24px;
+	color: #333333;
+	cursor: pointer;
+	padding: 8px;
+	width: 36px;
+	height: 36px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	transition: all 0.3s ease;
+}
+
+.simulation-modal .close-btn:hover {
+	background: rgba(255, 255, 255, 0.3);
+	border-color: rgba(0, 212, 255, 0.5);
+	color: #00d4ff;
+	transform: scale(1.1);
+}
+
+.simulation-content {
+	padding: 25px;
+}
+
+.simulation-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 2fr;
+	grid-template-rows: 1fr 1fr 1fr;
+	gap: 15px;
+	height: calc(90vh - 200px);
+}
+
+.simulation-item {
+	background: rgba(255, 255, 255, 0.15);
+	backdrop-filter: blur(15px);
+	border-radius: 12px;
+	overflow: hidden;
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2), 
+				inset 0 1px 0 rgba(255, 255, 255, 0.1);
+	transition: all 0.3s ease;
+}
+
+.simulation-item:hover {
+	background: rgba(255, 255, 255, 0.2);
+	border-color: rgba(255, 255, 255, 0.3);
+	transform: translateY(-2px);
+}
+
+.sim-video {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.data-panel {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.data-content {
+	text-align: center;
+	padding: 20px;
+}
+
+.data-title {
+	font-size: 16px;
+	font-weight: 600;
+	color: #333333;
+	margin-bottom: 15px;
+}
+
+.data-row {
+	font-size: 14px;
+	color: #666666;
+	margin: 8px 0;
+}
+
+.text-panel {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: #f8f9fa;
+}
+
+.text-content {
+	width: 100%;
+	height: 100%;
+	padding: 20px;
+}
+
+.text-area {
+	width: 100%;
+	height: 100%;
+	border: 2px dashed #ddd;
+	border-radius: 8px;
+	padding: 15px;
+	font-size: 14px;
+	color: #666;
+	background: #fff;
+	outline: none;
+	min-height: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	cursor: text;
+}
+
+.text-area:empty::before {
+	content: "Click here to add text...";
+	color: #999;
+	font-style: italic;
+}
+
+.text-area:focus {
+	border-color: #00d4ff;
+	box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+}
+
+.parameter-info {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	padding: 20px;
+}
+
+.param-row {
+	font-size: 16px;
+	color: #333333;
+	margin: 8px 0;
+	font-weight: 500;
+	text-align: center;
+}
+
+.param-title {
+	font-size: 18px;
+	color: #333333;
+	font-weight: 600;
+	margin-bottom: 15px;
+	text-align: center;
+}
+
+.param-value {
+	font-size: 16px;
+	color: #333333;
+	margin: 8px 0;
+	font-weight: 500;
+	text-align: center;
+}
+
+.vs-divider {
+	font-size: 18px;
+	color: #ff6b6b;
+	font-weight: bold;
+	margin: 12px 0;
+	text-align: center;
+}
+
+.chart-panel {
+	display: flex;
+	flex-direction: column;
+	padding: 15px;
+}
+
+.chart-container {
+	flex: 1;
+	min-height: 120px;
+}
+
+.chart-label {
+	text-align: center;
+	padding: 10px;
+	background: rgba(0, 0, 0, 0.05);
+	border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.chart-label div {
+	font-size: 12px;
+	color: #333333;
+	margin: 2px 0;
+}
+
+.vs-text {
+	font-weight: bold;
+	color: #ff6b6b;
+	margin: 5px 0;
+}
+
+.conclusion-panel {
+	grid-column: 4;
+	grid-row: 1 / 4;
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-start;
+	padding: 20px;
+}
+
+.conclusion-content {
+	text-align: left;
+}
+
+.conclusion-title {
+	font-size: 18px;
+	font-weight: 600;
+	color: #333333;
+	margin-bottom: 15px;
+}
+
+.conclusion-point {
+	font-size: 16px;
+	color: #666666;
+	line-height: 1.6;
+	margin-bottom: 15px;
+}
+
+.conclusion-point strong {
+	color: #333333;
+	font-weight: 600;
 }
 
 .simulation-modal-content {
