@@ -550,8 +550,8 @@ const nextImage = () => {
 </script>
 
 <template>
-  <div class="bg-center bg-no-repeat relative flex flex-col min-h-screen w-full"
-       :style="`background: url('${icon3}'); background-size: 100% 100%;`">
+  <div class="bg-center bg-no-repeat relative flex flex-col w-full overflow-hidden"
+       :style="`background: url('${icon3}'); background-size: 100% 100%; height: 100vh;`">
     <!-- Navigation -->
     <!-- 顶部导航栏 -->
     <nav class="top-nav">
@@ -581,14 +581,14 @@ const nextImage = () => {
       <!-- Left Content -->
       <div class="flex-1 flex items-center justify-center relative min-w-0">
         <!-- Circle Container -->
-        <div class="relative w-[830px] h-[830px] max-w-full max-h-full" style="transform: scale(min(1.1, calc(100vw / 3 / 600px), calc((100vh - 200px) / 600px), 1)); transform-origin: left;">
+        <div class="relative w-[830px] h-[830px] max-w-full max-h-full" style="transform: scale(min(1.1, calc(100vw / 3 / 600px), calc((100vh - 200px) / 600px), 0.9)); transform-origin: left;">
           <!-- 830x830 white circle -->
           <div class="ring"></div>
 
           <!-- Icons positioned along the circle -->
           <div class="absolute top-0 left-0 w-full h-full">
             <!-- Icon 6 - 30 degrees -->
-            <div class="absolute icon-6-container icon-container transition-all duration-300 flex items-center cursor-pointer" style="top: 70px; left: 100px;" @click="activateIcon('icon-6-container', 'european', 'european')" @mouseenter="activateIcon('icon-6-container', 'european', 'european')">
+            <div class="absolute icon-6-container icon-container transition-all duration-300 flex items-center cursor-pointer" style="top: 20px; left: 100px;" @click="activateIcon('icon-6-container', 'european', 'european')" @mouseenter="activateIcon('icon-6-container', 'european', 'european')">
               <!-- White dot 10x10 -->
               <div class="w-[10px] h-[10px] bg-white rounded-full dot-container-dot relative"></div>
               <!-- Map image icon-6.png 100x100 -->
@@ -600,7 +600,7 @@ const nextImage = () => {
             </div>
 
             <!-- Icon 7 - 60 degrees -->
-            <div class="absolute icon-7-container icon-container transition-all duration-300 flex items-center cursor-pointer" style="top: 180px; left: 180px;" @click="activateIcon('icon-7-container', 'southeast-asia', 'southeast-asia')" @mouseenter="activateIcon('icon-7-container', 'southeast-asia', 'southeast-asia')">
+            <div class="absolute icon-7-container icon-container transition-all duration-300 flex items-center cursor-pointer" style="top: 130px; left: 180px;" @click="activateIcon('icon-7-container', 'southeast-asia', 'southeast-asia')" @mouseenter="activateIcon('icon-7-container', 'southeast-asia', 'southeast-asia')">
               <!-- White dot 10x10 -->
               <div class="w-[10px] h-[10px] bg-white rounded-full dot-container-dot relative"></div>
               <!-- Map image icon-7.png 100x100 -->
@@ -612,7 +612,7 @@ const nextImage = () => {
             </div>
 
             <!-- Icon 8 - 90 degrees -->
-            <div class="absolute icon-8-container icon-container transition-all duration-300 flex items-center cursor-pointer active-icon" style="top: 320px; left: 221px;" @click="activateIcon('icon-8-container', 'china', 'default')" @mouseenter="activateIcon('icon-8-container', 'china', 'default')">
+            <div class="absolute icon-8-container icon-container transition-all duration-300 flex items-center cursor-pointer active-icon" style="top: 270px; left: 221px;" @click="activateIcon('icon-8-container', 'china', 'default')" @mouseenter="activateIcon('icon-8-container', 'china', 'default')">
               <!-- White dot 10x10 -->
               <div class="w-[10px] h-[10px] bg-white rounded-full dot-container-dot relative"></div>
               <!-- Map image icon-8.png 100x100 -->
@@ -624,7 +624,7 @@ const nextImage = () => {
             </div>
 
             <!-- Icon 9 - 120 degrees -->
-            <div class="absolute icon-9-container icon-container transition-all duration-300 flex items-center cursor-pointer" style="top: 460px; left: 213px;" @click="activateIcon('icon-9-container', 'usa', 'usa')" @mouseenter="activateIcon('icon-9-container', 'usa', 'usa')">
+            <div class="absolute icon-9-container icon-container transition-all duration-300 flex items-center cursor-pointer" style="top: 410px; left: 213px;" @click="activateIcon('icon-9-container', 'usa', 'usa')" @mouseenter="activateIcon('icon-9-container', 'usa', 'usa')">
               <!-- White dot 10x10 -->
               <div class="w-[10px] h-[10px] bg-white rounded-full dot-container-dot relative"></div>
               <!-- Map image icon-9.png 100x100 -->
@@ -636,7 +636,7 @@ const nextImage = () => {
             </div>
 
             <!-- Icon 10 - 150 degrees -->
-            <div class="absolute icon-10-container icon-container transition-all duration-300 flex items-center cursor-pointer" style="top: 600px; left: 150px;" @click="activateIcon('icon-10-container', 'middle-east', 'middle-east')" @mouseenter="activateIcon('icon-10-container', 'middle-east', 'middle-east')">
+            <div class="absolute icon-10-container icon-container transition-all duration-300 flex items-center cursor-pointer" style="top: 550px; left: 150px;" @click="activateIcon('icon-10-container', 'middle-east', 'middle-east')" @mouseenter="activateIcon('icon-10-container', 'middle-east', 'middle-east')">
               <!-- White dot 10x10 -->
               <div class="w-[10px] h-[10px] bg-white rounded-full dot-container-dot relative"></div>
               <!-- Map image icon-10.png 100x100 -->
@@ -934,7 +934,7 @@ const nextImage = () => {
 .ring {
   position: absolute;
   left: -600px;
-  top: 0px;
+  top: -50px;
 	width: 830px;
 	height: 830px;
 	border: 3px solid white;
