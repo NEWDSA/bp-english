@@ -11,8 +11,8 @@ import icon9_1 from '../assets/icon-9-1.png'
 import icon9_2 from '../assets/icon-9-2.png'
 import icon10_1 from '../assets/icon-10-1.png'
 import icon10_2 from '../assets/icon-10-2.png'
-import Navigation from '../components/Navigation.vue'
-import CountryCircle from '../components/CountryCircle.vue'
+// import Navigation from '../components/Navigation.vue'
+// import CountryCircle from '../components/CountryCircle.vue'
 import { useRouter } from 'vue-router'
 const router = useRouter()
 
@@ -488,18 +488,18 @@ const goHome = () => {
 	router.push('/')
 }
 
-import view1 from '../assets/img/view-1.png'
-import view2 from '../assets/img/view-2.png'
-import view3 from '../assets/img/view-3.png'
-import view4 from '../assets/img/view-4.png'
-import view5 from '../assets/img/view-5.png'
-import view6 from '../assets/img/view-6.png'
-import view7 from '../assets/img/view-7.png'
-import view8 from '../assets/img/view-8.png'
-import view9 from '../assets/img/view-9.png'
-import view10 from '../assets/img/view-10.png'
-import view11 from '../assets/img/view-11.png'
-import view12 from '../assets/img/view-12.png'
+// import view1 from '../assets/img/view-1.png'
+// import view2 from '../assets/img/view-2.png'
+// import view3 from '../assets/img/view-3.png'
+// import view4 from '../assets/img/view-4.png'
+// import view5 from '../assets/img/view-5.png'
+// import view6 from '../assets/img/view-6.png'
+// import view7 from '../assets/img/view-7.png'
+// import view8 from '../assets/img/view-8.png'
+// import view9 from '../assets/img/view-9.png'
+// import view10 from '../assets/img/view-10.png'
+// import view11 from '../assets/img/view-11.png'
+// import view12 from '../assets/img/view-12.png'
 import video1 from '../assets/video/3-2.mp4'
 import video2 from '../assets/video/3-1.mp4'
 import video3 from '../assets/video/3-3.mp4'
@@ -581,7 +581,7 @@ const nextImage = () => {
       <!-- Left Content -->
       <div class="flex-1 flex items-center justify-center relative min-w-0">
         <!-- Circle Container -->
-        <div class="relative w-[830px] h-[830px] max-w-full max-h-full" style="transform: scale(min(1.1, calc(100vw / 3 / 600px), calc((100vh - 200px) / 600px))); transform-origin: left;">
+        <div class="relative w-[830px] h-[830px] max-w-full max-h-full" style="transform: scale(min(1.1, calc(100vw / 3 / 600px), calc((100vh - 200px) / 600px), 1)); transform-origin: left;">
           <!-- 830x830 white circle -->
           <div class="ring"></div>
 
