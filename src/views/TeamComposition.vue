@@ -216,8 +216,37 @@
 				</div>
 				
 				<div class="overlay-content">
-					<h2 class="overlay-title">Investment Highlights</h2>
-					<p class="overlay-text">Investment highlights content will be added here...</p>
+					<h1 class="presentation-title">Investment Highlights</h1>
+					
+					<div class="presentation-grid">
+						<div class="presentation-left">
+							<div class="content-block">
+								<h3 class="block-title">Market Opportunity</h3>
+								<p class="block-text">Hydrofoil fusion is the best solution for ship electrification, opening up a trillion dollar market. Current ship electrification is limited to simple oil-to-electricity conversion, without fundamentally solving the contradiction between energy consumption and propulsion efficiency. Hydrofoil technology can truly solve and completely overturn the energy management mode of traditional watercraft.</p>
+								<p class="block-text">High performance hydrofoil boats have been validated for their value in multiple scenarios, and leading overseas companies are making efforts, leaving a basic blank in China.</p>
+							</div>
+							
+							<div class="content-block">
+								<h3 class="block-title">Core Competencies</h3>
+								<p class="block-text">Mastering the core industry chain with strong product innovation capability, leading the development of the industry. We adhere to independent research and production throughout the entire industry chain, with modular assembly lines for components.</p>
+								<p class="block-text">Adhere to original design, improve product matrix, develop intelligent control system, three-mode intelligent steering wheel, smart cabin, terminal sales program, high-strength modular hydrofoil, and high-strength lightweight material process of hull.</p>
+							</div>
+						</div>
+						
+						<div class="presentation-right">
+							<div class="content-block">
+								<h3 class="block-title">Global Leadership Strategy</h3>
+								<p class="block-text">Actively globalizing and striving to become an absolute leader in the consumer level field as soon as possible. Our past products have been recognized by top domestic and international customers and have been implemented in various scenarios such as technology, transportation, consumption, and cultural tourism.</p>
+								<p class="block-text">80% of our revenue comes from the transportation industry.</p>
+							</div>
+							
+							<div class="content-block">
+								<h3 class="block-title">Future Innovation</h3>
+								<p class="block-text">Based on technological accumulation and significant advantages, advance layout of consumer grade intelligent water transportation. Pioneering cooperation with multiple leading domestic and overseas enterprises to jointly promote the landing of AI + water transportation vehicles.</p>
+								<p class="block-text">The company will release a new form of product in July this year, with no competition in the same scale, and will establish an absolute leading advantage by combining the full chain experience of "product definition - technological innovation - supply chain - channel".</p>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 
@@ -1089,26 +1118,27 @@ onMounted(() => {
 }
 
 .overlay-content {
-	width: 90%;
-	max-width: 1400px;
-	height: 80vh;
+	width: 95%;
+	max-width: none;
+	height: 85vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	padding: 0 2vw;
 }
 
 .presentation-title {
-	font-size: clamp(2.5rem, 5vw, 4rem);
+	font-size: clamp(2.5rem, 4.5vw, 6rem);
 	font-weight: 700;
 	color: #ffffff;
-	margin: 0 0 3rem 0;
+	margin: 0 0 clamp(2rem, 4vh, 4rem) 0;
 	text-align: center;
 }
 
 .presentation-grid {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	gap: 4rem;
+	gap: clamp(2rem, 4vw, 6rem);
 	height: 100%;
 	align-items: start;
 }
@@ -1117,72 +1147,144 @@ onMounted(() => {
 .presentation-right {
 	display: flex;
 	flex-direction: column;
-	gap: 2.5rem;
+	gap: clamp(1.5rem, 3vh, 3rem);
 	height: 100%;
 }
 
 .content-block {
 	flex: 1;
+	display: flex;
+	flex-direction: column;
 }
 
 .block-title {
-	font-size: clamp(1.5rem, 3vw, 2rem);
+	font-size: clamp(1.3rem, 2.5vw, 3rem);
 	font-weight: 600;
 	color: #ffffff;
-	margin: 0 0 1rem 0;
+	margin: 0 0 clamp(0.8rem, 1.5vh, 1.5rem) 0;
 	border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-	padding-bottom: 0.5rem;
+	padding-bottom: clamp(0.3rem, 0.8vh, 0.8rem);
 }
 
 .block-text {
-	font-size: clamp(1rem, 2vw, 1.3rem);
+	font-size: clamp(0.9rem, 1.4vw, 2rem);
 	color: #ffffff;
-	line-height: 1.6;
-	margin: 0;
+	line-height: 1.5;
+	margin: 0 0 clamp(0.8rem, 1.2vh, 1.2rem) 0;
 	opacity: 0.9;
+}
+
+.block-text:last-child {
+	margin-bottom: 0;
 }
 
 .achievements-list {
 	display: flex;
 	flex-direction: column;
-	gap: 1rem;
+	gap: clamp(0.8rem, 1.2vh, 1.5rem);
 }
 
 .achievement-row {
 	display: flex;
 	align-items: flex-start;
-	gap: 1rem;
+	gap: clamp(0.8rem, 1.2vw, 1.5rem);
 }
 
 .year-label {
 	background: rgba(255, 255, 255, 0.2);
 	color: #ffffff;
-	font-size: clamp(0.8rem, 1.5vw, 1rem);
+	font-size: clamp(0.7rem, 1.1vw, 1.4rem);
 	font-weight: 700;
-	padding: 0.3rem 0.8rem;
+	padding: clamp(0.2rem, 0.4vh, 0.5rem) clamp(0.6rem, 1vw, 1rem);
 	border-radius: 15px;
-	min-width: 60px;
+	min-width: clamp(50px, 4vw, 80px);
 	text-align: center;
 	flex-shrink: 0;
 }
 
 .bullet {
 	color: #ffffff;
-	font-size: clamp(1rem, 2vw, 1.3rem);
+	font-size: clamp(0.9rem, 1.4vw, 2rem);
 	font-weight: bold;
 	flex-shrink: 0;
-	width: 20px;
+	width: clamp(15px, 1.5vw, 25px);
 }
 
 .achievement-desc {
-	font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+	font-size: clamp(0.8rem, 1.3vw, 1.8rem);
 	color: #ffffff;
-	line-height: 1.5;
+	line-height: 1.4;
 	opacity: 0.9;
 	flex: 1;
 }
 
-/* 响应式适配 */
+/* 针对不同屏幕尺寸的精确适配 */
+
+/* 笔记本 (1366x768 - 1920x1080) */
+@media (min-width: 1366px) and (max-width: 1920px) {
+	.overlay-content {
+		width: 90%;
+		padding: 0 3vw;
+	}
+	
+	.presentation-grid {
+		gap: 4rem;
+	}
+}
+
+/* 大台式机 (1920x1080 - 2560x1440) */
+@media (min-width: 1921px) and (max-width: 2560px) {
+	.overlay-content {
+		width: 85%;
+		padding: 0 4vw;
+	}
+	
+	.presentation-title {
+		font-size: clamp(3rem, 4vw, 5rem);
+	}
+	
+	.block-title {
+		font-size: clamp(1.8rem, 2.2vw, 2.8rem);
+	}
+	
+	.block-text {
+		font-size: clamp(1.2rem, 1.3vw, 1.8rem);
+	}
+}
+
+/* 超大屏幕/投影仪 (2560px+) */
+@media (min-width: 2561px) {
+	.overlay-content {
+		width: 80%;
+		padding: 0 5vw;
+	}
+	
+	.presentation-title {
+		font-size: clamp(4rem, 3.5vw, 8rem);
+		margin-bottom: clamp(3rem, 3vh, 5rem);
+	}
+	
+	.block-title {
+		font-size: clamp(2.2rem, 2vw, 4rem);
+		margin-bottom: clamp(1.2rem, 1.5vh, 2rem);
+	}
+	
+	.block-text {
+		font-size: clamp(1.4rem, 1.2vw, 2.5rem);
+		margin-bottom: clamp(1rem, 1.2vh, 1.8rem);
+	}
+	
+	.achievement-desc {
+		font-size: clamp(1.2rem, 1.1vw, 2.2rem);
+	}
+	
+	.year-label {
+		font-size: clamp(1rem, 1vw, 1.8rem);
+		min-width: clamp(70px, 4vw, 100px);
+	}
+}
+
+/* 平板和小屏幕适配 */
 @media (max-width: 1024px) {
 	.presentation-grid {
 		grid-template-columns: 1fr;
@@ -1190,23 +1292,31 @@ onMounted(() => {
 	}
 	
 	.overlay-content {
-		height: 85vh;
+		height: 90vh;
 		overflow-y: auto;
 	}
 }
 
-@media (max-height: 600px) {
+/* 极小屏幕 */
+@media (max-width: 768px) {
 	.overlay-content {
-		height: 90vh;
-		overflow-y: auto;
+		width: 95%;
+		padding: 0 1rem;
+		height: 95vh;
 	}
 	
 	.presentation-title {
+		font-size: clamp(2rem, 6vw, 3rem);
 		margin-bottom: 1.5rem;
 	}
-	
-	.presentation-grid {
-		gap: 2rem;
+}
+
+/* 超高分辨率显示器优化 */
+@media (min-resolution: 192dpi), (min-resolution: 2dppx) {
+	.block-text,
+	.achievement-desc {
+		font-weight: 400;
+		letter-spacing: 0.02em;
 	}
 }
 </style>
