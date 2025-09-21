@@ -93,12 +93,12 @@
 					<!-- 上方信息区域 -->
 					<div class="top-info">
 						<div class="info-item">
-							<div class="info-frame">
+							<div class="info-frame" @click="showWhoWeAreModal">
 								<h3 class="info-title">Who we are?</h3>
 							</div>
 						</div>
 						<div class="info-item">
-							<div class="info-frame">
+							<div class="info-frame" @click="showInvestmentHighlightsModal">
 								<h3 class="info-title">Investment Highlights</h3>
 							</div>
 						</div>
@@ -107,7 +107,7 @@
 			</div>
 
             <!-- 底部团队成员区域 -->
-            <div class="bottom-section" :class="{ collapsed: hasAnyPanelOpen }">
+            <div v-if="!showWhoWeAreContent && !showInvestmentHighlightsContent" class="bottom-section" :class="{ collapsed: hasAnyPanelOpen }">
 				<div v-if="!hasAnyPanelOpen" class="team-members-grid">
 					<!-- Team Members -->
 					<div class="team-members-title">Team Members</div>
@@ -146,8 +146,81 @@
 				</div>
 				<!-- 折叠时显示的恢复入口 -->
 				<div v-else class="team-toggle" @click="closeAllPanels">Team Members</div>
-
 			</div>
+
+			<!-- Who we are 中间显示内容 -->
+			<div v-if="showWhoWeAreContent" class="overlay-content-display">
+				<div class="overlay-close-btn" @click="closeWhoWeAreContent">
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+						<path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+					</svg>
+				</div>
+				
+				<div class="overlay-content">
+					<h1 class="presentation-title">Who we are?</h1>
+					
+					<div class="presentation-grid">
+						<div class="presentation-left">
+							<div class="content-block">
+								<h3 class="block-title">Company Overview</h3>
+								<p class="block-text">The world's first high-performance intelligent hydrofoil boat focused on consumer and industry levels, solves the pain points of high energy consumption and low efficiency of traditional ships through a "hardware + software service" model.</p>
+							</div>
+							
+							<div class="content-block">
+								<h3 class="block-title">Innovation Leadership</h3>
+								<p class="block-text">Outstanding leadership in core algorithms, dynamic control, and route perception. Currently holds 9 domestic patents, 6 appearance patents, 3 utility model patents, and 1 invention patent.</p>
+							</div>
+						</div>
+						
+						<div class="presentation-right">
+							<div class="content-block">
+								<h3 class="block-title">Key Achievements</h3>
+								<div class="achievements-list">
+									<div class="achievement-row">
+										<span class="year-label">2015</span>
+										<span class="achievement-desc">Earliest domestic entry into water-based consumer transportation</span>
+									</div>
+									<div class="achievement-row">
+										<span class="year-label">2016</span>
+										<span class="achievement-desc">First to define new water tourism ships direction in China</span>
+									</div>
+									<div class="achievement-row">
+										<span class="year-label">2024</span>
+										<span class="achievement-desc">First globally to complete 5M class hydrofoil model experiment</span>
+									</div>
+									<div class="achievement-row">
+										<span class="bullet">•</span>
+										<span class="achievement-desc">Strongest integration capability in national shipbuilding industry</span>
+									</div>
+									<div class="achievement-row">
+										<span class="bullet">•</span>
+										<span class="achievement-desc">Leading boat design with multiple latest water technology products</span>
+									</div>
+									<div class="achievement-row">
+										<span class="bullet">•</span>
+										<span class="achievement-desc">Outstanding R&D capabilities with closed-loop system</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Investment Highlights 中间显示内容 -->
+			<div v-if="showInvestmentHighlightsContent" class="overlay-content-display">
+				<div class="overlay-close-btn" @click="closeInvestmentHighlightsContent">
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+						<path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+					</svg>
+				</div>
+				
+				<div class="overlay-content">
+					<h2 class="overlay-title">Investment Highlights</h2>
+					<p class="overlay-text">Investment highlights content will be added here...</p>
+				</div>
+			</div>
+
 		</div>
 
 	</div>
@@ -171,6 +244,11 @@ const expanded = ref({ work: false, education: false, works: false })
 
 // 当前成员内容
 const memberContent = ref({ work: '', education: '', worksImages: [] })
+
+
+// 中间内容显示状态
+const showWhoWeAreContent = ref(false)
+const showInvestmentHighlightsContent = ref(false)
 
 const hasAnyPanelOpen = computed(() => expanded.value.work || expanded.value.education || expanded.value.works)
 
@@ -198,6 +276,24 @@ function closeAllPanels() {
     expanded.value.work = false
     expanded.value.education = false
     expanded.value.works = false
+}
+
+// 内容显示控制函数
+function showWhoWeAreModal() {
+    showWhoWeAreContent.value = true
+}
+
+function showInvestmentHighlightsModal() {
+    showInvestmentHighlightsContent.value = true
+}
+
+// 中间内容控制函数
+function closeWhoWeAreContent() {
+    showWhoWeAreContent.value = false
+}
+
+function closeInvestmentHighlightsContent() {
+    showInvestmentHighlightsContent.value = false
 }
 
 // 获取当前成员信息的方法
@@ -718,21 +814,39 @@ onMounted(() => {
 
 /* 右侧内容样式 */
 .top-info {
-	/* display: flex;
-	justify-content: space-between; */
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
 	margin-bottom: 40px;
 }
 
 .info-item {
 	flex: 1;
-	margin: 0 10px;
+	margin: 0;
+}
+
+.info-frame {
+	background: rgba(255, 255, 255, 0.05);
+	backdrop-filter: blur(10px);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	border-radius: 12px;
+	padding: 20px;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+	transition: all 0.3s ease;
+}
+
+.info-frame:hover {
+	background: rgba(255, 255, 255, 0.08);
+	border-color: rgba(0, 212, 255, 0.3);
+	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+	cursor: pointer;
 }
 
 .info-title {
 	font-size: 18px;
 	font-weight: 500;
 	color: #ffffff;
-	text-align: right;
+	text-align: center;
 	margin: 0;
 }
 
@@ -920,6 +1034,179 @@ onMounted(() => {
 
 	.founder-name {
 		font-size: 28px;
+	}
+}
+
+
+/* 蒙版内容显示样式 */
+.overlay-content-display {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.7);
+	backdrop-filter: blur(10px);
+	z-index: 1000;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 20px;
+	animation: overlayFadeIn 0.3s ease-out;
+}
+
+@keyframes overlayFadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+.overlay-close-btn {
+	position: absolute;
+	top: 30px;
+	right: 30px;
+	background: rgba(255, 255, 255, 0.1);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	color: #ffffff;
+	cursor: pointer;
+	padding: 12px;
+	width: 48px;
+	height: 48px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	transition: all 0.3s ease;
+}
+
+.overlay-close-btn:hover {
+	background: rgba(255, 255, 255, 0.2);
+	color: #00d4ff;
+	transform: scale(1.1);
+}
+
+.overlay-content {
+	width: 90%;
+	max-width: 1400px;
+	height: 80vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.presentation-title {
+	font-size: clamp(2.5rem, 5vw, 4rem);
+	font-weight: 700;
+	color: #ffffff;
+	margin: 0 0 3rem 0;
+	text-align: center;
+}
+
+.presentation-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 4rem;
+	height: 100%;
+	align-items: start;
+}
+
+.presentation-left,
+.presentation-right {
+	display: flex;
+	flex-direction: column;
+	gap: 2.5rem;
+	height: 100%;
+}
+
+.content-block {
+	flex: 1;
+}
+
+.block-title {
+	font-size: clamp(1.5rem, 3vw, 2rem);
+	font-weight: 600;
+	color: #ffffff;
+	margin: 0 0 1rem 0;
+	border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+	padding-bottom: 0.5rem;
+}
+
+.block-text {
+	font-size: clamp(1rem, 2vw, 1.3rem);
+	color: #ffffff;
+	line-height: 1.6;
+	margin: 0;
+	opacity: 0.9;
+}
+
+.achievements-list {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.achievement-row {
+	display: flex;
+	align-items: flex-start;
+	gap: 1rem;
+}
+
+.year-label {
+	background: rgba(255, 255, 255, 0.2);
+	color: #ffffff;
+	font-size: clamp(0.8rem, 1.5vw, 1rem);
+	font-weight: 700;
+	padding: 0.3rem 0.8rem;
+	border-radius: 15px;
+	min-width: 60px;
+	text-align: center;
+	flex-shrink: 0;
+}
+
+.bullet {
+	color: #ffffff;
+	font-size: clamp(1rem, 2vw, 1.3rem);
+	font-weight: bold;
+	flex-shrink: 0;
+	width: 20px;
+}
+
+.achievement-desc {
+	font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+	color: #ffffff;
+	line-height: 1.5;
+	opacity: 0.9;
+	flex: 1;
+}
+
+/* 响应式适配 */
+@media (max-width: 1024px) {
+	.presentation-grid {
+		grid-template-columns: 1fr;
+		gap: 2rem;
+	}
+	
+	.overlay-content {
+		height: 85vh;
+		overflow-y: auto;
+	}
+}
+
+@media (max-height: 600px) {
+	.overlay-content {
+		height: 90vh;
+		overflow-y: auto;
+	}
+	
+	.presentation-title {
+		margin-bottom: 1.5rem;
+	}
+	
+	.presentation-grid {
+		gap: 2rem;
 	}
 }
 </style>
