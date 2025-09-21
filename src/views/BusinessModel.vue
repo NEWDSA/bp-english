@@ -1643,14 +1643,14 @@ onMounted(() => {
 }
 
 .strategy-title {
-	font-size: 16px;
+	font-size: clamp(18px, 1.8vw, 24px);
 	font-weight: 600;
-	margin-bottom: 8px;
+	margin-bottom: clamp(8px, 1vh, 12px);
 	color: #ffffff;
 }
 
 .strategy-section {
-	margin-bottom: 10px;
+	margin-bottom: clamp(12px, 1.5vh, 18px);
 }
 
 .strategy-section:last-child {
@@ -1658,10 +1658,11 @@ onMounted(() => {
 }
 
 .strategy-subtitle {
-	font-size: 15px;
+	font-size: clamp(16px, 1.6vw, 20px);
 	font-weight: 500;
 	color: #ffffff;
-	margin-bottom: 6px;
+	margin-bottom: clamp(8px, 1vh, 12px);
+	line-height: 1.3;
 }
 
 .strategy-content {
@@ -1669,17 +1670,17 @@ onMounted(() => {
 }
 
 .strategy-label {
-	font-size: 14px;
+	font-size: clamp(15px, 1.4vw, 18px);
 	font-weight: 600;
 	color: #ffffff;
-	margin: 4px 0 2px 0;
+	margin: clamp(6px, 0.8vh, 8px) 0 clamp(3px, 0.4vh, 5px) 0;
 }
 
 .strategy-text {
-	font-size: 12px;
-	line-height: 1.3;
+	font-size: clamp(13px, 1.2vw, 16px);
+	line-height: 1.4;
 	color: #cccccc;
-	margin: 2px 0;
+	margin: clamp(3px, 0.4vh, 5px) 0;
 }
 
 /* SVG 覆盖层 */
@@ -2338,24 +2339,25 @@ onMounted(() => {
 	}
 
 	.strategy-title {
-		font-size: 13px;
-		margin-bottom: 8px;
+		font-size: clamp(20px, 1.6vw, 26px);
+		margin-bottom: clamp(10px, 1.2vh, 14px);
 	}
 
 	.strategy-subtitle {
-		font-size: 12px;
-		margin-bottom: 8px;
+		font-size: clamp(17px, 1.4vw, 22px);
+		margin-bottom: clamp(10px, 1.2vh, 14px);
+		line-height: 1.3;
 	}
 
 	.strategy-label {
-		font-size: 11px;
-		margin: 5px 0 3px 0;
+		font-size: clamp(16px, 1.3vw, 20px);
+		margin: clamp(7px, 1vh, 10px) 0 clamp(4px, 0.5vh, 6px) 0;
 	}
 
 	.strategy-text {
-		font-size: 10px;
-		line-height: 1.3;
-		margin: 3px 0;
+		font-size: clamp(14px, 1.1vw, 17px);
+		line-height: 1.4;
+		margin: clamp(4px, 0.5vh, 6px) 0;
 	}
 
 	.content-panel {
@@ -2396,24 +2398,25 @@ onMounted(() => {
 	}
 
 	.strategy-title {
-		font-size: 12px;
-		margin-bottom: 8px;
+		font-size: clamp(18px, 1.5vw, 22px);
+		margin-bottom: clamp(8px, 1vh, 12px);
 	}
 
 	.strategy-subtitle {
-		font-size: 11px;
-		margin-bottom: 6px;
+		font-size: clamp(16px, 1.3vw, 19px);
+		margin-bottom: clamp(8px, 1vh, 10px);
+		line-height: 1.3;
 	}
 
 	.strategy-label {
-		font-size: 10px;
-		margin: 4px 0 2px 0;
+		font-size: clamp(15px, 1.2vw, 17px);
+		margin: clamp(6px, 0.8vh, 8px) 0 clamp(3px, 0.4vh, 5px) 0;
 	}
 
 	.strategy-text {
-		font-size: 9px;
-		line-height: 1.2;
-		margin: 2px 0;
+		font-size: clamp(13px, 1.1vw, 15px);
+		line-height: 1.4;
+		margin: clamp(3px, 0.4vh, 5px) 0;
 	}
 
 	.content-panel {
@@ -2468,24 +2471,25 @@ onMounted(() => {
 	}
 
 	.strategy-title {
-		font-size: 11px;
-		margin-bottom: 6px;
+		font-size: clamp(16px, 1.4vw, 20px);
+		margin-bottom: clamp(8px, 1vh, 10px);
 	}
 
 	.strategy-subtitle {
-		font-size: 10px;
-		margin-bottom: 5px;
+		font-size: clamp(14px, 1.2vw, 17px);
+		margin-bottom: clamp(6px, 0.8vh, 8px);
+		line-height: 1.3;
 	}
 
 	.strategy-label {
-		font-size: 9px;
-		margin: 3px 0 1px 0;
+		font-size: clamp(13px, 1.1vw, 15px);
+		margin: clamp(5px, 0.6vh, 7px) 0 clamp(2px, 0.3vh, 4px) 0;
 	}
 
 	.strategy-text {
-		font-size: 8px;
-		line-height: 1.2;
-		margin: 1px 0;
+		font-size: clamp(11px, 1vw, 13px);
+		line-height: 1.3;
+		margin: clamp(2px, 0.3vh, 4px) 0;
 	}
 
 	.content-panel {
@@ -2546,24 +2550,25 @@ onMounted(() => {
 	}
 
 	.strategy-title {
-		font-size: 10px;
-		margin-bottom: 5px;
+		font-size: clamp(14px, 1.3vw, 18px);
+		margin-bottom: clamp(6px, 0.8vh, 8px);
 	}
 
 	.strategy-subtitle {
-		font-size: 9px;
-		margin-bottom: 4px;
+		font-size: clamp(12px, 1.1vw, 15px);
+		margin-bottom: clamp(5px, 0.6vh, 7px);
+		line-height: 1.3;
 	}
 
 	.strategy-label {
-		font-size: 8px;
-		margin: 2px 0 1px 0;
+		font-size: clamp(11px, 1vw, 13px);
+		margin: clamp(4px, 0.5vh, 6px) 0 clamp(2px, 0.3vh, 3px) 0;
 	}
 
 	.strategy-text {
-		font-size: 7px;
-		line-height: 1.2;
-		margin: 1px 0;
+		font-size: clamp(9px, 0.9vw, 11px);
+		line-height: 1.3;
+		margin: clamp(2px, 0.3vh, 3px) 0;
 	}
 
 	.content-panel {
@@ -2662,24 +2667,25 @@ onMounted(() => {
 	}
 
 	.strategy-title {
-		font-size: 9px;
-		margin-bottom: 4px;
+		font-size: clamp(12px, 1.2vw, 16px);
+		margin-bottom: clamp(5px, 0.6vh, 7px);
 	}
 
 	.strategy-subtitle {
-		font-size: 8px;
-		margin-bottom: 3px;
+		font-size: clamp(10px, 1vw, 13px);
+		margin-bottom: clamp(4px, 0.5vh, 6px);
+		line-height: 1.3;
 	}
 
 	.strategy-label {
-		font-size: 7px;
-		margin: 2px 0 1px 0;
+		font-size: clamp(9px, 0.9vw, 11px);
+		margin: clamp(3px, 0.4vh, 5px) 0 clamp(1px, 0.2vh, 2px) 0;
 	}
 
 	.strategy-text {
-		font-size: 6px;
-		line-height: 1.1;
-		margin: 1px 0;
+		font-size: clamp(8px, 0.8vw, 10px);
+		line-height: 1.3;
+		margin: clamp(2px, 0.2vh, 3px) 0;
 	}
 
 	/* 手机下的 Revenue Model 效果 */
