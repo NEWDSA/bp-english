@@ -217,9 +217,9 @@ onBeforeUnmount(() => { document.removeEventListener('keydown', onKeydown) })
 .corner-btn {
 	position: absolute;
 	top: 56px;
-	right: 178px; /* 1920- (1742+42) 近似到右距 */
-	width: 42px;
-	height: 42px;
+	right: 178px;
+	width: 58px;
+	height: 58px;
 	border: none;
 	background: none;
 	padding: 0;
@@ -250,10 +250,10 @@ onBeforeUnmount(() => { document.removeEventListener('keydown', onKeydown) })
 	position: absolute;
 	top: 4px;
 	left: 4px;
-	width: 34px;
-	height: 34px;
+	width: 50px;
+	height: 50px;
 	border-radius: 50%;
-	background: #FFFFFF; /* paint_0:2639 */
+	background: #FFFFFF;
 	transition: all 0.3s ease;
 	box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
@@ -264,8 +264,8 @@ onBeforeUnmount(() => { document.removeEventListener('keydown', onKeydown) })
 
 .corner-btn__icon {
 	position: relative;
-	width: 42px;
-	height: 42px;
+	width: 58px;
+	height: 58px;
 	display: block;
 	object-fit: contain;
 	transition: transform 0.3s ease;
