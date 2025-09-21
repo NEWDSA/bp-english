@@ -411,10 +411,7 @@ function syncMemberContent() {
             work: '• 10+ years ship design\n• Ferrari Group QC & After-sales\n• China Academy of Art - Industrial Design Teacher',
             education: '• BFA CAA\n• Joint Master: Genoa/Milan Poly - Ship & Yacht\n• PhD UNIKL - Ship & Ocean',
             worksImages: [
-                '/src/assets/work1.png',
-                '/src/assets/work2.png',
-                '/src/assets/work3.png',
-                '/src/assets/work4.png'
+                '/src/assets/Delivered.png'
             ]
         },
         cfo: {
@@ -702,20 +699,34 @@ onMounted(() => {
 	opacity: 0.9;
 }
 .works-grid {
+	position: fixed;
+	right: 170px;
+	top: 50%;
+	transform: translateY(-50%);
 	display: grid;
-	grid-template-columns: repeat(4, 1fr);
+	grid-template-columns: 1fr;
 	gap: 12px;
+	max-width: 560px;
+	z-index: 1001;
+	background: rgba(255, 255, 255, 0.1);
+	backdrop-filter: blur(20px) saturate(180%);
+	-webkit-backdrop-filter: blur(20px) saturate(180%);
+	padding: 20px;
+	border-radius: 8px;
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37), 
+				inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 .work-card {
 	background: rgba(0, 0, 0, 0.25);
 	border: 1px solid rgba(255, 255, 255, 0.15);
-	border-radius: 10px;
+	border-radius: 0px;
 	overflow: hidden;
 }
 .work-card img {
-	width: 100%;
-	height: 100px;
-	object-fit: cover;
+	width: 300px;
+	/* height: 580px; */
+	object-fit: contain;
 }
 
 .section-icon {
