@@ -197,7 +197,7 @@ const handleCityClick = (cityInfo) => {
                 <h3 class="text-sm text-gray-300">{{ isChinaSelected ? "China's ship leasing market" : isSoutheastAsiaSelected ? "The ship leasing market in Southeast Asia" : isItalySelected ? "The scale of the Italian ship leasing market" : isAmericaSelected ? "The scale of the US ship leasing market" : isMiddleEastSelected ? "The scale of the ship leasing market in the Middle East" : "Global ship leasing market size" }}</h3>
               </div>
               <div :style="{ height: chartHeight }">
-                <EChartsComponent chart-type="bar" :selected-city="selectedCity" @chart-click="handleChartClick" />
+                <EChartsComponent chart-type="gradientBar" :selected-city="selectedCity" @chart-click="handleChartClick" />
               </div>
             </div>
 
