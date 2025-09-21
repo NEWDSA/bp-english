@@ -45,13 +45,13 @@
 				<!-- 左侧内容 - 创始人信息 -->
 				<div class="left-section">
 					<!-- 创始人标题 -->
-					<div class="founder-header">
+					<div v-if="hasActiveMember" class="founder-header">
 						<h1 class="founder-title">{{ getCurrentMemberTitle() }}</h1>
 						<h2 class="founder-name">{{ getCurrentMemberName() }}</h2>
 					</div>
 
 					<!-- 工作经验 -->
-					<div v-if="!isEngineerBackground" class="info-section" @mouseenter="showTooltipWithType('work')" @mouseleave="hideTooltip">
+					<div v-if="!isEngineerBackground && hasActiveMember" class="info-section" @mouseenter="showTooltipWithType('work')" @mouseleave="hideTooltip">
 						<div class="section-icon">
 							<img src="/src/assets/work.png" alt="Work Experience" class="icon-image" />
 						</div>
@@ -59,7 +59,7 @@
 					</div>
 
 					<!-- 教育背景 -->
-					<div v-if="!isEngineerBackground" class="info-section" @mouseenter="showTooltipWithType('education')" @mouseleave="hideTooltip">
+					<div v-if="!isEngineerBackground && hasActiveMember" class="info-section" @mouseenter="showTooltipWithType('education')" @mouseleave="hideTooltip">
 						<div class="section-icon">
 							<img src="/src/assets/edu.png" alt="Educational Background" class="icon-image" />
 						</div>
@@ -67,7 +67,7 @@
 					</div>
 
 					<!-- 代表作品 -->
-					<div v-if="!isEngineerBackground" class="info-section" @mouseenter="showTooltipWithType('works')" @mouseleave="hideTooltip">
+					<div v-if="!isEngineerBackground && hasActiveMember" class="info-section" @mouseenter="showTooltipWithType('works')" @mouseleave="hideTooltip">
 						<div class="section-icon">
 							<img src="/src/assets/video.png" alt="Representative works" class="icon-image" />
 						</div>
@@ -75,7 +75,7 @@
 					</div>
 
 					<!-- 工程师专用 - 主要职责 -->
-					<div v-if="isEngineerBackground" class="info-section" @mouseenter="showTooltip('engineer')" @mouseleave="hideTooltip">
+					<div v-if="isEngineerBackground && hasActiveMember" class="info-section" @mouseenter="showTooltip('engineer')" @mouseleave="hideTooltip">
 						<div class="section-icon">
 							<img src="/src/assets/work.png" alt="Mainly Responsible For" class="icon-image" />
 						</div>
@@ -167,7 +167,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -180,6 +180,13 @@ const isEngineerBackground = ref(false)
 const isInteractionEngineerBackground = ref(false)
 const isStructuralEngineerBackground = ref(false)
 const isStrategicPlannerBackground = ref(false)
+
+// 计算是否有活跃的成员被选中
+const hasActiveMember = computed(() => {
+	return isCeoBackground.value || isCfoBackground.value || isCooBackground.value || 
+		   isEngineerBackground.value || isInteractionEngineerBackground.value || 
+		   isStructuralEngineerBackground.value || isStrategicPlannerBackground.value
+})
 
 function goHome() {
 	router.push('/')
@@ -200,6 +207,9 @@ function hideTooltip() {
 
 // 获取当前成员信息的方法
 function getCurrentMemberTitle() {
+	if (!hasActiveMember.value) {
+		return 'Our Team'
+	}
 	const currentMember = getCurrentActiveMember()
 	const titles = {
 		ceo: 'Founder & CEO',
@@ -214,6 +224,9 @@ function getCurrentMemberTitle() {
 }
 
 function getCurrentMemberName() {
+	if (!hasActiveMember.value) {
+		return 'Click on any team member to learn more'
+	}
 	const currentMember = getCurrentActiveMember()
 	const names = {
 		ceo: 'Kevin',
@@ -235,7 +248,7 @@ function getCurrentActiveMember() {
 	if (isInteractionEngineerBackground.value) return 'interactionEngineer'
 	if (isStructuralEngineerBackground.value) return 'structuralEngineer'
 	if (isStrategicPlannerBackground.value) return 'strategicPlanner'
-	return 'ceo' // 默认返回CEO
+	return null // 没有活跃成员时返回null
 }
 
 function getTooltipTitle(tooltipType) {
