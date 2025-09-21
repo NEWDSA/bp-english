@@ -61,25 +61,25 @@
 						<p class="expand-text">{{ memberContent.work }}</p>
 					</div>
 
-					<!-- 教育背景（点击展开） -->
-					<div v-if="hasActiveMember" class="info-section" :class="{ active: expanded.education }" @click="togglePanel('education')">
+					<!-- 教育背景（点击展开） - 只在有内容时显示 -->
+					<div v-if="hasActiveMember && memberContent.education" class="info-section" :class="{ active: expanded.education }" @click="togglePanel('education')">
 						<div class="section-icon">
 							<img src="/src/assets/edu.png" alt="Educational Background" class="icon-image" />
 						</div>
 						<h3 class="section-title">Educational Background</h3>
 					</div>
-					<div v-if="hasActiveMember" class="expand-panel" :class="{ open: expanded.education }">
+					<div v-if="hasActiveMember && memberContent.education" class="expand-panel" :class="{ open: expanded.education }">
 						<p class="expand-text">{{ memberContent.education }}</p>
 					</div>
 
-					<!-- 代表作品（点击展开） -->
-					<div v-if="hasActiveMember" class="info-section" :class="{ active: expanded.works }" @click="togglePanel('works')">
+					<!-- 代表作品（点击展开） - 只在有图片时显示 -->
+					<div v-if="hasActiveMember && memberContent.worksImages.length > 0" class="info-section" :class="{ active: expanded.works }" @click="togglePanel('works')">
 						<div class="section-icon">
 							<img src="/src/assets/video.png" alt="Representative works" class="icon-image" />
 						</div>
 						<h3 class="section-title">Representative works (Delivered)</h3>
 					</div>
-					<div v-if="hasActiveMember" class="expand-panel" :class="{ open: expanded.works }">
+					<div v-if="hasActiveMember && memberContent.worksImages.length > 0" class="expand-panel" :class="{ open: expanded.works }">
 						<div class="works-grid">
 							<div v-for="(img, idx) in memberContent.worksImages" :key="idx" class="work-card">
 								<img :src="img" alt="work" />
@@ -248,8 +248,6 @@ function getCurrentActiveMember() {
 
 
 function toggleCeoBackground() {
-	isCeoBackground.value = !isCeoBackground.value
-    syncMemberContent()
 	// 关闭其他所有背景
 	isCfoBackground.value = false
 	isCooBackground.value = false
@@ -257,11 +255,12 @@ function toggleCeoBackground() {
 	isInteractionEngineerBackground.value = false
 	isStructuralEngineerBackground.value = false
 	isStrategicPlannerBackground.value = false
+	// 切换当前成员状态
+	isCeoBackground.value = !isCeoBackground.value
+    syncMemberContent()
 }
 
 function toggleCfoBackground() {
-	isCfoBackground.value = !isCfoBackground.value
-    syncMemberContent()
 	// 关闭其他所有背景
 	isCeoBackground.value = false
 	isCooBackground.value = false
@@ -269,11 +268,12 @@ function toggleCfoBackground() {
 	isInteractionEngineerBackground.value = false
 	isStructuralEngineerBackground.value = false
 	isStrategicPlannerBackground.value = false
+	// 切换当前成员状态
+	isCfoBackground.value = !isCfoBackground.value
+    syncMemberContent()
 }
 
 function toggleCooBackground() {
-	isCooBackground.value = !isCooBackground.value
-    syncMemberContent()
 	// 关闭其他所有背景
 	isCeoBackground.value = false
 	isCfoBackground.value = false
@@ -281,11 +281,12 @@ function toggleCooBackground() {
 	isInteractionEngineerBackground.value = false
 	isStructuralEngineerBackground.value = false
 	isStrategicPlannerBackground.value = false
+	// 切换当前成员状态
+	isCooBackground.value = !isCooBackground.value
+    syncMemberContent()
 }
 
 function toggleEngineerBackground() {
-	isEngineerBackground.value = !isEngineerBackground.value
-    syncMemberContent()
 	// 关闭其他所有背景
 	isCeoBackground.value = false
 	isCfoBackground.value = false
@@ -293,11 +294,12 @@ function toggleEngineerBackground() {
 	isInteractionEngineerBackground.value = false
 	isStructuralEngineerBackground.value = false
 	isStrategicPlannerBackground.value = false
+	// 切换当前成员状态
+	isEngineerBackground.value = !isEngineerBackground.value
+    syncMemberContent()
 }
 
 function toggleInteractionEngineerBackground() {
-	isInteractionEngineerBackground.value = !isInteractionEngineerBackground.value
-    syncMemberContent()
 	// 关闭其他所有背景
 	isCeoBackground.value = false
 	isCfoBackground.value = false
@@ -305,11 +307,12 @@ function toggleInteractionEngineerBackground() {
 	isEngineerBackground.value = false
 	isStructuralEngineerBackground.value = false
 	isStrategicPlannerBackground.value = false
+	// 切换当前成员状态
+	isInteractionEngineerBackground.value = !isInteractionEngineerBackground.value
+    syncMemberContent()
 }
 
 function toggleStructuralEngineerBackground() {
-	isStructuralEngineerBackground.value = !isStructuralEngineerBackground.value
-    syncMemberContent()
 	// 关闭其他所有背景
 	isCeoBackground.value = false
 	isCfoBackground.value = false
@@ -317,11 +320,12 @@ function toggleStructuralEngineerBackground() {
 	isEngineerBackground.value = false
 	isInteractionEngineerBackground.value = false
 	isStrategicPlannerBackground.value = false
+	// 切换当前成员状态
+	isStructuralEngineerBackground.value = !isStructuralEngineerBackground.value
+    syncMemberContent()
 }
 
 function toggleStrategicPlannerBackground() {
-	isStrategicPlannerBackground.value = !isStrategicPlannerBackground.value
-    syncMemberContent()
 	// 关闭其他所有背景
 	isCeoBackground.value = false
 	isCfoBackground.value = false
@@ -329,6 +333,9 @@ function toggleStrategicPlannerBackground() {
 	isEngineerBackground.value = false
 	isInteractionEngineerBackground.value = false
 	isStructuralEngineerBackground.value = false
+	// 切换当前成员状态
+	isStrategicPlannerBackground.value = !isStrategicPlannerBackground.value
+    syncMemberContent()
 }
 
 function syncMemberContent() {
@@ -336,41 +343,39 @@ function syncMemberContent() {
     // 简单示例数据，可替换为真实内容
     const dataMap = {
         ceo: {
-            work: '• 10+ years ship design\n• Ferrari Group QC & After-sales\n• China Academy of Art - Industrial Design Teacher',
-            education: '• BFA CAA\n• Joint Master: Genoa/Milan Poly - Ship & Yacht\n• PhD UNIKL - Ship & Ocean',
-            worksImages: [
-                '/src/assets/Delivered.png'
-            ]
-        },
-        cfo: {
-            work: '• Founding Partner of Micro Light Investment\n• Tax laws, investment and financing expert\n• Financial strategy and risk management\n• Oversees all financial operations and compliance',
-            education: '• Master of Law, China University of Political Science and Law\n• Master of Finance from Stanford University',
+            work: '• Over 10 years of experience in ship design work\n• 2015-2017 Ferrari Group, Italy - Quality Control and After sales Manager\n• 2020/10-2022/10 School of Design and Art, China Academy of Art - Industrial Design Teacher\n• Hangzhou Yihai Ship Design Co., Ltd. - General Manager/Legal Representative\n• Yushui Flying (Shenzhen) Technology Co., Ltd. - General Manager',
+            education: '• Undergraduate: China Academy of Art - Industrial Design\n• Graduate student: Genoa Milan Polytechnic Joint Training Master\'s Degree - Ship and Yacht Design\n• PhD: University of Kuala Lumpur - Ship and Ocean Engineering',
             worksImages: ['/src/assets/Delivered.png']
         },
+        cfo: {
+            work: '• Founding Partner of Micro Light Innovation Investment\n• Responsible for tax laws, investment and financing',
+            education: '• Master of Law, China University of Political Science and Law\n• Master of Finance from Stanford University in the United States',
+            worksImages: []
+        },
         coo: { 
-            work: '• Operations leadership and management\n• Business process optimization\n• Strategic planning and execution\n• Team coordination and development', 
-            education: '• MBA in Operations Management\n• Bachelor in Business Administration', 
-            worksImages: ['/src/assets/Delivered.png'] 
+            work: '• Product development and delivery\n• Supply Chain Technology Management', 
+            education: '', 
+            worksImages: [] 
         },
         engineer: { 
-            work: '• Performance testing and optimization\n• CNC structural engineering\n• Software and hardware embedded systems\n• Material research and innovation', 
-            education: '• Bachelor of Engineering in Mechanical Engineering\n• Master of Science in Materials Science\n• Advanced certifications in CNC programming', 
-            worksImages: ['/src/assets/Delivered.png'] 
+            work: '• Responsible for performance testing and optimization\n• CNC structural engineer\n• Software and hardware embedded engineer\n• Material research and innovation', 
+            education: '', 
+            worksImages: [] 
         },
         interactionEngineer: { 
-            work: '• User interaction systems design\n• UI/UX development\n• Human-computer interaction optimization\n• Interface design and testing', 
-            education: '• Master in Human-Computer Interaction\n• Bachelor in Computer Science\n• UX Design certifications', 
-            worksImages: ['/src/assets/Delivered.png'] 
+            work: '• Emotional Interaction Engine\n• Digital twin simulation\n• Compile level code optimization', 
+            education: '', 
+            worksImages: [] 
         },
         structuralEngineer: { 
-            work: '• Structural analysis and design\n• Engineering calculations and modeling\n• Safety assessment and compliance\n• Construction oversight', 
-            education: '• Master in Civil Engineering\n• Bachelor in Structural Engineering\n• Professional Engineering License', 
-            worksImages: ['/src/assets/Delivered.png'] 
+            work: '• Multi physics modeling and simulation\n• Research and development of intelligent control algorithms\n• High end equipment system integration', 
+            education: '', 
+            worksImages: [] 
         },
         strategicPlanner: { 
-            work: '• Strategic planning and analysis\n• Market research and forecasting\n• Business development strategies\n• Investment planning and evaluation', 
-            education: '• Master in Economics\n• Bachelor in Business Strategy\n• Strategic Planning certifications', 
-            worksImages: ['/src/assets/Delivered.png'] 
+            work: '• Analyze industry trends and competitor dynamics\n• Participate in business negotiations, sign sales contracts, and ensure their execution\n• Expand new customers, maintain key customer relationships, and promote long-term cooperation', 
+            education: '', 
+            worksImages: [] 
         }
     }
 
