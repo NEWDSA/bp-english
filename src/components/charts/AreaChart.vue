@@ -64,7 +64,7 @@ const generateRegionData = () => {
       simple: [28, 33, 38, 43, 48, 53]
     },
     'global': {
-      detailed: [32, 36, 42, 48, 54, 60, 66, 72, 78, 84, 90, 96],
+      detailed: [320,350,380,430,450,494,470,510,550],
       simple: [35, 40, 45, 50, 56, 62]
     }
   }
@@ -99,23 +99,24 @@ const getChartOptions = () => {
     xAxis: {
       type: 'category',
       data: props.isDetailed
-        ? ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-        : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        ? ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023']
+        : ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023'],
       axisLabel: {
         show: axisVisible,
-        color: '#64748b',
-        fontSize: 10,
-        margin: 12
+        color: '#ffffff',
+        fontSize: 14,
+        margin: 40
       },
       axisLine: { show: false },
       axisTick: { show: false },
       splitLine: { show: false }
     },
     yAxis: {
+      show: false,
       type: 'value',
       axisLabel: {
         show: axisVisible,
-        color: '#64748b',
+        color: '#ffffff',
         fontSize: 10
       },
       axisLine: { show: false },
@@ -160,6 +161,19 @@ const getChartOptions = () => {
         borderWidth: 3,
         shadowBlur: 8,
         shadowColor: 'rgba(34, 211, 238, 0.5)'
+      },
+      label: {
+        show: props.isDetailed,
+        position: 'top',
+        color: '#ffffff',
+        fontSize: 12,
+        fontWeight: 'bold',
+        distance: 8,
+        formatter: '{c}',
+        textBorderColor: '#1e293b',
+        textBorderWidth: 2,
+        textShadowColor: 'rgba(0, 0, 0, 0.5)',
+        textShadowBlur: 2
       },
       emphasis: {
         itemStyle: {

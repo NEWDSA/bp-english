@@ -100,11 +100,11 @@ const getChartOptions = () => {
     xAxis: {
       type: 'category',
       data: props.isDetailed
-        ? ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Week 8']
+        ? ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025']
         : Array.from({ length: dataCount }, (_, i) => ``),
       axisLabel: {
         show: props.isDetailed,
-        color: '#64748b',
+        color: '#ffffff',
         fontSize: 10,
         margin: 12
       },
@@ -116,7 +116,7 @@ const getChartOptions = () => {
       type: 'value',
       axisLabel: {
         show: props.isDetailed,
-        color: '#64748b',
+        color: '#ffffff',
         fontSize: 10
       },
       axisLine: { show: props.isDetailed, lineStyle: { color: '#374151' } },
@@ -179,7 +179,7 @@ const getChartOptions = () => {
         label: {
           show: props.isDetailed,
           position: 'top',
-          color: '#374151',
+          color: '#ffffff',
           fontSize: 11,
           fontWeight: 'bold',
           distance: 8,

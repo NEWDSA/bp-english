@@ -98,11 +98,11 @@ const getChartOptions = () => {
     xAxis: {
       type: 'category',
       data: props.isDetailed
-        ? Array.from({ length: 16 }, (_, i) => `${i + 1}`)
-        : Array.from({ length: 12 }, (_, i) => `${i + 1}`),
+        ? ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025']
+        : ['2018', '2019', '2020', '2021', '2022', '2023'],
       axisLabel: {
         show: axisVisible,
-        color: '#64748b',
+        color: '#ffffff',
         fontSize: 10
       },
       axisLine: { show: false },
@@ -113,7 +113,7 @@ const getChartOptions = () => {
       type: 'value',
       axisLabel: {
         show: axisVisible,
-        color: '#64748b',
+        color: '#ffffff',
         fontSize: 10
       },
       axisLine: { show: false },
@@ -171,6 +171,19 @@ const getChartOptions = () => {
             else return 'rgba(30, 64, 175, 0.3)'                   // Blue glow
           },
           shadowOffsetY: 0
+        },
+        label: {
+          show: props.isDetailed,
+          position: 'top',
+          color: '#ffffff',
+          fontSize: 12,
+          fontWeight: 'bold',
+          distance: 8,
+          formatter: '{c}',
+          textBorderColor: '#1e293b',
+          textBorderWidth: 2,
+          textShadowColor: 'rgba(0, 0, 0, 0.5)',
+          textShadowBlur: 2
         },
         emphasis: {
           itemStyle: {

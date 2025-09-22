@@ -48,7 +48,7 @@ const generateRegionData = (country) => {
     'Italy': [42, 48, 44, 58, 65, 62, 72, 79],
     'United States': [38, 45, 49, 62, 69, 65, 75, 81],
     'United Arab Emirates': [33, 39, 43, 48, 55, 52, 61, 68],
-    'global': [40, 47, 51, 58, 65, 61, 71, 77]
+    'global': [170.4, 181.4, 244.1, 261.4, 303.5, 342.0, 303.8]
   }
 
   let selectedData = regionData['global'] // default
@@ -83,11 +83,11 @@ const getChartOptions = () => {
       xAxis: {
         type: 'category',
         data: props.isDetailed
-          ? ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025']
+          ? ['2015', '2018', '2020', '2021', '2022', '2023', '2024']
           : ['', '', '', '', '', '', ''],
         axisLabel: {
           show: axisVisible,
-          color: '#64748b',
+          color: '#ffffff',
           fontSize: 10
         },
         axisLine: {
@@ -102,7 +102,7 @@ const getChartOptions = () => {
         max: 100,
         axisLabel: {
           show: axisVisible,
-          color: '#64748b',
+          color: '#ffffff',
           fontSize: 10
         },
         axisLine: {
@@ -170,7 +170,7 @@ const getChartOptions = () => {
           label: {
             show: props.isDetailed,
             position: 'top',
-            color: '#374151',
+            color: '#ffffff',
             fontSize: 11,
             fontWeight: 'bold',
             distance: 8,
@@ -204,11 +204,11 @@ const getChartOptions = () => {
     xAxis: {
       type: 'category',
       data: props.isDetailed
-        ? ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025']
+        ? ['2015', '2018', '2020', '2021', '2022', '2023', '2024']
         : ['', '', '', '', '', '', ''],
       axisLabel: {
         show: axisVisible,
-        color: '#64748b',
+        color: '#ffffff',
         fontSize: 10
       },
       axisLine: { show: false },
@@ -254,7 +254,7 @@ const getChartOptions = () => {
         label: {
           show: props.isDetailed,
           position: 'top',
-          color: '#374151',
+          color: '#ffffff',
           fontSize: 12,
           fontWeight: 'bold',
           distance: 8,

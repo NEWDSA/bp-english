@@ -107,7 +107,7 @@ const getChartOptions = () => {
       max: 100,
       axisLabel: {
         show: props.isDetailed,
-        color: '#64748b',
+        color: '#ffffff',
         fontSize: 10,
         formatter: '{value}%'
       },
@@ -131,7 +131,7 @@ const getChartOptions = () => {
         : Array.from({ length: dataCount }, (_, i) => ``),
       axisLabel: {
         show: props.isDetailed,
-        color: '#64748b',
+        color: '#ffffff',
         fontSize: 10,
         margin: 12
       },
@@ -200,7 +200,7 @@ const getChartOptions = () => {
           label: {
             show: props.isDetailed,
             position: 'right',
-            color: '#374151',
+            color: '#ffffff',
             fontSize: 11,
             fontWeight: 'bold',
             distance: 15,
