@@ -148,7 +148,7 @@ const getChartOptions = () => {
       {
         type: 'text',
         left: 'center',
-        top: '45%',
+        top: '42%',
         style: {
           text: maxSegment.name,
           fontSize: 22,
