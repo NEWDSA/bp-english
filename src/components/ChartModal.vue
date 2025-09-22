@@ -26,13 +26,10 @@
 
       <!-- Chart Content -->
       <div class="p-6">
-        <div class="h-[560px] w-full">
+        <div class="h-[600px] w-full">
           <EChartsComponent :chart-type="chartType" :is-detailed="true" />
         </div>
       </div>
-
-      <!-- 标记点 -->
-      <div style="color: #ffffff; padding-bottom: 20px; text-align: center;">Output value (in billions of US dollars)</div>
     </div>
   </div>
 </template>

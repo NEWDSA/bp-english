@@ -64,8 +64,8 @@ const generateRegionData = () => {
       simple: [28, 33, 38, 43, 48, 53]
     },
     'global': {
-      detailed: [320,350,380,430,450,494,470,510,550],
-      simple: [35, 40, 45, 50, 56, 62]
+      detailed: [320, 350, 380, 430, 450, 494, 470, 510, 550],
+      simple: [320, 350, 380, 430, 450, 494, 470, 510, 550]
     }
   }
 
@@ -91,10 +91,11 @@ const getChartOptions = () => {
   return {
     backgroundColor: 'transparent',
     grid: {
-      left: '8%',
-      right: '8%',
-      top: '10%',
-      bottom: '15%'
+      left: '3%',
+      right: '3%',
+      top: '5%',
+      bottom: '8%',
+      containLabel: true
     },
     xAxis: {
       type: 'category',
