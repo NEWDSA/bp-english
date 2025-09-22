@@ -64,8 +64,8 @@ const generateRegionData = () => {
       simple: [35, 40, 46, 52, 58, 64]
     },
     'global': {
-      detailed: [40, 46, 52, 58, 64, 70, 76, 82],
-      simple: [42, 48, 54, 60, 66, 72]
+      detailed: ['0', '-3.30', '8.40', '-5.12', '7.03'],
+      simple: ['0', '-3.30', '8.40', '-5.12', '7.03']
     }
   }
 
@@ -100,20 +100,21 @@ const getChartOptions = () => {
     xAxis: {
       type: 'category',
       data: props.isDetailed
-        ? ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025']
+        ? ['2019', '2020', '2021', '2022', '2023']
         : Array.from({ length: dataCount }, (_, i) => ``),
       axisLabel: {
         show: props.isDetailed,
         color: '#ffffff',
-        fontSize: 10,
-        margin: 12
+        fontSize: 14,
+        margin: 40
       },
-      axisLine: { show: props.isDetailed, lineStyle: { color: '#374151' } },
+      axisLine: { show: false },
       axisTick: { show: false },
       splitLine: { show: false }
     },
     yAxis: {
       type: 'value',
+      show: false,
       axisLabel: {
         show: props.isDetailed,
         color: '#ffffff',
@@ -135,7 +136,7 @@ const getChartOptions = () => {
         name: 'Vertical Lines',
         type: 'bar',
         data: chartData,
-        barWidth: 2,
+        barWidth: 1,
         itemStyle: {
           color: '#ffffff',
           borderRadius: [1, 1, 0, 0]

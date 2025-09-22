@@ -26,10 +26,20 @@
 
       <!-- Chart Content -->
       <div class="p-6">
-        <div class="h-[600px] w-full">
+        <div class="h-[560px] w-full">
           <EChartsComponent :chart-type="chartType" :is-detailed="true" />
         </div>
       </div>
+
+      <!-- 图例 -->
+      <p style="color: #ffffff; padding: 20px; text-align: center;" v-if="chartType !== 'line'">
+        <span style="display: inline-block; width: 10px; height: 10px; background-color: #22d3ee; border-radius: 10px; margin-right: 10px;"></span>
+        Output value (in billions of US dollars)
+      </p>
+      <p style="color: #ffffff; padding: 20px; text-align: center; margin-bottom: 5px;" v-else>
+        <span style="display: inline-block; width: 40px; height: 3px; background-color: #22d3ee; border-radius: 2px; margin-right: 10px;"></span>
+        Growth rate
+      </p>
     </div>
   </div>
 </template>
