@@ -320,7 +320,7 @@ const loadAirlineData = () => {
     { name: 'Dubai International Airport', city: 'Dubai', country: 'United Arab Emirates', region: 'Middle East', lat: 25.2532, lng: 55.3657 },
 
     // Europe
-    { name: 'London Heathrow Airport', city: 'London', country: 'United Kingdom', region: 'Europe', lat: 51.4700, lng: -0.4543 }
+    // { name: 'London Heathrow Airport', city: 'London', country: 'United Kingdom', region: 'Europe', lat: 51.4700, lng: -0.4543 }
   ]
 
   // Create mock route data for the selected regions
@@ -338,17 +338,16 @@ const loadAirlineData = () => {
     // Middle East routes
     { airline: 'Emirates', srcAirport: 'Dubai International Airport', dstAirport: 'Doha Hamad International Airport' },
     { airline: 'Qatar Airways', srcAirport: 'Doha Hamad International Airport', dstAirport: 'Riyadh King Khalid International Airport' },
-    { airline: 'El Al', srcAirport: 'Tel Aviv Ben Gurion Airport', dstAirport: 'London Heathrow Airport' },
 
     // Intercontinental routes
-    { airline: 'Emirates', srcAirport: 'Dubai International Airport', dstAirport: 'London Heathrow Airport' },
-    { airline: 'Cathay Pacific', srcAirport: 'Beijing Capital International Airport', dstAirport: 'London Heathrow Airport' },
-    { airline: 'Air France', srcAirport: 'London Heathrow Airport', dstAirport: 'Los Angeles International Airport' },
-    { airline: 'Singapore Airlines', srcAirport: 'Singapore Changi Airport', dstAirport: 'London Heathrow Airport' },
+    { airline: 'Emirates', srcAirport: 'Dubai International Airport', dstAirport: 'Rome Fiumicino Airport' },
+    { airline: 'Cathay Pacific', srcAirport: 'Beijing Capital International Airport', dstAirport: 'Singapore Changi Airport' },
+    { airline: 'Air France', srcAirport: 'Rome Fiumicino Airport', dstAirport: 'Los Angeles International Airport' },
+    { airline: 'Singapore Airlines', srcAirport: 'Singapore Changi Airport', dstAirport: 'Dubai International Airport' },
     { airline: 'Qatar Airways', srcAirport: 'Doha Hamad International Airport', dstAirport: 'Rome Fiumicino Airport' },
-    { airline: 'Turkish Airlines', srcAirport: 'London Heathrow Airport', dstAirport: 'Beijing Capital International Airport' },
-    { airline: 'British Airways', srcAirport: 'London Heathrow Airport', dstAirport: 'Los Angeles International Airport' },
-    { airline: 'Lufthansa', srcAirport: 'London Heathrow Airport', dstAirport: 'Rome Fiumicino Airport' }
+    { airline: 'Turkish Airlines', srcAirport: 'Dubai International Airport', dstAirport: 'Beijing Capital International Airport' },
+    { airline: 'British Airways', srcAirport: 'Rome Fiumicino Airport', dstAirport: 'Los Angeles International Airport' },
+    { airline: 'Lufthansa', srcAirport: 'Dubai International Airport', dstAirport: 'Rome Fiumicino Airport' }
   ]
 
   try {

@@ -105,7 +105,8 @@ const getChartOptions = () => {
     series: [
       {
         type: 'pie',
-        radius: ['52.5%', '67.5%'],
+        roseType: 'area',
+        radius: ['55%', '75%'],
         center: ['50%', '45%'],
         startAngle: 90,
         data: ageGroups.map((item, index) => ({
@@ -152,7 +153,7 @@ const getChartOptions = () => {
         style: {
           text: maxSegment.name,
           fontSize: 22,
-          fontWeight: 'bold',
+          fontWeight: 'normal',
           fill: '#ffffff',
           textAlign: 'center',
           textVerticalAlign: 'middle'
@@ -163,16 +164,16 @@ const getChartOptions = () => {
     legend: {
       orient: 'horizontal',
       left: 'center',
-      bottom: '8%',
+      bottom: '3%',
       data: ageGroups.map(item => ({
         name: item.name,
         icon: 'circle',
         textStyle: {
-          color: '#64748b'
+          color: '#ffffff'
         }
       })),
       textStyle: {
-        color: '#64748b',
+        color: '#ffffff',
         fontSize: 11
       },
       itemWidth: 12,
@@ -220,7 +221,7 @@ const getChartOptions = () => {
     baseConfig.legend = {
       orient: 'horizontal',
       left: 'center',
-      bottom: '5%',
+      bottom: '2%',
       data: ageGroups.map(item => ({
         name: item.name,
         icon: 'circle',
@@ -240,7 +241,7 @@ const getChartOptions = () => {
 
     // Adjust center position to accommodate title
     baseConfig.series[0].center = ['50%', '50%']
-    baseConfig.series[0].radius = ['45%', '60%']
+    baseConfig.series[0].radius = ['50%', '75%']
 
     // Update graphic text position and style
     baseConfig.graphic[0].top = '50%'

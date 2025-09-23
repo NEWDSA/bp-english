@@ -83,11 +83,11 @@ const handleChartClick = (chartInfo) => {
 // Get chart title based on chart type and region
 const getChartTitle = (chartType) => {
   const titles = {
-    'bar': isChinaSelected.value ? "China's small yacht manufacturing industry" :
-           isSoutheastAsiaSelected.value ? "Small yacht manufacturing industry in Southeast Asia" :
-           isItalySelected.value ? "Italian small yacht manufacturing industry" :
-           isAmericaSelected.value ? "Small yacht manufacturing industry in the United States" :
-           isMiddleEastSelected.value ? "Small yacht manufacturing industry in the Middle East" :
+    'bar': isChinaSelected.value ? "Market size of China's small yacht manufacturing industry" :
+           isSoutheastAsiaSelected.value ? "Market size of small yacht manufacturing industry in Southeast Asia" :
+           isItalySelected.value ? "Market size of Italian small yacht manufacturing industry" :
+           isAmericaSelected.value ? "Market size of small yacht manufacturing industry in the United States" :
+           isMiddleEastSelected.value ? "Market size of small yacht manufacturing industry in the Middle East" :
            "The market size of the global small yacht manufacturing industry",
     'area': isChinaSelected.value ? "Scale of China's Small Yacht Sales Market" :
             isSoutheastAsiaSelected.value ? "Market size of outdoor water sports equipment in Southeast Asia" :
@@ -95,17 +95,17 @@ const getChartTitle = (chartType) => {
             isAmericaSelected.value ? "Size of the Small Yacht Sales Market in the United States" :
             isMiddleEastSelected.value ? "Scale of Small Yacht Sales Market in the Middle East" :
             "Global small yacht sales market size",
-    'line': (isChinaSelected.value ? "Water sports equipment in China" :
-             isSoutheastAsiaSelected.value ? "Water sports equipment in Southeast Asia" :
-             isItalySelected.value ? "Water sports equipment in Italy" :
-             isAmericaSelected.value ? "Water sports equipment in USA" :
-             isMiddleEastSelected.value ? "Water sports equipment in the Middle East" :
-             "Global market size of water outdoor sports equipment") + " (growth rate)",
-    'scatter': isChinaSelected.value ? "Water sports equipment in China" :
-               isSoutheastAsiaSelected.value ? "Water sports equipment in Southeast Asia" :
-               isItalySelected.value ? "Water sports equipment in Italy" :
-               isAmericaSelected.value ? "Water sports equipment in the United States" :
-               isMiddleEastSelected.value ? "Water sports equipment in the Middle East" :
+    'line': isChinaSelected.value ? "Market size of outdoor water sports equipment in China" :
+             isSoutheastAsiaSelected.value ? "Market size of outdoor water sports equipment in Southeast Asia" :
+             isItalySelected.value ? "Market size of outdoor water sports equipment in Italy" :
+             isAmericaSelected.value ? "Market size of outdoor water sports equipment in the United States" :
+             isMiddleEastSelected.value ? "Market size of water and outdoor sports equipment in the Middle East" :
+             "Global market size of water outdoor sports equipment",
+    'scatter': isChinaSelected.value ? "The scale of China's ship leasing market" :
+               isSoutheastAsiaSelected.value ? "Market size of outdoor water sports equipment in Southeast Asia" :
+               isItalySelected.value ? "Market size of outdoor water sports equipment in Italy" :
+               isAmericaSelected.value ? "Market size of outdoor water sports equipment in the United States" :
+               isMiddleEastSelected.value ? "Market size of outdoor water sports equipment in the Middle East" :
                "Global market size of water outdoor sports equipment",
     'pie': isChinaSelected.value ? "Age structure of Chinese ship owners" :
            isSoutheastAsiaSelected.value ? "Age structure of shipowners in Southeast Asia" :
@@ -113,12 +113,12 @@ const getChartTitle = (chartType) => {
            isAmericaSelected.value ? "Age structure of American shipowners" :
            isMiddleEastSelected.value ? "Age structure of shipowners in the Middle East" :
            "Age structure of global shipowners",
-    'gradientBar': isChinaSelected.value ? "China's ship leasing market" :
-                   isSoutheastAsiaSelected.value ? "The ship leasing market in Southeast Asia" :
+    'gradientBar': isChinaSelected.value ? "Age structure of Chinese ship owners" :
+                   isSoutheastAsiaSelected.value ? "The scale of the ship leasing market in Southeast Asia" :
                    isItalySelected.value ? "The scale of the Italian ship leasing market" :
                    isAmericaSelected.value ? "The scale of the US ship leasing market" :
                    isMiddleEastSelected.value ? "The scale of the ship leasing market in the Middle East" :
-                   "Global ship leasing market size"
+                   "The market size of the global small yacht manufacturing industry"
   }
   return titles[chartType] || 'Chart Details'
 }
@@ -179,7 +179,7 @@ const handleCityClick = (cityInfo) => {
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 xl:gap-6">
             <!-- Chart 1: Global small yacht manufacturing industry -->
             <div class="text-white">
-              <div class="flex items-center mb-4">
+              <div class="flex items-center mb-4 h-12">
                 <div class="w-2 h-2 bg-cyan-400 rounded-full mr-3"></div>
                 <h3 class="text-sm text-gray-300">{{ isChinaSelected ? "China's small yacht manufacturing industry" : isSoutheastAsiaSelected ? "Small yacht manufacturing industry in Southeast Asia" : isItalySelected ? "Italian small yacht manufacturing industry" : isAmericaSelected ? "Small yacht manufacturing industry in the United States" : isMiddleEastSelected ? "Small yacht manufacturing industry in the Middle East" : "Global small yacht manufacturing industry" }}</h3>
               </div>
@@ -190,7 +190,7 @@ const handleCityClick = (cityInfo) => {
 
             <!-- Chart 2: Global small yacht sales market size -->
             <div class="text-white">
-              <div class="flex items-center mb-4">
+              <div class="flex items-center mb-4 h-12">
                 <div class="w-2 h-2 bg-cyan-400 rounded-full mr-3"></div>
                 <h3 class="text-sm text-gray-300">{{ isChinaSelected ? "China's Small Yacht Sales Market" : isSoutheastAsiaSelected ? "Water sports equipment in Southeast Asia" : isItalySelected ? "Italian small yacht sales market" : isAmericaSelected ? "Size of the Small Yacht Sales Market in the United States" : isMiddleEastSelected ? "Scale of Small Yacht Sales Market in the Middle East" : "Global small yacht sales market size" }}</h3>
               </div>
@@ -201,7 +201,7 @@ const handleCityClick = (cityInfo) => {
 
             <!-- Chart 3: Global market size of water outdoor sports equipment (growth rate) -->
             <div class="text-white">
-              <div class="flex items-center mb-4">
+              <div class="flex items-center mb-4 h-12">
                 <div class="w-2 h-2 bg-cyan-400 rounded-full mr-3"></div>
                 <h3 class="text-sm text-gray-300">{{ isChinaSelected ? "Water sports equipment in China" : isSoutheastAsiaSelected ? "Water sports equipment in Southeast Asia" : isItalySelected ? "Water sports equipment in Italy" : isAmericaSelected ? "Water sports equipment in USA" : isMiddleEastSelected ? "Water sports equipment in the Middle East" : "Global market size of water outdoor sports equipment" }}<br/>(growth rate)</h3>
               </div>
@@ -212,7 +212,7 @@ const handleCityClick = (cityInfo) => {
 
             <!-- Chart 4: Global market size of water outdoor sports equipment -->
             <div class="text-white">
-              <div class="flex items-center mb-4">
+              <div class="flex items-center mb-4 h-12">
                 <div class="w-2 h-2 bg-cyan-400 rounded-full mr-3"></div>
                 <h3 class="text-sm text-gray-300">{{ isChinaSelected ? "Water sports equipment in China" : isSoutheastAsiaSelected ? "Water sports equipment in Southeast Asia" : isItalySelected ? "Water sports equipment in Italy" : isAmericaSelected ? "Water sports equipment in the United States" : isMiddleEastSelected ? "Water sports equipment in the Middle East" : "Global market size of water outdoor sports equipment" }}</h3>
               </div>
@@ -223,7 +223,7 @@ const handleCityClick = (cityInfo) => {
 
             <!-- Chart 5: Global ship leasing market size -->
             <div class="text-white">
-              <div class="flex items-center mb-4">
+              <div class="flex items-center mb-4 h-12">
                 <div class="w-2 h-2 bg-cyan-400 rounded-full mr-3"></div>
                 <h3 class="text-sm text-gray-300">{{ isChinaSelected ? "China's ship leasing market" : isSoutheastAsiaSelected ? "The ship leasing market in Southeast Asia" : isItalySelected ? "The scale of the Italian ship leasing market" : isAmericaSelected ? "The scale of the US ship leasing market" : isMiddleEastSelected ? "The scale of the ship leasing market in the Middle East" : "Global ship leasing market size" }}</h3>
               </div>
@@ -234,7 +234,7 @@ const handleCityClick = (cityInfo) => {
 
             <!-- Chart 6: Age structure of global shipowners -->
             <div class="text-white">
-              <div class="flex items-center mb-4">
+              <div class="flex items-center mb-4 h-12">
                 <div class="w-2 h-2 bg-cyan-400 rounded-full mr-3"></div>
                 <h3 class="text-sm text-gray-300">{{ isChinaSelected ? "Age structure of Chinese ship owners" : isSoutheastAsiaSelected ? "Age structure of shipowners in Southeast Asia" : isItalySelected ? "Age structure of Italian shipowners" : isAmericaSelected ? "Age structure of American shipowners" : isMiddleEastSelected ? "Age structure of shipowners in the Middle East" : "Age structure of global shipowners" }}</h3>
               </div>

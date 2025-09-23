@@ -118,6 +118,12 @@ const getChartOptions = () => {
   // Use raw values directly (no percentage normalization)
   const maxValue = Math.max(...regionData.data)
 
+  // Debug logging
+  console.log('ScatterChart data:', regionData.data)
+  console.log('ScatterChart yAxis:', regionData.yAxis)
+  console.log('Is detailed:', props.isDetailed)
+  console.log('Selected city:', props.selectedCity)
+
   return {
     backgroundColor: 'transparent',
     grid: {
@@ -130,7 +136,7 @@ const getChartOptions = () => {
     xAxis: {
       type: 'value',
       min: 0,
-      max: 'dataMax',
+      max: 400,
       show: false,
       axisLabel: {
         show: props.isDetailed,
@@ -170,7 +176,7 @@ const getChartOptions = () => {
       inverse: true
     },
     series: [
-      // Single series combining background and progress
+      // Progress Bars
       {
         name: 'Progress Bars',
         type: 'bar',
@@ -202,39 +208,14 @@ const getChartOptions = () => {
         z: 1,
         animationDuration: 1500,
         animationEasing: 'cubicOut',
-        markPoint: {
-          symbol: 'circle',
-          symbolSize: 12,
-          itemStyle: {
-            color: '#ffffff',
-            borderColor: '#22d3ee',
-            borderWidth: 2,
-            shadowBlur: 10,
-            shadowColor: 'rgba(34, 211, 238, 0.6)'
-          },
-          emphasis: {
-            itemStyle: {
-              shadowBlur: 18,
-              shadowColor: 'rgba(34, 211, 238, 0.9)',
-              borderWidth: 3
-            }
-          },
-          data: regionData.data.map((value, index) => ({
-            coord: [value, index],
-            value: value
-          })),
-          label: {
-            show: props.isDetailed,
-            position: 'right',
-            color: '#ffffff',
-            fontSize: 20,
-            fontWeight: 'none',
-            distance: 15,
-            formatter: '{c}'
-          },
-          z: 3,
-          animationDuration: 2000,
-          animationEasing: 'elasticOut'
+        label: {
+          show: props.isDetailed,
+          position: 'right',
+          color: '#ffffff',
+          fontSize: 20,
+          fontWeight: 'none',
+          distance: 15,
+          formatter: '{c}'
         }
       }
     ]
