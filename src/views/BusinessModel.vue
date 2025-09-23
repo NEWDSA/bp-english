@@ -785,7 +785,7 @@ function renderModalCharts() {
 			},
 			xAxis: {
 				type: 'category',
-                
+
 				data: ['5.29', '5.21', '5.14', '5.07', '5.00', '4.93', '4.86', '4.79', '4.71', '4.64', '4.57', '4.50'],
 				axisLabel: { color: '#666', fontSize: 8, show: true },
 				axisTick: { show: false },
@@ -992,7 +992,7 @@ function renderModalCharts() {
 		const option3 = {
 			title: {
 				text: 'When the cost of a single ship is 35,000$, break even sales volume is achieved',
-				textStyle: { fontSize: 9, color: '#333',fontWeight: 'normal' },
+				textStyle: { fontSize: 9, color: '#333', fontWeight: 'normal' },
 				top: 5,
 				left: 'center'
 			},
@@ -1182,7 +1182,7 @@ function renderModalCharts() {
 			},
 			xAxis: {
 				type: 'category',
-				data: ['13', '14', '14', '15', '15', '16', '16', '17', '18', '19', '20', '20', '21', '23', '24'],
+				data: ['9.57', '9.43', '9.29', '9.14', '9.00', '8.86', '8.71', '8.57', '8.43', '8.29', '8.14', '8.00', '7.86', '7.71', '7.57'],
 				position: 'bottom',
 				axisLabel: {
 					show: true,
@@ -1203,10 +1203,10 @@ function renderModalCharts() {
 				},
 				boundaryGap: false
 			},
-			yAxis: {
+			yAxis: [{
 				type: 'value',
 				min: 0,
-				max: 50,
+				max: 100,
 				axisLabel: {
 					show: false
 				},
@@ -1216,11 +1216,20 @@ function renderModalCharts() {
 					show: false
 				}
 			},
+			{
+				type: 'value',
+				position: 'right',
+				axisLabel: { show: false },
+				axisTick: { show: false },
+				axisLine: { show: false },
+				splitLine: { show: false }
+			}],
 			series: [
 				{
 					name: 'Annual breakeven sales volume (units)',
 					type: 'line',
-					data: [40, 40, 38, 38, 37, 37, 36, 35, 34, 33, 32, 31, 27, 26, 25],
+					yAxisIndex: 0,
+					data: [13, 14, 14, 15, 15, 16, 16, 17, 18, 19, 20, 21, 23, 24],
 					smooth: true,
 					symbol: 'circle',
 					symbolSize: 3,
@@ -1254,7 +1263,8 @@ function renderModalCharts() {
 				{
 					name: 'Gross profit margin',
 					type: 'line',
-					data: [13, 14, 14, 15, 15, 16, 16, 17, 18, 19, 20, 20, 21, 23, 24],
+					yAxisIndex: 1,
+					data: [45, 44, 44, 43, 42, 42, 41, 40, 39, 38, 37, 36, 36, 34, 33],
 					smooth: true,
 					symbol: 'circle',
 					symbolSize: 3,
