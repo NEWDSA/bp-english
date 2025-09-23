@@ -44,28 +44,52 @@ const generateRegionData = () => {
   // Define consistent data for each region
   const regionData = {
     'China': {
-      detailed: [55, 62, 68, 75, 82, 78, 85, 92],
-      simple: [58, 65, 72, 78, 85, 91]
+      detailed: [5.76, 5.40, 5.54, 4.91, 4.94],
+      simple: [5.76, 5.40, 5.54, 4.91, 4.94],
+      yAxis: {
+        detailed: ['2019', '2020', '2021', '2022', '2023'],
+        simple: ['2019', '2020', '2021', '2022', '2023']
+      }
     },
     'Singapore': {
-      detailed: [48, 54, 60, 66, 72, 68, 75, 82],
-      simple: [50, 56, 62, 68, 74, 80]
+      detailed: [28.5, 35.2, 32.1, 48.6, 52.3, 57.0],
+      simple: [28.5, 35.2, 32.1, 48.6, 52.3, 57.0],
+      yAxis: {
+        detailed: ['2015', '2018', '2020', '2022', '2023', '2024'],
+        simple: ['2015', '2018', '2020', '2022', '2023', '2024']
+      }
     },
     'Italy': {
-      detailed: [52, 58, 64, 70, 76, 72, 79, 86],
-      simple: [54, 60, 66, 72, 78, 84]
+      detailed: [10.9, 11.5, 13.6, 17.5, 18.3],
+      simple: [10.9, 11.5, 13.6, 17.5, 18.3],
+      yAxis: {
+        detailed: ['2018', '2019', '2020', '2021', '2022'],
+        simple: ['2018', '2019', '2020', '2021', '2022']
+      }
     },
     'United States': {
-      detailed: [46, 52, 58, 65, 72, 68, 75, 82],
-      simple: [48, 54, 60, 67, 74, 80]
+      detailed: [89.9, 86.9, 94.2, 89.3, 95.7],
+      simple: [89.9, 86.9, 94.2, 89.3, 95.7],
+      yAxis: {
+        detailed: ['2019', '2020', '2021', '2022', '2023'],
+        simple: ['2019', '2020', '2021', '2022', '2023']
+      }
     },
     'United Arab Emirates': {
-      detailed: [42, 48, 54, 60, 66, 62, 69, 76],
-      simple: [44, 50, 56, 62, 68, 74]
+      detailed: [48.4, 46.8, 50.7, 48.1, 51.5],
+      simple: [48.4, 46.8, 50.7, 48.1, 51.5],
+      yAxis: {
+        detailed: ['2019', '2020', '2021', '2022', '2023'],
+        simple: ['2019', '2020', '2021', '2022', '2023']
+      }
     },
     'global': {
       detailed: [345.6, 334.3, 362.3, 342.8, 367.9],
-      simple: [345.6, 334.3, 362.3, 342.8, 367.9]
+      simple: [345.6, 334.3, 362.3, 342.8, 367.9],
+      yAxis: {
+        detailed: ['2019', '2020', '2021', '2022', '2023'],
+        simple: ['2019', '2020', '2021', '2022', '2023']
+      }
     }
   }
 
@@ -80,24 +104,27 @@ const generateRegionData = () => {
     }
   }
 
-  return props.isDetailed ? selectedData.detailed : selectedData.simple
+  return {
+    data: props.isDetailed ? selectedData.detailed : selectedData.simple,
+    yAxis: props.isDetailed ? selectedData.yAxis.detailed : selectedData.yAxis.simple
+  }
 }
 
 const getChartOptions = () => {
-  const data = generateRegionData()
+  const regionData = generateRegionData()
   const axisVisible = props.isDetailed
   const dataCount = props.isDetailed ? 8 : 6
 
   // Use raw values directly (no percentage normalization)
-  const maxValue = Math.max(...data)
+  const maxValue = Math.max(...regionData.data)
 
   return {
     backgroundColor: 'transparent',
     grid: {
       left: '8%',
       right: '12%',
-      top: '8%',
-      bottom: '8%',
+      top: props.isDetailed ? '5%' : '8%',
+      bottom: props.isDetailed ? '-2%' : '8%',
       containLabel: true
     },
     xAxis: {
@@ -108,7 +135,7 @@ const getChartOptions = () => {
       axisLabel: {
         show: props.isDetailed,
         color: '#ffffff',
-        fontSize: 10,
+        fontSize: 20,
         // Show raw values
       },
       axisLine: {
@@ -126,13 +153,11 @@ const getChartOptions = () => {
     },
     yAxis: {
       type: 'category',
-      data: props.isDetailed
-        ? [2019, 2020, 2021, 2022, 2023]
-        : Array.from({ length: dataCount }, (_, i) => ``),
+      data: regionData.yAxis,
       axisLabel: {
         show: props.isDetailed,
         color: '#ffffff',
-        fontSize: 14,
+        fontSize: 20,
         margin: 12
       },
       axisLine: {
@@ -149,7 +174,7 @@ const getChartOptions = () => {
       {
         name: 'Progress Bars',
         type: 'bar',
-        data: data.map((value, index) => ({
+        data: regionData.data.map((value, index) => ({
           value: value,
           itemStyle: {
             color: {
@@ -194,7 +219,7 @@ const getChartOptions = () => {
               borderWidth: 3
             }
           },
-          data: data.map((value, index) => ({
+          data: regionData.data.map((value, index) => ({
             coord: [value, index],
             value: value
           })),
@@ -202,8 +227,8 @@ const getChartOptions = () => {
             show: props.isDetailed,
             position: 'right',
             color: '#ffffff',
-            fontSize: 11,
-            fontWeight: 'bold',
+            fontSize: 20,
+            fontWeight: 'none',
             distance: 15,
             formatter: '{c}'
           },
@@ -306,7 +331,7 @@ const initChart = () => {
     }
 
     const options = getChartOptions()
-    chartInstance.setOption(options, true)
+    chartInstance.setOption(options, false)
 
     // Add click event listener only for non-detailed charts
     if (!props.isDetailed) {
@@ -392,7 +417,15 @@ const handleResize = () => {
 watch(() => props.selectedCity, (newCity) => {
   if (chartInstance && !chartInstance.isDisposed()) {
     const newOptions = getChartOptions()
-    chartInstance.setOption(newOptions, true)
+    // Use notMerge: false to merge options instead of replacing them
+    chartInstance.setOption({
+      yAxis: {
+        data: newOptions.yAxis.data
+      },
+      series: [{
+        data: newOptions.series[0].data
+      }]
+    }, false)
     console.log(`Scatter chart updated for city: ${newCity ? newCity.city : 'None'}`)
   }
 }, { deep: true })

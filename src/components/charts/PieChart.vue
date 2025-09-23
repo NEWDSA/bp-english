@@ -45,32 +45,32 @@ const getChartOptions = () => {
       'China': [
         { value: 25, name: '18-34', color: '#22d3ee' },
         { value: 45, name: '35-50', color: '#f59e0b' },
-        { value: 25, name: '51-65', color: '#fbbf24' },
-        { value: 5, name: '≥65', color: '#3b82f6' }
-      ],
-      'Singapore': [
-        { value: 35, name: '18-34', color: '#22d3ee' },
-        { value: 38, name: '35-50', color: '#f59e0b' },
-        { value: 22, name: '51-65', color: '#fbbf24' },
-        { value: 5, name: '≥65', color: '#3b82f6' }
-      ],
-      'Italy': [
-        { value: 28, name: '18-34', color: '#22d3ee' },
-        { value: 42, name: '35-50', color: '#f59e0b' },
         { value: 20, name: '51-65', color: '#fbbf24' },
         { value: 10, name: '≥65', color: '#3b82f6' }
       ],
+      'Singapore': [
+        { value: 35, name: '18-34', color: '#22d3ee' },
+        { value: 45, name: '35-50', color: '#f59e0b' },
+        { value: 15, name: '51-65', color: '#fbbf24' },
+        { value: 5, name: '≥65', color: '#3b82f6' }
+      ],
+      'Italy': [
+        { value: 15, name: '18-34', color: '#22d3ee' },
+        { value: 35, name: '35-50', color: '#f59e0b' },
+        { value: 30, name: '51-65', color: '#fbbf24' },
+        { value: 20, name: '≥65', color: '#3b82f6' }
+      ],
       'United States': [
-        { value: 32, name: '18-34', color: '#22d3ee' },
-        { value: 38, name: '35-50', color: '#f59e0b' },
-        { value: 23, name: '51-65', color: '#fbbf24' },
-        { value: 7, name: '≥65', color: '#3b82f6' }
+        { value: 25, name: '18-34', color: '#22d3ee' },
+        { value: 50, name: '35-50', color: '#f59e0b' },
+        { value: 15, name: '51-65', color: '#fbbf24' },
+        { value: 10, name: '≥65', color: '#3b82f6' }
       ],
       'United Arab Emirates': [
-        { value: 40, name: '18-34', color: '#22d3ee' },
-        { value: 35, name: '35-50', color: '#f59e0b' },
+        { value: 30, name: '18-34', color: '#22d3ee' },
+        { value: 40, name: '35-50', color: '#f59e0b' },
         { value: 20, name: '51-65', color: '#fbbf24' },
-        { value: 5, name: '≥65', color: '#3b82f6' }
+        { value: 10, name: '≥65', color: '#3b82f6' }
       ],
       'global': [
         { value: 30, name: '18-34', color: '#22d3ee' },

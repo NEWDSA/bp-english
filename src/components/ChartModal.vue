@@ -27,7 +27,7 @@
       <!-- Chart Content -->
       <div class="p-6">
         <div class="h-[560px] w-full">
-          <EChartsComponent :chart-type="chartType" :is-detailed="true" :name="name" />
+          <EChartsComponent :chart-type="chartType" :is-detailed="true" :name="name" :selected-city="selectedCity" />
         </div>
       </div>
 
@@ -66,6 +66,10 @@ defineProps({
   name: {
     type: Object,
     required: false
+  },
+  selectedCity: {
+    type: Object,
+    default: null
   }
 })
 

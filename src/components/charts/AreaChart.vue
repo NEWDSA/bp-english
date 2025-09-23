@@ -50,28 +50,52 @@ const generateRegionData = () => {
   // Define consistent data for each region
   const regionData = {
     'China': {
-      detailed: [32, 38, 45, 52, 58, 65, 72, 68, 75, 82, 88, 95],
-      simple: [35, 42, 48, 55, 62, 69]
+      detailed: [9.25, 10.26, 11.49, 12.99, 14.81, 17.03],
+      simple: [9.25, 10.26, 11.49, 12.99, 14.81, 17.03],
+      xAxis: {
+        detailed: ['2018', '2019', '2020', '2021', '2022', '2023'],
+        simple: ['2018', '2019', '2020', '2021', '2022', '2023']
+      }
     },
     'Singapore': {
-      detailed: [28, 32, 36, 42, 48, 52, 58, 62, 68, 72, 78, 84],
-      simple: [30, 35, 40, 45, 50, 56]
+      detailed: [2.8, 4.2, 3.5, 4.6, 6.3, 7.1],
+      simple: [2.8, 4.2, 3.5, 4.6, 6.3, 7.1],
+      xAxis: {
+        detailed: ['2015','2018', '2020', '2021', '2023', '2024'],
+        simple: ['2015','2018', '2020', '2021', '2023', '2024']
+      }
     },
     'Italy': {
-      detailed: [35, 40, 44, 48, 54, 58, 62, 66, 70, 74, 78, 82],
-      simple: [38, 42, 46, 50, 55, 60]
+      detailed: [28.3, 38.1, 24.9, 32.6, 37.6, 43.4],
+      simple: [28.3, 38.1, 24.9, 32.6, 37.6, 43.4],
+      xAxis: {
+        detailed: ['2015', '2018', '2020', '2023', '2024'],
+        simple: ['2015', '2018', '2020', '2023', '2024']
+      }
     },
     'United States': {
-      detailed: [30, 35, 40, 46, 52, 58, 64, 70, 76, 82, 88, 94],
-      simple: [33, 38, 43, 48, 54, 60]
+      detailed: [29.2, 30.4, 31.1, 32.8, 34.6, 40.3, 45.5, 48.1, 52.2, 54.9],
+      simple: [33, 38, 43, 48, 54, 60],
+      xAxis: {
+        detailed: ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'],
+        simple: ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024']
+      }
     },
     'United Arab Emirates': {
-      detailed: [25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80],
-      simple: [28, 33, 38, 43, 48, 53]
+      detailed: [16.8, 17.6, 18.4, 19.3, 20.0, 19.7, 20.8, 22.0, 22.9, 24.0],
+      simple: [16.8, 17.6, 18.4, 19.3, 20.0, 19.7, 20.8, 22.0, 22.9, 24.0],
+      xAxis: {
+        detailed: ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'],
+        simple: ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024']
+      }
     },
     'global': {
       detailed: [320, 350, 380, 430, 450, 494, 470, 510, 550],
-      simple: [320, 350, 380, 430, 450, 494, 470, 510, 550]
+      simple: [320, 350, 380, 430, 450, 494, 470, 510, 550],
+      xAxis: {
+        detailed: ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023'],
+        simple: ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023']
+      }
     }
   }
 
@@ -86,11 +110,14 @@ const generateRegionData = () => {
     }
   }
 
-  return props.isDetailed ? selectedData.detailed : selectedData.simple
+  return {
+    data: props.isDetailed ? selectedData.detailed : selectedData.simple,
+    xAxis: props.isDetailed ? selectedData.xAxis.detailed : selectedData.xAxis.simple
+  }
 }
 
 const getChartOptions = () => {
-  const data = generateRegionData()
+  const regionData = generateRegionData()
   const axisVisible = props.isDetailed
   const dataCount = props.isDetailed ? 12 : 6
 
@@ -105,9 +132,7 @@ const getChartOptions = () => {
     },
     xAxis: {
       type: 'category',
-      data: props.isDetailed
-        ? ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023']
-        : ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023'],
+      data: regionData.xAxis,
       axisLabel: {
         show: axisVisible,
         color: '#ffffff',
@@ -137,7 +162,7 @@ const getChartOptions = () => {
       }
     },
     series: [{
-      data: data,
+      data: regionData.data,
       type: 'line',
       smooth: true,
       symbol: 'circle',
@@ -285,7 +310,7 @@ const initChart = () => {
     }
 
     const options = getChartOptions()
-    chartInstance.setOption(options, true)
+    chartInstance.setOption(options, false)
 
     // Add click event listener only for non-detailed charts
     if (!props.isDetailed) {
@@ -371,7 +396,15 @@ const handleResize = () => {
 watch(() => props.selectedCity, (newCity) => {
   if (chartInstance && !chartInstance.isDisposed()) {
     const newOptions = getChartOptions()
-    chartInstance.setOption(newOptions, true)
+    // Use notMerge: false to merge options instead of replacing them
+    chartInstance.setOption({
+      xAxis: {
+        data: newOptions.xAxis.data
+      },
+      series: [{
+        data: newOptions.series[0].data
+      }]
+    }, false)
     console.log(`Area chart updated for city: ${newCity ? newCity.city : 'None'}`)
   }
 }, { deep: true })

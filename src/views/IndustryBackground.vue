@@ -76,7 +76,6 @@ const handleChartClick = (chartInfo) => {
   selectedChart.value = {
     title: getChartTitle(chartInfo.chartType),
     type: chartInfo.chartType,
-    name: isChinaSelected ? isChinaSelected : isSoutheastAsiaSelected ? isSoutheastAsiaSelected : isItalySelected ? isItalySelected : isAmericaSelected ? isAmericaSelected : isMiddleEastSelected ? isMiddleEastSelected : "Global"
   }
   showChartModal.value = true
 }
@@ -394,6 +393,7 @@ const handleCityClick = (cityInfo) => {
       :is-visible="showChartModal"
       :title="selectedChart.title"
       :chart-type="selectedChart.type"
+      :selected-city="selectedCity"
       @close="showChartModal = false"
     />
   </div>
