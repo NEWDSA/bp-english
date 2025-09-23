@@ -1226,8 +1226,37 @@ function renderModalCharts() {
 			}],
 			series: [
 				{
+					name: 'Gross profit margin',
+					type: 'line',
+					z: 1,
+					yAxisIndex: 1,
+					data: [45, 44, 44, 43, 42, 42, 41, 40, 39, 38, 37, 36, 36, 34, 33],
+					smooth: true,
+					symbol: 'circle',
+					symbolSize: 3,
+					lineStyle: {
+						color: '#f5a623',
+						width: 2
+					},
+					itemStyle: {
+						color: '#f5a623',
+						borderWidth: 1,
+						borderColor: '#ffffff'
+					},
+					label: {
+						show: true,
+						position: 'top',
+						fontSize: 8,
+						color: '#333',
+						formatter: '{c}%',
+						fontWeight: 'normal',
+						offset: [0, -3]
+					}
+				},
+				{
 					name: 'Annual breakeven sales volume (units)',
 					type: 'line',
+					z: 3,
 					yAxisIndex: 0,
 					data: [13, 14, 14, 15, 15, 16, 16, 17, 18, 19, 20, 21, 23, 24],
 					smooth: true,
@@ -1256,33 +1285,6 @@ function renderModalCharts() {
 						fontSize: 8,
 						color: '#333',
 						formatter: '{c}',
-						fontWeight: 'normal',
-						offset: [0, -3]
-					}
-				},
-				{
-					name: 'Gross profit margin',
-					type: 'line',
-					yAxisIndex: 1,
-					data: [45, 44, 44, 43, 42, 42, 41, 40, 39, 38, 37, 36, 36, 34, 33],
-					smooth: true,
-					symbol: 'circle',
-					symbolSize: 3,
-					lineStyle: {
-						color: '#f5a623',
-						width: 2
-					},
-					itemStyle: {
-						color: '#f5a623',
-						borderWidth: 1,
-						borderColor: '#ffffff'
-					},
-					label: {
-						show: true,
-						position: 'top',
-						fontSize: 8,
-						color: '#333',
-						formatter: '{c}%',
 						fontWeight: 'normal',
 						offset: [0, -3]
 					}
