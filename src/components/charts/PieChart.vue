@@ -200,9 +200,9 @@ const getChartOptions = () => {
       show: true,
       position: 'outside',
       formatter: '{c}%',
-      color: '#64748b',
-      fontSize: 14,
-      fontWeight: 'bold',
+      color: '#ffffff',
+      fontSize: 20,
+      fontWeight: 'normal',
       lineHeight: 20
     }
 
@@ -225,16 +225,16 @@ const getChartOptions = () => {
         name: item.name,
         icon: 'circle',
         textStyle: {
-          color: '#64748b',
-          fontSize: 12
+          color: '#ffffff',
+          fontSize: 20
         }
       })),
       itemWidth: 8,
       itemHeight: 8,
       itemGap: 25,
       textStyle: {
-        color: '#64748b',
-        fontSize: 12
+        color: '#ffffff',
+        fontSize: 20
       }
     }
 
@@ -242,8 +242,16 @@ const getChartOptions = () => {
     baseConfig.series[0].center = ['50%', '50%']
     baseConfig.series[0].radius = ['45%', '60%']
 
-    // Update graphic text position
+    // Update graphic text position and style
     baseConfig.graphic[0].top = '50%'
+    baseConfig.graphic[0].style = {
+      text: maxSegment.name,
+      fontSize: 60,
+      fontWeight: 'normal',
+      fill: '#ffffff',
+      textAlign: 'center',
+      textVerticalAlign: 'middle'
+    }
   }
 
   return baseConfig
