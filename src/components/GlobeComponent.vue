@@ -58,6 +58,7 @@ onMounted(async () => {
           .particleLat('lat')
           .particleLng('lng')
           .particleAltitude('alt')
+          .arcStroke(0.5)
           .particlesColor(() => 'palegreen')
           .arcsData([])
           .arcColor('color')
@@ -283,7 +284,17 @@ const startTimeAnimation = (satData) => {
     })
 
     // Update globe particles like reference code
-    globe.particlesData([satData.filter(d => !isNaN(d.lat) && !isNaN(d.lng) && !isNaN(d.alt))])
+    const validSatData = satData.filter(d => !isNaN(d.lat) && !isNaN(d.lng) && !isNaN(d.alt))
+    console.log('Valid satellite count:', validSatData.length, 'Sample:', validSatData[0])
+
+    // Temporarily disabled particles due to compatibility issues
+    // try {
+    //   if (globe && Array.isArray(validSatData)) {
+    //     globe.particlesData(validSatData)
+    //   }
+    // } catch (error) {
+    //   console.error('Error updating particles:', error)
+    // }
   }
 
   frameTicker()
@@ -291,25 +302,25 @@ const startTimeAnimation = (satData) => {
 
 // Load airline data function like reference code
 const loadAirlineData = () => {
-  // Create mock airport data for specific regions (one per country)
+  // Create mock airport data for specific regions
   const mockAirports = [
     // China
     { name: 'Beijing Capital International Airport', city: 'Beijing', country: 'China', region: 'Asia', lat: 40.0799, lng: 116.6031 },
 
-    // Southeast Asia (one per country)
+    // Southeast Asia
     { name: 'Singapore Changi Airport', city: 'Singapore', country: 'Singapore', region: 'Southeast Asia', lat: 1.3644, lng: 103.9915 },
 
     // Italy
     { name: 'Rome Fiumicino Airport', city: 'Rome', country: 'Italy', region: 'Europe', lat: 41.8003, lng: 12.2389 },
 
-    // America (one per country)
+    // America
     { name: 'Los Angeles International Airport', city: 'Los Angeles', country: 'United States', region: 'America', lat: 33.9425, lng: -118.4081 },
 
-    // Middle East (one per country)
+    // Middle East
     { name: 'Dubai International Airport', city: 'Dubai', country: 'United Arab Emirates', region: 'Middle East', lat: 25.2532, lng: 55.3657 },
 
-    // Europe (consolidated as one region)
-    // { name: 'London Heathrow Airport', city: 'London', country: 'Europe', region: 'Europe', lat: 51.4700, lng: -0.4543 }
+    // Europe
+    { name: 'London Heathrow Airport', city: 'London', country: 'United Kingdom', region: 'Europe', lat: 51.4700, lng: -0.4543 }
   ]
 
   // Create mock route data for the selected regions
@@ -355,7 +366,7 @@ const loadAirlineData = () => {
         startLng: +airportByName[d.srcAirport].lng,
         endLat: +airportByName[d.dstAirport].lat,
         endLng: +airportByName[d.dstAirport].lng,
-        color: ['red', 'white', 'blue', 'green'][Math.round(Math.random() * 3)]
+        color: 'white'
       }))
 
     // Process airports for points data with native point styling
@@ -390,6 +401,10 @@ const loadAirlineData = () => {
     // Update globe with airline data like reference code
     globe
       .arcsData(arcsData)
+      .arcStartLat('startLat')
+      .arcStartLng('startLng')
+      .arcEndLat('endLat')
+      .arcEndLng('endLng')
       .pointsData(pointsData)
       .htmlElementsData(labelsData)
 
