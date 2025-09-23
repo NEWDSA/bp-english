@@ -53,7 +53,7 @@
 					<!-- 工作经验（点击展开） -->
 					<div v-if="hasActiveMember" class="info-section" :class="{ active: expanded.work }" @click="togglePanel('work')">
 						<div class="section-icon">
-							<img src="/src/assets/work.png" alt="Work Experience" class="icon-image" />
+							<img :src="getAssetImage('work.png')" alt="Work Experience" class="icon-image" />
 						</div>
 						<h3 class="section-title">Work Experience</h3>
 					</div>
@@ -64,7 +64,7 @@
 					<!-- 教育背景（点击展开） - 只在有内容时显示 -->
 					<div v-if="hasActiveMember && memberContent.education" class="info-section" :class="{ active: expanded.education }" @click="togglePanel('education')">
 						<div class="section-icon">
-							<img src="/src/assets/edu.png" alt="Educational Background" class="icon-image" />
+							<img :src="getAssetImage('edu.png')" alt="Educational Background" class="icon-image" />
 						</div>
 						<h3 class="section-title">Educational Background</h3>
 					</div>
@@ -75,14 +75,14 @@
 					<!-- 代表作品（点击展开） - 只在有图片时显示 -->
 					<div v-if="hasActiveMember && memberContent.worksImages.length > 0" class="info-section" :class="{ active: expanded.works }" @click="togglePanel('works')">
 						<div class="section-icon">
-							<img src="/src/assets/video.png" alt="Representative works" class="icon-image" />
+							<img :src="getAssetImage('video.png')" alt="Representative works" class="icon-image" />
 						</div>
 						<h3 class="section-title">Representative works (Delivered)</h3>
 					</div>
 					<div v-if="hasActiveMember && memberContent.worksImages.length > 0" class="expand-panel" :class="{ open: expanded.works }">
 						<div class="works-grid">
-							<div v-for="(img, idx) in memberContent.worksImages" :key="idx" class="work-card">
-								<img :src="img" alt="work" />
+							<div v-for="(img, idx) in memberContent.worksImages" :key="idx" class="work-card" @click="showWorksFullscreen">
+								<img :src="getAssetImage(img)" alt="work" />
 							</div>
 						</div>
 					</div>
@@ -250,6 +250,112 @@
 				</div>
 			</div>
 
+			<!-- 全屏作品展示弹窗 -->
+			<div v-if="showWorksModal" class="works-fullscreen-modal" @click="closeWorksModal">
+				<div class="works-modal-wrapper" @click.stop>
+					<!-- 关闭按钮 -->
+					<button class="works-close-btn" @click="closeWorksModal">
+						<svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+							<path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+						</svg>
+					</button>
+					
+					<div class="works-modal-content">
+					<!-- <div class="works-modal-header">
+						<h1 class="works-modal-title">Representative Works</h1>
+						<button class="works-close-btn" @click="closeWorksModal">
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+								<path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+							</svg>
+						</button>
+					</div> -->
+					
+					<!-- <div class="works-images-grid">
+						<div v-for="i in 6" :key="i" class="works-image-item">
+							<img :src="getWorkImage(i)" :alt="`Work ${i}`" class="works-image" />
+							<div class="works-image-overlay">
+								<div class="works-image-number">{{ i }}</div>
+							</div>
+							<div v-if="i === 1" class="works-image-text">
+								<div class="works-project-number">1</div>
+								<div class="works-title">The Definer of the Future Water-X Pontoon</div>
+								<div class="works-details">
+									<div class="works-project">Project: Wuhu Pearl</div>
+									<div class="works-launch">Launch Date: September 2022</div>
+									<div class="works-location">Location: Wuhu, Anhui</div>
+								</div>
+							</div>
+						</div>
+					</div> -->
+					<div class="works-images-grid">
+						<template v-for="i in 6" :key="i">
+							<div class="works-image-item">
+								<img :src="getWorkImage(i)" :alt="`Work ${i}`" class="works-image" />
+								
+								<!-- 第一张图片文字 -->
+								<div v-if="i === 1" class="works-text-overlay">
+									<div class="works-number">1</div>
+									<div class="works-title">The Definer of the Future Water-X Pontoon</div>
+									<div class="works-project">Project: Wuhu Pearl</div>
+									<div class="works-date">Launch Date: September 2022</div>
+									<div class="works-location">Location: Wuhu, Anhui</div>
+								</div>
+								
+								<!-- 第二张图片文字 -->
+								<div v-if="i === 2" class="works-text-overlay">
+									<div class="works-number">2</div>
+									<div class="works-title">Definer of maritime cultural tourism vessels</div>
+									<div class="works-project">Project: Xunxian 1 and 2</div>
+									<div class="works-date">Landing Date: May 2017</div>
+									<div class="works-location">Location: Yantai, Qinhuangdao</div>
+								</div>
+								
+								<!-- 第三张图片文字 -->
+								<div v-if="i === 3" class="works-text-overlay">
+									<div class="works-number">3</div>
+									<div class="works-title">Rich resources on B-side and G-side</div>
+									<div class="works-project">Project: Jiuzhou Bay No. 1 (Nezha)</div>
+									<div class="works-date">Landing Date: October 2020</div>
+									<div class="works-location">Location: Zhuhai, Guangdong</div>
+								</div>
+								
+								<!-- 第四张图片文字 -->
+								<div v-if="i === 4" class="works-text-overlay">
+									<div class="works-number">4</div>
+									<div class="works-title">Pioneer of consumer transportation</div>
+									<div class="works-project">Project: Kun</div>
+									<div class="works-date">Landing Date: April 2024</div>
+									<div class="works-location">Location: Weihai, Shandong</div>
+								</div>
+								
+								<!-- 第五张图片文字 -->
+								<div v-if="i === 5" class="works-text-overlay">
+									<div class="works-number">5</div>
+									<div class="works-title">Complete domestic and overseas channel network</div>
+									<div class="works-project">Project: ADAMAS</div>
+									<div class="works-date">Launch Date: March 2025</div>
+									<div class="works-location">Location: Ho Chi Minh City, Vietnam</div>
+								</div>
+								
+								<!-- 第六张图片文字 -->
+								<div v-if="i === 6" class="works-text-overlay">
+									<div class="works-number">6</div>
+									<div class="works-title">Designer of the country's first smart yacht</div>
+									<div class="works-project">Project: Smart Boat No. 1</div>
+									<div class="works-date">Landing Date: October 2022</div>
+									<div class="works-location">Location: Guangdong-Hong Kong-Macao Greater Bay Area</div>
+									<div class="works-extra">"Smart Yacht Interior Design Technology Research Report"</div>
+									<div class="works-extra">"Smart Yacht Independent Development Project"</div>
+									<div class="works-extra">"Research on Exterior and Interior Design Technology of Medium-Sized Luxury Cruise Ships"</div>
+									<div class="works-extra">"2023 Forward-Looking Research Project"</div>
+								</div>
+							</div>
+						</template>
+					</div>
+					</div>
+				</div>
+			</div>
+
 		</div>
 
 	</div>
@@ -278,6 +384,7 @@ const memberContent = ref({ work: '', education: '', worksImages: [] })
 // 中间内容显示状态
 const showWhoWeAreContent = ref(false)
 const showInvestmentHighlightsContent = ref(false)
+const showWorksModal = ref(false)
 
 const hasAnyPanelOpen = computed(() => expanded.value.work || expanded.value.education || expanded.value.works)
 
@@ -307,12 +414,34 @@ function closeAllPanels() {
     expanded.value.works = false
 }
 
+function resetAllBackgrounds() {
+    isCeoBackground.value = false
+    isCfoBackground.value = false
+    isCooBackground.value = false
+    isEngineerBackground.value = false
+    isInteractionEngineerBackground.value = false
+    isStructuralEngineerBackground.value = false
+    isStrategicPlannerBackground.value = false
+}
+
 // 内容显示控制函数
 function showWhoWeAreModal() {
+    // 关闭所有其他面板
+    closeAllPanels()
+    resetAllBackgrounds()
+    showInvestmentHighlightsContent.value = false
+    showWorksModal.value = false
+    
     showWhoWeAreContent.value = true
 }
 
 function showInvestmentHighlightsModal() {
+    // 关闭所有其他面板
+    closeAllPanels()
+    resetAllBackgrounds()
+    showWhoWeAreContent.value = false
+    showWorksModal.value = false
+    
     showInvestmentHighlightsContent.value = true
 }
 
@@ -323,6 +452,31 @@ function closeWhoWeAreContent() {
 
 function closeInvestmentHighlightsContent() {
     showInvestmentHighlightsContent.value = false
+}
+
+// 全屏作品展示控制函数
+function showWorksFullscreen() {
+	// 关闭所有其他面板
+	closeAllPanels()
+	resetAllBackgrounds()
+	showWhoWeAreContent.value = false
+	showInvestmentHighlightsContent.value = false
+	
+	showWorksModal.value = true
+}
+
+function closeWorksModal() {
+	showWorksModal.value = false
+}
+
+// 获取作品图片路径
+function getWorkImage(index) {
+	return new URL(`../assets/work${index}.png`, import.meta.url).href
+}
+
+// 获取其他图片路径
+function getAssetImage(imageName) {
+	return new URL(`../assets/${imageName}`, import.meta.url).href
 }
 
 // 获取当前成员信息的方法
@@ -470,7 +624,7 @@ function syncMemberContent() {
         ceo: {
             work: '• Over 10 years of experience in ship design work\n• 2015-2017 Ferrari Group, Italy - Quality Control and After sales Manager\n• 2020/10-2022/10 School of Design and Art, China Academy of Art - Industrial Design Teacher\n• Hangzhou Yihai Ship Design Co., Ltd. - General Manager/Legal Representative\n• Yushui Flying (Shenzhen) Technology Co., Ltd. - General Manager',
             education: '• Undergraduate: China Academy of Art - Industrial Design\n• Graduate student: Genoa Milan Polytechnic Joint Training Master\'s Degree - Ship and Yacht Design\n• PhD: University of Kuala Lumpur - Ship and Ocean Engineering',
-            worksImages: ['/src/assets/Delivered.png']
+            worksImages: ['Delivered.png']
         },
         cfo: {
             work: '• Founding Partner of Micro Light Innovation Investment\n• Responsible for tax laws, investment and financing',
@@ -531,6 +685,7 @@ onMounted(() => {
 .team-composition {
 	min-height: 100vh;
 	color: #ffffff;
+	/* background-color: rgba(0, 0, 0, 0.7); */
 	font-family: 'Arial', sans-serif;
 	position: relative;
 	overflow: hidden;
@@ -800,6 +955,14 @@ onMounted(() => {
 	border: 1px solid rgba(255, 255, 255, 0.15);
 	border-radius: 0px;
 	overflow: hidden;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+.work-card:hover {
+	transform: scale(1.05);
+	border-color: rgba(0, 212, 255, 0.4);
+	box-shadow: 0 8px 25px rgba(0, 212, 255, 0.2);
 }
 .work-card img {
 	width: 300px;
@@ -1317,6 +1480,435 @@ onMounted(() => {
 	.achievement-desc {
 		font-weight: 400;
 		letter-spacing: 0.02em;
+	}
+}
+
+/* 全屏作品展示弹窗样式 */
+.works-fullscreen-modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(255, 255, 255, 0.1);
+	backdrop-filter: blur(25px) saturate(180%);
+	z-index: 2000;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	animation: worksModalFadeIn 0.4s ease-out;
+}
+
+@keyframes worksModalFadeIn {
+	from {
+		opacity: 0;
+		backdrop-filter: blur(0px);
+	}
+	to {
+		opacity: 1;
+		backdrop-filter: blur(20px);
+	}
+}
+
+.works-modal-wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+
+.works-close-btn {
+	position: absolute;
+	top: 30px;
+	right: 30px;
+	background: rgba(255, 255, 255, 0.1);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	color: #ffffff;
+	cursor: pointer;
+	padding: 12px;
+	width: 48px;
+	height: 48px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	transition: all 0.3s ease;
+	backdrop-filter: blur(10px);
+	z-index: 10;
+}
+
+.works-close-btn:hover {
+	background: rgba(255, 255, 255, 0.2);
+	color: #00d4ff;
+	transform: scale(1.1);
+	box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+}
+
+.works-modal-content {
+	width: 800px;
+	height: 700px;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	background: rgba(255, 255, 255, 0.1);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	border-radius: 20px;
+	backdrop-filter: blur(15px) saturate(180%);
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 
+	            0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+}
+
+.works-modal-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 40px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.works-modal-title {
+	font-size: clamp(2rem, 4vw, 4rem);
+	font-weight: 700;
+	color: #ffffff;
+	margin: 0;
+	text-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+}
+
+.works-close-btn {
+	background: rgba(255, 255, 255, 0.1);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	color: #ffffff;
+	cursor: pointer;
+	padding: 15px;
+	width: 50px;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	transition: all 0.3s ease;
+	backdrop-filter: blur(10px);
+}
+
+.works-close-btn:hover {
+	background: rgba(255, 255, 255, 0.2);
+	color: #00d4ff;
+	transform: scale(1.1);
+	box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+}
+
+.works-images-grid {
+	width: 100%;
+	height: 100%;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(2, 1fr);
+	gap: 10px;
+	justify-content: center;
+	align-content: center;
+	padding: 20px;
+}
+
+.works-image-item {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: rgba(0, 0, 0, 0.1);
+	border-radius: 0;
+	overflow: hidden;
+	transition: all 0.3s ease;
+	cursor: pointer;
+}
+
+.works-image-item:hover {
+	transform: scale(1.02);
+	border-color: rgba(0, 212, 255, 0.3);
+	box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+}
+
+.works-image {
+	max-width: 100%;
+	max-height: 100%;
+	object-fit: contain;
+	transition: all 0.3s ease;
+}
+
+.works-image-item:hover .works-image {
+	transform: scale(1.05);
+}
+
+/* 简洁的文字覆盖层 */
+.works-text-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	text-align: center;
+	color: white;
+	padding: 50px 10px 10px 10px;
+}
+
+.works-number {
+	position: absolute;
+	top: 10px;
+	left: 50%;
+	transform: translateX(-50%);
+	/* background: rgba(0, 212, 255, 0.9); */
+	color: #ffffff;
+	font-size: 18px;
+	font-weight: bold;
+	/* width: 35px;
+	height: 35px; */
+	/* border-radius: 50%; */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	backdrop-filter: blur(10px);
+	/* border: 2px solid rgba(255, 255, 255, 0.3); */
+	/* text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); */
+	/* box-shadow: 0 4px 15px rgba(0, 212, 255, 0.4); */
+}
+
+.works-title {
+	font-size: 12px;
+	/* font-weight: bold; */
+	margin-bottom: 6px;
+	line-height: 1.2;
+}
+
+.works-project,
+.works-date,
+.works-location {
+	font-size: 10px;
+	margin-bottom: 3px;
+}
+
+.works-extra {
+	font-size: 8px;
+	margin-bottom: 1px;
+	font-style: italic;
+	color: white;
+}
+
+.works-image-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 0, 0, 0.3) 100%);
+	opacity: 0;
+	transition: all 0.3s ease;
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-end;
+	padding: 15px;
+}
+
+.works-image-item:hover .works-image-overlay {
+	opacity: 1;
+}
+
+.works-image-number {
+	background: rgba(0, 212, 255, 0.8);
+	color: #ffffff;
+	font-size: 18px;
+	font-weight: 700;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	backdrop-filter: blur(10px);
+	border: 2px solid rgba(255, 255, 255, 0.3);
+	text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* 第一张图片的文字覆盖层 */
+.works-image-text {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 100%);
+	color: #ffffff;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	opacity: 0;
+	transition: all 0.4s ease;
+	backdrop-filter: blur(5px);
+}
+
+.works-image-item:hover .works-image-text {
+	opacity: 1;
+}
+
+.works-project-number {
+	position: absolute;
+	top: 15px;
+	left: 15px;
+	background: rgba(0, 212, 255, 0.9);
+	color: #ffffff;
+	font-size: 24px;
+	font-weight: 700;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	backdrop-filter: blur(10px);
+	border: 2px solid rgba(255, 255, 255, 0.3);
+	text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+	box-shadow: 0 4px 15px rgba(0, 212, 255, 0.4);
+}
+
+/* .works-title {
+	font-size: clamp(14px, 2.2vw, 22px);
+	font-weight: 700;
+	color: #ffffff;
+	text-align: center;
+	margin: 20px 0;
+	line-height: 1.3;
+	text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+	text-transform: capitalize;
+} */
+
+.works-details {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	margin-top: auto;
+	padding: 15px;
+	background: rgba(0, 0, 0, 0.6);
+	border-radius: 10px;
+	backdrop-filter: blur(10px);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.works-project,
+.works-launch,
+.works-location {
+	font-size: clamp(11px, 1.4vw, 14px);
+	color: #ffffff;
+	line-height: 1.4;
+	text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+	opacity: 0.9;
+}
+
+.works-project {
+	/* font-weight: 600; */
+	color: white;
+}
+
+.works-launch {
+	font-weight: 500;
+}
+
+.works-location {
+	font-weight: 500;
+	color: white;
+}
+
+/* 响应式适配 */
+@media (max-width: 1024px) {
+	.works-modal-content {
+		width: 98vw;
+		height: 95vh;
+		padding: 20px;
+	}
+	
+	.works-images-grid {
+		gap: 15px;
+		padding: 15px 0;
+	}
+	
+	.works-modal-title {
+		font-size: clamp(1.5rem, 5vw, 3rem);
+	}
+}
+
+@media (max-width: 768px) {
+	.works-images-grid {
+		grid-template-columns: repeat(2, 1fr);
+		grid-template-rows: repeat(3, 1fr);
+		gap: 10px;
+	}
+	
+	.works-modal-content {
+		padding: 15px;
+	}
+	
+	.works-modal-header {
+		margin-bottom: 20px;
+		padding-bottom: 15px;
+	}
+	
+	.works-modal-title {
+		font-size: clamp(1.2rem, 6vw, 2.5rem);
+	}
+	
+	.works-close-btn {
+		width: 40px;
+		height: 40px;
+		padding: 10px;
+	}
+	
+	/* 移动端文字适配 */
+	.works-image-text {
+		padding: 15px;
+	}
+	
+	.works-project-number {
+		width: 35px;
+		height: 35px;
+		font-size: 18px;
+		top: 10px;
+		left: 10px;
+	}
+	
+	/* .works-title {
+		font-size: clamp(12px, 3vw, 16px);
+		margin: 15px 0;
+	} */
+	
+	.works-details {
+		padding: 10px;
+		gap: 6px;
+	}
+	
+	.works-project,
+	.works-launch,
+	.works-location {
+		font-size: clamp(9px, 2.5vw, 12px);
+	}
+}
+
+@media (max-width: 480px) {
+	.works-images-grid {
+		grid-template-columns: 1fr;
+		grid-template-rows: repeat(6, 1fr);
+		gap: 8px;
+	}
+	
+	.works-modal-content {
+		width: 100vw;
+		height: 100vh;
+		border-radius: 0;
+		padding: 10px;
 	}
 }
 </style>

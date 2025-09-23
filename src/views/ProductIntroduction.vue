@@ -552,7 +552,7 @@ import priceImg from '../assets/price.png'
 
 // 导入产品亮点图标
 import wheel1Img from '../assets/wheel1.png'
-import wheel2Img from '../assets/wheel2.png'
+import wheel2Img from '../assets/wheel2.gif'
 import modularImg from '../assets/modular.png'
 import AutoSettingImg from '../assets/auto_setting.png'
 
