@@ -1969,7 +1969,7 @@ onUnmounted(() => {
 }
 
 .modal-title {
-	font-size: clamp(24px, 3vw, 36px);
+	font-size: clamp(16px, 2vw, 24px);
 	font-weight: 600;
 	color: #ffffff;
 	margin: 0;
@@ -2130,7 +2130,8 @@ onUnmounted(() => {
 }
 
 .simulation-item {
-	background: rgba(255, 255, 255, 0.15);
+	/* background: rgba(255, 255, 255, 0.15); */
+	background-color: #ffffff;
 	backdrop-filter: blur(15px);
 	border-radius: 12px;
 	overflow: hidden;
@@ -2140,11 +2141,11 @@ onUnmounted(() => {
 	transition: all 0.3s ease;
 }
 
-.simulation-item:hover {
+/* .simulation-item:hover {
 	background: rgba(255, 255, 255, 0.2);
 	border-color: rgba(255, 255, 255, 0.3);
 	transform: translateY(-2px);
-}
+} */
 
 .sim-video {
 	width: 100%;
