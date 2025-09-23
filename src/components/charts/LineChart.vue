@@ -105,7 +105,7 @@ const getChartOptions = () => {
       axisLabel: {
         show: props.isDetailed,
         color: '#ffffff',
-        fontSize: 14,
+        fontSize: 20,
         margin: 40
       },
       axisLine: { show: false },
@@ -136,9 +136,9 @@ const getChartOptions = () => {
         name: 'Vertical Lines',
         type: 'bar',
         data: chartData,
-        barWidth: 1,
+        barWidth: 0,
         itemStyle: {
-          color: '#ffffff',
+          color: 'transparent',
           borderRadius: [1, 1, 0, 0]
         },
         z: 1,
@@ -157,11 +157,11 @@ const getChartOptions = () => {
             y: 0,
             x2: 0,
             y2: 1,
-            colorStops: [
-              { offset: 0, color: 'rgba(34, 211, 238, 0.8)' },
-              { offset: 0.5, color: 'rgba(34, 211, 238, 0.5)' },
-              { offset: 1, color: 'rgba(34, 211, 238, 0.1)' }
-            ]
+            // colorStops: [
+            //   { offset: 0, color: 'rgba(34, 211, 238, 0.8)' },
+            //   { offset: 0.5, color: 'rgba(34, 211, 238, 0.5)' },
+            //   { offset: 1, color: 'rgba(34, 211, 238, 0.1)' }
+            // ]
           }
         },
         lineStyle: {
@@ -181,8 +181,8 @@ const getChartOptions = () => {
           show: props.isDetailed,
           position: 'top',
           color: '#ffffff',
-          fontSize: 11,
-          fontWeight: 'bold',
+          fontSize: 20,
+          fontWeight: 'none',
           distance: 8,
           formatter: '{c}'
         },

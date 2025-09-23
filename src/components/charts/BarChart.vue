@@ -88,7 +88,7 @@ const getChartOptions = () => {
         axisLabel: {
           show: axisVisible,
           color: '#ffffff',
-          fontSize: 10
+          fontSize: 20
         },
         axisLine: {
           show: axisVisible,
@@ -99,7 +99,7 @@ const getChartOptions = () => {
       },
       yAxis: {
         type: 'value',
-        max: 100,
+        max: 'dataMax',
         axisLabel: {
           show: axisVisible,
           color: '#ffffff',
@@ -171,8 +171,8 @@ const getChartOptions = () => {
             show: props.isDetailed,
             position: 'top',
             color: '#ffffff',
-            fontSize: 11,
-            fontWeight: 'bold',
+            fontSize: 20,
+            fontWeight: 'none',
             distance: 8,
             formatter: '{c}'
           },
@@ -205,11 +205,12 @@ const getChartOptions = () => {
       type: 'category',
       data: props.isDetailed
         ? ['2015', '2018', '2020', '2021', '2022', '2023', '2024']
-        : ['', '', '', '', '', '', ''],
+        : ['2015', '2018', '2020', '2021', '2022', '2023', '2024'],
       axisLabel: {
         show: axisVisible,
         color: '#ffffff',
-        fontSize: 10
+        fontSize: 20,
+        margin: 40,
       },
       axisLine: { show: false },
       axisTick: { show: false },
@@ -217,7 +218,7 @@ const getChartOptions = () => {
     },
     yAxis: {
       type: 'value',
-      max: 100,
+        max: 'dataMax',
       axisLabel: { show: false },
       axisLine: { show: false },
       axisTick: { show: false },
@@ -255,8 +256,8 @@ const getChartOptions = () => {
           show: props.isDetailed,
           position: 'top',
           color: '#ffffff',
-          fontSize: 12,
-          fontWeight: 'bold',
+          fontSize: 20,
+          fontWeight: 'none',
           distance: 8,
           formatter: '{c}'
         },

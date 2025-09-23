@@ -184,16 +184,16 @@ const getChartOptions = () => {
   // Enhanced configuration for detailed mode
   if (props.isDetailed) {
     // Add title
-    baseConfig.title = {
-      text: 'Age structure of global shipowners',
-      left: 'center',
-      top: '5%',
-      textStyle: {
-        color: '#64748b',
-        fontSize: 16,
-        fontWeight: 'normal'
-      }
-    }
+    // baseConfig.title = {
+    //   text: 'Age structure of global shipowners',
+    //   left: 'center',
+    //   top: '5%',
+    //   textStyle: {
+    //     color: '#64748b',
+    //     fontSize: 16,
+    //     fontWeight: 'normal'
+    //   }
+    // }
 
     // Update series for detailed mode with percentage labels
     baseConfig.series[0].label = {

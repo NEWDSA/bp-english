@@ -29,8 +29,14 @@ const props = defineProps({
   selectedCity: {
     type: Object,
     default: null
-  }
+  },
+  chartType: {
+    type: String,
+    default: 'line'
+  },
 })
+
+console.log("props.chartType", props.chartType);
 
 const emit = defineEmits(['chart-click'])
 
@@ -105,7 +111,7 @@ const getChartOptions = () => {
       axisLabel: {
         show: axisVisible,
         color: '#ffffff',
-        fontSize: 14,
+        fontSize: 20,
         margin: 40
       },
       axisLine: { show: false },
@@ -118,7 +124,7 @@ const getChartOptions = () => {
       axisLabel: {
         show: axisVisible,
         color: '#ffffff',
-        fontSize: 10
+        fontSize: 20
       },
       axisLine: { show: false },
       axisTick: { show: false },
@@ -167,8 +173,8 @@ const getChartOptions = () => {
         show: props.isDetailed,
         position: 'top',
         color: '#ffffff',
-        fontSize: 12,
-        fontWeight: 'bold',
+        fontSize: 20,
+        fontWeight: 'none',
         distance: 8,
         formatter: '{c}',
         textBorderColor: '#1e293b',

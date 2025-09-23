@@ -64,8 +64,8 @@ const generateRegionData = () => {
       simple: [44, 50, 56, 62, 68, 74]
     },
     'global': {
-      detailed: [50, 56, 62, 68, 74, 70, 77, 84],
-      simple: [52, 58, 64, 70, 76, 82]
+      detailed: [345.6, 334.3, 362.3, 342.8, 367.9],
+      simple: [345.6, 334.3, 362.3, 342.8, 367.9]
     }
   }
 
@@ -88,9 +88,8 @@ const getChartOptions = () => {
   const axisVisible = props.isDetailed
   const dataCount = props.isDetailed ? 8 : 6
 
-  // Normalize data to percentages for progress bars
+  // Use raw values directly (no percentage normalization)
   const maxValue = Math.max(...data)
-  const normalizedData = data.map(value => value / maxValue * 100)
 
   return {
     backgroundColor: 'transparent',
@@ -104,12 +103,13 @@ const getChartOptions = () => {
     xAxis: {
       type: 'value',
       min: 0,
-      max: 100,
+      max: 'dataMax',
+      show: false,
       axisLabel: {
         show: props.isDetailed,
         color: '#ffffff',
         fontSize: 10,
-        formatter: '{value}%'
+        // Show raw values
       },
       axisLine: {
         show: props.isDetailed,
@@ -127,18 +127,19 @@ const getChartOptions = () => {
     yAxis: {
       type: 'category',
       data: props.isDetailed
-        ? ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6', 'Item 7', 'Item 8']
+        ? [2019, 2020, 2021, 2022, 2023]
         : Array.from({ length: dataCount }, (_, i) => ``),
       axisLabel: {
         show: props.isDetailed,
         color: '#ffffff',
-        fontSize: 10,
+        fontSize: 14,
         margin: 12
       },
       axisLine: {
         show: props.isDetailed,
         lineStyle: { color: '#374151' }
       },
+      axisLine: { show: false },
       axisTick: { show: false },
       splitLine: { show: false },
       inverse: true
@@ -148,7 +149,7 @@ const getChartOptions = () => {
       {
         name: 'Progress Bars',
         type: 'bar',
-        data: normalizedData.map((value, index) => ({
+        data: data.map((value, index) => ({
           value: value,
           itemStyle: {
             color: {
@@ -193,9 +194,9 @@ const getChartOptions = () => {
               borderWidth: 3
             }
           },
-          data: normalizedData.map((value, index) => ({
+          data: data.map((value, index) => ({
             coord: [value, index],
-            value: Math.round(value) + '%'
+            value: value
           })),
           label: {
             show: props.isDetailed,

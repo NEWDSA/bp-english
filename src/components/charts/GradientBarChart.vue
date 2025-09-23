@@ -64,8 +64,8 @@ const generateRegionData = () => {
       simple: [17, 23, 29, 35, 41, 47, 53, 60, 67, 73, 80, 87]
     },
     'global': {
-      detailed: [20, 26, 32, 38, 44, 50, 56, 62, 58, 65, 72, 78, 85, 92, 98, 105],
-      simple: [22, 28, 34, 40, 46, 52, 58, 65, 72, 78, 85, 92]
+      detailed: [89.6, 92.7, 97.3, 102.2, 106.8, 98.3, 113, 126.6, 132.9, 144.9, 167.4],
+      simple: [89.6, 92.7, 97.3, 102.2, 106.8, 98.3, 113, 126.6, 132.9, 144.9, 167.4]
     }
   }
 
@@ -98,12 +98,13 @@ const getChartOptions = () => {
     xAxis: {
       type: 'category',
       data: props.isDetailed
-        ? ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025']
-        : ['2018', '2019', '2020', '2021', '2022', '2023'],
+        ? [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]
+        : [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
       axisLabel: {
         show: axisVisible,
         color: '#ffffff',
-        fontSize: 10
+        fontSize: 14,
+        margin: 40
       },
       axisLine: { show: false },
       axisTick: { show: false },
@@ -111,6 +112,7 @@ const getChartOptions = () => {
     },
     yAxis: {
       type: 'value',
+      show: false,
       axisLabel: {
         show: axisVisible,
         color: '#ffffff',
