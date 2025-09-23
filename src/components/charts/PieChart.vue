@@ -45,32 +45,32 @@ const getChartOptions = () => {
       'China': [
         { value: 25, name: '18-34', color: '#22d3ee' },
         { value: 45, name: '35-50', color: '#f59e0b' },
-        { value: 25, name: '51-65', color: '#fbbf24' },
-        { value: 5, name: '≥65', color: '#3b82f6' }
-      ],
-      'Singapore': [
-        { value: 35, name: '18-34', color: '#22d3ee' },
-        { value: 38, name: '35-50', color: '#f59e0b' },
-        { value: 22, name: '51-65', color: '#fbbf24' },
-        { value: 5, name: '≥65', color: '#3b82f6' }
-      ],
-      'Italy': [
-        { value: 28, name: '18-34', color: '#22d3ee' },
-        { value: 42, name: '35-50', color: '#f59e0b' },
         { value: 20, name: '51-65', color: '#fbbf24' },
         { value: 10, name: '≥65', color: '#3b82f6' }
       ],
+      'Singapore': [
+        { value: 35, name: '18-34', color: '#22d3ee' },
+        { value: 45, name: '35-50', color: '#f59e0b' },
+        { value: 15, name: '51-65', color: '#fbbf24' },
+        { value: 5, name: '≥65', color: '#3b82f6' }
+      ],
+      'Italy': [
+        { value: 15, name: '18-34', color: '#22d3ee' },
+        { value: 35, name: '35-50', color: '#f59e0b' },
+        { value: 30, name: '51-65', color: '#fbbf24' },
+        { value: 20, name: '≥65', color: '#3b82f6' }
+      ],
       'United States': [
-        { value: 32, name: '18-34', color: '#22d3ee' },
-        { value: 38, name: '35-50', color: '#f59e0b' },
-        { value: 23, name: '51-65', color: '#fbbf24' },
-        { value: 7, name: '≥65', color: '#3b82f6' }
+        { value: 25, name: '18-34', color: '#22d3ee' },
+        { value: 50, name: '35-50', color: '#f59e0b' },
+        { value: 15, name: '51-65', color: '#fbbf24' },
+        { value: 10, name: '≥65', color: '#3b82f6' }
       ],
       'United Arab Emirates': [
-        { value: 40, name: '18-34', color: '#22d3ee' },
-        { value: 35, name: '35-50', color: '#f59e0b' },
+        { value: 30, name: '18-34', color: '#22d3ee' },
+        { value: 40, name: '35-50', color: '#f59e0b' },
         { value: 20, name: '51-65', color: '#fbbf24' },
-        { value: 5, name: '≥65', color: '#3b82f6' }
+        { value: 10, name: '≥65', color: '#3b82f6' }
       ],
       'global': [
         { value: 30, name: '18-34', color: '#22d3ee' },
@@ -184,25 +184,25 @@ const getChartOptions = () => {
   // Enhanced configuration for detailed mode
   if (props.isDetailed) {
     // Add title
-    baseConfig.title = {
-      text: 'Age structure of global shipowners',
-      left: 'center',
-      top: '5%',
-      textStyle: {
-        color: '#64748b',
-        fontSize: 16,
-        fontWeight: 'normal'
-      }
-    }
+    // baseConfig.title = {
+    //   text: 'Age structure of global shipowners',
+    //   left: 'center',
+    //   top: '5%',
+    //   textStyle: {
+    //     color: '#64748b',
+    //     fontSize: 16,
+    //     fontWeight: 'normal'
+    //   }
+    // }
 
     // Update series for detailed mode with percentage labels
     baseConfig.series[0].label = {
       show: true,
       position: 'outside',
       formatter: '{c}%',
-      color: '#64748b',
-      fontSize: 14,
-      fontWeight: 'bold',
+      color: '#ffffff',
+      fontSize: 20,
+      fontWeight: 'normal',
       lineHeight: 20
     }
 
@@ -225,16 +225,16 @@ const getChartOptions = () => {
         name: item.name,
         icon: 'circle',
         textStyle: {
-          color: '#64748b',
-          fontSize: 12
+          color: '#ffffff',
+          fontSize: 20
         }
       })),
       itemWidth: 8,
       itemHeight: 8,
       itemGap: 25,
       textStyle: {
-        color: '#64748b',
-        fontSize: 12
+        color: '#ffffff',
+        fontSize: 20
       }
     }
 
@@ -242,8 +242,16 @@ const getChartOptions = () => {
     baseConfig.series[0].center = ['50%', '50%']
     baseConfig.series[0].radius = ['45%', '60%']
 
-    // Update graphic text position
+    // Update graphic text position and style
     baseConfig.graphic[0].top = '50%'
+    baseConfig.graphic[0].style = {
+      text: maxSegment.name,
+      fontSize: 60,
+      fontWeight: 'normal',
+      fill: '#ffffff',
+      textAlign: 'center',
+      textVerticalAlign: 'middle'
+    }
   }
 
   return baseConfig

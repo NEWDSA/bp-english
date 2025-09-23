@@ -75,7 +75,7 @@ onUnmounted(() => {
 const handleChartClick = (chartInfo) => {
   selectedChart.value = {
     title: getChartTitle(chartInfo.chartType),
-    type: chartInfo.chartType
+    type: chartInfo.chartType,
   }
   showChartModal.value = true
 }
@@ -88,10 +88,10 @@ const getChartTitle = (chartType) => {
            isItalySelected.value ? "Italian small yacht manufacturing industry" :
            isAmericaSelected.value ? "Small yacht manufacturing industry in the United States" :
            isMiddleEastSelected.value ? "Small yacht manufacturing industry in the Middle East" :
-           "Global small yacht manufacturing industry",
-    'area': isChinaSelected.value ? "China's Small Yacht Sales Market" :
-            isSoutheastAsiaSelected.value ? "Water sports equipment in Southeast Asia" :
-            isItalySelected.value ? "Italian small yacht sales market" :
+           "The market size of the global small yacht manufacturing industry",
+    'area': isChinaSelected.value ? "Scale of China's Small Yacht Sales Market" :
+            isSoutheastAsiaSelected.value ? "Market size of outdoor water sports equipment in Southeast Asia" :
+            isItalySelected.value ? "The size of the Italian small yacht sales market" :
             isAmericaSelected.value ? "Size of the Small Yacht Sales Market in the United States" :
             isMiddleEastSelected.value ? "Scale of Small Yacht Sales Market in the Middle East" :
             "Global small yacht sales market size",
@@ -393,6 +393,7 @@ const handleCityClick = (cityInfo) => {
       :is-visible="showChartModal"
       :title="selectedChart.title"
       :chart-type="selectedChart.type"
+      :selected-city="selectedCity"
       @close="showChartModal = false"
     />
   </div>

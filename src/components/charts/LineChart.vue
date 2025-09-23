@@ -44,28 +44,52 @@ const generateRegionData = () => {
   // Define consistent data for each region
   const regionData = {
     'China': {
-      detailed: [42, 48, 55, 62, 68, 75, 82, 88],
-      simple: [45, 52, 58, 65, 72, 78]
+      detailed: [0, -0.60, 12.83, -2.53, 6.67],
+      simple: [0, -0.60, 12.83, -2.53, 6.67],
+      xAxis: {
+        detailed: ['2019', '2020', '2021', '2022', '2023'],
+        simple: ['2019', '2020', '2021', '2022', '2023']
+      }
     },
     'Singapore': {
-      detailed: [38, 42, 48, 54, 60, 66, 72, 78],
-      simple: [40, 45, 50, 56, 62, 68]
+      detailed: [0, 8.4, -9.1, 18.7, 7.6, 9.0],
+      simple: [0, 8.4, -9.1, 18.7, 7.6, 9.0],
+      xAxis: {
+        detailed: ['2015', '2018', '2020', '2022', '2023', '2024'],
+        simple: ['2015', '2018', '2020', '2022', '2023', '2024']
+      }
     },
     'Italy': {
-      detailed: [40, 44, 50, 56, 62, 68, 74, 80],
-      simple: [42, 47, 52, 58, 64, 70]
+      detailed: [0, 3.5, 1.1, 11.0, 5.2],
+      simple: [0, 3.5, 1.1, 11.0, 5.2],
+      xAxis: {
+        detailed: ['2015', '2016', '2017', '2018', '2019'],
+        simple: ['2015', '2016', '2017', '2018', '2019']
+      }
     },
     'United States': {
-      detailed: [36, 42, 48, 55, 62, 69, 76, 83],
-      simple: [38, 44, 50, 57, 64, 71]
+      detailed: [0, -3.3, 8.4, -5.1, 7.1],
+      simple: [0, -3.3, 8.4, -5.1, 7.1],
+      xAxis: {
+        detailed: ['2019', '2020', '2021', '2022', '2023'],
+        simple: ['2019', '2020', '2021', '2022', '2023']
+      }
     },
     'United Arab Emirates': {
-      detailed: [32, 38, 44, 50, 56, 62, 68, 74],
-      simple: [35, 40, 46, 52, 58, 64]
+      detailed: [0, -3.3, 8.4, -5.2, 7.1],
+      simple: [0, -3.3, 8.4, -5.2, 7.1],
+      xAxis: {
+        detailed: ['2019', '2020', '2021', '2022', '2023'],
+        simple: ['2019', '2020', '2021', '2022', '2023']
+      }
     },
     'global': {
-      detailed: [40, 46, 52, 58, 64, 70, 76, 82],
-      simple: [42, 48, 54, 60, 66, 72]
+      detailed: ['0', '-3.30', '8.40', '-5.12', '7.03'],
+      simple: ['0', '-3.30', '8.40', '-5.12', '7.03'],
+      xAxis: {
+        detailed: ['2019', '2020', '2021', '2022', '2023'],
+        simple: ['2019', '2020', '2021', '2022', '2023']
+      }
     }
   }
 
@@ -80,14 +104,17 @@ const generateRegionData = () => {
     }
   }
 
-  return props.isDetailed ? selectedData.detailed : selectedData.simple
+  return {
+    data: props.isDetailed ? selectedData.detailed : selectedData.simple,
+    xAxis: props.isDetailed ? selectedData.xAxis.detailed : selectedData.xAxis.simple
+  }
 }
 
 const getChartOptions = () => {
-  const data = generateRegionData()
+  const regionData = generateRegionData()
   const axisVisible = props.isDetailed
   const dataCount = props.isDetailed ? 8 : 6
-  const chartData = data
+  const chartData = regionData.data
 
   return {
     backgroundColor: 'transparent',
@@ -99,24 +126,23 @@ const getChartOptions = () => {
     },
     xAxis: {
       type: 'category',
-      data: props.isDetailed
-        ? ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Week 8']
-        : Array.from({ length: dataCount }, (_, i) => ``),
+      data: regionData.xAxis,
       axisLabel: {
         show: props.isDetailed,
-        color: '#64748b',
-        fontSize: 10,
-        margin: 12
+        color: '#ffffff',
+        fontSize: 20,
+        margin: 40
       },
-      axisLine: { show: props.isDetailed, lineStyle: { color: '#374151' } },
+      axisLine: { show: false },
       axisTick: { show: false },
       splitLine: { show: false }
     },
     yAxis: {
       type: 'value',
+      show: false,
       axisLabel: {
         show: props.isDetailed,
-        color: '#64748b',
+        color: '#ffffff',
         fontSize: 10
       },
       axisLine: { show: props.isDetailed, lineStyle: { color: '#374151' } },
@@ -135,9 +161,9 @@ const getChartOptions = () => {
         name: 'Vertical Lines',
         type: 'bar',
         data: chartData,
-        barWidth: 2,
+        barWidth: 0,
         itemStyle: {
-          color: '#ffffff',
+          color: 'transparent',
           borderRadius: [1, 1, 0, 0]
         },
         z: 1,
@@ -156,11 +182,11 @@ const getChartOptions = () => {
             y: 0,
             x2: 0,
             y2: 1,
-            colorStops: [
-              { offset: 0, color: 'rgba(34, 211, 238, 0.8)' },
-              { offset: 0.5, color: 'rgba(34, 211, 238, 0.5)' },
-              { offset: 1, color: 'rgba(34, 211, 238, 0.1)' }
-            ]
+            // colorStops: [
+            //   { offset: 0, color: 'rgba(34, 211, 238, 0.8)' },
+            //   { offset: 0.5, color: 'rgba(34, 211, 238, 0.5)' },
+            //   { offset: 1, color: 'rgba(34, 211, 238, 0.1)' }
+            // ]
           }
         },
         lineStyle: {
@@ -179,11 +205,11 @@ const getChartOptions = () => {
         label: {
           show: props.isDetailed,
           position: 'top',
-          color: '#374151',
-          fontSize: 11,
-          fontWeight: 'bold',
+          color: '#ffffff',
+          fontSize: 20,
+          fontWeight: 'none',
           distance: 8,
-          formatter: '{c}'
+          formatter: '{c}%'
         },
         emphasis: {
           itemStyle: {
@@ -316,7 +342,7 @@ const initChart = () => {
     }
 
     const options = getChartOptions()
-    chartInstance.setOption(options, true)
+    chartInstance.setOption(options, false)
 
     // Add click event listener only for non-detailed charts
     if (!props.isDetailed) {
@@ -402,7 +428,23 @@ const handleResize = () => {
 watch(() => props.selectedCity, (newCity) => {
   if (chartInstance && !chartInstance.isDisposed()) {
     const newOptions = getChartOptions()
-    chartInstance.setOption(newOptions, true)
+    // Use notMerge: false to merge options instead of replacing them
+    chartInstance.setOption({
+      xAxis: {
+        data: newOptions.xAxis.data
+      },
+      series: [
+        {
+          data: newOptions.series[0].data
+        },
+        {
+          data: newOptions.series[1].data
+        },
+        {
+          data: newOptions.series[2].data
+        }
+      ]
+    }, false)
     console.log(`Line chart updated for city: ${newCity ? newCity.city : 'None'}`)
   }
 }, { deep: true })
