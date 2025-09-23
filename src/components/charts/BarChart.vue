@@ -43,12 +43,30 @@ const generateRegionData = (country) => {
 
   // Define consistent data for each region
   const regionData = {
-    'China': [45, 52, 48, 65, 72, 68, 78, 82],
-    'Singapore': [35, 42, 46, 55, 62, 58, 68, 75],
-    'Italy': [42, 48, 44, 58, 65, 62, 72, 79],
-    'United States': [38, 45, 49, 62, 69, 65, 75, 81],
-    'United Arab Emirates': [33, 39, 43, 48, 55, 52, 61, 68],
-    'global': [170.4, 181.4, 244.1, 261.4, 303.5, 342.0, 303.8]
+    'China': {
+      bar: [23.80, 18.50, -7.90, 6.20, 13.90, 15.00, 15.50, 15.30],
+      line: [22.10, 16.80, 10.03, 4.50, 12.30, 13.80, 14.20, 14.10]
+    },
+    'Singapore': {
+      bar: [35, 42, 46, 55, 62, 58, 68, 75],
+      line: [32, 38, 42, 48, 55, 62, 65, 70]
+    },
+    'Italy': {
+      bar: [42, 48, 44, 58, 65, 62, 72, 79],
+      line: [40, 44, 48, 52, 60, 65, 68, 73]
+    },
+    'United States': {
+      bar: [38, 45, 49, 62, 69, 65, 75, 81],
+      line: [35, 42, 46, 58, 65, 70, 73, 78]
+    },
+    'United Arab Emirates': {
+      bar: [33, 39, 43, 48, 55, 52, 61, 68],
+      line: [30, 36, 40, 45, 52, 56, 58, 63]
+    },
+    'global': {
+      bar: [170.4, 181.4, 244.1, 261.4, 303.5, 342.0, 303.8],
+      line: [165.2, 175.8, 230.5, 248.7, 285.3, 325.4, 290.6]
+    }
   }
 
   let selectedData = regionData['global'] // default
@@ -62,11 +80,14 @@ const generateRegionData = (country) => {
     }
   }
 
-  return selectedData.slice(0, dataCount)
+  return {
+    bar: selectedData.bar.slice(0, dataCount),
+    line: selectedData.line.slice(0, dataCount)
+  }
 }
 
 const getChartOptions = () => {
-  const data = generateRegionData()
+  const regionData = generateRegionData()
   const axisVisible = props.isDetailed
   const hasRegionSelected = props.selectedCity && props.selectedCity.country
 
@@ -119,25 +140,11 @@ const getChartOptions = () => {
         }
       },
       series: [
-        // Vertical bars as lines
-        {
-          name: 'Vertical Lines',
-          type: 'bar',
-          data: data,
-          barWidth: 2,
-          itemStyle: {
-            color: '#22d3ee',
-            borderRadius: [1, 1, 0, 0]
-          },
-          z: 1,
-          animationDuration: 1000,
-          animationEasing: 'cubicOut'
-        },
         // Area fill
         {
           name: 'Area',
           type: 'line',
-          data: data,
+          data: regionData.bar,
           areaStyle: {
             color: {
               type: 'linear',
@@ -187,6 +194,38 @@ const getChartOptions = () => {
           z: 2,
           animationDuration: 1500,
           animationEasing: 'cubicOut'
+        },
+        // Line chart overlay
+        {
+          name: 'Line',
+          type: 'line',
+          data: regionData.line,
+          lineStyle: {
+            color: '#22d3ee',
+            width: 3,
+            shadowBlur: 8,
+            shadowColor: 'rgba(34, 211, 238, 0.4)'
+          },
+          symbol: 'circle',
+          symbolSize: 8,
+          itemStyle: {
+            color: '#ffffff',
+            borderColor: '#22d3ee',
+            borderWidth: 3,
+            shadowBlur: 10,
+            shadowColor: 'rgba(34, 211, 238, 0.7)'
+          },
+          emphasis: {
+            itemStyle: {
+              shadowBlur: 18,
+              shadowColor: 'rgba(34, 211, 238, 1)',
+              borderWidth: 4
+            }
+          },
+          smooth: true,
+          z: 3,
+          animationDuration: 2000,
+          animationEasing: 'cubicOut'
         }
       ]
     }
@@ -227,7 +266,7 @@ const getChartOptions = () => {
     series: [
       {
         name: 'Capsule Bars',
-        data: data,
+        data: regionData.bar,
         type: 'bar',
         barWidth: '24px',
         barGap: '20%',
@@ -276,7 +315,7 @@ const getChartOptions = () => {
         name: 'Segment Lines',
         type: 'scatter',
         data: (() => {
-          const barData = data
+          const barData = regionData.bar
           const lineData = []
 
           barData.forEach((value, barIndex) => {
