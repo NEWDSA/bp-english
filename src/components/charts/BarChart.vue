@@ -48,26 +48,32 @@ const generateRegionData = (country) => {
     China: {
       bar: [3.5, 4.3, 4.0, 4.5, 5.2, 6.0, 6.9],
       line: ['hidden', 23.00, -7.90, 13.90, 15.00, 15.50, 15.30],
+      xAxis: ['2018', '2019', '2020', '2021', '2022', '2023', '2024'],
     },
     Singapore: {
       bar: [35, 42, 46, 55, 62, 58, 68, 75],
       line: [32, 38, 42, 48, 55, 62, 65, 70],
+      xAxis: ['2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'],
     },
     Italy: {
       bar: [42, 48, 44, 58, 65, 62, 72, 79],
       line: [40, 44, 48, 52, 60, 65, 68, 73],
+      xAxis: ['2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'],
     },
     'United States': {
       bar: [38, 45, 49, 62, 69, 65, 75, 81],
       line: [35, 42, 46, 58, 65, 70, 73, 78],
+      xAxis: ['2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'],
     },
     'United Arab Emirates': {
       bar: [33, 39, 43, 48, 55, 52, 61, 68],
       line: [30, 36, 40, 45, 52, 56, 58, 63],
+      xAxis: ['2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'],
     },
     global: {
       bar: [170.4, 181.4, 244.1, 261.4, 303.5, 342.0, 303.8],
       line: [165.2, 175.8, 230.5, 248.7, 285.3, 325.4, 290.6],
+      xAxis: ['2015', '2018', '2020', '2021', '2022', '2023', '2024'],
     },
   }
 
@@ -82,9 +88,23 @@ const generateRegionData = (country) => {
     }
   }
 
+  const barData = selectedData.bar.slice(0, dataCount)
+  const lineData = selectedData.line.slice(0, dataCount)
+
+  const barMax = Math.max(...barData)
+  const validLineData = lineData.filter(v => v !== 'hidden' && typeof v === 'number')
+  const lineMax = Math.max(...validLineData)
+  const lineMin = Math.min(...validLineData)
+
   return {
-    bar: selectedData.bar.slice(0, dataCount),
-    line: selectedData.line.slice(0, dataCount),
+    bar: barData,
+    line: lineData,
+    xAxis: selectedData.xAxis.slice(0, dataCount),
+    barMax,
+    lineMax,
+    lineMin,
+    // 根据数据范围决定是否需要分离轴
+    needSeparateAxis: Math.abs(barMax - lineMax) < barMax * 0.1 // 如果差距小于10%则需要分离
   }
 }
 
@@ -106,8 +126,8 @@ const getChartOptions = () => {
       xAxis: {
         type: 'category',
         data: props.isDetailed
-          ? ['2015', '2018', '2020', '2021', '2022', '2023', '2024']
-          : ['', '', '', '', '', '', ''],
+          ? regionData.xAxis
+          : regionData.xAxis.map(() => ''),
         axisLabel: {
           show: axisVisible,
           color: '#ffffff',
@@ -121,7 +141,7 @@ const getChartOptions = () => {
       yAxis: [
         {
           type: 'value',
-          max: 'dataMax',
+          max: regionData.needSeparateAxis ? regionData.barMax * 1.2 : 'dataMax',
           show: false,
           axisLabel: { show: false },
           axisLine: { show: false },
@@ -131,7 +151,10 @@ const getChartOptions = () => {
         {
           type: 'value',
           position: 'right',
-          max: 'dataMax',
+          max: regionData.needSeparateAxis ? regionData.lineMax * 1.3 : 'dataMax',
+          min: regionData.needSeparateAxis ?
+            (regionData.lineMin < 0 ? regionData.lineMin * 1.3 : regionData.lineMin * 0.7) :
+            'dataMin',
           axisLabel: {
             show: axisVisible,
             color: '#ffffff',
@@ -144,7 +167,7 @@ const getChartOptions = () => {
           splitLine: { show: false },
         },
       ],
-      graphic: regionData.bar.map((value, index) => ({
+      graphic: props.isDetailed ? regionData.bar.map((value, index) => ({
         type: 'text',
         left: `${9 + (81 / (regionData.bar.length - 1)) * index}%`, // 根据图表网格定位
         top: '6%', // 固定在图表顶部位置
@@ -157,7 +180,7 @@ const getChartOptions = () => {
           textVerticalAlign: 'bottom'
         },
         z: 100
-      })),
+      })) : [],
       series: [
         // 区域填充
         {
@@ -209,29 +232,29 @@ const getChartOptions = () => {
           animationEasing: 'cubicOut',
         },
         // 从数据点延伸的垂直线
-        {
-          name: 'Vertical Lines',
-          type: 'scatter',
-          data: (() => {
-            const lineData = []
-            regionData.bar.forEach((value, index) => {
-              // 创建多个点来形成垂直线
-              for (let i = 0; i <= value; i += value / 20) {
-                lineData.push([index, i])
-              }
-            })
-            return lineData
-          })(),
-          symbol: 'rect',
-          symbolSize: [1, 2],
-          itemStyle: {
-            color: '#22d3ee',
-            opacity: 0.6,
-          },
-          z: 1,
-          silent: true,
-          animation: false,
-        },
+        // {
+        //   name: 'Vertical Lines',
+        //   type: 'scatter',
+        //   data: (() => {
+        //     const lineData = []
+        //     regionData.bar.forEach((value, index) => {
+        //       // 创建多个点来形成垂直线
+        //       for (let i = 0; i <= value; i += value / 20) {
+        //         lineData.push([index, i])
+        //       }
+        //     })
+        //     return lineData
+        //   })(),
+        //   symbol: 'rect',
+        //   symbolSize: [1, 2],
+        //   itemStyle: {
+        //     color: '#22d3ee',
+        //     opacity: 0.6,
+        //   },
+        //   z: 1,
+        //   silent: true,
+        //   animation: false,
+        // },
         // 叠加的折线图
         {
           name: 'Line',
@@ -239,24 +262,24 @@ const getChartOptions = () => {
           yAxisIndex: 1,
           data: regionData.line,
           lineStyle: {
-            color: '#ffffff',
-            width: 3,
+            color: '#c4c4c4ff',
+            width: 2,
             shadowBlur: 8,
             shadowColor: 'rgba(255, 255, 255, 0.4)',
           },
           symbol: 'circle',
           symbolSize: 8,
           itemStyle: {
-            color: '#ffffff',
-            borderColor: '#ffffff',
-            borderWidth: 3,
+            color: '#c4c4c4ff',
+            borderColor: '#c4c4c4ff',
+            borderWidth: 1,
             shadowBlur: 10,
             shadowColor: 'rgba(255, 255, 255, 0.7)',
           },
           label: {
-            show: true,
+            show: props.isDetailed,
             position: 'top',
-            color: '#ffffff',
+            color: '#c4c4c4ff',
             fontSize: 20,
             fontWeight: 'none',
             distance: 8,
@@ -289,9 +312,7 @@ const getChartOptions = () => {
     },
     xAxis: {
       type: 'category',
-      data: props.isDetailed
-        ? ['2015', '2018', '2020', '2021', '2022', '2023', '2024']
-        : ['2015', '2018', '2020', '2021', '2022', '2023', '2024'],
+      data: regionData.xAxis,
       axisLabel: {
         show: axisVisible,
         color: '#ffffff',
