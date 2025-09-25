@@ -3,9 +3,11 @@
     ref="chartRef"
     class="w-full h-full bg-gray-900/50 rounded-xl relative overflow-hidden"
     :class="{ 'cursor-pointer': !isDetailed }"
-    >
+  >
     <!-- CSS-only hover overlay -->
-    <div class="absolute inset-0 opacity-0 hover:opacity-100 transition-all duration-300 rounded-xl pointer-events-none">
+    <div
+      class="absolute inset-0 opacity-0 hover:opacity-100 transition-all duration-300 rounded-xl pointer-events-none"
+    >
       <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 rounded-xl"></div>
       <div class="absolute inset-0 rounded-xl border-2 border-cyan-400/30 shadow-lg shadow-cyan-400/20"></div>
       <div class="absolute inset-0 flex items-center justify-center">
@@ -24,12 +26,12 @@ import * as echarts from 'echarts'
 const props = defineProps({
   isDetailed: {
     type: Boolean,
-    default: false
+    default: false,
   },
   selectedCity: {
     type: Object,
-    default: null
-  }
+    default: null,
+  },
 })
 
 const emit = defineEmits(['chart-click'])
@@ -43,30 +45,30 @@ const generateRegionData = (country) => {
 
   // Define consistent data for each region
   const regionData = {
-    'China': {
-      bar: [23.80, 18.50, -7.90, 6.20, 13.90, 15.00, 15.50, 15.30],
-      line: [22.10, 16.80, 10.03, 4.50, 12.30, 13.80, 14.20, 14.10]
+    China: {
+      bar: [3.5, 4.3, 4.0, 4.5, 5.2, 6.0, 6.9],
+      line: ['hidden', 23.0, -7.9, 13.9, 15.0, 15.5, 15.3],
     },
-    'Singapore': {
+    Singapore: {
       bar: [35, 42, 46, 55, 62, 58, 68, 75],
-      line: [32, 38, 42, 48, 55, 62, 65, 70]
+      line: [32, 38, 42, 48, 55, 62, 65, 70],
     },
-    'Italy': {
+    Italy: {
       bar: [42, 48, 44, 58, 65, 62, 72, 79],
-      line: [40, 44, 48, 52, 60, 65, 68, 73]
+      line: [40, 44, 48, 52, 60, 65, 68, 73],
     },
     'United States': {
       bar: [38, 45, 49, 62, 69, 65, 75, 81],
-      line: [35, 42, 46, 58, 65, 70, 73, 78]
+      line: [35, 42, 46, 58, 65, 70, 73, 78],
     },
     'United Arab Emirates': {
       bar: [33, 39, 43, 48, 55, 52, 61, 68],
-      line: [30, 36, 40, 45, 52, 56, 58, 63]
+      line: [30, 36, 40, 45, 52, 56, 58, 63],
     },
-    'global': {
+    global: {
       bar: [170.4, 181.4, 244.1, 261.4, 303.5, 342.0, 303.8],
-      line: [165.2, 175.8, 230.5, 248.7, 285.3, 325.4, 290.6]
-    }
+      line: [165.2, 175.8, 230.5, 248.7, 285.3, 325.4, 290.6],
+    },
   }
 
   let selectedData = regionData['global'] // default
@@ -82,7 +84,7 @@ const generateRegionData = (country) => {
 
   return {
     bar: selectedData.bar.slice(0, dataCount),
-    line: selectedData.line.slice(0, dataCount)
+    line: selectedData.line.slice(0, dataCount),
   }
 }
 
@@ -99,7 +101,7 @@ const getChartOptions = () => {
         left: '8%',
         right: '8%',
         top: '15%',
-        bottom: '15%'
+        bottom: '15%',
       },
       xAxis: {
         type: 'category',
@@ -109,36 +111,57 @@ const getChartOptions = () => {
         axisLabel: {
           show: axisVisible,
           color: '#ffffff',
-          fontSize: 20
+          fontSize: 20,
         },
         axisLine: {
           show: axisVisible,
-          lineStyle: { color: '#374151' }
+          lineStyle: { color: '#374151' },
         },
         axisTick: { show: false },
-        splitLine: { show: false }
+        splitLine: { show: false },
       },
-      yAxis: {
-        type: 'value',
-        max: 'dataMax',
-        axisLabel: {
-          show: axisVisible,
-          color: '#ffffff',
-          fontSize: 10
+      yAxis: [
+        {
+          type: 'value',
+          max: 'dataMax',
+          show: false,
+          axisLabel: { show: false },
+          axisLine: { show: false },
+          axisTick: { show: false },
+          splitLine: { show: false },
         },
-        axisLine: {
-          show: axisVisible,
-          lineStyle: { color: '#374151' }
+        {
+          type: 'value',
+          position: 'right',
+          max: 'dataMax',
+          axisLabel: {
+            show: axisVisible,
+            color: '#ffffff',
+            fontSize: 10,
+            formatter: '{value}%',
+          },
+          axisLine: {
+            show: axisVisible,
+            lineStyle: { color: '#374151' },
+          },
+          axisTick: { show: false },
+          splitLine: { show: false },
         },
-        axisTick: { show: false },
-        splitLine: {
-          show: axisVisible,
-          lineStyle: {
-            color: 'rgba(100, 116, 139, 0.2)',
-            type: 'dashed'
-          }
-        }
-      },
+      ],
+      graphic: regionData.bar.map((value, index) => ({
+        type: 'text',
+        left: `${8 + (84 / (regionData.bar.length - 1)) * index}%`, // Position based on chart grid
+        top: '15%', // Fixed position at top of chart
+        style: {
+          text: value.toString(),
+          fontSize: 16,
+          fontWeight: 'bold',
+          fill: '#ffffff',
+          textAlign: 'center',
+          textVerticalAlign: 'bottom'
+        },
+        z: 100
+      })),
       series: [
         // Area fill
         {
@@ -153,17 +176,17 @@ const getChartOptions = () => {
               x2: 0,
               y2: 1,
               colorStops: [
-                { offset: 0, color: 'rgba(34, 211, 238, 0.6)' },
-                { offset: 0.5, color: 'rgba(34, 211, 238, 0.3)' },
-                { offset: 1, color: 'rgba(34, 211, 238, 0.05)' }
-              ]
-            }
+                { offset: 0, color: 'rgba(34, 211, 238, 0.8)' },
+                { offset: 0.5, color: 'rgba(34, 211, 238, 0.5)' },
+                { offset: 1, color: 'rgba(34, 211, 238, 0.1)' },
+              ],
+            },
           },
           lineStyle: {
             color: '#22d3ee',
             width: 2,
             shadowBlur: 6,
-            shadowColor: 'rgba(34, 211, 238, 0.3)'
+            shadowColor: 'rgba(34, 211, 238, 0.3)',
           },
           symbol: 'circle',
           symbolSize: 6,
@@ -172,62 +195,90 @@ const getChartOptions = () => {
             borderColor: '#22d3ee',
             borderWidth: 2,
             shadowBlur: 8,
-            shadowColor: 'rgba(34, 211, 238, 0.6)'
+            shadowColor: 'rgba(34, 211, 238, 0.6)',
           },
           label: {
-            show: props.isDetailed,
-            position: 'top',
-            color: '#ffffff',
-            fontSize: 20,
-            fontWeight: 'none',
-            distance: 8,
-            formatter: '{c}'
+            show: false,
           },
           emphasis: {
             itemStyle: {
               shadowBlur: 15,
               shadowColor: 'rgba(34, 211, 238, 0.9)',
-              borderWidth: 3
-            }
+              borderWidth: 3,
+            },
           },
           smooth: false,
           z: 2,
           animationDuration: 1500,
-          animationEasing: 'cubicOut'
+          animationEasing: 'cubicOut',
+        },
+        // Vertical lines from data points
+        {
+          name: 'Vertical Lines',
+          type: 'scatter',
+          data: (() => {
+            const lineData = []
+            regionData.bar.forEach((value, index) => {
+              // Create multiple points to form vertical lines
+              for (let i = 0; i <= value; i += value / 20) {
+                lineData.push([index, i])
+              }
+            })
+            return lineData
+          })(),
+          symbol: 'rect',
+          symbolSize: [1, 2],
+          itemStyle: {
+            color: '#22d3ee',
+            opacity: 0.6,
+          },
+          z: 1,
+          silent: true,
+          animation: false,
         },
         // Line chart overlay
         {
           name: 'Line',
           type: 'line',
+          yAxisIndex: 1,
           data: regionData.line,
           lineStyle: {
-            color: '#22d3ee',
+            color: '#ffffff',
             width: 3,
             shadowBlur: 8,
-            shadowColor: 'rgba(34, 211, 238, 0.4)'
+            shadowColor: 'rgba(255, 255, 255, 0.4)',
           },
           symbol: 'circle',
           symbolSize: 8,
           itemStyle: {
             color: '#ffffff',
-            borderColor: '#22d3ee',
+            borderColor: '#ffffff',
             borderWidth: 3,
             shadowBlur: 10,
-            shadowColor: 'rgba(34, 211, 238, 0.7)'
+            shadowColor: 'rgba(255, 255, 255, 0.7)',
+          },
+          label: {
+            show: true,
+            position: 'top',
+            color: '#ffffff',
+            fontSize: 16,
+            fontWeight: 'bold',
+            distance: 8,
+            formatter: '{c}%',
           },
           emphasis: {
             itemStyle: {
               shadowBlur: 18,
-              shadowColor: 'rgba(34, 211, 238, 1)',
-              borderWidth: 4
-            }
+              shadowColor: 'rgba(255, 255, 255, 1)',
+              borderWidth: 4,
+            },
           },
-          smooth: true,
+          smooth: false,
           z: 3,
           animationDuration: 2000,
-          animationEasing: 'cubicOut'
-        }
-      ]
+          animationEasing: 'cubicOut',
+        },
+      ],
     }
   }
 
@@ -238,7 +289,7 @@ const getChartOptions = () => {
       left: '8%',
       right: '8%',
       top: '15%',
-      bottom: '15%'
+      bottom: '15%',
     },
     xAxis: {
       type: 'category',
@@ -253,15 +304,15 @@ const getChartOptions = () => {
       },
       axisLine: { show: false },
       axisTick: { show: false },
-      splitLine: { show: false }
+      splitLine: { show: false },
     },
     yAxis: {
       type: 'value',
-        max: 'dataMax',
+      max: 'dataMax',
       axisLabel: { show: false },
       axisLine: { show: false },
       axisTick: { show: false },
-      splitLine: { show: false }
+      splitLine: { show: false },
     },
     series: [
       {
@@ -283,13 +334,13 @@ const getChartOptions = () => {
               { offset: 0.4, color: '#0284c7' },
               { offset: 0.6, color: '#0ea5e9' },
               { offset: 0.8, color: '#38bdf8' },
-              { offset: 1, color: '#7dd3fc' }
-            ]
+              { offset: 1, color: '#7dd3fc' },
+            ],
           },
           borderRadius: [12, 12, 12, 12],
           shadowBlur: 10,
           shadowColor: 'rgba(56, 189, 248, 0.4)',
-          shadowOffsetY: 0
+          shadowOffsetY: 0,
         },
         label: {
           show: props.isDetailed,
@@ -298,17 +349,17 @@ const getChartOptions = () => {
           fontSize: 20,
           fontWeight: 'none',
           distance: 8,
-          formatter: '{c}'
+          formatter: '{c}',
         },
         emphasis: {
           itemStyle: {
             shadowBlur: 20,
-            shadowColor: 'rgba(56, 189, 248, 0.6)'
-          }
+            shadowColor: 'rgba(56, 189, 248, 0.6)',
+          },
         },
         animationDuration: 1500,
         animationEasing: 'elasticOut',
-        z: 1
+        z: 1,
       },
       // 分段线条系列
       {
@@ -331,13 +382,13 @@ const getChartOptions = () => {
         symbolSize: [20, 1],
         itemStyle: {
           color: '#1e293b',
-          opacity: 0.9
+          opacity: 0.9,
         },
         z: 10,
         silent: true,
-        animation: false
-      }
-    ]
+        animation: false,
+      },
+    ],
   }
 }
 
@@ -385,7 +436,6 @@ onMounted(async () => {
         if (resizeObserver && chartRef.value) {
           resizeObserver.observe(chartRef.value)
         }
-
       } catch (error) {
         console.error('Error in chart initialization attempt', attempts + 1, ':', error)
         if (attempts < maxAttempts - 1) {
@@ -396,7 +446,6 @@ onMounted(async () => {
 
     // Start initialization with a small delay
     setTimeout(() => initWithRetry(), 100)
-
   } catch (error) {
     console.error('Error in chart mount hook:', error)
   }
@@ -422,7 +471,7 @@ const initChart = () => {
     // Initialize new chart instance
     chartInstance = echarts.init(chartRef.value, null, {
       width: containerRect.width,
-      height: containerRect.height
+      height: containerRect.height,
     })
 
     if (!chartInstance) {
@@ -441,7 +490,10 @@ const initChart = () => {
         const rect = chartRef.value.getBoundingClientRect()
 
         // Convert click coordinates to chart coordinates
-        const pointInChart = chartInstance.convertFromPixel('grid', [event.offsetX - rect.left, event.offsetY - rect.top])
+        const pointInChart = chartInstance.convertFromPixel('grid', [
+          event.offsetX - rect.left,
+          event.offsetY - rect.top,
+        ])
 
         // Emit click event regardless of whether it's on a data point
         emit('chart-click', {
@@ -451,8 +503,8 @@ const initChart = () => {
             offsetX: event.offsetX,
             offsetY: event.offsetY,
             // Include coordinates in case needed
-            pointInChart: pointInChart
-          }
+            pointInChart: pointInChart,
+          },
         })
       })
     }
@@ -465,7 +517,6 @@ const initChart = () => {
     }, 50)
 
     console.log('Bar chart initialized successfully')
-
   } catch (error) {
     console.error('Error in initChart:', error)
 
@@ -514,13 +565,17 @@ const handleResize = () => {
 }
 
 // Watch for selected city changes and update chart data
-watch(() => props.selectedCity, (newCity) => {
-  if (chartInstance && !chartInstance.isDisposed()) {
-    const newOptions = getChartOptions()
-    chartInstance.setOption(newOptions, true)
-    console.log(`Bar chart updated for city: ${newCity ? newCity.city : 'None'}`)
-  }
-}, { deep: true })
+watch(
+  () => props.selectedCity,
+  (newCity) => {
+    if (chartInstance && !chartInstance.isDisposed()) {
+      const newOptions = getChartOptions()
+      chartInstance.setOption(newOptions, true)
+      console.log(`Bar chart updated for city: ${newCity ? newCity.city : 'None'}`)
+    }
+  },
+  { deep: true }
+)
 </script>
 
 <style scoped>
