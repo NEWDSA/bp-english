@@ -98,10 +98,10 @@ const getChartOptions = () => {
     return {
       backgroundColor: 'transparent',
       grid: {
-        left: '8%',
-        right: '8%',
-        top: '15%',
-        bottom: '15%',
+        left: '3%',
+        right: '3%',
+        top: '20%',
+        bottom: '14%',
       },
       xAxis: {
         type: 'category',
@@ -112,13 +112,11 @@ const getChartOptions = () => {
           show: axisVisible,
           color: '#ffffff',
           fontSize: 20,
+          margin: 40
         },
-        axisLine: {
-          show: axisVisible,
-          lineStyle: { color: '#374151' },
-        },
+        axisLine: { show: false },
         axisTick: { show: false },
-        splitLine: { show: false },
+        splitLine: { show: false }
       },
       yAxis: [
         {
@@ -140,22 +138,20 @@ const getChartOptions = () => {
             fontSize: 10,
             formatter: '{value}%',
           },
-          axisLine: {
-            show: axisVisible,
-            lineStyle: { color: '#374151' },
-          },
+          axisLabel: { show: false },
+          axisLine: { show: false },
           axisTick: { show: false },
           splitLine: { show: false },
         },
       ],
       graphic: regionData.bar.map((value, index) => ({
         type: 'text',
-        left: `${8 + (84 / (regionData.bar.length - 1)) * index}%`, // 根据图表网格定位
-        top: '15%', // 固定在图表顶部位置
+        left: `${9 + (81 / (regionData.bar.length - 1)) * index}%`, // 根据图表网格定位
+        top: '6%', // 固定在图表顶部位置
         style: {
           text: value.toString(),
-          fontSize: 16,
-          fontWeight: 'bold',
+          fontSize: 20,
+          fontWeight: 'none',
           fill: '#ffffff',
           textAlign: 'center',
           textVerticalAlign: 'bottom'
@@ -261,8 +257,8 @@ const getChartOptions = () => {
             show: true,
             position: 'top',
             color: '#ffffff',
-            fontSize: 16,
-            fontWeight: 'bold',
+            fontSize: 20,
+            fontWeight: 'none',
             distance: 8,
             formatter: '{c}%',
           },
