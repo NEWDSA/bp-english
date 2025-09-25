@@ -4,7 +4,7 @@
     class="w-full h-full bg-gray-900/50 rounded-xl relative overflow-hidden"
     :class="{ 'cursor-pointer': !isDetailed }"
   >
-    <!-- CSS-only hover overlay -->
+    <!-- 纯CSS悬停遮罩效果 -->
     <div
       class="absolute inset-0 opacity-0 hover:opacity-100 transition-all duration-300 rounded-xl pointer-events-none"
     >
@@ -41,13 +41,13 @@ let chartInstance = null
 let resizeObserver = null
 
 const generateRegionData = (country) => {
-  const dataCount = props.isDetailed ? 8 : 7
+  const dataCount = props.isDetailed ? 8 : 7  // 根据是否详情模式决定数据点数量
 
-  // Define consistent data for each region
+  // 为每个地区定义一致的数据
   const regionData = {
     China: {
       bar: [3.5, 4.3, 4.0, 4.5, 5.2, 6.0, 6.9],
-      line: ['hidden', 23.0, -7.9, 13.9, 15.0, 15.5, 15.3],
+      line: ['hidden', 23.00, -7.90, 13.90, 15.00, 15.50, 15.30],
     },
     Singapore: {
       bar: [35, 42, 46, 55, 62, 58, 68, 75],
@@ -71,14 +71,14 @@ const generateRegionData = (country) => {
     },
   }
 
-  let selectedData = regionData['global'] // default
+  let selectedData = regionData['global'] // 默认使用全球数据
 
   if (props.selectedCity && props.selectedCity.country) {
     const country = props.selectedCity.country
     if (regionData[country]) {
       selectedData = regionData[country]
     } else if (country === 'Thailand' || country === 'Indonesia' || country === 'Malaysia') {
-      selectedData = regionData['Singapore'] // Southeast Asia uses Singapore data
+      selectedData = regionData['Singapore'] // 东南亚地区使用新加坡数据
     }
   }
 
@@ -93,7 +93,7 @@ const getChartOptions = () => {
   const axisVisible = props.isDetailed
   const hasRegionSelected = props.selectedCity && props.selectedCity.country
 
-  // If region is selected, show vertical line chart style
+  // 如果选择了地区，显示垂直线条图表样式
   if (hasRegionSelected) {
     return {
       backgroundColor: 'transparent',
@@ -150,8 +150,8 @@ const getChartOptions = () => {
       ],
       graphic: regionData.bar.map((value, index) => ({
         type: 'text',
-        left: `${8 + (84 / (regionData.bar.length - 1)) * index}%`, // Position based on chart grid
-        top: '15%', // Fixed position at top of chart
+        left: `${8 + (84 / (regionData.bar.length - 1)) * index}%`, // 根据图表网格定位
+        top: '15%', // 固定在图表顶部位置
         style: {
           text: value.toString(),
           fontSize: 16,
@@ -163,7 +163,7 @@ const getChartOptions = () => {
         z: 100
       })),
       series: [
-        // Area fill
+        // 区域填充
         {
           name: 'Area',
           type: 'line',
@@ -212,14 +212,14 @@ const getChartOptions = () => {
           animationDuration: 1500,
           animationEasing: 'cubicOut',
         },
-        // Vertical lines from data points
+        // 从数据点延伸的垂直线
         {
           name: 'Vertical Lines',
           type: 'scatter',
           data: (() => {
             const lineData = []
             regionData.bar.forEach((value, index) => {
-              // Create multiple points to form vertical lines
+              // 创建多个点来形成垂直线
               for (let i = 0; i <= value; i += value / 20) {
                 lineData.push([index, i])
               }
@@ -236,7 +236,7 @@ const getChartOptions = () => {
           silent: true,
           animation: false,
         },
-        // Line chart overlay
+        // 叠加的折线图
         {
           name: 'Line',
           type: 'line',
@@ -282,7 +282,7 @@ const getChartOptions = () => {
     }
   }
 
-  // Default capsule bar style when no region is selected
+  // 未选择地区时的默认胶囊柱状图样式
   return {
     backgroundColor: 'transparent',
     grid: {
@@ -361,7 +361,7 @@ const getChartOptions = () => {
         animationEasing: 'elasticOut',
         z: 1,
       },
-      // 分段线条系列
+      // 分段线条系列（用于创建柱状图的分割线效果）
       {
         name: 'Segment Lines',
         type: 'scatter',
@@ -396,17 +396,17 @@ onMounted(async () => {
   try {
     await nextTick()
 
-    // Add resize listener
+    // 添加窗口大小调整监听器
     window.addEventListener('resize', handleResize)
 
-    // Add ResizeObserver for more accurate container size tracking
+    // 添加ResizeObserver以更准确地跟踪容器大小
     if (window.ResizeObserver) {
       resizeObserver = new ResizeObserver(() => {
         handleResize()
       })
     }
 
-    // Use requestAnimationFrame for better DOM readiness
+    // 使用requestAnimationFrame确保DOM就绪
     const initWithRetry = (attempts = 0, maxAttempts = 5) => {
       if (attempts >= maxAttempts) {
         console.error('Failed to initialize chart after', maxAttempts, 'attempts')
@@ -420,7 +420,7 @@ onMounted(async () => {
       }
 
       try {
-        // Check if the element has dimensions
+        // 检查元素是否有尺寸
         const rect = chartRef.value.getBoundingClientRect()
         console.log(`Chart container dimensions: ${rect.width}x${rect.height}`)
         if (rect.width === 0 || rect.height === 0) {
@@ -429,10 +429,10 @@ onMounted(async () => {
           return
         }
 
-        // Initialize the chart
+        // 初始化图表
         initChart()
 
-        // Start observing container size changes
+        // 开始监听容器尺寸变化
         if (resizeObserver && chartRef.value) {
           resizeObserver.observe(chartRef.value)
         }
@@ -444,7 +444,7 @@ onMounted(async () => {
       }
     }
 
-    // Start initialization with a small delay
+    // 延迟一小段时间后开始初始化
     setTimeout(() => initWithRetry(), 100)
   } catch (error) {
     console.error('Error in chart mount hook:', error)
@@ -458,17 +458,17 @@ const initChart = () => {
   }
 
   try {
-    // Dispose any existing chart instance
+    // 销毁已存在的图表实例
     if (chartInstance) {
       chartInstance.dispose()
       chartInstance = null
     }
 
-    // Get container dimensions for initialization
+    // 获取容器尺寸用于初始化
     const containerRect = chartRef.value.getBoundingClientRect()
     console.log(`Initializing chart with dimensions: ${containerRect.width}x${containerRect.height}`)
 
-    // Initialize new chart instance
+    // 初始化新的图表实例
     chartInstance = echarts.init(chartRef.value, null, {
       width: containerRect.width,
       height: containerRect.height,
@@ -482,34 +482,34 @@ const initChart = () => {
     const options = getChartOptions()
     chartInstance.setOption(options, true)
 
-    // Add click event listener only for non-detailed charts
+    // 仅为非详情图表添加点击事件监听器
     if (!props.isDetailed) {
-      // Listen to click events on the entire chart container
+      // 监听整个图表容器的点击事件
       chartInstance.getZr().on('click', (event) => {
-        // Get the DOM element position
+        // 获取DOM元素位置
         const rect = chartRef.value.getBoundingClientRect()
 
-        // Convert click coordinates to chart coordinates
+        // 将点击坐标转换为图表坐标
         const pointInChart = chartInstance.convertFromPixel('grid', [
           event.offsetX - rect.left,
           event.offsetY - rect.top,
         ])
 
-        // Emit click event regardless of whether it's on a data point
+        // 无论是否点击在数据点上，都发出点击事件
         emit('chart-click', {
           chartType: 'bar',
           params: {
             event: event,
             offsetX: event.offsetX,
             offsetY: event.offsetY,
-            // Include coordinates in case needed
+            // 包含坐标以备不时之需
             pointInChart: pointInChart,
           },
         })
       })
     }
 
-    // Force immediate resize to ensure proper sizing
+    // 强制立即调整大小以确保正确的尺寸
     setTimeout(() => {
       if (chartInstance && !chartInstance.isDisposed()) {
         chartInstance.resize()
@@ -520,7 +520,7 @@ const initChart = () => {
   } catch (error) {
     console.error('Error in initChart:', error)
 
-    // Clean up on error
+    // 出错时清理
     if (chartInstance) {
       try {
         chartInstance.dispose()
@@ -533,10 +533,10 @@ const initChart = () => {
 }
 
 onUnmounted(() => {
-  // Remove resize listener
+  // 移除窗口大小调整监听器
   window.removeEventListener('resize', handleResize)
 
-  // Disconnect ResizeObserver
+  // 断开ResizeObserver连接
   if (resizeObserver) {
     resizeObserver.disconnect()
     resizeObserver = null
@@ -548,11 +548,11 @@ onUnmounted(() => {
   }
 })
 
-// Handle resize
+// 处理窗口大小调整
 const handleResize = () => {
   if (chartInstance && chartRef.value) {
     try {
-      // Use setTimeout to ensure DOM has finished updating
+      // 使用setTimeout确保DOM已完成更新
       setTimeout(() => {
         if (chartInstance && !chartInstance.isDisposed()) {
           chartInstance.resize()
@@ -564,7 +564,7 @@ const handleResize = () => {
   }
 }
 
-// Watch for selected city changes and update chart data
+// 监听选中城市的变化并更新图表数据
 watch(
   () => props.selectedCity,
   (newCity) => {
@@ -579,7 +579,7 @@ watch(
 </script>
 
 <style scoped>
-/* CSS-only hover effects */
+/* 纯CSS悬停效果 */
 .cursor-pointer {
   position: relative;
   transition: all 0.3s ease;
@@ -589,7 +589,7 @@ watch(
   transform: scale(1.02);
 }
 
-/* Ensure ECharts canvas doesn't block mouse events */
+/* 确保ECharts画布不会阻止鼠标事件 */
 :deep(canvas) {
   pointer-events: none;
 }

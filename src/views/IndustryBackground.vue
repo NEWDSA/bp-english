@@ -34,30 +34,30 @@ const isItalySelected = ref(false)
 const isAmericaSelected = ref(false)
 const isMiddleEastSelected = ref(false)
 
-// nav
+// 导航到首页
 const goHome = () => {
 	router.push('/')
 }
 
-// Calculate chart height dynamically
+// 动态计算图表高度
 const chartContainerHeight = ref('0px')
 const chartHeight = ref('0px')
 
 const calculateChartHeight = () => {
-  // Navigation height (pt-24 = 6rem = 96px)
+  // 导航栏高度 (pt-24 = 6rem = 96px)
   const navHeight = 84
-  // Page title section height (mt-5 + mb-6 + content height ≈ 80px)
+  // 页面标题部分高度 (mt-5 + mb-6 + 内容高度 ≈ 80px)
   const titleHeight = 82
-  // Padding bottom (pb-8 = 2rem = 32px)
+  // 底部内边距 (pb-8 = 2rem = 32px)
   const paddingBottom = 32
-  // Grid gap (gap-4 between 3 rows = 8px * 2 = 16px for mobile, gap-6 for desktop)
-  const gridGap = window.innerWidth >= 1024 ? 12 * 2 : 8 * 2 // 2 gaps between 3 rows
+  // 网格间距 (3行之间的间距：移动端 gap-4 = 8px * 2 = 16px，桌面端 gap-6)
+  const gridGap = window.innerWidth >= 1024 ? 12 * 2 : 8 * 2 // 3行之间有2个间隙
   const gridTitle = 56 * 3
 
   console.log(navHeight, titleHeight, paddingBottom, gridGap)
 
   const availableHeight = window.innerHeight - navHeight - titleHeight - paddingBottom - gridGap - gridTitle
-  const calculatedChartHeight = Math.floor(availableHeight / 3) // 3 rows of charts
+  const calculatedChartHeight = Math.floor(availableHeight / 3) // 3行图表
 
   chartHeight.value = `${calculatedChartHeight}px`
 }
@@ -71,7 +71,7 @@ onUnmounted(() => {
   window.removeEventListener('resize', calculateChartHeight)
 })
 
-// Handle chart click event
+// 处理图表点击事件
 const handleChartClick = (chartInfo) => {
   selectedChart.value = {
     title: getChartTitle(chartInfo.chartType),
@@ -80,7 +80,7 @@ const handleChartClick = (chartInfo) => {
   showChartModal.value = true
 }
 
-// Get chart title based on chart type and region
+// 根据图表类型和地区获取图表标题
 const getChartTitle = (chartType) => {
   const titles = {
     'bar': isChinaSelected.value ? "Market size of China's small yacht manufacturing industry" :
@@ -123,7 +123,7 @@ const getChartTitle = (chartType) => {
   return titles[chartType] || 'Chart Details'
 }
 
-// Handle city click event from globe
+// 处理地球上的城市点击事件
 const handleCityClick = (cityInfo) => {
   selectedCity.value = cityInfo
   isChinaSelected.value = cityInfo.country === 'China'
@@ -162,12 +162,12 @@ const handleCityClick = (cityInfo) => {
       </div>
     </nav>
 
-    <!-- Main Content -->
+    <!-- 主内容区域 -->
     <div class="w-full px-4 sm:px-8 pt-24 pb-8 min-h-screen overflow-hidden">
       <div class="flex flex-col xl:flex-row gap-8 xl:gap-12 h-full overflow-hidden">
-        <!-- Left Side - Page Title and Charts -->
+        <!-- 左侧 - 页面标题和图表 -->
         <div class="w-full xl:w-1/2 flex flex-col h-full">
-          <!-- Page Title -->
+          <!-- 页面标题 -->
           <div class="mt-1 mb-6 xl:mb-8 flex-shrink-0">
             <div class="flex items-center text-white">
               <img src="../assets/icon-1.png" alt="Icon" class="w-[27px] h-[28px] mr-3" />
@@ -175,9 +175,9 @@ const handleCityClick = (cityInfo) => {
             </div>
           </div>
 
-          <!-- Charts Grid -->
+          <!-- 图表网格布局 -->
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 xl:gap-6">
-            <!-- Chart 1: Global small yacht manufacturing industry -->
+            <!-- 图表1：全球小型游艇制造业 -->
             <div class="text-white">
               <div class="flex items-center mb-4 h-12">
                 <div class="w-2 h-2 bg-cyan-400 rounded-full mr-3"></div>
@@ -188,7 +188,7 @@ const handleCityClick = (cityInfo) => {
               </div>
             </div>
 
-            <!-- Chart 2: Global small yacht sales market size -->
+            <!-- 图表2：全球小型游艇销售市场规模 -->
             <div class="text-white">
               <div class="flex items-center mb-4 h-12">
                 <div class="w-2 h-2 bg-cyan-400 rounded-full mr-3"></div>
@@ -199,7 +199,7 @@ const handleCityClick = (cityInfo) => {
               </div>
             </div>
 
-            <!-- Chart 3: Global market size of water outdoor sports equipment (growth rate) -->
+            <!-- 图表3：全球水上户外运动装备市场规模（增长率） -->
             <div class="text-white">
               <div class="flex items-center mb-4 h-12">
                 <div class="w-2 h-2 bg-cyan-400 rounded-full mr-3"></div>
@@ -210,7 +210,7 @@ const handleCityClick = (cityInfo) => {
               </div>
             </div>
 
-            <!-- Chart 4: Global market size of water outdoor sports equipment -->
+            <!-- 图表4：全球水上户外运动装备市场规模 -->
             <div class="text-white">
               <div class="flex items-center mb-4 h-12">
                 <div class="w-2 h-2 bg-cyan-400 rounded-full mr-3"></div>
@@ -221,7 +221,7 @@ const handleCityClick = (cityInfo) => {
               </div>
             </div>
 
-            <!-- Chart 5: Global ship leasing market size -->
+            <!-- 图表5：全球船舶租赁市场规模 -->
             <div class="text-white">
               <div class="flex items-center mb-4 h-12">
                 <div class="w-2 h-2 bg-cyan-400 rounded-full mr-3"></div>
@@ -232,7 +232,7 @@ const handleCityClick = (cityInfo) => {
               </div>
             </div>
 
-            <!-- Chart 6: Age structure of global shipowners -->
+            <!-- 图表6：全球船东年龄结构 -->
             <div class="text-white">
               <div class="flex items-center mb-4 h-12">
                 <div class="w-2 h-2 bg-cyan-400 rounded-full mr-3"></div>
@@ -245,17 +245,17 @@ const handleCityClick = (cityInfo) => {
           </div>
         </div>
 
-        <!-- Right Side - Globe -->
+        <!-- 右侧 - 地球组件 -->
         <div class="w-[50vw] h-[80vh] flex flex-col items-center justify-center mt-10">
           <div class="relative w-full h-full aspect-square">
-            <!-- Selected City Indicator & Summary Button -->
+            <!-- 选中城市指示器和摘要按钮 -->
             <div class="absolute top-0 right-0 z-10 flex flex-col items-end space-y-3">
-              <!-- Selected City Display -->
+              <!-- 选中城市显示 -->
               <!-- <div v-if="selectedCity" class="bg-gray-800/90 backdrop-blur-sm border border-cyan-500/30 rounded-lg px-4 py-2 text-white text-sm">
                 <span class="text-cyan-400 font-medium">Selected:</span> {{ selectedCity.city }}, {{ selectedCity.country }}
               </div> -->
 
-              <!-- Summary Button -->
+              <!-- 摘要按钮 -->
               <div
                 @mouseenter="showSummary = true"
                 @mouseleave="showSummary = false"
@@ -268,7 +268,7 @@ const handleCityClick = (cityInfo) => {
                   {{ isChinaSelected || isSoutheastAsiaSelected || isItalySelected || isAmericaSelected || isMiddleEastSelected ? 'Government Policy' : 'Summary' }}
                 </button>
 
-                <!-- Summary Popup -->
+                <!-- 摘要弹出框 -->
                 <div
                   v-show="showSummary"
                   @mouseenter="showSummary = true"
@@ -276,7 +276,7 @@ const handleCityClick = (cityInfo) => {
                   class="absolute top-full z-9999999 right-0 mt-6 w-[480px] bg-gray-800/95 backdrop-blur-sm border border-cyan-500/30 rounded-lg p-4 shadow-2xl transform transition-all duration-300 origin-top-right"
                   :class="showSummary ? 'animate-in fade-in-90 slide-in-from-top-2' : 'animate-out fade-out-90 slide-out-to-top-2'"
                 >
-                  <!-- Content -->
+                  <!-- 内容 -->
                   <div class="text-gray-100 text-sm leading-relaxed">
                     <template v-if="isChinaSelected">
                       <p class="mb-3 font-semibold text-cyan-400">Guiding Opinions on Promoting the Development of Energy Electronics Industry</p>
@@ -356,13 +356,13 @@ const handleCityClick = (cityInfo) => {
               </div>
             </div>
 
-            <!-- Globe -->
+            <!-- 地球组件 -->
             <div class="absolute inset-0 flex items-center justify-center">
               <GlobeComponent @city-click="handleCityClick" />
             </div>
           </div>
 
-          <!-- Legend -->
+          <!-- 图例 -->
           <!-- <div class="mt-8 space-y-2">
             <div class="flex items-center">
               <div class="w-4 h-3 bg-cyan-600 mr-3"></div>
@@ -381,14 +381,14 @@ const handleCityClick = (cityInfo) => {
       </div>
     </div>
 
-    <!-- Floating particles for visual effect -->
+    <!-- 浮动粒子视觉效果 -->
     <div class="fixed inset-0 pointer-events-none z-0">
       <div class="absolute top-1/4 left-1/4 w-1 h-1 bg-blue-400 rounded-full animate-ping"></div>
       <div class="absolute top-3/4 right-1/3 w-1 h-1 bg-purple-400 rounded-full animate-ping animation-delay-2000"></div>
       <div class="absolute bottom-1/4 left-1/3 w-1 h-1 bg-cyan-400 rounded-full animate-ping animation-delay-4000"></div>
     </div>
 
-    <!-- Chart Modal -->
+    <!-- 图表弹窗 -->
     <ChartModal
       :is-visible="showChartModal"
       :title="selectedChart.title"
@@ -431,7 +431,7 @@ const handleCityClick = (cityInfo) => {
   animation-delay: 4s;
 }
 
-/* Custom animation classes */
+/* 自定义动画类 */
 .fade-in-90 {
   animation-duration: 0.3s;
   animation-fill-mode: both;
