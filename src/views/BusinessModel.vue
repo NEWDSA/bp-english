@@ -491,6 +491,7 @@
 import { ref, onMounted, onBeforeUnmount, watchEffect, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import * as echarts from 'echarts'
+import { getScale } from '../utils/flexible.js'
 
 const router = useRouter()
 
@@ -498,6 +499,9 @@ const router = useRouter()
 const activeContent = ref(null)
 const showLakeDetail = ref(false)
 const isRevenueSelected = ref(false)
+
+// lib-flexible 适配相关
+let cleanupFlexible = null
 
 // 图表数据
 const chartData = ref([
@@ -1560,7 +1564,7 @@ function onWindowResize() {
 	if (demandChartInstance) demandChartInstance.resize()
 }
 
-onBeforeUnmount(() => {
+	onBeforeUnmount(() => {
 	window.removeEventListener('resize', onWindowResize)
 	if (revenueChartInstance) {
 		revenueChartInstance.dispose()

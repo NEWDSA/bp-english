@@ -5,7 +5,10 @@ import GlobeComponent from '../components/GlobeComponent.vue';
 import Navigation from '../components/Navigation.vue';
 import ChartModal from '../components/ChartModal.vue';
 import { useRouter } from 'vue-router'
+import { getScale } from '../utils/flexible.js'
 const router = useRouter()
+
+// 页面相关状态
 
 const chartData = ref([
   { title: 'Global Yacht Sales', subtitle: 'Market size and trends', type: 'line', id: 'yacht-sales' },

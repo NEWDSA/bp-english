@@ -106,7 +106,7 @@
 								<div class="highlight-card unmanned-systems" @mouseenter="showTooltip('unmanned')"
 									@mouseleave="hideTooltip">
 									<div v-if="activeTooltip !== 'unmanned'">
-										<img :src="wheel1Img" alt="Unmanned Systems" class="highlight-icon" />
+										<img :src="wheel1Img" alt="Unmanned Systems" class="unmanned-image" />
 										<div class="highlight-title">Unmanned Systems</div>
 									</div>
 									<!-- 悬停时显示的详细信息 -->
@@ -136,7 +136,7 @@
 								<div class="highlight-card adaptive-algorithm" @mouseenter="showTooltip('adaptive')"
 									@mouseleave="hideTooltip">
 									<div v-if="activeTooltip !== 'adaptive'">
-										<img :src="AutoSettingImg" alt="Adaptive hydrofoil" class="highlight-icon" />
+										<img :src="AutoSettingImg" alt="Adaptive hydrofoil" class="adaptive-image" />
 										<div class="highlight-title">Adaptive hydrofoil control algorithm</div>
 									</div>
 									<!-- 悬停时显示的详细信息 -->
@@ -151,7 +151,7 @@
 								<div class="highlight-card modular-hull" @mouseenter="showTooltip('modular')"
 									@mouseleave="hideTooltip">
 									<div v-if="activeTooltip !== 'modular'">
-										<img :src="modularImg" alt="Modular detachable hull" class="highlight-icon" />
+										<img :src="modularImg" alt="Modular detachable hull" class="modular-image" />
 										<div class="highlight-title">Modular detachable hull</div>
 									</div>
 									<!-- 悬停时显示的详细信息 -->
@@ -183,7 +183,7 @@
 			<div class="right-section">
 				<div class="product-specs-panel">
 					<!-- <h3 class="specs-title">Ship name: YU</h3> -->
-					<div style="background-color: rgba(100, 100, 100, 1);padding: 10px;border-radius: 10px 10px 0 0;">
+					<div class="ship-name-header">
 						<span class="specs-title">Ship name: YU</span>
 					</div>
 					<!-- 主要尺寸 -->
@@ -414,7 +414,8 @@
 			<div v-if="showSimulationModal" class="modal-overlay" @click="hideSimulationModal">
 				<div class="simulation-modal" @click.stop>
 					<div class="simulation-modal-header">
-						<h2 class="simulation-title">Breakthrough verification of energy efficiency and stability of hydrofoil system</h2>
+						<h2 class="simulation-title">Breakthrough verification of energy efficiency and stability of
+							hydrofoil system</h2>
 						<button class="close-btn" @click="hideSimulationModal">×</button>
 					</div>
 					<div class="simulation-content">
@@ -426,7 +427,7 @@
 									<source src="../assets/2.1.mp4" type="video/mp4">
 								</video>
 							</div>
-							
+
 							<!-- 中上：参数信息区域 -->
 							<div class="simulation-item text-panel">
 								<div class="text-content">
@@ -438,14 +439,14 @@
 									</div>
 								</div>
 							</div>
-							
+
 							<!-- 第三列第一行：视频 -->
 							<div class="simulation-item video-item">
 								<video autoplay muted loop playsinline class="sim-video">
 									<source src="../assets/2.2.mp4" type="video/mp4">
 								</video>
 							</div>
-							
+
 							<!-- 第四列：结论面板（跨3行） -->
 							<div class="simulation-item conclusion-panel">
 								<div class="conclusion-content">
@@ -453,22 +454,28 @@
 									<div class="conclusion-text">
 										<div class="conclusion-point">
 											<strong>1. Energy efficiency reduction:</strong>
-											At a speed of 18kt, the hydrofoil boat exhibits a 55% reduction in water resistance and a 75% reduction in propulsion power compared to a conventional hull.
+											At a speed of 18kt, the hydrofoil boat exhibits a 55% reduction in water
+											resistance and a 75% reduction in propulsion power compared to a
+											conventional hull.
 										</div>
 										<div class="conclusion-point">
 											<strong>2. Stability improvement:</strong>
-											With a simulated wave height of 0.5m and an angle of 45°, the hydrofoil boat maintains a more stable and comfortable navigation posture, with the crew barely feeling the vessel's trim. In contrast, conventional boats experience a trim of up to 8° under these sea conditions, making the crew extremely uncomfortable.
+											With a simulated wave height of 0.5m and an angle of 45°, the hydrofoil boat
+											maintains a more stable and comfortable navigation posture, with the crew
+											barely feeling the vessel's trim. In contrast, conventional boats experience
+											a trim of up to 8° under these sea conditions, making the crew extremely
+											uncomfortable.
 										</div>
 									</div>
 								</div>
 							</div>
-							
+
 							<!-- 第二行 -->
 							<!-- 左中：波点图表 -->
 							<div class="simulation-item chart-panel">
 								<div ref="waveChartRef" class="chart-container"></div>
 							</div>
-							
+
 							<!-- 中中：Trim Angle信息区域 -->
 							<div class="simulation-item text-panel">
 								<div class="text-content">
@@ -480,7 +487,7 @@
 									</div>
 								</div>
 							</div>
-							
+
 							<!-- 第三列第二行：Trim Angle图表 -->
 							<div class="simulation-item chart-panel">
 								<div ref="trimAngleChartRef" class="chart-container"></div>
@@ -491,13 +498,13 @@
 									<div>-7°~-8.5°</div>
 								</div>
 							</div>
-							
+
 							<!-- 第三行 -->
 							<!-- 左下：图表 -->
 							<div class="simulation-item chart-panel">
 								<div ref="trimAngleChart2Ref" class="chart-container"></div>
 							</div>
-							
+
 							<!-- 中下：Effective Power信息区域 -->
 							<div class="simulation-item text-panel">
 								<div class="text-content">
@@ -509,7 +516,7 @@
 									</div>
 								</div>
 							</div>
-							
+
 							<!-- 第三列第三行：Effective Power图表 -->
 							<div class="simulation-item chart-panel">
 								<div ref="powerChartRef" class="chart-container"></div>
@@ -531,6 +538,8 @@
 import { ref, onMounted, onUnmounted, computed, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import * as echarts from 'echarts'
+// 引入 lib-flexible 工具函数
+import { getScale } from '../utils/flexible.js'
 // 导入船只图片资源
 import whiteBoatImg from '../assets/white_boat.png'
 import greenBoatImg from '../assets/green_boat.png'
@@ -601,25 +610,40 @@ const calculateLinePosition = () => {
 		const firstItem = items[0]
 		const lastItem = items[items.length - 1]
 
-		const firstItemRect = firstItem.getBoundingClientRect()
-		const lastItemRect = lastItem.getBoundingClientRect()
-		const navListRect = navList.getBoundingClientRect()
+		// 获取元素相对于父容器的位置
+		const firstItemOffsetTop = firstItem.offsetTop
+		const lastItemOffsetTop = lastItem.offsetTop
+		const firstItemHeight = firstItem.offsetHeight
+		const lastItemHeight = lastItem.offsetHeight
 
-		// 计算第一个项目的水平线位置相对于导航列表的位置
-		const firstItemTop = firstItemRect.top - navListRect.top + firstItemRect.height / 2
+		// 计算连接线的起始位置（第一个项目的中心点）
+		const firstItemCenter = firstItemOffsetTop + firstItemHeight / 2
 
-		// 计算最后一个项目的水平线位置相对于导航列表的位置
-		const lastItemTop = lastItemRect.top - navListRect.top + lastItemRect.height / 2
+		// 计算连接线的结束位置（最后一个项目的中心点）
+		const lastItemCenter = lastItemOffsetTop + lastItemHeight / 2
 
 		// 设置连接线的起始位置和高度
-		lineTop.value = `${firstItemTop}px`
-		lineHeight.value = `${lastItemTop - firstItemTop}px`
+		lineTop.value = `${firstItemCenter}px`
+		lineHeight.value = `${lastItemCenter - firstItemCenter}px`
+
+		console.log('连接线位置计算完成:', {
+			firstItemOffsetTop,
+			lastItemOffsetTop,
+			firstItemHeight,
+			lastItemHeight,
+			firstItemCenter: `${firstItemCenter}px`,
+			lastItemCenter: `${lastItemCenter}px`,
+			lineHeight: `${lastItemCenter - firstItemCenter}px`
+		})
 	})
 }
 
 // 监听窗口大小变化
 const handleResize = () => {
-	calculateLinePosition()
+	// 延迟执行，等待DOM更新完成
+	setTimeout(() => {
+		calculateLinePosition()
+	}, 100)
 }
 
 // 船只图片映射
@@ -695,7 +719,7 @@ function renderSimulationCharts() {
 			trimAngleChartInstance.dispose()
 		}
 		trimAngleChartInstance = echarts.init(trimAngleChartRef.value)
-		
+
 		const trimAngleOption = {
 			grid: { top: 20, bottom: 20, left: 30, right: 30 },
 			xAxis: {
@@ -731,14 +755,14 @@ function renderSimulationCharts() {
 		}
 		trimAngleChartInstance.setOption(trimAngleOption)
 	}
-	
+
 	// 渲染Power图表
 	if (powerChartRef.value) {
 		if (powerChartInstance) {
 			powerChartInstance.dispose()
 		}
 		powerChartInstance = echarts.init(powerChartRef.value)
-		
+
 		const powerOption = {
 			grid: { top: 20, bottom: 20, left: 30, right: 30 },
 			xAxis: {
@@ -774,14 +798,14 @@ function renderSimulationCharts() {
 		}
 		powerChartInstance.setOption(powerOption)
 	}
-	
+
 	// 渲染第二个Trim Angle图表
 	if (trimAngleChart2Ref.value) {
 		if (trimAngleChart2Instance) {
 			trimAngleChart2Instance.dispose()
 		}
 		trimAngleChart2Instance = echarts.init(trimAngleChart2Ref.value)
-		
+
 		const trimAngle2Option = {
 			grid: { top: 20, bottom: 20, left: 30, right: 30 },
 			xAxis: {
@@ -819,14 +843,14 @@ function renderSimulationCharts() {
 		}
 		trimAngleChart2Instance.setOption(trimAngle2Option)
 	}
-	
+
 	// 渲染波点图表
 	if (waveChartRef.value) {
 		if (waveChartInstance) {
 			waveChartInstance.dispose()
 		}
 		waveChartInstance = echarts.init(waveChartRef.value)
-		
+
 		const waveOption = {
 			grid: { top: 20, bottom: 20, left: 30, right: 30 },
 			xAxis: {
@@ -882,8 +906,8 @@ function renderSimulationCharts() {
 		}
 		waveChartInstance.setOption(waveOption)
 	}
-	
-	
+
+
 	if (chart4Ref.value) {
 		if (chart4Instance) chart4Instance.dispose()
 		chart4Instance = echarts.init(chart4Ref.value)
@@ -894,7 +918,7 @@ function renderSimulationCharts() {
 			series: [{ type: 'line', data: [15, 25, 35, 40], smooth: true, lineStyle: { color: '#FF9800' } }]
 		})
 	}
-	
+
 	if (chart5Ref.value) {
 		if (chart5Instance) chart5Instance.dispose()
 		chart5Instance = echarts.init(chart5Ref.value)
@@ -1111,7 +1135,7 @@ onUnmounted(() => {
 /* 左侧导航列表定位 */
 .left-nav-list {
 	position: absolute;
-	left: 100px;
+	left: 140px;
 	top: 50%;
 	transform: translateY(-50%) translateY(100px);
 }
@@ -1127,23 +1151,37 @@ onUnmounted(() => {
 /* 右侧产品规格面板 */
 .product-specs-panel {
 	position: absolute;
-	right: 100px;
+	right: 140px;
 	top: 50%;
 	transform: translateY(-50%);
 	background-color: rgba(100, 100, 100, 0.3);
 	backdrop-filter: blur(20px);
 	border-radius: 10px;
 	border: 1px solid rgba(255, 255, 255, 0.3);
-	width: 100%;
-	max-width: 350px;
+	width: 409px;
 	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+	padding-left: 29px;
+}
+
+/* 船舶名称头部样式 */
+.ship-name-header {
+	width: 409px;
+	height: 58px;
+	background: #646464;
+	border-radius: 10px 10px 10px 10px;
+	/* opacity: 0.5; */
+	/* text-align: left; */
+	display: flex;
+	align-items: center;
+	/* justify-content: center; */
+	margin-left: -29px;
 }
 
 /* 左侧导航列表样式 */
 .left-nav-list {
 	display: flex;
 	flex-direction: column;
-	gap: 60px;
+	gap: 99px;
 	padding-left: 20px;
 	padding-top: 30px;
 	padding-bottom: 30px;
@@ -1332,7 +1370,7 @@ onUnmounted(() => {
 .color-options {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
-	gap: 8px;
+	gap: 8px 20px;
 	width: 100%;
 	max-width: 260px;
 	position: relative;
@@ -1340,10 +1378,10 @@ onUnmounted(() => {
 }
 
 .color-swatch {
-	width: 80px;
+	width: 135px;
 	height: 25px;
-	border-radius: 8px;
-	border: 2px solid rgba(255, 255, 255, 0.3);
+	/* border-radius: 8px; */
+	/* border: 2px solid rgba(255, 255, 255, 0.3); */
 	cursor: pointer;
 	transition: all 0.3s ease;
 	position: relative;
@@ -1371,8 +1409,10 @@ onUnmounted(() => {
 	align-items: center;
 	gap: 10px;
 	background: rgba(255, 255, 255, 0.8);
-	margin-left: 80px;
+	margin-left: 300px;
 	color: #000000;
+	width: 353px;
+	height: 69px;
 	padding: 15px 25px;
 	border-radius: 8px;
 	cursor: pointer;
@@ -1417,7 +1457,7 @@ onUnmounted(() => {
 	justify-content: center;
 	align-items: center;
 	flex-shrink: 0;
-	min-width: 140px;
+	width: 230px;
 	height: 120px;
 	transform: scale(0.8);
 	border: 1px solid rgba(255, 255, 255, 0.2);
@@ -1436,18 +1476,50 @@ onUnmounted(() => {
 	height: 80px;
 	margin-bottom: 8px;
 	object-fit: contain;
-	border-radius: 8px;
-	background: rgba(255, 255, 255, 0.1);
+	/* border-radius: 8px; */
+	/* background: rgba(255, 255, 255, 0.1); */
 	padding: 8px;
 }
 
+/* 自适应水翼控制算法图片的独立样式 */
+.adaptive-image {
+	width: 77px;
+	height: 56px;
+	margin: 0 auto 8px auto;
+	object-fit: contain;
+	padding: 8px;
+	display: block;
+}
+
+/* 模块化可拆卸船体图片的独立样式 */
+.modular-image {
+	width: 70px;
+	height: 71px;
+	margin: 5px auto 0 auto;
+	object-fit: contain;
+	padding: 8px;
+	display: block;
+}
+
+/* 无人系统图片的独立样式 */
+.unmanned-image {
+	width: 120px;
+	height: 80px;
+	margin: 0 auto 8px auto;
+	object-fit: contain;
+	padding: 8px;
+	display: block;
+}
+
 .highlight-title {
-	font-size: 11px;
-	font-weight: 600;
-	color: #333333;
-	margin-bottom: 4px;
+	font-weight: 300;
+	font-size: 20px;
+	color: #000000;
+	line-height: 30px;
 	text-align: center;
-	line-height: 1.3;
+	font-style: normal;
+	text-transform: none;
+	margin-bottom: 4px;
 	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
 }
 
@@ -1908,7 +1980,7 @@ onUnmounted(() => {
 
 .boat-3d-model {
 	position: relative;
-	width: 650px;
+	/* width: 650px; */
 	height: 420px;
 	display: flex;
 	align-items: center;
@@ -1918,8 +1990,8 @@ onUnmounted(() => {
 }
 
 .boat-image {
-	width: 100%;
-	height: 100%;
+	width: 900px;
+	height: auto;
 	object-fit: contain;
 	filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
 	transition: all 0.3s ease;
@@ -1952,9 +2024,9 @@ onUnmounted(() => {
 	max-width: 95vw;
 	max-height: 90vh;
 	overflow: hidden;
-	box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), 
-				0 0 0 1px rgba(255, 255, 255, 0.1),
-				inset 0 1px 0 rgba(255, 255, 255, 0.2);
+	box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4),
+		0 0 0 1px rgba(255, 255, 255, 0.1),
+		inset 0 1px 0 rgba(255, 255, 255, 0.2);
 	border: 1px solid rgba(255, 255, 255, 0.2);
 	position: relative;
 	width: auto;
@@ -2025,16 +2097,16 @@ onUnmounted(() => {
 	border-radius: 12px;
 	overflow: hidden;
 	aspect-ratio: 16/9;
-	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 
-				inset 0 1px 0 rgba(255, 255, 255, 0.1);
+	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3),
+		inset 0 1px 0 rgba(255, 255, 255, 0.1);
 	border: 1px solid rgba(255, 255, 255, 0.2);
 	transition: all 0.3s ease;
 }
 
 .video-container:hover {
 	transform: translateY(-2px);
-	box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 
-				inset 0 1px 0 rgba(255, 255, 255, 0.15);
+	box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4),
+		inset 0 1px 0 rgba(255, 255, 255, 0.15);
 	border-color: rgba(0, 212, 255, 0.3);
 }
 
@@ -2062,9 +2134,9 @@ onUnmounted(() => {
 	max-width: 95vw;
 	max-height: 90vh;
 	overflow: hidden;
-	box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), 
-				0 0 0 1px rgba(255, 255, 255, 0.1),
-				inset 0 1px 0 rgba(255, 255, 255, 0.2);
+	box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4),
+		0 0 0 1px rgba(255, 255, 255, 0.1),
+		inset 0 1px 0 rgba(255, 255, 255, 0.2);
 	border: 1px solid rgba(255, 255, 255, 0.2);
 	position: relative;
 	width: auto;
@@ -2136,8 +2208,8 @@ onUnmounted(() => {
 	border-radius: 12px;
 	overflow: hidden;
 	border: 1px solid rgba(255, 255, 255, 0.2);
-	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2), 
-				inset 0 1px 0 rgba(255, 255, 255, 0.1);
+	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2),
+		inset 0 1px 0 rgba(255, 255, 255, 0.1);
 	transition: all 0.3s ease;
 }
 
@@ -2592,11 +2664,13 @@ onUnmounted(() => {
 
 
 .specs-title {
-	font-size: 20px;
-	font-weight: 400;
+	font-size: 24px;
+	font-weight: 300;
 	color: #FFFFFF;
-	/* margin-bottom: 20px; */
-	text-align: left;
+	margin-left: 29px;
+	line-height: 20px;
+	font-style: normal;
+	text-transform: none;
 }
 
 .spec-group {

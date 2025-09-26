@@ -362,8 +362,9 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { getScale } from '../utils/flexible.js'
 
 const router = useRouter()
 const isCeoBackground = ref(false)
@@ -373,6 +374,9 @@ const isEngineerBackground = ref(false)
 const isInteractionEngineerBackground = ref(false)
 const isStructuralEngineerBackground = ref(false)
 const isStrategicPlannerBackground = ref(false)
+
+// lib-flexible 适配相关
+let cleanupFlexible = null
 
 // 展开面板状态
 const expanded = ref({ work: false, education: false, works: false })
@@ -666,6 +670,10 @@ function syncMemberContent() {
 
 onMounted(() => {
 	// 页面加载完成后的初始化逻辑
+})
+
+	onUnmounted(() => {
+	// 页面清理
 })
 </script>
 

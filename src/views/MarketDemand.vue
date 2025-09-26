@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import icon5 from '../assets/icon-5.png'
 import icon3 from '../assets/icon-3.png'
 import icon4 from '../assets/icon-4.png'
@@ -9,6 +9,7 @@ import icon7_1 from '../assets/icon-7-1.png'
 import icon7_2 from '../assets/icon-7-2.png'
 import icon9_1 from '../assets/icon-9-1.png'
 import icon9_2 from '../assets/icon-9-2.png'
+import { getScale } from '../utils/flexible.js'
 import icon10_1 from '../assets/icon-10-1.png'
 import icon10_2 from '../assets/icon-10-2.png'
 // import Navigation from '../components/Navigation.vue'
@@ -19,10 +20,17 @@ const router = useRouter()
 // State to track active icon
 const activeIcon = ref('icon-8')
 
+// lib-flexible 适配相关
+let cleanupFlexible = null
+
 // Initialize with default content
 onMounted(() => {
   updateMiddleContent('china')
   updateRightContent('default')
+})
+
+onUnmounted(() => {
+  // 页面清理
 })
 
 const countries = ref([
