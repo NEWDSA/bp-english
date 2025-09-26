@@ -45,51 +45,33 @@ const generateRegionData = () => {
   const regionData = {
     'China': {
       detailed: [0, -0.60, 12.83, -2.53, 6.67],
-      simple: [0, -0.60, 12.83, -2.53, 6.67],
-      xAxis: {
-        detailed: ['2019', '2020', '2021', '2022', '2023'],
-        simple: ['2019', '2020', '2021', '2022', '2023']
-      }
+      barData: [4.94, 4.91, 5.54, 5.4, 6.67],
+      xAxis: ['2019', '2020', '2021', '2022', '2023']
     },
     'Singapore': {
       detailed: [0, 8.4, -9.1, 18.7, 7.6, 9.0],
-      simple: [0, 8.4, -9.1, 18.7, 7.6, 9.0],
-      xAxis: {
-        detailed: ['2015', '2018', '2020', '2022', '2023', '2024'],
-        simple: ['2015', '2018', '2020', '2022', '2023', '2024']
-      }
+      barData: [28.5, 35.2, 32.1, 48.6, 52.3, 57.0],
+      xAxis: ['2015', '2018', '2020', '2022', '2023', '2024']
     },
     'Italy': {
       detailed: [0, 3.5, 1.1, 11.0, 5.2],
-      simple: [0, 3.5, 1.1, 11.0, 5.2],
-      xAxis: {
-        detailed: ['2015', '2016', '2017', '2018', '2019'],
-        simple: ['2015', '2016', '2017', '2018', '2019']
-      }
+      barData: [9.7, 10.1, 10.2, 11.0, 11.5],
+      xAxis: ['2015', '2016', '2017', '2018', '2019']
     },
     'United States': {
       detailed: [0, -3.3, 8.4, -5.1, 7.1],
-      simple: [0, -3.3, 8.4, -5.1, 7.1],
-      xAxis: {
-        detailed: ['2019', '2020', '2021', '2022', '2023'],
-        simple: ['2019', '2020', '2021', '2022', '2023']
-      }
+      barData: [90, 87, 94, 89, 96],
+      xAxis: ['2019', '2020', '2021', '2022', '2023']
     },
     'United Arab Emirates': {
       detailed: [0, -3.3, 8.4, -5.2, 7.1],
-      simple: [0, -3.3, 8.4, -5.2, 7.1],
-      xAxis: {
-        detailed: ['2019', '2020', '2021', '2022', '2023'],
-        simple: ['2019', '2020', '2021', '2022', '2023']
-      }
+      barData: [48.4, 46.8, 50.7, 48.1, 51.5],
+      xAxis: ['2019', '2020', '2021', '2022', '2023']
     },
     'global': {
       detailed: ['0', '-3.30', '8.40', '-5.12', '7.03'],
-      simple: ['0', '-3.30', '8.40', '-5.12', '7.03'],
-      xAxis: {
-        detailed: ['2019', '2020', '2021', '2022', '2023'],
-        simple: ['2019', '2020', '2021', '2022', '2023']
-      }
+      barData: [345.6, 344.3, 362.3, 342.8, 367.9],
+      xAxis: ['2019', '2020', '2021', '2022', '2023']
     }
   }
 
@@ -105,8 +87,9 @@ const generateRegionData = () => {
   }
 
   return {
-    data: props.isDetailed ? selectedData.detailed : selectedData.simple,
-    xAxis: props.isDetailed ? selectedData.xAxis.detailed : selectedData.xAxis.simple
+    data: selectedData.detailed,
+    barData: selectedData.barData,
+    xAxis: selectedData.xAxis
   }
 }
 
@@ -119,11 +102,34 @@ const getChartOptions = () => {
   return {
     backgroundColor: 'transparent',
     grid: {
-      left: '8%',
-      right: '8%',
-      top: '10%',
-      bottom: '15%'
+      left: '3%',
+      right: '3%',
+      top: '20%',
+      bottom: '14%'
     },
+    graphic: props.isDetailed ? regionData.barData.map((value, index) => {
+      const totalBars = regionData.barData.length
+      const gridLeft = 8
+      const gridRight = 8
+      const gridWidth = 100 - gridLeft - gridRight
+      const barGapPercent = gridWidth / totalBars
+      const barCenterOffset = barGapPercent / 2
+
+      return {
+        type: 'text',
+        left: `${gridLeft + barCenterOffset + (barGapPercent * index)}%`,
+        top: '5%',
+        style: {
+          text: value.toString(),
+          fontSize: 20,
+          fontWeight: 'normal',
+          fill: '#ffffffff',
+          textAlign: 'center',
+          textVerticalAlign: 'bottom'
+        },
+        z: 100
+      }
+    }) : [],
     xAxis: {
       type: 'category',
       data: regionData.xAxis,
@@ -137,36 +143,68 @@ const getChartOptions = () => {
       axisTick: { show: false },
       splitLine: { show: false }
     },
-    yAxis: {
-      type: 'value',
-      show: false,
-      axisLabel: {
-        show: props.isDetailed,
-        color: '#ffffff',
-        fontSize: 10
-      },
-      axisLine: { show: props.isDetailed, lineStyle: { color: '#374151' } },
-      axisTick: { show: false },
-      splitLine: {
-        show: props.isDetailed,
-        lineStyle: {
-          color: 'rgba(100, 116, 139, 0.2)',
-          type: 'dashed'
-        }
-      }
-    },
-    series: [
-      // Vertical lines from bottom
+    yAxis: [
       {
-        name: 'Vertical Lines',
+        type: 'value',
+        show: false,
+        axisLabel: {
+          show: props.isDetailed,
+          color: '#ffffff',
+          fontSize: 10
+        },
+        axisLine: { show: props.isDetailed, lineStyle: { color: '#374151' } },
+        axisTick: { show: false },
+        splitLine: {
+          show: props.isDetailed,
+          lineStyle: {
+            color: 'rgba(100, 116, 139, 0.2)',
+            type: 'dashed'
+          }
+        }
+      },
+      {
+        type: 'value',
+        show: false,
+        axisLabel: {
+          show: props.isDetailed,
+          color: '#ffffff',
+          fontSize: 10
+        },
+        axisLine: { show: false },
+        axisTick: { show: false },
+        splitLine: { show: false }
+      }
+    ],
+    series: [
+      // Bar chart data
+      {
+        name: 'Bar Data',
         type: 'bar',
-        data: chartData,
-        barWidth: 0,
+        yAxisIndex: 1,
+        data: regionData.barData,
+        barWidth: 3,
         itemStyle: {
-          color: 'transparent',
-          borderRadius: [1, 1, 0, 0]
+          color: '#ffffff',
+          borderRadius: [2, 2, 0, 0]
         },
         z: 1,
+        animationDuration: 1000,
+        animationEasing: 'cubicOut'
+      },
+      // Dots on top of bars
+      {
+        name: 'Bar Top Dots',
+        type: 'scatter',
+        yAxisIndex: 1,
+        data: regionData.barData.map((value, index) => [index, value]),
+        symbol: 'circle',
+        symbolSize: 6,
+        itemStyle: {
+          color: '#ffffff',
+          shadowBlur: 6,
+          shadowColor: 'rgba(149, 246, 255, 0.6)'
+        },
+        z: 4,
         animationDuration: 1000,
         animationEasing: 'cubicOut'
       },
@@ -176,31 +214,32 @@ const getChartOptions = () => {
         type: 'line',
         data: chartData,
         areaStyle: {
+          origin: 'start',
           color: {
             type: 'linear',
             x: 0,
             y: 0,
             x2: 0,
             y2: 1,
-            // colorStops: [
-            //   { offset: 0, color: 'rgba(34, 211, 238, 0.8)' },
-            //   { offset: 0.5, color: 'rgba(34, 211, 238, 0.5)' },
-            //   { offset: 1, color: 'rgba(34, 211, 238, 0.1)' }
-            // ]
+            colorStops: [
+              { offset: 0, color: 'rgba(2, 225, 212, 0.6)' },
+              { offset: 0.5, color: 'rgba(2, 225, 212, 0.3)' },
+              { offset: 1, color: 'rgba(2, 225, 212, 0)' }
+            ]
           }
         },
         lineStyle: {
-          color: '#22d3ee',
+          color: '#00e1d4',
           width: 2
         },
         symbol: 'circle',
         symbolSize: 8,
         itemStyle: {
           color: '#ffffff',
-          borderColor: '#22d3ee',
+          borderColor: '#00e1d4',
           borderWidth: 2,
           shadowBlur: 8,
-          shadowColor: 'rgba(34, 211, 238, 0.6)'
+          shadowColor: 'rgba(0, 225, 212, 0.6)'
         },
         label: {
           show: props.isDetailed,
@@ -214,7 +253,7 @@ const getChartOptions = () => {
         emphasis: {
           itemStyle: {
             shadowBlur: 15,
-            shadowColor: 'rgba(34, 211, 238, 0.9)',
+            shadowColor: 'rgba(0, 225, 212, 0.9)',
             borderWidth: 3
           }
         },
@@ -232,15 +271,15 @@ const getChartOptions = () => {
         symbol: 'circle',
         itemStyle: {
           color: '#ffffff',
-          borderColor: '#22d3ee',
+          borderColor: '#00e1d4',
           borderWidth: 2,
           shadowBlur: 10,
-          shadowColor: 'rgba(34, 211, 238, 0.7)'
+          shadowColor: 'rgba(0, 225, 212, 0.7)'
         },
         emphasis: {
           itemStyle: {
             shadowBlur: 18,
-            shadowColor: 'rgba(34, 211, 238, 1)',
+            shadowColor: 'rgba(0, 225, 212, 1)',
             borderWidth: 3
           }
         },
@@ -442,6 +481,9 @@ watch(() => props.selectedCity, (newCity) => {
         },
         {
           data: newOptions.series[2].data
+        },
+        {
+          data: newOptions.series[3].data
         }
       ]
     }, false)

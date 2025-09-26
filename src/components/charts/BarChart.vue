@@ -231,30 +231,30 @@ const getChartOptions = () => {
           animationDuration: 1500,
           animationEasing: 'cubicOut',
         },
-        // 从数据点延伸的垂直线
-        // {
-        //   name: 'Vertical Lines',
-        //   type: 'scatter',
-        //   data: (() => {
-        //     const lineData = []
-        //     regionData.bar.forEach((value, index) => {
-        //       // 创建多个点来形成垂直线
-        //       for (let i = 0; i <= value; i += value / 20) {
-        //         lineData.push([index, i])
-        //       }
-        //     })
-        //     return lineData
-        //   })(),
-        //   symbol: 'rect',
-        //   symbolSize: [1, 2],
-        //   itemStyle: {
-        //     color: '#22d3ee',
-        //     opacity: 0.6,
-        //   },
-        //   z: 1,
-        //   silent: true,
-        //   animation: false,
-        // },
+        {
+          name: 'Vertical Dotted Lines',
+          type: 'scatter',
+          data: (() => {
+            const lineData = []
+            regionData.bar.forEach((value, index) => {
+              const dotCount = 30
+              const dotSpacing = value / dotCount
+              for (let i = 0; i <= dotCount; i++) {
+                lineData.push([index, i * dotSpacing])
+              }
+            })
+            return lineData
+          })(),
+          symbol: 'circle',
+          symbolSize: 2,
+          itemStyle: {
+            color: '#00E1D4',
+            opacity: 0.7,
+          },
+          z: 1,
+          silent: true,
+          animation: false,
+        },
         // 叠加的折线图
         {
           name: 'Line',
