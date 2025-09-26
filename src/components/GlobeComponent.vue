@@ -23,18 +23,18 @@ let currentWidth = 0
 let currentHeight = 0
 let customMarkers = []
 
-// Constants like reference code
+// 常量定义
 const EARTH_RADIUS_KM = 6371
-const TIME_STEP = 3 * 1000 // 3 seconds per frame
+const TIME_STEP = 3 * 1000 // 每帧3秒
 
 onMounted(async () => {
   try {
     await nextTick()
 
-    // Add resize listener
+    // 添加窗口大小变化监听器
     window.addEventListener('resize', handleResize)
 
-    // Wait for DOM to be fully ready with multiple checks
+    // 等待DOM完全准备就绪，多次检查
     setTimeout(async () => {
       if (!globeContainer.value || !(globeContainer.value instanceof HTMLElement)) {
         console.error('Globe container not found or invalid')
@@ -42,14 +42,14 @@ onMounted(async () => {
       }
 
       try {
-        // Clear any existing content
+        // 清除任何现有内容
         globeContainer.value.innerHTML = ''
 
-        // Calculate responsive size (100% of container)
+        // 计算响应式尺寸（容器的100%）
         const containerRect = globeContainer.value.getBoundingClientRect()
         console.log(containerRect)
 
-        // Initialize Globe like the simple version first
+        // 初始化地球组件
         globe = Globe()
           .width(containerRect.width)
           .height(containerRect.height)
@@ -114,14 +114,14 @@ onMounted(async () => {
           })
           .htmlAltitude(d => d.altitude || 0.01)
 
-        // Mount to container
+        // 挂载到容器
         globe(globeContainer.value)
 
-        // Set point of view and controls like reference (with delay)
+        // 设置视角和控制器（延迟执行）
         setTimeout(() => {
           globe.pointOfView({ altitude: 1.66 })
 
-          // Configure controls after globe is fully initialized
+          // 地球完全初始化后配置控制器
           try {
             const controls = globe.controls()
             if (controls) {
@@ -135,21 +135,21 @@ onMounted(async () => {
             console.warn('Could not configure controls:', error)
           }
 
-          // Add render listener after globe is initialized
+          // 地球初始化后添加渲染监听器
           addRenderListener()
         }, 500)
 
         console.log('Globe initialized, loading satellite data...')
 
-        // Load satellite data like reference code
+        // 加载卫星数据
         loadSatelliteData()
 
-        // Load airline data
+        // 加载航空数据
         loadAirlineData()
 
       } catch (error) {
         console.error('Error initializing globe:', error)
-        // Fallback: try alternative mounting approach
+        // 备用方案：尝试替代挂载方法
         setTimeout(() => {
           try {
             if (globeContainer.value && globe) {
@@ -168,15 +168,15 @@ onMounted(async () => {
 })
 
 onUnmounted(() => {
-  // Remove resize listener
+  // 移除窗口大小变化监听器
   window.removeEventListener('resize', handleResize)
 
-  // Stop animation
+  // 停止动画
   if (animationId) {
     cancelAnimationFrame(animationId)
   }
 
-  // Clear custom markers
+  // 清除自定义标记
   customMarkers.forEach(marker => {
     if (marker.element && marker.element.parentNode) {
       marker.element.parentNode.removeChild(marker.element)
@@ -188,7 +188,7 @@ onUnmounted(() => {
   }
 })
 
-// Handle resize
+// 处理窗口大小变化
 const handleResize = () => {
   if (globe && globeContainer.value) {
     const containerRect = globeContainer.value.getBoundingClientRect()
@@ -203,16 +203,16 @@ const handleResize = () => {
   }
 }
 
-// Load satellite data function like reference code
+// 加载卫星数据函数
 const loadSatelliteData = () => {
-  // Create mock TLE data for demonstration (in real app, would fetch from API)
+  // 创建模拟TLE数据用于演示（实际应用中应从API获取）
   const mockTleData = [
     [
       'ISS (ZARYA)',
       '1 25544U 98067A   23001.00000000  .00001234  00000-0  12345-3 0  9992',
       '2 25544  51.6400 339.3900 0008440 288.1300  71.9000 15.49030996123456'
     ],
-    // Add more mock satellites...
+    // 添加更多模拟卫星...
     ...Array.from({ length: 399 }, (_, i) => [
       `SATELLITE-${i + 1}`,
       `1 ${(40000 + i).toString().padStart(5, '0')}U 23001A   23001.00000000  .00001234  00000-0  12345-3 0  999${i % 10}`,
@@ -221,12 +221,12 @@ const loadSatelliteData = () => {
   ]
 
   try {
-    // Process TLE data like reference code
+    // 处理TLE数据
     const satData = mockTleData.map(([name, line1, line2]) => ({
       satrec: satellite.twoline2satrec(line1, line2),
       name: name.trim().replace(/^0 /, '')
     }))
-    // Filter out satellites that can't be propagated
+    // 过滤掉无法传播的卫星
     .filter(d => {
       try {
         return !!satellite.propagate(d.satrec, new Date())?.position
@@ -240,7 +240,7 @@ const loadSatelliteData = () => {
       satelliteCount.value.textContent = `Satellites: ${satData.length}`
     }
 
-    // Start time ticker like reference code
+    // 启动时间动画
     startTimeAnimation(satData)
 
   } catch (error) {
@@ -248,7 +248,7 @@ const loadSatelliteData = () => {
   }
 }
 
-// Time animation function like reference code
+// 时间动画函数
 const startTimeAnimation = (satData) => {
   let time = new Date()
 
@@ -260,7 +260,7 @@ const startTimeAnimation = (satData) => {
       timeLog.value.textContent = time.toString()
     }
 
-    // Update satellite positions like reference code
+    // 更新卫星位置
     const gmst = satellite.gstime(time)
     satData.forEach(d => {
       try {
@@ -271,7 +271,7 @@ const startTimeAnimation = (satData) => {
           d.lng = satellite.radiansToDegrees(gdPos.longitude)
           d.alt = gdPos.height / EARTH_RADIUS_KM
         } else {
-          // Explicitly handle invalid position
+          // 显式处理无效位置
           d.lat = NaN
           d.lng = NaN
           d.alt = NaN
@@ -283,11 +283,11 @@ const startTimeAnimation = (satData) => {
       }
     })
 
-    // Update globe particles like reference code
+    // 更新地球粒子
     const validSatData = satData.filter(d => !isNaN(d.lat) && !isNaN(d.lng) && !isNaN(d.alt))
-    console.log('Valid satellite count:', validSatData.length, 'Sample:', validSatData[0])
+    // console.log('Valid satellite count:', validSatData.length, 'Sample:', validSatData[0])
 
-    // Temporarily disabled particles due to compatibility issues
+    // 由于兼容性问题暂时禁用粒子效果
     // try {
     //   if (globe && Array.isArray(validSatData)) {
     //     globe.particlesData(validSatData)
@@ -300,46 +300,46 @@ const startTimeAnimation = (satData) => {
   frameTicker()
 }
 
-// Load airline data function like reference code
+// 加载航空数据函数
 const loadAirlineData = () => {
-  // Create mock airport data for specific regions
+  // 为特定地区创建模拟机场数据
   const mockAirports = [
-    // China
+    // 中国
     { name: 'Beijing Capital International Airport', city: 'Beijing', country: 'China', region: 'Asia', lat: 40.0799, lng: 116.6031 },
 
-    // Southeast Asia
+    // 东南亚
     { name: 'Singapore Changi Airport', city: 'Singapore', country: 'Singapore', region: 'Southeast Asia', lat: 1.3644, lng: 103.9915 },
 
-    // Italy
+    // 意大利
     { name: 'Rome Fiumicino Airport', city: 'Rome', country: 'Italy', region: 'Europe', lat: 41.8003, lng: 12.2389 },
 
-    // America
+    // 美国
     { name: 'Los Angeles International Airport', city: 'Los Angeles', country: 'United States', region: 'America', lat: 33.9425, lng: -118.4081 },
 
-    // Middle East
+    // 中东
     { name: 'Dubai International Airport', city: 'Dubai', country: 'United Arab Emirates', region: 'Middle East', lat: 25.2532, lng: 55.3657 },
 
-    // Europe
+    // 欧洲
     // { name: 'London Heathrow Airport', city: 'London', country: 'United Kingdom', region: 'Europe', lat: 51.4700, lng: -0.4543 }
   ]
 
-  // Create mock route data for the selected regions
+  // 为选定地区创建模拟航线数据
   const mockRoutes = [
-    // Southeast Asia routes
+    // 东南亚航线
     { airline: 'Singapore Airlines', srcAirport: 'Singapore Changi Airport', dstAirport: 'Kuala Lumpur International Airport' },
     { airline: 'Thai Airways', srcAirport: 'Bangkok Suvarnabhumi Airport', dstAirport: 'Singapore Changi Airport' },
     { airline: 'Garuda Indonesia', srcAirport: 'Jakarta Soekarno-Hatta Airport', dstAirport: 'Singapore Changi Airport' },
     { airline: 'Philippine Airlines', srcAirport: 'Manila Ninoy Aquino Airport', dstAirport: 'Beijing Capital International Airport' },
 
-    // America routes
+    // 美国航线
     { airline: 'United Airlines', srcAirport: 'Los Angeles International Airport', dstAirport: 'Mexico City International Airport' },
     { airline: 'LATAM Airlines', srcAirport: 'São Paulo–Guarulhos International Airport', dstAirport: 'Los Angeles International Airport' },
 
-    // Middle East routes
+    // 中东航线
     { airline: 'Emirates', srcAirport: 'Dubai International Airport', dstAirport: 'Doha Hamad International Airport' },
     { airline: 'Qatar Airways', srcAirport: 'Doha Hamad International Airport', dstAirport: 'Riyadh King Khalid International Airport' },
 
-    // Intercontinental routes
+    // 洲际航线
     { airline: 'Emirates', srcAirport: 'Dubai International Airport', dstAirport: 'Rome Fiumicino Airport' },
     { airline: 'Cathay Pacific', srcAirport: 'Beijing Capital International Airport', dstAirport: 'Singapore Changi Airport' },
     { airline: 'Air France', srcAirport: 'Rome Fiumicino Airport', dstAirport: 'Los Angeles International Airport' },
@@ -351,13 +351,13 @@ const loadAirlineData = () => {
   ]
 
   try {
-    // Create airport lookup map
+    // 创建机场查找映射
     const airportByName = {}
     mockAirports.forEach(d => {
       airportByName[d.name] = d
     })
 
-    // Process routes and create arcs data like reference code
+    // 处理航线并创建弧线数据
     const arcsData = mockRoutes
       .filter(d => airportByName[d.srcAirport] && airportByName[d.dstAirport])
       .map(d => ({
@@ -368,19 +368,19 @@ const loadAirlineData = () => {
         color: 'white'
       }))
 
-    // Process airports for points data with native point styling
+    // 处理机场为点数据，使用原生点样式
     const pointsData = mockAirports.map(d => ({
       lat: +d.lat,
       lng: +d.lng,
-      size: 0.8, // Larger base size
-      color: 'red', // Red color for the main point
+      size: 0.8, // 较大的基础尺寸
+      color: 'red', // 主点使用红色
       city: d.city,
       country: d.country,
       name: d.name,
       altitude: 0.005
     }))
 
-    // Process airports for custom text labels
+    // 为机场处理自定义文本标签
     const labelsData = mockAirports.map(d => ({
       lat: +d.lat,
       lng: +d.lng,
@@ -397,7 +397,7 @@ const loadAirlineData = () => {
 
     console.log(`Loaded ${arcsData.length} flight routes, ${pointsData.length} airports, and ${labelsData.length} labels`)
 
-    // Update globe with airline data like reference code
+    // 使用航空数据更新地球
     globe
       .arcsData(arcsData)
       .arcStartLat('startLat')
@@ -412,9 +412,9 @@ const loadAirlineData = () => {
   }
 }
 
-// Create custom markers for airport points
+// 为机场点创建自定义标记
 const createCustomMarkers = (pointsData) => {
-  // Clear existing markers
+  // 清除现有标记
   customMarkers.forEach(marker => {
     if (marker.element && marker.element.parentNode) {
       marker.element.parentNode.removeChild(marker.element)
@@ -425,7 +425,7 @@ const createCustomMarkers = (pointsData) => {
   console.log('Creating custom markers for points:', pointsData.length)
 
   pointsData.forEach((point, index) => {
-    // Create marker container
+    // 创建标记容器
     const markerElement = document.createElement('div')
     markerElement.style.position = 'absolute'
     markerElement.style.transform = 'translate(-50%, -50%)'
@@ -433,7 +433,7 @@ const createCustomMarkers = (pointsData) => {
     markerElement.style.cursor = 'pointer'
     markerElement.style.zIndex = '1000'
 
-    // Create icon image element
+    // 创建图标图像元素
     const iconElement = document.createElement('img')
     iconElement.src = icon2
     iconElement.style.width = '40px'
@@ -442,7 +442,7 @@ const createCustomMarkers = (pointsData) => {
     iconElement.style.display = 'block'
     iconElement.alt = `${point.city} airport icon`
 
-    // Create label with black semi-transparent background and cyan border
+    // 创建带有黑色半透明背景和青色边框的标签
     const labelElement = document.createElement('div')
     labelElement.textContent = point.country
     labelElement.style.position = 'absolute'
@@ -458,7 +458,7 @@ const createCustomMarkers = (pointsData) => {
     labelElement.style.whiteSpace = 'nowrap'
     labelElement.style.fontFamily = 'system-ui, -apple-system, sans-serif'
 
-    // Add click event
+    // 添加点击事件
     markerElement.addEventListener('click', () => {
       emit('city-click', {
         city: point.city,
@@ -469,7 +469,7 @@ const createCustomMarkers = (pointsData) => {
       })
     })
 
-    // Build the marker structure
+    // 构建标记结构
     markerElement.appendChild(iconElement)
     markerElement.appendChild(labelElement)
     globeContainer.value.appendChild(markerElement)
@@ -483,11 +483,11 @@ const createCustomMarkers = (pointsData) => {
     })
   })
 
-  // Update marker positions
+  // 更新标记位置
   updateMarkerPositions()
 }
 
-// Update marker positions based on globe projection
+// 基于地球投影更新标记位置
 const updateMarkerPositions = () => {
   if (!globe || !globeContainer.value) return
 
@@ -495,19 +495,19 @@ const updateMarkerPositions = () => {
 
   customMarkers.forEach((marker, index) => {
     try {
-      // Get coordinates from globe using 3D projection
+      // 使用3D投影从地球获取坐标
       const vector = globe.getPointPos(marker.point.lat, marker.point.lng, 0.01)
 
       if (vector) {
-        // Get camera and project 3D to 2D
+        // 获取相机并将3D投影到2D
         const camera = globe.camera()
         vector.project(camera)
 
-        // Convert to screen coordinates
+        // 转换为屏幕坐标
         const x = (vector.x + 1) * containerRect.width / 2
         const y = (-vector.y + 1) * containerRect.height / 2
 
-        // Only show if in front of camera
+        // 只有在相机前方时才显示
         if (vector.z < 1) {
           marker.element.style.left = `${x}px`
           marker.element.style.top = `${y}px`
@@ -524,15 +524,15 @@ const updateMarkerPositions = () => {
   })
 }
 
-// Update markers on globe rotation
+// 地球旋转时更新标记
 const onGlobeRender = () => {
   updateMarkerPositions()
 }
 
-// Add render listener to update markers continuously
+// 添加渲染监听器以持续更新标记
 const addRenderListener = () => {
   if (globe) {
-    // Add animation loop to continuously update markers
+    // 添加动画循环以持续更新标记
     const animate = () => {
       updateMarkerPositions()
       requestAnimationFrame(animate)
