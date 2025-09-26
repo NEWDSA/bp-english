@@ -71,11 +71,14 @@ import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { useRouter } from 'vue-router'
 import homeVideo from '../assets/home.mp4'
 import yihaiLogo from '../assets/yihai.svg'
+import { getScale } from '../utils/flexible.js'
 
 const router = useRouter()
 
 const showCatalogue = ref(false)
 const showCompanyInfo = ref(false)
+
+// 页面相关状态
 
 function onKeydown(e) {
 	if (e.key === 'Escape') {
@@ -129,8 +132,13 @@ function navigateToProduct() {
 	router.push('/product-introduction')
 }
 
-onMounted(() => { document.addEventListener('keydown', onKeydown) })
-onBeforeUnmount(() => { document.removeEventListener('keydown', onKeydown) })
+onMounted(() => { 
+	document.addEventListener('keydown', onKeydown) 
+})
+
+onBeforeUnmount(() => { 
+	document.removeEventListener('keydown', onKeydown) 
+})
 </script>
 
 <style scoped>

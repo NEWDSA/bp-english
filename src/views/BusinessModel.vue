@@ -89,13 +89,10 @@
 				<!-- Revenue Model 弹窗 -->
 				<div class="revenue-modal" v-if="activeContent === 'revenue'" @click="hideContent">
 					<div class="revenue-modal-content" @click.stop>
-						<div class="modal-header">
-							<!-- <h2 class="modal-title">Revenue Model Analysis</h2> -->
-							<button class="close-btn" @click="hideContent">×</button>
-						</div>
+						<button class="close-btn" @click="hideContent">×</button>
 						<div class="charts-grid">
 							<div class="chart-item">
-								<!-- <h3 class="chart-item-title">Annual Revenue Growth</h3> -->
+
 								<div ref="chart1Ref" class="modal-chart"></div>
 							</div>
 							<div class="chart-item">
@@ -259,7 +256,6 @@
 									</div>
 								</div>
 							</div>
-
 							<!-- 描述文字 -->
 							<div class="demand-description">
 								<p>Each ship has a passenger capacity of 4 people</p>
@@ -495,6 +491,7 @@
 import { ref, onMounted, onBeforeUnmount, watchEffect, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import * as echarts from 'echarts'
+import { getScale } from '../utils/flexible.js'
 
 const router = useRouter()
 
@@ -502,6 +499,9 @@ const router = useRouter()
 const activeContent = ref(null)
 const showLakeDetail = ref(false)
 const isRevenueSelected = ref(false)
+
+// lib-flexible 适配相关
+let cleanupFlexible = null
 
 // 图表数据
 const chartData = ref([
@@ -619,7 +619,7 @@ function renderRevenueChart() {
 				name: 'Orange',
 				type: 'bar',
 				data: oranges,
-				barWidth: 15,
+				// barWidth: 15,
 				// barGap: '5%',
 				itemStyle: {
 					// borderRadius: [6, 6, 0, 0],
@@ -637,7 +637,7 @@ function renderRevenueChart() {
 				name: 'Teal',
 				type: 'bar',
 				data: teals,
-				barWidth: 15,
+				// barWidth: 15,
 				// barGap: '5%',
 				itemStyle: {
 					// borderRadius: [6, 6, 0, 0],
@@ -666,37 +666,49 @@ function renderModalCharts() {
 		// 销毁旧实例
 		if (chart1Instance) {
 			chart1Instance.dispose()
+			//strategicPlanner
+			//engineer_bg.png
 		}
 		// 重新创建实例
+		//3840.2160
 		chart1Instance = echarts.init(chart1Ref.value)
 		const option1 = {
 			title: {
 				text: 'When the cost of a single ship is 28,000$,break even sales volume is achieved',
-				textStyle: { fontSize: 10, color: '#333' },
-				top: 10
+				textStyle: { fontSize: 10, color: '#333', fontWeight: 'normal' },
+				top: 5
 			},
-			grid: { top: 60, bottom: 60, left: 40, right: 40 },
+			grid: { top: 50, bottom: 45, left: 40, right: 40 },
+
 			legend: {
 				data: ['Annual breakeven sales volume (units)', 'Gross profit margin'],
-				bottom: 10,
-				textStyle: { fontSize: 10 }
+				bottom: 0,
+				textStyle: { fontSize: 8 },
+				left: 'center',
+				itemGap: 20
+			},
+			graphic: {
+				type: 'text',
+				left: 20,
+				bottom: 0,
+				style: {
+					text: 'Prices :\n10,000$',
+					fontSize: 8,
+					fontWeight: 'bold',
+					fill: '#333',
+					textAlign: 'left',
+					textVerticalAlign: 'bottom'
+				}
 			},
 			xAxis: {
 				type: 'category',
-				// data: ['13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32'],
-				axisLabel: { color: '#666', fontSize: 10 },
-				axisLabel: { show: false },
+				// 字体大小10px
+				data: ['4.79', '4.71', '4.64', '4.57', '4.50', '4.43', '4.36', '4.29', '4.21', '4.14', '4.07'],
+				axisLabel: { color: '#666', fontSize: 8, show: true },
 				axisTick: { show: false },
 				axisLine: { show: false },
 				splitLine: { show: false }
 			},
-			// xAxis: {
-			// 	type: 'value',
-			// 	axisLabel: { show: false },
-			// 	axisTick: { show: false },
-			// 	axisLine: { show: false },
-			// 	splitLine: { show: false }
-			// },
 			yAxis: {
 				type: 'value',
 				axisLabel: { show: false },
@@ -708,7 +720,7 @@ function renderModalCharts() {
 				{
 					name: 'Annual breakeven sales volume (units)',
 					type: 'bar',
-					data: [45, 48, 52, 55, 58, 62, 65, 68, 72, 75, 78, 82, 85, 88, 92, 95, 98, 102, 105, 108],
+					data: [43, 45, 47.2, 50.0, 53.1, 56.7, 60.8, 65.5, 70.9, 77.4, 85.2],
 					itemStyle: { color: '#00d4ff' },
 					label: {
 						show: true,
@@ -721,7 +733,7 @@ function renderModalCharts() {
 				{
 					name: 'Gross profit margin',
 					type: 'bar',
-					data: [25, 28, 32, 35, 38, 42, 45, 48, 52, 55, 58, 62, 65, 68, 72, 75, 78, 82, 85, 88],
+					data: [25, 24, 23, 23, 22, 21, 20, 19, 18, 16, 15],
 					itemStyle: { color: '#FFC27A' },
 					label: {
 						show: true,
@@ -751,19 +763,35 @@ function renderModalCharts() {
 		const option2 = {
 			title: {
 				text: 'When the cost of a single ship is 31,000$, break even sales volume is achieved',
-				textStyle: { fontSize: 10, color: '#333' },
-				top: 10
+				textStyle: { fontSize: 10, color: '#333', fontWeight: 'normal' },
+				top: 5
 			},
-			grid: { top: 60, bottom: 60, left: 40, right: 40 },
+			grid: { top: 50, bottom: 45, left: 40, right: 40 },
 			legend: {
 				data: ['Annual breakeven sales volume (units)', 'Gross profit margin'],
-				bottom: 10,
-				textStyle: { fontSize: 10 }
+				bottom: 0,
+				textStyle: { fontSize: 8 },
+				left: 'center',
+				itemGap: 20
+			},
+			graphic: {
+				type: 'text',
+				left: 20,
+				bottom: 0,
+				style: {
+					text: 'Prices :\n10,000$',
+					fontSize: 8,
+					fontWeight: 'bold',
+					fill: '#333',
+					textAlign: 'left',
+					textVerticalAlign: 'bottom'
+				}
 			},
 			xAxis: {
 				type: 'category',
-				// data: ['13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'],
-				axisLabel: { show: false },
+
+				data: ['5.29', '5.21', '5.14', '5.07', '5.00', '4.93', '4.86', '4.79', '4.71', '4.64', '4.57', '4.50'],
+				axisLabel: { color: '#666', fontSize: 8, show: true },
 				axisTick: { show: false },
 				axisLine: { show: false },
 				splitLine: { show: false }
@@ -779,7 +807,7 @@ function renderModalCharts() {
 				{
 					name: 'Annual breakeven sales volume (units)',
 					type: 'bar',
-					data: [18, 22, 25, 28, 32, 35, 38, 42, 45, 48, 52, 55],
+					data: [38, 40, 42, 44, 46, 49, 52, 56, 60, 64, 69, 75],
 					itemStyle: { color: '#00d4ff' },
 					label: {
 						show: true,
@@ -792,7 +820,8 @@ function renderModalCharts() {
 				{
 					name: 'Gross profit margin',
 					type: 'bar',
-					data: [12, 15, 18, 22, 25, 28, 32, 35, 38, 42, 45, 48],
+					// data: [12, 15, 18, 22, 25, 28, 32, 35, 38, 42, 45, 48],
+					data: [26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15],
 					itemStyle: { color: '#FFC27A' },
 					label: {
 						show: true,
@@ -819,82 +848,293 @@ function renderModalCharts() {
 		}
 		// 重新创建实例
 		chart3Instance = echarts.init(chart3Ref.value)
+		// const option3 = {
+		// 	title: {
+		// 		text: 'When the cost of a single ship is 35,000$, break even sales volume is achieved',
+		// 		textStyle: { fontSize: 9, color: '#333' },
+		// 		top: 5,
+		// 		left: 'center'
+		// 	},
+		// 	grid: {
+		// 		top: 50,
+		// 		bottom: 45,
+		// 		left: 40,
+		// 		right: 40,
+		// 		show: false
+		// 	},
+		// 	legend: {
+		// 		data: ['Annual breakeven sales volume (units)', 'Gross profit margin'],
+		// 		bottom: 0,
+		// 		textStyle: { fontSize: 8 },
+		// 		left: 'center',
+		// 		itemGap: 20
+		// 	},
+		// 	graphic: {
+		// 		type: 'text',
+		// 		left: 20,
+		// 		bottom: 0,
+		// 		style: {
+		// 			text: 'Prices :\n10,000$',
+		// 			fontSize: 8,
+		// 			fontWeight: 'bold',
+		// 			fill: '#333',
+		// 			textAlign: 'left',
+		// 			textVerticalAlign: 'bottom'
+		// 		}
+		// 	},
+		// 	xAxis: {
+		// 		type: 'category',
+		// 		// data: ['16', '17', '17', '18', '19', '20', '21', '22', '23', '24', '26', '27', '29', '31', '34'],
+		// 		data: ['8.00,', '7.86', '7.71', '7.57', '7.43', '7.29', '7.14', '7.00', '6.86', '6.71', '6.57', '6.42', '6.29', '6.14', '6.00'],
+		// 		position: 'bottom',
+		// 		axisLabel: {
+		// 			show: true,
+		// 			fontSize: 8,
+		// 			color: '#666',
+		// 			interval: 0,
+		// 			margin: 5,
+		// 			align: 'center',
+		// 			verticalAlign: 'bottom',
+		// 			offset: 0
+		// 		},
+		// 		axisTick: {
+		// 			show: false
+		// 		},
+		// 		axisLine: { show: false },
+		// 		splitLine: {
+		// 			show: true,
+		// 			lineStyle: { color: 'rgba(150, 150, 150, 0.8)', width: 1 }
+		// 		},
+		// 		boundaryGap: false
+		// 	},
+		// 	yAxis: {
+		// 		type: 'value',
+		// 		// min: 0,
+		// 		// max: 50,
+		// 		data: ['16', '17', '17', '18', '19', '20', '21', '22', '23', '24', '26', '27', '29', '31', '34'],
+		// 		// position:'bottom',
+		// 		axisLabel: {
+		// 			show: false
+		// 		},
+		// 		axisTick: { show: false },
+		// 		axisLine: { show: false },
+		// 		splitLine: {
+		// 			show: false
+		// 		}
+		// 	},
+		// 	series: [
+		// 		{
+		// 			name: 'Annual breakeven sales volume (units)',
+		// 			type: 'line',
+		// 			data: [16, 17, 17, 18, 19, 20, 21, 22, 23, 24, 26, 27, 29, 31, 34],
+		// 			smooth: true,
+		// 			symbol: 'circle',
+		// 			symbolSize: 3,
+		// 			lineStyle: {
+		// 				color: '#1ed5e6',
+		// 				width: 2
+		// 			},
+		// 			itemStyle: {
+		// 				color: '#1ed5e6',
+		// 				borderWidth: 1,
+		// 				borderColor: '#ffffff'
+		// 			},
+		// 			areaStyle: {
+		// 				color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
+		// 					{ offset: 0, color: 'rgba(30, 213, 230, 0.1)' },
+		// 					{ offset: 0.3, color: 'rgba(30, 213, 230, 0.3)' },
+		// 					{ offset: 0.7, color: 'rgba(30, 213, 230, 0.6)' },
+		// 					{ offset: 1, color: 'rgba(30, 213, 230, 0.8)' }
+		// 				])
+		// 			},
+		// 			label: {
+		// 				show: true,
+		// 				position: 'top',
+		// 				fontSize: 8,
+		// 				color: '#333',
+		// 				formatter: '{c}',
+		// 				fontWeight: 'normal',
+		// 				offset: [0, -3]
+		// 			}
+		// 		},
+		// 		{
+		// 			name: 'Gross profit margin',
+		// 			type: 'line',
+		// 			data: [40, 40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 29, 28, 27, 25],
+		// 			smooth: true,
+		// 			symbol: 'circle',
+		// 			symbolSize: 3,
+		// 			lineStyle: {
+		// 				color: '#f5a623',
+		// 				width: 2
+		// 			},
+		// 			itemStyle: {
+		// 				color: '#f5a623',
+		// 				borderWidth: 1,
+		// 				borderColor: '#ffffff'
+		// 			},
+		// 			areaStyle: {
+		// 				color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
+		// 					{ offset: 0, color: 'rgba(245, 166, 35, 0.1)' },
+		// 					{ offset: 0.3, color: 'rgba(245, 166, 35, 0.3)' },
+		// 					{ offset: 0.7, color: 'rgba(245, 166, 35, 0.6)' },
+		// 					{ offset: 1, color: 'rgba(245, 166, 35, 0.8)' }
+		// 				])
+		// 			},
+		// 			label: {
+		// 				show: true,
+		// 				position: 'top',
+		// 				fontSize: 8,
+		// 				color: '#333',
+		// 				formatter: '{c}%',
+		// 				fontWeight: 'normal',
+		// 				offset: [0, -3]
+		// 			}
+		// 		}
+		// 	]
+		// }
 		const option3 = {
 			title: {
-				text: 'When the cost of a single ship is 35,000$,break even sales volume is achieved',
-				textStyle: { fontSize: 10, color: '#333' },
-				top: 10
+				text: 'When the cost of a single ship is 35,000$, break even sales volume is achieved',
+				textStyle: { fontSize: 9, color: '#333', fontWeight: 'normal' },
+				top: 5,
+				left: 'center'
 			},
-			grid: { top: 60, bottom: 60, left: 40, right: 40 },
+			grid: {
+				top: 50,
+				bottom: 45,
+				left: 40,
+				right: 40,
+				show: false
+			},
 			legend: {
 				data: ['Annual breakeven sales volume (units)', 'Gross profit margin'],
-				bottom: 10,
-				textStyle: { fontSize: 10 }
+				bottom: 0,
+				textStyle: { fontSize: 8 },
+				left: 'center',
+				itemGap: 20
+			},
+			graphic: {
+				type: 'text',
+				left: 20,
+				bottom: 0,
+				style: {
+					text: 'Prices :\n10,000$',
+					fontSize: 8,
+					fontWeight: 'bold',
+					fill: '#333',
+					textAlign: 'left',
+					textVerticalAlign: 'bottom'
+				}
 			},
 			xAxis: {
 				type: 'category',
-				data: ['13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32'],
-				axisLabel: { show: false },
+				data: [
+					'8.00', '7.86', '7.71', '7.57', '7.43',
+					'7.29', '7.14', '7.00', '6.86', '6.71',
+					'6.57', '6.42', '6.29', '6.14', '6.00'
+				],
+				position: 'bottom',
+				axisLabel: {
+					show: true,
+					fontSize: 8,
+					color: '#666',
+					interval: 0,
+					margin: 5,
+					align: 'center',
+					verticalAlign: 'bottom',
+					offset: 0
+				},
 				axisTick: { show: false },
 				axisLine: { show: false },
-				splitLine: { show: false }
+				splitLine: {
+					show: true,
+					lineStyle: { color: 'rgba(150, 150, 150, 0.8)', width: 1 }
+				},
+				boundaryGap: false
 			},
-			yAxis: {
-				type: 'value',
-				axisLabel: { show: false },
-				axisTick: { show: false },
-				axisLine: { show: false },
-				splitLine: { show: false }
-			},
+			yAxis: [
+				{
+					type: 'value',
+					// name: 'Units',
+					position: 'left',
+					axisLabel: { show: false },
+					axisTick: { show: false },
+					axisLine: { show: false },
+					splitLine: { show: false }
+				},
+				{
+					type: 'value',
+					// name: 'Profit %',
+					min: 0,
+					max: 100,
+					position: 'right',
+					axisLabel: { show: false },
+					axisTick: { show: false },
+					axisLine: { show: false },
+					splitLine: { show: false }
+				}
+			],
 			series: [
 				{
 					name: 'Annual breakeven sales volume (units)',
 					type: 'line',
-					data: [42, 45, 48, 52, 55, 58, 62, 65, 68, 72, 75, 78, 82, 85, 88, 92, 95, 98, 102, 105],
-					smooth: true,
-					symbol: 'circle',
-					symbolSize: 6,
+					data: [16, 17, 17, 18, 19, 20, 21, 22, 23, 24, 26, 27, 29, 31, 34],
+					yAxisIndex: 0,
+					smooth: 0,
 					lineStyle: {
-						color: '#00d4ff',
-						width: 3
+						color: '#1ed5e6',
+						width: 2
 					},
 					itemStyle: {
-						color: '#00d4ff',
-						borderWidth: 2,
+						color: '#1ed5e6',
+						borderWidth: 1,
 						borderColor: '#ffffff'
 					},
 					areaStyle: {
-						color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-							{ offset: 0, color: 'rgba(0, 212, 255, 0.6)' },
-							{ offset: 1, color: 'rgba(0, 212, 255, 0.1)' }
+						color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
+							{ offset: 0, color: 'rgba(30, 213, 230, 0.1)' },
+							{ offset: 0.3, color: 'rgba(30, 213, 230, 0.3)' },
+							{ offset: 0.7, color: 'rgba(30, 213, 230, 0.6)' },
+							{ offset: 1, color: 'rgba(30, 213, 230, 0.8)' }
 						])
+					},
+					label: {
+						show: true,
+						position: 'top',
+						fontSize: 8,
+						color: '#333',
+						formatter: '{c}',
+						offset: [0, -3]
 					}
 				},
 				{
 					name: 'Gross profit margin',
 					type: 'line',
-					data: [22, 25, 28, 32, 35, 38, 42, 45, 48, 52, 55, 58, 62, 65, 68, 72, 75, 78, 82, 85],
-					smooth: true,
-					symbol: 'circle',
-					symbolSize: 6,
+					data: [40, 40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 29, 28, 27, 25],
+					yAxisIndex: 1,
+					smooth: 0,
 					lineStyle: {
-						color: '#FFC27A',
-						width: 3
+						color: '#f5a623',
+						width: 2
 					},
 					itemStyle: {
-						color: '#FFC27A',
-						borderWidth: 2,
+						color: '#f5a623',
+						borderWidth: 1,
 						borderColor: '#ffffff'
 					},
-					areaStyle: {
-						color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-							{ offset: 0, color: 'rgba(255, 194, 122, 0.6)' },
-							{ offset: 1, color: 'rgba(255, 194, 122, 0.1)' }
-						])
+					label: {
+						show: true,
+						position: 'top',
+						fontSize: 8,
+						color: '#333',
+						formatter: '{c}%',
+						offset: [0, -3]
 					}
 				}
 			]
-		}
+		};
+
 		chart3Instance.setOption(option3)
 		// 确保图表正确显示
 		setTimeout(() => {
@@ -912,76 +1152,145 @@ function renderModalCharts() {
 		chart4Instance = echarts.init(chart4Ref.value)
 		const option4 = {
 			title: {
-				text: 'When the cost of a single ship is 41,000$,break even sales volume is achieved',
-				textStyle: { fontSize: 10, color: '#333' },
-				top: 10
+				text: 'When the cost of a single ship is 41,000$, break even sales volume is achieved',
+				textStyle: { fontSize: 9, color: '#333', fontWeight: 'normal' },
+				top: 5,
+				left: 'center'
 			},
-			grid: { top: 60, bottom: 60, left: 40, right: 40 },
+			grid: {
+				top: 50,
+				bottom: 45,
+				left: 40,
+				right: 40,
+				show: false
+			},
 			legend: {
 				data: ['Annual breakeven sales volume (units)', 'Gross profit margin'],
-				bottom: 10,
-				textStyle: { fontSize: 10 }
+				bottom: 0,
+				textStyle: { fontSize: 8 },
+				left: 'center',
+				itemGap: 20
+			},
+			graphic: {
+				type: 'text',
+				left: 20,
+				bottom: 0,
+				style: {
+					text: 'Prices :\n10,000$',
+					fontSize: 8,
+					fontWeight: 'bold',
+					fill: '#333',
+					textAlign: 'left',
+					textVerticalAlign: 'bottom'
+				}
 			},
 			xAxis: {
 				type: 'category',
-				data: ['13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'],
-				axisLabel: { show: false },
-				axisTick: { show: false },
-				axisLine: { show: false },
-				splitLine: { show: false }
-			},
-			yAxis: {
-				type: 'value',
-				axisLabel: { show: false },
-				axisTick: { show: false },
-				axisLine: { show: false },
-				splitLine: { show: false }
-			},
-			series: [
-				{
-					name: 'Annual breakeven sales volume (units)',
-					type: 'line',
-					data: [15, 18, 22, 25, 28, 32, 35, 38, 42, 45, 48, 52],
-					smooth: true,
-					symbol: 'circle',
-					symbolSize: 6,
-					lineStyle: {
-						color: '#00d4ff',
-						width: 3
-					},
-					itemStyle: {
-						color: '#00d4ff',
-						borderWidth: 2,
-						borderColor: '#ffffff'
-					},
-					areaStyle: {
-						color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-							{ offset: 0, color: 'rgba(0, 212, 255, 0.6)' },
-							{ offset: 1, color: 'rgba(0, 212, 255, 0.1)' }
-						])
-					}
+				data: ['9.57', '9.43', '9.29', '9.14', '9.00', '8.86', '8.71', '8.57', '8.43', '8.29', '8.14', '8.00', '7.86', '7.71', '7.57'],
+				position: 'bottom',
+				axisLabel: {
+					show: true,
+					fontSize: 8,
+					color: '#666',
+					interval: 0,
+					margin: 5,
+					align: 'center',
+					verticalAlign: 'top'
 				},
+				axisTick: {
+					show: false
+				},
+				axisLine: { show: false },
+				splitLine: {
+					show: true,
+					lineStyle: { color: 'rgba(150, 150, 150, 0.8)', width: 1 }
+				},
+				boundaryGap: false
+			},
+			yAxis: [{
+				type: 'value',
+				min: 0,
+				max: 100,
+				axisLabel: {
+					show: false
+				},
+				axisTick: { show: false },
+				axisLine: { show: false },
+				splitLine: {
+					show: false
+				}
+			},
+			{
+				type: 'value',
+				position: 'right',
+				axisLabel: { show: false },
+				axisTick: { show: false },
+				axisLine: { show: false },
+				splitLine: { show: false }
+			}],
+			series: [
 				{
 					name: 'Gross profit margin',
 					type: 'line',
-					data: [8, 12, 15, 18, 22, 25, 28, 32, 35, 38, 42, 45],
+					z: 1,
+					yAxisIndex: 1,
+					data: [45, 44, 44, 43, 42, 42, 41, 40, 39, 38, 37, 36, 36, 34, 33],
 					smooth: true,
 					symbol: 'circle',
-					symbolSize: 6,
+					symbolSize: 3,
 					lineStyle: {
-						color: '#FFC27A',
-						width: 3
+						color: '#f5a623',
+						width: 2
 					},
 					itemStyle: {
-						color: '#FFC27A',
-						borderWidth: 2,
+						color: '#f5a623',
+						borderWidth: 1,
+						borderColor: '#ffffff'
+					},
+					label: {
+						show: true,
+						position: 'top',
+						fontSize: 8,
+						color: '#333',
+						formatter: '{c}%',
+						fontWeight: 'normal',
+						offset: [0, -3]
+					}
+				},
+				{
+					name: 'Annual breakeven sales volume (units)',
+					type: 'line',
+					z: 3,
+					yAxisIndex: 0,
+					data: [13, 14, 14, 15, 15, 16, 16, 17, 18, 19, 20, 21, 23, 24],
+					smooth: true,
+					symbol: 'circle',
+					symbolSize: 3,
+					lineStyle: {
+						color: '#1ed5e6',
+						width: 2
+					},
+					itemStyle: {
+						color: '#1ed5e6',
+						borderWidth: 1,
 						borderColor: '#ffffff'
 					},
 					areaStyle: {
-						color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-							{ offset: 0, color: 'rgba(255, 194, 122, 0.6)' },
-							{ offset: 1, color: 'rgba(255, 194, 122, 0.1)' }
+						color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
+							{ offset: 0, color: 'rgba(30, 213, 230, 0.1)' },
+							{ offset: 0.3, color: 'rgba(30, 213, 230, 0.3)' },
+							{ offset: 0.7, color: 'rgba(30, 213, 230, 0.6)' },
+							{ offset: 1, color: 'rgba(30, 213, 230, 0.8)' }
 						])
+					},
+					label: {
+						show: true,
+						position: 'top',
+						fontSize: 8,
+						color: '#333',
+						formatter: '{c}',
+						fontWeight: 'normal',
+						offset: [0, -3]
 					}
 				}
 			]
@@ -1255,7 +1564,7 @@ function onWindowResize() {
 	if (demandChartInstance) demandChartInstance.resize()
 }
 
-onBeforeUnmount(() => {
+	onBeforeUnmount(() => {
 	window.removeEventListener('resize', onWindowResize)
 	if (revenueChartInstance) {
 		revenueChartInstance.dispose()
@@ -2172,7 +2481,7 @@ onMounted(() => {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: rgba(0, 0, 0, 0.8);
+	/* background: rgba(0, 0, 0, 0.8); */
 	backdrop-filter: blur(10px);
 	z-index: 1000;
 	display: flex;
@@ -2182,17 +2491,19 @@ onMounted(() => {
 }
 
 .revenue-modal-content {
-	background: rgba(255, 255, 255, 0.1);
+	/* background: rgba(255, 255, 255, 0.1); */
+	/* background-color: #ffffff; */
+	background-color: #f1efef;
 	backdrop-filter: blur(25px) saturate(180%);
 	border: 1px solid rgba(255, 255, 255, 0.2);
 	border-radius: 20px;
-	width: 95vw;
-	max-width: 1400px;
-	height: 80vh;
-	max-height: 700px;
-	padding: 25px;
-	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 
-	            0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+	width: 75vw;
+	max-width: 950px;
+	height: 70vh;
+	max-height: 650px;
+	padding: 5px;
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3),
+		0 0 0 1px rgba(255, 255, 255, 0.1) inset;
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
@@ -2215,6 +2526,9 @@ onMounted(() => {
 }
 
 .close-btn {
+	position: absolute;
+	top: 20px;
+	right: 20px;
 	background: rgba(255, 255, 255, 0.1);
 	backdrop-filter: blur(10px);
 	border: 1px solid rgba(255, 255, 255, 0.2);
@@ -2230,6 +2544,7 @@ onMounted(() => {
 	border-radius: 50%;
 	transition: all 0.3s ease;
 	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+	z-index: 10;
 }
 
 .close-btn:hover {
@@ -2240,26 +2555,54 @@ onMounted(() => {
 
 .charts-grid {
 	display: grid;
-	grid-template-columns: 1fr 1fr;
-	grid-template-rows: 1fr 1fr;
+	grid-template-columns: 380px 380px;
+	grid-template-rows: 280px 280px;
 	gap: 20px;
-	flex: 1;
-	overflow: hidden;
+	justify-content: center;
+	align-content: center;
+	width: 100%;
+	height: 100%;
+	position: relative;
+	padding: 0px;
 }
 
+.charts-grid::before {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 0;
+	right: 0;
+	height: 1px;
+	background-color: #ffffff;
+	transform: translateY(-50%);
+	z-index: 1;
+}
+
+/* .charts-grid::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 50%;
+	width: 1px;
+	background-color: #ffffff;
+	transform: translateX(-50%);
+	z-index: 1;
+} */
+
 .chart-item {
-	background: rgba(255, 255, 255, 0.2);
-	backdrop-filter: blur(15px) saturate(180%);
-	border: 1px solid rgba(255, 255, 255, 0.3);
-	border-radius: 15px;
-	padding: 15px;
+	background: transparent;
+	border: none;
+	border-radius: 0;
+	padding: 5px 2px 2px 2px;
 	display: flex;
 	flex-direction: column;
-	overflow: hidden;
-	min-height: 200px;
-	width: 100%;
-	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
-	            0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+	align-items: center;
+	justify-content: flex-start;
+	overflow: visible;
+	width: 380px;
+	height: 280px;
+	box-shadow: none;
 }
 
 .chart-item-title {
@@ -2271,10 +2614,8 @@ onMounted(() => {
 }
 
 .modal-chart {
-	flex: 1;
-	min-height: 150px;
-	max-height: 200px;
-	width: 100%;
+	width: 446px;
+	height: 280px;
 }
 
 @keyframes fadeIn {
