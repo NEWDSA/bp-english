@@ -3,7 +3,7 @@
 		<!-- 背景视频/图片 -->
 		<div class="video-background">
 			<video v-if="!isCeoBackground && !isCfoBackground && !isCooBackground && !isEngineerBackground && !isInteractionEngineerBackground && !isStructuralEngineerBackground && !isStrategicPlannerBackground" autoplay muted loop playsinline class="background-video">
-				<source src="../assets/team_bg.mp4" type="video/mp4">
+				<source src="../assets/team_bg_compressed.mp4" type="video/mp4">
 			</video>
 			<img v-if="isCeoBackground" src="../assets/ceo_bg.png" alt="CEO Background" class="background-image">
 			<img v-if="isCfoBackground" src="../assets/cfo_bg.png" alt="CFO Background" class="background-image">
@@ -364,7 +364,6 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { getScale } from '../utils/flexible.js'
 
 const router = useRouter()
 const isCeoBackground = ref(false)

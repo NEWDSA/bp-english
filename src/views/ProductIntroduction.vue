@@ -3,7 +3,7 @@
 		<!-- 背景视频 -->
 		<div class="video-background">
 			<video autoplay muted loop playsinline class="background-video">
-				<source src="../assets/sea_wave.mp4" type="video/mp4">
+				<source src="../assets/sea_wave_compressed.mp4" type="video/mp4">
 			</video>
 			<div class="video-overlay"></div>
 		</div>
@@ -283,7 +283,7 @@
 					<div class="hydrofoil-section">
 						<div class="section-header">
 							<h3>Intelligent hydrofoil boat</h3>
-							<div class="boat-image">
+							<div class="comparison-boat-image">
 								<img :src="currentBoatImage" alt="Intelligent hydrofoil boat" />
 							</div>
 						</div>
@@ -378,32 +378,32 @@
 					<div class="videos-grid">
 						<div class="video-container">
 							<video autoplay muted loop playsinline class="simulation-video">
-								<source src="../assets/1.1.mp4" type="video/mp4">
+								<source src="../assets/1.1_compressed.mp4" type="video/mp4">
 							</video>
 						</div>
 						<div class="video-container">
 							<video autoplay muted loop playsinline class="simulation-video">
-								<source src="../assets/1.2.mp4" type="video/mp4">
+								<source src="../assets/1.2_compressed.mp4" type="video/mp4">
 							</video>
 						</div>
 						<div class="video-container">
 							<video autoplay muted loop playsinline class="simulation-video">
-								<source src="../assets/1.3.mp4" type="video/mp4">
+								<source src="../assets/1.3_compressed.mp4" type="video/mp4">
 							</video>
 						</div>
 						<div class="video-container">
 							<video autoplay muted loop playsinline class="simulation-video">
-								<source src="../assets/1.4.mp4" type="video/mp4">
+								<source src="../assets/1.4_compressed.mp4" type="video/mp4">
 							</video>
 						</div>
 						<div class="video-container">
 							<video autoplay muted loop playsinline class="simulation-video">
-								<source src="../assets/1.5.mp4" type="video/mp4">
+								<source src="../assets/1.5_compressed.mp4" type="video/mp4">
 							</video>
 						</div>
 						<div class="video-container">
 							<video autoplay muted loop playsinline class="simulation-video">
-								<source src="../assets/1.6.mp4" type="video/mp4">
+								<source src="../assets/1.6_compressed.mp4" type="video/mp4">
 							</video>
 						</div>
 					</div>
@@ -424,7 +424,7 @@
 							<!-- 左上：视频 -->
 							<div class="simulation-item video-item">
 								<video autoplay muted loop playsinline class="sim-video">
-									<source src="../assets/2.1.mp4" type="video/mp4">
+									<source src="../assets/2.1_compressed.mp4" type="video/mp4">
 								</video>
 							</div>
 
@@ -443,7 +443,7 @@
 							<!-- 第三列第一行：视频 -->
 							<div class="simulation-item video-item">
 								<video autoplay muted loop playsinline class="sim-video">
-									<source src="../assets/2.2.mp4" type="video/mp4">
+									<source src="../assets/2.2_compressed.mp4" type="video/mp4">
 								</video>
 							</div>
 
@@ -538,8 +538,7 @@
 import { ref, onMounted, onUnmounted, computed, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import * as echarts from 'echarts'
-// 引入 lib-flexible 工具函数
-import { getScale } from '../utils/flexible.js'
+// 移除复杂的外部依赖，使用内联方案
 // 导入船只图片资源
 import whiteBoatImg from '../assets/white_boat.png'
 import greenBoatImg from '../assets/green_boat.png'
@@ -638,12 +637,49 @@ const calculateLinePosition = () => {
 	})
 }
 
-// 监听窗口大小变化
-const handleResize = () => {
+// 防抖函数
+const debounce = (func, wait) => {
+	let timeout
+	return function executedFunction(...args) {
+		const later = () => {
+			clearTimeout(timeout)
+			func(...args)
+		}
+		clearTimeout(timeout)
+		timeout = setTimeout(later, wait)
+	}
+}
+
+// 监听窗口大小变化（防抖处理）
+const handleResize = debounce(() => {
 	// 延迟执行，等待DOM更新完成
 	setTimeout(() => {
 		calculateLinePosition()
-	}, 100)
+	}, 200) // 增加延迟时间
+}, 100) // 防抖延迟
+
+// ResizeObserver实例
+let resizeObserver = null
+
+// 初始化ResizeObserver
+const initResizeObserver = () => {
+	if (typeof ResizeObserver !== 'undefined') {
+		resizeObserver = new ResizeObserver(debounce(() => {
+			calculateLinePosition()
+		}, 150))
+		
+		// 观察左侧导航容器
+		const navList = document.querySelector('.left-nav-list')
+		if (navList) {
+			resizeObserver.observe(navList)
+		}
+		
+		// 观察主内容区域
+		const mainContent = document.querySelector('.main-content')
+		if (mainContent) {
+			resizeObserver.observe(mainContent)
+		}
+	}
 }
 
 // 船只图片映射
@@ -953,6 +989,9 @@ function goHome() {
 onMounted(() => {
 	// 页面加载完成后的初始化逻辑
 	calculateLinePosition()
+	
+	// 初始化ResizeObserver
+	initResizeObserver()
 
 	// 监听窗口大小变化
 	window.addEventListener('resize', handleResize)
@@ -961,7 +1000,26 @@ onMounted(() => {
 	window.addEventListener('wheel', (e) => {
 		if (e.ctrlKey) {
 			// 延迟执行，等待缩放完成
-			setTimeout(calculateLinePosition, 100)
+			setTimeout(() => {
+				calculateLinePosition()
+			}, 300) // 增加延迟时间
+		}
+	}, { passive: true })
+	
+	// 监听方向键变化（可能影响布局）
+	window.addEventListener('orientationchange', () => {
+		setTimeout(() => {
+			calculateLinePosition()
+		}, 500) // 方向变化后延迟更长时间
+	})
+	
+	// 监听页面可见性变化
+	document.addEventListener('visibilitychange', () => {
+		if (!document.hidden) {
+			// 页面重新可见时重新计算
+			setTimeout(() => {
+				calculateLinePosition()
+			}, 100)
 		}
 	})
 })
@@ -969,6 +1027,17 @@ onMounted(() => {
 // 组件卸载时清理事件监听器
 onUnmounted(() => {
 	window.removeEventListener('resize', handleResize)
+	
+	// 清理ResizeObserver
+	if (resizeObserver) {
+		resizeObserver.disconnect()
+		resizeObserver = null
+	}
+	
+	// 清理其他事件监听器
+	window.removeEventListener('orientationchange', calculateLinePosition)
+	document.removeEventListener('visibilitychange', calculateLinePosition)
+	
 	// 清理图表实例
 	if (trimAngleChartInstance) {
 		trimAngleChartInstance.dispose()
@@ -998,6 +1067,8 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+/* px-to-viewport-ignore-next */
+/* 启用 postcss-px-to-viewport 转换 */
 .product-introduction {
 	min-height: 100vh;
 	height: auto;
@@ -1262,6 +1333,8 @@ onUnmounted(() => {
 	flex-direction: row;
 	gap: 8px;
 	flex-wrap: nowrap;
+	align-items: flex-start; /* 确保卡片从顶部对齐，不会因为高度变化影响其他卡片 */
+	position: relative; /* 为绝对定位的子元素提供参考 */
 }
 
 /* 颜色价格区域的伪类元素特殊定位 */
@@ -1451,7 +1524,7 @@ onUnmounted(() => {
 	border-radius: 12px;
 	padding: 12px;
 	text-align: center;
-	transition: all 0.3s ease;
+	transition: none; /* 移除transition，避免影响其他卡片 */
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -1462,13 +1535,31 @@ onUnmounted(() => {
 	transform: scale(0.8);
 	border: 1px solid rgba(255, 255, 255, 0.2);
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	position: relative;
+	overflow: hidden;
 }
 
 .highlight-card:hover {
 	background: rgba(255, 255, 255, 0.6);
-	transform: scale(0.8) translateY(-8px);
 	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 	border-color: rgba(0, 212, 255, 0.3);
+	height: 420px; /* 原来120px + 300px = 420px */
+	animation: growFromBottom 0.3s ease-out forwards;
+	z-index: 10; /* 确保悬浮的卡片在最上层 */
+	position: absolute; /* 使用绝对定位，避免影响其他卡片 */
+	width: 230px; /* 保持原始宽度 */
+}
+
+/* 从底部向上生长的动画 */
+@keyframes growFromBottom {
+	0% {
+		height: 120px;
+		transform: scale(0.8) translateY(0);
+	}
+	100% {
+		height: 420px;
+		transform: scale(0.8) translateY(-300px);
+	}
 }
 
 .highlight-icon {
@@ -1524,7 +1615,7 @@ onUnmounted(() => {
 }
 
 .highlight-desc {
-	font-size: 8px;
+	font-size: 10px;
 	color: #666666;
 	line-height: 1.2;
 	text-align: center;
@@ -1562,7 +1653,7 @@ onUnmounted(() => {
 	padding: 20px;
 	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 	border: 1px solid rgba(255, 255, 255, 0.3);
-	/* animation: fadeInUp 0.3s ease-out; */
+	pointer-events: none; /* 防止tooltip阻挡鼠标事件 */
 }
 
 .tooltip-content p {
@@ -1649,7 +1740,7 @@ onUnmounted(() => {
 .close-btn {
 	background: none;
 	border: none;
-	font-size: 32px;
+	font-size: 36px;
 	color: #666666;
 	cursor: pointer;
 	padding: 0;
@@ -1813,6 +1904,36 @@ onUnmounted(() => {
 	color: #20B2AA;
 }
 
+.comparison-boat-image {
+	width: 80px;
+	height: 60px;
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.comparison-boat-image img {
+	/* width: 100%; */
+	width: 150px;
+	height: 100%;
+	object-fit: contain;
+}
+
+.comparison-boat-image {
+	width: 900px;
+	height: auto;
+	max-width: 100%;
+	object-fit: contain;
+	filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));
+	transition: all 0.3s ease;
+}
+
+.comparison-boat-image:hover {
+	transform: scale(1.05);
+	filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.4));
+}
+
 .boat-image {
 	width: 80px;
 	height: 60px;
@@ -1947,7 +2068,7 @@ onUnmounted(() => {
 .card-content p {
 	margin: 0;
 	padding: 3px 0;
-	font-size: 11px;
+	font-size: 10px;
 	color: #333333;
 	line-height: 1.4;
 	text-align: left;
@@ -2523,7 +2644,7 @@ onUnmounted(() => {
 } */
 
 .param-item {
-	font-size: 11px;
+	font-size: 10px;
 	color: #666666;
 	background: rgba(255, 255, 255, 0.7);
 	padding: 4px 8px;
@@ -2563,7 +2684,7 @@ onUnmounted(() => {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	font-size: 11px;
+	font-size: 10px;
 	color: #666666;
 }
 
@@ -2596,7 +2717,7 @@ onUnmounted(() => {
 
 .conclusion-item {
 	margin-bottom: 15px;
-	font-size: 11px;
+	font-size: 10px;
 	line-height: 1.4;
 	color: #666666;
 }

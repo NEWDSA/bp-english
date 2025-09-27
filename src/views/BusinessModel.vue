@@ -491,7 +491,6 @@
 import { ref, onMounted, onBeforeUnmount, watchEffect, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import * as echarts from 'echarts'
-import { getScale } from '../utils/flexible.js'
 
 const router = useRouter()
 
@@ -2236,7 +2235,7 @@ onMounted(() => {
 
 
 .main-title {
-	font-size: 15px;
+	font-size: 14px;
 	font-weight: 600;
 	color: #ffffff;
 	margin-bottom: 8px;
@@ -2393,7 +2392,7 @@ onMounted(() => {
 }
 
 .content-subtitle {
-	font-size: 15px;
+	font-size: 14px;
 	font-weight: 500;
 	color: #cccccc;
 	margin-bottom: 20px;

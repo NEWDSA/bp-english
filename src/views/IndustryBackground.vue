@@ -5,7 +5,6 @@ import GlobeComponent from '../components/GlobeComponent.vue';
 import Navigation from '../components/Navigation.vue';
 import ChartModal from '../components/ChartModal.vue';
 import { useRouter } from 'vue-router'
-import { getScale } from '../utils/flexible.js'
 const router = useRouter()
 
 // 页面相关状态
