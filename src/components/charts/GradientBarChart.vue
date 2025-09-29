@@ -161,42 +161,22 @@ const getChartOptions = () => {
         barWidth: '60%',
         barGap: '10%',
         itemStyle: {
-          color: (params) => {
-            // Create dynamic gradient based on value height
-            const maxValue = Math.max(...regionData.data)
-            const ratio = params.value / maxValue
-
-            // Gradient from dark blue-teal to bright cyan-green
-            const colorStops = [
-              { offset: 0, color: '#1e3a8a' },      // Dark blue
-              { offset: 0.2, color: '#1e40af' },   // Blue
-              { offset: 0.4, color: '#0891b2' },   // Teal
-              { offset: 0.6, color: '#06b6d4' },   // Cyan
-              { offset: 0.8, color: '#22d3ee' },   // Light cyan
-              { offset: 1, color: '#10b981' }      // Green
+          color: {
+            type: 'linear',
+            x: 0,
+            y: 1,
+            x2: 0,
+            y2: 0,
+            colorStops: [
+              { offset: 1, color: '#45D9D8' },
+              { offset: 0, color: 'rgba(224, 247, 247, 0.1)' }
             ]
-
-            return {
-              type: 'linear',
-              x: 0,
-              y: 1,
-              x2: 0,
-              y2: 0,
-              colorStops: colorStops
-            }
           },
+          borderColor: '#45D9D8',
+          borderWidth: 2,
           borderRadius: [2, 2, 0, 0],
           shadowBlur: 15,
-          shadowColor: (params) => {
-            const maxValue = Math.max(...regionData.data)
-            const ratio = params.value / maxValue
-
-            // Shadow color changes based on height
-            if (ratio > 0.8) return 'rgba(16, 185, 129, 0.6)'      // Green glow
-            else if (ratio > 0.6) return 'rgba(34, 211, 238, 0.5)' // Cyan glow
-            else if (ratio > 0.4) return 'rgba(6, 182, 212, 0.4)'  // Teal glow
-            else return 'rgba(30, 64, 175, 0.3)'                   // Blue glow
-          },
+          shadowColor: 'rgba(69, 217, 216, 0.5)',
           shadowOffsetY: 0
         },
         label: {
@@ -215,7 +195,7 @@ const getChartOptions = () => {
         emphasis: {
           itemStyle: {
             shadowBlur: 25,
-            shadowColor: 'rgba(16, 185, 129, 0.8)'
+            shadowColor: 'rgba(69, 217, 216, 0.8)'
           }
         },
         animationDuration: 2000,

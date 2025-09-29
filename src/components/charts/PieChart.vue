@@ -43,40 +43,40 @@ const getChartOptions = () => {
   const getRegionAgeData = () => {
     const regionAgeData = {
       'China': [
-        { value: 25, name: '18-34', color: '#22d3ee' },
-        { value: 45, name: '35-50', color: '#f59e0b' },
-        { value: 20, name: '51-65', color: '#fbbf24' },
-        { value: 10, name: '≥65', color: '#3b82f6' }
+        { value: 25, name: '18-34', color: '#00E1D4' },
+        { value: 45, name: '35-50', color: '#FF9600' },
+        { value: 20, name: '51-65', color: '#FFDE00' },
+        { value: 10, name: '≥65', color: '#008CFF' }
       ],
       'Singapore': [
-        { value: 35, name: '18-34', color: '#22d3ee' },
-        { value: 45, name: '35-50', color: '#f59e0b' },
-        { value: 15, name: '51-65', color: '#fbbf24' },
-        { value: 5, name: '≥65', color: '#3b82f6' }
+        { value: 35, name: '18-34', color: '#00E1D4' },
+        { value: 45, name: '35-50', color: '#FF9600' },
+        { value: 15, name: '51-65', color: '#FFDE00' },
+        { value: 5, name: '≥65', color: '#008CFF' }
       ],
       'Italy': [
-        { value: 15, name: '18-34', color: '#22d3ee' },
-        { value: 35, name: '35-50', color: '#f59e0b' },
-        { value: 30, name: '51-65', color: '#fbbf24' },
-        { value: 20, name: '≥65', color: '#3b82f6' }
+        { value: 15, name: '18-34', color: '#00E1D4' },
+        { value: 35, name: '35-50', color: '#FF9600' },
+        { value: 30, name: '51-65', color: '#FFDE00' },
+        { value: 20, name: '≥65', color: '#008CFF' }
       ],
       'United States': [
-        { value: 25, name: '18-34', color: '#22d3ee' },
-        { value: 50, name: '35-50', color: '#f59e0b' },
-        { value: 15, name: '51-65', color: '#fbbf24' },
-        { value: 10, name: '≥65', color: '#3b82f6' }
+        { value: 25, name: '18-34', color: '#00E1D4' },
+        { value: 50, name: '35-50', color: '#FF9600' },
+        { value: 15, name: '51-65', color: '#FFDE00' },
+        { value: 10, name: '≥65', color: '#008CFF' }
       ],
       'United Arab Emirates': [
-        { value: 30, name: '18-34', color: '#22d3ee' },
-        { value: 40, name: '35-50', color: '#f59e0b' },
-        { value: 20, name: '51-65', color: '#fbbf24' },
-        { value: 10, name: '≥65', color: '#3b82f6' }
+        { value: 30, name: '18-34', color: '#00E1D4' },
+        { value: 40, name: '35-50', color: '#FF9600' },
+        { value: 20, name: '51-65', color: '#FFDE00' },
+        { value: 10, name: '≥65', color: '#008CFF' }
       ],
       'global': [
-        { value: 30, name: '18-34', color: '#22d3ee' },
-        { value: 40, name: '35-50', color: '#f59e0b' },
-        { value: 20, name: '51-65', color: '#fbbf24' },
-        { value: 10, name: '≥65', color: '#3b82f6' }
+        { value: 30, name: '18-34', color: '#00E1D4' },
+        { value: 40, name: '35-50', color: '#FF9600' },
+        { value: 20, name: '51-65', color: '#FFDE00' },
+        { value: 10, name: '≥65', color: '#008CFF' }
       ]
     }
 
@@ -98,6 +98,9 @@ const getChartOptions = () => {
   const maxSegment = ageGroups.reduce((max, current) =>
     current.value > max.value ? current : max
   )
+
+  const vhSize = window.innerHeight * (props.isDetailed ? 0.05 : 0.025)
+  const fontSize = Math.max(12, Math.min(vhSize, props.isDetailed ? 60 : 22))
 
   // Base configuration for simple mode
   let baseConfig = {
@@ -149,10 +152,10 @@ const getChartOptions = () => {
       {
         type: 'text',
         left: 'center',
-        top: '42%',
+        top: '40%',
         style: {
           text: maxSegment.name,
-          fontSize: 22,
+          fontSize: fontSize,
           fontWeight: 'normal',
           fill: '#ffffff',
           textAlign: 'center',
@@ -244,10 +247,10 @@ const getChartOptions = () => {
     baseConfig.series[0].radius = ['50%', '75%']
 
     // Update graphic text position and style
-    baseConfig.graphic[0].top = '50%'
+    baseConfig.graphic[0].top = '44%'
     baseConfig.graphic[0].style = {
       text: maxSegment.name,
-      fontSize: 60,
+      fontSize: fontSize,
       fontWeight: 'normal',
       fill: '#ffffff',
       textAlign: 'center',

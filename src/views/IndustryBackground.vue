@@ -54,7 +54,7 @@ const calculateChartHeight = () => {
   const paddingBottom = 32
   // 网格间距 (3行之间的间距：移动端 gap-4 = 8px * 2 = 16px，桌面端 gap-6)
   const gridGap = window.innerWidth >= 1024 ? 12 * 2 : 8 * 2 // 3行之间有2个间隙
-  const gridTitle = 56 * 3
+  const gridTitle = window.innerWidth <= 1600 ? 40 * 3 : window.innerWidth > 1600 && window.innerWidth <= 1920 ? 46 * 3 : 60 * 3
 
   console.log(navHeight, titleHeight, paddingBottom, gridGap)
 
@@ -138,11 +138,9 @@ const handleCityClick = (cityInfo) => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900 relative">
-    <!-- navItems: 导航栏 -->
-    <!-- <Navigation :nav-items="navItems" /> -->
+  <div class="flex flex-col h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900">
     <!-- 顶部导航栏 -->
-    <nav class="top-nav">
+    <nav class="flex-shrink-0 top-nav">
       <div class="nav-container">
         <!-- 返回首页按钮 -->
         <div class="home-btn" @click="goHome">
@@ -165,15 +163,15 @@ const handleCityClick = (cityInfo) => {
     </nav>
 
     <!-- 主内容区域 -->
-    <div class="w-full px-4 sm:px-8 pt-24 pb-8 min-h-screen overflow-hidden">
-      <div class="flex flex-col xl:flex-row gap-8 xl:gap-12 h-full overflow-hidden">
+    <div class="flex-1 overflow-auto px-4 sm:px-8 pt-5 pb-5">
+      <div class="flex flex-col xl:flex-row gap-8 xl:gap-12 h-full">
         <!-- 左侧 - 页面标题和图表 -->
         <div class="w-full xl:w-1/2 flex flex-col h-full">
           <!-- 页面标题 -->
-          <div class="mt-1 mb-6 xl:mb-8 flex-shrink-0">
+          <div class="mb-[30px] xl:mb-8 flex-shrink-0">
             <div class="flex items-center text-white">
               <img src="../assets/icon-1.png" alt="Icon" class="w-[27px] h-[28px] mr-3" />
-              <p class="text-[20px] font-bold text-gray-300 tracking-wide">Industry Background - {{ isChinaSelected ? 'China' : isSoutheastAsiaSelected ? 'Southeast Asia' : isItalySelected ? 'Italian' : isAmericaSelected ? 'America' : isMiddleEastSelected ? 'Middle East' : 'Global' }}</p>
+              <p class="text-sm md:text-sm lg:text-lg xl:text-xl 2xl:text-[20px]">Industry Background - {{ isChinaSelected ? 'China' : isSoutheastAsiaSelected ? 'Southeast Asia' : isItalySelected ? 'Italian' : isAmericaSelected ? 'America' : isMiddleEastSelected ? 'Middle East' : 'Global' }}</p>
             </div>
           </div>
 
@@ -181,9 +179,9 @@ const handleCityClick = (cityInfo) => {
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 xl:gap-6">
             <!-- 图表1：全球小型游艇制造业 -->
             <div class="text-white">
-              <div class="flex items-center mb-4 h-12">
-                <div class="w-2 h-2 bg-cyan-400 rounded-full mr-3"></div>
-                <h3 class="text-sm text-gray-300">{{ isChinaSelected ? "China's small yacht manufacturing industry" : isSoutheastAsiaSelected ? "Small yacht manufacturing industry in Southeast Asia" : isItalySelected ? "Italian small yacht manufacturing industry" : isAmericaSelected ? "Small yacht manufacturing industry in the United States" : isMiddleEastSelected ? "Small yacht manufacturing industry in the Middle East" : "Global small yacht manufacturing industry" }}</h3>
+              <div class="flex items-center h-12">
+                <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
+                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[14px]">{{ isChinaSelected ? "China's small yacht manufacturing industry" : isSoutheastAsiaSelected ? "Small yacht manufacturing industry in Southeast Asia" : isItalySelected ? "Italian small yacht manufacturing industry" : isAmericaSelected ? "Small yacht manufacturing industry in the United States" : isMiddleEastSelected ? "Small yacht manufacturing industry in the Middle East" : "Global small yacht manufacturing industry" }}</p>
               </div>
               <div :style="{ height: chartHeight }">
                 <EChartsComponent chart-type="bar" :selected-city="selectedCity" @chart-click="handleChartClick" />
@@ -192,9 +190,9 @@ const handleCityClick = (cityInfo) => {
 
             <!-- 图表2：全球小型游艇销售市场规模 -->
             <div class="text-white">
-              <div class="flex items-center mb-4 h-12">
-                <div class="w-2 h-2 bg-cyan-400 rounded-full mr-3"></div>
-                <h3 class="text-sm text-gray-300">{{ isChinaSelected ? "China's Small Yacht Sales Market" : isSoutheastAsiaSelected ? "Water sports equipment in Southeast Asia" : isItalySelected ? "Italian small yacht sales market" : isAmericaSelected ? "Size of the Small Yacht Sales Market in the United States" : isMiddleEastSelected ? "Scale of Small Yacht Sales Market in the Middle East" : "Global small yacht sales market size" }}</h3>
+              <div class="flex items-center h-12">
+                <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
+                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[14px]">{{ isChinaSelected ? "China's Small Yacht Sales Market" : isSoutheastAsiaSelected ? "Water sports equipment in Southeast Asia" : isItalySelected ? "Italian small yacht sales market" : isAmericaSelected ? "Size of the Small Yacht Sales Market in the United States" : isMiddleEastSelected ? "Scale of Small Yacht Sales Market in the Middle East" : "Global small yacht sales market size" }}</p>
               </div>
               <div :style="{ height: chartHeight }">
                 <EChartsComponent chart-type="area" :selected-city="selectedCity" @chart-click="handleChartClick" />
@@ -203,9 +201,9 @@ const handleCityClick = (cityInfo) => {
 
             <!-- 图表3：全球水上户外运动装备市场规模（增长率） -->
             <div class="text-white">
-              <div class="flex items-center mb-4 h-12">
-                <div class="w-2 h-2 bg-cyan-400 rounded-full mr-3"></div>
-                <h3 class="text-sm text-gray-300">{{ isChinaSelected ? "Water sports equipment in China" : isSoutheastAsiaSelected ? "Water sports equipment in Southeast Asia" : isItalySelected ? "Water sports equipment in Italy" : isAmericaSelected ? "Water sports equipment in USA" : isMiddleEastSelected ? "Water sports equipment in the Middle East" : "Global market size of water outdoor sports equipment" }}<br/>(growth rate)</h3>
+              <div class="flex items-center h-12">
+                <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
+                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[14px]">{{ isChinaSelected ? "Water sports equipment in China" : isSoutheastAsiaSelected ? "Water sports equipment in Southeast Asia" : isItalySelected ? "Water sports equipment in Italy" : isAmericaSelected ? "Water sports equipment in USA" : isMiddleEastSelected ? "Water sports equipment in the Middle East" : "Global market size of water outdoor sports equipment" }}<br/>(growth rate)</p>
               </div>
               <div :style="{ height: chartHeight }">
                 <EChartsComponent chart-type="line" :selected-city="selectedCity" @chart-click="handleChartClick" />
@@ -214,9 +212,9 @@ const handleCityClick = (cityInfo) => {
 
             <!-- 图表4：全球水上户外运动装备市场规模 -->
             <div class="text-white">
-              <div class="flex items-center mb-4 h-12">
-                <div class="w-2 h-2 bg-cyan-400 rounded-full mr-3"></div>
-                <h3 class="text-sm text-gray-300">{{ isChinaSelected ? "Water sports equipment in China" : isSoutheastAsiaSelected ? "Water sports equipment in Southeast Asia" : isItalySelected ? "Water sports equipment in Italy" : isAmericaSelected ? "Water sports equipment in the United States" : isMiddleEastSelected ? "Water sports equipment in the Middle East" : "Global market size of water outdoor sports equipment" }}</h3>
+              <div class="flex items-center h-12">
+                <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
+                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[14px]">{{ isChinaSelected ? "Water sports equipment in China" : isSoutheastAsiaSelected ? "Water sports equipment in Southeast Asia" : isItalySelected ? "Water sports equipment in Italy" : isAmericaSelected ? "Water sports equipment in the United States" : isMiddleEastSelected ? "Water sports equipment in the Middle East" : "Global market size of water outdoor sports equipment" }}</p>
               </div>
               <div :style="{ height: chartHeight }">
                 <EChartsComponent chart-type="scatter" :selected-city="selectedCity" @chart-click="handleChartClick" />
@@ -225,9 +223,9 @@ const handleCityClick = (cityInfo) => {
 
             <!-- 图表5：全球船舶租赁市场规模 -->
             <div class="text-white">
-              <div class="flex items-center mb-4 h-12">
-                <div class="w-2 h-2 bg-cyan-400 rounded-full mr-3"></div>
-                <h3 class="text-sm text-gray-300">{{ isChinaSelected ? "China's ship leasing market" : isSoutheastAsiaSelected ? "The ship leasing market in Southeast Asia" : isItalySelected ? "The scale of the Italian ship leasing market" : isAmericaSelected ? "The scale of the US ship leasing market" : isMiddleEastSelected ? "The scale of the ship leasing market in the Middle East" : "Global ship leasing market size" }}</h3>
+              <div class="flex items-center h-12">
+                <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
+                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[14px]">{{ isChinaSelected ? "China's ship leasing market" : isSoutheastAsiaSelected ? "The ship leasing market in Southeast Asia" : isItalySelected ? "The scale of the Italian ship leasing market" : isAmericaSelected ? "The scale of the US ship leasing market" : isMiddleEastSelected ? "The scale of the ship leasing market in the Middle East" : "Global ship leasing market size" }}</p>
               </div>
               <div :style="{ height: chartHeight }">
                 <EChartsComponent chart-type="gradientBar" :selected-city="selectedCity" @chart-click="handleChartClick" />
@@ -236,9 +234,9 @@ const handleCityClick = (cityInfo) => {
 
             <!-- 图表6：全球船东年龄结构 -->
             <div class="text-white">
-              <div class="flex items-center mb-4 h-12">
-                <div class="w-2 h-2 bg-cyan-400 rounded-full mr-3"></div>
-                <h3 class="text-sm text-gray-300">{{ isChinaSelected ? "Age structure of Chinese ship owners" : isSoutheastAsiaSelected ? "Age structure of shipowners in Southeast Asia" : isItalySelected ? "Age structure of Italian shipowners" : isAmericaSelected ? "Age structure of American shipowners" : isMiddleEastSelected ? "Age structure of shipowners in the Middle East" : "Age structure of global shipowners" }}</h3>
+              <div class="flex items-center h-12">
+                <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
+                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[14px]">{{ isChinaSelected ? "Age structure of Chinese ship owners" : isSoutheastAsiaSelected ? "Age structure of shipowners in Southeast Asia" : isItalySelected ? "Age structure of Italian shipowners" : isAmericaSelected ? "Age structure of American shipowners" : isMiddleEastSelected ? "Age structure of shipowners in the Middle East" : "Age structure of global shipowners" }}</p>
               </div>
               <div :style="{ height: chartHeight }">
                 <EChartsComponent chart-type="pie" :selected-city="selectedCity" @chart-click="handleChartClick" />
@@ -265,7 +263,7 @@ const handleCityClick = (cityInfo) => {
               >
                 <button
                   @click="showSummary = !showSummary"
-                  class="button-focus bg-gradient-to-r from-cyan-600 to-blue-600 text-white px-6 py-3 text-sm xl:text-base rounded-lg hover:from-cyan-500 hover:to-blue-500 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/25 animate-pulse focus:outline-none focus:ring-0 focus:border-0"
+                  class="button-focus bg-gradient-to-r from-cyan-600 to-blue-600 text-white text-sm sm:text-base md:text-lg lg:text-xl 2xl:text-[20px] px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 rounded-lg hover:from-cyan-500 hover:to-blue-500 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/25 animate-pulse focus:outline-none focus:ring-0 focus:border-0"
                 >
                   {{ isChinaSelected || isSoutheastAsiaSelected || isItalySelected || isAmericaSelected || isMiddleEastSelected ? 'Government Policy' : 'Summary' }}
                 </button>
@@ -275,11 +273,11 @@ const handleCityClick = (cityInfo) => {
                   v-show="showSummary"
                   @mouseenter="showSummary = true"
                   @mouseleave="showSummary = false"
-                  class="absolute top-full z-9999999 right-0 mt-6 w-[480px] bg-gray-800/95 backdrop-blur-sm border border-cyan-500/30 rounded-lg p-4 shadow-2xl transform transition-all duration-300 origin-top-right"
+                  class="absolute top-full z-9999999 right-0 mt-6 w-[320px] sm:w-[400px] md:w-[480px] lg:w-[820px] bg-gray-800/95 backdrop-blur-sm border border-cyan-500/30 rounded-lg p-3 sm:p-4 shadow-2xl transform transition-all duration-300 origin-top-right"
                   :class="showSummary ? 'animate-in fade-in-90 slide-in-from-top-2' : 'animate-out fade-out-90 slide-out-to-top-2'"
                 >
                   <!-- 内容 -->
-                  <div class="text-gray-100 text-sm leading-relaxed">
+                  <div class="text-gray-100 text-xs sm:text-sm md:text-base lg:text-lg 2xl:text-[20px] leading-relaxed">
                     <template v-if="isChinaSelected">
                       <p class="mb-3 font-semibold text-cyan-400">Guiding Opinions on Promoting the Development of Energy Electronics Industry</p>
                       <p class="mb-3">
@@ -384,11 +382,11 @@ const handleCityClick = (cityInfo) => {
     </div>
 
     <!-- 浮动粒子视觉效果 -->
-    <div class="fixed inset-0 pointer-events-none z-0">
+    <!-- <div class="fixed inset-0 pointer-events-none z-0">
       <div class="absolute top-1/4 left-1/4 w-1 h-1 bg-blue-400 rounded-full animate-ping"></div>
       <div class="absolute top-3/4 right-1/3 w-1 h-1 bg-purple-400 rounded-full animate-ping animation-delay-2000"></div>
-      <div class="absolute bottom-1/4 left-1/3 w-1 h-1 bg-cyan-400 rounded-full animate-ping animation-delay-4000"></div>
-    </div>
+      <div class="absolute bottom-1/4 left-1/3 w-1 h-1 bg-white rounded-full animate-ping animation-delay-4000"></div>
+    </div> -->
 
     <!-- 图表弹窗 -->
     <ChartModal
@@ -481,10 +479,6 @@ const handleCityClick = (cityInfo) => {
 }
 
 .top-nav {
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
 	background: rgba(0, 0, 0, 0.8);
 	backdrop-filter: blur(10px);
 	z-index: 40;
