@@ -418,7 +418,6 @@
 					</div>
 				</div>
 			</div>
-
 			<!-- Design&Simulation Technology 第二个弹窗 -->
 			<div v-if="showSimulationModal" class="modal-overlay" @click="hideSimulationModal">
 				<div class="simulation-modal" @click.stop>
@@ -482,7 +481,8 @@
 							<!-- 第二行 -->
 							<!-- 左中：波点图表 -->
 							<div class="simulation-item chart-panel">
-								<div ref="waveChartRef" class="chart-container"></div>
+								<!-- <div ref="waveChartRef" class="chart-container"></div> -->
+								<img src="../assets/pd1.png" alt="波点图表" class="chart-image"></img>
 							</div>
 
 							<!-- 中中：Trim Angle信息区域 -->
@@ -499,19 +499,21 @@
 
 							<!-- 第三列第二行：Trim Angle图表 -->
 							<div class="simulation-item chart-panel">
-								<div ref="trimAngleChartRef" class="chart-container"></div>
-								<div class="chart-label">
+								<!-- <div ref="trimAngleChartRef" class="chart-container"></div> -->
+								<!-- <div class="chart-label">
 									<div>Trim Angle</div>
 									<div>-1.25°~0.85°</div>
 									<div class="vs-text">VS</div>
 									<div>-7°~-8.5°</div>
-								</div>
+								</div> -->
+								<img src="../assets/pd2.png" alt="Trim Angle图表" class="chart-image"></img>
 							</div>
 
 							<!-- 第三行 -->
 							<!-- 左下：图表 -->
 							<div class="simulation-item chart-panel">
-								<div ref="trimAngleChart2Ref" class="chart-container"></div>
+								<!-- <div ref="trimAngleChart2Ref" class="chart-container"></div> -->
+								<img src="../assets/pd1.2.png" alt="Trim Angle图表" class="chart-image"></img>
 							</div>
 
 							<!-- 中下：Effective Power信息区域 -->
@@ -528,13 +530,14 @@
 
 							<!-- 第三列第三行：Effective Power图表 -->
 							<div class="simulation-item chart-panel">
-								<div ref="powerChartRef" class="chart-container"></div>
+								<img src="../assets/pd2.2.png" alt="Effective Power图表" class="chart-image"></img>
+								<!-- <div ref="powerChartRef" class="chart-container"></div>
 								<div class="chart-label">
 									<div>Effective Power</div>
 									<div>25kw</div>
 									<div class="vs-text">VS</div>
 									<div>90kw</div>
-								</div>
+								</div> -->
 							</div>
 						</div>
 					</div>
@@ -676,13 +679,13 @@ const initResizeObserver = () => {
 		resizeObserver = new ResizeObserver(debounce(() => {
 			calculateLinePosition()
 		}, 150))
-		
+
 		// 观察左侧导航容器
 		const navList = document.querySelector('.left-nav-list')
 		if (navList) {
 			resizeObserver.observe(navList)
 		}
-		
+
 		// 观察主内容区域
 		const mainContent = document.querySelector('.main-content')
 		if (mainContent) {
@@ -998,7 +1001,7 @@ function goHome() {
 onMounted(() => {
 	// 页面加载完成后的初始化逻辑
 	calculateLinePosition()
-	
+
 	// 初始化ResizeObserver
 	initResizeObserver()
 
@@ -1014,14 +1017,14 @@ onMounted(() => {
 			}, 300) // 增加延迟时间
 		}
 	}, { passive: true })
-	
+
 	// 监听方向键变化（可能影响布局）
 	window.addEventListener('orientationchange', () => {
 		setTimeout(() => {
 			calculateLinePosition()
 		}, 500) // 方向变化后延迟更长时间
 	})
-	
+
 	// 监听页面可见性变化
 	document.addEventListener('visibilitychange', () => {
 		if (!document.hidden) {
@@ -1036,17 +1039,17 @@ onMounted(() => {
 // 组件卸载时清理事件监听器
 onUnmounted(() => {
 	window.removeEventListener('resize', handleResize)
-	
+
 	// 清理ResizeObserver
 	if (resizeObserver) {
 		resizeObserver.disconnect()
 		resizeObserver = null
 	}
-	
+
 	// 清理其他事件监听器
 	window.removeEventListener('orientationchange', calculateLinePosition)
 	document.removeEventListener('visibilitychange', calculateLinePosition)
-	
+
 	// 清理图表实例
 	if (trimAngleChartInstance) {
 		trimAngleChartInstance.dispose()
@@ -1683,7 +1686,8 @@ onUnmounted(() => {
 	padding: 20px;
 	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 	border: 1px solid rgba(255, 255, 255, 0.3);
-	pointer-events: none; /* 防止tooltip阻挡鼠标事件 */
+	pointer-events: none;
+	/* 防止tooltip阻挡鼠标事件 */
 }
 
 .tooltip-content p {
@@ -2247,7 +2251,8 @@ onUnmounted(() => {
 	backdrop-filter: blur(15px);
 	border-radius: 12px;
 	overflow: hidden;
-	aspect-ratio: 16/9;
+	width: 381px;
+	height: 283px;
 	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3),
 		inset 0 1px 0 rgba(255, 255, 255, 0.1);
 	border: 1px solid rgba(255, 255, 255, 0.2);
@@ -2262,8 +2267,10 @@ onUnmounted(() => {
 }
 
 .simulation-video {
-	width: 100%;
-	height: 100%;
+	/* width: 100%;
+	height: 100%; */
+	width: 381px;
+	height: 283px;
 	object-fit: cover;
 	opacity: 0.9;
 	border-radius: 12px;
@@ -2561,10 +2568,12 @@ onUnmounted(() => {
 
 .simulation-comparison {
 	display: grid;
-	grid-template-columns: repeat(4, 200px);
-	grid-template-rows: repeat(3, 200px);
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: repeat(2, 1fr);
 	gap: 15px;
 	height: 100%;
+	justify-content: center;
+	align-content: center;
 	/* width: 680px; */
 	/* border: 2px solid #ff0000; */
 	border-radius: 10px;
@@ -2659,8 +2668,8 @@ onUnmounted(() => {
 }
 
 .simulation-video {
-	width: 100%;
-	height: 200px;
+	width: 381px;
+	height: 283px;
 	object-fit: cover;
 	border-radius: 10px;
 	margin-bottom: 10px;
@@ -2801,7 +2810,10 @@ onUnmounted(() => {
 	}
 
 	.simulation-video {
-		height: 150px;
+		width: 100%;
+		height: auto;
+		max-width: 381px;
+		max-height: 283px;
 	}
 
 	.chart-image {

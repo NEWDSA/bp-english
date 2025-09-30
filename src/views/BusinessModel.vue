@@ -515,7 +515,7 @@ const chartData = ref([
 	{ orange: 75, teal: 105 },
 	{ orange: 80, teal: 110 },
 	{ orange: 90, teal: 120 },
-	{orange:110,teal:220}
+	{ orange: 110, teal: 220 }
 ])
 
 // 显示内容面板
@@ -677,24 +677,23 @@ function renderModalCharts() {
 				textStyle: { fontSize: 16, color: '#333', fontWeight: 'normal' },
 				top: 5
 			},
-			grid: { top: 50, bottom: 45, left: 40, right: 40 },
+			grid: { top: 50, bottom: 80, left: 40, right: 40 },
 
 			legend: {
 				data: ['Annual breakeven sales volume (units)', 'Gross profit margin'],
-				bottom: 0,
-				textStyle: { fontSize: 16 },
+				bottom: '5%',
+				textStyle: { fontSize: '1vw' },
 				left: 'center',
 				itemGap: 20
 			},
 			graphic: {
 				type: 'text',
-				left: 50,
-				bottom: 0,
+				left: '5%',
+				bottom: '7%',
 				style: {
 					text: 'Prices :10,000$',
-					fontSize: 16,
-					// fontWeight: 'bold',
-					fill: '#333',
+					fontSize: '1vw',
+					color: '#333',
 					textAlign: 'left',
 					textVerticalAlign: 'bottom'
 				}
@@ -765,23 +764,22 @@ function renderModalCharts() {
 				textStyle: { fontSize: 16, color: '#333', fontWeight: 'normal' },
 				top: 5
 			},
-			grid: { top: 50, bottom: 45, left: 40, right: 40 },
+			grid: { top: 50, bottom: 80, left: 40, right: 40 },
 			legend: {
 				data: ['Annual breakeven sales volume (units)', 'Gross profit margin'],
-				bottom: 0,
-				textStyle: { fontSize: 16 },
+				bottom: '5%',
+				textStyle: { fontSize: '1vw' },
 				left: 'center',
 				itemGap: 20
 			},
 			graphic: {
 				type: 'text',
-				left: 50,
-				bottom: 0,
+				left: '5%',
+				bottom: '7%',
 				style: {
 					text: 'Prices :10,000$',
-					fontSize: 16,
-					// fontWeight: 'bold',
-					fill: '#333',
+					fontSize: '1vw',
+					color: '#333',
 					textAlign: 'left',
 					textVerticalAlign: 'bottom'
 				}
@@ -856,27 +854,26 @@ function renderModalCharts() {
 			},
 			grid: {
 				top: 50,
-				bottom: 45,
+				bottom: 80,
 				left: 40,
 				right: 40,
 				show: false
 			},
 			legend: {
 				data: ['Annual breakeven sales volume (units)', 'Gross profit margin'],
-				bottom: 0,
-				textStyle: { fontSize: 16 },
+				bottom: '5%',
+				textStyle: { fontSize: '1vw' },
 				left: 'center',
 				itemGap: 20
 			},
 			graphic: {
 				type: 'text',
-				left: 50,
-				bottom: 0,
+				left: '5%',
+				bottom: '2%',
 				style: {
 					text: 'Prices :10,000$',
-					fontSize: 16,
-					fontWeight: 'bold',
-					fill: '#333',
+					fontSize: '1vw',
+					color: '#333',
 					textAlign: 'left',
 					textVerticalAlign: 'bottom'
 				}
@@ -1013,27 +1010,26 @@ function renderModalCharts() {
 			},
 			grid: {
 				top: 50,
-				bottom: 45,
+				bottom: 80,
 				left: 40,
 				right: 40,
 				show: false
 			},
 			legend: {
 				data: ['Annual breakeven sales volume (units)', 'Gross profit margin'],
-				bottom: 0,
-				textStyle: { fontSize: 16 },
+				bottom: '5%',
+				textStyle: { fontSize: '1vw' },
 				left: 'center',
 				itemGap: 20
 			},
 			graphic: {
 				type: 'text',
-				left: 50,
-				bottom: 0,
+				left: '5%',
+				bottom: '7%',
 				style: {
 					text: 'Prices :10,000$',
-					fontSize: 16,
-					// fontWeight: 'bold',
-					fill: '#333',
+					fontSize: '1vw',
+					color: '#333',
 					textAlign: 'left',
 					textVerticalAlign: 'bottom'
 				}
@@ -1452,7 +1448,7 @@ onBeforeUnmount(() => {
 	window.removeEventListener('resize', onWindowResize)
 	// 清理定时器
 	clearTimeout(window.resizeTimer)
-	
+
 	if (revenueChartInstance) {
 		revenueChartInstance.dispose()
 		revenueChartInstance = null
@@ -1630,17 +1626,20 @@ onMounted(() => {
 }
 
 .map-container {
-	position: absolute;
-	top: 40%;
+	position: fixed;
+	top: 45%;
 	left: 50%;
-	transform: translate(-50%, -40%);
-	width: min(100px, 80vw);
-	height: min(100px, 80vw);
+	transform: translate(-50%, -50%);
+	width: min(100px, 8vw);
+	height: min(100px, 8vw);
 	max-width: 100px;
 	max-height: 100px;
+	min-width: 60px;
+	min-height: 60px;
 
 	overflow: hidden;
 	cursor: pointer;
+	z-index: 1000;
 }
 
 
@@ -1812,7 +1811,7 @@ onMounted(() => {
 }
 
 .revenue-echart {
-	position:relative;
+	position: relative;
 	width: 100%;
 	height: 100%;
 }
@@ -1826,7 +1825,7 @@ onMounted(() => {
 }
 
 .strategy-title {
-	font-size:20px;
+	font-size: 20px;
 	font-weight: 600;
 	margin-bottom: 13px;
 	color: #ffffff;
@@ -2106,7 +2105,7 @@ onMounted(() => {
 
 /* 内容面板样式 */
 .content-panel {
-	width: 480px;
+	width: 461px;
 	/* height: 520px; */
 	/* backdrop-filter: blur(15px); */
 	/* border-radius: 15px; */
@@ -2277,7 +2276,7 @@ onMounted(() => {
 }
 
 .content-title {
-	font-size: 15px;
+	font-size: 20px;
 	/* font-weight: 700; */
 	color: #ffffff;
 	margin-bottom: 8px;
