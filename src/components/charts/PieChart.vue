@@ -152,7 +152,7 @@ const getChartOptions = () => {
       {
         type: 'text',
         left: 'center',
-        top: '40%',
+        top: '42%',
         style: {
           text: maxSegment.name,
           fontSize: fontSize,
@@ -233,12 +233,13 @@ const getChartOptions = () => {
           fontSize: 20
         }
       })),
-      itemWidth: 8,
-      itemHeight: 8,
-      itemGap: 25,
+      itemWidth: 10,
+      itemHeight: 10,
+      itemGap: 80,
       textStyle: {
         color: '#ffffff',
-        fontSize: 20
+        fontSize: 20,
+        padding: [0, 0, 0, 4]
       }
     }
 
@@ -247,7 +248,7 @@ const getChartOptions = () => {
     baseConfig.series[0].radius = ['50%', '75%']
 
     // Update graphic text position and style
-    baseConfig.graphic[0].top = '44%'
+    baseConfig.graphic[0].top = '46%'
     baseConfig.graphic[0].style = {
       text: maxSegment.name,
       fontSize: fontSize,

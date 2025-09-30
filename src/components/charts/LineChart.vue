@@ -45,22 +45,22 @@ const generateRegionData = () => {
   const regionData = {
     'China': {
       detailed: ['hidden', -0.60, 12.83, -2.53, 6.67, 6.50],
-      barData: [4.94, 4.91, 5.54, 5.4, 5.76, 6.13],
+      barData: [4.9, 4.9, 5.5, 5.4, 5.8, 6.1],
       xAxis: ['2019', '2020', '2021', '2022', '2023', '2024']
     },
     'Singapore': {
-      detailed: ['hidden', 8.4, -9.10, 18.70, 7.60, 9.00],
+      detailed: ['hidden', 8.40, -9.10, 18.70, 7.60, 9.00],
       barData: [28.5, 35.2, 32.1, 48.6, 52.3, 57.0],
       xAxis: ['2015', '2018', '2020', '2022', '2023', '2024']
     },
     'Italy': {
       detailed: ['hidden', 17.66, 29.17, 4.50, 4.88, 4.90],
-      barData: [11.53, 13.56, 17.52, 18.31, 19.20, 20.10],
+      barData: [11.5, 13.6, 17.5, 18.3, 19.2, 20.1],
       xAxis: ['2019', '2020', '2021', '2022', '2023', '2024']
     },
     'United States': {
       detailed: ['hidden', -3.30, 8.39, -5.12, 7.03, 5.82],
-      barData: [89.86, 86.91, 94.20, 89.38, 95.67, 101.23],
+      barData: [89.9, 86.9, 94.2, 89.4, 95.7, 101.2],
       xAxis: ['2019', '2020', '2021', '2022', '2023', '2024']
     },
     'United Arab Emirates': {
@@ -69,8 +69,8 @@ const generateRegionData = () => {
       xAxis: ['2019', '2020', '2021', '2022', '2023', '2024']
     },
     'global': {
-      detailed: ['hidden', '-3.30', '8.40', '-5.12', '7.03', '7.00'],
-      barData: [345.6, 334.26, 362.32, 343.76, 367.93, 393.7],
+      detailed: ['hidden', -3.30, 8.40, -5.12, 7.03, 7.00],
+      barData: [345.6, 334.3, 362.3, 343.8, 367.9, 393.7],
       xAxis: ['2019', '2020', '2021', '2022', '2023', '2024']
     }
   }
@@ -141,7 +141,7 @@ const getChartOptions = () => {
         left: `${9 + (80 / (regionData.barData.length - 1)) * index}%`, // 根据图表网格定位
         top: '5%',
         style: {
-          text: value.toString(),
+          text: Number(value).toFixed(1),
           fontSize: 20,
           fontWeight: 'normal',
           fill: '#ffffffff',
@@ -269,7 +269,10 @@ const getChartOptions = () => {
           fontSize: 20,
           fontWeight: 'none',
           distance: 8,
-          formatter: '{c}%'
+          formatter: (params) => {
+            if (params.value === 'hidden') return '';
+            return params.value + '%';
+          },
         },
         emphasis: {
           itemStyle: {
