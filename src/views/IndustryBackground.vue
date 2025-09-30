@@ -201,9 +201,18 @@ const handleCityClick = (cityInfo) => {
 
             <!-- 图表3：全球水上户外运动装备市场规模（增长率） -->
             <div class="text-white">
-              <div class="flex items-center h-12">
+              <div class="flex items-center h-12 z-2 relative">
                 <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
-                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[14px]">{{ isChinaSelected ? "Water sports equipment in China" : isSoutheastAsiaSelected ? "Water sports equipment in Southeast Asia" : isItalySelected ? "Water sports equipment in Italy" : isAmericaSelected ? "Water sports equipment in USA" : isMiddleEastSelected ? "Water sports equipment in the Middle East" : "Global market size of water outdoor sports equipment" }}<br/>(growth rate)</p>
+                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[14px]">
+                  <template v-if="isChinaSelected">Water sports equipment in China(growth rate)</template>
+                  <template v-else-if="isSoutheastAsiaSelected">Water sports equipment in Southeast Asia(growth rate)</template>
+                  <template v-else-if="isItalySelected">Water sports equipment in Italy(growth rate)</template>
+                  <template v-else-if="isAmericaSelected">Water sports equipment in USA(growth rate)</template>
+                  <template v-else-if="isMiddleEastSelected">Water sports equipment in the Middle East(growth rate)</template>
+                  <template v-else>
+                    Global market size of water outdoor sports equipment<br>(growth rate)
+                  </template>
+                </p>
               </div>
               <div :style="{ height: chartHeight }">
                 <EChartsComponent chart-type="line" :selected-city="selectedCity" @chart-click="handleChartClick" />

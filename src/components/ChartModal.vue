@@ -1,14 +1,14 @@
 <template>
   <div v-if="isVisible" class="fixed inset-0 z-50 flex items-center justify-center p-4">
-    <!-- Backdrop -->
+    <!-- 背景遮罩 -->
     <div
       class="absolute inset-0 bg-black/60 backdrop-blur-sm"
       @click="$emit('close')"
     ></div>
 
-    <!-- Modal Content -->
+    <!-- 弹窗内容 -->
     <div class="relative bg-gray-900 border border-cyan-500/30 rounded-xl shadow-2xl w-[80vw] max-h-[90vh] overflow-hidden">
-      <!-- Header -->
+      <!-- 头部 -->
       <div class="flex items-center justify-between p-6 border-b border-gray-700">
         <div class="flex items-center justify-center w-full">
           <!-- <div class="w-3 h-3 bg-cyan-400 rounded-full mr-3"></div> -->
@@ -24,7 +24,7 @@
         </button>
       </div>
 
-      <!-- Chart Content -->
+      <!-- 图表内容 -->
       <div class="p-6">
         <div class="h-[60vh] w-full">
           <EChartsComponent :chart-type="chartType" :is-detailed="true" :name="name" :selected-city="selectedCity" />

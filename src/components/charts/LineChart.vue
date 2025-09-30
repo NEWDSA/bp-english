@@ -101,23 +101,44 @@ const getChartOptions = () => {
 
   return {
     backgroundColor: 'transparent',
+    legend: props.isDetailed ? {
+      bottom: '3%',
+      left: 'center',
+      itemGap: 80,
+      textStyle: {
+        color: '#ffffff',
+        fontSize: 12,
+        padding: [0, 0, 0, 4]
+      },
+      data: [
+        {
+          name: 'Output value (in billions of US dollars)',
+          icon: 'circle',
+          itemStyle: {
+            color: '#14E1D5'
+          }
+        },
+        {
+          name: 'Growth rate',
+          icon: 'line',
+          itemStyle: {
+            color: '#CFFAFD'
+          }
+        }
+      ],
+      itemWidth: 48,  // Width for icons
+      itemHeight: 8   // Height for icons
+    } : undefined,
     grid: {
       left: '3%',
       right: '3%',
       top: '20%',
-      bottom: '14%'
+      bottom: props.isDetailed ? '18%' : '14%',
     },
     graphic: props.isDetailed ? regionData.barData.map((value, index) => {
-      const totalBars = regionData.barData.length
-      const gridLeft = 8
-      const gridRight = 8
-      const gridWidth = 100 - gridLeft - gridRight
-      const barGapPercent = gridWidth / totalBars
-      const barCenterOffset = barGapPercent / 2
-
       return {
         type: 'text',
-        left: `${gridLeft + barCenterOffset + (barGapPercent * index)}%`,
+        left: `${9 + (80 / (regionData.barData.length - 1)) * index}%`, // 根据图表网格定位
         top: '5%',
         style: {
           text: value.toString(),
@@ -178,7 +199,7 @@ const getChartOptions = () => {
     series: [
       // Bar chart data
       {
-        name: 'Bar Data',
+        name: 'Output value (in billions of US dollars)',
         type: 'bar',
         yAxisIndex: 1,
         data: regionData.barData,
@@ -210,7 +231,7 @@ const getChartOptions = () => {
       },
       // Triangular filled area
       {
-        name: 'Area',
+        name: 'Growth rate',
         type: 'line',
         data: chartData,
         areaStyle: {

@@ -120,11 +120,11 @@ const getChartOptions = () => {
       legend: props.isDetailed ? {
         bottom: '3%',
         left: 'center',
-        itemGap: 60,
+        itemGap: 80,
         textStyle: {
           color: '#ffffff',
           fontSize: 12,
-          padding: [0, 0, 0, 12]
+          padding: [0, 0, 0, 4]
         },
         data: [
           {
@@ -149,7 +149,7 @@ const getChartOptions = () => {
         left: '3%',
         right: '3%',
         top: '20%',
-        bottom: props.isDetailed ? '16%' : '14%',
+        bottom: props.isDetailed ? '18%' : '14%',
       },
       xAxis: {
         type: 'category',
