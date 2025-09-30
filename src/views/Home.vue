@@ -70,7 +70,7 @@
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { useRouter } from 'vue-router'
 import homeVideo from '../assets/home_compressed.mp4'
-import yihaiLogo from '../assets/yihai.svg'
+import yihaiLogo from '../assets/logoh20.png'
 
 const router = useRouter()
 

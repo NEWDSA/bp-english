@@ -55,10 +55,10 @@
 						<div class="section-icon">
 							<img :src="getAssetImage('work.png')" alt="Work Experience" class="icon-image" />
 						</div>
-						<h3 class="section-title">Work Experience</h3>
+						<h3 class="section-title">{{ getWorkExperienceTitle() }}</h3>
 					</div>
 					<div v-if="hasActiveMember" class="expand-panel" :class="{ open: expanded.work }">
-						<p class="expand-text">{{ memberContent.work }}</p>
+						<p class="expand-text">{{ getWorkContent() }}</p>
 					</div>
 
 					<!-- 教育背景（点击展开） - 只在有内容时显示 -->
@@ -508,7 +508,7 @@ function getCurrentMemberName() {
 	const names = {
 		ceo: 'Kevin',
 		cfo: 'Liang Gong',
-		coo: 'David',
+		coo: 'Leo',
 		engineer: 'Ben',
 		interactionEngineer: 'Mike',
 		structuralEngineer: 'Tom',
@@ -526,6 +526,32 @@ function getCurrentActiveMember() {
 	if (isStructuralEngineerBackground.value) return 'structuralEngineer'
 	if (isStrategicPlannerBackground.value) return 'strategicPlanner'
 	return null // 没有活跃成员时返回null
+}
+
+function getWorkExperienceTitle() {
+	if (!hasActiveMember.value) {
+		return 'Work Experience'
+	}
+	const currentMember = getCurrentActiveMember()
+	// CEO和CFO显示"Work Experience"，其他成员显示"Mainly responsible for"
+	if (currentMember === 'ceo' || currentMember === 'cfo') {
+		return 'Work Experience'
+	} else {
+		return 'Mainly responsible for'
+	}
+}
+
+function getWorkContent() {
+	if (!hasActiveMember.value) {
+		return ''
+	}
+	const currentMember = getCurrentActiveMember()
+	// CEO和CFO使用work字段，其他成员使用"Mainly responsible for"字段
+	if (currentMember === 'ceo' || currentMember === 'cfo') {
+		return memberContent.value.work || ''
+	} else {
+		return memberContent.value['Mainly responsible for'] || ''
+	}
 }
 
 
@@ -635,27 +661,27 @@ function syncMemberContent() {
             worksImages: []
         },
         coo: { 
-            work: '• Product development and delivery\n• Supply Chain Technology Management', 
+            'Mainly responsible for': '• Product development and delivery\n• Supply Chain Technology Management', 
             education: '', 
             worksImages: [] 
         },
         engineer: { 
-            work: '• Responsible for performance testing and optimization\n• CNC structural engineer\n• Software and hardware embedded engineer\n• Material research and innovation', 
+            'Mainly responsible for': '• Responsible for performance testing and optimization\n• CNC structural engineer\n• Software and hardware embedded engineer\n• Material research and innovation', 
             education: '', 
             worksImages: [] 
         },
         interactionEngineer: { 
-            work: '• Emotional Interaction Engine\n• Digital twin simulation\n• Compile level code optimization', 
+            'Mainly responsible for': '• Emotional Interaction Engine\n• Digital twin simulation\n• Compile level code optimization', 
             education: '', 
             worksImages: [] 
         },
         structuralEngineer: { 
-            work: '• Multi physics modeling and simulation\n• Research and development of intelligent control algorithms\n• High end equipment system integration', 
+            'Mainly responsible for': '• Multi physics modeling and simulation\n• Research and development of intelligent control algorithms\n• High end equipment system integration', 
             education: '', 
             worksImages: [] 
         },
         strategicPlanner: { 
-            work: '• Analyze industry trends and competitor dynamics\n• Participate in business negotiations, sign sales contracts, and ensure their execution\n• Expand new customers, maintain key customer relationships, and promote long-term cooperation', 
+            'Mainly responsible for': '• Analyze industry trends and competitor dynamics\n• Participate in business negotiations, sign sales contracts, and ensure their execution\n• Expand new customers, maintain key customer relationships, and promote long-term cooperation', 
             education: '', 
             worksImages: [] 
         }
@@ -1090,8 +1116,10 @@ onMounted(() => {
 }
 
 .member-avatar {
-	width: 98px;
-	height: 133px;
+	/* width: 98px; */
+	width: 114px;
+	height: 154px;
+	/* height: 133px; */
 	/* height: 100px; */
 	/* border-radius: 12px; */
 	position: relative;

@@ -27,7 +27,7 @@ const setActiveNav = (itemId) => {
     <div class="">
       <div class="flex items-center space-x-1">
         <!-- Logo -->
-        <img src="../assets/nav_back.png" alt="Logo" class="w-6 h-6 mr-4 cursor-pointer" @click="router.push('/')" />
+        <img src="../assets/logoh20.png" alt="Logo" class="w-6 h-6 mr-4 cursor-pointer" @click="router.push('/')" />
 
         <!-- Navigation Items -->
         <div class="flex items-center space-x-0 bg-gray-800/30 backdrop-blur-md rounded-lg border-gray-700/50 border-t border-b h-[52px]">
