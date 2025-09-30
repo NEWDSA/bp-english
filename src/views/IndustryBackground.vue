@@ -54,7 +54,7 @@ const calculateChartHeight = () => {
   const paddingBottom = 32
   // 网格间距 (3行之间的间距：移动端 gap-4 = 8px * 2 = 16px，桌面端 gap-6)
   const gridGap = window.innerWidth >= 1024 ? 12 * 2 : 8 * 2 // 3行之间有2个间隙
-  const gridTitle = window.innerWidth <= 1600 ? 40 * 3 : window.innerWidth > 1600 && window.innerWidth <= 1920 ? 46 * 3 : 60 * 3
+  const gridTitle = window.innerWidth <= 1600 ? 40 * 3 : window.innerWidth > 1600 && window.innerWidth <= 1920 ? 46 * 3 : 68 * 3
 
   console.log(navHeight, titleHeight, paddingBottom, gridGap)
 

@@ -47,18 +47,18 @@ const generateRegionData = (country) => {
   const regionData = {
     China: {
       bar: [3.5, 4.3, 4.0, 4.5, 5.2, 6.0, 6.9],
-      line: ['hidden', 23.00, -7.90, 13.90, 15.00, 15.50, 15.30],
+      line: ['hidden', 23.0, -7.9, 13.9, 15.0, 15.5, 15.3],
       xAxis: ['2015', '2018', '2020', '2021', '2022', '2023', '2024'],
     },
     Singapore: {
-      bar: [2.8, 4.2, 3.5, 4.6, 6.3, 7.1,],
-      line: [5.3, 12.1, -16.7, 31.4, 11.2, 12.7],
-      xAxis: ['2015', '2018', '2020', '2021', '2022', '2023'],
+      bar: [2.8, 4.2, 3.5, 4.6, 6.3, 7.1, 7.9],
+      line: [5.3, 12.1, -16.7, 31.4, 11.2, 12.7, 12],
+      xAxis: ['2015', '2018', '2020', '2021', '2022', '2023', '2024'],
     },
     Italy: {
-      bar: [16.4, 30.2, 25.3, 49.1, 58.4, 52.5],
-      line: ['hidden', 22.7, -16.3, 94.4, 18.8, -10.0],
-      xAxis: ['2015', '2018', '2020', '2021', '2022', '2023'],
+      bar: [16.4, 30.2, 25.3, 49.1, 58.4, 52.5, 47.3],
+      line: ['hidden', 22.7, -16.3, 94.4, 18.8, -10.0, -8.0],
+      xAxis: ['2015', '2018', '2020', '2021', '2022', '2023', '2024'],
     },
     'United States': {
       bar: [28.5, 32.8, 37.5, 41.2, 44.8, 48.3, 51.6],
@@ -117,11 +117,42 @@ const getChartOptions = () => {
   if (hasRegionSelected) {
     return {
       backgroundColor: 'transparent',
+      legend: props.isDetailed ? {
+        bottom: '3%',
+        left: 'center',
+        itemGap: 30,
+        data: [
+          {
+            name: 'Output value (in billions of US dollars)',
+            icon: 'circle',
+            itemStyle: {
+              color: '#14E1D5'
+            },
+            textStyle: {
+              color: '#ffffff',
+              fontSize: 12
+            }
+          },
+          {
+            name: 'Growth rate',
+            icon: 'rect',
+            itemStyle: {
+              color: '#CFFAFD'
+            },
+            textStyle: {
+              color: '#ffffff',
+              fontSize: 12
+            }
+          }
+        ],
+        itemWidth: 8,
+        itemHeight: 8
+      } : undefined,
       grid: {
         left: '3%',
         right: '3%',
         top: '20%',
-        bottom: '14%',
+        bottom: props.isDetailed ? '16%' : '14%',
       },
       xAxis: {
         type: 'category',
@@ -184,7 +215,7 @@ const getChartOptions = () => {
       series: [
         // 区域填充
         {
-          name: 'Area',
+          name: 'Output value (in billions of US dollars)',
           type: 'line',
           data: regionData.bar,
           areaStyle: {
@@ -257,7 +288,7 @@ const getChartOptions = () => {
         },
         // 叠加的折线图
         {
-          name: 'Line',
+          name: 'Growth rate',
           type: 'line',
           yAxisIndex: 1,
           data: regionData.line,
@@ -307,11 +338,21 @@ const getChartOptions = () => {
   // 未选择地区时的默认胶囊柱状图样式
   return {
     backgroundColor: 'transparent',
+    title: props.isDetailed && !props.selectedCity ? {
+      text: 'Output value (in billions of US dollars)',
+      bottom: '2%',
+      left: 'center',
+      textStyle: {
+        color: '#ffffff',
+        fontSize: 12,
+        fontWeight: 'normal'
+      }
+    } : undefined,
     grid: {
       left: '8%',
       right: '8%',
       top: '15%',
-      bottom: '15%',
+      bottom: props.isDetailed && !props.selectedCity ? '18%' : '15%',
     },
     xAxis: {
       type: 'category',
@@ -349,12 +390,11 @@ const getChartOptions = () => {
             x2: 0,
             y2: 0,
             colorStops: [
-              { offset: 0, color: '#0c4a6e' },
-              { offset: 0.2, color: '#0369a1' },
-              { offset: 0.4, color: '#0284c7' },
-              { offset: 0.6, color: '#0ea5e9' },
-              { offset: 0.8, color: '#38bdf8' },
-              { offset: 1, color: '#7dd3fc' },
+              { offset: 0, color: '#00364F' },
+              { offset: 0.2, color: '#00606F' },
+              { offset: 0.6, color: '#00A8A1' },
+              { offset: 0.8, color: '#58FFEB' },
+              { offset: 1, color: '#F6FFFD' },
             ],
           },
           borderRadius: [12, 12, 12, 12],
