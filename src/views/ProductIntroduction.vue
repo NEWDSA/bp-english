@@ -111,10 +111,14 @@
 									</div>
 									<!-- 悬停时显示的详细信息 -->
 									<div v-if="activeTooltip === 'unmanned'" class="card-content">
-										<p>The third mock examination switching</p>
-										<p>+ lifting rail expansion</p>
-										<p>Electromagnetic locking structure spring</p>
-										<p>damping increasing limit</p>
+										<div class="card-title">Unmanned Systems</div>
+										<div class="card-description">
+											<div>Unmanned Systems</div>
+											<p>The third mock examination switching</p>
+											<p>+ lifting rail expansion</p>
+											<p>Electromagnetic locking structure spring</p>
+											<p>damping increasing limit</p>
+										</div>
 									</div>
 								</div>
 								<div class="highlight-card team-members" @mouseenter="showTooltip('team')"
@@ -125,6 +129,7 @@
 									</div>
 									<!-- 悬停时显示的详细信息 -->
 									<div v-if="activeTooltip === 'team'" class="card-content">
+										<div class="card-title">Team Members</div>
 										<p><strong>U/C-shaped wing design:</strong></p>
 										<p>The front wing (U-shaped) and rear wing (C-shaped) feature streamlined
 											surfaces optimized for fluid dynamics.</p>
@@ -141,6 +146,7 @@
 									</div>
 									<!-- 悬停时显示的详细信息 -->
 									<div v-if="activeTooltip === 'adaptive'" class="card-content">
+										<div class="card-title">Adaptive hydrofoil control algorithm</div>
 										<p><strong>Advanced control system:</strong></p>
 										<p>Real-time adjustment of hydrofoil angles based on water conditions and vessel
 											performance.</p>
@@ -156,11 +162,14 @@
 									</div>
 									<!-- 悬停时显示的详细信息 -->
 									<div v-if="activeTooltip === 'modular'" class="card-content">
-										<p><strong>Quick assembly design:</strong></p>
-										<p>Modular components allow for rapid assembly and disassembly in under 30
-											minutes.</p>
-										<p><strong>Transportation efficiency:</strong></p>
-										<p>Reduced shipping costs by 60% through compact modular packaging.</p>
+										<div class="card-title">Modular detachable hull</div>
+										<div class="card-description">
+											<p><strong>Quick assembly design:</strong></p>
+											<p>Modular components allow for rapid assembly and disassembly in under 30
+												minutes.</p>
+											<p><strong>Transportation efficiency:</strong></p>
+											<p>Reduced shipping costs by 60% through compact modular packaging.</p>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -1330,11 +1339,10 @@ onUnmounted(() => {
 
 .highlights-grid {
 	display: flex;
-	flex-direction: row;
-	gap: 8px;
-	flex-wrap: nowrap;
-	align-items: flex-start; /* 确保卡片从顶部对齐，不会因为高度变化影响其他卡片 */
-	position: relative; /* 为绝对定位的子元素提供参考 */
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 20px;
+	position: relative;
 }
 
 /* 颜色价格区域的伪类元素特殊定位 */
@@ -1447,7 +1455,7 @@ onUnmounted(() => {
 	width: 100%;
 	max-width: 260px;
 	position: relative;
-	z-index: 100;
+	/* z-index: 100; */
 }
 
 .color-swatch {
@@ -1458,7 +1466,7 @@ onUnmounted(() => {
 	cursor: pointer;
 	transition: all 0.3s ease;
 	position: relative;
-	z-index: 101;
+	/* z-index: 101; */
 	pointer-events: auto;
 	background-size: cover;
 	background-position: center;
@@ -1520,47 +1528,36 @@ onUnmounted(() => {
 
 
 .highlight-card {
+	position: relative;
+	width: 230px;
+	height: 120px;
 	background: rgba(255, 255, 255, 0.4);
 	border-radius: 12px;
 	padding: 12px;
 	text-align: center;
-	transition: none; /* 移除transition，避免影响其他卡片 */
+	cursor: pointer;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	flex-shrink: 0;
-	width: 230px;
-	height: 120px;
-	transform: scale(0.8);
 	border: 1px solid rgba(255, 255, 255, 0.2);
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-	position: relative;
 	overflow: hidden;
+	z-index: 2000;
 }
 
 .highlight-card:hover {
-	background: rgba(255, 255, 255, 0.6);
+	height: 230px;
+	margin-top: -110px;
+	/* background: rgba(255, 255, 255, 0.6); */
+	background: #FFFFFF;
+	opacity: 1;
 	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 	border-color: rgba(0, 212, 255, 0.3);
-	height: 420px; /* 原来120px + 300px = 420px */
-	animation: growFromBottom 0.3s ease-out forwards;
-	z-index: 10; /* 确保悬浮的卡片在最上层 */
-	position: absolute; /* 使用绝对定位，避免影响其他卡片 */
-	width: 230px; /* 保持原始宽度 */
+	z-index: 10001;
 }
 
-/* 从底部向上生长的动画 */
-@keyframes growFromBottom {
-	0% {
-		height: 120px;
-		transform: scale(0.8) translateY(0);
-	}
-	100% {
-		height: 420px;
-		transform: scale(0.8) translateY(-300px);
-	}
-}
+
 
 .highlight-icon {
 	width: 120px;
@@ -1570,6 +1567,39 @@ onUnmounted(() => {
 	/* border-radius: 8px; */
 	/* background: rgba(255, 255, 255, 0.1); */
 	padding: 8px;
+}
+
+/* 悬停卡片标题样式 */
+.card-title {
+	position: relative;
+	left: 0;
+	top: -23px;
+	width: 100%;
+	height: 20px;
+	opacity: 1;
+	font-family: FolioLT;
+	font-size: 20px;
+	font-weight: normal;
+	line-height: 20px;
+	letter-spacing: 0em;
+	color: #000000;
+	text-align: center;
+}
+
+.card-description {
+	position: relative;
+	left: 12px;
+	top: 10px;
+	width: 90.43%;
+	/* height: 200px; */
+	opacity: 1;
+	font-family: FolioLT;
+	font-size: 12px;
+	font-weight: normal;
+	line-height: normal;
+	text-align: center;
+	letter-spacing: 0em;
+	color: #000000;
 }
 
 /* 自适应水翼控制算法图片的独立样式 */

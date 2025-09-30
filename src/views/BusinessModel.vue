@@ -42,7 +42,6 @@
 					<h3 class="strategy-title">Channel Strategy</h3>
 
 					<div class="strategy-section">
-						<!-- <h4 class="strategy-subtitle">Domestic (B-end water area operator)</h4> -->
 						<div class="strategy-subtitle">Domestic (B-end water area operator)</div>
 						<div class="strategy-content">
 							<p class="strategy-label">Positioning:</p>
@@ -510,12 +509,13 @@ const chartData = ref([
 	// { orange: 85, teal: 85 },
 	// { orange: 90, teal: 90 },
 	// { orange: 95, teal: 95 },
-	{ orange: 100, teal: 100 },
-	{ orange: 95, teal: 65 },
-	{ orange: 100, teal: 70 },
-	{ orange: 105, teal: 75 },
-	{ orange: 110, teal: 80 },
-	{ orange: 120, teal: 90 }
+	{ orange: 65, teal: 70 },
+	{ orange: 70, teal: 80 },
+	{ orange: 70, teal: 90 },
+	{ orange: 75, teal: 105 },
+	{ orange: 80, teal: 110 },
+	{ orange: 90, teal: 120 },
+	{orange:110,teal:220}
 ])
 
 // 显示内容面板
@@ -602,7 +602,7 @@ function renderRevenueChart() {
 
 	const option = {
 		animation: true,
-		grid: { top: 10, bottom: 8, containLabel: false },
+		grid: { top: 5, bottom: 5, left: 5, right: 5, containLabel: false },
 		xAxis: {
 			type: 'category',
 			data: new Array(chartData.value.length).fill(''),
@@ -614,6 +614,24 @@ function renderRevenueChart() {
 		yAxis: { type: 'value', show: false },
 		tooltip: { show: false },
 		series: [
+			{
+				name: 'Teal',
+				type: 'bar',
+				data: teals,
+				// barWidth: 15,
+				// barGap: '5%',
+				itemStyle: {
+					// borderRadius: [6, 6, 0, 0],
+					shadowColor: 'rgba(0,0,0,0.35)',
+					shadowBlur: 10,
+					shadowOffsetY: 4,
+					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+						{ offset: 0, color: '#3FF4FF' },
+						{ offset: 0.35, color: '#19D8F3' },
+						{ offset: 1, color: 'rgba(22, 79, 96, 0.65)' }
+					])
+				}
+			},
 			{
 				name: 'Orange',
 				type: 'bar',
@@ -632,24 +650,6 @@ function renderRevenueChart() {
 					])
 				}
 			},
-			{
-				name: 'Teal',
-				type: 'bar',
-				data: teals,
-				// barWidth: 15,
-				// barGap: '5%',
-				itemStyle: {
-					// borderRadius: [6, 6, 0, 0],
-					shadowColor: 'rgba(0,0,0,0.35)',
-					shadowBlur: 10,
-					shadowOffsetY: 4,
-					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-						{ offset: 0, color: '#3FF4FF' },
-						{ offset: 0.35, color: '#19D8F3' },
-						{ offset: 1, color: 'rgba(22, 79, 96, 0.65)' }
-					])
-				}
-			}
 		]
 	}
 
@@ -674,7 +674,7 @@ function renderModalCharts() {
 		const option1 = {
 			title: {
 				text: 'When the cost of a single ship is 28,000$,break even sales volume is achieved',
-				textStyle: { fontSize: 10, color: '#333', fontWeight: 'normal' },
+				textStyle: { fontSize: 16, color: '#333', fontWeight: 'normal' },
 				top: 5
 			},
 			grid: { top: 50, bottom: 45, left: 40, right: 40 },
@@ -682,18 +682,18 @@ function renderModalCharts() {
 			legend: {
 				data: ['Annual breakeven sales volume (units)', 'Gross profit margin'],
 				bottom: 0,
-				textStyle: { fontSize: 8 },
+				textStyle: { fontSize: 16 },
 				left: 'center',
 				itemGap: 20
 			},
 			graphic: {
 				type: 'text',
-				left: 20,
+				left: 50,
 				bottom: 0,
 				style: {
-					text: 'Prices :\n10,000$',
-					fontSize: 8,
-					fontWeight: 'bold',
+					text: 'Prices :10,000$',
+					fontSize: 16,
+					// fontWeight: 'bold',
 					fill: '#333',
 					textAlign: 'left',
 					textVerticalAlign: 'bottom'
@@ -762,25 +762,25 @@ function renderModalCharts() {
 		const option2 = {
 			title: {
 				text: 'When the cost of a single ship is 31,000$, break even sales volume is achieved',
-				textStyle: { fontSize: 10, color: '#333', fontWeight: 'normal' },
+				textStyle: { fontSize: 16, color: '#333', fontWeight: 'normal' },
 				top: 5
 			},
 			grid: { top: 50, bottom: 45, left: 40, right: 40 },
 			legend: {
 				data: ['Annual breakeven sales volume (units)', 'Gross profit margin'],
 				bottom: 0,
-				textStyle: { fontSize: 8 },
+				textStyle: { fontSize: 16 },
 				left: 'center',
 				itemGap: 20
 			},
 			graphic: {
 				type: 'text',
-				left: 20,
+				left: 50,
 				bottom: 0,
 				style: {
-					text: 'Prices :\n10,000$',
-					fontSize: 8,
-					fontWeight: 'bold',
+					text: 'Prices :10,000$',
+					fontSize: 16,
+					// fontWeight: 'bold',
 					fill: '#333',
 					textAlign: 'left',
 					textVerticalAlign: 'bottom'
@@ -847,151 +847,6 @@ function renderModalCharts() {
 		}
 		// 重新创建实例
 		chart3Instance = echarts.init(chart3Ref.value)
-		// const option3 = {
-		// 	title: {
-		// 		text: 'When the cost of a single ship is 35,000$, break even sales volume is achieved',
-		// 		textStyle: { fontSize: 9, color: '#333' },
-		// 		top: 5,
-		// 		left: 'center'
-		// 	},
-		// 	grid: {
-		// 		top: 50,
-		// 		bottom: 45,
-		// 		left: 40,
-		// 		right: 40,
-		// 		show: false
-		// 	},
-		// 	legend: {
-		// 		data: ['Annual breakeven sales volume (units)', 'Gross profit margin'],
-		// 		bottom: 0,
-		// 		textStyle: { fontSize: 8 },
-		// 		left: 'center',
-		// 		itemGap: 20
-		// 	},
-		// 	graphic: {
-		// 		type: 'text',
-		// 		left: 20,
-		// 		bottom: 0,
-		// 		style: {
-		// 			text: 'Prices :\n10,000$',
-		// 			fontSize: 8,
-		// 			fontWeight: 'bold',
-		// 			fill: '#333',
-		// 			textAlign: 'left',
-		// 			textVerticalAlign: 'bottom'
-		// 		}
-		// 	},
-		// 	xAxis: {
-		// 		type: 'category',
-		// 		// data: ['16', '17', '17', '18', '19', '20', '21', '22', '23', '24', '26', '27', '29', '31', '34'],
-		// 		data: ['8.00,', '7.86', '7.71', '7.57', '7.43', '7.29', '7.14', '7.00', '6.86', '6.71', '6.57', '6.42', '6.29', '6.14', '6.00'],
-		// 		position: 'bottom',
-		// 		axisLabel: {
-		// 			show: true,
-		// 			fontSize: 8,
-		// 			color: '#666',
-		// 			interval: 0,
-		// 			margin: 5,
-		// 			align: 'center',
-		// 			verticalAlign: 'bottom',
-		// 			offset: 0
-		// 		},
-		// 		axisTick: {
-		// 			show: false
-		// 		},
-		// 		axisLine: { show: false },
-		// 		splitLine: {
-		// 			show: true,
-		// 			lineStyle: { color: 'rgba(150, 150, 150, 0.8)', width: 1 }
-		// 		},
-		// 		boundaryGap: false
-		// 	},
-		// 	yAxis: {
-		// 		type: 'value',
-		// 		// min: 0,
-		// 		// max: 50,
-		// 		data: ['16', '17', '17', '18', '19', '20', '21', '22', '23', '24', '26', '27', '29', '31', '34'],
-		// 		// position:'bottom',
-		// 		axisLabel: {
-		// 			show: false
-		// 		},
-		// 		axisTick: { show: false },
-		// 		axisLine: { show: false },
-		// 		splitLine: {
-		// 			show: false
-		// 		}
-		// 	},
-		// 	series: [
-		// 		{
-		// 			name: 'Annual breakeven sales volume (units)',
-		// 			type: 'line',
-		// 			data: [16, 17, 17, 18, 19, 20, 21, 22, 23, 24, 26, 27, 29, 31, 34],
-		// 			smooth: true,
-		// 			symbol: 'circle',
-		// 			symbolSize: 3,
-		// 			lineStyle: {
-		// 				color: '#1ed5e6',
-		// 				width: 2
-		// 			},
-		// 			itemStyle: {
-		// 				color: '#1ed5e6',
-		// 				borderWidth: 1,
-		// 				borderColor: '#ffffff'
-		// 			},
-		// 			areaStyle: {
-		// 				color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
-		// 					{ offset: 0, color: 'rgba(30, 213, 230, 0.1)' },
-		// 					{ offset: 0.3, color: 'rgba(30, 213, 230, 0.3)' },
-		// 					{ offset: 0.7, color: 'rgba(30, 213, 230, 0.6)' },
-		// 					{ offset: 1, color: 'rgba(30, 213, 230, 0.8)' }
-		// 				])
-		// 			},
-		// 			label: {
-		// 				show: true,
-		// 				position: 'top',
-		// 				fontSize: 8,
-		// 				color: '#333',
-		// 				formatter: '{c}',
-		// 				fontWeight: 'normal',
-		// 				offset: [0, -3]
-		// 			}
-		// 		},
-		// 		{
-		// 			name: 'Gross profit margin',
-		// 			type: 'line',
-		// 			data: [40, 40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 29, 28, 27, 25],
-		// 			smooth: true,
-		// 			symbol: 'circle',
-		// 			symbolSize: 3,
-		// 			lineStyle: {
-		// 				color: '#f5a623',
-		// 				width: 2
-		// 			},
-		// 			itemStyle: {
-		// 				color: '#f5a623',
-		// 				borderWidth: 1,
-		// 				borderColor: '#ffffff'
-		// 			},
-		// 			areaStyle: {
-		// 				color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
-		// 					{ offset: 0, color: 'rgba(245, 166, 35, 0.1)' },
-		// 					{ offset: 0.3, color: 'rgba(245, 166, 35, 0.3)' },
-		// 					{ offset: 0.7, color: 'rgba(245, 166, 35, 0.6)' },
-		// 					{ offset: 1, color: 'rgba(245, 166, 35, 0.8)' }
-		// 				])
-		// 			},
-		// 			label: {
-		// 				show: true,
-		// 				position: 'top',
-		// 				fontSize: 8,
-		// 				color: '#333',
-		// 				formatter: '{c}%',
-		// 				fontWeight: 'normal',
-		// 				offset: [0, -3]
-		// 			}
-		// 		}
-		// 	]
-		// }
 		const option3 = {
 			title: {
 				text: 'When the cost of a single ship is 35,000$, break even sales volume is achieved',
@@ -1009,17 +864,17 @@ function renderModalCharts() {
 			legend: {
 				data: ['Annual breakeven sales volume (units)', 'Gross profit margin'],
 				bottom: 0,
-				textStyle: { fontSize: 8 },
+				textStyle: { fontSize: 16 },
 				left: 'center',
 				itemGap: 20
 			},
 			graphic: {
 				type: 'text',
-				left: 20,
+				left: 50,
 				bottom: 0,
 				style: {
-					text: 'Prices :\n10,000$',
-					fontSize: 8,
+					text: 'Prices :10,000$',
+					fontSize: 16,
 					fontWeight: 'bold',
 					fill: '#333',
 					textAlign: 'left',
@@ -1152,7 +1007,7 @@ function renderModalCharts() {
 		const option4 = {
 			title: {
 				text: 'When the cost of a single ship is 41,000$, break even sales volume is achieved',
-				textStyle: { fontSize: 9, color: '#333', fontWeight: 'normal' },
+				textStyle: { fontSize: 16, color: '#333', fontWeight: 'normal' },
 				top: 5,
 				left: 'center'
 			},
@@ -1166,18 +1021,18 @@ function renderModalCharts() {
 			legend: {
 				data: ['Annual breakeven sales volume (units)', 'Gross profit margin'],
 				bottom: 0,
-				textStyle: { fontSize: 8 },
+				textStyle: { fontSize: 16 },
 				left: 'center',
 				itemGap: 20
 			},
 			graphic: {
 				type: 'text',
-				left: 20,
+				left: 50,
 				bottom: 0,
 				style: {
-					text: 'Prices :\n10,000$',
-					fontSize: 8,
-					fontWeight: 'bold',
+					text: 'Prices :10,000$',
+					fontSize: 16,
+					// fontWeight: 'bold',
 					fill: '#333',
 					textAlign: 'left',
 					textVerticalAlign: 'bottom'
@@ -1558,13 +1413,46 @@ onMounted(() => {
 })
 
 function onWindowResize() {
-	if (revenueChartInstance) revenueChartInstance.resize()
-	if (pieChartInstance) pieChartInstance.resize()
-	if (demandChartInstance) demandChartInstance.resize()
+	// 使用防抖来优化性能，避免频繁重绘
+	clearTimeout(window.resizeTimer)
+	window.resizeTimer = setTimeout(() => {
+		// 重新渲染所有图表以确保正确缩放
+		if (revenueChartInstance) {
+			revenueChartInstance.resize()
+			renderRevenueChart()
+		}
+		if (pieChartInstance) {
+			pieChartInstance.resize()
+			renderPieChart()
+		}
+		if (demandChartInstance) {
+			demandChartInstance.resize()
+			renderDemandChart()
+		}
+		if (chart1Instance) {
+			chart1Instance.resize()
+			renderChart1()
+		}
+		if (chart2Instance) {
+			chart2Instance.resize()
+			renderChart2()
+		}
+		if (chart3Instance) {
+			chart3Instance.resize()
+			renderChart3()
+		}
+		if (chart4Instance) {
+			chart4Instance.resize()
+			renderChart4()
+		}
+	}, 150)
 }
 
-	onBeforeUnmount(() => {
+onBeforeUnmount(() => {
 	window.removeEventListener('resize', onWindowResize)
+	// 清理定时器
+	clearTimeout(window.resizeTimer)
+	
 	if (revenueChartInstance) {
 		revenueChartInstance.dispose()
 		revenueChartInstance = null
@@ -1713,15 +1601,15 @@ onMounted(() => {
 	padding-top: 80px;
 	gap: 15px;
 	overflow: hidden;
-	padding-left: 10px;
+	padding-left: 150px;
 	padding-right: 10px;
 }
 
 /* 左侧面板：Revenue Model + Channel Strategy */
 .left-panel {
-	flex: 0 0 280px;
-	min-width: 280px;
-	max-width: 320px;
+	flex: 0 0 416px;
+	min-width: 416px;
+	max-width: 416px;
 	padding: 15px;
 	display: flex;
 	flex-direction: column;
@@ -1794,9 +1682,13 @@ onMounted(() => {
 
 /* 图表卡片 */
 .chart-card {
+	width: 386px;
+	height: 228px;
+	/* background: #FFFFFF; */
 	background: rgba(255, 255, 255, 0.08);
+	border-radius: 10px 10px 10px 10px;
+	/* opacity: 0.1; */
 	backdrop-filter: blur(15px);
-	border-radius: 12px;
 	padding: 15px;
 	border: 1px solid rgba(255, 255, 255, 0.15);
 	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
@@ -1869,7 +1761,7 @@ onMounted(() => {
 
 .revenue-selected .chart-container::after {
 	content: '';
-	position: absolute;
+	/* position: absolute; */
 	top: 0;
 	left: 0;
 	right: 0;
@@ -1911,7 +1803,7 @@ onMounted(() => {
 }
 
 .chart-container {
-	height: 100px;
+	height: 160px;
 	display: flex;
 	align-items: end;
 	gap: 5px;
@@ -1920,8 +1812,9 @@ onMounted(() => {
 }
 
 .revenue-echart {
+	position:relative;
 	width: 100%;
-	height: 90px;
+	height: 100%;
 }
 
 /* 策略卡片 */
@@ -1933,9 +1826,9 @@ onMounted(() => {
 }
 
 .strategy-title {
-	font-size: clamp(16px, 1.4vw, 20px);
+	font-size:20px;
 	font-weight: 600;
-	margin-bottom: clamp(8px, 1vh, 12px);
+	margin-bottom: 13px;
 	color: #ffffff;
 }
 
@@ -2476,10 +2369,10 @@ onMounted(() => {
 /* Revenue Modal 样式 */
 .revenue-modal {
 	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
+	top: 106px;
+	left: 140px;
+	right: 140px;
+	bottom: 106px;
 	/* background: rgba(0, 0, 0, 0.8); */
 	backdrop-filter: blur(10px);
 	z-index: 1000;
@@ -2496,10 +2389,8 @@ onMounted(() => {
 	backdrop-filter: blur(25px) saturate(180%);
 	border: 1px solid rgba(255, 255, 255, 0.2);
 	border-radius: 20px;
-	width: 75vw;
-	max-width: 950px;
-	height: 70vh;
-	max-height: 650px;
+	width: 100%;
+	height: 100%;
 	padding: 5px;
 	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3),
 		0 0 0 1px rgba(255, 255, 255, 0.1) inset;
@@ -2518,7 +2409,7 @@ onMounted(() => {
 }
 
 .modal-title {
-	font-size: 28px;
+	font-size: 11px;
 	font-weight: 700;
 	color: #333333;
 	margin: 0;
@@ -2554,15 +2445,14 @@ onMounted(() => {
 
 .charts-grid {
 	display: grid;
-	grid-template-columns: 380px 380px;
-	grid-template-rows: 280px 280px;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr 1fr;
 	gap: 20px;
-	justify-content: center;
-	align-content: center;
 	width: 100%;
 	height: 100%;
 	position: relative;
-	padding: 0px;
+	padding: 20px;
+	box-sizing: border-box;
 }
 
 .charts-grid::before {
@@ -2593,19 +2483,19 @@ onMounted(() => {
 	background: transparent;
 	border: none;
 	border-radius: 0;
-	padding: 5px 2px 2px 2px;
+	padding: 5px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: flex-start;
-	overflow: visible;
-	width: 380px;
-	height: 280px;
+	justify-content: center;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
 	box-shadow: none;
 }
 
 .chart-item-title {
-	font-size: 16px;
+	font-size: 18px;
 	font-weight: 600;
 	color: #333333;
 	margin: 0 0 15px 0;
@@ -2613,8 +2503,9 @@ onMounted(() => {
 }
 
 .modal-chart {
-	width: 446px;
-	height: 280px;
+	width: 100%;
+	height: 100%;
+	min-height: 200px;
 }
 
 @keyframes fadeIn {
@@ -2626,432 +2517,6 @@ onMounted(() => {
 	to {
 		opacity: 1;
 		transform: scale(1);
-	}
-}
-
-/* 响应式设计 */
-/* 大屏幕 (1920px+) */
-@media (min-width: 1920px) {
-	.main-content {
-		gap: 25px;
-		padding-left: 20px;
-		padding-right: 20px;
-	}
-
-	.left-panel,
-	.right-panel {
-		flex: 0 0 350px;
-		min-width: 350px;
-		max-width: 400px;
-		padding: 20px;
-	}
-
-	.middle-panel {
-		min-width: 600px;
-		padding: 20px;
-	}
-
-	.chart-card {
-		padding: 20px;
-		margin-bottom: 12px;
-	}
-
-	.chart-title {
-		font-size: 20px;
-		margin-bottom: 15px;
-	}
-
-	.chart-container {
-		height: 130px;
-	}
-
-	.revenue-echart {
-		height: 120px;
-	}
-
-	.strategy-title {
-		font-size: clamp(17px, 1.4vw, 22px);
-		margin-bottom: clamp(8px, 1vh, 12px);
-	}
-
-	.strategy-subtitle {
-		font-size: clamp(15px, 1.2vw, 19px);
-		margin-bottom: clamp(8px, 1vh, 12px);
-		line-height: 1.3;
-	}
-
-	.strategy-label {
-		font-size: clamp(14px, 1.1vw, 17px);
-		margin: clamp(6px, 0.8vh, 8px) 0 clamp(3px, 0.4vh, 5px) 0;
-	}
-
-	.strategy-text {
-		font-size: clamp(12px, 1vw, 15px);
-		line-height: 1.4;
-		margin: clamp(3px, 0.4vh, 5px) 0;
-	}
-
-	.content-panel {
-		width: 510px;
-		/* height: 580px; */
-		right: 25px;
-	}
-
-	/* 大屏幕下的 Revenue Model 效果优化 */
-	.revenue-selected {
-		transform: scale(1.03);
-	}
-
-	.revenue-selected::before {
-		animation: revenueGlow 1.5s ease-in-out infinite;
-	}
-}
-
-/* 中等屏幕 (1400px-1919px) */
-@media (min-width: 1400px) and (max-width: 1919px) {
-	.main-content {
-		gap: 18px;
-		padding-left: 15px;
-		padding-right: 15px;
-	}
-
-	.left-panel,
-	.right-panel {
-		flex: 0 0 300px;
-		min-width: 300px;
-		max-width: 340px;
-		padding: 18px;
-	}
-
-	.middle-panel {
-		min-width: 500px;
-		padding: 18px;
-	}
-
-	.strategy-title {
-		font-size: clamp(16px, 1.3vw, 19px);
-		margin-bottom: clamp(7px, 0.8vh, 10px);
-	}
-
-	.strategy-subtitle {
-		font-size: clamp(14px, 1.1vw, 16px);
-		margin-bottom: clamp(6px, 0.8vh, 9px);
-		line-height: 1.3;
-	}
-
-	.strategy-label {
-		font-size: clamp(13px, 1vw, 15px);
-		margin: clamp(5px, 0.6vh, 7px) 0 clamp(2px, 0.3vh, 4px) 0;
-	}
-
-	.strategy-text {
-		font-size: clamp(11px, 0.9vw, 13px);
-		line-height: 1.4;
-		margin: clamp(2px, 0.3vh, 4px) 0;
-	}
-
-	.content-panel {
-		width: 420px;
-		/* height: 500px; */
-		right: 18px;
-	}
-
-	/* 中等屏幕下的 Revenue Model 效果 */
-	.revenue-selected {
-		transform: scale(1.02);
-	}
-}
-
-/* 小屏幕 (1200px-1399px) */
-@media (min-width: 1200px) and (max-width: 1399px) {
-	.main-content {
-		gap: 12px;
-		padding-left: 10px;
-		padding-right: 10px;
-	}
-
-	.left-panel,
-	.right-panel {
-		flex: 0 0 260px;
-		min-width: 260px;
-		max-width: 280px;
-		padding: 12px;
-	}
-
-	.middle-panel {
-		min-width: 400px;
-		padding: 12px;
-	}
-
-	.chart-card {
-		padding: 12px;
-		margin-bottom: 6px;
-	}
-
-	.chart-title {
-		font-size: 16px;
-		margin-bottom: 10px;
-	}
-
-	.chart-container {
-		height: 80px;
-	}
-
-	.revenue-echart {
-		height: 70px;
-	}
-
-	.strategy-title {
-		font-size: clamp(15px, 1.2vw, 18px);
-		margin-bottom: clamp(6px, 0.8vh, 9px);
-	}
-
-	.strategy-subtitle {
-		font-size: clamp(13px, 1vw, 15px);
-		margin-bottom: clamp(5px, 0.6vh, 7px);
-		line-height: 1.3;
-	}
-
-	.strategy-label {
-		font-size: clamp(12px, 0.9vw, 14px);
-		margin: clamp(4px, 0.5vh, 6px) 0 clamp(2px, 0.3vh, 3px) 0;
-	}
-
-	.strategy-text {
-		font-size: clamp(10px, 0.8vw, 12px);
-		line-height: 1.3;
-		margin: clamp(2px, 0.3vh, 3px) 0;
-	}
-
-	.content-panel {
-		width: 390px;
-		/* height: 480px; */
-		right: 12px;
-	}
-
-	/* 小屏幕下的 Revenue Model 效果 */
-	.revenue-selected {
-		transform: scale(1.01);
-	}
-
-	.revenue-selected::before {
-		animation: revenueGlow 2.5s ease-in-out infinite;
-	}
-}
-
-/* 平板和小笔记本 (992px-1199px) */
-@media (min-width: 992px) and (max-width: 1199px) {
-	.main-content {
-		flex-direction: column;
-		gap: 15px;
-		height: auto;
-		max-height: none;
-		padding: 80px 15px 20px;
-	}
-
-	.left-panel,
-	.right-panel,
-	.middle-panel {
-		flex: none;
-		width: 100%;
-		min-width: auto;
-		max-width: none;
-		padding: 15px;
-	}
-
-	.left-panel {
-		order: 1;
-		max-height: 300px;
-		overflow-y: auto;
-	}
-
-	.middle-panel {
-		order: 2;
-		height: 400px;
-	}
-
-	.right-panel {
-		order: 3;
-		max-height: 400px;
-		overflow-y: auto;
-	}
-
-	.map-container {
-		max-height: 350px;
-	}
-
-	.strategy-title {
-		font-size: clamp(13px, 1.1vw, 16px);
-		margin-bottom: clamp(5px, 0.6vh, 7px);
-	}
-
-	.strategy-subtitle {
-		font-size: clamp(11px, 0.9vw, 13px);
-		margin-bottom: clamp(4px, 0.5vh, 6px);
-		line-height: 1.3;
-	}
-
-	.strategy-label {
-		font-size: clamp(10px, 0.8vw, 12px);
-		margin: clamp(3px, 0.4vh, 5px) 0 clamp(1px, 0.2vh, 2px) 0;
-	}
-
-	.strategy-text {
-		font-size: clamp(9px, 0.7vw, 10px);
-		line-height: 1.3;
-		margin: clamp(1px, 0.2vh, 2px) 0;
-	}
-
-	.content-panel {
-		width: 350px;
-		/* height: 420px; */
-		right: 15px;
-	}
-
-	/* 平板下的 Revenue Model 效果 */
-	.revenue-selected {
-		transform: scale(1.01);
-	}
-
-	.revenue-selected::before {
-		animation: revenueGlow 3s ease-in-out infinite;
-	}
-}
-
-/* 手机屏幕 (768px以下) */
-@media (max-width: 991px) {
-	.main-content {
-		flex-direction: column;
-		gap: 10px;
-		height: auto;
-		max-height: none;
-		padding: 80px 10px 20px;
-	}
-
-	.left-panel,
-	.right-panel,
-	.middle-panel {
-		flex: none;
-		width: 100%;
-		min-width: auto;
-		max-width: none;
-		padding: 10px;
-	}
-
-	.left-panel {
-		order: 1;
-		max-height: 250px;
-		overflow-y: auto;
-	}
-
-	.middle-panel {
-		order: 2;
-		height: 300px;
-	}
-
-	.right-panel {
-		order: 3;
-		max-height: 300px;
-		overflow-y: auto;
-	}
-
-	.nav-container {
-		flex-wrap: wrap;
-		gap: 8px;
-		padding: 0 10px;
-	}
-
-	.nav-item {
-		font-size: 12px;
-		padding: 6px 12px;
-	}
-
-	.chart-container {
-		height: 100px;
-	}
-
-	.map-container {
-		max-height: 250px;
-		border-radius: 10px;
-	}
-
-	.content-panel {
-		width: 320px;
-		/* height: 380px; */
-		padding: 15px;
-		border-radius: 10px;
-		right: 10px;
-		position: fixed;
-		top: 50%;
-		transform: translateY(-50%);
-	}
-
-	.chart-card {
-		padding: 10px;
-		border-radius: 8px;
-		margin-bottom: 5px;
-	}
-
-	.chart-title {
-		font-size: 13px;
-		margin-bottom: 8px;
-	}
-
-	.strategy-title {
-		font-size: clamp(11px, 1vw, 14px);
-		margin-bottom: clamp(4px, 0.5vh, 6px);
-	}
-
-	.strategy-subtitle {
-		font-size: clamp(9px, 0.8vw, 11px);
-		margin-bottom: clamp(3px, 0.4vh, 5px);
-		line-height: 1.3;
-	}
-
-	.strategy-label {
-		font-size: clamp(8px, 0.7vw, 10px);
-		margin: clamp(2px, 0.3vh, 4px) 0 clamp(1px, 0.1vh, 1px) 0;
-	}
-
-	.strategy-text {
-		font-size: clamp(7px, 0.6vw, 9px);
-		line-height: 1.3;
-		margin: clamp(1px, 0.1vh, 2px) 0;
-	}
-
-	/* 手机下的 Revenue Model 效果 */
-	.revenue-selected {
-		transform: scale(1.005);
-	}
-
-	.revenue-selected::before {
-		animation: revenueGlow 3.5s ease-in-out infinite;
-	}
-
-	.revenue-selected .chart-title {
-		animation: titleGlow 2s ease-in-out infinite alternate;
-	}
-}
-
-/* 超小屏幕 (480px以下) */
-@media (max-width: 480px) {
-	.content-panel {
-		width: 90vw;
-		max-width: 300px;
-		/* height: 70vh; */
-		/* max-height: 380px; */
-		right: 5px;
-		left: 5px;
-		transform: translateY(-50%);
-	}
-
-	/* 超小屏幕下的 Revenue Model 效果 */
-	.revenue-selected {
-		transform: scale(1.002);
-	}
-
-	.revenue-selected::before {
-		animation: revenueGlow 4s ease-in-out infinite;
 	}
 }
 </style>
