@@ -120,33 +120,30 @@ const getChartOptions = () => {
       legend: props.isDetailed ? {
         bottom: '3%',
         left: 'center',
-        itemGap: 30,
+        itemGap: 60,
+        textStyle: {
+          color: '#ffffff',
+          fontSize: 12,
+          padding: [0, 0, 0, 12]
+        },
         data: [
           {
             name: 'Output value (in billions of US dollars)',
             icon: 'circle',
             itemStyle: {
               color: '#14E1D5'
-            },
-            textStyle: {
-              color: '#ffffff',
-              fontSize: 12
             }
           },
           {
             name: 'Growth rate',
-            icon: 'rect',
+            icon: 'line',
             itemStyle: {
               color: '#CFFAFD'
-            },
-            textStyle: {
-              color: '#ffffff',
-              fontSize: 12
             }
           }
         ],
-        itemWidth: 8,
-        itemHeight: 8
+        itemWidth: 48,  // Width for icons
+        itemHeight: 8   // Height for icons
       } : undefined,
       grid: {
         left: '3%',
@@ -204,8 +201,7 @@ const getChartOptions = () => {
         top: '6%', // 固定在图表顶部位置
         style: {
           text: Number(value).toFixed(1),
-          fontSize: 20,
-          fontWeight: 'none',
+          font: '20px Microsoft YaHei',  // 设置字体大小和字体族
           fill: '#ffffff',
           textAlign: 'center',
           textVerticalAlign: 'bottom'
@@ -226,14 +222,14 @@ const getChartOptions = () => {
               x2: 0,
               y2: 1,
               colorStops: [
-                { offset: 0, color: 'rgba(34, 211, 238, 0.8)' },
-                { offset: 0.5, color: 'rgba(34, 211, 238, 0.5)' },
-                { offset: 1, color: 'rgba(34, 211, 238, 0.1)' },
+                { offset: 0, color: 'rgba(89, 223, 215, 0.8)' },
+                { offset: 0.5, color: 'rgba(89, 223, 215, 0.5)' },
+                { offset: 1, color: 'rgba(89, 223, 215, 0.1)' },
               ],
             },
           },
           lineStyle: {
-            color: '#22d3ee',
+            color: '#30E0D6',
             width: 2,
             shadowBlur: 6,
             shadowColor: 'rgba(34, 211, 238, 0.3)',
