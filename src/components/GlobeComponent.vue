@@ -9,6 +9,7 @@ import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 import Globe from 'globe.gl'
 import * as THREE from 'three'
 import icon2 from '../assets/icon-2.png'
+import earthPhoto from '../assets/earth-blue-marble.jpg';
 import * as satellite from '../assets/satellite.mjs'
 import { csvParseRows } from '../assets/d3-dsv.mjs'
 
@@ -54,7 +55,7 @@ onMounted(async () => {
           .width(containerRect.width)
           .height(containerRect.height)
           .backgroundColor('rgba(0,0,0,0)')
-          .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
+          .globeImageUrl(earthPhoto)
           .particleLat('lat')
           .particleLng('lng')
           .particleAltitude('alt')
