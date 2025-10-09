@@ -182,8 +182,14 @@
 			<div class="center-section">
 				<div class="product-3d-showcase">
 					<div class="boat-3d-model">
-						<!-- 3D船体模型 -->
-						<img :src="currentBoatImage" alt="YU Hydrofoil Boat" class="boat-image" />
+					<!-- 3D船体模型 -->
+						<div class="boat-3d-container-wrapper">
+							<div
+								ref="boat3DContainer"
+								class="boat-3d-viewer"
+								style="width: 1200px; height: 800px;"
+							></div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -550,6 +556,10 @@
 import { ref, onMounted, onUnmounted, computed, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import * as echarts from 'echarts'
+import * as THREE from 'three'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+
 // 移除复杂的外部依赖，使用内联方案
 // 导入船只图片资源
 import whiteBoatImg from '../assets/white_boat.png'
@@ -583,6 +593,28 @@ const selectedColor = ref('white')
 
 // 悬停提示状态
 const activeTooltip = ref(null)
+
+// 3D模型相关
+const boat3DContainer = ref(null)
+let scene, camera, renderer, controls, model, originalMaterials = []
+let modelInitialPosition = null // 保存模型初始位置
+let modelCenter = null // 保存模型几何中心点
+
+// 拖拽相关变量
+let isDragging = false
+let dragStart = { x: 0, y: 0 }
+let dragStartRotation = { x: 0, y: 0 }
+let dragStartPosition = { x: 0, y: 0, z: 0 }
+let dragHintElement = null
+
+// 固定点旋转相关变量
+let rotationCenter = new THREE.Vector3(0, 0, 0) // 旋转中心点
+
+// 3D控制状态
+const modelScale = ref(1)
+const modelRotationX = ref(0)
+const modelRotationY = ref(0)
+const isFixedPointRotation = ref(true) // 响应式变量，控制旋转模式
 
 // 对比表格模态框状态
 const showComparison = ref(false)
@@ -714,6 +746,16 @@ const colorBackgrounds = {
 	'black': blackBdImg
 }
 
+// 3D模型颜色映射
+const modelColors = {
+	'white': 0xffffff,
+	'green': 0x4CAF50,
+	'blue': 0x2196F3,
+	'purple': 0x9C27B0,
+	'red': 0xF44336,
+	'black': 0x333333
+}
+
 // 计算当前船只图片
 const currentBoatImage = computed(() => {
 	console.log('当前选择的颜色:', selectedColor.value)
@@ -727,6 +769,279 @@ function changeBoatColor(color) {
 	selectedColor.value = color
 	console.log('selectedColor更新为:', selectedColor.value)
 	console.log('currentBoatImage应该是:', currentBoatImage.value)
+	
+	// 改变3D模型颜色
+	changeModelColor(color)
+}
+
+// 改变3D模型颜色
+function changeModelColor(color) {
+	if (!model) return
+
+	const newColor = modelColors[color]
+	if (newColor === undefined) return
+
+	console.log('改变颜色前的位置:', model.position)
+
+	// 遍历模型的所有子对象，改变材质颜色
+	model.traverse((child) => {
+		if (child.isMesh && child.material) {
+			// 如果是数组材质
+			if (Array.isArray(child.material)) {
+				child.material.forEach((mat) => {
+					if (mat.isMeshStandardMaterial || mat.isMeshPhongMaterial) {
+						mat.color.setHex(newColor)
+					}
+				})
+			} else {
+				// 单个材质
+				if (child.material.isMeshStandardMaterial || child.material.isMeshPhongMaterial) {
+					child.material.color.setHex(newColor)
+				}
+			}
+		}
+	})
+
+	// 确保模型位置保持在世界原点，使用保存的初始位置
+	if (modelInitialPosition) {
+		model.position.copy(modelInitialPosition)
+	} else {
+		model.position.set(0, 0, 0)
+	}
+
+	console.log('改变颜色后的位置:', model.position)
+}
+
+// 点击模型时旋转180度
+function rotateModelOnClick() {
+	if (!model) return
+
+	const duration = 2000 // 2秒完成180度旋转
+	const startTime = Date.now()
+	
+	// 获取模型当前Y轴旋转角度
+	const initialRotationY = model.rotation.y
+	
+	console.log('开始点击旋转动画，初始角度:', initialRotationY)
+	
+	// 临时禁用轨道控制器，防止干扰旋转动画
+	const controlsWasEnabled = controls.enabled
+	if (controls) {
+		controls.enabled = false
+	}
+	
+	function animate() {
+		const elapsed = Date.now() - startTime
+		const progress = Math.min(elapsed / duration, 1)
+		
+		// 使用缓动函数，让旋转更平滑
+		const easeProgress = 1 - Math.pow(1 - progress, 3) // easeOutCubic
+		// 180度顺时针旋转 = -π弧度（负值表示顺时针）
+		const rotationAngle = -Math.PI * 1 * easeProgress
+		
+		// 只改变Y轴旋转
+		model.rotation.y = initialRotationY + rotationAngle
+		
+		if (progress < 1) {
+			requestAnimationFrame(animate)
+		} else {
+			// 动画结束，恢复轨道控制器
+			if (controls) {
+				controls.enabled = controlsWasEnabled
+			}
+			console.log('点击旋转动画结束，最终角度:', model.rotation.y)
+		}
+	}
+	
+	animate()
+}
+
+// 添加拖拽检测和控制
+function addClickDetection() {
+	if (!renderer || !model) {
+		console.error('addClickDetection: renderer或model未初始化', { renderer: !!renderer, model: !!model })
+		return
+	}
+	
+	const raycaster = new THREE.Raycaster()
+	const mouse = new THREE.Vector2()
+	
+	// 鼠标按下事件 - 开始拖拽
+	function onMouseDown(event) {
+		// 只有在自由拖拽模式下才需要自定义拖拽逻辑
+		if (!isFixedPointRotation.value) {
+			console.log('鼠标按下事件触发（自由拖拽模式）')
+			
+			// 计算鼠标位置
+			const rect = renderer.domElement.getBoundingClientRect()
+			mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1
+			mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1
+			
+			// 设置射线
+			raycaster.setFromCamera(mouse, camera)
+			
+			// 检测与模型的交点
+			const intersects = raycaster.intersectObject(model, true)
+			
+			console.log('射线检测结果:', intersects.length, '个交点')
+			
+			if (intersects.length > 0) {
+				// 开始拖拽
+				isDragging = true
+				dragStart.x = event.clientX
+				dragStart.y = event.clientY
+				dragStartRotation.x = model.rotation.x
+				dragStartRotation.y = model.rotation.y
+				dragStartPosition.x = model.position.x
+				dragStartPosition.y = model.position.y
+				dragStartPosition.z = model.position.z
+				
+				// 禁用轨道控制器
+				if (controls) {
+					controls.enabled = false
+				}
+				
+				// 改变鼠标样式
+				renderer.domElement.style.cursor = 'grabbing'
+				
+				// 隐藏拖拽提示
+				if (dragHintElement) {
+					dragHintElement.style.display = 'none'
+				}
+				
+				console.log('开始拖拽模型')
+			}
+		}
+	}
+	
+	// 鼠标移动事件 - 拖拽中
+	function onMouseMove(event) {
+		// 只有在自由拖拽模式下才需要自定义拖拽逻辑
+		if (!isFixedPointRotation.value) {
+			// 计算鼠标位置
+			const rect = renderer.domElement.getBoundingClientRect()
+			mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1
+			mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1
+			
+			// 设置射线
+			raycaster.setFromCamera(mouse, camera)
+			
+			// 检测与模型的交点
+			const intersects = raycaster.intersectObject(model, true)
+			
+			if (isDragging) {
+				// 自由拖拽模式
+				const deltaX = event.clientX - dragStart.x
+				const deltaY = event.clientY - dragStart.y
+				
+				const rotationSensitivity = 0.01
+				const newRotationY = dragStartRotation.y + deltaX * rotationSensitivity
+				const newRotationX = dragStartRotation.x - deltaY * rotationSensitivity
+				
+				// 限制X轴旋转角度，避免模型翻转过度
+				const maxRotationX = Math.PI / 3 // 60度
+				model.rotation.x = Math.max(-maxRotationX, Math.min(maxRotationX, newRotationX))
+				model.rotation.y = newRotationY
+				
+				// 计算位置偏移（基于鼠标移动距离）
+				const positionSensitivity = 0.01
+				const newPositionX = dragStartPosition.x + deltaX * positionSensitivity
+				const newPositionY = dragStartPosition.y - deltaY * positionSensitivity
+				
+				// 限制位置范围，避免模型移出视野
+				const maxPosition = 3
+				model.position.x = Math.max(-maxPosition, Math.min(maxPosition, newPositionX))
+				model.position.y = Math.max(-maxPosition, Math.min(maxPosition, newPositionY))
+				model.position.z = dragStartPosition.z
+				
+			} else {
+				// 悬停效果
+				if (intersects.length > 0) {
+					renderer.domElement.style.cursor = 'grab'
+				} else {
+					renderer.domElement.style.cursor = 'default'
+				}
+			}
+		} else {
+			// 固定点旋转模式下，使用OrbitControls的默认鼠标样式
+			renderer.domElement.style.cursor = 'grab'
+		}
+	}
+	
+	// 鼠标释放事件 - 结束拖拽
+	function onMouseUp(event) {
+		// 只有在自由拖拽模式下才需要处理
+		if (!isFixedPointRotation.value && isDragging) {
+			isDragging = false
+			
+			// 重新启用轨道控制器
+			if (controls) {
+				controls.enabled = true
+			}
+			
+			// 恢复鼠标样式
+			renderer.domElement.style.cursor = 'default'
+			
+			// 延迟显示拖拽提示
+			setTimeout(() => {
+				if (dragHintElement) {
+					dragHintElement.style.display = 'flex'
+				}
+			}, 2000)
+			
+			console.log('结束拖拽模型')
+		}
+	}
+	
+	// 触摸事件处理函数
+	function onTouchStart(event) {
+		event.preventDefault()
+		if (event.touches.length === 1) {
+			const touch = event.touches[0]
+			const mouseEvent = {
+				clientX: touch.clientX,
+				clientY: touch.clientY
+			}
+			onMouseDown(mouseEvent)
+		}
+	}
+	
+	function onTouchMove(event) {
+		event.preventDefault()
+		if (event.touches.length === 1) {
+			const touch = event.touches[0]
+			const mouseEvent = {
+				clientX: touch.clientX,
+				clientY: touch.clientY
+			}
+			onMouseMove(mouseEvent)
+		}
+	}
+	
+	function onTouchEnd(event) {
+		event.preventDefault()
+		onMouseUp(event)
+	}
+	
+	// 添加事件监听器
+	renderer.domElement.addEventListener('mousedown', onMouseDown)
+	renderer.domElement.addEventListener('mousemove', onMouseMove)
+	renderer.domElement.addEventListener('mouseup', onMouseUp)
+	
+	// 添加触摸事件监听器
+	renderer.domElement.addEventListener('touchstart', onTouchStart, { passive: false })
+	renderer.domElement.addEventListener('touchmove', onTouchMove, { passive: false })
+	renderer.domElement.addEventListener('touchend', onTouchEnd, { passive: false })
+	
+	// 防止拖拽时选中文本
+	renderer.domElement.addEventListener('selectstart', (e) => e.preventDefault())
+	
+	// 添加简单的测试事件
+	renderer.domElement.addEventListener('click', (e) => {
+		console.log('Canvas被点击了！', e)
+	})
+	
+	console.log('拖拽事件监听器已添加')
 }
 
 // 显示悬停提示
@@ -984,6 +1299,260 @@ function renderSimulationCharts() {
 	}
 }
 
+// 初始化3D模型
+function init3DModel() {
+	if (!boat3DContainer.value) {
+		console.error('3D容器未找到')
+		return
+	}
+
+	// 创建场景
+	scene = new THREE.Scene()
+	scene.background = null // 设置透明背景
+	console.log('场景创建完成')
+
+	// 创建相机 - 使用正确的宽高比
+	camera = new THREE.PerspectiveCamera(75, 1200 / 800, 0.1, 1000)
+	camera.position.set(0, 2, 8)
+	camera.lookAt(0, 0, 0)
+	console.log('相机创建完成')
+
+	// 创建渲染器
+	renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true }) // 启用透明背景
+	renderer.setSize(1200, 800)
+	renderer.setClearColor(0x000000, 0) // 设置透明背景
+	renderer.shadowMap.enabled = true
+	renderer.shadowMap.type = THREE.PCFSoftShadowMap
+	console.log('渲染器创建完成')
+
+	// 将渲染器添加到容器
+	boat3DContainer.value.innerHTML = '' // 清空容器
+	boat3DContainer.value.appendChild(renderer.domElement)
+	console.log('渲染器已添加到容器')
+
+	// 添加轨道控制器（支持缩放、旋转、平移）
+	controls = new OrbitControls(camera, renderer.domElement)
+	controls.enableDamping = true // 启用阻尼效果
+	controls.dampingFactor = 0.05
+	controls.enableZoom = true // 启用缩放
+	controls.enableRotate = true // 启用旋转
+	controls.enablePan = false // 禁用平移，实现固定点旋转
+	controls.minDistance = 2 // 最小缩放距离
+	controls.maxDistance = 20 // 最大缩放距离
+	controls.target.set(0, 0, 0) // 控制器对准世界原点（旋转中心点）
+	console.log('轨道控制器创建完成（固定点旋转模式）')
+
+	// 添加光照 - 增强光照以便更好地看到模型
+	const ambientLight = new THREE.AmbientLight(0xffffff, 1.2)
+	scene.add(ambientLight)
+
+	const directionalLight1 = new THREE.DirectionalLight(0xffffff, 1.0)
+	directionalLight1.position.set(10, 10, 10)
+	directionalLight1.castShadow = true
+	scene.add(directionalLight1)
+
+	const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.6)
+	directionalLight2.position.set(-10, 5, -10)
+	scene.add(directionalLight2)
+
+	console.log('光照设置完成')
+
+	// 加载GLB模型
+	const loader = new GLTFLoader()
+
+	console.log('开始加载GLB模型:', '/水翼艇.glb')
+
+	loader.load(
+		'/水翼艇.glb',
+		(gltf) => {
+			console.log('GLB模型加载成功:', gltf)
+			model = gltf.scene
+
+			// 先将模型添加到场景，确保变换矩阵更新
+			scene.add(model)
+
+			// 计算模型边界框和几何中心
+			const box = new THREE.Box3().setFromObject(model)
+			const size = new THREE.Vector3()
+			box.getSize(size) // 模型尺寸
+			const center = new THREE.Vector3()
+			box.getCenter(center) // 模型中心点
+			console.log('模型原始边界框:', { center, size })
+
+			// 计算合适的缩放比例
+			const maxDim = Math.max(size.x, size.y, size.z)
+			console.log('模型最大尺寸:', maxDim)
+
+			// 设置一个合适的缩放比例，让模型大小适中 - 增加缩放比例让模型更大
+			const scale = 15 / maxDim
+			model.scale.setScalar(scale)
+			console.log('模型缩放比例:', scale)
+
+			// 关键：把模型的几何中心移动到世界坐标原点 (0, 0, 0)
+			// 需要根据缩放后的中心点位置进行调整
+			model.position.set(-center.x * scale, -center.y * scale, -center.z * scale)
+
+			// 保存模型的最终位置（此时模型几何中心在世界原点）
+			modelInitialPosition = model.position.clone()
+			rotationCenter.copy(modelInitialPosition) // 设置旋转中心点为模型中心
+			console.log('模型几何中心已对齐到世界原点:', modelInitialPosition)
+			console.log('旋转中心点设置为:', rotationCenter)
+			console.log('固定点旋转模式已启用:', isFixedPointRotation.value)
+
+			// 根据缩放后的模型尺寸调整相机位置 - 拉近视距
+			const scaledSize = new THREE.Vector3(size.x * scale, size.y * scale, size.z * scale)
+			const distance = Math.max(scaledSize.x, scaledSize.y, scaledSize.z) * 0.8 // 从0.95减少到0.7，拉近视角
+
+			// 设置相机位置，确保模型完整显示在视野中央
+			camera.position.set(0, distance * 0.2, distance)
+
+			// 相机对准世界原点（模型中心）
+			camera.lookAt(0, 0, 0)
+
+			// 更新控制器目标点
+			controls.target.set(0, 0, 0)
+
+			// 更新相机和控制器
+			camera.updateProjectionMatrix()
+			controls.update()
+
+			console.log('相机位置:', camera.position)
+			console.log('模型位置:', model.position)
+			console.log('模型缩放:', model.scale)
+			console.log('控制器目标:', controls.target)
+
+			// 添加点击检测
+			addClickDetection()
+			
+			// 获取拖拽提示元素
+			dragHintElement = document.querySelector('.drag-hint')
+		},
+		(progress) => {
+			console.log('Loading progress:', (progress.loaded / progress.total * 100) + '%')
+		},
+		(error) => {
+			console.error('Error loading GLB model:', error)
+			console.error('错误详情:', error.message)
+			console.error('请确认模型文件路径: /水翼艇.glb 是否正确')
+		}
+	)
+
+	// 渲染循环
+	function animate() {
+		requestAnimationFrame(animate)
+
+		// 更新轨道控制器
+		controls.update()
+
+		// 渲染场景
+		renderer.render(scene, camera)
+	}
+
+	animate()
+	console.log('渲染循环已启动')
+}
+
+// 3D控制按钮方法
+function zoomIn() {
+	if (controls) {
+		const currentDistance = controls.getDistance()
+		const newDistance = Math.max(currentDistance * 0.8, controls.minDistance)
+		controls.dollyTo(newDistance, true)
+	}
+}
+
+function zoomOut() {
+	if (controls) {
+		const currentDistance = controls.getDistance()
+		const newDistance = Math.min(currentDistance * 1.25, controls.maxDistance)
+		controls.dollyTo(newDistance, true)
+	}
+}
+
+function flipX() {
+	if (model) {
+		modelRotationY.value += Math.PI
+		model.rotation.y = modelRotationY.value
+	}
+}
+
+function flipY() {
+	if (model) {
+		modelRotationX.value += Math.PI
+		model.rotation.x = modelRotationX.value
+	}
+}
+
+function resetModel() {
+	if (model && controls) {
+		// 重置拖拽状态
+		isDragging = false
+		
+		// 重置模型旋转
+		modelRotationX.value = 0
+		modelRotationY.value = 0
+		model.rotation.x = 0
+		model.rotation.y = 0
+		
+		// 重置模型位置到初始位置（旋转中心点）
+		if (modelInitialPosition) {
+			model.position.copy(modelInitialPosition)
+		} else {
+			model.position.set(0, 0, 0)
+		}
+		
+		// 确保启用固定点旋转模式
+		isFixedPointRotation.value = true
+		
+		// 设置OrbitControls为固定点旋转模式
+		controls.enableRotate = true
+		controls.enablePan = false
+		controls.target.set(0, 0, 0)
+		
+		// 重置相机位置
+		controls.reset()
+		
+		// 重置缩放
+		modelScale.value = 1
+		
+		// 重新计算最佳视角
+		const box = new THREE.Box3().setFromObject(model)
+		const size = box.getSize(new THREE.Vector3())
+		const distance = Math.max(size.x, size.y, size.z) * 1.0 // 从1.5减少到1.0，拉近视角
+		camera.position.set(0, distance * 0.3, distance)
+		camera.lookAt(0, 0, 0)
+		controls.update()
+		
+		console.log('模型已重置到初始状态，固定点旋转模式已启用')
+	}
+}
+
+// 切换旋转模式
+function toggleRotationMode() {
+	isFixedPointRotation.value = !isFixedPointRotation.value
+	console.log('旋转模式切换为:', isFixedPointRotation.value ? '固定点旋转' : '自由拖拽')
+	
+	if (controls) {
+		if (isFixedPointRotation.value) {
+			// 固定点旋转模式：启用OrbitControls旋转，禁用平移
+			controls.enableRotate = true
+			controls.enablePan = false
+			controls.target.set(0, 0, 0) // 设置旋转中心点
+			console.log('OrbitControls: 启用旋转，禁用平移')
+		} else {
+			// 自由拖拽模式：禁用OrbitControls，使用自定义拖拽
+			controls.enableRotate = false
+			controls.enablePan = false
+			console.log('OrbitControls: 禁用旋转和平移，使用自定义拖拽')
+		}
+	}
+	
+	// 如果切换到固定点旋转模式，重置模型位置到旋转中心
+	if (isFixedPointRotation.value && model) {
+		model.position.copy(rotationCenter)
+	}
+}
+
 // 隐藏设计弹窗
 function hideDesignModal() {
 	showDesignModal.value = false
@@ -1001,6 +1570,9 @@ function goHome() {
 onMounted(() => {
 	// 页面加载完成后的初始化逻辑
 	calculateLinePosition()
+
+	// 初始化3D模型
+	init3DModel()
 
 	// 初始化ResizeObserver
 	initResizeObserver()
@@ -1224,11 +1796,24 @@ onUnmounted(() => {
 }
 
 /* 中间3D产品展示定位 */
-.product-3d-showcase {
+.center-section {
 	position: absolute;
 	left: 50%;
-	top: 50%;
-	transform: translate(-50%, -50%);
+	top: 30%;
+	transform: translate(-50%, -30%);
+	width: 1200px;
+	height: 488px;
+	overflow: visible;
+	z-index: 10;
+}
+
+.product-3d-showcase {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: visible;
 }
 
 /* 右侧产品规格面板 */
@@ -1270,7 +1855,7 @@ onUnmounted(() => {
 	padding-bottom: 30px;
 	min-height: 60vh;
 	justify-content: flex-start;
-	z-index: 9999;
+	/* z-index: 9999; */
 }
 
 /* 动态连接线样式 */
@@ -2131,17 +2716,37 @@ onUnmounted(() => {
 	align-items: center;
 	justify-content: center;
 	perspective: 1000px;
+	overflow: visible;
+	position: relative;
+}
+
+.boat-3d-viewer {
+	width: 100%;
+	height: 100%;
+	background: transparent;
+	overflow: visible;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* 确保Three.js canvas居中显示 */
+.boat-3d-viewer canvas {
+	display: block !important;
 }
 
 .boat-3d-model {
 	position: relative;
-	/* width: 650px; */
-	height: 420px;
+	width: 100%;
+	height: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	transform: rotateX(5deg) rotateY(-10deg);
-	animation: boatFloat 4s ease-in-out infinite;
+	overflow: visible;
+	z-index: 200;
+	/* transform: rotateX(5deg) rotateY(-10deg);
+	animation: boatFloat 4s ease-in-out infinite; */
+	/* border:1px solid pink; */
 }
 
 .boat-image {
@@ -2929,4 +3534,16 @@ onUnmounted(() => {
 		max-width: 100%;
 	}
 }
+
+/* 3D容器样式 */
+.boat-3d-container-wrapper {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
 </style>
