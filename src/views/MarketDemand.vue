@@ -541,8 +541,8 @@ const nextImage = () => {
 </script>
 
 <template>
-  <div class="bg-center bg-no-repeat relative flex flex-col w-full overflow-hidden"
-       :style="`background: url('${icon3}'); background-size: 100% 100%; height: 100vh;`">
+  <div class="bg-center bg-no-repeat relative flex flex-col w-full overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900"
+    :style="`background: url('${icon3}'); background-size: 100% 100%; height: 100vh; font-family: 'Arial', sans-serif !important;`">
     <!-- 导航栏 -->
     <!-- 顶部导航栏 -->
     <nav class="top-nav">
@@ -570,7 +570,7 @@ const nextImage = () => {
     <!-- 主内容容器 -->
     <div class="flex flex-col lg:flex-row mt-[71px] main-content-container">
       <!-- 左侧内容 -->
-      <div class="w-[34%] flex items-center justify-center relative min-w-0">
+      <div class="w-[28%] flex items-center justify-center relative min-w-0">
         <!-- 圆圈容器 -->
         <div class="relative w-[830px] h-[830px] max-w-full max-h-full circle-container">
           <!-- 830x830 白色圆圈 -->
@@ -646,7 +646,7 @@ const nextImage = () => {
         <!-- 中间内容 -->
         <div class="flex-3 flex items-start justify-center px-0 py-4 lg:py-8 min-w-0">
           <div class="text-white w-full max-w-4xl">
-            <div class="bg-white/10 backdrop-blur-sm rounded-lg shadow-lg border border-white/20 p-4 lg:p-6">
+            <div class="bg-white/10 backdrop-blur-sm rounded-lg shadow-lg border border-white/20 p-3 lg:p-3">
               <div class="space-y-4" v-html="middleContent"></div>
             </div>
           </div>
@@ -662,8 +662,8 @@ const nextImage = () => {
               <div class="bg-white/10 pl-4 border-b border-white/20 shadow-inner">
                 <div class="flex items-center justify-between">
                   <div class="flex-1 my-2">
-                    <h2 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[20px] mb-1">{{ rightContent.name }}</h2>
-                    <p class="text-xs sm:text-xs md:text-sm lg:text-sm xl:text-base 2xl:text-[16px]">{{ rightContent.title }}</p>
+                    <h2 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[24px] mb-1" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);">{{ rightContent.name }}</h2>
+                    <p class="text-xs sm:text-xs md:text-sm lg:text-sm xl:text-base 2xl:text-[18px]" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);">{{ rightContent.title }}</p>
                   </div>
                   <div class="ml-2 lg:ml-4">
                     <img :src="rightContent.personImage" :alt="rightContent.name" class="w-[72px] h-[72px] lg:w-[92px] lg:h-[92px] rounded-[10px] object-cover shadow-xl" />
@@ -858,6 +858,7 @@ const nextImage = () => {
 	backdrop-filter: blur(10px);
 	z-index: 40;
 	padding: 15px 0;
+  font-family: 'Arial', sans-serif !important;
 }
 
 .nav-container {

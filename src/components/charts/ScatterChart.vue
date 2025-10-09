@@ -112,7 +112,7 @@ const getChartOptions = () => {
     xAxis: {
       type: 'value',
       min: 0,
-      max: 400,
+      max: 754,
       show: false,
       axisLabel: {
         show: props.isDetailed,
@@ -166,19 +166,20 @@ const getChartOptions = () => {
               x2: 1,
               y2: 0,
               colorStops: [
-                { offset: 0, color: '#0891b2' },
-                { offset: 1, color: '#22d3ee' }
+                { offset: 0, color: '#4FD1EB' },
+                { offset: 0.6, color: '#9AE4F3' },
+                { offset: 1, color: '#F7FCFE' }
               ]
             },
-            borderRadius: [3, 3, 3, 3],
+            borderRadius: [10, 10, 10, 10],
             shadowBlur: 8,
             shadowColor: 'rgba(34, 211, 238, 0.4)'
           }
         })),
-        barWidth: 8,
+        barWidth: props.isDetailed ? 12 : 8 ,
         backgroundStyle: {
           color: 'rgba(30, 41, 59, 0.6)',
-          borderRadius: [3, 3, 3, 3]
+          borderRadius: [10, 10, 10, 10]
         },
         showBackground: true,
         z: 1,

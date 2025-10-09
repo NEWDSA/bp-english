@@ -103,12 +103,12 @@ const getChartTitle = (chartType) => {
              isAmericaSelected.value ? "Market size of outdoor water sports equipment in the United States" :
              isMiddleEastSelected.value ? "Market size of water and outdoor sports equipment in the Middle East" :
              "Global market size of water outdoor sports equipment",
-    'scatter': isChinaSelected.value ? "The scale of China's ship leasing market" :
-               isSoutheastAsiaSelected.value ? "Market size of outdoor water sports equipment in Southeast Asia" :
-               isItalySelected.value ? "Market size of outdoor water sports equipment in Italy" :
-               isAmericaSelected.value ? "Market size of outdoor water sports equipment in the United States" :
-               isMiddleEastSelected.value ? "Market size of outdoor water sports equipment in the Middle East" :
-               "Global market size of water outdoor sports equipment",
+    'scatter': isChinaSelected.value ? "The scale of China's leisure yacht market" :
+               isSoutheastAsiaSelected.value ? "The scale of the leisure yacht market in Southeast Asia" :
+               isItalySelected.value ? "The scale of the Italian leisure yacht market" :
+               isAmericaSelected.value ? "The scale of the recreational yacht market in the United States" :
+               isMiddleEastSelected.value ? "The scale of the leisure yacht market in the Middle East" :
+               "Global leisure yacht market size",
     'pie': isChinaSelected.value ? "Age structure of Chinese ship owners" :
            isSoutheastAsiaSelected.value ? "Age structure of shipowners in Southeast Asia" :
            isItalySelected.value ? "Age structure of Italian shipowners" :
@@ -219,11 +219,11 @@ const handleCityClick = (cityInfo) => {
               </div>
             </div>
 
-            <!-- 图表4：全球水上户外运动装备市场规模 -->
+            <!-- 图表4：全球的休闲游艇规模 -->
             <div class="text-white">
               <div class="flex items-center h-12">
                 <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
-                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[14px]">{{ isChinaSelected ? "Water sports equipment in China" : isSoutheastAsiaSelected ? "Water sports equipment in Southeast Asia" : isItalySelected ? "Water sports equipment in Italy" : isAmericaSelected ? "Water sports equipment in the United States" : isMiddleEastSelected ? "Water sports equipment in the Middle East" : "Global market size of water outdoor sports equipment" }}</p>
+                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[14px]">{{ isChinaSelected ? "China's leisure yacht scale" : isSoutheastAsiaSelected ? "The scale of leisure yachts in Southeast Asia" : isItalySelected ? "The scale of leisure yachts in Italy" : isAmericaSelected ? "Recreational yachting in the United States" : isMiddleEastSelected ? "The scale of leisure yachts in the Middle East" : "Global leisure yachting market size" }}</p>
               </div>
               <div :style="{ height: chartHeight }">
                 <EChartsComponent chart-type="scatter" :selected-city="selectedCity" @chart-click="handleChartClick" />
@@ -286,7 +286,7 @@ const handleCityClick = (cityInfo) => {
                   :class="showSummary ? 'animate-in fade-in-90 slide-in-from-top-2' : 'animate-out fade-out-90 slide-out-to-top-2'"
                 >
                   <!-- 内容 -->
-                  <div class="text-gray-100 text-xs sm:text-sm md:text-base lg:text-lg 2xl:text-[20px] leading-relaxed">
+                  <div class="text-gray-100 text-xs sm:text-sm md:text-base lg:text-lg 2xl:text-[18px] leading-relaxed">
                     <template v-if="isChinaSelected">
                       <p class="mb-3 font-semibold text-cyan-400">Guiding Opinions on Promoting the Development of Energy Electronics Industry</p>
                       <p class="mb-3">
@@ -492,6 +492,7 @@ const handleCityClick = (cityInfo) => {
 	backdrop-filter: blur(10px);
 	z-index: 40;
 	padding: 15px 0;
+  font-family: 'Arial', sans-serif !important;
 }
 
 .nav-container {
