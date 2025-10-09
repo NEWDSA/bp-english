@@ -645,7 +645,7 @@ const nextImage = () => {
       <div class="flex flex flex-col lg:flex-row content-scroll-container">
         <!-- 中间内容 -->
         <div class="flex-3 flex items-start justify-center px-0 py-4 lg:py-8 min-w-0">
-          <div class="text-white w-full max-w-4xl">
+          <div class="text-white w-full">
             <div class="bg-white/10 backdrop-blur-sm rounded-lg shadow-lg border border-white/20 p-3 lg:p-3">
               <div class="space-y-4" v-html="middleContent"></div>
             </div>
