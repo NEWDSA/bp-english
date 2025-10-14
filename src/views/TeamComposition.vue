@@ -40,15 +40,13 @@
 
         <!-- 主要内容区域 -->
         <div class="main-content" :class="{ panelsOpen: hasAnyPanelOpen }">
+			<!-- 职位介绍独立显示区域 -->
+			
+
 			<!-- 上半部分 - 水平布局 -->
 			<div class="top-section">
 				<!-- 左侧内容 - 创始人信息 -->
 				<div class="left-section">
-					<!-- 创始人标题 -->
-					<div v-if="hasActiveMember" class="founder-header">
-						<h1 class="founder-title">{{ getCurrentMemberTitle() }}</h1>
-						<h2 class="founder-name">{{ getCurrentMemberName() }}</h2>
-					</div>
 
 					<!-- 工作经验（点击展开） -->
 					<div v-if="hasActiveMember" class="info-section" :class="{ active: expanded.work }" @click="togglePanel('work')">
@@ -140,7 +138,7 @@
 						<div class="member-role">Strategic Planner</div>
 						<img class="member-avatar" src="../assets/strategicPlanner.png" alt="Strategic Planner" />
 					</div>
-					<div style="width: 200px;">Team members gather top talents in the four core fields of ship
+					<div class="team-description-text">Team members gather top talents in the four core fields of ship
 						engineering, intelligent systems, corporate internal control, finance, taxation, and legal
 						affairs.</div>
 				</div>
@@ -517,6 +515,23 @@ function getCurrentMemberName() {
 	return names[currentMember] || 'Team Member'
 }
 
+function getCurrentMemberImage() {
+	if (!hasActiveMember.value) {
+		return ''
+	}
+	const currentMember = getCurrentActiveMember()
+	const images = {
+		ceo: 'ceo.png',
+		cfo: 'cfo.png',
+		coo: 'coo.png',
+		engineer: 'engineer.png',
+		interactionEngineer: 'interactionEngineer.png',
+		structuralEngineer: 'structuralEnginner.png',
+		strategicPlanner: 'strategicPlanner.png'
+	}
+	return getAssetImage(images[currentMember] || '')
+}
+
 function getCurrentActiveMember() {
 	if (isCeoBackground.value) return 'ceo'
 	if (isCfoBackground.value) return 'cfo'
@@ -704,8 +719,8 @@ onMounted(() => {
 
 <style scoped>
 .team-members-title {
-	font-size: 16px;
-	font-weight: 600;
+	font-size: 36px;
+	font-weight: 300;
 	color: #ffffff;
 	margin-bottom: 8px;
 	text-align: left;
@@ -915,9 +930,84 @@ onMounted(() => {
 	box-shadow: 0 0 14px rgba(0, 212, 255, 0.4);
 }
 
+/* 独立职位介绍显示区域 */
+.member-profile-display {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	z-index: 100;
+	background: rgba(0, 0, 0, 0.3);
+	backdrop-filter: blur(15px);
+	border-radius: 20px;
+	padding: 40px;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+	animation: profileFadeIn 0.5s ease-out;
+}
+
+@keyframes profileFadeIn {
+	from {
+		opacity: 0;
+		transform: translate(-50%, -50%) scale(0.8);
+	}
+	to {
+		opacity: 1;
+		transform: translate(-50%, -50%) scale(1);
+	}
+}
+
 /* 创始人信息样式 */
 .founder-header {
 	margin-bottom: 60px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: relative;
+}
+
+.position-label {
+	background: rgba(0, 212, 255, 0.2);
+	border: 2px solid rgba(0, 212, 255, 0.6);
+	border-radius: 8px;
+	padding: 8px 20px;
+	font-size: 18px;
+	font-weight: 600;
+	color: #ffffff;
+	margin-bottom: 20px;
+	backdrop-filter: blur(10px);
+	box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+	text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
+
+.member-portrait {
+	position: relative;
+	margin-bottom: 20px;
+	width: 180px;
+	height: 220px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.portrait-image {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
+	border-radius: 12px;
+	border: 3px solid #00d4ff;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 212, 255, 0.4);
+	transition: all 0.3s ease;
+}
+
+.portrait-image:hover {
+	transform: scale(1.02);
+	border-color: #00d4ff;
+	box-shadow: 0 12px 40px rgba(0, 212, 255, 0.3), 0 0 30px rgba(0, 212, 255, 0.6);
 }
 
 .founder-title {
@@ -933,6 +1023,7 @@ onMounted(() => {
 	font-weight: 400;
 	color: #ffffff;
 	margin-bottom: 0;
+	text-align: center;
 }
 
 .info-section {
@@ -1183,14 +1274,22 @@ onMounted(() => {
 	align-items: center;
 }
 
+.team-description-text {
+	width: 200px;
+	font-size: 20px;
+	color: #ffffff;
+	line-height: 1.4;
+	text-align: left;
+}
+
 /* 成员卡片外框样式 */
 .member-card {
-	width: 120px;
-	padding: 10px 10px 12px 10px;
-	border-radius: 16px;
+	/* width: 120px; */
+	/* padding: 10px 10px 12px 10px; */
+	/* border-radius: 16px; */
 	background: rgba(0, 0, 0, 0.25);
 	backdrop-filter: blur(6px);
-	border: 1px solid rgba(255, 255, 255, 0.18);
+	/* border: 1px solid rgba(255, 255, 255, 0.18); */
 	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), inset 0 0 0 1px rgba(0, 212, 255, 0.15);
 	display: flex;
 	flex-direction: column;
@@ -1205,20 +1304,27 @@ onMounted(() => {
 /* 职位胶囊标签 */
 .member-role {
 	color: #e6faff;
-	font-size: 12px;
-	font-weight: 700;
-	margin-bottom: 8px;
+	font-size: 20px;
+	/* font-weight: 700; */
+	margin-bottom:4px;
 	text-shadow: 0 0 8px rgba(0, 212, 255, 0.5);
 	display: block;
 	width: 100%;
 	text-align: center;
+	background: rgba(0, 212, 255, 0.2);
+	border: 2px solid #00d4ff;
+	border-radius: 6px;
+	padding: 4px 8px;
+	backdrop-filter: blur(10px);
+	box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+	white-space: nowrap;
 }
 
 /* 统一头像尺寸与边框 */
 .member-card .member-avatar {
-	width: 86px;
-	height: 116px;
-	border-radius: 12px;
+	/* width: 114px; */
+     /* height: 154px; */
+	border-radius: 5px;
 	border: 2px solid rgba(255, 255, 255, 0.25);
 	box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
 }
