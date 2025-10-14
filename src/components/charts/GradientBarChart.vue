@@ -116,6 +116,27 @@ const getChartOptions = () => {
 
   return {
     backgroundColor: 'transparent',
+    legend: props.isDetailed ? {
+      bottom: '3%',
+      left: 'center',
+      itemGap: 80,
+      textStyle: {
+        color: '#ffffff',
+        fontSize: 12,
+        padding: [0, 0, 0, 4]
+      },
+      data: [
+        {
+          name: 'Output value (in billions of US dollars)',
+          icon: 'circle',
+          itemStyle: {
+            color: '#14E1D5'
+          }
+        },
+      ],
+      itemWidth: 48,  // Width for icons
+      itemHeight: 8   // Height for icons
+    } : undefined,
     grid: {
       left: '5%',
       right: '5%',
@@ -155,7 +176,7 @@ const getChartOptions = () => {
     },
     series: [
       {
-        name: 'Gradient Bars',
+        name: 'Output value (in billions of US dollars)',
         data: regionData.data,
         type: 'bar',
         barWidth: '60%',

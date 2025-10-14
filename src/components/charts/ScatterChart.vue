@@ -102,6 +102,27 @@ const getChartOptions = () => {
 
   return {
     backgroundColor: 'transparent',
+    legend: props.isDetailed ? {
+      bottom: '3%',
+      left: 'center',
+      itemGap: 80,
+      textStyle: {
+        color: '#ffffff',
+        fontSize: 12,
+        padding: [0, 0, 0, 4]
+      },
+      data: [
+        {
+          name: 'Output value (in billions of US dollars)',
+          icon: 'circle',
+          itemStyle: {
+            color: '#14E1D5'
+          }
+        },
+      ],
+      itemWidth: 48,  // Width for icons
+      itemHeight: 8   // Height for icons
+    } : undefined,
     grid: {
       left: '8%',
       right: '12%',
@@ -154,7 +175,7 @@ const getChartOptions = () => {
     series: [
       // 进度条
       {
-        name: 'Progress Bars',
+        name: 'Output value (in billions of US dollars)',
         type: 'bar',
         data: regionData.data.map((value, index) => ({
           value: value,
