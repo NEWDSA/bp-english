@@ -562,7 +562,7 @@ function getCurrentMemberName() {
 		coo: 'Leo',
 		engineer: 'Ben',
 		interactionEngineer: 'John',
-		structuralEngineer: 'Jef',
+		structuralEngineer: 'Jeff',
 		strategicPlanner: 'Zhiliao Zheng'
 	}
 	return names[currentMember] || 'Team Member'
