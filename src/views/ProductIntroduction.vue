@@ -182,13 +182,11 @@
 			<div class="center-section">
 				<div class="product-3d-showcase">
 					<div class="boat-3d-model">
-					<!-- 3D船体模型 -->
+						<!-- 静态图片展示（替换原3D模型容器） -->
 						<div class="boat-3d-container-wrapper">
-							<div
-								ref="boat3DContainer"
-								class="boat-3d-viewer"
-								style="width: 1200px; height: 800px;"
-							></div>
+							<div class="boat-3d-viewer" style="width: 1200px; height: 800px; display: flex; align-items: center; justify-content: center;">
+								<img :src="currentBoatImage" alt="Hydrofoil Boat" class="boat-image" style="max-width: 100%; max-height: 100%; object-fit: contain;" />
+							</div>
 						</div>
 					</div>
 				</div>
@@ -557,8 +555,9 @@ import { ref, onMounted, onUnmounted, computed, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import * as echarts from 'echarts'
 import * as THREE from 'three'
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+// GLB与三维交互已移除
+// import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+// import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
 // 移除复杂的外部依赖，使用内联方案
 // 导入船只图片资源
@@ -1301,10 +1300,8 @@ function renderSimulationCharts() {
 
 // 初始化3D模型
 function init3DModel() {
-	if (!boat3DContainer.value) {
-		console.error('3D容器未找到')
-		return
-	}
+	// 项目不再需要3D模型，跳过初始化
+	return
 
 	// 创建场景
 	scene = new THREE.Scene()
@@ -1571,8 +1568,7 @@ onMounted(() => {
 	// 页面加载完成后的初始化逻辑
 	calculateLinePosition()
 
-	// 初始化3D模型
-	init3DModel()
+	// 项目不再使用GLB与WebGL，跳过3D初始化
 
 	// 初始化ResizeObserver
 	initResizeObserver()
