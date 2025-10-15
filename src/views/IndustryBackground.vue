@@ -115,12 +115,12 @@ const getChartTitle = (chartType) => {
            isAmericaSelected.value ? "Age structure of American shipowners" :
            isMiddleEastSelected.value ? "Age structure of shipowners in the Middle East" :
            "Age structure of global shipowners",
-    'gradientBar': isChinaSelected.value ? "Age structure of Chinese ship owners" :
+    'gradientBar': isChinaSelected.value ? "China's ship leasing market" :
                    isSoutheastAsiaSelected.value ? "The scale of the ship leasing market in Southeast Asia" :
                    isItalySelected.value ? "The scale of the Italian ship leasing market" :
                    isAmericaSelected.value ? "The scale of the US ship leasing market" :
                    isMiddleEastSelected.value ? "The scale of the ship leasing market in the Middle East" :
-                   "The market size of the global small yacht manufacturing industry"
+                   "Global ship leasing market size"
   }
   return titles[chartType] || 'Chart Details'
 }
