@@ -46,35 +46,67 @@ const generateRegionData = (country) => {
   // 为每个地区定义一致的数据
   const regionData = {
     China: {
-      bar: [3.5, 4.3, 4.0, 4.5, 5.2, 6.0, 6.9],
+      bar: [0.21, 0.26, 0.24, 0.27, 0.31, 0.36, 0.41],
       line: ['hidden', 23.0, -7.9, 13.9, 15.0, 15.5, 15.3],
       xAxis: ['2015', '2018', '2020', '2021', '2022', '2023', '2024'],
     },
     Singapore: {
-      bar: [2.8, 4.2, 3.5, 4.6, 6.3, 7.1, 7.9],
+      bar: [0.17, 0.25, 0.21, 0.28, 0.38, 0.43,0.47],
       line: [5.3, 12.1, -16.7, 31.4, 11.2, 12.7, 12],
       xAxis: ['2015', '2018', '2020', '2021', '2022', '2023', '2024'],
     },
     Italy: {
-      bar: [16.4, 30.2, 25.3, 49.1, 58.4, 52.5, 47.3],
+      bar: [0.98, 1.81, 1.51, 2.95, 3.50, 3.15, 2.83],
       line: ['hidden', 22.7, -16.3, 94.4, 18.8, -10.0, -8.0],
       xAxis: ['2015', '2018', '2020', '2021', '2022', '2023', '2024'],
     },
     'United States': {
-      bar: [28.5, 32.8, 37.5, 41.2, 44.8, 48.3, 51.6],
+      bar: [1.71, 1.97, 2.25, 2.47, 2.69, 2.90, 3.10],
       line: ['hidden', 4.82, 6.9, 9.87, 8.87, 7.81, 6.83],
       xAxis: ['2015', '2018', '2020', '2021', '2022', '2023', '2024'],
     },
     'United Arab Emirates': {
-      bar: [3.2, 4.4, 3.9, 4.6, 5.3, 5.9, 6.5],
+      bar: [  0.19, 0.26, 0.23, 0.28, 0.32, 0.35, 0.39],
       line: ['hidden', 37.5, -11.4, 17.9, 15.2, 11.3, 10.2],
       xAxis: ['2015', '2018', '2020', '2021', '2022', '2023', '2024'],
     },
     global: {
-      bar: [170.4, 181.4, 244.1, 261.4, 303.5, 342.0, 303.8],
-      line: [165.2, 175.8, 230.5, 248.7, 285.3, 325.4, 290.6],
-      xAxis: ['2015', '2018', '2020', '2021', '2022', '2023', '2024'],
+      bar: [5.18, 5.46, 5.60, 5.78, 5.87, 5.92, 5.96, 6.21],
+      line: [5.18, 5.46, 5.60, 5.78, 5.87, 5.92, 5.96, 6.21],
+      xAxis: ['2015', '2018', '2019', '2020', '2021', '2022', '2023', '2024'],
     },
+
+    // 2025-10-20 备份数据
+    // China: {
+    //   bar: [3.5, 4.3, 4.0, 4.5, 5.2, 6.0, 6.9],
+    //   line: ['hidden', 23.0, -7.9, 13.9, 15.0, 15.5, 15.3],
+    //   xAxis: ['2015', '2018', '2020', '2021', '2022', '2023', '2024'],
+    // },
+    // Singapore: {
+    //   bar: [2.8, 4.2, 3.5, 4.6, 6.3, 7.1, 7.9],
+    //   line: [5.3, 12.1, -16.7, 31.4, 11.2, 12.7, 12],
+    //   xAxis: ['2015', '2018', '2020', '2021', '2022', '2023', '2024'],
+    // },
+    // Italy: {
+    //   bar: [16.4, 30.2, 25.3, 49.1, 58.4, 52.5, 47.3],
+    //   line: ['hidden', 22.7, -16.3, 94.4, 18.8, -10.0, -8.0],
+    //   xAxis: ['2015', '2018', '2020', '2021', '2022', '2023', '2024'],
+    // },
+    // 'United States': {
+    //   bar: [28.5, 32.8, 37.5, 41.2, 44.8, 48.3, 51.6],
+    //   line: ['hidden', 4.82, 6.9, 9.87, 8.87, 7.81, 6.83],
+    //   xAxis: ['2015', '2018', '2020', '2021', '2022', '2023', '2024'],
+    // },
+    // 'United Arab Emirates': {
+    //   bar: [3.2, 4.4, 3.9, 4.6, 5.3, 5.9, 6.5],
+    //   line: ['hidden', 37.5, -11.4, 17.9, 15.2, 11.3, 10.2],
+    //   xAxis: ['2015', '2018', '2020', '2021', '2022', '2023', '2024'],
+    // },
+    // global: {
+    //   bar: [170.4, 181.4, 244.1, 261.4, 303.5, 342.0, 303.8],
+    //   line: [165.2, 175.8, 230.5, 248.7, 285.3, 325.4, 290.6],
+    //   xAxis: ['2015', '2018', '2020', '2021', '2022', '2023', '2024'],
+    // },
   }
 
   let selectedData = regionData['global'] // 默认使用全球数据
@@ -200,7 +232,7 @@ const getChartOptions = () => {
         left: `${9 + (81 / (regionData.bar.length - 1)) * index}%`, // 根据图表网格定位
         top: '6%', // 固定在图表顶部位置
         style: {
-          text: Number(value).toFixed(1),
+          text: Number(value).toFixed(2),
           font: '20px Microsoft YaHei',  // 设置字体大小和字体族
           fill: '#ffffff',
           textAlign: 'center',
@@ -336,11 +368,17 @@ const getChartOptions = () => {
     backgroundColor: 'transparent',
     title: props.isDetailed && !props.selectedCity ? {
       text: 'Output value (in billions of US dollars)',
-      bottom: '2%',
+      subtext: 'About 70% of the value corresponds to manufacturing/new construction/delivery',
+      bottom: '0%',
       left: 'center',
       textStyle: {
         color: '#ffffff',
         fontSize: 12,
+        fontWeight: 'normal'
+      },
+      subtextStyle: {
+        color: 'rgba(255, 255, 255, 0.9)',
+        fontSize: 11,
         fontWeight: 'normal'
       }
     } : undefined,
@@ -426,9 +464,9 @@ const getChartOptions = () => {
           const lineData = []
 
           barData.forEach((value, barIndex) => {
-            const segmentCount = Math.floor(value / 10)
+            const segmentCount = Math.floor(value / 1)
             for (let i = 1; i < segmentCount; i++) {
-              lineData.push([barIndex, i * 10])
+              lineData.push([barIndex, i * 1])
             }
           })
 
