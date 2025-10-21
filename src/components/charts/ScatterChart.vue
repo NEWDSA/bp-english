@@ -44,19 +44,19 @@ const generateRegionData = () => {
   // 为每个地区定义一致的数据
   const regionData = {
     'China': {
-      detailed: [21.43, 31.43, 40.00, 48.57, 54.29 ],
+      detailed: [2.143, 3.143, 4.00, 4.857, 5.429 ],
       yAxis: ['2020', '2021', '2022', '2023', '2024']
     },
     'Singapore': {
-      detailed: [15.2, 17.8, 21.5, 25.6, 30.3],
+      detailed: [1.52, 1.78, 2.15, 2.56, 3.03],
       yAxis: ['2020', '2021', '2022', '2023', '2024']
     },
     'Italy': {
-      detailed: [50.31, 78.39, 91.26, 97.461, 100.62],
+      detailed: [5.031, 7.839, 9.126, 9.746, 10.062],
       yAxis: ['2020', '2021', '2022', '2023', '2024']
     },
     'United States': {
-      detailed: [307.92, 415.45, 518.62, 570.46, 556],
+      detailed: [4.619, 6.232, 7.779, 8.557, 8.34],
       yAxis: ['2020', '2021', '2022', '2023', '2024']
     },
     'United Arab Emirates': {
@@ -64,7 +64,7 @@ const generateRegionData = () => {
       yAxis: ['2020', '2021', '2022', '2023', '2024']
     },
     'global': {
-      detailed: [401.66, 544.57, 680.28, 752.29, 753.31],
+      detailed: [39.16, 40.54, 42.30, 44.21, 46.29],
       yAxis: ['2020', '2021', '2022', '2023', '2024']
     }
   }
@@ -133,7 +133,7 @@ const getChartOptions = () => {
     xAxis: {
       type: 'value',
       min: 0,
-      max: 754,
+      max: 50,
       show: false,
       axisLabel: {
         show: props.isDetailed,
