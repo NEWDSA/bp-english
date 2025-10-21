@@ -368,7 +368,7 @@ const getChartOptions = () => {
     backgroundColor: 'transparent',
     title: props.isDetailed && !props.selectedCity ? {
       text: 'Output value (in billions of US dollars)',
-      subtext: 'About 70% of the value corresponds to manufacturing/new construction/delivery',
+      // subtext: 'About 70% of the value corresponds to manufacturing/new construction/delivery',
       bottom: '0%',
       left: 'center',
       textStyle: {

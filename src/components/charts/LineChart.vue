@@ -173,7 +173,7 @@ const getChartOptions = () => {
         left: `${9 + (80 / (regionData.barData.length - 1)) * index}%`, // 根据图表网格定位
         top: '5%',
         style: {
-          text: Number(value).toFixed(3),
+          text: Number(value).toFixed(2),
           fontSize: 20,
           fontWeight: 'normal',
           fill: '#ffffffff',
