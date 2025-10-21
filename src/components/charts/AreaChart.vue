@@ -231,7 +231,7 @@ const getChartOptions = () => {
       left: `${7 + (84 / (regionData.area.length - 1)) * index}%`, // 根据图表网格定位
       top: '6%', // 固定在图表顶部位置
       style: {
-        text:  Number(value).toFixed(1),
+        text:  Number(value).toFixed(2),
         font: '20px Microsoft YaHei',  // 设置字体大小和字体族
         fill: '#ffffff',
         textAlign: 'center',
