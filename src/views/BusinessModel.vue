@@ -675,7 +675,8 @@ function renderModalCharts() {
 			title: {
 				text: 'When the cost of a single ship is 28,000$,break even sales volume is achieved',
 				textStyle: { fontSize: 16, color: '#333', fontWeight: 'normal' },
-				top: 5
+				top: 5,
+				left: 'center'
 			},
 			grid: { top: 50, bottom: 80, left: 40, right: 40 },
 
@@ -691,7 +692,7 @@ function renderModalCharts() {
 				left: '5%',
 				bottom: '7%',
 				style: {
-					text: 'Prices :10,000$',
+					text: 'Dollars :10,000$',
 					fontSize: '1vw',
 					color: '#333',
 					textAlign: 'left',
@@ -762,7 +763,8 @@ function renderModalCharts() {
 			title: {
 				text: 'When the cost of a single ship is 31,000$, break even sales volume is achieved',
 				textStyle: { fontSize: 16, color: '#333', fontWeight: 'normal' },
-				top: 5
+				top: 5,
+				left: 'center'
 			},
 			grid: { top: 50, bottom: 80, left: 40, right: 40 },
 			legend: {
@@ -777,7 +779,7 @@ function renderModalCharts() {
 				left: '5%',
 				bottom: '7%',
 				style: {
-					text: 'Prices :10,000$',
+					text: 'Dollars :10,000$',
 					fontSize: '1vw',
 					color: '#333',
 					textAlign: 'left',
@@ -848,7 +850,7 @@ function renderModalCharts() {
 		const option3 = {
 			title: {
 				text: 'When the cost of a single ship is 35,000$, break even sales volume is achieved',
-				textStyle: { fontSize: 9, color: '#333', fontWeight: 'normal' },
+				textStyle: { fontSize: 16, color: '#333', fontWeight: 'normal' },
 				top: 5,
 				left: 'center'
 			},
@@ -869,9 +871,9 @@ function renderModalCharts() {
 			graphic: {
 				type: 'text',
 				left: '5%',
-				bottom: '2%',
+				bottom: '7%',
 				style: {
-					text: 'Prices :10,000$',
+					text: 'Dollars :10,000$',
 					fontSize: '1vw',
 					color: '#333',
 					textAlign: 'left',
@@ -1027,7 +1029,7 @@ function renderModalCharts() {
 				left: '5%',
 				bottom: '7%',
 				style: {
-					text: 'Prices :10,000$',
+					text: 'Dollars :10,000$',
 					fontSize: '1vw',
 					color: '#333',
 					textAlign: 'left',
@@ -1112,7 +1114,7 @@ function renderModalCharts() {
 					type: 'line',
 					z: 3,
 					yAxisIndex: 0,
-					data: [13, 14, 14, 15, 15, 16, 16, 17, 18, 19, 20, 21, 23, 24],
+					data: [13, 14, 14, 15, 15, 16, 16, 17, 18, 19, 20, 21, 23, 24,26],
 					smooth: true,
 					symbol: 'circle',
 					symbolSize: 3,
