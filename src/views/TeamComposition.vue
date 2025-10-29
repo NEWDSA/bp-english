@@ -40,7 +40,7 @@
 					<!-- 竖线与圆点 -->
 					<div class="absolute left-[40px] top-1/4 bottom-1/4 w-1 bg-white/30 z-20"></div>
 					<div class="absolute left-[32px] top-1/2 transform -translate-y-1/2 z-30">
-						<div class="w-6 h-6 bg-white rounded-full flex items-center justify-center text-sm font-bold text-teal-600 shadow-lg">
+						<div class="w-6 h-6 bg-white rounded-full flex items-center justify-center text-sm font-bold shadow-lg">
 						</div>
 					</div>
 
@@ -65,16 +65,16 @@
 							<div class="max-w-4xl">
 								<!-- 经历部分 (只有吴关和龚亮显示) -->
 								<div v-if="selectedMember.name === '吴关' || selectedMember.name === '龚亮'" class="2xl:mb-10 mb-6">
-									<span class="text-xl text-gray-900 mb-4 flex items-center">
-										<span class="w-2 h-2 bg-gray-800 rounded-full mr-3"></span>
+									<span class="text-xl text-white mb-4 flex items-center">
+										<span class="w-2 h-2 bg-white/60 rounded-full mr-3"></span>
 										Experience
                                     </span>
 									<div class="pl-5 space-y-2">
 										<div v-for="(item, index) in formatListItems(selectedMember.professionalQualifications)"
 											:key="`qual-${index}`"
 											class="flex items-start group">
-											<span class="text-gray-600 mr-3 mt-1.5 text-xs">▸</span>
-											<p class="text-gray-700 text-base leading-relaxed flex-1 group-hover:text-gray-900 transition-colors">
+											<span class="text-white/70 mr-3 mt-1.5 text-xs">▸</span>
+											<p class="text-white/90 text-base leading-relaxed flex-1 group-hover:text-white transition-colors">
 												{{ item }}
 											</p>
 										</div>
@@ -83,12 +83,12 @@
 
 								<!-- 专长领域部分 (只有非吴关和非龚亮显示) -->
 								<div v-if="selectedMember.name !== '吴关' && selectedMember.name !== '龚亮'" class="2xl:mb-10 mb-6">
-									<span class="text-xl text-gray-900 mb-4 flex items-center">
-										<span class="w-2 h-2 bg-gray-700 rounded-full mr-3"></span>
+									<span class="text-xl text-white mb-4 flex items-center">
+										<span class="w-2 h-2 bg-white/60 rounded-full mr-3"></span>
 										Areas of expertise
 									</span>
-									<div class="pl-5 bg-gradient-to-r from-gray-50 to-white rounded-xl p-6 border border-gray-200">
-										<p class="text-gray-700 text-base leading-relaxed whitespace-pre-wrap">
+									<div class="pl-5 bg-white/10 rounded-xl p-6 border border-white/20 backdrop-blur-sm">
+										<p class="text-white/90 text-base leading-relaxed whitespace-pre-wrap">
 											{{ formatExpertiseWithLineBreaks(selectedMember.areasOfExpertise) }}
 										</p>
 									</div>
@@ -96,12 +96,12 @@
 
 								<!-- 主要职责部分 (只有非吴关和非龚亮显示) -->
 								<div v-if="selectedMember.name !== '吴关' && selectedMember.name !== '龚亮'">
-									<span class="text-xl text-gray-900 mb-4 flex items-center">
-										<span class="w-2 h-2 bg-gray-800 rounded-full mr-3"></span>
+									<span class="text-xl text-white mb-4 flex items-center">
+										<span class="w-2 h-2 bg-white/60 rounded-full mr-3"></span>
 										Main Responsibilities
                                     </span>
 									<div class="pl-5">
-										<p class="text-gray-700 text-base leading-loose text-justify">
+										<p class="text-white/90 text-base leading-loose text-justify">
 											{{ selectedMember.description }}
 										</p>
 									</div>
@@ -109,12 +109,12 @@
 
 								<!-- 个人简介部分 (只有吴关和龚亮显示) -->
 								<div v-if="selectedMember.name === '吴关' || selectedMember.name === '龚亮'">
-									<span class="text-xl text-gray-900 mb-4 flex items-center">
-										<span class="w-2 h-2 bg-gray-800 rounded-full mr-3"></span>
+									<span class="text-xl text-white mb-4 flex items-center">
+										<span class="w-2 h-2 bg-white/60 rounded-full mr-3"></span>
 										Personal Profile
                                     </span>
 									<div class="pl-5">
-										<p class="text-gray-700 text-base leading-loose text-justify">
+										<p class="text-white/90 text-base leading-loose text-justify">
 											{{ selectedMember.introduction }}
 										</p>
 									</div>
@@ -126,7 +126,7 @@
 						<div class="border-gray-200 px-12 py-8">
 							<!-- 标题 -->
 							<div class="flex items-center justify-between mb-6">
-								<h3 class="text-3xl bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">Y-H2O Team</h3>
+								<h3 class="text-3xl bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">Y-H2O Team</h3>
 							</div>
 
 							<!-- 履带式轮播容器 -->
@@ -172,7 +172,7 @@
 
 								<!-- 公司名称 -->
 								<div class="absolute left-[calc(50%+370px)]">
-									<h2 class="text-2xl text-gray-800">Y-H2O</h2>
+									<h2 class="text-2xl text-white">Y-H2O</h2>
 								</div>
 							</div>
 						</div>
@@ -291,7 +291,7 @@ const selectedMember = computed(() => teamMembers.value[selectedIndex.value])
 const formatListItems = (text: string) => {
     if (!text) return []
     // 按数字标记分割文本
-    const items = text.split(/\d+[:：]/)
+    const items = text.split(/\d+[.。]/)
         .filter(item => item.trim())
         .map(item => item.trim())
     return items
@@ -301,7 +301,7 @@ const formatListItems = (text: string) => {
 const formatExpertise = (text: string) => {
     if (!text) return ''
     // 移除数字标记，用逗号连接
-    const items = text.split(/\d+[:：]/)
+    const items = text.split(/\d+[.。]/)
         .filter(item => item.trim())
         .map(item => item.trim())
     return items.join('、')
@@ -310,7 +310,7 @@ const formatExpertise = (text: string) => {
 // 格式化专长领域并添加换行
 const formatExpertiseWithLineBreaks = (text: string) => {
     if (!text) return ''
-    const items = text.split(/\d+[:：]/)
+    const items = text.split(/\d+[.。]/)
         .filter(item => item.trim())
         .map((item, index, arr) => {
             const trimmed = item.trim()
@@ -667,12 +667,12 @@ const previousMember = () => {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: linear-gradient(45deg, #4e4e4e, #959595);
+    background: rgba(255, 255, 255, 0.3);
     border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(45deg, #4e4e4e, #959595);
+    background: rgba(255, 255, 255, 0.5);
 }
 
 /* 隐藏水平滚动条但保持滚动功能 */
@@ -713,5 +713,8 @@ button:hover {
 }
 button:focus, button:focus-visible {
     outline: none;
+}
+button {
+    background-color: rgba(255,255,255,0.8);
 }
 </style>
