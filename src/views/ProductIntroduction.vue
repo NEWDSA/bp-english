@@ -121,14 +121,14 @@
 										</div>
 									</div>
 								</div>
-								<div class="highlight-card team-members" @mouseenter="showTooltip('team')"
-									@mouseleave="hideTooltip">
-									<div v-if="activeTooltip !== 'team'">
+								<!-- <div class="highlight-card team-members" @mouseenter="showTooltip('team')"
+									@mouseleave="hideTooltip"> -->
+									<!-- <div v-if="activeTooltip !== 'team'">
 										<img :src="wheel2Img" alt="Team Members" class="highlight-icon" />
 										<div class="highlight-title">Team Members</div>
-									</div>
+									</div> -->
 									<!-- 悬停时显示的详细信息 -->
-									<div v-if="activeTooltip === 'team'" class="card-content">
+									<!-- <div v-if="activeTooltip === 'team'" class="card-content">
 										<div class="card-title">Team Members</div>
 										<p><strong>U/C-shaped wing design:</strong></p>
 										<p>The front wing (U-shaped) and rear wing (C-shaped) feature streamlined
@@ -136,8 +136,8 @@
 										<p><strong>Resistance quick assembly system:</strong></p>
 										<p>Reduced transportation volume, with on-site assembly efficiency increased by
 											50%.</p>
-									</div>
-								</div>
+									</div> -->
+								<!-- </div> -->
 								<div class="highlight-card adaptive-algorithm" @mouseenter="showTooltip('adaptive')"
 									@mouseleave="hideTooltip">
 									<div v-if="activeTooltip !== 'adaptive'">
@@ -1824,6 +1824,7 @@ onUnmounted(() => {
 	border: 1px solid rgba(255, 255, 255, 0.3);
 	width: 409px;
 	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+	z-index: 10000;
 	padding-left: 29px;
 }
 
@@ -1851,7 +1852,7 @@ onUnmounted(() => {
 	padding-bottom: 30px;
 	min-height: 60vh;
 	justify-content: flex-start;
-	/* z-index: 9999; */
+	z-index: 10000;
 }
 
 /* 动态连接线样式 */
