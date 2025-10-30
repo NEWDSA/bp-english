@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-col h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900">
+	<div class="flex flex-col h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900 relative">
 		<!-- 顶部导航栏 -->
 		<nav class="flex-shrink-0  top-nav">
 			<div class="nav-container">
@@ -25,7 +25,7 @@
 
 		<!-- 背景视频 -->
 		<video
-			class="w-full h-full object-cover"
+			class="absolute inset-0 w-full h-full object-cover"
 			src="../assets/video/video-1.mp4"
 			autoplay
 			muted
