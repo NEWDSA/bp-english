@@ -192,7 +192,7 @@ import CFO from '../assets/team/4.png'
 import EngineerPng from '../assets/team/3.png'
 import qiang from '../assets/team/5.png'
 import Jeff from '../assets/team/6.jpg'
-import zhiliao from '../assets/team/7.png' 
+import zhiliao from '../assets/team/7.jpg' 
 const router = useRouter()
 
 // 导航到首页
