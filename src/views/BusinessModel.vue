@@ -1566,13 +1566,13 @@ onMounted(() => {
 	transition: all 0.3s ease;
 	padding: 5px;
 	border-radius: 50%;
-	background: rgba(255, 255, 255, 0.1);
+	/* background: rgba(255, 255, 255, 0.1); */
 	backdrop-filter: blur(10px);
 }
 
 .home-btn:hover {
-	background: rgba(0, 212, 255, 0.2);
-	transform: scale(1.1);
+	/* background: rgba(0, 212, 255, 0.2);
+	transform: scale(1.1); */
 }
 
 .home-icon {
