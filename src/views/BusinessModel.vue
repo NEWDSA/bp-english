@@ -1576,8 +1576,8 @@ onMounted(() => {
 }
 
 .home-icon {
-	width: 20px;
-	height: 20px;
+	width: 25px;
+	height: 25px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
