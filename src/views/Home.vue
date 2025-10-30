@@ -11,6 +11,14 @@
 		>
 			<source :src="homeVideo" type="video/mp4">
 		</video>
+		<!-- 背景音乐 -->
+		<audio
+			ref="audioRef"
+			:src="bgMusic"
+			loop
+			preload="auto"
+			:volume="0.5"
+		></audio>
 		<!-- 左上：CATALOGUE 块（标题与子项为一个整体） -->
 		<div class="catalogue-wrap" :class="{ 'is-open': showCatalogue }">
 			<!-- <button class="catalogue-head" type="button" @click="toggleCatalogue" :aria-expanded="showCatalogue ? 'true' : 'false'">CATALOGUE</button> -->
@@ -67,15 +75,18 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, onMounted, onBeforeUnmount, watch } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import homeVideo from '../assets/home_compressed.mp4'
 import yihaiLogo from '../assets/logoh20.png'
+import bgMusic from '../assets/video/music.mp3'
 
 const router = useRouter()
+const route = useRoute()
 
 const showCatalogue = ref(false)
 const showCompanyInfo = ref(false)
+const audioRef = ref(null)
 
 // 页面相关状态
 
@@ -106,37 +117,89 @@ function hideCompanyInfo() {
 	showCompanyInfo.value = false
 }
 
+function stopMusic() {
+	if (audioRef.value) {
+		audioRef.value.pause()
+		audioRef.value.currentTime = 0
+	}
+}
+
 function navigateToIndustry() {
 	showCatalogue.value = false
+	stopMusic()
 	router.push('/industry-background')
 }
 
 function navigateToMarket() {
 	showCatalogue.value = false
+	stopMusic()
 	router.push('/market-demand')
 }
 
 function navigateToBusiness() {
 	showCatalogue.value = false
+	stopMusic()
 	router.push('/business-model')
 }
 
 function navigateToTeam() {
 	showCatalogue.value = false
+	stopMusic()
 	router.push('/team-composition')
 }
 
 function navigateToProduct() {
 	showCatalogue.value = false
+	stopMusic()
 	router.push('/product-introduction')
 }
 
-onMounted(() => { 
-	document.addEventListener('keydown', onKeydown) 
+onMounted(() => {
+	document.addEventListener('keydown', onKeydown)
+	// 确保DOM完全加载后再尝试播放
+	setTimeout(() => {
+		// 只在首页路由（/）时播放音乐
+		if (audioRef.value) {
+			audioRef.value.volume = 0.5 // 设置音量为50%
+			audioRef.value.play().catch(error => {
+				console.log('自动播放失败，等待用户交互:', error)
+				// 添加点击事件来播放音乐
+				const playMusic = () => {
+					if (audioRef.value) {
+						audioRef.value.play().catch(e => console.log('播放失败:', e))
+					}
+					document.removeEventListener('click', playMusic)
+					document.removeEventListener('touchstart', playMusic)
+				}
+				document.addEventListener('click', playMusic)
+				document.addEventListener('touchstart', playMusic) // 移动端支持
+			})
+		}
+	}, 100)
 })
 
-onBeforeUnmount(() => { 
-	document.removeEventListener('keydown', onKeydown) 
+// 监听路由变化
+watch(() => route.path, (newPath) => {
+	// 如果不是首页，停止音乐
+	if (newPath !== '/' && audioRef.value) {
+		stopMusic()
+	}
+	// 如果回到首页，尝试播放音乐
+	else if (newPath === '/' && audioRef.value) {
+		audioRef.value.volume = 0.5
+		audioRef.value.play().catch(error => {
+			console.log('播放失败:', error)
+		})
+	}
+})
+
+onBeforeUnmount(() => {
+	document.removeEventListener('keydown', onKeydown)
+	// 清理音频
+	if (audioRef.value) {
+		audioRef.value.pause()
+		audioRef.value.currentTime = 0
+	}
 })
 </script>
 
