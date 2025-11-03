@@ -692,7 +692,7 @@ function renderModalCharts() {
 				left: '5%',
 				bottom: '7%',
 				style: {
-					text: 'Dollars :10,000$',
+					text: 'Price: US Dollars',
 					fontSize: '1vw',
 					color: '#333',
 					textAlign: 'left',
@@ -779,7 +779,7 @@ function renderModalCharts() {
 				left: '5%',
 				bottom: '7%',
 				style: {
-					text: 'Dollars :10,000$',
+					text: 'Price: US Dollars',
 					fontSize: '1vw',
 					color: '#333',
 					textAlign: 'left',
@@ -873,7 +873,7 @@ function renderModalCharts() {
 				left: '5%',
 				bottom: '7%',
 				style: {
-					text: 'Dollars :10,000$',
+					text: 'Price: US Dollars',
 					fontSize: '1vw',
 					color: '#333',
 					textAlign: 'left',
@@ -1029,7 +1029,7 @@ function renderModalCharts() {
 				left: '5%',
 				bottom: '7%',
 				style: {
-					text: 'Dollars :10,000$',
+					text: 'Price: US Dollars',
 					fontSize: '1vw',
 					color: '#333',
 					textAlign: 'left',
