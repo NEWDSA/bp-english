@@ -81,17 +81,17 @@ const updateMiddleContent = (contentType) => {
       <div class="mb-5">
         <div class="flex items-center mb-2">
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[24px] text-white">Core customers:</h3>
+          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Core customers:</h3>
         </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[18px] space-y-2 ml-5 items-center mb-2">
+        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5 items-center mb-2">
           <p>tourism platforms, environmental logistics companies, high-end camping resorts</p>
           <p>technology elites and environmental pioneers, industry KOLs</p>
         </div>
         <div class="flex items-center pt-2">
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[24px] text-white">Seed users: </h3>
+          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Seed users: </h3>
         </div>
-         <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[18px] space-y-2 ml-5 items-center">
+         <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5 items-center">
           <p>technology elites and environmental pioneers, industry KOLs</p>
         </div>
       </div>
@@ -99,9 +99,9 @@ const updateMiddleContent = (contentType) => {
       <div class="mb-5">
         <div class="flex items-center mb-2">
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[24px] text-white">Basic information and requirements:</h3>
+          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Basic information and requirements:</h3>
         </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[18px] space-y-2 ml-5">
+        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5">
           <p>There are extremely high requirements for the environmental performance of ships, which comply with strict EU environmental regulations</p>
           <p>Emphasize innovative technology experience and pursue high performance and security, while also requiring a comprehensive after-sales and maintenance network</p>
         </div>
@@ -110,9 +110,9 @@ const updateMiddleContent = (contentType) => {
       <div class="mb-5">
         <div class="flex items-center mb-2">
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[24px] text-white">Type:</h3>
+          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Type:</h3>
         </div>
-        <p class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[18px] leading-relaxed ml-5">
+        <p class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] leading-relaxed ml-5">
           High end sightseeing boat, green logistics boat, high-tech leisure boat, catering to both B-end procurement and C-end high-end consumers.
         </p>
       </div>
@@ -120,9 +120,9 @@ const updateMiddleContent = (contentType) => {
       <div>
         <div class="flex items-center mb-2">
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[24px] text-white">Market opportunity:</h3>
+          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Market opportunity:</h3>
         </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[18px] space-y-2 ml-5">
+        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5">
           <p>The European Union is one of the world's largest markets for large LNG carriers, with a market share of approximately 30%.</p>
           <p>The tourism economy in the Mediterranean and Nordic islands is developed, and there is a stable demand for green and efficient sea transportation tools.</p>
           <p>The EU's "Green Agreement" drives the upgrade of traditional shipping, providing huge subsidies and policy benefits for new energy ships.</p>
@@ -136,17 +136,17 @@ const updateMiddleContent = (contentType) => {
       <div class="mb-5">
         <div class="flex items-center mb-2">
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[24px] text-white">Core customers:</h3>
+          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Core customers:</h3>
         </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[18px] space-y-2 ml-5 mb-5">
+        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5 mb-5">
           <p>Royal affiliated enterprises, national energy companies, high-end tourism development groups</p>
         </div>
 
         <div class="flex items-center">
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[24px] text-white">Seed users: </h3>
+          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Seed users: </h3>
         </div>
-         <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[18px] space-y-2 ml-5 items-center">
+         <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5 items-center">
           <p>Wealthy class, high-tech enterprises</p>
         </div>
       </div>
@@ -154,9 +154,9 @@ const updateMiddleContent = (contentType) => {
       <div class="mb-5">
         <div class="flex items-center mb-2">
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[24px] text-white">Basic information and requirements:</h3>
+          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Basic information and requirements:</h3>
         </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[18px] space-y-2 ml-5">
+        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5">
           <p>Pursuing ultimate luxury, customization, and high performance, with low price sensitivity</p>
           <p>As a symbol of identity and a 'mobile luxury palace', ships need to be designed to highlight their nobility</p>
           <p>Need to adapt to high temperature environments and meet specific religious and cultural customs</p>
@@ -166,9 +166,9 @@ const updateMiddleContent = (contentType) => {
       <div class="mb-5">
         <div class="flex items-center mb-2">
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[24px] text-white">Type:</h3>
+          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Type:</h3>
         </div>
-        <p class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[18px] leading-relaxed ml-5">
+        <p class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] leading-relaxed ml-5">
           Mainly targeting the B-end market, government and state-owned enterprises, and some C-end users
         </p>
       </div>
@@ -176,9 +176,9 @@ const updateMiddleContent = (contentType) => {
       <div>
         <div class="flex items-center mb-2">
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[24px] text-white">Market opportunity:</h3>
+          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Market opportunity:</h3>
         </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[18px] space-y-2 ml-5">
+        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5">
           <p>LNG expansion plans in countries such as Qatar and Saudi Arabia have generated a demand for high-end, green shipping solutions.</p>
           <p>Saudi Arabia's "2030 Vision" vigorously develops tourism and logistics industries, and large-scale tourism projects in the Red Sea require supporting maritime transportation.</p>
           <p>The wealthy class is vast and an important sales market for top luxury yachts worldwide.</p>
@@ -191,16 +191,16 @@ const updateMiddleContent = (contentType) => {
       <div class="mb-5">
         <div class="flex items-center mb-2">
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[24px] text-white">Core customers:</h3>
+          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Core customers:</h3>
         </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[18px] space-y-2 ml-5 mb-5">
+        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5 mb-5">
           <p>National Park Service, large boat rental chain brands, diving service companies</p>
         </div>
         <div class="flex items-center">
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[24px] text-white">Seed users: </h3>
+          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Seed users: </h3>
         </div>
-         <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[18px] space-y-2 ml-5 items-center">
+         <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5 items-center">
           <p>yacht and water sports operators</p>
         </div>
       </div>
@@ -208,9 +208,9 @@ const updateMiddleContent = (contentType) => {
       <div class="mb-5">
         <div class="flex items-center mb-2">
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[24px] text-white">Basic information and needs:</h3>
+          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Basic information and needs:</h3>
         </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[18px] space-y-2 ml-5">
+        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5">
           <p>preference for high displacement and high-performance boats (8% of high-end users) and comfortable and safe leisure and entertainment boats (67% of general users)</p>
           <p>Emphasize brand reputation and entertainment attributes, and have high requirements for the convenience and flexibility of leasing services</p>
           <p>The demand for financing purchase and leasing solutions is widespread among C-end users</p>
@@ -220,9 +220,9 @@ const updateMiddleContent = (contentType) => {
       <div class="mb-5">
         <div class="flex items-center mb-2">
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[24px] text-white">Type:</h3>
+          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Type:</h3>
         </div>
-        <p class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[18px] leading-relaxed ml-5">
+        <p class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] leading-relaxed ml-5">
           High horsepower sports speedboat, family leisure boat, park shuttle boat, with a high market share in the C-end market.
         </p>
       </div>
@@ -230,9 +230,9 @@ const updateMiddleContent = (contentType) => {
       <div>
         <div class="flex items-center mb-2">
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[24px] text-white">Market opportunity:</h3>
+          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Market opportunity:</h3>
         </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[18px] space-y-2 ml-5">
+        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5">
           <p>The United States is the world's largest yacht consumer market, with a water sports equipment market size of $79.9 billion by 2023.</p>
           <p>There are numerous national parks and private lakes, and there are a large number of government orders for the upgrading of green transportation within the scenic areas.</p>
           <p>The demand for outdoor leisure and entertainment continues to be strong, and the rental market is active.</p>
@@ -245,17 +245,17 @@ const updateMiddleContent = (contentType) => {
       <div class="mb-5">
         <div class="flex items-center mb-2">
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[24px] text-white">Core customers:</h3>
+          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Core customers:</h3>
         </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[18px] space-y-2 ml-5 mb-5">
+        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5 mb-5">
           <p>local governments and large state-owned enterprises</p>
         </div>
 
         <div class="flex items-center">
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[24px] text-white">Seed users: </h3>
+          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Seed users: </h3>
         </div>
-         <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[18px] space-y-2 ml-5 items-center">
+         <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5 items-center">
           <p>Yacht and water sports operators</p>
         </div>
       </div>
@@ -263,9 +263,9 @@ const updateMiddleContent = (contentType) => {
       <div class="mb-5">
         <div class="flex items-center mb-2">
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[24px] text-white">Basic information and requirements:</h3>
+          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Basic information and requirements:</h3>
         </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[18px] space-y-2 ml-5">
+        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5">
           <p>The cost-effectiveness of higher products requires environmental protection and intelligent technology, which is easy to manage</p>
           <p>Comprehensive after-sales service</p>
         </div>
@@ -274,9 +274,9 @@ const updateMiddleContent = (contentType) => {
       <div class="mb-5">
         <div class="flex items-center mb-2">
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[24px] text-white">Type:</h3>
+          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Type:</h3>
         </div>
-        <p class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[18px] leading-relaxed ml-5">
+        <p class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] leading-relaxed ml-5">
           Mainly targeting the B-end market, government and state-owned enterprises, and some C-end users
         </p>
       </div>
@@ -284,9 +284,9 @@ const updateMiddleContent = (contentType) => {
       <div>
         <div class="flex items-center mb-2">
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[24px] text-white">Market opportunity:</h3>
+          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Market opportunity:</h3>
         </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[18px] space-y-2 ml-5">
+        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5">
           <p>China is the "core engine" of global shipbuilding, with a global share of over 45% in ship exports by 2024.</p>
           <p>The demand for gas powered boats in the market has significantly increased.</p>
           <p>The green and intelligent transformation of inland and coastal vessels is a clear direction, and the plan is to achieve comprehensive green and intelligent transformation of inland vessels by 2030.</p>
@@ -300,17 +300,17 @@ const updateMiddleContent = (contentType) => {
       <div class="mb-5">
         <div class="flex items-center mb-2">
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[24px] text-white">Core customers:</h3>
+          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Core customers:</h3>
         </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[18px] space-y-2 ml-5 mb-5">
+        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5 mb-5">
           <p>High end resort groups, emerging shipping companies, yacht clubs</p>
         </div>
 
         <div class="flex items-center">
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[24px] text-white">Seed users: </h3>
+          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Seed users: </h3>
         </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[18px] space-y-2 ml-5 items-center">
+        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5 items-center">
           <p>Local tourism operators and start-up technology companies</p>
         </div>
       </div>
@@ -318,9 +318,9 @@ const updateMiddleContent = (contentType) => {
       <div class="mb-5">
         <div class="flex items-center mb-2">
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[24px] text-white">Basic information and requirements:</h3>
+          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Basic information and requirements:</h3>
         </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[18px] space-y-2 ml-5">
+        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5">
           <p>Highly concerned about the cost-effectiveness and operating costs of products</p>
           <p>Ships need to adapt to high temperature and high salinity tropical marine environments with strong corrosion resistance</p>
           <p>There are requirements for the product's multifunctionality (such as being able to meet both connectivity and sightseeing needs)</p>
@@ -330,9 +330,9 @@ const updateMiddleContent = (contentType) => {
       <div class="mb-5">
         <div class="flex items-center mb-2">
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[24px] text-white">Type:</h3>
+          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Type:</h3>
         </div>
-        <p class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[18px] leading-relaxed ml-5">
+        <p class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] leading-relaxed ml-5">
           High end private yachts, island shuttle ships, and offshore transport ships are mainly purchased from the B-end.
         </p>
       </div>
@@ -340,9 +340,9 @@ const updateMiddleContent = (contentType) => {
       <div>
         <div class="flex items-center mb-2">
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[24px] text-white">Market opportunity:</h3>
+          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Market opportunity:</h3>
         </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[18px] space-y-2 ml-5">
+        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5">
           <p>Southeast Asia's island tourism industry is recovering rapidly, and the development of new vacation projects is driving demand for new transportation tools.</p>
           <p>The growth of regional trade and the deepening of the "the Belt and Road" initiative promote the development of green offshore shipping.</p>
           <p>The upgrading of infrastructure in various countries has led to an increase in demand for ships related to port dredging and engineering construction.</p>
@@ -355,17 +355,17 @@ const updateMiddleContent = (contentType) => {
       <div class="mb-6">
         <div class="flex items-center mb-2">
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[24px] text-white">Target Customers:</h3>
+          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Target Customers:</h3>
         </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[18px] space-y-2 ml-5">
+        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5">
           <p>High end resort groups, emerging shipping companies, yacht clubs</p>
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
         </div>
         <div class="flex items-center mt-2">
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[24px] text-white">Seed users: </h3>
+          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Seed users: </h3>
         </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[18px] space-y-2 ml-5 items-center">
+        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5 items-center">
           <p>Local tourism operators and start-up technology companies</p>
         </div>
       </div>
@@ -373,9 +373,9 @@ const updateMiddleContent = (contentType) => {
       <div class="mb-6">
         <div class="flex items-center mb-2">
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[24px] text-white">Requirements:</h3>
+          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Requirements:</h3>
         </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[18px] space-y-2 ml-5">
+        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5">
           <p>Highly concerned about cost-effectiveness and operating costs of products</p>
           <p>Ships need to adapt to high temperature and high salinity tropical marine environments with strong corrosion resistance</p>
           <p>Requirements for product multifunctionality (connectivity and sightseeing needs)</p>
@@ -385,9 +385,9 @@ const updateMiddleContent = (contentType) => {
       <div class="mb-6">
         <div class="flex items-center mb-2">
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[24px] text-white">Type:</h3>
+          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Type:</h3>
         </div>
-        <p class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[18px] leading-relaxed ml-5">
+        <p class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] leading-relaxed ml-5">
           High end private yachts, island shuttle ships, and offshore transport ships are mainly purchased from the B-end
         </p>
       </div>
@@ -395,9 +395,9 @@ const updateMiddleContent = (contentType) => {
       <div>
         <div class="flex items-center mb-2">
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[24px] text-white">Market Opportunity:</h3>
+          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Market Opportunity:</h3>
         </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[18px] space-y-2 ml-5">
+        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5">
           <p>Southeast Asia's island tourism industry is recovering rapidly, driving demand for new transportation tools</p>
           <p>Growth of regional trade and "Belt and Road" initiative promote green offshore shipping development</p>
           <p>Infrastructure upgrading increases demand for port dredging and engineering construction ships</p>
@@ -662,8 +662,8 @@ const nextImage = () => {
               <div class="bg-white/10 pl-4 border-b border-white/20 shadow-inner">
                 <div class="flex items-center justify-between">
                   <div class="flex-1 my-2">
-                    <h2 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[24px] mb-1" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);">{{ rightContent.name }}</h2>
-                    <p class="text-xs sm:text-xs md:text-sm lg:text-sm xl:text-base 2xl:text-[18px]" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);">{{ rightContent.title }}</p>
+                    <h2 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[28px] mb-1" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);">{{ rightContent.name }}</h2>
+                    <p class="text-xs sm:text-xs md:text-sm lg:text-sm xl:text-base 2xl:text-[20px]" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);">{{ rightContent.title }}</p>
                   </div>
                   <div class="ml-2 lg:ml-4">
                     <img :src="rightContent.personImage" :alt="rightContent.name" class="w-[72px] h-[72px] lg:w-[92px] lg:h-[92px] rounded-[10px] object-cover shadow-xl" />
@@ -674,15 +674,15 @@ const nextImage = () => {
               <!-- 需求内容 -->
               <div class="bg-white/10 p-4 shadow-inner">
                 <div class="space-y-4">
-                  <p class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[18px]">
+                  <p class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px]">
                     {{ rightContent.bio }}
                   </p>
 
                   <div>
-                    <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[24px] items-center">
+                    <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] items-center">
                       Core Requirements:
                     </h3>
-                    <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[18px]">
+                    <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px]">
                       <p v-for="(requirement, index) in rightContent.requirements" :key="index" :class="{'border-b pb-1 pt-1 border-white/20': index < rightContent.requirements.length - 1}">
                         {{ requirement }}
                       </p>
@@ -712,7 +712,7 @@ const nextImage = () => {
           ></video>
           <div class="image-mask absolute inset-0 bg-black/30 flex items-center justify-center transition-opacity duration-300">
             <div class="text-content bg-black/50 px-4 py-2 rounded w-full text-center">
-              <p class="text-white text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[18px]">Inter island transportation</p>
+              <p class="text-white text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[22px]">Inter island transportation</p>
             </div>
           </div>
         </div>
@@ -730,7 +730,7 @@ const nextImage = () => {
           ></video>
           <div class="image-mask absolute inset-0 bg-black/30 flex items-center justify-center transition-opacity duration-300">
             <div class="text-content bg-black/50 px-4 py-2 rounded w-full text-center">
-              <p class="text-white text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[18px]">Urban water system transportation</p>
+              <p class="text-white text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[22px]">Urban water system transportation</p>
             </div>
           </div>
         </div>
@@ -748,7 +748,7 @@ const nextImage = () => {
           ></video>
           <div class="image-mask absolute inset-0 bg-black/30 flex items-center justify-center transition-opacity duration-300">
             <div class="text-content bg-black/50 px-4 py-2 rounded w-full text-center">
-              <p class="text-white text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[18px]">Water sports and fishing</p>
+              <p class="text-white text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[22px]">Water sports and fishing</p>
             </div>
           </div>
         </div>
@@ -766,7 +766,7 @@ const nextImage = () => {
           ></video>
           <div class="image-mask absolute inset-0 bg-black/30 flex items-center justify-center transition-opacity duration-300">
             <div class="text-content bg-black/50 px-4 py-2 rounded w-full text-center">
-              <p class="text-white text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[18px]">Tourist attraction</p>
+              <p class="text-white text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[22px]">Tourist attraction</p>
             </div>
           </div>
         </div>
@@ -827,18 +827,18 @@ const nextImage = () => {
 	transition: all 0.3s ease;
 	padding: 5px;
 	border-radius: 50%;
-	background: rgba(255, 255, 255, 0.1);
+	/* background: rgba(255, 255, 255, 0.1); */
 	backdrop-filter: blur(10px);
 }
 
 .home-btn:hover {
-	background: rgba(0, 212, 255, 0.2);
-	transform: scale(1.1);
+	/* background: rgba(0, 212, 255, 0.2);
+	transform: scale(1.1); */
 }
 
 .home-icon {
-	width: 20px;
-	height: 20px;
+	width: 25px;
+	height: 25px;
 	display: flex;
 	align-items: center;
 	justify-content: center;

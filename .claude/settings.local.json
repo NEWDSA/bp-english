@@ -10,7 +10,8 @@
       "Bash(curl:*)",
       "WebFetch(domain:globe.gl)",
       "WebSearch",
-      "Read(//c/Users/kk/Desktop/**)"
+      "Read(//c/Users/kk/Desktop/**)",
+      "Bash(grep:*)"
     ],
     "deny": [],
     "ask": []

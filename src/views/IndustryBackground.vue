@@ -171,7 +171,7 @@ const handleCityClick = (cityInfo) => {
           <div class="mb-[30px] xl:mb-8 flex-shrink-0">
             <div class="flex items-center text-white">
               <img src="../assets/icon-1.png" alt="Icon" class="w-[27px] h-[28px] mr-3" />
-              <p class="text-sm md:text-sm lg:text-lg xl:text-xl 2xl:text-[20px]">Industry Background - {{ isChinaSelected ? 'China' : isSoutheastAsiaSelected ? 'Southeast Asia' : isItalySelected ? 'Italian' : isAmericaSelected ? 'America' : isMiddleEastSelected ? 'Middle East' : 'Global' }}</p>
+              <p class="text-sm md:text-sm lg:text-lg xl:text-xl 2xl:text-[24px]">Industry Background - {{ isChinaSelected ? 'China' : isSoutheastAsiaSelected ? 'Southeast Asia' : isItalySelected ? 'Italian' : isAmericaSelected ? 'America' : isMiddleEastSelected ? 'Middle East' : 'Global' }}</p>
             </div>
           </div>
 
@@ -181,7 +181,7 @@ const handleCityClick = (cityInfo) => {
             <div class="text-white">
               <div class="flex items-center h-12">
                 <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
-                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[14px]">{{ isChinaSelected ? "China's small yacht manufacturing industry" : isSoutheastAsiaSelected ? "Small yacht manufacturing industry in Southeast Asia" : isItalySelected ? "Italian small yacht manufacturing industry" : isAmericaSelected ? "Small yacht manufacturing industry in the United States" : isMiddleEastSelected ? "Small yacht manufacturing industry in the Middle East" : "Global small yacht manufacturing industry" }}</p>
+                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">{{ isChinaSelected ? "China's small yacht manufacturing industry" : isSoutheastAsiaSelected ? "Small yacht manufacturing industry in Southeast Asia" : isItalySelected ? "Italian small yacht manufacturing industry" : isAmericaSelected ? "Small yacht manufacturing industry in the United States" : isMiddleEastSelected ? "Small yacht manufacturing industry in the Middle East" : "Global small yacht manufacturing industry" }}</p>
               </div>
               <div :style="{ height: chartHeight }">
                 <EChartsComponent chart-type="bar" :selected-city="selectedCity" @chart-click="handleChartClick" />
@@ -192,7 +192,7 @@ const handleCityClick = (cityInfo) => {
             <div class="text-white">
               <div class="flex items-center h-12">
                 <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
-                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[14px]">{{ isChinaSelected ? "China's Small Yacht Sales Market" : isSoutheastAsiaSelected ? "Water sports equipment in Southeast Asia" : isItalySelected ? "Italian small yacht sales market" : isAmericaSelected ? "Size of the Small Yacht Sales Market in the United States" : isMiddleEastSelected ? "Scale of Small Yacht Sales Market in the Middle East" : "Global small yacht sales market size" }}</p>
+                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">{{ isChinaSelected ? "China's Small Yacht Sales Market" : isSoutheastAsiaSelected ? "Water sports equipment in Southeast Asia" : isItalySelected ? "Italian small yacht sales market" : isAmericaSelected ? "Size of the Small Yacht Sales Market in the United States" : isMiddleEastSelected ? "Scale of Small Yacht Sales Market in the Middle East" : "Global small yacht sales market size" }}</p>
               </div>
               <div :style="{ height: chartHeight }">
                 <EChartsComponent chart-type="area" :selected-city="selectedCity" @chart-click="handleChartClick" />
@@ -203,7 +203,7 @@ const handleCityClick = (cityInfo) => {
             <div class="text-white">
               <div class="flex items-center h-12 z-2 relative">
                 <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
-                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[14px]">
+                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">
                   <template v-if="isChinaSelected">Water sports equipment in China(growth rate)</template>
                   <template v-else-if="isSoutheastAsiaSelected">Water sports equipment in Southeast Asia(growth rate)</template>
                   <template v-else-if="isItalySelected">Water sports equipment in Italy(growth rate)</template>
@@ -223,7 +223,7 @@ const handleCityClick = (cityInfo) => {
             <div class="text-white">
               <div class="flex items-center h-12">
                 <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
-                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[14px]">{{ isChinaSelected ? "China's leisure yacht scale" : isSoutheastAsiaSelected ? "The scale of leisure yachts in Southeast Asia" : isItalySelected ? "The scale of leisure yachts in Italy" : isAmericaSelected ? "Recreational yachting in the United States" : isMiddleEastSelected ? "The scale of leisure yachts in the Middle East" : "Global leisure yachting market size" }}</p>
+                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">{{ isChinaSelected ? "China's leisure yacht scale" : isSoutheastAsiaSelected ? "The scale of leisure yachts in Southeast Asia" : isItalySelected ? "The scale of leisure yachts in Italy" : isAmericaSelected ? "Recreational yachting in the United States" : isMiddleEastSelected ? "The scale of leisure yachts in the Middle East" : "Global leisure yachting market size" }}</p>
               </div>
               <div :style="{ height: chartHeight }">
                 <EChartsComponent chart-type="scatter" :selected-city="selectedCity" @chart-click="handleChartClick" />
@@ -234,7 +234,7 @@ const handleCityClick = (cityInfo) => {
             <div class="text-white">
               <div class="flex items-center h-12">
                 <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
-                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[14px]">{{ isChinaSelected ? "China's ship leasing market" : isSoutheastAsiaSelected ? "The ship leasing market in Southeast Asia" : isItalySelected ? "The scale of the Italian ship leasing market" : isAmericaSelected ? "The scale of the US ship leasing market" : isMiddleEastSelected ? "The scale of the ship leasing market in the Middle East" : "Global ship leasing market size" }}</p>
+                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">{{ isChinaSelected ? "China's ship leasing market" : isSoutheastAsiaSelected ? "The ship leasing market in Southeast Asia" : isItalySelected ? "The scale of the Italian ship leasing market" : isAmericaSelected ? "The scale of the US ship leasing market" : isMiddleEastSelected ? "The scale of the ship leasing market in the Middle East" : "Global ship leasing market size" }}</p>
               </div>
               <div :style="{ height: chartHeight }">
                 <EChartsComponent chart-type="gradientBar" :selected-city="selectedCity" @chart-click="handleChartClick" />
@@ -245,7 +245,7 @@ const handleCityClick = (cityInfo) => {
             <div class="text-white">
               <div class="flex items-center h-12">
                 <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
-                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[14px]">{{ isChinaSelected ? "Age structure of Chinese ship owners" : isSoutheastAsiaSelected ? "Age structure of shipowners in Southeast Asia" : isItalySelected ? "Age structure of Italian shipowners" : isAmericaSelected ? "Age structure of American shipowners" : isMiddleEastSelected ? "Age structure of shipowners in the Middle East" : "Age structure of global shipowners" }}</p>
+                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">{{ isChinaSelected ? "Age structure of Chinese ship owners" : isSoutheastAsiaSelected ? "Age structure of shipowners in Southeast Asia" : isItalySelected ? "Age structure of Italian shipowners" : isAmericaSelected ? "Age structure of American shipowners" : isMiddleEastSelected ? "Age structure of shipowners in the Middle East" : "Age structure of global shipowners" }}</p>
               </div>
               <div :style="{ height: chartHeight }">
                 <EChartsComponent chart-type="pie" :selected-city="selectedCity" @chart-click="handleChartClick" />
@@ -464,18 +464,18 @@ const handleCityClick = (cityInfo) => {
 	transition: all 0.3s ease;
 	padding: 5px;
 	border-radius: 50%;
-	background: rgba(255, 255, 255, 0.1);
+	/* background: rgba(255, 255, 255, 0.1); */
 	backdrop-filter: blur(10px);
 }
 
 .home-btn:hover {
-	background: rgba(0, 212, 255, 0.2);
-	transform: scale(1.1);
+	/* background: rgba(0, 212, 255, 0.2); */
+	/* transform: scale(1.2); */
 }
 
 .home-icon {
-	width: 20px;
-	height: 20px;
+	width: 25px;
+	height: 25px;
 	display: flex;
 	align-items: center;
 	justify-content: center;

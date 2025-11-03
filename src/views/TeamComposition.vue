@@ -1,28 +1,7 @@
 <template>
-	<div class="team-composition">
-		<!-- 背景视频/图片 -->
-		<div class="video-background">
-			<video
-				v-if="!isCeoBackground && !isCfoBackground && !isCooBackground && !isEngineerBackground && !isInteractionEngineerBackground && !isStructuralEngineerBackground && !isStrategicPlannerBackground"
-				autoplay muted loop playsinline class="background-video">
-				<source src="../assets/team_bg_compressed.mp4" type="video/mp4">
-			</video>
-			<img v-if="isCeoBackground" src="../assets/ceo_bg.png" alt="CEO Background" class="background-image">
-			<img v-if="isCfoBackground" src="../assets/cfo_bg.png" alt="CFO Background" class="background-image">
-			<img v-if="isCooBackground" src="../assets/coo_bg.png" alt="COO Background" class="background-image">
-			<img v-if="isEngineerBackground" src="../assets/engineer_bg.png" alt="Engineer Background"
-				class="background-image">
-			<img v-if="isInteractionEngineerBackground" src="../assets/interactionEngineer_bg.png"
-				alt="Interaction Engineer Background" class="background-image">
-			<img v-if="isStructuralEngineerBackground" src="../assets/structuralEngineer_bg.png"
-				alt="Structural Engineer Background" class="background-image">
-			<img v-if="isStrategicPlannerBackground" src="../assets/strategicPlanner_bg.png"
-				alt="Strategic Planner Background" class="background-image">
-			<div class="video-overlay"></div>
-		</div>
-
+	<div class="flex flex-col h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900">
 		<!-- 顶部导航栏 -->
-		<nav class="top-nav">
+		<nav class="flex-shrink-0  top-nav">
 			<div class="nav-container">
 				<!-- 返回首页按钮 -->
 				<div class="home-btn" @click="goHome">
@@ -44,820 +23,444 @@
 			</div>
 		</nav>
 
-		<!-- 主要内容区域 -->
-		<div class="main-content" :class="{ panelsOpen: hasAnyPanelOpen }">
-			<!-- 职位介绍独立显示区域 -->
 
+		<!-- 团队详情页 -->
+		<!-- min-h-screen  -->
+		<div class="bg-gradient-to-br to-magenta-900 overflow-hidden" style="height: calc(100vh - 56px);">
+			<div class="flex h-full">
+				<!-- 左侧人物区域 -->
+				<div class="w-[36%] relative overflow-hidden">
+					<!-- 背景图 -->
+					<div class="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-500"
+						:style="{ backgroundImage: `url(${selectedMember.image})` }"></div>
 
-			<!-- 上半部分 - 水平布局 -->
-			<div class="top-section">
-				<!-- 左侧内容 - 创始人信息 -->
-				<div class="left-section">
-					<div v-if="hasActiveMember" class="founder-header">
-						<h1 class="founder-title">{{ getCurrentMemberTitle() }}</h1>
-						<h2 class="founder-name">{{ getCurrentMemberName() }}</h2>
-					</div>
-					<!-- 工作经验（点击展开） -->
-					<div v-if="hasActiveMember" class="info-section" :class="{ active: expanded.work }"
-						@click="togglePanel('work')">
-						<div class="section-icon">
-							<img :src="getAssetImage('work.png')" alt="Work Experience" class="icon-image" />
+					<!-- 背景遮罩 -->
+					<div class="absolute inset-0 bg-black/30"></div>
+
+					<!-- 竖线与圆点 -->
+					<div class="absolute left-[40px] top-1/4 bottom-1/4 w-1 bg-white/30 z-20"></div>
+					<div class="absolute left-[32px] top-1/2 transform -translate-y-1/2 z-30">
+						<div class="w-6 h-6 bg-white rounded-full flex items-center justify-center text-sm font-bold shadow-lg">
 						</div>
-						<h3 class="section-title">{{ getWorkExperienceTitle() }}</h3>
-					</div>
-					<div v-if="hasActiveMember" class="expand-panel" :class="{ open: expanded.work }">
-						<p class="expand-text">{{ getWorkContent() }}</p>
 					</div>
 
-					<!-- 教育背景（点击展开） - 只在有内容时显示 -->
-					<div v-if="hasActiveMember && memberContent.education" class="info-section"
-						:class="{ active: expanded.education }" @click="togglePanel('education')">
-						<div class="section-icon">
-							<img :src="getAssetImage('edu.png')" alt="Educational Background" class="icon-image" />
-						</div>
-						<h3 class="section-title">Educational Background</h3>
+					<!-- 姓名与职位 -->
+					<div class="absolute left-20 top-1/4 z-20">
+						<span class="font-bold text-white tracking-wider text-[36px] font-[Times_New_Roman] transition-all duration-500">
+							{{ selectedMember.enName }}
+                        </span>
 					</div>
-					<div v-if="hasActiveMember && memberContent.education" class="expand-panel"
-						:class="{ open: expanded.education }">
-						<p class="expand-text">{{ memberContent.education }}</p>
-					</div>
-
-					<!-- 代表作品（点击展开） - 只在有图片时显示 -->
-					<div v-if="hasActiveMember && memberContent.worksImages.length > 0" class="info-section"
-						:class="{ active: expanded.works }" @click="togglePanel('works')">
-						<div class="section-icon">
-							<img :src="getAssetImage('video.png')" alt="Representative works" class="icon-image" />
-						</div>
-						<h3 class="section-title">Representative works (Delivered)</h3>
-					</div>
-					<div v-if="hasActiveMember && memberContent.worksImages.length > 0" class="expand-panel"
-						:class="{ open: expanded.works }">
-						<div class="works-grid">
-							<div v-for="(img, idx) in memberContent.worksImages" :key="idx" class="work-card"
-								@click="showWorksFullscreen">
-								<img :src="getAssetImage(img)" alt="work" />
-							</div>
-						</div>
+					<div class="absolute left-20 bottom-1/4 z-20">
+						<h2 class="text-[64px] font-bold text-white tracking-wider font-[Times_New_Roman] transition-all duration-500">
+							{{ selectedMember.role }}
+						</h2>
 					</div>
 				</div>
 
-				<!-- 右侧内容 -->
-				<div class="right-section">
-					<!-- 上方信息区域 -->
-					<div class="top-info">
-						<div class="info-item">
-							<div class="info-frame" @click="showWhoWeAreModal">
-								<h3 class="info-title">Who we are?</h3>
-							</div>
-						</div>
-						<div class="info-item">
-							<div class="info-frame" @click="showInvestmentHighlightsModal">
-								<h3 class="info-title">Investment Highlights</h3>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- 底部团队成员区域 -->
-			<div v-if="!showWhoWeAreContent && !showInvestmentHighlightsContent" class="bottom-section"
-				:class="{ collapsed: hasAnyPanelOpen }">
-				<div v-if="!hasAnyPanelOpen" class="team-members-grid">
-					<!-- Team Members -->
-					<div class="team-members-title">Team Members</div>
-					<!-- CEO -->
-					<div class="member-card" @click="toggleCeoBackground">
-						<div class="member-role">CEO</div>
-						<img class="member-avatar" src="../assets/ceo.png" alt="CEO" />
-					</div>
-					<div class="member-card" @click="toggleCfoBackground">
-						<div class="member-role">CFO</div>
-						<img class="member-avatar" src="../assets/cfo.png" alt="CFO" />
-					</div>
-					<div class="member-card" @click="toggleCooBackground">
-						<div class="member-role">COO</div>
-						<img class="member-avatar" src="../assets/coo.png" alt="COO" />
-					</div>
-					<div class="member-card" @click="toggleEngineerBackground">
-						<div class="member-role">Engineer</div>
-						<img class="member-avatar" src="../assets/engineer.png" alt="Engineer" />
-					</div>
-					<div class="member-card" @click="toggleInteractionEngineerBackground">
-						<div class="member-role">Interaction Engineer</div>
-						<img class="member-avatar" src="../assets/interactionEngineer.png" alt="Interaction Engineer" />
-					</div>
-					<div class="member-card" @click="toggleStructuralEngineerBackground">
-						<div class="member-role">Structural Engineer</div>
-						<img class="member-avatar" src="../assets/structuralEnginner.png" alt="Structural Engineer" />
-					</div>
-					<div class="member-card" @click="toggleStrategicPlannerBackground">
-						<div class="member-role">Strategic Planner</div>
-						<img class="member-avatar" src="../assets/strategicPlanner.png" alt="Strategic Planner" />
-					</div>
-					<div class="team-description-text">Team members gather top talents in the four core fields of ship
-						engineering, intelligent systems, corporate internal control, finance, taxation, and legal
-						affairs.</div>
-				</div>
-				<!-- 折叠时显示的恢复入口 -->
-				<div v-else class="team-toggle" @click="closeAllPanels">Team Members</div>
-			</div>
-
-			<!-- Who we are 中间显示内容 -->
-			<div v-if="showWhoWeAreContent" class="overlay-content-display">
-				<div class="overlay-close-btn" @click="closeWhoWeAreContent">
-					<svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-						<path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-					</svg>
-				</div>
-
-				<div class="overlay-content">
-					<h1 class="presentation-title">Who we are?</h1>
-
-					<div class="presentation-grid">
-						<div class="presentation-left">
-							<div class="content-block">
-								<h3 class="block-title">Company Overview</h3>
-								<p class="block-text">The world's first high-performance intelligent hydrofoil boat
-									focused on consumer and industry levels, solves the pain points of high energy
-									consumption and low efficiency of traditional ships through a "hardware + software
-									service" model.</p>
-							</div>
-
-							<div class="content-block">
-								<h3 class="block-title">Innovation Leadership</h3>
-								<p class="block-text">Outstanding leadership in core algorithms, dynamic control, and
-									route perception. Currently holds 9 domestic patents, 6 appearance patents, 3
-									utility model patents, and 1 invention patent.</p>
-							</div>
-						</div>
-
-						<div class="presentation-right">
-							<div class="content-block">
-								<h3 class="block-title">Key Achievements</h3>
-								<div class="achievements-list">
-									<div class="achievement-row">
-										<span class="year-label">2015</span>
-										<span class="achievement-desc">Earliest domestic entry into water-based consumer
-											transportation</span>
-									</div>
-									<div class="achievement-row">
-										<span class="year-label">2016</span>
-										<span class="achievement-desc">First to define new water tourism ships direction
-											in China</span>
-									</div>
-									<div class="achievement-row">
-										<span class="year-label">2024</span>
-										<span class="achievement-desc">First globally to complete 5M class hydrofoil
-											model experiment</span>
-									</div>
-									<div class="achievement-row">
-										<span class="bullet">•</span>
-										<span class="achievement-desc">Strongest integration capability in national
-											shipbuilding industry</span>
-									</div>
-									<div class="achievement-row">
-										<span class="bullet">•</span>
-										<span class="achievement-desc">Leading boat design with multiple latest water
-											technology products</span>
-									</div>
-									<div class="achievement-row">
-										<span class="bullet">•</span>
-										<span class="achievement-desc">Outstanding R&D capabilities with closed-loop
-											system</span>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- Investment Highlights 中间显示内容 -->
-			<div v-if="showInvestmentHighlightsContent" class="overlay-content-display">
-				<div class="overlay-close-btn" @click="closeInvestmentHighlightsContent">
-					<svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-						<path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-					</svg>
-				</div>
-
-				<div class="overlay-content">
-					<h1 class="presentation-title">Investment Highlights</h1>
-
-					<div class="presentation-grid">
-						<div class="presentation-left">
-							<div class="content-block">
-								<h3 class="block-title">Market Opportunity</h3>
-								<p class="block-text">Hydrofoil fusion is the best solution for ship electrification,
-									opening up a trillion dollar market. Current ship electrification is limited to
-									simple oil-to-electricity conversion, without fundamentally solving the
-									contradiction between energy consumption and propulsion efficiency. Hydrofoil
-									technology can truly solve and completely overturn the energy management mode of
-									traditional watercraft.</p>
-								<p class="block-text">High performance hydrofoil boats have been validated for their
-									value in multiple scenarios, and leading overseas companies are making efforts,
-									leaving a basic blank in China.</p>
-							</div>
-
-							<div class="content-block">
-								<h3 class="block-title">Core Competencies</h3>
-								<p class="block-text">Mastering the core industry chain with strong product innovation
-									capability, leading the development of the industry. We adhere to independent
-									research and production throughout the entire industry chain, with modular assembly
-									lines for components.</p>
-								<p class="block-text">Adhere to original design, improve product matrix, develop
-									intelligent control system, three-mode intelligent steering wheel, smart cabin,
-									terminal sales program, high-strength modular hydrofoil, and high-strength
-									lightweight material process of hull.</p>
-							</div>
-						</div>
-
-						<div class="presentation-right">
-							<div class="content-block">
-								<h3 class="block-title">Global Leadership Strategy</h3>
-								<p class="block-text">Actively globalizing and striving to become an absolute leader in
-									the consumer level field as soon as possible. Our past products have been recognized
-									by top domestic and international customers and have been implemented in various
-									scenarios such as technology, transportation, consumption, and cultural tourism.</p>
-								<p class="block-text">80% of our revenue comes from the transportation industry.</p>
-							</div>
-
-							<div class="content-block">
-								<h3 class="block-title">Future Innovation</h3>
-								<p class="block-text">Based on technological accumulation and significant advantages,
-									advance layout of consumer grade intelligent water transportation. Pioneering
-									cooperation with multiple leading domestic and overseas enterprises to jointly
-									promote the landing of AI + water transportation vehicles.</p>
-								<p class="block-text">The company will release a new form of product in July this year,
-									with no competition in the same scale, and will establish an absolute leading
-									advantage by combining the full chain experience of "product definition -
-									technological innovation - supply chain - channel".</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- 全屏作品展示弹窗 -->
-			<div v-if="showWorksModal" class="works-fullscreen-modal" @click="closeWorksModal">
-				<div class="works-modal-wrapper" @click.stop>
-					<!-- 关闭按钮 -->
-					<button class="works-close-btn" @click="closeWorksModal">
-						<svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-							<path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2"
-								stroke-linecap="round" />
-						</svg>
-					</button>
-
-					<div class="works-modal-content">
-						<!-- <div class="works-modal-header">
-						<h1 class="works-modal-title">Representative Works</h1>
-						<button class="works-close-btn" @click="closeWorksModal">
-							<svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-								<path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-							</svg>
-						</button>
-					</div> -->
-
-						<!-- <div class="works-images-grid">
-						<div v-for="i in 6" :key="i" class="works-image-item">
-							<img :src="getWorkImage(i)" :alt="`Work ${i}`" class="works-image" />
-							<div class="works-image-overlay">
-								<div class="works-image-number">{{ i }}</div>
-							</div>
-							<div v-if="i === 1" class="works-image-text">
-								<div class="works-project-number">1</div>
-								<div class="works-title">The Definer of the Future Water-X Pontoon</div>
-								<div class="works-details">
-									<div class="works-project">Project: Wuhu Pearl</div>
-									<div class="works-launch">Launch Date: September 2022</div>
-									<div class="works-location">Location: Wuhu, Anhui</div>
-								</div>
-							</div>
-						</div>
-					</div> -->
-						<div class="works-images-grid">
-							<template v-for="i in 6" :key="i">
-								<div class="works-image-item">
-									<img :src="getWorkImage(i)" :alt="`Work ${i}`" class="works-image" />
-
-									<!-- 第一张图片文字 -->
-									<div v-if="i === 1" class="works-text-overlay">
-										<div class="works-number">1</div>
-										<div class="works-title">The Definer of the Future Water-X Pontoon</div>
-										<div class="works-project">Project: Wuhu Pearl</div>
-										<div class="works-date">Launch Date: September 2022</div>
-										<div class="works-location">Location: Wuhu, Anhui</div>
-									</div>
-
-									<!-- 第二张图片文字 -->
-									<div v-if="i === 2" class="works-text-overlay">
-										<div class="works-number">2</div>
-										<div class="works-title">Definer of maritime cultural tourism vessels</div>
-										<div class="works-project">Project: Xunxian 1 and 2</div>
-										<div class="works-date">Landing Date: May 2017</div>
-										<div class="works-location">Location: Yantai, Qinhuangdao</div>
-									</div>
-
-									<!-- 第三张图片文字 -->
-									<div v-if="i === 3" class="works-text-overlay">
-										<div class="works-number">3</div>
-										<div class="works-title">Rich resources on B-side and G-side</div>
-										<div class="works-project">Project: Jiuzhou Bay No. 1 (Nezha)</div>
-										<div class="works-date">Landing Date: October 2020</div>
-										<div class="works-location">Location: Zhuhai, Guangdong</div>
-									</div>
-
-									<!-- 第四张图片文字 -->
-									<div v-if="i === 4" class="works-text-overlay">
-										<div class="works-number">4</div>
-										<div class="works-title">Pioneer of consumer transportation</div>
-										<div class="works-project">Project: Kun</div>
-										<div class="works-date">Landing Date: April 2024</div>
-										<div class="works-location">Location: Weihai, Shandong</div>
-									</div>
-
-									<!-- 第五张图片文字 -->
-									<div v-if="i === 5" class="works-text-overlay">
-										<div class="works-number">5</div>
-										<div class="works-title">Complete domestic and overseas channel network</div>
-										<div class="works-project">Project: ADAMAS</div>
-										<div class="works-date">Launch Date: March 2025</div>
-										<div class="works-location">Location: Ho Chi Minh City, Vietnam</div>
-									</div>
-
-									<!-- 第六张图片文字 -->
-									<div v-if="i === 6" class="works-text-overlay">
-										<div class="works-number">6</div>
-										<div class="works-title">Designer of the country's first smart yacht</div>
-										<div class="works-project">Project: Smart Boat No. 1</div>
-										<div class="works-date">Landing Date: October 2022</div>
-										<div class="works-location">Location: Guangdong-Hong Kong-Macao Greater Bay Area
+				<!-- 右侧内容区域 -->
+				<div class="w-[64%] bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900 flex flex-col justify-between">
+					<div class="flex flex-col h-full">
+						<!-- 成员介绍区域 -->
+						<div class="px-12 py-10 overflow-y-auto 2xl:h-[560px] xl:h-[400px]">
+							<div class="max-w-4xl">
+								<!-- 经历部分 (只有吴关和龚亮显示) -->
+								<div v-if="selectedMember.name === '吴关' || selectedMember.name === '龚亮'" class="2xl:mb-10 mb-6">
+									<span class="text-xl text-white mb-4 flex items-center">
+										<span class="w-2 h-2 bg-white/60 rounded-full mr-3"></span>
+										Experience
+                                    </span>
+									<div class="pl-5 space-y-2">
+										<div v-for="(item, index) in formatListItems(selectedMember.professionalQualifications)"
+											:key="`qual-${index}`"
+											class="flex items-start group">
+											<span class="text-white/70 mr-3 mt-1.5 text-xs">▸</span>
+											<p class="text-white/90 text-base leading-relaxed flex-1 group-hover:text-white transition-colors">
+												{{ item }}
+											</p>
 										</div>
-										<div class="works-extra">"Smart Yacht Interior Design Technology Research
-											Report"</div>
-										<div class="works-extra">"Smart Yacht Independent Development Project"</div>
-										<div class="works-extra">"Research on Exterior and Interior Design Technology of
-											Medium-Sized Luxury Cruise Ships"</div>
-										<div class="works-extra">"2023 Forward-Looking Research Project"</div>
 									</div>
 								</div>
-							</template>
+
+								<!-- 专长领域部分 (只有非吴关和非龚亮显示) -->
+								<div v-if="selectedMember.name !== '吴关' && selectedMember.name !== '龚亮'" class="2xl:mb-10 mb-6">
+									<span class="text-xl text-white mb-4 flex items-center">
+										<span class="w-2 h-2 bg-white/60 rounded-full mr-3"></span>
+										Areas of expertise
+									</span>
+									<div class="pl-5 bg-white/10 rounded-xl p-6 border border-white/20 backdrop-blur-sm">
+										<p class="text-white/90 text-base leading-relaxed whitespace-pre-wrap">
+											{{ formatExpertiseWithLineBreaks(selectedMember.areasOfExpertise) }}
+										</p>
+									</div>
+								</div>
+
+								<!-- 主要职责部分 (只有非吴关和非龚亮显示) -->
+								<div v-if="selectedMember.name !== '吴关' && selectedMember.name !== '龚亮'">
+									<span class="text-xl text-white mb-4 flex items-center">
+										<span class="w-2 h-2 bg-white/60 rounded-full mr-3"></span>
+										Main Responsibilities
+                                    </span>
+									<div class="pl-5">
+										<p class="text-white/90 text-base leading-loose text-justify">
+											{{ selectedMember.description }}
+										</p>
+									</div>
+								</div>
+
+								<!-- 个人简介部分 (只有吴关和龚亮显示) -->
+								<div v-if="selectedMember.name === '吴关' || selectedMember.name === '龚亮'">
+									<span class="text-xl text-white mb-4 flex items-center">
+										<span class="w-2 h-2 bg-white/60 rounded-full mr-3"></span>
+										Personal Profile
+                                    </span>
+									<div class="pl-5">
+										<p class="text-white/90 text-base leading-loose text-justify">
+											{{ selectedMember.introduction }}
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- 底部团队轮播区域 -->
+						<div class="border-gray-200 px-12 py-8">
+							<!-- 标题 -->
+							<div class="flex items-center justify-between mb-6">
+								<h3 class="text-3xl bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">Y-H2O Team</h3>
+							</div>
+
+							<!-- 履带式轮播容器 -->
+							<div class="relative w-full px-4 overflow-hidden">
+								<div class="flex transition-transform duration-500 ease-in-out"
+									:style="{ transform: `translateX(-${scrollPosition}px)` }">
+									<!-- 单一卡片组，使用两次循环实现无限滚动效果 -->
+									<template v-for="cycle in 2" :key="cycle">
+										<div v-for="(member, index) in teamMembers"
+											:key="`${cycle}-${index}`"
+											@click="selectMember(index)"
+											:class="[
+												'rounded-2xl p-4 cursor-pointer group flex-shrink-0 relative overflow-hidden border-white/20 mr-[30px] bg-cover bg-center ',
+												selectedIndex === index ? 'h-[360px]' : 'h-[320px]'
+											]"
+											:style="{
+												width: '256px',
+												boxSizing: 'border-box',
+												boxShadow: '0 0 10px rgba(0,0,0,0.15)',
+												zIndex: selectedIndex === index ? 20 : 10,
+												backgroundImage: `url(${member.image})`
+											}">
+										</div>
+									</template>
+								</div>
+							</div>
+
+							<!-- 导航按钮组 -->
+							<div class="flex mt-10 space-x-3 items-center w-full relative">
+								<button @click="previousMember"
+									class="cursor-pointer rounded-full text-gray-500 bg-white/50 hover:bg-black/70 transition-all duration-300 shadow-lg hover:shadow-sm transform hover:scale-105">
+									<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" />
+									</svg>
+								</button>
+
+								<button @click="nextMember"
+									class="cursor-pointer rounded-full text-gray-500 bg-white/50 hover:bg-black/70 transition-all duration-300 shadow-lg hover:shadow-sm transform hover:scale-105">
+									<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" />
+									</svg>
+								</button>
+
+								<!-- 公司名称 -->
+								<div class="absolute left-[calc(50%+370px)]">
+									<h2 class="text-2xl text-white">Y-H2O</h2>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-
 		</div>
-
 	</div>
 </template>
 
-<script setup>
-import { ref, onMounted, onUnmounted, computed } from 'vue'
+<script setup lang="ts">
 import { useRouter } from 'vue-router'
-
+import { ref, computed } from 'vue'
+import CEOPng from '../assets/team/1.jpg'
+import COOPng from '../assets/team/2.png'
+import CFO from '../assets/team/4.png'
+import EngineerPng from '../assets/team/3.png'
+import qiang from '../assets/team/5.png'
+import Jeff from '../assets/team/6.jpg'
+import zhiliao from '../assets/team/7.jpg' 
 const router = useRouter()
-const isCeoBackground = ref(false)
-const isCfoBackground = ref(false)
-const isCooBackground = ref(false)
-const isEngineerBackground = ref(false)
-const isInteractionEngineerBackground = ref(false)
-const isStructuralEngineerBackground = ref(false)
-const isStrategicPlannerBackground = ref(false)
 
-// lib-flexible 适配相关
-let cleanupFlexible = null
-
-// 展开面板状态
-const expanded = ref({ work: false, education: false, works: false })
-
-// 当前成员内容
-const memberContent = ref({ work: '', education: '', worksImages: [] })
-
-
-// 中间内容显示状态
-const showWhoWeAreContent = ref(false)
-const showInvestmentHighlightsContent = ref(false)
-const showWorksModal = ref(false)
-
-const hasAnyPanelOpen = computed(() => expanded.value.work || expanded.value.education || expanded.value.works)
-
-// 计算是否有活跃的成员被选中
-const hasActiveMember = computed(() => {
-	return isCeoBackground.value || isCfoBackground.value || isCooBackground.value ||
-		isEngineerBackground.value || isInteractionEngineerBackground.value ||
-		isStructuralEngineerBackground.value || isStrategicPlannerBackground.value
-})
-
-function goHome() {
+// 导航到首页
+const goHome = () => {
 	router.push('/')
 }
 
+// 团队成员数据
+const teamMembers = ref([
+    {
+        name: '吴关',
+        enName: 'Kevin',
+        role: 'CEO',
+        image: CEOPng,
+        description: '• Over 10 years of experience in ship design work • 2015-2017 Ferrari Group, Italy - Quality Control and After sales Manager • 2020/10-2022/10 School of Design and Art, China Academy of Art - Industrial Design Teacher • Hangzhou Yihai Ship Design Co., Ltd. - General Manager/Legal Representative • Yushui Flying (Shenzhen) Technology Co., Ltd. - General Manager',
+        professionalQualifications: '1. Bachelor of Industrial Design, China Academy of Art; 2. Master of Ship and Yacht Design, University of Genoa, Italy; 3. PhD in Marine Engineering Technology, University of Kuala Lumpur, Malaysia; 4. Internship at the headquarters of Ferretti Group in Italy, participating in yacht design and CMF design; 5. Extensive teaching and management experience in ship, yacht, and industrial product design; 6. Currently CEO of Hangzhou Yi Hai Ship Design Co., Ltd. and Zhuhai Yi Hai Ship Design Co., Ltd.',
+        areasOfExpertise: '1. Ship and Yacht Design (Exterior and Interior) 2. Industrial and Transportation Vehicle Styling Design 3. 3D Modeling and Rendering (Rhinoceros, KeyShot, Cinema 4D, etc.) 4. User Experience and Sustainable Design Teaching 5. Corporate Strategy and Design Management',
+        introduction: 'Possessing extensive experience in ship, yacht, and industrial design, with a background in both artistic creativity and engineering technology, he graduated from the China Academy of Art and furthered his studies at the University of Genoa in Italy and the University of Kuala Lumpur in Malaysia, focusing on ship and yacht design and marine engineering technology. He previously worked as an intern designer at the Ferretti Group in Italy, and later founded Italian Marine Design Company, leading numerous yacht and cruise ship projects, with his work winning numerous international awards. In addition to corporate management, he has also served as a university lecturer, dedicated to cultivating innovative design talent, integrating aesthetics and practicality, and promoting the internationalization of Chinese ship design.'
+    },
+    {
+        name: '龚亮',
+        enName: 'Liang Gong',
+        role: 'CFO',
+        image: CFO,
+        description: '• Founding Partner of Micro Light Innovation Investment • Responsible for tax laws, investment and financing',
+        professionalQualifications: '1. Bachelor of Accounting, Sichuan Normal University; currently a Master is Supervisor at the School of Economics and Management, Sichuan Normal University.2. Master of Economic Law, China University of Political Science and Law. 3. Master of Finance (Alternative Asset Management), Stanford University. 4. Private Equity Fund Manager (Primary Market). 5. Entrepreneurship Mentor at Shanghai Jiao Tong University, Sichuan University, University of Electronic Science and Technology of China, Hong Kong University of Science and Technology, and Macau University of Science and Technology. 6. Long-term experience in private equity investment, technology transfer, and IPO consulting.',
+        areasOfExpertise: '1. Private Equity Investment and Capital Operation; 2. Technology Transfer and Industrial Incubation; 3. Mergers & Acquisitions and IPO Planning (Mainland China, Hong Kong, Singapore, USA); 4. Innovation and Entrepreneurship Mentoring and Business Model Innovation Training; 5. Industrial Fund Management in Medical Devices, New Materials, Optoelectronics, and Military Industries.',
+        introduction: 'A seasoned private equity fund manager with a combined legal and financial background, he studied at China University of Political Science and Law and Stanford University, possessing solid industrial and capital operation capabilities. He has long been involved in technology transfer, industrial fund management, and IPO consulting, leading investments and exits in several well-known projects such as BLT, Andon Health, and Tengdun Technology, accumulating rich experience in capital operations and practical application. He previously worked at Blackstone Group, participating in numerous mergers and acquisitions of internationally renowned companies. Currently, he serves as an entrepreneurship mentor at several universities, dedicated to promoting the integration of technological innovation and capital, and contributing to high-quality industrial development.',
+    },
+    {
+        name: '陈坤灵',
+        enName: 'Leo',
+        role: 'COO',
+        image: COOPng,
+        description: '• Product development and delivery • Supply Chain Technology Management',
+        professionalQualifications: '1. Graduated from the School of Decorative Art and Design, Guangzhou Maritime University in 2013 (Associate Degree). 2. Graduated from the School of Naval Architecture and Ocean Engineering, Guangzhou Maritime University in 2022 (Bachelor is Degree). 3. Holds Senior Interior Designer Certificate, Senior Furniture Designer Certificate, and Intermediate Ship Engineer Certificate. 4. Has been engaged in ship design and engineering management since 2016; currently a Project Manager at Hangzhou Yihai Ship Design Co., Ltd., and a core member of the Shenzhen Science and Technology Innovation Academy project.',
+        areasOfExpertise: '1. Marine Engineering and Interior Design: Proficient in overall planning, structural design, process optimization, on-site technical coordination, and quality control of marine interiors. 2. Product Development and Supply Chain Management: Experienced in the research, development, production, and supply chain coordination of marine seating and modular interior products. 3. Project Management and Technical Coordination: Familiar with the entire process management of large cruise ships, passenger ships, and yachts, including contract documents, design presentations, material procurement, and on-site construction technical coordination. 4. Software Skills: Proficient in AutoCAD, Photoshop, 3D modeling, and Office design and office software.',
+        introduction: 'With over eight years of experience in marine engineering and product development, he has led the interior design and quality control of several large cruise ships, including the "Dream Voyage," "Guangzhou Star," and "Foshan Night Cruise Sanlong Bay No. 2." His work has been featured multiple times on CNR.cn. Chen Kunling has achieved significant results in areas such as modular design of marine seats, interior design of solar-powered yachts, and innovation in main light-less systems, generating over 1.5 million RMB in product transactions. He possesses both artistic design and engineering thinking, enabling him to seamlessly integrate design aesthetics with practical functionality. He is a multi-talented marine design engineer combining creativity, technology, and management skills.',
+    },
+    {
+        name: '张世彬',
+        enName: 'Ben',
+        role: 'Engineer',
+        image: EngineerPng,
+        description: '• Responsible for performance testing and optimization • CNC structural engineer • Software and hardware embedded engineer • Material research and innovation',
+        professionalQualifications: '1. Graduated from Guangzhou Maritime College in 2015 with a diploma in Nautical Technology. 2. Completed professional skills training in game animation design at South China University of Technology in 2016. 3. Possesses 3 years of experience in film and television animation design and 5 years of experience in unmanned surface vessels (USVs) and ship product development. 4. Currently a product manager at Hangzhou YiHai Ship Design Co., Ltd., previously worked at well-known ship and USV R&D companies such as Zhuhai Yunzhou Intelligent Technology Co., Ltd. and Zhuhai Haiyi Ship Design Co., Ltd.',
+        areasOfExpertise: '1. Product Development and Interaction Design: Proficient in product appearance design, human-computer interaction logic planning, and functional module design; familiar with the entire process from concept to prototype verification. 2. Film & Animation and Brand Promotion: Experienced in film directing and special effects editing; capable of independently completing the entire process from animation modeling, rendering, post-production editing to brand visual packaging. 3. Ship and Unmanned Vessel Design: Participated in several leading domestic unmanned vessel projects and high-end yacht designs; familiar with ship product structure, technology, interior design, and branding processes. 4. Technical Software Skills: Proficient in professional software such as MAYA, 3DsMax, ZBrush, Houdini, AE, PR, Photoshop, Illustrator, Unreal Engine, AutoCAD, and Office.',
+        introduction: `With eight years of experience in product design and film and television creative work, Zhang Shibin possesses both technical research and development and artistic creativity. He led the design and interactive system development of China's first unmanned cargo ship, "Jindouyun No. 0," and participated in several innovative ship projects, including the "Yu" hydrofoil and the Yunzhou leisure platform series. Early in his career, he worked in the film and television industry on modeling and special effects for theatrical productions such as *Armor Hero*, *Star Alliance*, and *Beast Girl*, demonstrating strong visual creativity and brand communication capabilities. Zhang Shibin excels at combining digital art with shipbuilding industrial design, driving innovation throughout the entire product development process from concept design to market launch. He is a cross-disciplinary product designer with both industrial aesthetics and engineering logic.`,
+    },
+    {
+        name: '陈宗强',
+        enName: 'John',
+        role: 'IE',
+        image: qiang,
+        description: '• Emotional Interaction Engine • Digital twin simulation • Compile level code optimization',
+        professionalQualifications: '1. Graduated from Maoming Radio and Television University in 2012 with a diploma in Computer Engineering. 2. Possesses many years of experience in 3D modeling, virtual reality (VR), and interactive visualization development. 3. Currently working as a VR Display Engineer/Technical Lead at Hangzhou Yihai Ship Design Co., Ltd. 4. Previously worked at Guangzhou Lanyue Ship Design Co., Ltd., Hangzhou Jingtuke Co., Ltd., and Juzhong Decoration Co., Ltd., engaged in interior design and virtual display system development.',
+        areasOfExpertise: '1. 3D Modeling and Visualization Design: Proficient in using Unreal Engine (UE4/UE5) for 3D scene building, lighting optimization, and material creation, capable of independently developing virtual model homes and ship VR displays. 2. Virtual Reality and Interactive Development: Familiar with functional modules such as the Blueprint system, GAS (Gameplay Ability System), UMG/Slate, and possess the ability to optimize project performance and implement specialized features. 3. Interface and Motion Design: Expertise in the creation and implementation of UI motion effects, capable of independently completing interface layout, interactive animation, and logo dynamic interpretation design from concept to finished product. 4. Interior Design and Visual Aesthetics: Possess a deep appreciation for spatial aesthetics and design, with a precise grasp of color, proportion, and materiality, and the ability to integrate innovative technology and artistic trends to create high-quality presentations.',
+        introduction: 'With over eight years of experience in 3D design and virtual reality development, he has long focused on developing virtual reality projects using Unreal Engine (UE4/UE5), participating in the VR visualization design of several large-scale ship and real estate projects, including the "Zhongwei Fuyu 32-meter Ferry," "Foshan Sanlong Bay," and "Vietnam Cruise Ship P4500-01." In these projects, he was responsible for scene construction, interactive logic development, motion effect implementation, and performance optimization, demonstrating excellent technical innovation and artistic integration capabilities. Chen Zongqiang excels at combining modern design aesthetics with digital technology, bringing high-quality, immersive visual experiences to the fields of ship interior design and virtual display.',
+    },
+    {
+        name: '刘胤霆',
+        enName: 'Jeff',
+        role: 'SE',
+        image: Jeff,
+        description: '• Multi physics modeling and simulation • Research and development of intelligent control algorithms • High end equipment system integration',
+        professionalQualifications: '1: Graduated from South China University of Technology (Bachelor of Engineering) in Mechanical Engineering in 2023, GPA 3.2/4 2: Currently studying for a Master of Mechanical Engineering (Automotive and Racing Engineering) at Politecnico di Milano, Italy, GPA 23/30 3: Language proficiency: Chinese (native), English (IELTS 7.5), Italian (A2) 4: Proficient in engineering software such as MATLAB, SolidWorks, Ansys Fluent, AutoCAD, Python, and Adams Car 5: Experienced in electric vehicle and aerodynamics research, having won second prize in the China University Student Electric Formula Competition',
+        areasOfExpertise: '1. Mechanical and Vehicle Engineering Design: Proficient in mechanical system design, transmission and power structure analysis, and CAD/CAE modeling and simulation. 2. Fluid and Aerodynamic Analysis: Familiar with CFD-based aerodynamic simulation and able to optimize vehicle aerodynamic performance using Ansys Fluent. 3. Electric and Hybrid System Design: Experienced in designing DC-DC power systems and emergency braking (EBS) systems; familiar with electric vehicle control logic and electrical safety architecture. 4. Multidisciplinary Collaborative Modeling and Verification: Able to combine theoretical mechanics, vehicle dynamics, and engineering simulation to complete virtual testing and performance analysis of complex mechanical systems.',
+        introduction: `A mechanical engineer, currently pursuing a Master's degree in Automotive and Motorsports Engineering at the Polytechnic University of Milan, Italy. During his time at South China University of Technology, he served as a member of the electronic control team for a Formula E racing team, leading the development of DC-DC power conversion and EBS safety systems; the project won a second-place national award. His research focuses on vehicle aerodynamics and hybrid power system optimization. He is skilled in using CFD technology to analyze ground effects and vehicle aerodynamic performance, and possesses a deep understanding of improving energy efficiency in vehicle design. Liu Yinting combines a solid foundation in engineering theory with an international research perspective, enabling him to conduct mechanical and vehicle engineering design with a systematic approach, providing innovative solutions for intelligent and green transportation.`,
+    },
+    {
+        name: '郑志彦',
+        enName: 'Zhiliao Zheng',
+        role: 'SP',
+        image: zhiliao,
+        description: '• Analyze industry trends and competitor dynamics • Participate in business negotiations, sign sales contracts, and ensure their execution • Expand new customers, maintain key customer relationships, and promote long-term cooperation',
+        professionalQualifications: `1. Graduated in 2010 from the International Economics and Trade program at South China Agricultural University, Zhujiang College (Bachelor's degree). 2. Possesses over 15 years of experience in the high-end industry and yacht sector, including over 10 years of experience in sales and marketing management for high-end luxury brands. 3. Currently serves as co-founder and general manager of Shenzhen Tingyouqu Technology Co., Ltd., responsible for corporate strategic planning, market expansion, and brand building. 4. Previously served as Senior Client Director at Hainan Haitianshengyan Exhibition Co., Ltd., and Sales Director at Shenzhen Haizhilan Yacht Service Co., Ltd.`,
+        areasOfExpertise: '1. Yacht Industry and High-End Market Operations: Possess extensive yacht industry resources and business ecosystem insights, and be familiar with yacht sales, brand promotion, investment strategies, and customer service systems. 2. Market Strategy and Brand Management: Expertise in developing marketing and public relations strategies, with the ability to integrate resources, shape brand image, and drive performance growth. 3. Customer Relationships and Business Development: Long-term service to high-end client groups, with expertise in key account management, negotiation, and channel development, and possessing exceptional communication and leadership skills. 4. Business Management and Strategic Execution: Founded the "Ting Youqu" platform from scratch, achieving success from startup to profitability, demonstrating exceptional strategic thinking and team execution.',
+        introduction: 'Zheng Zhiyan, a graduate of Zhujiang College of South China Agricultural University with a degree in International Economics and Trade, is currently the co-founder and General Manager of Shenzhen Tingyouqu Technology Co., Ltd., with over 15 years of experience in the yacht and high-end industries. He initially worked for international freight forwarding companies DHL and Senator, accumulating a background in international trade and logistics. He later transitioned to the yacht industry, serving as Sales Director of Ocean Blue Yachts and Senior Account Director of Hai Tian Sheng Yan, delving into luxury brand marketing and high-end customer service. In 2019, he founded the "Tingyouqu" yacht industry platform, which achieved profitability and secured capital support within just two years. With extensive experience in yacht sales, marketing planning, branding, and business operations, Zheng Zhiyan is a high-end market operations expert who combines strategic vision with practical skills.',
+    }
+])
 
-function togglePanel(type) {
-	// 单选：展开一个，其它关闭
-	expanded.value.work = false
-	expanded.value.education = false
-	expanded.value.works = false
-	expanded.value[type] = true
+// 当前选中的成员索引
+const selectedIndex = ref(0)
+
+// 卡片总宽度（包含间距）
+// const CARD_TOTAL_WIDTH = 230 // 200px宽度 + 30px间距
+const CARD_TOTAL_WIDTH = 286 // 256px宽度 + 30px间距
+
+// 滚动位置
+const scrollPosition = ref(0)
+
+// 计算当前选中的成员
+const selectedMember = computed(() => teamMembers.value[selectedIndex.value])
+
+// 格式化列表项（将带数字的文本转换为列表）
+const formatListItems = (text: string) => {
+    if (!text) return []
+    // 按数字标记分割文本
+    const items = text.split(/\d+[.。]/)
+        .filter(item => item.trim())
+        .map(item => item.trim())
+    return items
 }
 
-function closeAllPanels() {
-	expanded.value.work = false
-	expanded.value.education = false
-	expanded.value.works = false
+// 格式化专长领域（将带数字的文本转换为逗号分隔的文本）
+const formatExpertise = (text: string) => {
+    if (!text) return ''
+    // 移除数字标记，用逗号连接
+    const items = text.split(/\d+[.。]/)
+        .filter(item => item.trim())
+        .map(item => item.trim())
+    return items.join('、')
 }
 
-function resetAllBackgrounds() {
-	isCeoBackground.value = false
-	isCfoBackground.value = false
-	isCooBackground.value = false
-	isEngineerBackground.value = false
-	isInteractionEngineerBackground.value = false
-	isStructuralEngineerBackground.value = false
-	isStrategicPlannerBackground.value = false
+// 格式化专长领域并添加换行
+const formatExpertiseWithLineBreaks = (text: string) => {
+    if (!text) return ''
+    const items = text.split(/\d+[.。]/)
+        .filter(item => item.trim())
+        .map((item, index, arr) => {
+            const trimmed = item.trim()
+            return index === arr.length - 1 ? trimmed : trimmed + '\n'
+        })
+    return items.join('')
 }
 
-// 内容显示控制函数
-function showWhoWeAreModal() {
-	// 关闭所有其他面板
-	closeAllPanels()
-	resetAllBackgrounds()
-	showInvestmentHighlightsContent.value = false
-	showWorksModal.value = false
-
-	showWhoWeAreContent.value = true
+// 选择成员
+const selectMember = (index: number) => {
+    selectedIndex.value = index
+    updateScrollPosition(index)
 }
 
-function showInvestmentHighlightsModal() {
-	// 关闭所有其他面板
-	closeAllPanels()
-	resetAllBackgrounds()
-	showWhoWeAreContent.value = false
-	showWorksModal.value = false
-
-	showInvestmentHighlightsContent.value = true
+// 更新滚动位置
+const updateScrollPosition = (index: number) => {
+    scrollPosition.value = index * CARD_TOTAL_WIDTH
 }
 
-// 中间内容控制函数
-function closeWhoWeAreContent() {
-	showWhoWeAreContent.value = false
+// 下一个成员 - 履带式向右移动
+const nextMember = () => {
+    if (selectedIndex.value === teamMembers.value.length - 1) {
+        // 最后一张卡片向右移动，履带向左移动显示第一张卡片
+        selectedIndex.value = 0
+        
+        // 履带式效果：先向左滚动到第一组的开始位置
+        // 让用户感觉履带向左移动，然后第一张卡片"转上来"
+        scrollPosition.value = 0
+        
+        // 立即跳转到第一组，让用户感觉履带向左移动
+        const container = document.querySelector('.flex.transition-transform') as HTMLElement
+        if (container) {
+            container.style.transition = 'none'
+            // 跳转到第一组的开始位置
+            container.style.transform = `translateX(0px)`
+            setTimeout(() => {
+                container.style.transition = 'transform 500ms ease-in-out'
+                // 然后正确定位到被选中的卡片（第一张）
+                updateScrollPosition(selectedIndex.value)
+            }, 50)
+        }
+    } else {
+        selectedIndex.value = selectedIndex.value + 1
+        updateScrollPosition(selectedIndex.value)
+    }
 }
 
-function closeInvestmentHighlightsContent() {
-	showInvestmentHighlightsContent.value = false
+// 上一个成员 - 履带式向左移动
+const previousMember = () => {
+    if (selectedIndex.value === 0) {
+        // 第一张卡片向左移动，履带向右移动显示最后一张卡片
+        selectedIndex.value = teamMembers.value.length - 1
+        
+        // 履带式效果：先向右滚动到第二组的开始位置
+        // 让用户感觉履带向右移动，然后最后一张卡片"转上来"
+        scrollPosition.value = teamMembers.value.length * CARD_TOTAL_WIDTH
+        
+        // 立即跳转到第二组，让用户感觉履带向右移动
+        const container = document.querySelector('.flex.transition-transform') as HTMLElement
+        if (container) {
+            container.style.transition = 'none'
+            // 跳转到第二组的开始位置
+            container.style.transform = `translateX(-${teamMembers.value.length * CARD_TOTAL_WIDTH}px)`
+            setTimeout(() => {
+                container.style.transition = 'transform 500ms ease-in-out'
+                // 然后正确定位到被选中的卡片（最后一张）
+                updateScrollPosition(selectedIndex.value)
+            }, 50)
+        }
+    } else {
+        selectedIndex.value = selectedIndex.value - 1
+        updateScrollPosition(selectedIndex.value)
+    }
 }
-
-// 全屏作品展示控制函数
-function showWorksFullscreen() {
-	// 关闭所有其他面板
-	closeAllPanels()
-	resetAllBackgrounds()
-	showWhoWeAreContent.value = false
-	showInvestmentHighlightsContent.value = false
-
-	showWorksModal.value = true
-}
-
-function closeWorksModal() {
-	showWorksModal.value = false
-}
-
-// 获取作品图片路径
-function getWorkImage(index) {
-	return new URL(`../assets/work${index}.png`, import.meta.url).href
-}
-
-// 获取其他图片路径
-function getAssetImage(imageName) {
-	return new URL(`../assets/${imageName}`, import.meta.url).href
-}
-
-// 获取当前成员信息的方法
-function getCurrentMemberTitle() {
-	if (!hasActiveMember.value) {
-		return 'Our Team'
-	}
-	const currentMember = getCurrentActiveMember()
-	const titles = {
-		ceo: 'Founder & CEO',
-		cfo: 'CFO',
-		coo: 'COO',
-		engineer: 'Engineer',
-		interactionEngineer: 'Interaction Engineer',
-		structuralEngineer: 'Structural Engineer',
-		strategicPlanner: 'Strategic Planner'
-	}
-	return titles[currentMember] || 'Team Member'
-}
-
-function getCurrentMemberName() {
-	if (!hasActiveMember.value) {
-		return 'Click on any team member to learn more'
-	}
-	const currentMember = getCurrentActiveMember()
-	const names = {
-		ceo: 'Kevin',
-		cfo: 'Liang Gong',
-		coo: 'Leo',
-		engineer: 'Ben',
-		interactionEngineer: 'John',
-		structuralEngineer: 'Jeff',
-		strategicPlanner: 'Zhiliao Zheng'
-	}
-	return names[currentMember] || 'Team Member'
-}
-
-function getCurrentMemberImage() {
-	if (!hasActiveMember.value) {
-		return ''
-	}
-	const currentMember = getCurrentActiveMember()
-	const images = {
-		ceo: 'ceo.png',
-		cfo: 'cfo.png',
-		coo: 'coo.png',
-		engineer: 'engineer.png',
-		interactionEngineer: 'interactionEngineer.png',
-		structuralEngineer: 'structuralEnginner.png',
-		strategicPlanner: 'strategicPlanner.png'
-	}
-	return getAssetImage(images[currentMember] || '')
-}
-
-function getCurrentActiveMember() {
-	if (isCeoBackground.value) return 'ceo'
-	if (isCfoBackground.value) return 'cfo'
-	if (isCooBackground.value) return 'coo'
-	if (isEngineerBackground.value) return 'engineer'
-	if (isInteractionEngineerBackground.value) return 'interactionEngineer'
-	if (isStructuralEngineerBackground.value) return 'structuralEngineer'
-	if (isStrategicPlannerBackground.value) return 'strategicPlanner'
-	return null // 没有活跃成员时返回null
-}
-
-function getWorkExperienceTitle() {
-	if (!hasActiveMember.value) {
-		return 'Work Experience'
-	}
-	const currentMember = getCurrentActiveMember()
-	// CEO和CFO显示"Work Experience"，其他成员显示"Mainly responsible for"
-	if (currentMember === 'ceo' || currentMember === 'cfo') {
-		return 'Work Experience'
-	} else {
-		return 'Mainly responsible for'
-	}
-}
-
-function getWorkContent() {
-	if (!hasActiveMember.value) {
-		return ''
-	}
-	const currentMember = getCurrentActiveMember()
-	// CEO和CFO使用work字段，其他成员使用"Mainly responsible for"字段
-	if (currentMember === 'ceo' || currentMember === 'cfo') {
-		return memberContent.value.work || ''
-	} else {
-		return memberContent.value['Mainly responsible for'] || ''
-	}
-}
-
-
-function toggleCeoBackground() {
-	// 关闭其他所有背景
-	isCfoBackground.value = false
-	isCooBackground.value = false
-	isEngineerBackground.value = false
-	isInteractionEngineerBackground.value = false
-	isStructuralEngineerBackground.value = false
-	isStrategicPlannerBackground.value = false
-	// 切换当前成员状态
-	isCeoBackground.value = !isCeoBackground.value
-	syncMemberContent()
-}
-
-function toggleCfoBackground() {
-	// 关闭其他所有背景
-	isCeoBackground.value = false
-	isCooBackground.value = false
-	isEngineerBackground.value = false
-	isInteractionEngineerBackground.value = false
-	isStructuralEngineerBackground.value = false
-	isStrategicPlannerBackground.value = false
-	// 切换当前成员状态
-	isCfoBackground.value = !isCfoBackground.value
-	syncMemberContent()
-}
-
-function toggleCooBackground() {
-	// 关闭其他所有背景
-	isCeoBackground.value = false
-	isCfoBackground.value = false
-	isEngineerBackground.value = false
-	isInteractionEngineerBackground.value = false
-	isStructuralEngineerBackground.value = false
-	isStrategicPlannerBackground.value = false
-	// 切换当前成员状态
-	isCooBackground.value = !isCooBackground.value
-	syncMemberContent()
-}
-
-function toggleEngineerBackground() {
-	// 关闭其他所有背景
-	isCeoBackground.value = false
-	isCfoBackground.value = false
-	isCooBackground.value = false
-	isInteractionEngineerBackground.value = false
-	isStructuralEngineerBackground.value = false
-	isStrategicPlannerBackground.value = false
-	// 切换当前成员状态
-	isEngineerBackground.value = !isEngineerBackground.value
-	syncMemberContent()
-}
-
-function toggleInteractionEngineerBackground() {
-	// 关闭其他所有背景
-	isCeoBackground.value = false
-	isCfoBackground.value = false
-	isCooBackground.value = false
-	isEngineerBackground.value = false
-	isStructuralEngineerBackground.value = false
-	isStrategicPlannerBackground.value = false
-	// 切换当前成员状态
-	isInteractionEngineerBackground.value = !isInteractionEngineerBackground.value
-	syncMemberContent()
-}
-
-function toggleStructuralEngineerBackground() {
-	// 关闭其他所有背景
-	isCeoBackground.value = false
-	isCfoBackground.value = false
-	isCooBackground.value = false
-	isEngineerBackground.value = false
-	isInteractionEngineerBackground.value = false
-	isStrategicPlannerBackground.value = false
-	// 切换当前成员状态
-	isStructuralEngineerBackground.value = !isStructuralEngineerBackground.value
-	syncMemberContent()
-}
-
-function toggleStrategicPlannerBackground() {
-	// 关闭其他所有背景
-	isCeoBackground.value = false
-	isCfoBackground.value = false
-	isCooBackground.value = false
-	isEngineerBackground.value = false
-	isInteractionEngineerBackground.value = false
-	isStructuralEngineerBackground.value = false
-	// 切换当前成员状态
-	isStrategicPlannerBackground.value = !isStrategicPlannerBackground.value
-	syncMemberContent()
-}
-
-function syncMemberContent() {
-	const key = getCurrentActiveMember()
-	// 简单示例数据，可替换为真实内容
-	const dataMap = {
-		ceo: {
-			work: '• Over 10 years of experience in ship design work\n• 2015-2017 Ferrari Group, Italy - Quality Control and After sales Manager\n• 2020/10-2022/10 School of Design and Art, China Academy of Art - Industrial Design Teacher\n• Hangzhou Yihai Ship Design Co., Ltd. - General Manager/Legal Representative\n• Yushui Flying (Shenzhen) Technology Co., Ltd. - General Manager',
-			education: '• Undergraduate: China Academy of Art - Industrial Design\n• Graduate student: Genoa Milan Polytechnic Joint Training Master\'s Degree - Ship and Yacht Design\n• PhD: University of Kuala Lumpur - Ship and Ocean Engineering',
-			worksImages: ['Delivered.png']
-		},
-		cfo: {
-			work: '• Founding Partner of Micro Light Innovation Investment\n• Responsible for tax laws, investment and financing',
-			education: '• Master of Law, China University of Political Science and Law\n• Master of Finance from Stanford University in the United States',
-			worksImages: []
-		},
-		coo: {
-			'Mainly responsible for': '• Product development and delivery\n• Supply Chain Technology Management',
-			education: '',
-			worksImages: []
-		},
-		engineer: {
-			'Mainly responsible for': '• Responsible for performance testing and optimization\n• CNC structural engineer\n• Software and hardware embedded engineer\n• Material research and innovation',
-			education: '',
-			worksImages: []
-		},
-		interactionEngineer: {
-			'Mainly responsible for': '• Emotional Interaction Engine\n• Digital twin simulation\n• Compile level code optimization',
-			education: '',
-			worksImages: []
-		},
-		structuralEngineer: {
-			'Mainly responsible for': '• Multi physics modeling and simulation\n• Research and development of intelligent control algorithms\n• High end equipment system integration',
-			education: '',
-			worksImages: []
-		},
-		strategicPlanner: {
-			'Mainly responsible for': '• Analyze industry trends and competitor dynamics\n• Participate in business negotiations, sign sales contracts, and ensure their execution\n• Expand new customers, maintain key customer relationships, and promote long-term cooperation',
-			education: '',
-			worksImages: []
-		}
-	}
-
-	if (key && dataMap[key]) {
-		memberContent.value = dataMap[key]
-	}
-}
-
-
-onMounted(() => {
-	// 页面加载完成后的初始化逻辑
-})
-
-onUnmounted(() => {
-	// 页面清理
-})
 </script>
 
 <style scoped>
-.team-members-title {
-	font-size: 36px;
-	font-weight: 300;
-	color: #ffffff;
-	margin-bottom: 8px;
-	text-align: left;
-	/* //文字不换行 */
-	white-space: nowrap;
-	/* overflow: hidden; */
-	/* text-overflow: ellipsis; */
+/* 顶部导航栏.start */
+.home-btn {
+	cursor: pointer;
+	transition: all 0.3s ease;
+	padding: 5px;
+	border-radius: 50%;
+	/* background: rgba(255, 255, 255, 0.1); */
+	backdrop-filter: blur(10px);
 }
 
-.team-composition {
-	min-height: 100vh;
-	color: #ffffff;
-	/* background-color: rgba(0, 0, 0, 0.7); */
-	font-family: 'Arial', sans-serif;
-	position: relative;
-	overflow: hidden;
+.home-btn:hover {
+	/* background: rgba(0, 212, 255, 0.2);
+	transform: scale(1.1); */
 }
 
-/* 背景视频样式 */
-.video-background {
-	position: fixed;
-	top: 0;
-	left: 0;
+.home-icon {
+	width: 25px;
+	height: 25px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.home-icon img {
 	width: 100%;
 	height: 100%;
-	z-index: -2;
-	overflow: hidden;
+	object-fit: contain;
 }
 
-.background-video {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	object-position: center;
-}
-
-.background-image {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	object-position: center;
-}
-
-.video-overlay {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: linear-gradient(135deg, rgba(26, 26, 46, 0.7) 0%, rgba(22, 33, 62, 0.6) 50%, rgba(15, 52, 96, 0.8) 100%);
-	z-index: -1;
-}
-
-/* 顶部导航栏 */
 .top-nav {
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
 	background: rgba(0, 0, 0, 0.8);
 	backdrop-filter: blur(10px);
-	z-index: 1000;
+	z-index: 40;
 	padding: 15px 0;
+  font-family: 'Arial', sans-serif !important;
 }
 
 .nav-container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	gap: 20px;
+	gap: 12px;
 	max-width: 1200px;
 	margin: 0 auto;
-	padding: 0 20px;
+	padding: 0 12px;
+	flex-wrap: wrap;
+}
+
+@media (min-width: 1024px) {
+	.nav-container {
+		gap: 20px;
+		padding: 0 20px;
+		flex-wrap: nowrap;
+	}
 }
 
 .nav-item {
-	padding: 10px 20px;
+	padding: 8px 12px;
 	cursor: pointer;
 	transition: all 0.3s ease;
 	position: relative;
-	font-size: 14px;
+	font-size: 12px;
 	font-weight: 500;
 	text-decoration: none;
 	color: #ffffff;
+	text-align: center;
+}
+
+@media (min-width: 1024px) {
+	.nav-item {
+		padding: 10px 20px;
+		font-size: 14px;
+	}
 }
 
 .nav-item:hover {
@@ -883,1236 +486,235 @@ onUnmounted(() => {
 	height: 20px;
 	background: rgba(255, 255, 255, 0.3);
 }
+/* 顶部导航栏.start */
 
-/* 首页按钮样式 */
-.home-btn {
-	cursor: pointer;
-	transition: all 0.3s ease;
-	padding: 5px;
-	border-radius: 50%;
-	background: rgba(255, 255, 255, 0.1);
-	backdrop-filter: blur(10px);
+
+
+/* 团队样式 */
+/* 自定义动画 */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
 }
 
-.home-btn:hover {
-	background: rgba(0, 212, 255, 0.2);
-	transform: scale(1.1);
+@keyframes glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba(236, 72, 153, 0.5);
+    }
+
+    50% {
+        box-shadow: 0 0 40px rgba(236, 72, 153, 0.8), 0 0 60px rgba(168, 85, 247, 0.6);
+    }
 }
 
-.home-icon {
-	width: 20px;
-	height: 20px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
 }
 
-.home-icon img {
-	width: 100%;
-	height: 100%;
-	object-fit: contain;
+@keyframes spin-slow {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }
 
-/* 主要内容区域 */
-.main-content {
-	display: flex;
-	flex-direction: column;
-	height: 100vh;
-	padding-top: 80px;
-	overflow: hidden;
+@keyframes slide-in {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
-.main-content.panelsOpen .top-section {
-	height: calc(100vh - 80px - 10vh);
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-/* 上半部分 - 水平布局 */
-.top-section {
-	display: flex;
-	flex: 1;
-	height: calc(100vh - 80px - 30vh);
-	overflow: hidden;
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
 }
 
-.left-section {
-	flex: 1;
-	padding: 40px;
-	display: flex;
-	flex-direction: column;
-	gap: 30px;
+@keyframes breathe {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
 }
 
-.right-section {
-	flex: 1;
-	padding: 40px;
-	display: flex;
-	align-items: flex-start;
-	justify-content: center;
-}
-
-/* 底部团队成员区域 */
-.bottom-section {
-	padding: 15px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 30vh;
-	max-height: 30vh;
-	overflow: hidden;
-}
-
-.bottom-section.collapsed {
-	height: 8vh;
-	max-height: 8vh;
-	opacity: 0.9;
-	transition: height 0.3s ease;
-}
-
-.team-toggle {
-	background: rgba(0, 0, 0, 0.4);
-	color: #ffffff;
-	border: 1px solid rgba(255, 255, 255, 0.2);
-	border-radius: 12px;
-	padding: 10px 16px;
-	cursor: pointer;
-	backdrop-filter: blur(6px);
-	transition: all 0.2s ease;
-}
-
-.team-toggle:hover {
-	background: rgba(0, 212, 255, 0.2);
-	box-shadow: 0 0 14px rgba(0, 212, 255, 0.4);
-}
-
-/* 独立职位介绍显示区域 */
-.member-profile-display {
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	z-index: 100;
-	background: rgba(0, 0, 0, 0.3);
-	backdrop-filter: blur(15px);
-	border-radius: 20px;
-	padding: 40px;
-	border: 1px solid rgba(255, 255, 255, 0.1);
-	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-	animation: profileFadeIn 0.5s ease-out;
-}
-
-@keyframes profileFadeIn {
-	from {
-		opacity: 0;
-		transform: translate(-50%, -50%) scale(0.8);
-	}
-
-	to {
-		opacity: 1;
-		transform: translate(-50%, -50%) scale(1);
-	}
-}
-
-/* 创始人信息样式 */
-.founder-header {
-	margin-bottom: 60px;
-	/* display: flex;
-	flex-direction: column;
-	align-items: center;
-	position: relative; */
-}
-
-.position-label {
-	background: rgba(0, 212, 255, 0.2);
-	border: 2px solid rgba(0, 212, 255, 0.6);
-	border-radius: 8px;
-	padding: 8px 20px;
-	font-size: 18px;
-	font-weight: 600;
-	color: #ffffff;
-	margin-bottom: 20px;
-	backdrop-filter: blur(10px);
-	box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
-	text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
-}
-
-.member-portrait {
-	position: relative;
-	margin-bottom: 20px;
-	width: 180px;
-	height: 220px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.portrait-image {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	object-position: center;
-	border-radius: 12px;
-	border: 3px solid #00d4ff;
-	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 212, 255, 0.4);
-	transition: all 0.3s ease;
-}
-
-.portrait-image:hover {
-	transform: scale(1.02);
-	border-color: #00d4ff;
-	box-shadow: 0 12px 40px rgba(0, 212, 255, 0.3), 0 0 30px rgba(0, 212, 255, 0.6);
-}
-
-.founder-title {
-	font-size: 48px;
-	font-weight: 300;
-	color: #ffffff;
-	margin-bottom: 10px;
-	line-height: 1.2;
-}
-
-.founder-name {
-	font-size: 36px;
-	font-weight: 400;
-	color: #ffffff;
-	margin-bottom: 0;
-	/* text-align: center; */
-}
-
-.info-section {
-	display: flex;
-	align-items: center;
-	gap: 15px;
-	/* margin-bottom: 40px;
-	padding: 20px 0; */
-	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-	cursor: pointer;
-	/* padding: 10px 0; */
-}
-
-/* 展开面板样式 */
-.expand-panel {
-	display: none;
-	overflow: hidden;
-	padding: 0 8px;
-}
-
-.expand-panel.open {
-	display: block;
-	max-height: none;
-	padding: 8px;
-}
-
-.expand-text {
-	font-size: 16px;
-	color: #ffffff;
-	line-height: 1.8;
-	opacity: 0.9;
-}
-
-.works-grid {
-	position: fixed;
-	right: 170px;
-	top: 50%;
-	transform: translateY(-50%);
-	display: grid;
-	grid-template-columns: 1fr;
-	gap: 12px;
-	max-width: 560px;
-	z-index: 1001;
-	background: rgba(255, 255, 255, 0.1);
-	backdrop-filter: blur(20px) saturate(180%);
-	-webkit-backdrop-filter: blur(20px) saturate(180%);
-	padding: 20px;
-	border-radius: 8px;
-	border: 1px solid rgba(255, 255, 255, 0.3);
-	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37),
-		inset 0 1px 0 rgba(255, 255, 255, 0.1);
-}
-
-.work-card {
-	background: rgba(0, 0, 0, 0.25);
-	border: 1px solid rgba(255, 255, 255, 0.15);
-	border-radius: 0px;
-	overflow: hidden;
-	cursor: pointer;
-	transition: all 0.3s ease;
-}
-
-.work-card:hover {
-	transform: scale(1.05);
-	border-color: rgba(0, 212, 255, 0.4);
-	box-shadow: 0 8px 25px rgba(0, 212, 255, 0.2);
-}
-
-.work-card img {
-	width: 300px;
-	/* height: 580px; */
-	object-fit: contain;
-}
-
-.section-icon {
-	font-size: 24px;
-	width: 40px;
-	height: 40px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background: rgba(255, 255, 255, 0.1);
-	border-radius: 8px;
-}
-
-.icon-image {
-	width: 24px;
-	height: 24px;
-	object-fit: contain;
-	filter: brightness(0) invert(1);
-}
-
-.section-title {
-	font-size: 18px;
-	font-weight: 500;
-	color: #ffffff;
-	margin: 0;
-}
-
-/* 选中态样式（轻微高亮及左侧线） */
-.info-section.active {
-	background: rgba(0, 212, 255, 0.08);
-	border-left: 3px solid #00d4ff;
-	border-radius: 8px;
-	padding: 10px;
+/* 主要头像动画 */
+.w-80 {
+    animation: glow 3s ease-in-out infinite;
 }
 
 
-/* 右侧内容样式 */
-.top-info {
-	display: flex;
-	flex-direction: column;
-	gap: 20px;
-	margin-bottom: 40px;
+
+/* 慢速旋转动画 */
+.animate-spin-slow {
+    animation: spin-slow 20s linear infinite;
 }
 
-.info-item {
-	flex: 1;
-	margin: 0;
-}
-
-.info-frame {
-	background: rgba(255, 255, 255, 0.05);
-	backdrop-filter: blur(10px);
-	border: 1px solid rgba(255, 255, 255, 0.2);
-	border-radius: 12px;
-	padding: 20px;
-	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-	transition: all 0.3s ease;
-}
-
-.info-frame:hover {
-	background: rgba(255, 255, 255, 0.08);
-	border-color: rgba(0, 212, 255, 0.3);
-	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-	cursor: pointer;
-}
-
-.info-title {
-	font-size: 18px;
-	font-weight: 500;
-	color: #ffffff;
-	text-align: center;
-	margin: 0;
-}
-
-/* 团队成员网格样式 */
-.team-members-grid {
-	background: rgba(255, 255, 255, 0.05);
-	border-radius: 15px;
-	padding: 10px;
-	border: 1px solid rgba(255, 255, 255, 0.1);
-	/* max-width: 800px; */
-	justify-content: center;
-	width: 100%;
-	height: 100%;
-	display: flex;
-	align-items: center;
-	gap: 20px;
-}
-
-.team-members-content {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	flex: 1;
-}
-
-.members-title {
-	font-size: 16px;
-	font-weight: 600;
-	color: #ffffff;
-	margin-bottom: 8px;
-	text-align: left;
-}
-
-.members-avatars {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	grid-template-rows: repeat(2, 1fr);
-	gap: 30px;
-	margin-bottom: 20px;
-	justify-items: center;
-	max-width: 600px;
-}
-
-.member-avatar {
-	/* width: 98px; */
-	width: 114px;
-	height: 154px;
-	/* height: 133px; */
-	/* height: 100px; */
-	/* border-radius: 12px; */
-	position: relative;
-	border: 2px solid transparent;
-	/* background-size: cover; */
-	background-position: center;
-	transition: all 0.3s ease;
-	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.member-avatar:hover {
-	transform: scale(1.05);
-	border: 2px solid #00d4ff;
-	box-shadow: 0 8px 25px rgba(0, 212, 255, 0.3);
-}
-
-.member-avatar.cfo {
-	background: linear-gradient(45deg, #ff6b6b, #ee5a24);
-}
-
-.member-avatar.coo {
-	background: linear-gradient(45deg, #4834d4, #686de0);
-}
-
-.member-avatar.engineer {
-	background: linear-gradient(45deg, #00d2d3, #01a3a4);
-}
-
-.member-avatar.founder {
-	background: linear-gradient(45deg, #ff9ff3, #f368e0);
-}
-
-.member-avatar.engineer2 {
-	background: linear-gradient(45deg, #feca57, #ff9f43);
-}
-
-.member-avatar.strategy {
-	background: linear-gradient(45deg, #48dbfb, #0abde3);
-}
-
-.avatar-label {
-	position: absolute;
-	bottom: -12px;
-	left: 50%;
-	transform: translateX(-50%);
-	font-size: 7px;
-	color: #ffffff;
-	text-align: center;
-	white-space: nowrap;
-	font-weight: 500;
-}
-
-.team-description {
-	text-align: left;
-	color: #cccccc;
-	font-size: 9px;
-	line-height: 1.2;
-	max-width: 300px;
-	flex: 1;
-	display: flex;
-	align-items: center;
-}
-
-.team-description-text {
-	width: 200px;
-	font-size: 20px;
-	color: #ffffff;
-	line-height: 1.4;
-	text-align: left;
-}
-
-/* 成员卡片外框样式 */
-.member-card {
-	/* width: 120px; */
-	/* padding: 10px 10px 12px 10px; */
-	/* border-radius: 16px; */
-	background: rgba(0, 0, 0, 0.25);
-	backdrop-filter: blur(6px);
-	/* border: 1px solid rgba(255, 255, 255, 0.18); */
-	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), inset 0 0 0 1px rgba(0, 212, 255, 0.15);
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-.member-card:hover {
-	box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45), 0 0 20px rgba(0, 212, 255, 0.35);
-	transform: translateY(-3px);
-}
-
-/* 职位胶囊标签 */
-.member-role {
-	color: #e6faff;
-	font-size: 20px;
-	/* font-weight: 700; */
-	margin-bottom: 4px;
-	text-shadow: 0 0 8px rgba(0, 212, 255, 0.5);
-	display: block;
-	width: 100%;
-	text-align: center;
-	background: rgba(0, 212, 255, 0.2);
-	border: 2px solid #00d4ff;
-	border-radius: 6px;
-	padding: 4px 8px;
-	backdrop-filter: blur(10px);
-	box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
-	white-space: nowrap;
-}
-
-/* 统一头像尺寸与边框 */
-.member-card .member-avatar {
-	/* width: 114px; */
-	/* height: 154px; */
-	border-radius: 5px;
-	border: 2px solid rgba(255, 255, 255, 0.25);
-	box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+/* 文字进入动画 */
+.text-7xl {
+    animation: slide-in 1s ease-out;
 }
 
 
-/* 响应式设计 */
+/* 背景渐变动画 */
+.bg-gradient-to-b {
+    background-size: 200% 200%;
+    animation: shimmer 8s ease-in-out infinite;
+}
+
+/* 卡片进入动画 */
+.grid>div {
+    animation: fade-in-up 0.6s ease-out;
+}
+
+.grid>div:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.grid>div:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.grid>div:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.grid>div:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.grid>div:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+.grid>div:nth-child(6) {
+    animation-delay: 0.6s;
+}
+
+/* 渐变文字效果 */
+.bg-clip-text {
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+/* 玻璃效果增强 */
+.backdrop-blur-lg {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+.backdrop-blur-3xl {
+    backdrop-filter: blur(64px);
+    -webkit-backdrop-filter: blur(64px);
+}
+
+/* 自定义滚动条 */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+/* 隐藏水平滚动条但保持滚动功能 */
+.overflow-x-auto::-webkit-scrollbar {
+    display: none;
+}
+
+.overflow-x-auto {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+/* 响应式调整 */
 @media (max-width: 768px) {
-	.top-section {
-		flex-direction: column;
-	}
+    .flex {
+        flex-direction: column;
+    }
 
-	.nav-container {
-		flex-wrap: wrap;
-		gap: 10px;
-	}
+    .w-\[30\%\],
+    .w-\[70\%\] {
+        width: 100%;
+        height: 50vh;
+    }
 
-	.nav-item {
-		font-size: 12px;
-		padding: 8px 15px;
-	}
+    .text-6xl {
+        font-size: 3rem;
+    }
 
-	.left-section,
-	.right-section {
-		padding: 20px;
-	}
-
-	.bottom-section {
-		padding: 20px;
-	}
-
-	.members-avatars {
-		grid-template-columns: repeat(2, 1fr);
-		grid-template-rows: repeat(3, 1fr);
-		gap: 20px;
-	}
-
-	.founder-title {
-		font-size: 36px;
-	}
-
-	.founder-name {
-		font-size: 28px;
-	}
+    .w-80 {
+        width: 14rem;
+        height: 14rem;
+    }
 }
 
-
-/* 蒙版内容显示样式 */
-.overlay-content-display {
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background: rgba(0, 0, 0, 0.7);
-	backdrop-filter: blur(10px);
-	z-index: 1000;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	padding: 20px;
-	animation: overlayFadeIn 0.3s ease-out;
+/* 按钮样式处理 */
+button:hover {
+    border-color: #eeeeee;
 }
-
-@keyframes overlayFadeIn {
-	from {
-		opacity: 0;
-	}
-
-	to {
-		opacity: 1;
-	}
+button:focus, button:focus-visible {
+    outline: none;
 }
-
-.overlay-close-btn {
-	position: absolute;
-	top: 30px;
-	right: 30px;
-	background: rgba(255, 255, 255, 0.1);
-	border: 1px solid rgba(255, 255, 255, 0.3);
-	color: #ffffff;
-	cursor: pointer;
-	padding: 12px;
-	width: 48px;
-	height: 48px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	border-radius: 50%;
-	transition: all 0.3s ease;
-}
-
-.overlay-close-btn:hover {
-	background: rgba(255, 255, 255, 0.2);
-	color: #00d4ff;
-	transform: scale(1.1);
-}
-
-.overlay-content {
-	width: 95%;
-	max-width: none;
-	height: 85vh;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	padding: 0 2vw;
-}
-
-.presentation-title {
-	font-size: clamp(1.8rem, 3vw, 3.5rem);
-	font-weight: 700;
-	color: #ffffff;
-	margin: 0 0 clamp(1.5rem, 3vh, 2.5rem) 0;
-	text-align: center;
-}
-
-.presentation-grid {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: clamp(2rem, 4vw, 6rem);
-	height: 100%;
-	align-items: start;
-}
-
-.presentation-left,
-.presentation-right {
-	display: flex;
-	flex-direction: column;
-	gap: clamp(1.5rem, 3vh, 3rem);
-	height: 100%;
-}
-
-.content-block {
-	flex: 1;
-	display: flex;
-	flex-direction: column;
-}
-
-.block-title {
-	font-size: clamp(1rem, 1.8vw, 2rem);
-	font-weight: 600;
-	color: #ffffff;
-	margin: 0 0 clamp(0.6rem, 1vh, 1rem) 0;
-	border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-	padding-bottom: clamp(0.3rem, 0.6vh, 0.6rem);
-}
-
-.block-text {
-	font-size: clamp(0.8rem, 1.1vw, 1.3rem);
-	color: #ffffff;
-	line-height: 1.5;
-	margin: 0 0 clamp(0.6rem, 1vh, 1rem) 0;
-	opacity: 0.9;
-}
-
-.block-text:last-child {
-	margin-bottom: 0;
-}
-
-.achievements-list {
-	display: flex;
-	flex-direction: column;
-	gap: clamp(0.8rem, 1.2vh, 1.5rem);
-}
-
-.achievement-row {
-	display: flex;
-	align-items: flex-start;
-	gap: clamp(0.8rem, 1.2vw, 1.5rem);
-}
-
-.year-label {
-	background: rgba(255, 255, 255, 0.2);
-	color: #ffffff;
-	font-size: clamp(0.7rem, 1.1vw, 1.4rem);
-	font-weight: 700;
-	padding: clamp(0.2rem, 0.4vh, 0.5rem) clamp(0.6rem, 1vw, 1rem);
-	border-radius: 15px;
-	min-width: clamp(50px, 4vw, 80px);
-	text-align: center;
-	flex-shrink: 0;
-}
-
-.bullet {
-	color: #ffffff;
-	font-size: clamp(0.9rem, 1.4vw, 2rem);
-	font-weight: bold;
-	flex-shrink: 0;
-	width: clamp(15px, 1.5vw, 25px);
-}
-
-.achievement-desc {
-	font-size: clamp(0.7rem, 1vw, 1.2rem);
-	color: #ffffff;
-	line-height: 1.4;
-	opacity: 0.9;
-	flex: 1;
-}
-
-/* 针对不同屏幕尺寸的精确适配 */
-
-/* 笔记本 (1366x768 - 1920x1080) */
-@media (min-width: 1366px) and (max-width: 1920px) {
-	.overlay-content {
-		width: 90%;
-		padding: 0 3vw;
-	}
-
-	.presentation-grid {
-		gap: 4rem;
-	}
-}
-
-/* 大台式机 (1920x1080 - 2560x1440) */
-@media (min-width: 1921px) and (max-width: 2560px) {
-	.overlay-content {
-		width: 85%;
-		padding: 0 4vw;
-	}
-
-	.presentation-title {
-		font-size: clamp(3rem, 4vw, 5rem);
-	}
-
-	.block-title {
-		font-size: clamp(1.8rem, 2.2vw, 2.8rem);
-	}
-
-	.block-text {
-		font-size: clamp(1.2rem, 1.3vw, 1.8rem);
-	}
-}
-
-/* 超大屏幕/投影仪 (2560px+) */
-@media (min-width: 2561px) {
-	.overlay-content {
-		width: 80%;
-		padding: 0 5vw;
-	}
-
-	.presentation-title {
-		font-size: clamp(4rem, 3.5vw, 8rem);
-		margin-bottom: clamp(3rem, 3vh, 5rem);
-	}
-
-	.block-title {
-		font-size: clamp(2.2rem, 2vw, 4rem);
-		margin-bottom: clamp(1.2rem, 1.5vh, 2rem);
-	}
-
-	.block-text {
-		font-size: clamp(1.4rem, 1.2vw, 2.5rem);
-		margin-bottom: clamp(1rem, 1.2vh, 1.8rem);
-	}
-
-	.achievement-desc {
-		font-size: clamp(1.2rem, 1.1vw, 2.2rem);
-	}
-
-	.year-label {
-		font-size: clamp(1rem, 1vw, 1.8rem);
-		min-width: clamp(70px, 4vw, 100px);
-	}
-}
-
-/* 平板和小屏幕适配 */
-@media (max-width: 1024px) {
-	.presentation-grid {
-		grid-template-columns: 1fr;
-		gap: 2rem;
-	}
-
-	.overlay-content {
-		height: 90vh;
-		overflow-y: auto;
-	}
-}
-
-/* 极小屏幕 */
-@media (max-width: 768px) {
-	.overlay-content {
-		width: 95%;
-		padding: 0 1rem;
-		height: 95vh;
-	}
-
-	.presentation-title {
-		font-size: clamp(2rem, 6vw, 3rem);
-		margin-bottom: 1.5rem;
-	}
-}
-
-/* 超高分辨率显示器优化 */
-@media (min-resolution: 192dpi),
-(min-resolution: 2dppx) {
-
-	.block-text,
-	.achievement-desc {
-		font-weight: 400;
-		letter-spacing: 0.02em;
-	}
-}
-
-/* 全屏作品展示弹窗样式 */
-.works-fullscreen-modal {
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background: rgba(255, 255, 255, 0.1);
-	backdrop-filter: blur(25px) saturate(180%);
-	z-index: 2000;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	animation: worksModalFadeIn 0.4s ease-out;
-}
-
-@keyframes worksModalFadeIn {
-	from {
-		opacity: 0;
-		backdrop-filter: blur(0px);
-	}
-
-	to {
-		opacity: 1;
-		backdrop-filter: blur(20px);
-	}
-}
-
-.works-modal-wrapper {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	height: 100%;
-	position: relative;
-}
-
-.works-close-btn {
-	position: absolute;
-	top: 30px;
-	right: 30px;
-	background: rgba(255, 255, 255, 0.1);
-	border: 1px solid rgba(255, 255, 255, 0.3);
-	color: #ffffff;
-	cursor: pointer;
-	padding: 12px;
-	width: 48px;
-	height: 48px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	border-radius: 50%;
-	transition: all 0.3s ease;
-	backdrop-filter: blur(10px);
-	z-index: 10;
-}
-
-.works-close-btn:hover {
-	background: rgba(255, 255, 255, 0.2);
-	color: #00d4ff;
-	transform: scale(1.1);
-	box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
-}
-
-.works-modal-content {
-	width: 800px;
-	height: 700px;
-	display: flex;
-	flex-direction: column;
-	overflow: hidden;
-	background: rgba(255, 255, 255, 0.1);
-	border: 1px solid rgba(255, 255, 255, 0.3);
-	border-radius: 20px;
-	backdrop-filter: blur(15px) saturate(180%);
-	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4),
-		0 0 0 1px rgba(255, 255, 255, 0.1) inset;
-}
-
-.works-modal-header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin-bottom: 40px;
-	padding-bottom: 20px;
-	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.works-modal-title {
-	font-size: clamp(2rem, 4vw, 4rem);
-	font-weight: 700;
-	color: #ffffff;
-	margin: 0;
-	text-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
-}
-
-.works-close-btn {
-	background: rgba(255, 255, 255, 0.1);
-	border: 1px solid rgba(255, 255, 255, 0.2);
-	color: #ffffff;
-	cursor: pointer;
-	padding: 15px;
-	width: 50px;
-	height: 50px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	border-radius: 50%;
-	transition: all 0.3s ease;
-	backdrop-filter: blur(10px);
-}
-
-.works-close-btn:hover {
-	background: rgba(255, 255, 255, 0.2);
-	color: #00d4ff;
-	transform: scale(1.1);
-	box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
-}
-
-.works-images-grid {
-	width: 100%;
-	height: 100%;
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	grid-template-rows: repeat(2, 1fr);
-	gap: 10px;
-	justify-content: center;
-	align-content: center;
-	padding: 20px;
-}
-
-.works-image-item {
-	position: relative;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background: rgba(0, 0, 0, 0.1);
-	border-radius: 0;
-	overflow: hidden;
-	transition: all 0.3s ease;
-	cursor: pointer;
-}
-
-.works-image-item:hover {
-	transform: scale(1.02);
-	border-color: rgba(0, 212, 255, 0.3);
-	box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
-}
-
-.works-image {
-	max-width: 100%;
-	max-height: 100%;
-	object-fit: contain;
-	transition: all 0.3s ease;
-}
-
-.works-image-item:hover .works-image {
-	transform: scale(1.05);
-}
-
-/* 简洁的文字覆盖层 */
-.works-text-overlay {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: center;
-	text-align: center;
-	color: white;
-	padding: 50px 10px 10px 10px;
-}
-
-.works-number {
-	position: absolute;
-	top: 10px;
-	left: 50%;
-	transform: translateX(-50%);
-	/* background: rgba(0, 212, 255, 0.9); */
-	color: #ffffff;
-	font-size: 18px;
-	font-weight: bold;
-	/* width: 35px;
-	height: 35px; */
-	/* border-radius: 50%; */
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	backdrop-filter: blur(10px);
-	/* border: 2px solid rgba(255, 255, 255, 0.3); */
-	/* text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); */
-	/* box-shadow: 0 4px 15px rgba(0, 212, 255, 0.4); */
-}
-
-.works-title {
-	font-size: 12px;
-	/* font-weight: bold; */
-	margin-bottom: 6px;
-	line-height: 1.2;
-}
-
-.works-project,
-.works-date,
-.works-location {
-	font-size: 10px;
-	margin-bottom: 3px;
-}
-
-.works-extra {
-	font-size: 8px;
-	margin-bottom: 1px;
-	font-style: italic;
-	color: white;
-}
-
-.works-image-overlay {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 0, 0, 0.3) 100%);
-	opacity: 0;
-	transition: all 0.3s ease;
-	display: flex;
-	align-items: flex-start;
-	justify-content: flex-end;
-	padding: 15px;
-}
-
-.works-image-item:hover .works-image-overlay {
-	opacity: 1;
-}
-
-.works-image-number {
-	background: rgba(0, 212, 255, 0.8);
-	color: #ffffff;
-	font-size: 18px;
-	font-weight: 700;
-	width: 40px;
-	height: 40px;
-	border-radius: 50%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	backdrop-filter: blur(10px);
-	border: 2px solid rgba(255, 255, 255, 0.3);
-	text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-}
-
-/* 第一张图片的文字覆盖层 */
-.works-image-text {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 100%);
-	color: #ffffff;
-	padding: 20px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	opacity: 0;
-	transition: all 0.4s ease;
-	backdrop-filter: blur(5px);
-}
-
-.works-image-item:hover .works-image-text {
-	opacity: 1;
-}
-
-.works-project-number {
-	position: absolute;
-	top: 15px;
-	left: 15px;
-	background: rgba(0, 212, 255, 0.9);
-	color: #ffffff;
-	font-size: 24px;
-	font-weight: 700;
-	width: 50px;
-	height: 50px;
-	border-radius: 50%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	backdrop-filter: blur(10px);
-	border: 2px solid rgba(255, 255, 255, 0.3);
-	text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-	box-shadow: 0 4px 15px rgba(0, 212, 255, 0.4);
-}
-
-/* .works-title {
-	font-size: clamp(14px, 2.2vw, 22px);
-	font-weight: 700;
-	color: #ffffff;
-	text-align: center;
-	margin: 20px 0;
-	line-height: 1.3;
-	text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
-	text-transform: capitalize;
-} */
-
-.works-details {
-	display: flex;
-	flex-direction: column;
-	gap: 8px;
-	margin-top: auto;
-	padding: 15px;
-	background: rgba(0, 0, 0, 0.6);
-	border-radius: 10px;
-	backdrop-filter: blur(10px);
-	border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.works-project,
-.works-launch,
-.works-location {
-	font-size: clamp(11px, 1.4vw, 14px);
-	color: #ffffff;
-	line-height: 1.4;
-	text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-	opacity: 0.9;
-}
-
-.works-project {
-	/* font-weight: 600; */
-	color: white;
-}
-
-.works-launch {
-	font-weight: 500;
-}
-
-.works-location {
-	font-weight: 500;
-	color: white;
-}
-
-/* 响应式适配 */
-@media (max-width: 1024px) {
-	.works-modal-content {
-		width: 98vw;
-		height: 95vh;
-		padding: 20px;
-	}
-
-	.works-images-grid {
-		gap: 15px;
-		padding: 15px 0;
-	}
-
-	.works-modal-title {
-		font-size: clamp(1.5rem, 5vw, 3rem);
-	}
-}
-
-@media (max-width: 768px) {
-	.works-images-grid {
-		grid-template-columns: repeat(2, 1fr);
-		grid-template-rows: repeat(3, 1fr);
-		gap: 10px;
-	}
-
-	.works-modal-content {
-		padding: 15px;
-	}
-
-	.works-modal-header {
-		margin-bottom: 20px;
-		padding-bottom: 15px;
-	}
-
-	.works-modal-title {
-		font-size: clamp(1.2rem, 6vw, 2.5rem);
-	}
-
-	.works-close-btn {
-		width: 40px;
-		height: 40px;
-		padding: 10px;
-	}
-
-	/* 移动端文字适配 */
-	.works-image-text {
-		padding: 15px;
-	}
-
-	.works-project-number {
-		width: 35px;
-		height: 35px;
-		font-size: 18px;
-		top: 10px;
-		left: 10px;
-	}
-
-	/* .works-title {
-		font-size: clamp(12px, 3vw, 16px);
-		margin: 15px 0;
-	} */
-
-	.works-details {
-		padding: 10px;
-		gap: 6px;
-	}
-
-	.works-project,
-	.works-launch,
-	.works-location {
-		font-size: clamp(9px, 2.5vw, 12px);
-	}
-}
-
-@media (max-width: 480px) {
-	.works-images-grid {
-		grid-template-columns: 1fr;
-		grid-template-rows: repeat(6, 1fr);
-		gap: 8px;
-	}
-
-	.works-modal-content {
-		width: 100vw;
-		height: 100vh;
-		border-radius: 0;
-		padding: 10px;
-	}
+button {
+    background-color: rgba(255,255,255,0.8);
 }
 </style>

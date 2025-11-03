@@ -11,6 +11,23 @@
 		>
 			<source :src="homeVideo" type="video/mp4">
 		</video>
+		<!-- 背景音乐 -->
+		<audio
+			ref="audioRef"
+			:src="bgMusic"
+			loop
+			preload="auto"
+			:volume="0.5"
+		></audio>
+		<!-- 音乐控制按钮 -->
+		<p
+			class="music-btn"
+			@click="toggleMusic"
+			:class="{ 'is-playing': isPlaying }"
+			:aria-label="isPlaying ? 'Pause Music' : 'Play Music'"
+		>
+			<span class="music-icon">{{ isPlaying ? '🔊' : '🔇' }}</span>
+		</p>
 		<!-- 左上：CATALOGUE 块（标题与子项为一个整体） -->
 		<div class="catalogue-wrap" :class="{ 'is-open': showCatalogue }">
 			<!-- <button class="catalogue-head" type="button" @click="toggleCatalogue" :aria-expanded="showCatalogue ? 'true' : 'false'">CATALOGUE</button> -->
@@ -67,15 +84,19 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, onMounted, onBeforeUnmount, watch } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import homeVideo from '../assets/home_compressed.mp4'
 import yihaiLogo from '../assets/logoh20.png'
+import bgMusic from '../assets/video/music.mp3'
 
 const router = useRouter()
+const route = useRoute()
 
 const showCatalogue = ref(false)
 const showCompanyInfo = ref(false)
+const audioRef = ref(null)
+const isPlaying = ref(false)
 
 // 页面相关状态
 
@@ -106,37 +127,109 @@ function hideCompanyInfo() {
 	showCompanyInfo.value = false
 }
 
+function stopMusic() {
+	if (audioRef.value) {
+		audioRef.value.pause()
+		audioRef.value.currentTime = 0
+		isPlaying.value = false
+	}
+}
+
+function toggleMusic() {
+	if (audioRef.value) {
+		if (audioRef.value.paused) {
+			audioRef.value.volume = 0.5
+			audioRef.value.play().then(() => {
+				isPlaying.value = true
+				console.log('音乐开始播放')
+			}).catch(error => {
+				console.log('播放失败:', error)
+			})
+		} else {
+			audioRef.value.pause()
+			isPlaying.value = false
+		}
+	}
+}
+
 function navigateToIndustry() {
 	showCatalogue.value = false
+	stopMusic()
 	router.push('/industry-background')
 }
 
 function navigateToMarket() {
 	showCatalogue.value = false
+	stopMusic()
 	router.push('/market-demand')
 }
 
 function navigateToBusiness() {
 	showCatalogue.value = false
+	stopMusic()
 	router.push('/business-model')
 }
 
 function navigateToTeam() {
 	showCatalogue.value = false
+	stopMusic()
 	router.push('/team-composition')
 }
 
 function navigateToProduct() {
 	showCatalogue.value = false
+	stopMusic()
 	router.push('/product-introduction')
 }
 
-onMounted(() => { 
-	document.addEventListener('keydown', onKeydown) 
+onMounted(() => {
+	document.addEventListener('keydown', onKeydown)
+
+	// 尝试播放音乐
+	const tryPlayMusic = () => {
+		if (audioRef.value) {
+			audioRef.value.volume = 0.5
+			audioRef.value.play().then(() => {
+				isPlaying.value = true
+				console.log('音乐播放成功')
+			}).catch(() => {
+				// 静默处理自动播放失败，用户可以手动点击播放按钮
+				isPlaying.value = false
+			})
+		}
+	}
+
+	// 立即尝试播放
+	tryPlayMusic()
+
+	// 监听页面可见性变化
+	document.addEventListener('visibilitychange', () => {
+		if (!document.hidden && audioRef.value && audioRef.value.paused) {
+			tryPlayMusic()
+		}
+	})
 })
 
-onBeforeUnmount(() => { 
-	document.removeEventListener('keydown', onKeydown) 
+// 监听路由变化
+watch(() => route.path, (newPath) => {
+	// 如果不是首页，停止音乐
+	if (newPath !== '/' && audioRef.value) {
+		stopMusic()
+	}
+	// 如果回到首页，尝试播放音乐
+	else if (newPath === '/' && audioRef.value) {
+		tryPlayMusic()
+	}
+})
+
+onBeforeUnmount(() => {
+	document.removeEventListener('keydown', onKeydown)
+	// 清理音频
+	if (audioRef.value) {
+		audioRef.value.pause()
+		audioRef.value.currentTime = 0
+		isPlaying.value = false
+	}
 })
 </script>
 
@@ -297,6 +390,57 @@ onBeforeUnmount(() => {
 
 .corner-btn:hover .corner-btn__icon {
 	transform: rotate(10deg);
+}
+
+/* 音乐控制按钮 */
+.music-btn {
+	position: absolute;
+	bottom: 30px;
+	right: 30px;
+	width: 26px;
+	height: 26px;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.5);
+	border: 2px solid rgba(255, 255, 255, 0.3);
+	cursor: pointer;
+	transition: all 0.3s ease;
+	z-index: 20;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.music-btn:hover {
+	transform: scale(1.1);
+	background: rgba(255, 255, 255, 0.5);
+	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.music-btn:active {
+	transform: scale(0.95);
+}
+
+.music-btn.is-playing {
+	/* background: rgba(100, 108, 255, 0.9); */
+	animation: pulse 2s infinite;
+}
+
+.music-icon {
+	font-size: 12px;
+	line-height: 1;
+}
+
+@keyframes pulse {
+	0% {
+		box-shadow: 0 0 0 0 rgba(100, 108, 255, 0.7);
+	}
+	70% {
+		box-shadow: 0 0 0 10px rgba(100, 108, 255, 0);
+	}
+	100% {
+		box-shadow: 0 0 0 0 rgba(100, 108, 255, 0);
+	}
 }
 
 /* Catalogue panel 列表区域（容器背景由 .catalogue-wrap.is-open 提供） */
@@ -475,6 +619,17 @@ onBeforeUnmount(() => {
 	.catalogue-item {
 		font-size: 10px;
 		padding: 8px 10px;
+	}
+
+	.music-btn {
+		bottom: 20px;
+		right: 20px;
+		width: 40px;
+		height: 40px;
+	}
+
+	.music-icon {
+		font-size: 16px;
 	}
 }
 

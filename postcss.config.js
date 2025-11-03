@@ -17,6 +17,13 @@ export default {
       // exclude: [
       //   /^(?!.*(?:ProductIntroduction|BusinessModel|TeamComposition)\.vue$).*$/,
       // ],
+
+      selectorBlackList: [
+        'h-\\[',
+        'left-\\[',
+        'text-\\[',
+        'mr-\\['
+      ],
     },
   },
 }
