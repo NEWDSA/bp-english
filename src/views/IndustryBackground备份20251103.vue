@@ -52,13 +52,13 @@ const calculateChartHeight = () => {
   // 底部内边距 (pb-8 = 2rem = 32px)
   const paddingBottom = 32
   // 网格间距 (3行之间的间距：移动端 gap-4 = 8px * 2 = 16px，桌面端 gap-6)
-  const gridGap = window.innerWidth >= 1024 ? 12 * 1 : 8 * 1 // 3行之间有2个间隙
-  const gridTitle = window.innerWidth <= 1600 ? 40 * 2 : window.innerWidth > 1600 && window.innerWidth <= 1920 ? 46 * 2 : 60 * 2
+  const gridGap = window.innerWidth >= 1024 ? 12 * 2 : 8 * 2 // 3行之间有2个间隙
+  const gridTitle = window.innerWidth <= 1600 ? 40 * 3 : window.innerWidth > 1600 && window.innerWidth <= 1920 ? 46 * 3 : 68 * 3
 
   console.log(navHeight, titleHeight, paddingBottom, gridGap)
 
   const availableHeight = window.innerHeight - navHeight - titleHeight - paddingBottom - gridGap - gridTitle
-  const calculatedChartHeight = Math.floor(availableHeight / 2) // 3行图表
+  const calculatedChartHeight = Math.floor(availableHeight / 3) // 3行图表
 
   chartHeight.value = `${calculatedChartHeight}px`
 }
@@ -186,9 +186,9 @@ const handleGlobeClick = () => {
           </div>
 
           <!-- 图表网格布局 -->
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 xl:gap-4">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 xl:gap-6">
             <!-- 图表1：全球小型游艇制造业 -->
-            <!-- <div class="text-white">
+            <div class="text-white">
               <div class="flex items-center h-12">
                 <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
                 <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">{{ isChinaSelected ? "China's small yacht manufacturing industry" : isSoutheastAsiaSelected ? "Small yacht manufacturing industry in Southeast Asia" : isItalySelected ? "Italian small yacht manufacturing industry" : isAmericaSelected ? "Small yacht manufacturing industry in the United States" : isMiddleEastSelected ? "Small yacht manufacturing industry in the Middle East" : "Global small yacht manufacturing industry" }}</p>
@@ -196,7 +196,7 @@ const handleGlobeClick = () => {
               <div :style="{ height: chartHeight }">
                 <EChartsComponent chart-type="bar" :selected-city="selectedCity" @chart-click="handleChartClick" />
               </div>
-            </div> -->
+            </div>
 
             <!-- 图表2：全球小型游艇销售市场规模 -->
             <div class="text-white">
@@ -210,7 +210,7 @@ const handleGlobeClick = () => {
             </div>
 
             <!-- 图表3：全球水上户外运动装备市场规模（增长率） -->
-            <!-- <div class="text-white">
+            <div class="text-white">
               <div class="flex items-center h-12 z-2 relative">
                 <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
                 <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">
@@ -227,10 +227,10 @@ const handleGlobeClick = () => {
               <div :style="{ height: chartHeight }">
                 <EChartsComponent chart-type="line" :selected-city="selectedCity" @chart-click="handleChartClick" />
               </div>
-            </div> -->
+            </div>
 
             <!-- 图表4：全球的休闲游艇规模 -->
-            <!-- <div class="text-white">
+            <div class="text-white">
               <div class="flex items-center h-12">
                 <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
                 <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">{{ isChinaSelected ? "China's leisure yacht scale" : isSoutheastAsiaSelected ? "The scale of leisure yachts in Southeast Asia" : isItalySelected ? "The scale of leisure yachts in Italy" : isAmericaSelected ? "Recreational yachting in the United States" : isMiddleEastSelected ? "The scale of leisure yachts in the Middle East" : "Global leisure yachting market size" }}</p>
@@ -238,7 +238,7 @@ const handleGlobeClick = () => {
               <div :style="{ height: chartHeight }">
                 <EChartsComponent chart-type="scatter" :selected-city="selectedCity" @chart-click="handleChartClick" />
               </div>
-            </div> -->
+            </div>
 
             <!-- 图表5：全球船舶租赁市场规模 -->
             <div class="text-white">
@@ -259,34 +259,6 @@ const handleGlobeClick = () => {
               </div>
               <div :style="{ height: chartHeight }">
                 <EChartsComponent chart-type="pie" :selected-city="selectedCity" @chart-click="handleChartClick" />
-              </div>
-            </div>
-
-            <!-- 文本 -->
-            <div class="text-white">
-              <!-- 数据下方放行业趋势、结论 -->
-              <div class="flex items-center h-12">
-                <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
-                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">数据下方放行业趋势、结论</p>
-              </div>
-              <div class="bg-gray-900/50 rounded-xl overflow-hidden" :style="{ height: chartHeight }">
-                <div class="content-scroll-container h-full overflow-auto p-4 lg:p-6">
-                  <div class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">
-                    未来船舶发展呈现出"电动化"与"智能化"深度融合的明确趋势
-                  </div>
-
-                  <!-- 政策 -->
-                  <div class="flex items-center mt-6 lg:mt-10">
-                    <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">电动化</p>
-                    <img src="../assets/icon-12.png" alt="Icon" class="w-[14px] lg:w-[16px] mr-2 ml-2 lg:mr-3 lg:ml-3" />
-                    <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">智能化</p>
-                  </div>
-                  <div class="mt-2 text-[11px] lg:text-[12px] 2xl:text-[16px] leading-6 lg:leading-8 space-y-2">
-                    <p class="flex"><img src="../assets/icon-13.png" alt="Icon" class="flex-shrink-0 w-[16px] lg:w-[18px] h-[16px] lg:h-[18px] mr-2 lg:mr-3 mt-0.5 lg:mt-1" />环保法规要求：全球主要国家海事均发布船舶零排放法规，未来将逐步禁止油船进入水域。</p>
-                    <p class="flex"><img src="../assets/icon-14.png" alt="Icon" class="flex-shrink-0 w-[18px] lg:w-[20px] h-[18px] lg:h-[20px] mr-2 lg:mr-3 mt-0.5 lg:mt-1" />"三电"下放：中国电池、电机、电控技术&产业链随新能源汽车发展已成熟，三电技术将逐步下放其他交通工具领域，引领能源技术变革。目前主流船艇公司均逐步推出电动船艇产品，力图抢占市场。</p>
-                    <p class="flex"><img src="../assets/icon-15.png" alt="Icon" class="flex-shrink-0 w-[18px] lg:w-[20px] h-[18px] lg:h-[20px] mr-2 lg:mr-3 mt-0.5 lg:mt-1" />智能化趋势：电动化不应是简单的"油转电"，而是全新品类的全面升级；在其他行业我们已经看到了智能化设计在不断颠覆并替代传统产品，算力芯片、AI技术已较为成熟，可快速迁移。</p>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -595,28 +567,5 @@ const handleGlobeClick = () => {
 	background: rgba(255, 255, 255, 0.3);
 }
 /* 顶部导航栏.start */
-
-/* 自定义滚动条样式 */
-.content-scroll-container::-webkit-scrollbar {
-  width: 6px;
-}
-
-.content-scroll-container::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 3px;
-}
-
-.content-scroll-container::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 3px;
-}
-
-.content-scroll-container::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.5);
-}
-
-.content-scroll-container::-webkit-scrollbar-corner {
-  background: transparent;
-}
 
 </style>
