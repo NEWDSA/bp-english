@@ -8,7 +8,6 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 
 // 页面相关状态
-
 const chartData = ref([
   { title: 'Global Yacht Sales', subtitle: 'Market size and trends', type: 'line', id: 'yacht-sales' },
   { title: 'Water Sports Equipment', subtitle: 'Revenue by category', type: 'bar', id: 'equipment' },
@@ -134,6 +133,17 @@ const handleCityClick = (cityInfo) => {
   isAmericaSelected.value = cityInfo.country === 'United States'
   isMiddleEastSelected.value = cityInfo.country === 'United Arab Emirates' || cityInfo.region === 'Middle East'
   console.log('City selected:', cityInfo.city, cityInfo.country, 'Is China:', isChinaSelected.value, 'Is Southeast Asia:', isSoutheastAsiaSelected.value, 'Is Italy:', isItalySelected.value, 'Is America:', isAmericaSelected.value, 'Is Middle East:', isMiddleEastSelected.value)
+}
+
+// 处理地球背景点击事件 - 切换到Global数据
+const handleGlobeClick = () => {
+  selectedCity.value = null
+  isChinaSelected.value = false
+  isSoutheastAsiaSelected.value = false
+  isItalySelected.value = false
+  isAmericaSelected.value = false
+  isMiddleEastSelected.value = false
+  console.log('Globe clicked: Reset to Global data')
 }
 </script>
 
@@ -367,7 +377,7 @@ const handleCityClick = (cityInfo) => {
 
             <!-- 地球组件 -->
             <div class="absolute inset-0 flex items-center justify-center">
-              <GlobeComponent @city-click="handleCityClick" />
+              <GlobeComponent @city-click="handleCityClick" @globe-click="handleGlobeClick" />
             </div>
           </div>
 

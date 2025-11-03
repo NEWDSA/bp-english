@@ -13,7 +13,7 @@ import earthPhoto from '../assets/earth-blue-marble.jpg';
 import * as satellite from '../assets/satellite.mjs'
 import { csvParseRows } from '../assets/d3-dsv.mjs'
 
-const emit = defineEmits(['city-click'])
+const emit = defineEmits(['city-click', 'globe-click'])
 
 const globeContainer = ref(null)
 const timeLog = ref(null)
@@ -23,6 +23,7 @@ let animationId = null
 let currentWidth = 0
 let currentHeight = 0
 let customMarkers = []
+let isClickingCity = false // 标记是否正在点击城市
 
 // 常量定义
 const EARTH_RADIUS_KM = 6371
@@ -73,6 +74,7 @@ onMounted(async () => {
           .pointRadius(d => d.size || 0.3)
           .pointLabel('')
           .onPointClick(point => {
+            isClickingCity = true
             emit('city-click', {
               city: point.city,
               country: point.country,
@@ -80,6 +82,20 @@ onMounted(async () => {
               lat: point.lat,
               lng: point.lng
             })
+            // 延迟重置标记
+            setTimeout(() => {
+              isClickingCity = false
+            }, 100)
+            return true
+          })
+          .onGlobeClick(() => {
+            // 点击地球背景时，触发切换到Global数据
+            // 只有当没有点击到城市时才触发
+            setTimeout(() => {
+              if (!isClickingCity) {
+                emit('globe-click')
+              }
+            }, 50)
           })
           .htmlElementsData([])
           .htmlLat('lat')
@@ -89,7 +105,16 @@ onMounted(async () => {
             el.innerHTML = d.label
             el.style.pointerEvents = 'auto'
             el.style.cursor = 'pointer'
-            el.addEventListener('click', () => {
+            // 添加mousedown事件来更早地捕获点击
+            el.addEventListener('mousedown', (e) => {
+              e.stopPropagation()
+              e.preventDefault()
+              isClickingCity = true
+            })
+            el.addEventListener('click', (e) => {
+              e.stopPropagation() // 阻止事件冒泡
+              e.preventDefault()
+              isClickingCity = true
               emit('city-click', {
                 city: d.city,
                 country: d.country,
@@ -97,6 +122,10 @@ onMounted(async () => {
                 lat: d.lat,
                 lng: d.lng
               })
+              // 延迟重置标记
+              setTimeout(() => {
+                isClickingCity = false
+              }, 100)
             })
             // Add hover events to control globe rotation
             el.addEventListener('mouseenter', () => {
@@ -460,7 +489,8 @@ const createCustomMarkers = (pointsData) => {
     labelElement.style.fontFamily = 'system-ui, -apple-system, sans-serif'
 
     // 添加点击事件
-    markerElement.addEventListener('click', () => {
+    markerElement.addEventListener('click', (e) => {
+      e.stopPropagation() // 阻止事件冒泡
       emit('city-click', {
         city: point.city,
         country: point.country,
