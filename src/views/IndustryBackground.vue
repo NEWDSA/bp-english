@@ -51,16 +51,25 @@ const calculateChartHeight = () => {
   const titleHeight = 82
   // 底部内边距 (pb-8 = 2rem = 32px)
   const paddingBottom = 32
-  // 网格间距 (3行之间的间距：移动端 gap-4 = 8px * 2 = 16px，桌面端 gap-6)
-  const gridGap = window.innerWidth >= 1024 ? 12 * 1 : 8 * 1 // 3行之间有2个间隙
-  const gridTitle = window.innerWidth <= 1600 ? 40 * 2 : window.innerWidth > 1600 && window.innerWidth <= 1920 ? 46 * 2 : 60 * 2
 
-  console.log(navHeight, titleHeight, paddingBottom, gridGap)
+  // 根据是否选择了地区调整计算
+  if (selectedCity.value) {
+    // Global视图：3行图表
+    const gridGap = window.innerWidth >= 1024 ? 12 * 2 : 8 * 2 // 3行之间有2个间隙
+    const gridTitle = window.innerWidth <= 1600 ? 40 * 3 : window.innerWidth > 1600 && window.innerWidth <= 1920 ? 46 * 3 : 68 * 3
+    const availableHeight = window.innerHeight - navHeight - titleHeight - paddingBottom - gridGap - gridTitle
+    const calculatedChartHeight = Math.floor(availableHeight / 3) // 3行图表
+    chartHeight.value = `${calculatedChartHeight}px`
+  } else {
+    // 选择了地区：只有2行图表
+    const gridGap = window.innerWidth >= 1024 ? 12 * 1 : 8 * 1 // 2行之间有1个间隙
+    const gridTitle = window.innerWidth <= 1600 ? 40 * 2 : window.innerWidth > 1600 && window.innerWidth <= 1920 ? 46 * 2 : 60 * 2
+    const availableHeight = window.innerHeight - navHeight - titleHeight - paddingBottom - gridGap - gridTitle
+    const calculatedChartHeight = Math.floor(availableHeight / 2) // 2行图表
+    chartHeight.value = `${calculatedChartHeight}px`
+  }
 
-  const availableHeight = window.innerHeight - navHeight - titleHeight - paddingBottom - gridGap - gridTitle
-  const calculatedChartHeight = Math.floor(availableHeight / 2) // 3行图表
-
-  chartHeight.value = `${calculatedChartHeight}px`
+  console.log('Chart height calculated:', chartHeight.value, 'Selected city:', selectedCity.value)
 }
 
 onMounted(() => {
@@ -133,6 +142,8 @@ const handleCityClick = (cityInfo) => {
   isAmericaSelected.value = cityInfo.country === 'United States'
   isMiddleEastSelected.value = cityInfo.country === 'United Arab Emirates' || cityInfo.region === 'Middle East'
   console.log('City selected:', cityInfo.city, cityInfo.country, 'Is China:', isChinaSelected.value, 'Is Southeast Asia:', isSoutheastAsiaSelected.value, 'Is Italy:', isItalySelected.value, 'Is America:', isAmericaSelected.value, 'Is Middle East:', isMiddleEastSelected.value)
+  // 重新计算图表高度
+  calculateChartHeight()
 }
 
 // 处理地球背景点击事件 - 切换到Global数据
@@ -144,6 +155,8 @@ const handleGlobeClick = () => {
   isAmericaSelected.value = false
   isMiddleEastSelected.value = false
   console.log('Globe clicked: Reset to Global data')
+  // 重新计算图表高度
+  calculateChartHeight()
 }
 </script>
 
@@ -187,18 +200,8 @@ const handleGlobeClick = () => {
 
           <!-- 图表网格布局 -->
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 xl:gap-4">
-            <!-- 图表1：全球小型游艇制造业 -->
-            <!-- <div class="text-white">
-              <div class="flex items-center h-12">
-                <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
-                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">{{ isChinaSelected ? "China's small yacht manufacturing industry" : isSoutheastAsiaSelected ? "Small yacht manufacturing industry in Southeast Asia" : isItalySelected ? "Italian small yacht manufacturing industry" : isAmericaSelected ? "Small yacht manufacturing industry in the United States" : isMiddleEastSelected ? "Small yacht manufacturing industry in the Middle East" : "Global small yacht manufacturing industry" }}</p>
-              </div>
-              <div :style="{ height: chartHeight }">
-                <EChartsComponent chart-type="bar" :selected-city="selectedCity" @chart-click="handleChartClick" />
-              </div>
-            </div> -->
-
-            <!-- 图表2：全球小型游艇销售市场规模 -->
+           
+            <!-- 图表1：全球小型游艇销售市场规模 -->
             <div class="text-white">
               <div class="flex items-center h-12">
                 <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
@@ -209,38 +212,7 @@ const handleGlobeClick = () => {
               </div>
             </div>
 
-            <!-- 图表3：全球水上户外运动装备市场规模（增长率） -->
-            <!-- <div class="text-white">
-              <div class="flex items-center h-12 z-2 relative">
-                <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
-                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">
-                  <template v-if="isChinaSelected">Water sports equipment in China(growth rate)</template>
-                  <template v-else-if="isSoutheastAsiaSelected">Water sports equipment in Southeast Asia(growth rate)</template>
-                  <template v-else-if="isItalySelected">Water sports equipment in Italy(growth rate)</template>
-                  <template v-else-if="isAmericaSelected">Water sports equipment in USA(growth rate)</template>
-                  <template v-else-if="isMiddleEastSelected">Water sports equipment in the Middle East(growth rate)</template>
-                  <template v-else>
-                    Global market size of water outdoor sports equipment<br>(growth rate)
-                  </template>
-                </p>
-              </div>
-              <div :style="{ height: chartHeight }">
-                <EChartsComponent chart-type="line" :selected-city="selectedCity" @chart-click="handleChartClick" />
-              </div>
-            </div> -->
-
-            <!-- 图表4：全球的休闲游艇规模 -->
-            <!-- <div class="text-white">
-              <div class="flex items-center h-12">
-                <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
-                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">{{ isChinaSelected ? "China's leisure yacht scale" : isSoutheastAsiaSelected ? "The scale of leisure yachts in Southeast Asia" : isItalySelected ? "The scale of leisure yachts in Italy" : isAmericaSelected ? "Recreational yachting in the United States" : isMiddleEastSelected ? "The scale of leisure yachts in the Middle East" : "Global leisure yachting market size" }}</p>
-              </div>
-              <div :style="{ height: chartHeight }">
-                <EChartsComponent chart-type="scatter" :selected-city="selectedCity" @chart-click="handleChartClick" />
-              </div>
-            </div> -->
-
-            <!-- 图表5：全球船舶租赁市场规模 -->
+            <!-- 图表2：全球船舶租赁市场规模 -->
             <div class="text-white">
               <div class="flex items-center h-12">
                 <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
@@ -251,8 +223,8 @@ const handleGlobeClick = () => {
               </div>
             </div>
 
-            <!-- 图表6：全球船东年龄结构 -->
-            <div class="text-white">
+            <!-- 图表3：全球船东年龄结构 -->
+            <div v-if="!selectedCity" class="text-white">
               <div class="flex items-center h-12">
                 <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
                 <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">{{ isChinaSelected ? "Age structure of Chinese ship owners" : isSoutheastAsiaSelected ? "Age structure of shipowners in Southeast Asia" : isItalySelected ? "Age structure of Italian shipowners" : isAmericaSelected ? "Age structure of American shipowners" : isMiddleEastSelected ? "Age structure of shipowners in the Middle East" : "Age structure of global shipowners" }}</p>
@@ -263,7 +235,7 @@ const handleGlobeClick = () => {
             </div>
 
             <!-- 文本 -->
-            <div class="text-white">
+            <div v-if="!selectedCity" class="text-white">
               <!-- 数据下方放行业趋势、结论 -->
               <div class="flex items-center h-12">
                 <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
@@ -290,6 +262,9 @@ const handleGlobeClick = () => {
               </div>
             </div>
           </div>
+
+          <!-- 政策+数据+结论 -->
+          <div v-if="selectedCity" class="">政策+数据+结论</div>
         </div>
 
         <!-- 右侧 - 地球组件 -->
