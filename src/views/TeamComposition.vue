@@ -573,15 +573,16 @@ const handleCardClick = (index: number) => {
     // 判断当前在第一组还是第二组（使用更精确的判断，避免边界问题）
     const isInFirstGroup = currentScrollPos <= groupLength * 0.5
     
-    // 如果在第二组，点击时跳回第一组对应位置
+    // 如果在第二组，点击时跳回第一组对应位置（瞬间跳转，不需要动画）
     if (!isInFirstGroup) {
         selectedIndex.value = index
+        scrollPosition.value = index * CARD_TOTAL_WIDTH
         const container = document.querySelector('.flex.transition-transform') as HTMLElement
         if (container) {
+            // 瞬间跳转，保持 transition 禁用状态
             container.style.transition = 'none'
-            // 直接跳转到第一组对应位置
             container.style.transform = `translateX(-${index * CARD_TOTAL_WIDTH}px)`
-            scrollPosition.value = index * CARD_TOTAL_WIDTH
+            // 在下一个 tick 恢复过渡效果，但不移除内联样式，保持当前位置
             setTimeout(() => {
                 if (container) {
                     container.style.transition = 'transform 500ms ease-in-out'
@@ -598,19 +599,18 @@ const handleCardClick = (index: number) => {
         
         const container = document.querySelector('.flex.transition-transform') as HTMLElement
         if (container) {
-            container.style.transition = 'none'
-            // 跳转到第二组的第一张位置（瞬间跳转）
-            container.style.transform = `translateX(-${groupLength}px)`
+            // 先平滑过渡到第二组的第一张位置
             scrollPosition.value = groupLength
             
+            // 等待第一个动画完成后，再平滑滚动回第一组的第一张
             setTimeout(() => {
                 if (container) {
-                    // 恢复过渡效果
-                    container.style.transition = 'transform 500ms ease-in-out'
-                    // 平滑滚动到第一组的第一张
+                    // 清除内联 transform（如果有），让 Vue 的 :style 绑定完全接管
+                    container.style.transform = ''
+                    // 平滑滚动回第一组的第一张
                     scrollPosition.value = 0
                 }
-            }, 50)
+            }, 500) // 等待第一个过渡动画完成（500ms）
         }
     }
     // 情况2：从第一组第一张切换到最后一张，实现反向循环效果（从右向左滑动）
@@ -619,19 +619,18 @@ const handleCardClick = (index: number) => {
         
         const container = document.querySelector('.flex.transition-transform') as HTMLElement
         if (container) {
-            container.style.transition = 'none'
-            // 跳转到第二组的最后一张位置（瞬间跳转）
-            container.style.transform = `translateX(-${groupLength + lastIndex * CARD_TOTAL_WIDTH}px)`
+            // 先平滑过渡到第二组的最后一张位置
             scrollPosition.value = groupLength + lastIndex * CARD_TOTAL_WIDTH
             
+            // 等待第一个动画完成后，再平滑滚动回第一组的最后一张
             setTimeout(() => {
                 if (container) {
-                    // 恢复过渡效果
-                    container.style.transition = 'transform 500ms ease-in-out'
-                    // 平滑滚动回第一组的最后一张，实现从右向左的循环效果
+                    // 清除内联 transform（如果有），让 Vue 的 :style 绑定完全接管
+                    container.style.transform = ''
+                    // 平滑滚动回第一组的最后一张
                     scrollPosition.value = lastIndex * CARD_TOTAL_WIDTH
                 }
-            }, 50)
+            }, 500) // 等待第一个过渡动画完成（500ms）
         }
     }
     // 其他情况：在第一组内正常切换
