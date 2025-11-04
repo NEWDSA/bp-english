@@ -360,9 +360,9 @@ watch(selectedCity, (newValue) => {
           </div>
 
           <!-- 数据+结论 -->
-          <div v-if="selectedCity">
+          <div v-if="selectedCity" class="flex flex-col flex-1">
             <!-- 地区特点数据 -->
-            <div class="text-white">
+            <div class="text-white flex-shrink-0">
               <div class="flex items-center h-12">
                 <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
                 <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">地区经济与产业数据</p>
@@ -492,22 +492,22 @@ watch(selectedCity, (newValue) => {
             </div>
 
             <!-- 法规文字 -->
-            <div class="text-white">
-              <div class="flex items-center h-12">
+            <div class="text-white flex flex-col flex-1 mt-4">
+              <div class="flex items-center h-12 flex-shrink-0">
                 <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
                 <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">水污染禁航法规</p>
               </div>
-              <div class="bg-gray-900/50 rounded-xl overflow-hidden">
+              <div class="bg-gray-900/50 rounded-xl overflow-hidden flex-1">
                 <div class="content-scroll-container h-full overflow-auto p-4 lg:p-8">
                   <div class="text-xs lg:text-sm 2xl:text-[15px] text-gray-200 space-y-4">
                     <template v-if="isChinaSelected">
                       <p class="text-cyan-400 font-semibold">国家排放标准：</p>
                       <p>根据中国的《船舶排放控制区规定》，中国设有"排放控制区"，包括长江、珠江等沿海和内河的主要水道，对船舶的排放提出了严格要求，特别是二氧化氮（NOx）、颗粒物（PM）以及废气排放。</p>
 
-                      <p class="text-cyan-400 font-semibold mt-4">长江：</p>
+                      <p class="text-cyan-400 font-semibold mt-6">长江：</p>
                       <p>根据《长江船舶排放控制区（2018年修订）》规定，所有航行的船舶必须符合排放标准，尤其是燃油船舶要达到更严格的排放标准，部分区域直接禁止高排放船只入水。</p>
 
-                      <p class="text-cyan-400 font-semibold mt-4">港口与码头管理：</p>
+                      <p class="text-cyan-400 font-semibold mt-6">港口与码头管理：</p>
                       <p>中国很多沿海城市的码头对排放超标的船舶有禁止入港的规定，并对在港船只要求使用低硫燃料或符合排放标准的动力系统。</p>
                     </template>
 
@@ -515,10 +515,10 @@ watch(selectedCity, (newValue) => {
                       <p class="text-cyan-400 font-semibold">马来西亚：</p>
                       <p>马来西亚部分地区（如兰卡威、槟城等海岛）对燃油船实行严格的区域限制，特别是在保护区，部分海域禁止使用内燃机动力的船只。</p>
 
-                      <p class="text-cyan-400 font-semibold mt-4">新加坡：</p>
+                      <p class="text-cyan-400 font-semibold mt-6">新加坡：</p>
                       <p>新加坡有严格的港口管理法规，要求船舶在入港时必须符合环境排放标准，并对内燃机船实施限制，尤其是在海洋保护区。</p>
 
-                      <p class="text-cyan-400 font-semibold mt-4">泰国：</p>
+                      <p class="text-cyan-400 font-semibold mt-6">泰国：</p>
                       <p>泰国的普吉岛等热门旅游地区对高排放船舶（如一些老旧的渔船）进行了限制，逐步鼓励使用低排放或电动的船只。</p>
                     </template>
 
@@ -526,10 +526,10 @@ watch(selectedCity, (newValue) => {
                       <p class="text-cyan-400 font-semibold">欧盟指令：</p>
                       <p>欧洲出台了《休闲船艇指令（RCD，2013/53/EU）》，规定了船舶排放要求，涵盖气候变化（温室气体）、空气污染（颗粒物、氮氧化物）以及噪声污染等内容。指令要求所有进入欧盟市场的船舶必须符合环境保护标准。</p>
 
-                      <p class="text-cyan-400 font-semibold mt-4">2018年更新：</p>
+                      <p class="text-cyan-400 font-semibold mt-6">2018年更新：</p>
                       <p>2018年，欧盟更新了船舶排放标准，要求所有新船必须满足更严格的排放要求。氮氧化物、碳氢化合物等污染物的排放量将进一步减少。</p>
 
-                      <p class="text-cyan-400 font-semibold mt-4">意大利湖泊：</p>
+                      <p class="text-cyan-400 font-semibold mt-6">意大利湖泊：</p>
                       <p>意大利的多个湖泊（如Lake Garda、Lake Bracciano、Lake Vico）对燃油动力船有严格的禁航令，尤其是在环保保护区和旅游保护区。意大利部分水域限制噪音水平超过某一标准的船舶进入，尤其是在敏感生态区域和度假区。</p>
                     </template>
 
@@ -537,10 +537,10 @@ watch(selectedCity, (newValue) => {
                       <p class="text-cyan-400 font-semibold">Lake Tahoe：</p>
                       <p>自1999年起，California州严格禁止二冲程化油器发动机进入湖泊。这意味着湖区内不得使用老旧的污染性较强的发动机。</p>
 
-                      <p class="text-cyan-400 font-semibold mt-4">EPA Tier 4标准（2010）：</p>
+                      <p class="text-cyan-400 font-semibold mt-6">EPA Tier 4标准（2010）：</p>
                       <p>2010年推出的《美国船舶排放标准》（EPA's Tier 4 Standards），规定了小型船舶、游艇的排放限值。联邦标准（EPA）为新船和发动机制定了严格的排放标准，其中包括低硫燃料要求以及二氧化氮（NOx）、碳氢化合物和颗粒物（PM）的限制。</p>
 
-                      <p class="text-cyan-400 font-semibold mt-4">噪音标准：</p>
+                      <p class="text-cyan-400 font-semibold mt-6">噪音标准：</p>
                       <p>很多州，如加利福尼亚州，要求游艇和小型船舶的噪音不能超过特定的噪音标准（如75 dB）。这些要求适用于大部分船舶，包括游艇和水上摩托。</p>
                     </template>
 
@@ -548,7 +548,7 @@ watch(selectedCity, (newValue) => {
                       <p class="text-cyan-400 font-semibold">阿联酋：</p>
                       <p>阿联酋迪拜的部分海域和码头限制内燃机动力船舶，特别是在靠近海洋保护区和高端旅游区（如朱美拉海滩）。迪拜的环境保护署（DEWA）要求船舶满足环保标准，逐步推广使用电动船和低排放动力的船只。</p>
 
-                      <p class="text-cyan-400 font-semibold mt-4">沙特阿拉伯：</p>
+                      <p class="text-cyan-400 font-semibold mt-6">沙特阿拉伯：</p>
                       <p>沙特的红海区域和海湾沿岸的一些水域已开始对高污染船舶进行限制，尤其是老旧船舶，并鼓励使用更环保的船舶。</p>
                     </template>
                   </div>
