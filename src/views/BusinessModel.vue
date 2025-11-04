@@ -7,7 +7,8 @@
 				<!-- 内层矩形容器 -->
 				<div class="overlay-inner-container">
 					<!-- 对角线分割线 -->
-					<div class="diagonal-line"></div>
+					<div class="diagonal-line diagonal-line-1"></div>
+					<div class="diagonal-line diagonal-line-2"></div>
 					<!-- B方块 - 左上角 -->
 					<div class="block block-b" @click="showBContentPanel">B</div>
 					<!-- C方块 - 右下角 -->
@@ -2065,9 +2066,9 @@ onMounted(() => {
 /* 内层矩形容器 - 带圆角和边框 */
 .overlay-inner-container {
 	position: relative;
-	width: 80%;
+	width: 95%;
 	max-width: 1200px;
-	height: 70%;
+	height: 95%;
 	max-height: 800px;
 	background-color: #ffffff;
 	border: 3px solid #000000;
@@ -2094,7 +2095,20 @@ onMounted(() => {
 	top: 50%;
 	left: 50%;
 	width: 3px;
-	height: 141.42%;
+	height: 160%;
+	background-color: #000000;
+	transform: translate(-50%, -50%) rotate(-45deg);
+	transform-origin: center center;
+}
+
+/* 第二条对角线 - 也是从右上到左下，与第一条距离10px */
+.diagonal-line-2::before {
+	content: '';
+	position: absolute;
+	top: calc(50% + 7.07px);
+	left: calc(50% - 7.07px);
+	width: 3px;
+	height: 160%;
 	background-color: #000000;
 	transform: translate(-50%, -50%) rotate(-45deg);
 	transform-origin: center center;
