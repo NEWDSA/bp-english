@@ -150,6 +150,8 @@ const handleCityClick = (cityInfo) => {
         </div>
         <div class="nav-divider"></div>
 
+        <router-link to="/product-introduction" class="nav-item">Product Introduction</router-link>
+        <div class="nav-divider"></div>
         <div class="nav-item active">Industry Background</div>
         <div class="nav-divider"></div>
         <router-link to="/market-demand" class="nav-item">Market Demand</router-link>
@@ -157,8 +159,6 @@ const handleCityClick = (cityInfo) => {
         <router-link to="/business-model" class="nav-item">Business Model</router-link>
         <div class="nav-divider"></div>
         <router-link to="/team-composition" class="nav-item">Team Composition</router-link>
-        <div class="nav-divider"></div>
-        <router-link to="/product-introduction" class="nav-item">Product Introduction</router-link>
       </div>
     </nav>
 

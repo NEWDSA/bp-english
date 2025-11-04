@@ -1,5 +1,488 @@
 <template>
 	<div class="business-model">
+		<!-- 前置覆盖层 -->
+		<div class="overlay-mask" v-if="showOverlay">
+			<!-- 初始方块 - 对角线分割 -->
+			<div class="overlay-blocks" v-if="!showCContent && !showBContent">
+				<!-- 内层矩形容器 -->
+				<div class="overlay-inner-container">
+					<!-- 对角线分割线 -->
+					<div class="diagonal-line"></div>
+					<!-- B方块 - 左上角 -->
+					<div class="block block-b" @click="showBContentPanel">B</div>
+					<!-- C方块 - 右下角 -->
+					<div class="block block-c" @click="showCContentPanel">C</div>
+				</div>
+			</div>
+			
+			<!-- C方块的内容面板 - 全屏 -->
+			<div class="c-content-panel" v-if="showCContent">
+				<button class="close-content-btn" @click="backToBlocks">✕</button>
+				<div class="c-content-wrapper">
+					<h2 class="c-content-title">C 方块内容</h2>
+					<div class="c-content-body">
+						<p>这里是点击C方块后显示的内容区域</p>
+						<p>您可以在这里添加任何需要展示的信息</p>
+					</div>
+				</div>
+			</div>
+			
+			<!-- B方块的内容面板 - 全屏 -->
+			<div class="b-content-panel" v-if="showBContent">
+				<button class="close-content-btn" @click="backToBlocks">✕</button>
+				
+				<!-- B方块显示主要内容 -->
+				<div class="main-content">
+					<!-- 左侧面板：Revenue Model + Channel Strategy -->
+					<div class="left-panel">
+						<!-- 收入模型图表 -->
+						<div class="chart-card revenue-hover-card" :class="{ 'revenue-selected': isRevenueSelected }"
+							@click="showContent('revenue')">
+							<h3 class="chart-title">Revenue Model</h3>
+							<div class="chart-container">
+								<div ref="revenueChartRef" class="revenue-echart"></div>
+							</div>
+						</div>
+
+						<!-- 渠道策略 -->
+						<div class="strategy-card">
+							<h3 class="strategy-title">Channel Strategy</h3>
+
+							<div class="strategy-section">
+								<div class="strategy-subtitle">Domestic (B-end water area operator)</div>
+								<div class="strategy-content">
+									<p class="strategy-label">Positioning:</p>
+									<p class="strategy-text">To provide a full cycle hydrofoil operation solution for scenic
+										spots, passenger transport companies, and hotels.</p>
+
+									<p class="strategy-label">Core module:</p>
+									<p class="strategy-text">Fleet operation and maintenance (equipment support)+safety
+										management (real-time monitoring)</p>
+									<p class="strategy-text">Product operation (leasing system)+dock support (infrastructure
+										support)</p>
+								</div>
+							</div>
+
+							<div class="strategy-section">
+								<h4 class="strategy-subtitle">Overseas business (C-end private enterprises/private berth users)
+								</h4>
+								<div class="strategy-content">
+									<p class="strategy-label">Positioning:</p>
+									<p class="strategy-text">To build an intelligent hydrofoil boat lifestyle ecosystem for
+										middle-class private berth users.</p>
+
+									<p class="strategy-label">Core module:</p>
+									<p class="strategy-text">Map service (navigation planning)+APP service (remote control)</p>
+									<p class="strategy-text">Additional services (customized maintenance/social functions)</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- 中间面板：Lake Como 地图 -->
+					<div class="middle-panel">
+						<div class="map-container" @click="showContent('lake')">
+						</div>
+					</div>
+					
+					<!-- 右侧面板：详细内容 -->
+					<div class="right-panel">
+						<!-- Revenue Model 弹窗 -->
+						<div class="revenue-modal" v-if="activeContent === 'revenue'" @click="hideContent">
+							<div class="revenue-modal-content" @click.stop>
+								<button class="close-btn" @click="hideContent">×</button>
+								<div class="charts-grid">
+									<div class="chart-item">
+										<div ref="chart1Ref" class="modal-chart"></div>
+									</div>
+									<div class="chart-item">
+										<div ref="chart2Ref" class="modal-chart"></div>
+									</div>
+									<div class="chart-item">
+										<div ref="chart3Ref" class="modal-chart"></div>
+									</div>
+									<div class="chart-item">
+										<div ref="chart4Ref" class="modal-chart"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<!-- 内容面板 -->
+						<div class="content-panel" v-if="activeContent && activeContent !== 'revenue'">
+							<!-- Lake Como 案例内容 -->
+							<div v-if="activeContent === 'lake' && !showLakeDetail" class="lake-content"
+								@click="showLakeDetailPanel">
+								<div class="content-title">The case of Lake Como</div>
+								<div class="content-subtitle">Daily average number of tourists</div>
+
+								<!-- ECharts 圆环图 -->
+								<div class="pie-chart-container">
+									<div ref="pieChartRef" class="pie-chart-echarts"></div>
+								</div>
+
+								<!-- 描述文字 -->
+								<p class="description-text">
+									Each hotel has an average of 100 rooms, totaling 400 rooms, calculated based on the number
+									of tourists during the off-season.
+								</p>
+
+								<!-- 柱状图 -->
+								<div class="bar-charts">
+									<div class="bar-row">
+										<div class="bar-item filled"></div>
+										<div class="bar-item filled"></div>
+										<div class="bar-item filled"></div>
+										<div class="bar-item filled"></div>
+										<div class="bar-item filled"></div>
+										<div class="bar-item filled"></div>
+										<div class="bar-item filled"></div>
+										<div class="bar-item filled"></div>
+										<div class="bar-item filled"></div>
+										<div class="bar-item filled"></div>
+										<div class="bar-item filled"></div>
+										<div class="bar-item filled"></div>
+										<div class="bar-item filled"></div>
+										<div class="bar-item filled"></div>
+										<div class="bar-item filled"></div>
+										<div class="bar-item filled"></div>
+										<div class="bar-item filled"></div>
+										<div class="bar-item filled"></div>
+										<div class="bar-item filled"></div>
+										<div class="bar-item filled"></div>
+										<div class="bar-item empty"></div>
+										<div class="bar-item empty"></div>
+										<div class="bar-item empty"></div>
+										<div class="bar-item empty"></div>
+										<div class="bar-item empty"></div>
+									</div>
+									<div class="bar-row">
+										<div class="bar-item filled"></div>
+										<div class="bar-item filled"></div>
+										<div class="bar-item filled"></div>
+										<div class="bar-item filled"></div>
+										<div class="bar-item filled"></div>
+										<div class="bar-item filled"></div>
+										<div class="bar-item filled"></div>
+										<div class="bar-item filled"></div>
+										<div class="bar-item filled"></div>
+										<div class="bar-item filled"></div>
+										<div class="bar-item filled"></div>
+										<div class="bar-item filled"></div>
+										<div class="bar-item empty"></div>
+										<div class="bar-item empty"></div>
+										<div class="bar-item empty"></div>
+										<div class="bar-item empty"></div>
+										<div class="bar-item empty"></div>
+										<div class="bar-item empty"></div>
+										<div class="bar-item empty"></div>
+										<div class="bar-item empty"></div>
+										<div class="bar-item empty"></div>
+										<div class="bar-item empty"></div>
+										<div class="bar-item empty"></div>
+										<div class="bar-item empty"></div>
+										<div class="bar-item empty"></div>
+									</div>
+									<div class="bar-row">
+										<div class="bar-item filled"></div>
+										<div class="bar-item filled"></div>
+										<div class="bar-item filled"></div>
+										<div class="bar-item filled"></div>
+										<div class="bar-item empty"></div>
+										<div class="bar-item empty"></div>
+										<div class="bar-item empty"></div>
+										<div class="bar-item empty"></div>
+										<div class="bar-item empty"></div>
+										<div class="bar-item empty"></div>
+										<div class="bar-item empty"></div>
+										<div class="bar-item empty"></div>
+										<div class="bar-item empty"></div>
+										<div class="bar-item empty"></div>
+										<div class="bar-item empty"></div>
+										<div class="bar-item empty"></div>
+										<div class="bar-item empty"></div>
+										<div class="bar-item empty"></div>
+										<div class="bar-item empty"></div>
+										<div class="bar-item empty"></div>
+										<div class="bar-item empty"></div>
+										<div class="bar-item empty"></div>
+										<div class="bar-item empty"></div>
+										<div class="bar-item empty"></div>
+										<div class="bar-item empty"></div>
+									</div>
+								</div>
+
+								<!-- 图例 -->
+								<div class="legend">
+									<div class="legend-item">
+										<span class="legend-label">Daily average number of tourists</span>
+										<span class="legend-value">10000 people</span>
+									</div>
+									<div class="legend-item">
+										<span class="legend-label">Hotel load capacity</span>
+										<span class="legend-value">1200 people</span>
+									</div>
+									<div class="legend-item">
+										<span class="legend-label">Overnight tourists (50% occupancy rate)</span>
+										<span class="legend-value">400-600 people</span>
+									</div>
+								</div>
+							</div>
+
+							<!-- Lake详情面板 -->
+							<div v-if="activeContent === 'lake' && showLakeDetail" class="lake-content" @click="hideContent">
+								<!-- Transportation Demand 部分 -->
+								<div class="transportation-demand-section">
+									<div class="main-title">Daily average number of boat tourists</div>
+									<div class="section-title">Transportation Demand</div>
+
+									<!-- ECharts 半环形图 -->
+									<div class="demand-chart-container">
+										<div ref="demandChartRef" class="demand-chart-echarts"></div>
+										<!-- 引导线连接的文字 -->
+										<div class="chart-labels">
+											<div class="chart-label-left">
+												<div class="label-text">Daily transportation demand</div>
+												<div class="label-text">in the lake area</div>
+											</div>
+											<div class="chart-label-right">
+												<div class="label-text">Connection Requirements</div>
+											</div>
+											<div class="chart-label-bottom">
+												<div class="label-text">Other Requirements</div>
+											</div>
+										</div>
+									</div>
+									<!-- 描述文字 -->
+									<div class="demand-description">
+										<p>Each ship has a passenger capacity of 4 people</p>
+										<p>The total demand for hydrofoil boats is 25-38</p>
+									</div>
+								</div>
+
+								<!-- 游客数据部分 -->
+								<div class="tourist-data-section">
+									<div class="section-title">The daily average number of tourists taking boats on Lake Como,
+										calculated based on the peak and off peak seasons</div>
+
+									<!-- 柱状图 -->
+									<div class="bar-charts">
+										<div class="bar-row">
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+										</div>
+										<div class="bar-row">
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+										</div>
+										<div class="bar-row">
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+										</div>
+										<div class="bar-row">
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+										</div>
+										<div class="bar-row">
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+											<div class="bar-item empty"></div>
+										</div>
+										<div class="bar-row">
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+											<div class="bar-item filled"></div>
+										</div>
+									</div>
+
+									<!-- 详细数据列表 -->
+									<div class="data-list">
+										<div class="data-item">
+											<span class="data-label">Proportion of boat tourists during the off-season
+												(7.5%)</span>
+											<span class="data-value">750 people</span>
+										</div>
+										<div class="data-item">
+											<span class="data-label">During the off-season, tourists staying overnight use boats
+												(75%)</span>
+											<span class="data-value">450 people</span>
+										</div>
+										<div class="data-item">
+											<span class="data-label">Proportion of boat tourists during peak season
+												(7.5%)</span>
+											<span class="data-value">1312 people</span>
+										</div>
+										<div class="data-item">
+											<span class="data-label">Tourists staying overnight during peak season use boats
+												(75%)</span>
+											<span class="data-value">900 people</span>
+										</div>
+										<div class="data-item">
+											<span class="data-label">Average daily number of boat tourists during the
+												off-season</span>
+											<span class="data-value">1200 people</span>
+										</div>
+										<div class="data-item">
+											<span class="data-label">Average daily number of boat tourists during peak
+												season</span>
+											<span class="data-value">2212 people</span>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- 其他内容面板可以在这里添加 -->
+							<div v-if="activeContent === 'tourists'" class="tourists-content">
+								<div class="content-title">Daily average number of boat tourists</div>
+								<p>Tourist data content will be displayed here.</p>
+							</div>
+
+							<div v-if="activeContent === 'profit'" class="profit-content">
+								<div class="content-title">Operating profit and loss statement</div>
+								<p>Profit and loss data will be displayed here.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
 		<!-- 顶部导航栏 -->
 		<nav class="top-nav">
 			<div class="nav-container">
@@ -11,6 +494,8 @@
 				</div>
 				<div class="nav-divider"></div>
 
+				<router-link to="/product-introduction" class="nav-item">Product Introduction</router-link>
+				<div class="nav-divider"></div>
 				<router-link to="/industry-background" class="nav-item">Industry Background</router-link>
 				<div class="nav-divider"></div>
 				<router-link to="/market-demand" class="nav-item">Market Demand</router-link>
@@ -18,13 +503,11 @@
 				<div class="nav-item active">Business Model</div>
 				<div class="nav-divider"></div>
 				<router-link to="/team-composition" class="nav-item">Team Composition</router-link>
-				<div class="nav-divider"></div>
-				<router-link to="/product-introduction" class="nav-item">Product Introduction</router-link>
 			</div>
 		</nav>
 
-		<!-- 主要内容区域 -->
-		<div class="main-content">
+		<!-- 主要内容区域 - 只在覆盖层完全关闭时显示 -->
+		<div class="main-content" v-if="!showOverlay">
 			<!-- 左侧面板：Revenue Model + Channel Strategy -->
 			<div class="left-panel">
 				<!-- 收入模型图表 -->
@@ -498,6 +981,36 @@ const activeContent = ref(null)
 const showLakeDetail = ref(false)
 const isRevenueSelected = ref(false)
 
+// 覆盖层状态
+const showOverlay = ref(true)
+const showCContent = ref(false)
+const showBContent = ref(false)
+
+// 隐藏覆盖层（完全关闭）
+function hideOverlay() {
+	showOverlay.value = false
+	showCContent.value = false
+	showBContent.value = false
+}
+
+// 显示C方块内容
+function showCContentPanel() {
+	showCContent.value = true
+	showBContent.value = false
+}
+
+// 显示B方块内容
+function showBContentPanel() {
+	showBContent.value = true
+	showCContent.value = false
+}
+
+// 返回方块选择
+function backToBlocks() {
+	showCContent.value = false
+	showBContent.value = false
+}
+
 // lib-flexible 适配相关
 let cleanupFlexible = null
 
@@ -593,9 +1106,15 @@ let chart4Instance = null
 
 function renderRevenueChart() {
 	if (!revenueChartRef.value) return
-	if (!revenueChartInstance) {
-		revenueChartInstance = echarts.init(revenueChartRef.value)
+	
+	// 如果实例已存在，先销毁它（因为DOM元素可能已经改变）
+	if (revenueChartInstance) {
+		revenueChartInstance.dispose()
+		revenueChartInstance = null
 	}
+	
+	// 重新创建实例
+	revenueChartInstance = echarts.init(revenueChartRef.value)
 
 	const oranges = chartData.value.map(d => d.orange)
 	const teals = chartData.value.map(d => d.teal)
@@ -1405,9 +1924,22 @@ function renderDemandChart() {
 }
 
 onMounted(() => {
-	renderRevenueChart()
-	renderPieChart()
 	window.addEventListener('resize', onWindowResize)
+})
+
+// 监听B内容面板显示或覆盖层关闭，渲染图表
+watchEffect(() => {
+	if (showBContent.value || !showOverlay.value) {
+		nextTick(() => {
+			// 确保DOM已更新，延迟一下再渲染图表
+			setTimeout(() => {
+				if (showBContent.value || !showOverlay.value) {
+					renderRevenueChart()
+					renderPieChart()
+				}
+			}, 100)
+		})
+	}
 })
 
 function onWindowResize() {
@@ -1498,11 +2030,251 @@ onMounted(() => {
 <style scoped>
 .business-model {
 	min-height: 100vh;
-	background: url('../assets/bs_bg.png') center/contain;
 	/* 背景色为#000000 */
-	background-color: #000000;
 	color: #ffffff;
 	font-family: 'Arial', sans-serif;
+}
+
+/* 前置覆盖层 - 白色背景 */
+.overlay-mask {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: #ffffff;
+	z-index: 9999;
+	pointer-events: auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* 方块容器 */
+.overlay-blocks {
+	display: flex;
+	width: 100%;
+	height: 100%;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+}
+
+/* 内层矩形容器 - 带圆角和边框 */
+.overlay-inner-container {
+	position: relative;
+	width: 80%;
+	max-width: 1200px;
+	height: 70%;
+	max-height: 800px;
+	background-color: #ffffff;
+	border: 3px solid #000000;
+	border-radius: 20px;
+	box-shadow: 0 0 0 8px #ffffff;
+	overflow: hidden;
+}
+
+/* 对角线分割线 */
+.diagonal-line {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	overflow: visible;
+	z-index: 10;
+}
+
+.diagonal-line::before {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 3px;
+	height: 141.42%;
+	background-color: #000000;
+	transform: translate(-50%, -50%) rotate(-45deg);
+	transform-origin: center center;
+}
+
+/* 方块基础样式 - 改为圆圈 */
+.block {
+	width: 80px;
+	height: 80px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 36px;
+	font-weight: 700;
+	color: #000000;
+	border-radius: 50%;
+	transition: all 0.3s ease;
+	border: 2px solid #000000;
+	position: absolute;
+	cursor: pointer;
+	background-color: #ffffff;
+}
+
+/* B方块样式 - 左上角 */
+.block-b {
+	top: 20px;
+	left: 20px;
+}
+
+.block-b:hover {
+	transform: scale(1.1);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.block-b:active {
+	transform: scale(1.05);
+}
+
+/* C方块样式 - 右下角 */
+.block-c {
+	bottom: 20px;
+	right: 20px;
+}
+
+.block-c:hover {
+	transform: scale(1.1);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.block-c:active {
+	transform: scale(1.05);
+}
+
+
+/* C方块内容面板 - 全屏 */
+.c-content-panel {
+	width: 100%;
+	height: 100%;
+	background: rgba(255, 255, 255, 0.95);
+	backdrop-filter: blur(20px);
+	padding: 100px 40px 40px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	animation: fadeInScale 0.5s ease-out;
+	overflow-y: auto;
+	/*  */
+}
+
+/* B方块内容面板 - 全屏 */
+.b-content-panel {
+	width: 100%;
+	height: 100%;
+	background: url('../assets/bs_bg.png') center/contain;
+	background-color: #000000;
+	position: absolute;
+	top: 0;
+	left: 0;
+	animation: fadeInScale 0.5s ease-out;
+	overflow: hidden;
+}
+
+.b-content-panel .main-content {
+	height: calc(100vh - 80px);
+	max-height: calc(100vh - 80px);
+	padding-top: 80px;
+	padding-left: 150px;
+	padding-right: 10px;
+}
+
+/* 关闭按钮 - 统一样式 */
+.close-content-btn {
+	position: fixed;
+	top: 80px;
+	right: 30px;
+	background: rgba(0, 0, 0, 0.1);
+	color: #333333;
+	border: none;
+	width: 50px;
+	height: 50px;
+	font-size: 20px;
+	border-radius: 50%;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 10001;
+	line-height: 1;
+}
+
+.c-content-panel .close-content-btn {
+	color: #333333;
+	background: rgba(0, 0, 0, 0.1);
+}
+
+.b-content-panel .close-content-btn {
+	color: #ffffff;
+	background: rgba(255, 255, 255, 0.2);
+	backdrop-filter: blur(10px);
+}
+
+.close-content-btn:hover {
+	transform: rotate(90deg) scale(1.1);
+}
+
+.c-content-panel .close-content-btn:hover {
+	background: rgba(0, 0, 0, 0.2);
+}
+
+.b-content-panel .close-content-btn:hover {
+	background: rgba(255, 255, 255, 0.3);
+}
+
+.close-content-btn:active {
+	transform: rotate(90deg) scale(0.95);
+}
+
+.c-content-wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	padding-top: 40px;
+}
+
+.c-content-title {
+	font-size: 48px;
+	font-weight: 700;
+	color: #333333;
+	margin-bottom: 40px;
+	text-align: center;
+	background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+.c-content-body {
+	font-size: 24px;
+	color: #666666;
+	line-height: 1.8;
+	text-align: center;
+	max-width: 800px;
+}
+
+.c-content-body p {
+	margin: 20px 0;
+}
+
+@keyframes fadeInScale {
+	from {
+		opacity: 0;
+		transform: scale(0.9);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
 }
 
 /* 顶部导航栏 */
@@ -1513,7 +2285,7 @@ onMounted(() => {
 	right: 0;
 	background: rgba(0, 0, 0, 0.8);
 	backdrop-filter: blur(10px);
-	z-index: 1000;
+	z-index: 10000;
 	padding: 15px 0;
 }
 
