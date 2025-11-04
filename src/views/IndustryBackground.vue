@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, watch, nextTick } from 'vue'
 import EChartsComponent from '../components/EChartsComponent.vue';
 import GlobeComponent from '../components/GlobeComponent.vue';
 import Navigation from '../components/Navigation.vue';
@@ -158,6 +158,102 @@ const handleGlobeClick = () => {
   // 重新计算图表高度
   calculateChartHeight()
 }
+
+// 数字滚动动画函数
+const animateNumber = (element, start, end, duration = 1500, isPercentage = false, isCurrency = false) => {
+  if (!element) return
+
+  const startTime = Date.now()
+  const diff = end - start
+
+  const animate = () => {
+    const currentTime = Date.now()
+    const elapsed = currentTime - startTime
+    const progress = Math.min(elapsed / duration, 1)
+
+    // 使用缓动函数让动画更自然
+    const easeOutQuart = 1 - Math.pow(1 - progress, 4)
+    const current = start + diff * easeOutQuart
+
+    // 格式化显示
+    let displayValue = ''
+    if (isCurrency) {
+      displayValue = '$' + Math.round(current).toLocaleString()
+      if (end >= 1000000000) {
+        displayValue = '$' + (current / 1000000000).toFixed(0) + '亿'
+      } else if (end >= 100000000) {
+        displayValue = '$' + (current / 100000000).toFixed(0) + '亿'
+      }
+    } else if (isPercentage) {
+      displayValue = Math.round(current) + '%'
+    } else {
+      // 船艇数量
+      if (current < 1) {
+        displayValue = current.toFixed(1) + '艘'
+      } else if (element.classList.contains('boat-value') && isSoutheastAsiaSelected.value) {
+        displayValue = '2-5艘'
+      } else {
+        displayValue = Math.round(current) + '艘'
+      }
+    }
+
+    element.textContent = displayValue
+
+    if (progress < 1) {
+      requestAnimationFrame(animate)
+    }
+  }
+
+  requestAnimationFrame(animate)
+}
+
+// 触发所有数字动画
+const triggerNumberAnimations = () => {
+  nextTick(() => {
+    // GDP动画
+    const gdpElement = document.querySelector('.gdp-value')
+    if (gdpElement) {
+      const targetValue = parseFloat(gdpElement.getAttribute('data-value')) || 0
+      if (targetValue > 0) {
+        animateNumber(gdpElement, 0, targetValue, 1500, false, true)
+      }
+    }
+
+    // 收入比例动画
+    const incomeElement = document.querySelector('.income-value')
+    if (incomeElement) {
+      const targetValue = parseFloat(incomeElement.getAttribute('data-value')) || 0
+      if (targetValue > 0) {
+        animateNumber(incomeElement, 0, targetValue, 1500, true)
+      }
+    }
+
+    // 产业规模动画
+    const industryElement = document.querySelector('.industry-value')
+    if (industryElement) {
+      const targetValue = parseFloat(industryElement.getAttribute('data-value')) || 0
+      if (targetValue > 0) {
+        animateNumber(industryElement, 0, targetValue * 100000000, 1500, false, true)
+      }
+    }
+
+    // 船艇拥有量动画
+    const boatElement = document.querySelector('.boat-value')
+    if (boatElement) {
+      const targetValue = parseFloat(boatElement.getAttribute('data-value')) || 0
+      if (targetValue > 0) {
+        animateNumber(boatElement, 0, targetValue, 1500)
+      }
+    }
+  })
+}
+
+// 监听selectedCity变化，触发动画
+watch(selectedCity, (newValue) => {
+  if (newValue) {
+    triggerNumberAnimations()
+  }
+})
 </script>
 
 <template>
@@ -272,63 +368,124 @@ const handleGlobeClick = () => {
                 <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">地区经济与产业数据</p>
               </div>
               <div class="bg-gray-900/50 rounded-xl">
-                <div class="p-4 lg:p-6 grid grid-cols-1 lg:grid-cols-2 gap-4 xl:gap-4 mt-4">
-                  <!-- GDP数据 -->
-                  <div class="mb-6">
-                    <p class="text-cyan-400 text-sm font-semibold mb-2">人均GDP</p>
-                    <p class="text-xs lg:text-sm 2xl:text-base text-gray-300 mb-2">{{
-                      isChinaSelected ? '$13,445（中国大陆）' :
-                      isSoutheastAsiaSelected ? '$4,960（印尼）' :
-                      isItalySelected ? '$40,437（意大利）' :
-                      isAmericaSelected ? '$85,876（美国）' :
-                      isMiddleEastSelected ? '$53,813（阿联酋）' :
-                      '全球平均水平'
-                    }}</p>
-                    <p class="text-xs text-gray-400">{{
-                      isChinaSelected || isSoutheastAsiaSelected ? '人均GDP超过3000美元是游艇经济萌芽的临界点，超过10,000美元时，划艇等水上运动会更受欢迎' :
-                      '远超10,000美元的水上运动普及化门槛'
-                    }}</p>
-                  </div>
+                <div class="p-4 lg:p-8">
+                  <!-- 横向排列的数据 -->
+                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- GDP数据 -->
+                    <div class="text-center">
+                      <p class="text-cyan-400 text-sm font-semibold mb-6">人均GDP{{
+                        isChinaSelected ? ' (中国大陆)' :
+                        isSoutheastAsiaSelected ? ' (印尼)' :
+                        isItalySelected ? ' (意大利)' :
+                        isAmericaSelected ? ' (美国)' :
+                        isMiddleEastSelected ? ' (阿联酋)' :
+                        ''
+                      }}</p>
+                      <p class="text-2xl lg:text-3xl 2xl:text-4xl font-bold text-white gdp-value mb-2" :data-value="
+                        isChinaSelected ? '13445' :
+                        isSoutheastAsiaSelected ? '4960' :
+                        isItalySelected ? '40437' :
+                        isAmericaSelected ? '85876' :
+                        isMiddleEastSelected ? '53813' :
+                        '0'
+                      ">{{
+                        isChinaSelected ? '$13,445' :
+                        isSoutheastAsiaSelected ? '$4,960' :
+                        isItalySelected ? '$40,437' :
+                        isAmericaSelected ? '$85,876' :
+                        isMiddleEastSelected ? '$53,813' :
+                        '全球平均水平'
+                      }}</p>
+                      <div class="text-xs text-gray-400 leading-relaxed">
+                        <p>{{
+                          isChinaSelected || isSoutheastAsiaSelected ? 'GDP>$3k游艇萌芽' :
+                          '远超$10k普及门槛'
+                        }}</p>
+                        <p class="mt-6">超$3000是游艇经济萌芽临界点</p>
+                      </div>
+                    </div>
 
-                  <!-- 家庭收入分布 -->
-                  <div class="mb-6">
-                    <p class="text-cyan-400 text-sm font-semibold mb-2">年收入>50万人民币的家庭比例</p>
-                    <p class="text-xs lg:text-sm 2xl:text-base text-gray-300 mb-2">{{
-                      isChinaSelected ? '4%' :
-                      isSoutheastAsiaSelected ? '15%（新加坡）' :
-                      isItalySelected ? '28%' :
-                      isAmericaSelected ? '45%' :
-                      isMiddleEastSelected ? '7%（沙特阿拉伯）' :
-                      '各地区差异较大'
-                    }}</p>
-                    <p class="text-xs text-gray-400">人均月收入超过2万元的家庭有能力租用游艇，年收入超过50万元的家庭有能力购买游艇</p>
-                  </div>
+                    <!-- 家庭收入分布 -->
+                    <div class="text-center">
+                      <p class="text-cyan-400 text-sm font-semibold mb-6">年收入>50万人民币{{
+                        isSoutheastAsiaSelected ? ' (新加坡)' :
+                        isMiddleEastSelected ? ' (沙特)' :
+                        ''
+                      }}</p>
+                      <p class="text-2xl lg:text-3xl 2xl:text-4xl font-bold text-white income-value mb-2" :data-value="
+                        isChinaSelected ? '4' :
+                        isSoutheastAsiaSelected ? '15' :
+                        isItalySelected ? '28' :
+                        isAmericaSelected ? '45' :
+                        isMiddleEastSelected ? '7' :
+                        '0'
+                      ">{{
+                        isChinaSelected ? '4%' :
+                        isSoutheastAsiaSelected ? '15%' :
+                        isItalySelected ? '28%' :
+                        isAmericaSelected ? '45%' :
+                        isMiddleEastSelected ? '7%' :
+                        '各地区差异较大'
+                      }}</p>
+                      <div class="text-xs text-gray-400 leading-relaxed">
+                        <p>家庭比例</p>
+                        <p class="mt-6">年收入超50万家庭有能力购买游艇</p>
+                      </div>
+                    </div>
 
-                  <!-- 产业规模 -->
-                  <div class="mb-6">
-                    <p class="text-cyan-400 text-sm font-semibold mb-2">休闲船艇整个产业链规模</p>
-                    <p class="text-xs lg:text-sm 2xl:text-base text-gray-300 mb-2">{{
-                      isChinaSelected ? '$60亿美元' :
-                      isSoutheastAsiaSelected ? '$12亿美元' :
-                      isItalySelected ? '$250亿美元（欧洲总计）' :
-                      isAmericaSelected ? '$750亿美元' :
-                      isMiddleEastSelected ? '$20亿美元' :
-                      '全球市场规模'
-                    }}</p>
-                    <p class="text-xs text-gray-400">产业规模越大，说明当地基础设施越完善，消费场景越丰富，反过来会降低参与门槛，刺激家庭消费</p>
-                  </div>
+                    <!-- 产业规模 -->
+                    <div class="text-center">
+                      <p class="text-cyan-400 text-sm font-semibold mb-6">产业链规模{{
+                        isItalySelected ? ' (欧洲)' :
+                        ''
+                      }}</p>
+                      <p class="text-2xl lg:text-3xl 2xl:text-4xl font-bold text-white industry-value mb-2" :data-value="
+                        isChinaSelected ? '60' :
+                        isSoutheastAsiaSelected ? '12' :
+                        isItalySelected ? '250' :
+                        isAmericaSelected ? '750' :
+                        isMiddleEastSelected ? '20' :
+                        '0'
+                      ">{{
+                        isChinaSelected ? '$60亿' :
+                        isSoutheastAsiaSelected ? '$12亿' :
+                        isItalySelected ? '$250亿' :
+                        isAmericaSelected ? '$750亿' :
+                        isMiddleEastSelected ? '$20亿' :
+                        '全球市场规模'
+                      }}</p>
+                      <div class="text-xs text-gray-400 leading-relaxed">
+                        <p>美元</p>
+                        <p class="mt-6">产业规模反映基础设施完善程度</p>
+                      </div>
+                    </div>
 
-                  <!-- 船艇拥有量 -->
-                  <div class="mb-6">
-                    <p class="text-cyan-400 text-sm font-semibold mb-2">每百户家庭拥有船艇数量</p>
-                    <p class="text-xs lg:text-sm 2xl:text-base text-gray-300 mb-2">{{
-                      isChinaSelected ? '0.5艘/百户家庭' :
-                      isSoutheastAsiaSelected ? '2-5艘/百户家庭（根据具体国家而异）' :
-                      isItalySelected ? '10艘/百户家庭' :
-                      isAmericaSelected ? '15艘/百户家庭' :
-                      isMiddleEastSelected ? '8艘/百户家庭' :
-                      '全球平均水平'
-                    }}</p>
+                    <!-- 船艇拥有量 -->
+                    <div class="text-center">
+                      <p class="text-cyan-400 text-sm font-semibold mb-6">船艇拥有量</p>
+                      <p class="text-2xl lg:text-3xl 2xl:text-4xl font-bold text-white boat-value mb-2" :data-value="
+                        isChinaSelected ? '0.5' :
+                        isSoutheastAsiaSelected ? '3.5' :
+                        isItalySelected ? '10' :
+                        isAmericaSelected ? '15' :
+                        isMiddleEastSelected ? '8' :
+                        '0'
+                      ">{{
+                        isChinaSelected ? '0.5艘' :
+                        isSoutheastAsiaSelected ? '2-5艘' :
+                        isItalySelected ? '10艘' :
+                        isAmericaSelected ? '15艘' :
+                        isMiddleEastSelected ? '8艘' :
+                        '全球平均水平'
+                      }}</p>
+                      <div class="text-xs text-gray-400 leading-relaxed">
+                        <p>{{
+                          isSoutheastAsiaSelected ? '各国差异' :
+                          '每百户家庭'
+                        }}</p>
+                        <p class="mt-6">反映水上运动普及程度</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -340,9 +497,9 @@ const handleGlobeClick = () => {
                 <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
                 <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">水污染禁航法规</p>
               </div>
-              <div class="bg-gray-900/50 rounded-xl overflow-hidden" :style="{ height: chartHeight }">
-                <div class="content-scroll-container h-full overflow-auto p-4 lg:p-6">
-                  <div class="text-xs lg:text-sm 2xl:text-sm text-gray-200 space-y-4">
+              <div class="bg-gray-900/50 rounded-xl overflow-hidden">
+                <div class="content-scroll-container h-full overflow-auto p-4 lg:p-8">
+                  <div class="text-xs lg:text-sm 2xl:text-[15px] text-gray-200 space-y-4">
                     <template v-if="isChinaSelected">
                       <p class="text-cyan-400 font-semibold">国家排放标准：</p>
                       <p>根据中国的《船舶排放控制区规定》，中国设有"排放控制区"，包括长江、珠江等沿海和内河的主要水道，对船舶的排放提出了严格要求，特别是二氧化氮（NOx）、颗粒物（PM）以及废气排放。</p>
