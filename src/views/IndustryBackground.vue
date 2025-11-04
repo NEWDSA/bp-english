@@ -368,12 +368,12 @@ watch(selectedCity, (newValue) => {
                 <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">地区经济与产业数据</p>
               </div>
               <div class="bg-gray-900/50 rounded-xl">
-                <div class="p-3 md:p-4 lg:p-6 xl:p-8">
+                <div class="p-2 xl:p-4 2xl:p-6">
                   <!-- 横向排列的数据 -->
-                  <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-5 xl:gap-6">
+                  <div class="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4 lg:gap-5 xl:gap-6">
                     <!-- GDP数据 -->
                     <div class="text-center">
-                      <p class="text-cyan-400 text-[10px] sm:text-xs md:text-sm font-semibold mb-2 md:mb-4 lg:mb-6">人均GDP{{
+                      <p class="text-cyan-400 text-[9px] sm:text-[10px] md:text-xs lg:text-sm font-semibold mb-1 sm:mb-2 md:mb-3 lg:mb-4 xl:mb-6">人均GDP{{
                         isChinaSelected ? ' (中国大陆)' :
                         isSoutheastAsiaSelected ? ' (印尼)' :
                         isItalySelected ? ' (意大利)' :
@@ -381,7 +381,7 @@ watch(selectedCity, (newValue) => {
                         isMiddleEastSelected ? ' (阿联酋)' :
                         ''
                       }}</p>
-                      <p class="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-bold text-white gdp-value mb-1 md:mb-2" :data-value="
+                      <p class="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl font-bold text-white gdp-value mb-1 sm:mb-1 md:mb-2" :data-value="
                         isChinaSelected ? '13445' :
                         isSoutheastAsiaSelected ? '4960' :
                         isItalySelected ? '40437' :
@@ -396,24 +396,20 @@ watch(selectedCity, (newValue) => {
                         isMiddleEastSelected ? '$53,813' :
                         '全球平均水平'
                       }}</p>
-                      <div class="text-[9px] sm:text-[10px] md:text-xs text-gray-400 leading-relaxed">
-                        <!-- <p>{{
-                          isChinaSelected || isSoutheastAsiaSelected ? 'GDP>$3k游艇萌芽' :
-                          '远超$10k普及门槛'
-                        }}</p> -->
-                        <p class="mt-2 md:mt-4 lg:mt-6 hidden sm:block">超$3000是游艇经济萌芽临界点,超过10,000美元时，划艇等水上运动会更受欢迎</p>
+                      <div class="text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs text-gray-400 leading-relaxed">
+                        <p class="mt-1 sm:mt-2 md:mt-3 lg:mt-4 xl:mt-6 hidden md:block">超$3000是游艇经济萌芽临界点,超过10,000美元时，划艇等水上运动会更受欢迎</p>
                       </div>
                     </div>
 
                     <!-- 家庭收入分布 -->
                     <div class="text-center">
-                      <p class="text-cyan-400 text-[10px] sm:text-xs md:text-sm font-semibold mb-2 md:mb-4 lg:mb-6">家庭年收入>50万人民币{{
+                      <p class="text-cyan-400 text-[9px] sm:text-[10px] md:text-xs lg:text-sm font-semibold mb-1 sm:mb-2 md:mb-3 lg:mb-4 xl:mb-6">家庭年收入>50万{{
                         isSoutheastAsiaSelected ? ' (新加坡)' :
                         isMiddleEastSelected ? ' (沙特)' :
                         isItalySelected ? ' (意大利)' :
                         ''
                       }}</p>
-                      <p class="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-bold text-white income-value mb-1 md:mb-2" :data-value="
+                      <p class="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl font-bold text-white income-value mb-1 sm:mb-1 md:mb-2" :data-value="
                         isChinaSelected ? '4' :
                         isSoutheastAsiaSelected ? '15' :
                         isItalySelected ? '28' :
@@ -428,19 +424,18 @@ watch(selectedCity, (newValue) => {
                         isMiddleEastSelected ? '7%' :
                         '各地区差异较大'
                       }}</p>
-                      <div class="text-[9px] sm:text-[10px] md:text-xs text-gray-400 leading-relaxed">
-                        <!-- <p>家庭比例</p> -->
-                        <p class="mt-2 md:mt-4 lg:mt-6 hidden sm:block">人均月收入超过2万元的家庭有能力租用游艇，年收入超过50万元以上的家庭，则有能力购买游艇</p>
+                      <div class="text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs text-gray-400 leading-relaxed">
+                        <p class="mt-1 sm:mt-2 md:mt-3 lg:mt-4 xl:mt-6 hidden md:block">人均月收入超过2万元的家庭有能力租用游艇，年收入超过50万元以上的家庭，则有能力购买游艇</p>
                       </div>
                     </div>
 
                     <!-- 产业规模 -->
                     <div class="text-center">
-                      <p class="text-cyan-400 text-[10px] sm:text-xs md:text-sm font-semibold mb-2 md:mb-4 lg:mb-6">休闲船艇产业链{{
+                      <p class="text-cyan-400 text-[9px] sm:text-[10px] md:text-xs lg:text-sm font-semibold mb-1 sm:mb-2 md:mb-3 lg:mb-4 xl:mb-6">休闲船艇产业链{{
                         isItalySelected ? ' (欧洲)' :
                         ''
                       }}</p>
-                      <p class="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-bold text-white industry-value mb-1 md:mb-2" :data-value="
+                      <p class="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl font-bold text-white industry-value mb-1 sm:mb-1 md:mb-2" :data-value="
                         isChinaSelected ? '60' :
                         isSoutheastAsiaSelected ? '12' :
                         isItalySelected ? '250' :
@@ -455,16 +450,15 @@ watch(selectedCity, (newValue) => {
                         isMiddleEastSelected ? '$20亿' :
                         '全球市场规模'
                       }}</p>
-                      <div class="text-[9px] sm:text-[10px] md:text-xs text-gray-400 leading-relaxed">
-                        <!-- <p>美元</p> -->
-                        <p class="mt-2 md:mt-4 lg:mt-6 hidden sm:block">产业规模反映基础设施完善程度</p>
+                      <div class="text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs text-gray-400 leading-relaxed">
+                        <p class="mt-1 sm:mt-2 md:mt-3 lg:mt-4 xl:mt-6 hidden md:block">产业规模反映基础设施完善程度</p>
                       </div>
                     </div>
 
                     <!-- 船艇拥有量 -->
                     <div class="text-center">
-                      <p class="text-cyan-400 text-[10px] sm:text-xs md:text-sm font-semibold mb-2 md:mb-4 lg:mb-6">船艇拥有量</p>
-                      <p class="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-bold text-white boat-value mb-1 md:mb-2" :data-value="
+                      <p class="text-cyan-400 text-[9px] sm:text-[10px] md:text-xs lg:text-sm font-semibold mb-1 sm:mb-2 md:mb-3 lg:mb-4 xl:mb-6">船艇拥有量</p>
+                      <p class="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl font-bold text-white boat-value mb-1 sm:mb-1 md:mb-2" :data-value="
                         isChinaSelected ? '0.5' :
                         isSoutheastAsiaSelected ? '3.5' :
                         isItalySelected ? '10' :
@@ -479,12 +473,8 @@ watch(selectedCity, (newValue) => {
                         isMiddleEastSelected ? '8艘' :
                         '全球平均水平'
                       }}</p>
-                      <div class="text-[9px] sm:text-[10px] md:text-xs text-gray-400 leading-relaxed">
-                        <!-- <p>{{
-                          isSoutheastAsiaSelected ? '各国差异' :
-                          ''
-                        }}</p> -->
-                        <p class="mt-2 md:mt-4 lg:mt-6 hidden sm:block">每百户家庭拥有船艇数量</p>
+                      <div class="text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs text-gray-400 leading-relaxed">
+                        <p class="mt-1 sm:mt-2 md:mt-3 lg:mt-4 xl:mt-6 hidden md:block">每百户家庭拥有船艇数量</p>
                       </div>
                     </div>
                   </div>
