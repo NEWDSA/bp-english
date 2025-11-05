@@ -344,10 +344,10 @@ watch(selectedCity, (newValue) => {
                   </div>
 
                   <!-- 政策 -->
-                  <div class="flex items-center mt-6 lg:mt-10">
-                    <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">Electrification</p>
+                  <div class="flex items-center mt-2">
+                    <!-- <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">Electrification</p>
                     <img src="../assets/icon-12.png" alt="Icon" class="w-[14px] lg:w-[16px] mr-2 ml-2 lg:mr-3 lg:ml-3" />
-                    <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">Intelligent</p>
+                    <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">Intelligent</p> -->
                   </div>
                   <div class="mt-2 text-[11px] lg:text-[12px] 2xl:text-[16px] leading-6 lg:leading-8 space-y-2">
                     <p class="flex"><img src="../assets/icon-13.png" alt="Icon" class="flex-shrink-0 w-[16px] lg:w-[18px] h-[16px] lg:h-[18px] mr-2 lg:mr-3 mt-0.5 lg:mt-1" />Environmental regulations require that major maritime authorities around the world issue zero-emission regulations for ships, and oil tankers will be gradually banned from entering their waterways in the future.</p>
@@ -390,7 +390,7 @@ watch(selectedCity, (newValue) => {
                         'Global average level'
                       }}</p>
                       <div class="text-[8px] sm:text-[9px] md:text-[10px] lg:text-[11px] xl:text-xs text-gray-400 leading-relaxed">
-                        <p>
+                        <p class="min-h-[16px] md:min-h-[20px]">
                           {{
                             isChinaSelected ? 'Chinese mainland' :
                             isSoutheastAsiaSelected ? 'Indonesia' :
@@ -423,7 +423,7 @@ watch(selectedCity, (newValue) => {
                         'Significant differences exist between regions.'
                       }}</p>
                       <div class="text-[8px] sm:text-[9px] md:text-[10px] lg:text-[11px] xl:text-xs text-gray-400 leading-relaxed">
-                        <p>
+                        <p class="min-h-[16px] md:min-h-[20px]">
                           {{
                             isSoutheastAsiaSelected ? 'Singapore' :
                             isMiddleEastSelected ? 'Saudi Arabia' :
