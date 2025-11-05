@@ -890,31 +890,31 @@ const nextImage = () => {
                 <ul class="space-y-2 md:space-y-3 lg:space-y-4 text-white">
                   <li class="flex items-start">
                     <span class="w-1.5 h-1.5 md:w-2 md:h-2 bg-white rounded-full mr-2 md:mr-3 mt-1 md:mt-1.5 lg:mt-2 flex-shrink-0"></span>
-                    <span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-xl [@media(min-width:2000px)]:text-[24px]">AI avoidance system + front camera, angle control ≤1°, ensures safety and stability, low noise.</span>
+                    <span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-xl [@media(min-width:2000px)]:text-[24px]">AI obstacle avoidance system + forward-looking sonar, with tilt angle control ≤1° to ensure excellent stability and low noise.</span>
                   </li>
                   <li class="flex items-start">
                     <span class="w-1.5 h-1.5 md:w-2 md:h-2 bg-white rounded-full mr-2 md:mr-3 mt-1 md:mt-1.5 lg:mt-2 flex-shrink-0"></span>
-                    <span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-xl [@media(min-width:2000px)]:text-[24px]">Low acquisition cost, same return time, high annual economic benefits, great cost performance.</span>
+                    <span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-xl [@media(min-width:2000px)]:text-[24px]">Low procurement costs, short payback period, high annual economic benefits, and excellent cost performance.</span>
                   </li>
                   <li class="flex items-start">
                     <span class="w-1.5 h-1.5 md:w-2 md:h-2 bg-white rounded-full mr-2 md:mr-3 mt-1 md:mt-1.5 lg:mt-2 flex-shrink-0"></span>
-                    <span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-xl [@media(min-width:2000px)]:text-[24px]">Speed up to 20-40KM/H, high efficiency, extended range, dynamic coverage 15-40kW</span>
+                    <span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-xl [@media(min-width:2000px)]:text-[24px]">With speeds up to 20-40 km/h, high power-to-speed ratio, long range, and power outputs ranging from 15-40 kW, this vehicle boasts a high-performance engine.</span>
                   </li>
                   <li class="flex items-start">
                     <span class="w-1.5 h-1.5 md:w-2 md:h-2 bg-white rounded-full mr-2 md:mr-3 mt-1 md:mt-1.5 lg:mt-2 flex-shrink-0"></span>
-                    <span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-xl [@media(min-width:2000px)]:text-[24px]">Good stability, user-friendly seat design, convenient control, optional colorful ambient lights and 3D sound.</span>
+                    <span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-xl [@media(min-width:2000px)]:text-[24px]">It offers excellent stability, a user-friendly seat design, convenient operation, and additional comfort features such as ambient lighting and 3D sound.</span>
                   </li>
                   <li class="flex items-start">
                     <span class="w-1.5 h-1.5 md:w-2 md:h-2 bg-white rounded-full mr-2 md:mr-3 mt-1 md:mt-1.5 lg:mt-2 flex-shrink-0"></span>
-                    <span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-xl [@media(min-width:2000px)]:text-[24px]">Fully automatic driving, AI avoidance system, intelligent navigation control, improved convenience and technology sense.</span>
+                    <span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-xl [@media(min-width:2000px)]:text-[24px]">Fully automated driving, AI obstacle avoidance system, and intelligent navigation control enhance ease of operation and technological sophistication.</span>
                   </li>
                   <li class="flex items-start">
                     <span class="w-1.5 h-1.5 md:w-2 md:h-2 bg-white rounded-full mr-2 md:mr-3 mt-1 md:mt-1.5 lg:mt-2 flex-shrink-0"></span>
-                    <span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-xl [@media(min-width:2000px)]:text-[24px]">High-end private customization adapted to business leisure or social occasions, innovative brand image to increase user reputation.</span>
+                    <span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-xl [@media(min-width:2000px)]:text-[24px]">High-end private yachts are positioned to suit business, leisure, or social occasions, and the brand's innovative image enhances users' sense of belonging.</span>
                   </li>
                   <li class="flex items-start">
                     <span class="w-1.5 h-1.5 md:w-2 md:h-2 bg-white rounded-full mr-2 md:mr-3 mt-1 md:mt-1.5 lg:mt-2 flex-shrink-0"></span>
-                    <span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-xl [@media(min-width:2000px)]:text-[24px]">Industry-leading innovation with "Continuous Leadership" as the core, lightweight, sporty, and trendy brand culture.</span>
+                    <span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-xl [@media(min-width:2000px)]:text-[24px]">With "continuously leading innovation and defining new industry standards" as its core, the brand culture is young, sporty, and cutting-edge.</span>
                   </li>
                 </ul>
               </div>
@@ -927,11 +927,11 @@ const nextImage = () => {
                     <div class="bg-gray-700/30 rounded p-1 md:p-1.5 lg:p-2 mr-2 md:mr-3 lg:mr-4 overflow-hidden w-[40px] md:w-[50px] lg:w-[60px] xl:w-[70px]">
                       <img src="../assets/product-1.png" alt="Standard Edition" class="w-16 md:w-20 lg:w-24 xl:w-28 h-12 md:h-16 lg:h-18 xl:h-20 object-contain ml-[-8px] md:ml-[-12px] lg:ml-[-14px] xl:ml-[-16px]" />
                     </div>
-                    <p class="text-white text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-xl [@media(min-width:2000px)]:text-[24px] font-medium">Standard Edition</p>
+                    <p class="text-white text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-xl [@media(min-width:2000px)]:text-[24px] font-medium">Standard Track Version</p>
                   </div>
                   <img src="../assets/icon-16.png" alt="arrow" class="hidden md:block w-[16px] md:w-[20px] lg:w-[24px] xl:w-[28px] h-[16px] md:h-[20px] lg:h-[24px] xl:h-[28px] absolute left-[282px] lg:left-[322px] xl:left-[362px] [@media(min-width:2000px)]:left-[404px] top-1/2 -translate-y-1/2 -translate-x-1/2 z-10" />
                   <div class="bg-white/20 rounded-lg p-2 md:p-3 lg:p-4 flex items-center flex-1">
-                    <p class="text-gray-300 text-xs sm:text-sm md:text-base lg:text-base xl:text-lg [@media(min-width:2000px)]:text-[18px]">Focus on efficiency, reinforced hull and modular design, high cost performance.</p>
+                    <p class="text-gray-300 text-xs sm:text-sm md:text-base lg:text-base xl:text-lg [@media(min-width:2000px)]:text-[18px]">Focusing on passenger transport scenarios, it emphasizes corrosion resistance and modular design, offering high cost-effectiveness.</p>
                   </div>
                 </div>
 
@@ -941,11 +941,11 @@ const nextImage = () => {
                     <div class="bg-gray-700/30 rounded p-1 md:p-1.5 lg:p-2 mr-2 md:mr-3 lg:mr-4 overflow-hidden w-[40px] md:w-[50px] lg:w-[60px] xl:w-[70px]">
                       <img src="../assets/product-2.png" alt="Premium Experience" class="w-16 md:w-20 lg:w-24 xl:w-28 h-12 md:h-16 lg:h-18 xl:h-20 object-contain ml-[-8px] md:ml-[-12px] lg:ml-[-14px] xl:ml-[-16px]" />
                     </div>
-                    <p class="text-white text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-xl [@media(min-width:2000px)]:text-[24px] font-medium">Premium Experience</p>
+                    <p class="text-white text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-xl [@media(min-width:2000px)]:text-[24px] font-medium">Premium Leisure Edition</p>
                   </div>
                   <img src="../assets/icon-16.png" alt="arrow" class="hidden md:block w-[16px] md:w-[20px] lg:w-[24px] xl:w-[28px] h-[16px] md:h-[20px] lg:h-[24px] xl:h-[28px] absolute left-[282px] lg:left-[322px] xl:left-[362px] [@media(min-width:2000px)]:left-[404px] top-1/2 -translate-y-1/2 -translate-x-1/2 z-10" />
                   <div class="bg-white/20 rounded-lg p-2 md:p-3 lg:p-4 flex items-center flex-1">
-                    <p class="text-gray-300 text-xs sm:text-sm md:text-base lg:text-base xl:text-lg [@media(min-width:2000px)]:text-[18px]">For B-end rental companies, low maintenance and high load capacity, balanced cost and efficiency.</p>
+                    <p class="text-gray-300 text-xs sm:text-sm md:text-base lg:text-base xl:text-lg [@media(min-width:2000px)]:text-[18px]">Targeting B-end leasing/scenic spots, it focuses on low power consumption and high passenger capacity, balancing cost and efficiency.</p>
                   </div>
                 </div>
 
@@ -959,7 +959,7 @@ const nextImage = () => {
                   </div>
                   <img src="../assets/icon-16.png" alt="arrow" class="hidden md:block w-[16px] md:w-[20px] lg:w-[24px] xl:w-[28px] h-[16px] md:h-[20px] lg:h-[24px] xl:h-[28px] absolute left-[282px] lg:left-[322px] xl:left-[362px] [@media(min-width:2000px)]:left-[404px] top-1/2 -translate-y-1/2 -translate-x-1/2 z-10" />
                   <div class="bg-white/20 rounded-lg p-2 md:p-3 lg:p-4 flex items-center flex-1">
-                    <p class="text-gray-300 text-xs sm:text-sm md:text-base lg:text-base xl:text-lg [@media(min-width:2000px)]:text-[18px]">High-end private customization, exclusive automatic driving capability, improved comfort and experience.</p>
+                    <p class="text-gray-300 text-xs sm:text-sm md:text-base lg:text-base xl:text-lg [@media(min-width:2000px)]:text-[18px]">Positioned as a high-end private yacht, it is equipped with AI and autonomous driving functions to enhance its premium and experience.</p>
                   </div>
                 </div>
               </div>
@@ -977,7 +977,7 @@ const nextImage = () => {
                   </div>
                   <div class="flex justify-between items-center pb-2 md:pb-3 border-b border-white/20">
                     <span class="text-gray-300 text-xs sm:text-sm md:text-base lg:text-base xl:text-lg [@media(min-width:2000px)]:text-[18px]">02/</span>
-                    <span class="text-white text-xs sm:text-sm md:text-base lg:text-base xl:text-lg [@media(min-width:2000px)]:text-[18px]">Cost Effectiveness</span>
+                    <span class="text-white text-xs sm:text-sm md:text-base lg:text-base xl:text-lg [@media(min-width:2000px)]:text-[18px]">Cost</span>
                   </div>
                   <div class="flex justify-between items-center pb-2 md:pb-3 border-b border-white/20">
                     <span class="text-gray-300 text-xs sm:text-sm md:text-base lg:text-base xl:text-lg [@media(min-width:2000px)]:text-[18px]">03/</span>
