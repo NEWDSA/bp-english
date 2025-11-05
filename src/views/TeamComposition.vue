@@ -68,14 +68,17 @@
                                 <!-- 经历部分 (只有吴关和龚亮显示) -->
                                 <div v-if="selectedMember.name === '吴关' || selectedMember.name === '龚亮'"
                                     class="2xl:mb-10 mb-4 md:mb-6">
-                                    <span class="text-base sm:text-lg md:text-xl lg:text-xl xl:text-lg 2xl:text-xl text-white mb-3 md:mb-4 flex items-center">
-                                        <span class="w-1.5 h-1.5 md:w-2 md:h-2 bg-white/60 rounded-full mr-2 md:mr-3"></span>
+                                    <span
+                                        class="text-base sm:text-lg md:text-xl lg:text-xl xl:text-lg 2xl:text-xl text-white mb-3 md:mb-4 flex items-center">
+                                        <span
+                                            class="w-1.5 h-1.5 md:w-2 md:h-2 bg-white/60 rounded-full mr-2 md:mr-3"></span>
                                         Experience
                                     </span>
                                     <div class="pl-3 md:pl-4 lg:pl-5 space-y-2">
                                         <div v-for="(item, index) in formatListItems(selectedMember.professionalQualifications)"
                                             :key="`qual-${index}`" class="flex items-start group">
-                                            <span class="text-white/70 mr-2 md:mr-3 mt-1.5 text-[10px] sm:text-xs flex-shrink-0">▸</span>
+                                            <span
+                                                class="text-white/70 mr-2 md:mr-3 mt-1.5 text-[10px] sm:text-xs flex-shrink-0">▸</span>
                                             <p
                                                 class="text-white/90 text-sm sm:text-base md:text-base lg:text-base xl:text-sm 2xl:text-base leading-relaxed flex-1 min-w-0 group-hover:text-white transition-colors break-words">
                                                 {{ item }}
@@ -87,13 +90,16 @@
                                 <!-- 专长领域部分 (只有非吴关和非龚亮显示) -->
                                 <div v-if="selectedMember.name !== '吴关' && selectedMember.name !== '龚亮'"
                                     class="2xl:mb-10 mb-4 md:mb-6">
-                                    <span class="text-base sm:text-lg md:text-xl lg:text-xl xl:text-lg 2xl:text-xl text-white mb-3 md:mb-4 flex items-center">
-                                        <span class="w-1.5 h-1.5 md:w-2 md:h-2 bg-white/60 rounded-full mr-2 md:mr-3"></span>
+                                    <span
+                                        class="text-base sm:text-lg md:text-xl lg:text-xl xl:text-lg 2xl:text-xl text-white mb-3 md:mb-4 flex items-center">
+                                        <span
+                                            class="w-1.5 h-1.5 md:w-2 md:h-2 bg-white/60 rounded-full mr-2 md:mr-3"></span>
                                         Areas of expertise
                                     </span>
                                     <div
                                         class="pl-3 md:pl-4 lg:pl-5 bg-white/10 rounded-xl p-3 sm:p-4 md:p-5 lg:p-6 border border-white/20 backdrop-blur-sm">
-                                        <p class="text-white/90 text-sm sm:text-base md:text-base lg:text-base xl:text-sm 2xl:text-base leading-relaxed whitespace-pre-wrap break-words overflow-wrap-anywhere">
+                                        <p
+                                            class="text-white/90 text-sm sm:text-base md:text-base lg:text-base xl:text-sm 2xl:text-base leading-relaxed whitespace-pre-wrap break-words overflow-wrap-anywhere">
                                             {{ formatExpertiseWithLineBreaks(selectedMember.areasOfExpertise) }}
                                         </p>
                                     </div>
@@ -101,12 +107,15 @@
 
                                 <!-- 主要职责部分 (只有非吴关和非龚亮显示) -->
                                 <div v-if="selectedMember.name !== '吴关' && selectedMember.name !== '龚亮'">
-                                    <span class="text-base sm:text-lg md:text-xl lg:text-xl xl:text-lg 2xl:text-xl text-white mb-3 md:mb-4 flex items-center">
-                                        <span class="w-1.5 h-1.5 md:w-2 md:h-2 bg-white/60 rounded-full mr-2 md:mr-3"></span>
+                                    <span
+                                        class="text-base sm:text-lg md:text-xl lg:text-xl xl:text-lg 2xl:text-xl text-white mb-3 md:mb-4 flex items-center">
+                                        <span
+                                            class="w-1.5 h-1.5 md:w-2 md:h-2 bg-white/60 rounded-full mr-2 md:mr-3"></span>
                                         Main Responsibilities
                                     </span>
                                     <div class="pl-3 md:pl-4 lg:pl-5">
-                                        <p class="text-white/90 text-sm sm:text-base md:text-base lg:text-base xl:text-sm 2xl:text-base leading-loose break-words overflow-wrap-anywhere">
+                                        <p
+                                            class="text-white/90 text-sm sm:text-base md:text-base lg:text-base xl:text-sm 2xl:text-base leading-loose break-words overflow-wrap-anywhere">
                                             {{ selectedMember.description }}
                                         </p>
                                     </div>
@@ -114,12 +123,15 @@
 
                                 <!-- 个人简介部分 (只有吴关和龚亮显示) -->
                                 <div v-if="selectedMember.name === '吴关' || selectedMember.name === '龚亮'">
-                                    <span class="text-base sm:text-lg md:text-xl lg:text-xl xl:text-lg 2xl:text-xl text-white mb-3 md:mb-4 flex items-center">
-                                        <span class="w-1.5 h-1.5 md:w-2 md:h-2 bg-white/60 rounded-full mr-2 md:mr-3"></span>
+                                    <span
+                                        class="text-base sm:text-lg md:text-xl lg:text-xl xl:text-lg 2xl:text-xl text-white mb-3 md:mb-4 flex items-center">
+                                        <span
+                                            class="w-1.5 h-1.5 md:w-2 md:h-2 bg-white/60 rounded-full mr-2 md:mr-3"></span>
                                         Personal Profile
                                     </span>
                                     <div class="pl-3 md:pl-4 lg:pl-5">
-                                        <p class="text-white/90 text-sm sm:text-base md:text-base lg:text-base xl:text-sm 2xl:text-base leading-loose break-words overflow-wrap-anywhere">
+                                        <p
+                                            class="text-white/90 text-sm sm:text-base md:text-base lg:text-base xl:text-sm 2xl:text-base leading-loose break-words overflow-wrap-anywhere">
                                             {{ selectedMember.introduction }}
                                         </p>
                                     </div>
@@ -128,10 +140,15 @@
                             <!-- Who we are 和 Investment Cases 按钮区域 -->
                             <div class="flex flex-col gap-3 md:gap-4 flex-shrink-0 self-start min-w-fit">
                                 <div class="info-frame cursor-pointer whitespace-nowrap" @click="showWhoWeAreModal">
-                                    <h3 class="info-title text-sm sm:text-base md:text-lg lg:text-lg xl:text-base 2xl:text-lg">Team Introduction</h3>
+                                    <h3
+                                        class="info-title text-sm sm:text-base md:text-lg lg:text-lg xl:text-base 2xl:text-lg">
+                                        Team Introduction</h3>
                                 </div>
-                                <div class="info-frame cursor-pointer whitespace-nowrap" @click="showInvestmentHighlightsModal">
-                                    <h3 class="info-title text-sm sm:text-base md:text-lg lg:text-lg xl:text-base 2xl:text-lg">Investment Cases</h3>
+                                <div class="info-frame cursor-pointer whitespace-nowrap"
+                                    @click="showInvestmentHighlightsModal">
+                                    <h3
+                                        class="info-title text-sm sm:text-base md:text-lg lg:text-lg xl:text-base 2xl:text-lg">
+                                        Excellent Cases</h3>
                                 </div>
                             </div>
                         </div>
@@ -153,19 +170,16 @@
                                     <!-- 单一卡片组，使用两次循环实现无限滚动效果 -->
                                     <template v-for="cycle in 2" :key="cycle">
                                         <div v-for="(member, index) in teamMembers" :key="`${cycle}-${index}`"
-                                            @click="handleCardClick(index)" 
-                                            class="flex-shrink-0 mr-[30px] cursor-pointer"
-                                            :style="{
+                                            @click="handleCardClick(index)"
+                                            class="flex-shrink-0 mr-[30px] cursor-pointer" :style="{
                                                 width: '256px',
                                                 zIndex: selectedIndex === index ? 20 : 10
                                             }">
                                             <!-- 图片部分 -->
-                                            <div 
-                                                :class="[
-                                                    'rounded-2xl p-4 relative overflow-hidden border-white/20 bg-cover bg-center',
-                                                    selectedIndex === index ? 'h-[360px]' : 'h-[320px]'
-                                                ]" 
-                                                :style="{
+                                            <div :class="[
+                                                'rounded-2xl p-4 relative overflow-hidden border-white/20 bg-cover bg-center',
+                                                selectedIndex === index ? 'h-[360px]' : 'h-[320px]'
+                                            ]" :style="{
                                                     boxSizing: 'border-box',
                                                     boxShadow: '0 0 10px rgba(0,0,0,0.15)',
                                                     backgroundImage: `url(${member.image})`
@@ -201,8 +215,11 @@
                                 </button> -->
 
                                 <!-- 公司名称 -->
-                                <div class="absolute left-[calc(50%+200px)] sm:left-[calc(50%+250px)] md:left-[calc(50%+300px)] lg:left-[calc(50%+350px)] xl:left-[calc(50%+350px)] 2xl:left-[calc(50%+370px)]">
-                                    <h2 class="text-lg sm:text-xl md:text-xl lg:text-2xl xl:text-xl 2xl:text-2xl text-white">Y-H2O</h2>
+                                <div
+                                    class="absolute left-[calc(50%+200px)] sm:left-[calc(50%+250px)] md:left-[calc(50%+300px)] lg:left-[calc(50%+350px)] xl:left-[calc(50%+350px)] 2xl:left-[calc(50%+370px)]">
+                                    <h2
+                                        class="text-lg sm:text-xl md:text-xl lg:text-2xl xl:text-xl 2xl:text-2xl text-white">
+                                        Y-H2O</h2>
                                 </div>
                             </div>
                         </div>
@@ -279,9 +296,9 @@
                             </div>
                         </div>
 
-                        <!-- 右侧：投资案例 -->
+                        <!-- 右侧：优秀案例 -->
                         <div class="presentation-right">
-                            <h1 class="presentation-title">Investment Cases</h1>
+                            <h1 class="presentation-title">Excellent Cases</h1>
 
                             <div class="content-block">
                                 <p class="block-primary-text">Hydrofoil integration is the best solution for ship
@@ -299,23 +316,28 @@
                                     with leading overseas companies already investing heavily, while the domestic market
                                     remains
                                     largely untapped.</p>
-                                <p class="block-primary-text">Mastering the core industrial chain, possessing superior product
+                                <p class="block-primary-text">Mastering the core industrial chain, possessing superior
+                                    product
                                     innovation
                                     capabilities, and leading industry development.</p>
-                                <p class="block-primary-text">Adhering to self-developed and self-produced components across the
+                                <p class="block-primary-text">Adhering to self-developed and self-produced components
+                                    across the
                                     entire
                                     industrial chain, with modular assembly lines.</p>
-                                <p class="block-primary-text">Insisting on original design, perfecting the product matrix, and
+                                <p class="block-primary-text">Insisting on original design, perfecting the product
+                                    matrix, and
                                     developing
                                     self-developed intelligent control systems, including a three-mode intelligent
                                     steering wheel,
                                     intelligent cockpit, terminal sales program, high-strength modular hydrofoils, and
                                     high-strength
                                     lightweight hull materials and processes.</p>
-                                <p class="block-primary-text">Actively pursuing a global strategy to quickly achieve absolute
+                                <p class="block-primary-text">Actively pursuing a global strategy to quickly achieve
+                                    absolute
                                     leadership in
                                     the consumer market.</p>
-                                <p class="block-primary-text">Past products have gained recognition from leading domestic and
+                                <p class="block-primary-text">Past products have gained recognition from leading
+                                    domestic and
                                     international
                                     clients and have been implemented in multiple scenarios such as technology,
                                     transportation,
@@ -341,7 +363,8 @@
                 </div>
             </div>
             <!-- Investment Cases 中间显示内容 -->
-            <div v-if="showInvestmentHighlightsContent" class="works-fullscreen-modal" @click="closeInvestmentHighlightsContent">
+            <div v-if="showInvestmentHighlightsContent" class="works-fullscreen-modal"
+                @click="closeInvestmentHighlightsContent">
                 <div class="works-modal-wrapper" @click.stop>
                     <!-- 关闭按钮 -->
                     <button class="works-close-btn" @click="closeInvestmentHighlightsContent">
@@ -397,7 +420,8 @@
 
                                         <!-- 第五张图片文字 -->
                                         <template v-if="i === 5">
-                                            <div class="works-title">Complete domestic and overseas channel network</div>
+                                            <div class="works-title">Complete domestic and overseas channel network
+                                            </div>
                                             <div class="works-project">Project: ADAMAS</div>
                                             <div class="works-date">Launch Date: March 2025</div>
                                             <div class="works-location">Location: Ho Chi Minh City, Vietnam</div>
@@ -408,10 +432,13 @@
                                             <div class="works-title">Designer of the country's first smart yacht</div>
                                             <div class="works-project">Project: Smart Boat No. 1</div>
                                             <div class="works-date">Landing Date: October 2022</div>
-                                            <div class="works-location">Location: Guangdong-Hong Kong-Macao Greater Bay Area</div>
-                                            <div class="works-extra">"Smart Yacht Interior Design Technology Research Report"</div>
+                                            <div class="works-location">Location: Guangdong-Hong Kong-Macao Greater Bay
+                                                Area</div>
+                                            <div class="works-extra">"Smart Yacht Interior Design Technology Research
+                                                Report"</div>
                                             <div class="works-extra">"Smart Yacht Independent Development Project"</div>
-                                            <div class="works-extra">"Research on Exterior and Interior Design Technology of Medium-Sized Luxury Cruise Ships"</div>
+                                            <div class="works-extra">"Research on Exterior and Interior Design
+                                                Technology of Medium-Sized Luxury Cruise Ships"</div>
                                             <div class="works-extra">"2023 Forward-Looking Research Project"</div>
                                         </template>
                                     </div>
@@ -579,13 +606,13 @@ const swipeToMember = (direction: 'next' | 'previous', currentPosition?: number)
     const groupLength = teamMembers.value.length * CARD_TOTAL_WIDTH
     const lastIndex = teamMembers.value.length - 1
     const currentIndex = selectedIndex.value
-    
+
     // 使用传入的当前位置，如果没有则使用 scrollPosition
     const actualCurrentPosition = currentPosition ?? scrollPosition.value
-    
+
     let targetIndex: number
     let targetPosition: number
-    
+
     if (direction === 'next') {
         if (currentIndex === lastIndex) {
             // 从最后一张切换到第一张（循环）
@@ -608,17 +635,17 @@ const swipeToMember = (direction: 'next' | 'previous', currentPosition?: number)
             targetPosition = targetIndex * CARD_TOTAL_WIDTH
         }
     }
-    
+
     selectedIndex.value = targetIndex
-    
+
     // 如果是循环切换，需要特殊处理
-    if ((direction === 'next' && currentIndex === lastIndex) || 
+    if ((direction === 'next' && currentIndex === lastIndex) ||
         (direction === 'previous' && currentIndex === 0)) {
         const container = document.querySelector('.flex.transition-transform') as HTMLElement
-        
+
         // 先平滑过渡到第二组
         scrollPosition.value = targetPosition
-        
+
         // 等待动画完成后，重置到第一组对应位置
         setTimeout(() => {
             if (container) {
@@ -649,10 +676,10 @@ const selectMemberByClick = (index: number) => {
     const currentScrollPos = scrollPosition.value
     const groupLength = teamMembers.value.length * CARD_TOTAL_WIDTH
     const lastIndex = teamMembers.value.length - 1
-    
+
     // 判断当前在第一组还是第二组（使用更精确的判断，避免边界问题）
     const isInFirstGroup = currentScrollPos <= groupLength * 0.5
-    
+
     // 如果在第二组，点击时跳回第一组对应位置（瞬间跳转，不需要动画）
     if (!isInFirstGroup) {
         selectedIndex.value = index
@@ -671,17 +698,17 @@ const selectMemberByClick = (index: number) => {
         }
         return
     }
-    
+
     // 在第一组内处理循环效果
     // 情况1：从第一组最后一张切换到第一张，实现循环效果（从左向右滑动）
     if (selectedIndex.value === lastIndex && index === 0) {
         selectedIndex.value = 0
-        
+
         const container = document.querySelector('.flex.transition-transform') as HTMLElement
         if (container) {
             // 先平滑过渡到第二组的第一张位置
             scrollPosition.value = groupLength
-            
+
             // 等待第一个动画完成后，再平滑滚动回第一组的第一张
             setTimeout(() => {
                 if (container) {
@@ -696,12 +723,12 @@ const selectMemberByClick = (index: number) => {
     // 情况2：从第一组第一张切换到最后一张，实现反向循环效果（从右向左滑动）
     else if (selectedIndex.value === 0 && index === lastIndex) {
         selectedIndex.value = lastIndex
-        
+
         const container = document.querySelector('.flex.transition-transform') as HTMLElement
         if (container) {
             // 先平滑过渡到第二组的最后一张位置
             scrollPosition.value = groupLength + lastIndex * CARD_TOTAL_WIDTH
-            
+
             // 等待第一个动画完成后，再平滑滚动回第一组的最后一张
             setTimeout(() => {
                 if (container) {
@@ -1651,5 +1678,4 @@ button {
 .carousel-container:active {
     cursor: grabbing;
 }
-
 </style>

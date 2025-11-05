@@ -67,70 +67,62 @@
 
 				<!-- 弹窗内容 -->
 				<div class="modal-content-wrapper pain-points-content-wrapper">
-					<!-- 左侧空白区域 -->
-					<div class="modal-left-panel" style="display: none;"></div>
+					<!-- 左侧面板：图表和数据可视化 -->
+					<div class="modal-left-panel pain-points-left-panel">
+						<!-- 左侧内容显示背景图片和图表 -->
+					</div>
 
 					<!-- 右侧内容区域 -->
-					<div class="modal-right-panel pain-points-right-panel">
-						<div class="panel-header-section">
-							<div class="panel-header">Traditional Electric Boat Pain Points</div>
+					<div class="modal-right-panel pain-points-right-panel"
+						:class="{ 'pain-points-right-panel-expanded': showPainPointsContent }">
+						<!-- 如果未展开，显示可点击的div -->
+						<div v-if="!showPainPointsContent" class="pain-points-trigger-btn-inner"
+							@click="showPainPointsContent = true">
+							Traditional Electric Boat Pain Points
 						</div>
-						<!-- 内容 -->
-						<div class="panel-content">
-							<div class="panel-content-inner">
-								<!-- 结论部分 -->
-								<div class="panel-section">
-									<div class="conclusion-title">Conclusion:</div>
-									<div class="conclusion-content">
-										<div class="conclusion-item">
-											<span class="conclusion-number">1.</span>
-											<span class="conclusion-text">Weight & Resistance: Electric boats have higher values due to battery pack weight and hull design;</span>
-										</div>
-										<div class="conclusion-item">
-											<span class="conclusion-number">2.</span>
-											<span
-												class="conclusion-text">Size Requirements: To compensate for energy density disadvantages, electric boats need larger hulls to accommodate more batteries or optimize hydrodynamic performance.</span>
-										</div>
-									</div>
-								</div>
 
-								<!-- 常规船体 VS 水翼艇对比 -->
-								<div class="panel-section">
-									<div class="comparison-title">Conventional Hull vs Hydrofoil</div>
-									<div class="comparison-bars">
-										<div class="comparison-bar-item">
-											<div class="comparison-bar">
-												<div class="comparison-bar-fill" style="width: 72.8%"></div>
-												<span class="comparison-bar-text">Wetted area reduction: 72.8%</span>
+						<!-- 如果已展开，显示实际内容 -->
+						<template v-else>
+							<div class="panel-header-section">
+								<div class="panel-header">Traditional Electric Boat Pain Points</div>
+								<button class="pain-points-close-btn" @click="showPainPointsContent = false"
+									title="Close">×</button>
+							</div>
+							<!-- 内容 -->
+							<div class="panel-content">
+								<div class="panel-content-inner">
+									<!-- 结论部分 -->
+									<div class="panel-section">
+										<div class="conclusion-title">Conclusion:</div>
+										<div class="conclusion-content">
+											<div class="conclusion-item">
+												<span class="conclusion-number">1.</span>
+												<span class="conclusion-text">Weight & Resistance: Electric boats have
+													higher values due to battery pack weight and hull design;</span>
 											</div>
-										</div>
-										<div class="comparison-bar-item">
-											<div class="comparison-bar">
-												<div class="comparison-bar-fill" style="width: 63.1%"></div>
-												<span class="comparison-bar-text">Frictional resistance reduction: 63.1%</span>
-											</div>
-										</div>
-										<div class="comparison-bar-item">
-											<div class="comparison-bar">
-												<div class="comparison-bar-fill" style="width: 63.2%"></div>
-												<span class="comparison-bar-text">Maximum energy consumption reduction: 63.2%</span>
+											<div class="conclusion-item">
+												<span class="conclusion-number">2.</span>
+												<span class="conclusion-text">Size Requirements: To compensate for
+													energy density disadvantages, electric boats need larger hulls to
+													accommodate more batteries or optimize hydrodynamic
+													performance.</span>
 											</div>
 										</div>
 									</div>
-								</div>
 
-								<!-- 解决办法 -->
-								<div class="panel-section">
-									<div class="solutions-title">Solutions:</div>
-									<div class="solutions-grid">
-										<div class="solution-item">■ Controllable Cost</div>
-										<div class="solution-item">■ High Efficiency & Energy Saving</div>
-										<div class="solution-item">■ Quick Profitability</div>
-										<div class="solution-item">■ Policy Avoidance</div>
+									<!-- 解决办法 -->
+									<div class="panel-section">
+										<div class="solutions-title">Solutions:</div>
+										<div class="solutions-grid">
+											<div class="solution-item">■ Controllable Cost</div>
+											<div class="solution-item">■ High Efficiency & Energy Saving</div>
+											<div class="solution-item">■ Quick Profitability</div>
+											<div class="solution-item">■ Policy Avoidance</div>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
+						</template>
 					</div>
 				</div>
 			</div>
@@ -151,29 +143,29 @@
 						<button class="competitor-tab" :class="{ active: competitorTab === '10-15w' }"
 							@click="setCompetitorTab('10-15w')">
 							<!-- Hydrofoil 10-15w Euro -->
-							 H2o vs €100,000 - €150,000
+							YU vs €100,000 - €150,000
 						</button>
 						<button class="competitor-tab" :class="{ active: competitorTab === '18w' }"
 							@click="setCompetitorTab('18w')">
 							<!-- Hydrofoil 18w Euro -->
-							 H2o vs €180,000
+							YU vs €180,000
 						</button>
 						<button class="competitor-tab" :class="{ active: competitorTab === 'vs-others' }"
 							@click="setCompetitorTab('vs-others')">
 							<!-- VS Other Hydrofoils -->
-							 H2o vs other
+							YU vs other
 						</button>
 					</div>
 
 					<!-- Tab内容 -->
 					<div class="competitor-tab-content">
-					<!-- 水翼艇10-15w欧元 -->
-					<div v-if="competitorTab === '10-15w'" class="tab-panel three-col-tab">
+						<!-- 水翼艇10-15w欧元 -->
+						<div v-if="competitorTab === '10-15w'" class="tab-panel three-col-tab">
 							<!-- 产品图片 -->
 							<div class="competitor-grid">
 								<!-- 空白占位符 -->
 								<div class="competitor-spacer"></div>
-								
+
 								<!-- "御"水翼艇 -->
 								<div class="competitor-item">
 									<div class="competitor-image-wrapper">
@@ -181,19 +173,20 @@
 									</div>
 								</div>
 
-							<!-- Alfastreet 23 Cabin EVO Electric -->
-							<div class="competitor-item">
-								<div class="competitor-image-wrapper">
-									<img src="../assets/bb1.png" alt="Alfastreet 23 Cabin EVO Electric" class="competitor-image" />
+								<!-- Alfastreet 23 Cabin EVO Electric -->
+								<div class="competitor-item">
+									<div class="competitor-image-wrapper">
+										<img src="../assets/bb1.png" alt="Alfastreet 23 Cabin EVO Electric"
+											class="competitor-image" />
+									</div>
 								</div>
-							</div>
 
-							<!-- X-Shore 1 -->
-							<div class="competitor-item">
-								<div class="competitor-image-wrapper">
-									<img src="../assets/bb2.png" alt="X-Shore 1" class="competitor-image" />
+								<!-- X-Shore 1 -->
+								<div class="competitor-item">
+									<div class="competitor-image-wrapper">
+										<img src="../assets/bb2.png" alt="X-Shore 1" class="competitor-image" />
+									</div>
 								</div>
-							</div>
 							</div>
 
 							<!-- 性能对比表格 -->
@@ -202,13 +195,13 @@
 									<tbody>
 										<tr>
 											<td>Speed</td>
-											<td>40</td>
+											<td>65</td>
 											<td>33</td>
 											<td>55</td>
 										</tr>
 										<tr>
 											<td>Range at Full Speed (km)</td>
-											<td>40</td>
+											<td>65</td>
 											<td>30</td>
 											<td>33</td>
 										</tr>
@@ -220,9 +213,9 @@
 										</tr>
 										<tr>
 											<td>Battery Weight</td>
-											<td>~220kg</td>
-											<td>~300kg</td>
-											<td>~500kg</td>
+											<td>Approximately 220kg</td>
+											<td>Approximately 300kg</td>
+											<td>Approximately 500kg</td>
 										</tr>
 										<tr>
 											<td>Motor Power</td>
@@ -240,7 +233,7 @@
 											<td>Price (New Boat)</td>
 											<td>€150,000</td>
 											<td>€134,800</td>
-											<td>€100,000 ~ €155,900 （不含增值税） </td>
+											<td>€100,000 ~ €155,900 (excluding VAT) </td>
 										</tr>
 										<tr>
 											<td>Comfort</td>
@@ -289,13 +282,13 @@
 							</div>
 						</div>
 
-					<!-- 水翼艇18w欧元 -->
-					<div v-if="competitorTab === '18w'" class="tab-panel four-col-tab">
+						<!-- 水翼艇18w欧元 -->
+						<div v-if="competitorTab === '18w'" class="tab-panel four-col-tab">
 							<!-- 产品图片 -->
 							<div class="competitor-grid">
 								<!-- 空白占位符 -->
 								<div class="competitor-spacer"></div>
-								
+
 								<!-- "御"水翼艇 -->
 								<div class="competitor-item">
 									<div class="competitor-image-wrapper">
@@ -306,21 +299,23 @@
 								<!-- Q-Yachts Q30 -->
 								<div class="competitor-item">
 									<div class="competitor-image-wrapper">
-										<img src="../assets/other1.png" alt="Q-Yachts Q30" class="competitor-image" />
+										<img src="../assets/bbc1.png" alt="Q-Yachts Q30" class="competitor-image" />
 									</div>
 								</div>
 
 								<!-- RAND Spirit 25 Electric -->
 								<div class="competitor-item">
 									<div class="competitor-image-wrapper">
-										<img src="../assets/other2.png" alt="RAND Spirit 25 Electric" class="competitor-image" />
+										<img src="../assets/bbc2.png" alt="RAND Spirit 25 Electric"
+											class="competitor-image" />
 									</div>
 								</div>
 
 								<!-- Frauscher 740 Mirage Air -->
 								<div class="competitor-item">
 									<div class="competitor-image-wrapper">
-										<img src="../assets/other3.png" alt="Frauscher 740 Mirage Air" class="competitor-image" />
+										<img src="../assets/bbc3.png" alt="Frauscher 740 Mirage Air"
+											class="competitor-image" />
 									</div>
 								</div>
 							</div>
@@ -331,14 +326,14 @@
 									<tbody>
 										<tr>
 											<td>Speed</td>
-											<td>40</td>
+											<td>65</td>
 											<td>25.9</td>
 											<td>51</td>
 											<td>26</td>
 										</tr>
 										<tr>
 											<td>Range at Full Speed (km)</td>
-											<td>40</td>
+											<td>65</td>
 											<td>38.85</td>
 											<td>23</td>
 											<td>19</td>
@@ -352,10 +347,10 @@
 										</tr>
 										<tr>
 											<td>Battery Weight</td>
-											<td>~220kg</td>
-											<td>~240kg</td>
-											<td>~625kg</td>
-											<td>~320kg</td>
+											<td>Approximately 220kg</td>
+											<td>Approximately 240kg</td>
+											<td>Approximately 625kg</td>
+											<td>Approximately 320kg</td>
 										</tr>
 										<tr>
 											<td>Motor Power</td>
@@ -470,12 +465,12 @@
 									</div>
 								</div>
 
-							<!-- 友商D -->
-							<div class="competitor-item">
-								<div class="competitor-image-wrapper">
-									<img src="../assets/other4.png" alt="友商D" class="competitor-image" />
+								<!-- 友商D -->
+								<div class="competitor-item">
+									<div class="competitor-image-wrapper">
+										<img src="../assets/other4.png" alt="友商D" class="competitor-image" />
+									</div>
 								</div>
-							</div>
 							</div>
 
 							<!-- 性能对比表格 -->
@@ -484,69 +479,75 @@
 									<tbody>
 										<tr>
 											<td>Speed</td>
-											<td>40KM/H</td>
-											<td>33KM/H</td>
-											<td>55KM/H</td>
-											<td>25.9KM/H</td>
-											<td>51KM/H</td>
+											<td>65</td>
+											<td>24</td>
+											<td>28</td>
+											<td>80</td>
+											<td>55</td>
 											<!-- <td>26KM/H</td> -->
 										</tr>
 										<tr>
 											<td>Range at Full Speed (km)</td>
-											<td>40</td>
-											<td>30</td>
-											<td>33</td>
-											<td>38.85</td>
-											<td>23</td>
+											<td>65</td>
+											<td>80</td>
+											<td>50</td>
+											<td>100</td>
+											<td>100</td>
 											<!-- <td>19</td> -->
 										</tr>
 										<tr>
 											<td>Power-to-Speed Ratio (kW / kn)</td>
 											<td>1:1</td>
-											<td>1.7:1</td>
-											<td>1:6</td>
 											<td>2:1</td>
-											<td>3:1</td>
-											<!-- <td>2:1</td> -->
+											<td>2:1</td>
+											<td>2:1</td>
+											<td>2:1</td>
+										</tr>
+										<tr>
+											<td>Cost-effectiveness(€)</td>
+											<!-- <td>€35,000</td> -->
+											<td>€150,000</td>
+											<td>€35，700</td>
+											<td>€196，800</td>
+											<td>€700，000</td>
+											<td>€513，800</td>
 										</tr>
 										<tr>
 											<td>Battery Weight</td>
-											<td>~220kg</td>
-											<td>~300kg</td>
-											<td>~500kg</td>
-											<td>~240kg</td>
-											<td>~625kg</td>
+											<td>Approximately 220kg</td>
+											<td>Approximately 100kg</td>
+											<td>Approximately 360kg</td>
+											<td>Approximately 780kg</td>
+											<td>Approximately 1850kg</td>
 											<!-- <td>~320kg</td> -->
 										</tr>
-										<tr>
+										<!-- <tr>
 											<td>Motor Power</td>
 											<td>40kw</td>
 											<td>30kw</td>
 											<td>120kw</td>
 											<td>2*10kw</td>
 											<td>170kw</td>
-											<!-- <td>60kw</td> -->
-										</tr>
+										</tr> -->
 										<tr>
-											<td>Max Occupancy</td>
-											<td>5</td>
-											<td>8</td>
-											<td>5</td>
-											<td>8</td>
+											<td>Maximum occupant capacity</td>
+											<td>4</td>
+											<td>2</td>
+											<td>4</td>
 											<td>6</td>
+											<td>8</td>
 											<!-- <td>7</td> -->
 										</tr>
-										<tr>
+										<!-- <tr>
 											<td>Price (New Boat) (€)</td>
 											<td>€150,000</td>
 											<td>€134,800</td>
 											<td>€100,000 ~€155,900</td>
 											<td>€183,000</td>
 											<td>€185,000 from</td>
-											<!-- <td>€232 720</td> -->
-										</tr>
+										</tr> -->
 										<tr>
-											<td>User-Friendliness</td>
+											<td>Human-Computer Interaction Usability</td>
 											<td>
 												<!-- 4星 -->
 												<div class="stars">★★★★</div>
@@ -579,16 +580,25 @@
 								<div class="conclusion-content">
 									<div class="conclusion-item">
 										<span class="conclusion-bullet">•</span>
-										<span class="conclusion-text">Compared to traditional electric boats in the 100,000 Euro range, the "YU" hydrofoil has leading advantages in core performance and sailing experience;</span>
+										<span class="conclusion-text">Compared to traditional electric boats in the
+											100,000 Euro
+											range, the "YU" hydrofoil has leading advantages in core performance and
+											sailing
+											experience;</span>
 									</div>
 									<div class="conclusion-item">
 										<span class="conclusion-bullet">•</span>
-										<span class="conclusion-text">In terms of energy efficiency, quietness, and comfort, it has reached the level of products in the 170,000 Euro range;</span>
+										<span class="conclusion-text">In terms of energy efficiency, quietness, and
+											comfort, it
+											has reached the level of products in the 170,000 Euro range;</span>
 									</div>
 									<div class="conclusion-item">
 										<span class="conclusion-bullet">•</span>
-										<span
-											class="conclusion-text">Compared to other electric yachts on the market that also use hydrofoil technology, it highlights its more competitive price while maintaining core performance comparable to more expensive models.</span>
+										<span class="conclusion-text">Compared to other electric yachts on the market
+											that also
+											use hydrofoil technology, it highlights its more competitive price while
+											maintaining
+											core performance comparable to more expensive models.</span>
 									</div>
 								</div>
 							</div>
@@ -617,13 +627,20 @@
 						<div class="panel-section">
 							<div class="section-title">1. What is a Hydrofoil?</div>
 							<div class="section-text">
-								A hydrofoil is a boat-like "seaplane" vessel. When accelerating, the hydrofoils beneath the hull generate lift, lifting the entire hull out of the water, with only slender hydrofoil struts touching the water. This design significantly reduces water resistance and dramatically improves sailing speed and efficiency.
+								A hydrofoil is a boat-like "seaplane" vessel. When accelerating, the hydrofoils beneath
+								the hull
+								generate lift, lifting the entire hull out of the water, with only slender hydrofoil
+								struts
+								touching the water. This design significantly reduces water resistance and dramatically
+								improves
+								sailing speed and efficiency.
 							</div>
 						</div>
 
 						<!-- 第二部分：性能对比 -->
 						<div class="panel-section">
-							<div class="section-title">2. How does the hydrofoil perform compared to traditional boats?</div>
+							<div class="section-title">2. How does the hydrofoil perform compared to traditional boats?
+							</div>
 							<div class="performance-list">
 								<div class="performance-item">
 									<div class="performance-label">Drag reduction: up to 80%</div>
@@ -668,24 +685,32 @@
 						<!-- 内容区域 -->
 						<div class="panel-content">
 							<!-- 背景视频 -->
-							<video ref="videoRef" class="panel-background-video" src="../assets/shuiyiting.mp4" muted loop
-								playsinline @click="togglePlayPause"></video>
+							<video ref="videoRef" class="panel-background-video" src="../assets/shuiyiting.mp4" muted
+								loop playsinline @click="togglePlayPause"></video>
 							<!-- 视频遮罩层 -->
-							<div class="panel-video-overlay"></div>
+							<!-- <div class="panel-video-overlay"></div> -->
 							<!-- 视频控制按钮 -->
 							<div class="video-controls">
-								<button class="video-control-btn" @click="togglePlayPause" :title="isPlaying ? 'Pause' : 'Play'">
-									<svg v-if="isPlaying" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+								<button class="video-control-btn" @click="togglePlayPause"
+									:title="isPlaying ? 'Pause' : 'Play'">
+									<svg v-if="isPlaying" xmlns="http://www.w3.org/2000/svg" fill="none"
+										viewBox="0 0 24 24" stroke="currentColor">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+											d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
 									</svg>
-									<svg v-else xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+									<svg v-else t="1762358387505" class="icon" viewBox="0 0 1024 1024" version="1.1"
+										xmlns="http://www.w3.org/2000/svg" p-id="5203">
+										<path
+											d="M510.7 962.4c-60.7 0-119.5-11.9-175-35.3-53.5-22.6-101.6-55-142.9-96.3-41.3-41.3-73.7-89.3-96.3-142.9-23.4-55.4-35.3-114.3-35.3-175s11.9-119.5 35.3-175c22.6-53.5 55-101.6 96.3-142.9 41.3-41.3 89.3-73.7 142.9-96.3 55.4-23.4 114.3-35.3 175-35.3s119.5 11.9 175 35.3c53.5 22.6 101.6 55 142.9 96.3 41.3 41.3 73.7 89.3 96.3 142.9 23.4 55.4 35.3 114.3 35.3 175s-11.9 119.5-35.3 175c-22.6 53.5-55 101.6-96.3 142.9-41.3 41.3-89.3 73.7-142.9 96.3-55.5 23.4-114.3 35.3-175 35.3z m0-854.9c-223.5 0-405.4 181.9-405.4 405.4s181.9 405.4 405.4 405.4 405.4-181.9 405.4-405.4-181.9-405.4-405.4-405.4z"
+											fill="#ffffff" p-id="5204"></path>
+										<path d="M404.9 336.3v352.6l305.4-176.3z" fill="#ffffff" p-id="5205"></path>
 									</svg>
 								</button>
 								<button class="video-control-btn" @click="toggleFullscreen" title="Fullscreen">
-									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+										stroke="currentColor">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+											d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
 									</svg>
 								</button>
 							</div>
@@ -743,7 +768,7 @@
 						</div>
 						<div class="spec-row">
 							<span class="spec-label">Maximum speed</span>
-							<span class="spec-value">18/33 sections(kt)</span>
+							<span class="spec-value">18/35 sections(kt)</span>
 						</div>
 						<div class="spec-row">
 							<span class="spec-label">Endurance</span>
@@ -784,6 +809,9 @@ const router = useRouter()
 
 // 当前激活的导航项
 const activeNavItem = ref<string | null>(null)
+
+// 是否显示传统电动船舶痛点右侧内容
+const showPainPointsContent = ref(false)
 
 // 导航项引用
 const navListRef = ref<HTMLElement | null>(null)
@@ -832,6 +860,7 @@ const closeAdvantagesModal = () => {
 // 关闭传统电动船舶痛点弹窗
 const closePainPointsModal = () => {
 	activeNavItem.value = null
+	showPainPointsContent.value = false
 }
 
 // 关闭竞品分析弹窗
@@ -881,7 +910,7 @@ onMounted(() => {
 	updateLinePosition()
 	// 监听窗口大小变化
 	window.addEventListener('resize', updateLinePosition)
-	
+
 	// 监听视频播放状态
 	if (videoRef.value) {
 		videoRef.value.addEventListener('play', () => {
@@ -1290,7 +1319,7 @@ onUnmounted(() => {
 	left: 0;
 	width: 100vw;
 	height: 100vh;
-	background: rgba(40, 40, 40, 0.95);
+	background: rgba(40, 40, 40, 0.6);
 	backdrop-filter: blur(20px);
 	z-index: 20000;
 	display: flex;
@@ -1396,7 +1425,41 @@ onUnmounted(() => {
 	padding: 20px;
 	background: rgba(255, 255, 255, 0.05);
 	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
+
+.pain-points-close-btn {
+	width: 28px;
+	height: 28px;
+	min-width: 28px;
+	min-height: 28px;
+	max-width: 28px;
+	max-height: 28px;
+	background: rgba(255, 255, 255, 0.1);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	border-radius: 50% !important;
+	color: #FFFFFF;
+	font-size: 20px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.3s ease;
+	line-height: 1;
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+	flex-shrink: 0;
+}
+
+.pain-points-close-btn:hover {
+	background: rgba(255, 255, 255, 0.2);
+	transform: scale(1.1);
+	border-radius: 50% !important;
+}
+
 
 .panel-content {
 	position: relative;
@@ -1561,7 +1624,7 @@ onUnmounted(() => {
 	background-position: center;
 	background-repeat: no-repeat;
 	z-index: 0;
-	opacity: 0.3;
+	opacity: 0.6;
 }
 
 .pain-points-modal .modal-title,
@@ -1572,10 +1635,39 @@ onUnmounted(() => {
 }
 
 .pain-points-content-wrapper {
-	display: flex !important;
-	justify-content: flex-end !important;
-	grid-template-columns: none !important;
-	padding-left: 0 !important;
+	display: grid !important;
+	grid-template-columns: 2fr 1fr !important;
+	gap: 30px !important;
+	padding-left: 40px !important;
+}
+
+.pain-points-left-panel {
+	background: transparent !important;
+	border: none !important;
+	padding: 0 !important;
+	position: relative;
+}
+
+.pain-points-trigger-btn-inner {
+	background-color: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	border-radius: 12px;
+	padding: 40px 60px;
+	cursor: pointer;
+	color: #FFFFFF;
+	font-size: 20px;
+	font-weight: 500;
+	text-align: center;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.pain-points-trigger-btn-inner:hover {
+	background-color: rgba(255, 255, 255, 0.1);
+	border-color: rgba(255, 255, 255, 0.3);
 }
 
 .pain-points-content-wrapper .pain-points-right-panel {
@@ -1586,7 +1678,18 @@ onUnmounted(() => {
 	flex-shrink: 0 !important;
 	flex-grow: 0 !important;
 	flex-basis: 600px !important;
+	border: none !important;
+	background: transparent !important;
+	border-radius: 0 !important;
 }
+
+.pain-points-content-wrapper .pain-points-right-panel.pain-points-right-panel-expanded {
+	background: rgba(255, 255, 255, 0.05) !important;
+	backdrop-filter: blur(10px) !important;
+	border: 1px solid rgba(255, 255, 255, 0.2) !important;
+	border-radius: 12px !important;
+}
+
 
 /* 传统电动船舶痛点样式 */
 .conclusion-title,
@@ -1801,7 +1904,7 @@ onUnmounted(() => {
 .competitor-tab {
 	background: transparent;
 	border: none;
-	padding: 12px 24px;
+	padding: 12px 120px;
 	font-size: 14px;
 	font-weight: 500;
 	color: rgba(255, 255, 255, 0.6);
