@@ -18,11 +18,11 @@ const chartData = ref([
 ])
 
 const navItems = ref([
-  { id: 1, name: 'Industry Background', path: '/industry-background', active: true },
-  { id: 2, name: 'Market Demand', path: '/market-demand', active: false },
-  { id: 3, name: 'Business Model', path: '/business-model', active: false },
-  { id: 4, name: 'Team Composition', path: '/team-composition', active: false },
-  { id: 5, name: 'Product Introduction', path: '/product-introduction', active: false }
+  { id: 1, name: 'Product Introduction', path: '/product-introduction', active: false },
+  { id: 2, name: 'Industry Background', path: '/industry-background', active: true },
+  { id: 3, name: 'Market Demand', path: '/market-demand', active: false },
+  { id: 4, name: 'Business Model', path: '/business-model', active: false },
+  { id: 5, name: 'Team Composition', path: '/team-composition', active: false }
 ])
 
 const showSummary = ref(false)

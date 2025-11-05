@@ -33,11 +33,11 @@
 			<!-- <button class="catalogue-head" type="button" @click="toggleCatalogue" :aria-expanded="showCatalogue ? 'true' : 'false'">CATALOGUE</button> -->
 			<div class="catalogue-head" @click="toggleCatalogue" :aria-expanded="showCatalogue ? 'true' : 'false'">CATALOGUE</div>
 			<ul v-if="showCatalogue" class="catalogue-list" role="list">
+				<li class="catalogue-item" @click="navigateToProduct">Product Introduction</li>
 				<li class="catalogue-item" @click="navigateToIndustry">Industry Background</li>
 				<li class="catalogue-item" @click="navigateToMarket">Market Demand</li>
 				<li class="catalogue-item" @click="navigateToBusiness">Business Model</li>
 				<li class="catalogue-item" @click="navigateToTeam">Team Composition</li>
-				<li class="catalogue-item" @click="navigateToProduct">Product Introduction</li>
 			</ul>
 		</div>
 
