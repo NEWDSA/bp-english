@@ -66,12 +66,12 @@
 				</div>
 
 				<!-- 弹窗内容 -->
-				<div class="modal-content-wrapper">
+				<div class="modal-content-wrapper pain-points-content-wrapper">
 					<!-- 左侧空白区域 -->
-					<div class="modal-left-panel" style="visibility: hidden;"></div>
+					<div class="modal-left-panel" style="display: none;"></div>
 
 					<!-- 右侧内容区域 -->
-					<div class="modal-right-panel">
+					<div class="modal-right-panel pain-points-right-panel">
 						<div class="panel-header-section">
 							<div class="panel-header">Traditional Electric Boat Pain Points</div>
 						</div>
@@ -668,10 +668,27 @@
 						<!-- 内容区域 -->
 						<div class="panel-content">
 							<!-- 背景视频 -->
-							<video class="panel-background-video" src="../assets/shuiyiting.mp4" autoplay muted loop
-								playsinline></video>
+							<video ref="videoRef" class="panel-background-video" src="../assets/shuiyiting.mp4" muted loop
+								playsinline @click="togglePlayPause"></video>
 							<!-- 视频遮罩层 -->
 							<div class="panel-video-overlay"></div>
+							<!-- 视频控制按钮 -->
+							<div class="video-controls">
+								<button class="video-control-btn" @click="togglePlayPause" :title="isPlaying ? 'Pause' : 'Play'">
+									<svg v-if="isPlaying" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+									</svg>
+									<svg v-else xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+									</svg>
+								</button>
+								<button class="video-control-btn" @click="toggleFullscreen" title="Fullscreen">
+									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+									</svg>
+								</button>
+							</div>
 							<!-- 内容 -->
 						</div>
 					</div>
@@ -828,11 +845,52 @@ const setCompetitorTab = (tab: string) => {
 	competitorTab.value = tab
 }
 
+// 视频控制
+const videoRef = ref<HTMLVideoElement | null>(null)
+const isPlaying = ref(false)
+
+const togglePlayPause = () => {
+	if (videoRef.value) {
+		if (videoRef.value.paused) {
+			videoRef.value.play()
+			isPlaying.value = true
+		} else {
+			videoRef.value.pause()
+			isPlaying.value = false
+		}
+	}
+}
+
+const toggleFullscreen = () => {
+	if (videoRef.value) {
+		const panelContent = videoRef.value.closest('.panel-content')
+		if (panelContent) {
+			if (!document.fullscreenElement) {
+				panelContent.requestFullscreen().catch(err => {
+					console.log('Error attempting to enable fullscreen:', err)
+				})
+			} else {
+				document.exitFullscreen()
+			}
+		}
+	}
+}
+
 // 组件挂载后计算连接线位置
 onMounted(() => {
 	updateLinePosition()
 	// 监听窗口大小变化
 	window.addEventListener('resize', updateLinePosition)
+	
+	// 监听视频播放状态
+	if (videoRef.value) {
+		videoRef.value.addEventListener('play', () => {
+			isPlaying.value = true
+		})
+		videoRef.value.addEventListener('pause', () => {
+			isPlaying.value = false
+		})
+	}
 })
 
 // 组件更新后重新计算
@@ -1305,7 +1363,7 @@ onUnmounted(() => {
 
 .modal-content-wrapper {
 	display: grid;
-	grid-template-columns: 2fr 1fr;
+	grid-template-columns: 1fr 2fr;
 	gap: 30px;
 	padding: 25px 40px 30px 40px;
 	height: calc(100vh - 100px);
@@ -1366,6 +1424,43 @@ onUnmounted(() => {
 	height: 100%;
 	background: rgba(0, 0, 0, 0.4);
 	z-index: 1;
+	pointer-events: none;
+}
+
+.video-controls {
+	position: absolute;
+	bottom: 20px;
+	right: 20px;
+	display: flex;
+	gap: 12px;
+	z-index: 10;
+}
+
+.video-control-btn {
+	width: 44px;
+	height: 44px;
+	border-radius: 50%;
+	background: rgba(0, 0, 0, 0.6);
+	backdrop-filter: blur(10px);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	color: #ffffff;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.3s ease;
+	pointer-events: auto;
+}
+
+.video-control-btn:hover {
+	background: rgba(0, 0, 0, 0.8);
+	border-color: rgba(255, 255, 255, 0.5);
+	transform: scale(1.1);
+}
+
+.video-control-btn svg {
+	width: 20px;
+	height: 20px;
 }
 
 .panel-content-inner {
@@ -1474,6 +1569,23 @@ onUnmounted(() => {
 .pain-points-modal .modal-close-btn {
 	position: relative;
 	z-index: 2;
+}
+
+.pain-points-content-wrapper {
+	display: flex !important;
+	justify-content: flex-end !important;
+	grid-template-columns: none !important;
+	padding-left: 0 !important;
+}
+
+.pain-points-content-wrapper .pain-points-right-panel {
+	max-width: 600px !important;
+	width: 600px !important;
+	min-width: 600px !important;
+	flex: 0 0 600px !important;
+	flex-shrink: 0 !important;
+	flex-grow: 0 !important;
+	flex-basis: 600px !important;
 }
 
 /* 传统电动船舶痛点样式 */
