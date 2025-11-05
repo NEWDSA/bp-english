@@ -11,11 +11,11 @@ export const router = createRouter({
 	history: createWebHistory(),
 	routes: [
 		{ path: '/', name: 'home', component: Home },
+		{ path: '/product-introduction', name: 'product-introduction', component: ProductIntroduction },
 		{ path: '/industry-background', name: 'industry-background', component: IndustryBackground },
 		{ path: '/market-demand', name: 'market-demand', component: MarketDemand },
 		{ path: '/business-model', name: 'business-model', component: BusinessModel },
-		{ path: '/team-composition', name: 'team-composition', component: TeamComposition },
-		{ path: '/product-introduction', name: 'product-introduction', component: ProductIntroduction }
+		{ path: '/team-composition', name: 'team-composition', component: TeamComposition }
 	]
 })
 
