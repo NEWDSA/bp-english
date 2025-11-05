@@ -724,7 +724,7 @@ const nextImage = () => {
         </div>
 
         <!-- 右侧内容 -->
-        <div class="flex-2 px-0 py-4 lg:py-8 min-w-0">
+        <div class="flex-2 px-0 py-4 lg:py-8 min-w-0 relative">
           <div class="text-white w-full max-w-4xl pl-4 pr-8 ">
             <div class="bg-size-[100%_auto] bg-no-repeat rounded-[10px] shadow-xl border border-white/20 overflow-hidden bg-white/10"
                  :style="`background-image: url('${rightContent.backgroundImage}'); background-blend-mode: overlay;`">
@@ -768,9 +768,9 @@ const nextImage = () => {
           <button
             v-if="!showCoreRequirements"
             @click="toggleCoreRequirements"
-            class="mt-8 ml-6 px-6 py-3 rounded-lg flex items-center gap-3 bg-gray-600/80 hover:bg-gray-500/80 text-block shadow-xl hover:shadow-gray-500/30 transition-all duration-300 group">
+            class="absolute right-4 lg:right-8 mt-6 button-focus rounded-lg flex items-center gap-3 bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-xl hover:shadow-gray-500/30 transition-all duration-300 group">
             <span class="text-sm md:text-base lg:text-lg font-semibold tracking-wide">
-              Core detailed requirements
+              Core detailed
             </span>
             <svg class="w-6 h-6 transition-transform group-hover:translate-x-2 animate-bounce-right" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5-5 5M6 12h12" />
@@ -862,7 +862,7 @@ const nextImage = () => {
       <!-- 关闭按钮 -->
       <button
         @click="closeCoreRequirements"
-        class="absolute top-6 right-6 text-white bg-white/20 backdrop-blur-sm hover:bg-white/30 rounded-full p-3 z-50 transition-all duration-300 group">
+        class="button-focus absolute top-6 right-6 text-white bg-white/20 backdrop-blur-sm hover:bg-white/30 rounded-full p-3 z-50 transition-all duration-300 group">
         <svg class="w-6 h-6 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
         </svg>
@@ -1054,6 +1054,10 @@ const nextImage = () => {
 </template>
 
 <style scoped>
+.button-focus {
+  outline: none !important;
+}
+
 /* 顶部导航栏 */
 .home-btn {
 	cursor: pointer;
