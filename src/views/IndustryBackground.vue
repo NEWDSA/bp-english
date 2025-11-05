@@ -373,7 +373,7 @@ watch(selectedCity, (newValue) => {
                   <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-2 md:gap-3 lg:gap-4 xl:gap-5">
                     <!-- GDP数据 -->
                     <div class="text-center">
-                      <p class="text-cyan-400 text-[9px] sm:text-[10px] md:text-[11px] lg:text-xs xl:text-sm font-semibold mb-1 sm:mb-1 md:mb-2 lg:mb-3 xl:mb-4">GDP per capita</p>
+                      <p class="text-cyan-400 text-[9px] sm:text-[10px] md:text-[11px] lg:text-xs xl:text-sm font-semibold mb-1 sm:mb-1 md:mb-2 lg:mb-3 xl:mb-4 h-[28px] md:h-[32px] flex items-center justify-center">GDP per capita</p>
                       <p class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-bold text-white gdp-value mb-1 sm:mb-1 md:mb-1" :data-value="
                         isChinaSelected ? '13445' :
                         isSoutheastAsiaSelected ? '4960' :
@@ -406,7 +406,7 @@ watch(selectedCity, (newValue) => {
 
                     <!-- 家庭收入分布 -->
                     <div class="text-center">
-                      <p class="text-cyan-400 text-[9px] sm:text-[10px] md:text-[11px] lg:text-xs xl:text-sm font-semibold mb-1 sm:mb-1 md:mb-2 lg:mb-3 xl:mb-4">Annual income > 500,000 RMB</p>
+                      <p class="text-cyan-400 text-[9px] sm:text-[10px] md:text-[11px] lg:text-xs xl:text-sm font-semibold mb-1 sm:mb-1 md:mb-2 lg:mb-3 xl:mb-4 h-[28px] md:h-[32px] flex items-center justify-center">Annual income<br class="sm:hidden"/> > 500,000 RMB</p>
                       <p class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-bold text-white income-value mb-1 sm:mb-1 md:mb-1" :data-value="
                         isChinaSelected ? '4' :
                         isSoutheastAsiaSelected ? '15' :
@@ -437,7 +437,7 @@ watch(selectedCity, (newValue) => {
 
                     <!-- 产业规模 -->
                     <div class="text-center">
-                      <p class="text-cyan-400 text-[9px] sm:text-[10px] md:text-[11px] lg:text-xs xl:text-sm font-semibold mb-1 sm:mb-1 md:mb-2 lg:mb-3 xl:mb-4">Leisure boat industry chain</p>
+                      <p class="text-cyan-400 text-[9px] sm:text-[10px] md:text-[11px] lg:text-xs xl:text-sm font-semibold mb-1 sm:mb-1 md:mb-2 lg:mb-3 xl:mb-4 h-[28px] md:h-[32px] flex items-center justify-center">Leisure boat<br class="sm:hidden"/> industry chain</p>
                       <p class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-bold text-white industry-value mb-1 sm:mb-1 md:mb-1" :data-value="
                         isChinaSelected ? '60' :
                         isSoutheastAsiaSelected ? '12' :
@@ -466,7 +466,7 @@ watch(selectedCity, (newValue) => {
 
                     <!-- 船艇拥有量 -->
                     <div class="text-center">
-                      <p class="text-cyan-400 text-[9px] sm:text-[10px] md:text-[11px] lg:text-xs xl:text-sm font-semibold mb-1 sm:mb-1 md:mb-2 lg:mb-3 xl:mb-4">Boat ownership</p>
+                      <p class="text-cyan-400 text-[9px] sm:text-[10px] md:text-[11px] lg:text-xs xl:text-sm font-semibold mb-1 sm:mb-1 md:mb-2 lg:mb-3 xl:mb-4 h-[28px] md:h-[32px] flex items-center justify-center">Boat ownership</p>
                       <p class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-bold text-white boat-value mb-1 sm:mb-1 md:mb-1" :data-value="
                         isChinaSelected ? '0.5' :
                         isSoutheastAsiaSelected ? '3.5' :
