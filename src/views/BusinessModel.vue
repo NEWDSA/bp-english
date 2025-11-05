@@ -1215,23 +1215,23 @@ function renderModalCharts() {
 
 			legend: {
 				data: ['Annual breakeven sales volume (units)', 'Gross profit margin'],
-				bottom: '5%',
+				bottom: '1%',
 				textStyle: { fontSize: '1vw' },
 				left: 'center',
 				itemGap: 20
 			},
-			// graphic: {
-			// 	type: 'text',
-			// 	left: '5%',
-			// 	bottom: '7%',
-			// 	style: {
-			// 		text: 'Price: US Dollars',
-			// 		fontSize: '1vw',
-			// 		color: '#333',
-			// 		textAlign: 'left',
-			// 		textVerticalAlign: 'bottom'
-			// 	}
-			// },
+			graphic: {
+				type: 'text',
+				left: '40',
+				bottom: '25',
+				style: {
+					text: 'Horizontal axis (Price: US Dollars)',
+					fontSize: 10,
+					color: '#666',
+					textAlign: 'left',
+					textVerticalAlign: 'middle'
+				}
+			},
 			xAxis: {
 				type: 'category',
 				// 字体大小10px
@@ -1302,23 +1302,23 @@ function renderModalCharts() {
 			grid: { top: 50, bottom: 80, left: 40, right: 40 },
 			legend: {
 				data: ['Annual breakeven sales volume (units)', 'Gross profit margin'],
-				bottom: '5%',
+				bottom: '1%',
 				textStyle: { fontSize: '1vw' },
 				left: 'center',
 				itemGap: 20
 			},
-			// graphic: {
-			// 	type: 'text',
-			// 	left: '5%',
-			// 	bottom: '7%',
-			// 	style: {
-			// 		text: 'Price: US Dollars',
-			// 		fontSize: '1vw',
-			// 		color: '#333',
-			// 		textAlign: 'left',
-			// 		textVerticalAlign: 'bottom'
-			// 	}
-			// },
+			graphic: {
+				type: 'text',
+				left: '40',
+				bottom: '25',
+				style: {
+					text: 'Horizontal axis (Price: US Dollars)',
+					fontSize: 10,
+					color: '#666',
+					textAlign: 'left',
+					textVerticalAlign: 'middle'
+				}
+			},
 			xAxis: {
 				type: 'category',
 
@@ -1396,23 +1396,23 @@ function renderModalCharts() {
 			},
 			legend: {
 				data: ['Annual breakeven sales volume (units)', 'Gross profit margin'],
-				bottom: '5%',
+				bottom: '1%',
 				textStyle: { fontSize: '1vw' },
 				left: 'center',
 				itemGap: 20
 			},
-			// graphic: {
-			// 	type: 'text',
-			// 	left: '5%',
-			// 	bottom: '7%',
-			// 	style: {
-			// 		text: 'Price: US Dollars',
-			// 		fontSize: '1vw',
-			// 		color: '#333',
-			// 		textAlign: 'left',
-			// 		textVerticalAlign: 'bottom'
-			// 	}
-			// },
+			graphic: {
+				type: 'text',
+				left: '40',
+				bottom: '25',
+				style: {
+					text: 'Horizontal axis (Price: US Dollars)',
+					fontSize: 10,
+					color: '#666',
+					textAlign: 'left',
+					textVerticalAlign: 'middle'
+				}
+			},
 			xAxis: {
 				type: 'category',
 				data: [
@@ -1552,23 +1552,23 @@ function renderModalCharts() {
 			},
 			legend: {
 				data: ['Annual breakeven sales volume (units)', 'Gross profit margin'],
-				bottom: '5%',
+				bottom: '1%',
 				textStyle: { fontSize: '1vw' },
 				left: 'center',
 				itemGap: 20
 			},
-			// graphic: {
-			// 	type: 'text',
-			// 	left: '5%',
-			// 	bottom: '7%',
-			// 	style: {
-			// 		text: 'Price: US Dollars',
-			// 		fontSize: '1vw',
-			// 		color: '#333',
-			// 		textAlign: 'left',
-			// 		textVerticalAlign: 'bottom'
-			// 	}
-			// },
+			graphic: {
+				type: 'text',
+				left: '40',
+				bottom: '25',
+				style: {
+					text: 'Horizontal axis (Price: US Dollars)',
+					fontSize: 10,
+					color: '#666',
+					textAlign: 'left',
+					textVerticalAlign: 'middle'
+				}
+			},
 			xAxis: {
 				type: 'category',
 				data: ['95,700', '94,300', '92,900', '91,400', '90,000', '88,600', '87,100', '85,700', '84,300', '82,900', '81,400', '80,000', '78,600', '77,100', '75,700'],
