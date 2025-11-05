@@ -96,27 +96,6 @@
 
 					<!-- 右侧面板：详细内容 -->
 					<div class="right-panel">
-						<!-- Revenue Model 弹窗 -->
-						<div class="revenue-modal" v-if="activeContent === 'revenue'" @click="hideContent">
-							<div class="revenue-modal-content" @click.stop>
-								<button class="close-btn" @click="hideContent">×</button>
-								<div class="charts-grid">
-									<div class="chart-item">
-										<div ref="chart1Ref" class="modal-chart"></div>
-									</div>
-									<div class="chart-item">
-										<div ref="chart2Ref" class="modal-chart"></div>
-									</div>
-									<div class="chart-item">
-										<div ref="chart3Ref" class="modal-chart"></div>
-									</div>
-									<div class="chart-item">
-										<div ref="chart4Ref" class="modal-chart"></div>
-									</div>
-								</div>
-							</div>
-						</div>
-
 						<!-- 内容面板 -->
 						<div class="content-panel" v-if="activeContent && activeContent !== 'revenue'">
 							<!-- Lake Como 案例内容 -->
@@ -492,6 +471,27 @@
 								<p>Profit and loss data will be displayed here.</p>
 							</div>
 						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Revenue Model 弹窗 -->
+		<div class="revenue-modal" v-if="activeContent === 'revenue'" @click="hideContent">
+			<div class="revenue-modal-content" @click.stop>
+				<button class="close-btn" @click="hideContent">×</button>
+				<div class="charts-grid">
+					<div class="chart-item">
+						<div ref="chart1Ref" class="modal-chart"></div>
+					</div>
+					<div class="chart-item">
+						<div ref="chart2Ref" class="modal-chart"></div>
+					</div>
+					<div class="chart-item">
+						<div ref="chart3Ref" class="modal-chart"></div>
+					</div>
+					<div class="chart-item">
+						<div ref="chart4Ref" class="modal-chart"></div>
 					</div>
 				</div>
 			</div>
@@ -3468,17 +3468,19 @@ onMounted(() => {
 /* Revenue Modal 样式 */
 .revenue-modal {
 	position: fixed;
-	top: 106px;
-	left: 140px;
-	right: 140px;
-	bottom: 106px;
-	/* background: rgba(0, 0, 0, 0.8); */
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.2);
 	backdrop-filter: blur(10px);
-	z-index: 1000;
+	z-index: 10002;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	animation: fadeIn 0.3s ease-out;
+	padding: 106px 140px;
+	box-sizing: border-box;
 }
 
 .revenue-modal-content {
