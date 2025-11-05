@@ -867,12 +867,12 @@ const nextImage = () => {
     </div>
 
     <!-- 核心需求内容覆盖层 -->
-    <div v-if="showCoreRequirements" class="fixed inset-0 z-40 bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900 flex items-center justify-center" style="margin-top: 71px;">
+    <div v-if="showCoreRequirements" class="fixed inset-0 z-40 flex items-center justify-center" style="margin-top: 71px;">
       <!-- 关闭按钮 -->
       <button
         @click="closeCoreRequirements"
-        class="button-focus absolute top-6 right-6 text-white bg-white/20 backdrop-blur-sm hover:bg-white/30 rounded-full p-3 z-50 transition-all duration-300 group">
-        <svg class="w-6 h-6 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        class="button-focus absolute top-6 right-6 text-gray-300 bg-black/50 backdrop-blur-sm hover:bg-black/70 rounded-full p-3 z-50 transition-all duration-300 group">
+        <svg class="w-6 h-6 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
