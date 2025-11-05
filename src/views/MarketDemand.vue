@@ -639,7 +639,6 @@ const nextImage = () => {
       </div>
     </nav>
 
-<!-- 地球组件 -->
     <!-- 主内容容器 -->
     <div v-if="!showCoreRequirements" class="flex flex-col lg:flex-row mt-[71px] main-content-container">
       <!-- 左侧内容 -->
@@ -880,7 +879,134 @@ const nextImage = () => {
 
       <!-- 核心需求内容区域 -->
       <div class="w-full h-full overflow-auto p-8 md:p-12 lg:p-16">
-        
+        <div class="max-w-[1600px] mx-auto">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- 左侧容器：包含产品特点列表和版本对比卡片 -->
+            <div class="lg:col-span-8 space-y-6 bg-white/10 rounded-lg p-6">
+              <!-- 产品特点列表 -->
+              <div>
+                <ul class="space-y-4 text-white">
+                  <li class="flex items-start">
+                    <span class="w-2 h-2 bg-white rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                    <span class="text-sm lg:text-base">AI avoidance system + front camera, angle control ≤1°, ensures safety and stability, low noise.</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="w-2 h-2 bg-white rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                    <span class="text-sm lg:text-base">Low acquisition cost, same return time, high annual economic benefits, great cost performance.</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="w-2 h-2 bg-white rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                    <span class="text-sm lg:text-base">Speed up to 20-40KM/H, high efficiency, extended range, dynamic coverage 15-40kW</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="w-2 h-2 bg-white rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                    <span class="text-sm lg:text-base">Good stability, user-friendly seat design, convenient control, optional colorful ambient lights and 3D sound.</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="w-2 h-2 bg-white rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                    <span class="text-sm lg:text-base">Fully automatic driving, AI avoidance system, intelligent navigation control, improved convenience and technology sense.</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="w-2 h-2 bg-white rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                    <span class="text-sm lg:text-base">High-end private customization adapted to business leisure or social occasions, innovative brand image to increase user reputation.</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="w-2 h-2 bg-white rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                    <span class="text-sm lg:text-base">Industry-leading innovation with <span class="text-cyan-400">"Continuous Leadership"</span> as the core, lightweight, sporty, and trendy brand culture.</span>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- 版本对比卡片 -->
+              <div class="space-y-4">
+                <!-- 标准航迹版 -->
+                <div class="flex items-stretch gap-2 relative">
+                  <div class="bg-white/10 rounded-lg p-4 flex items-center w-[400px]">
+                    <div class="bg-gray-700/30 rounded p-2 mr-4 overflow-hidden w-[70px]">
+                      <img src="../assets/product-1.png" alt="Standard Edition" class="w-28 h-20 object-contain ml-[-16px]" />
+                    </div>
+                    <h3 class="text-white text-lg font-medium">Standard Edition</h3>
+                  </div>
+                  <img src="../assets/icon-16.png" alt="arrow" class="w-[28px] h-[28px] absolute left-[404px] top-1/2 -translate-y-1/2 -translate-x-1/2 z-10" />
+                  <div class="bg-white/10 rounded-lg p-4 flex items-center flex-1">
+                    <p class="text-gray-300 text-sm">Focus on efficiency, reinforced hull and modular design, high cost performance.</p>
+                  </div>
+                </div>
+
+                <!-- 尊享体验版 -->
+                <div class="flex items-stretch gap-2 relative">
+                  <div class="bg-white/10 rounded-lg p-4 flex items-center w-[400px]">
+                    <div class="bg-gray-700/30 rounded p-2 mr-4 overflow-hidden w-[70px]">
+                      <img src="../assets/product-2.png" alt="Premium Experience" class="w-28 h-20 object-contain ml-[-16px]" />
+                    </div>
+                    <h3 class="text-white text-lg font-medium">Premium Experience</h3>
+                  </div>
+                  <img src="../assets/icon-16.png" alt="arrow" class="w-[28px] h-[28px] absolute left-[404px] top-1/2 -translate-y-1/2 -translate-x-1/2 z-10" />
+                  <div class="bg-white/10 rounded-lg p-4 flex items-center flex-1">
+                    <p class="text-gray-300 text-sm">For B-end rental companies, low maintenance and high load capacity, balanced cost and efficiency.</p>
+                  </div>
+                </div>
+
+                <!-- 尊享悠游版 -->
+                <div class="flex items-stretch gap-2 relative">
+                  <div class="bg-white/10 rounded-lg p-4 flex items-center w-[400px]">
+                    <div class="bg-gray-700/30 rounded p-2 mr-4 overflow-hidden w-[70px]">
+                      <img src="../assets/product-3.png" alt="Luxury Leisure" class="w-28 h-20 object-contain ml-[-16px]" />
+                    </div>
+                    <h3 class="text-white text-lg font-medium">Luxury Leisure</h3>
+                  </div>
+                  <img src="../assets/icon-16.png" alt="arrow" class="w-[28px] h-[28px] absolute left-[404px] top-1/2 -translate-y-1/2 -translate-x-1/2 z-10" />
+                  <div class="bg-white/10 rounded-lg p-4 flex items-center flex-1">
+                    <p class="text-gray-300 text-sm">High-end private customization, exclusive automatic driving capability, improved comfort and experience.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 右侧信息栏 -->
+            <div class="lg:col-span-4 space-y-6 bg-white/10 rounded-lg p-6">
+              <!-- 产品力核心指标 -->
+              <div>
+                <h3 class="text-white text-lg font-medium mb-4">Core Product Competencies</h3>
+                <div class="space-y-3">
+                  <div class="flex justify-between items-center pb-3 border-b border-white/20">
+                    <span class="text-gray-300 text-sm">01/</span>
+                    <span class="text-white text-sm">Safety</span>
+                  </div>
+                  <div class="flex justify-between items-center pb-3 border-b border-white/20">
+                    <span class="text-gray-300 text-sm">02/</span>
+                    <span class="text-white text-sm">Cost Effectiveness</span>
+                  </div>
+                  <div class="flex justify-between items-center pb-3 border-b border-white/20">
+                    <span class="text-gray-300 text-sm">03/</span>
+                    <span class="text-white text-sm">Performance</span>
+                  </div>
+                  <div class="flex justify-between items-center pb-3 border-b border-white/20">
+                    <span class="text-gray-300 text-sm">04/</span>
+                    <span class="text-white text-sm">Comfort</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 产品差异化 -->
+              <div>
+                <h3 class="text-white text-lg font-medium mb-4">Potential demand that can generate a premium – product differentiation</h3>
+                <div class="bg-white/10 rounded-lg p-3 flex items-center h-[100px]">
+                  <span class="flex-1 text-center text-white text-sm py-1">Intelligent</span>
+                  <div class="w-px h-6 bg-white/30"></div>
+                  <span class="flex-1 text-center text-white text-sm py-1">Social attributes</span>
+                  <div class="w-px h-6 bg-white/30"></div>
+                  <span class="flex-1 text-center text-white text-sm py-1">Brand Culture</span>
+                </div>
+              </div>
+
+              <!-- 产品矩阵 -->
+              <div>
+                <p class="text-gray-300 text-sm">A product matrix with different configurations, sizes, prices, and additional functions can be extended according to different scenarios.</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
