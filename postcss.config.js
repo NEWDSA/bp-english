@@ -20,6 +20,7 @@ export default {
 
       selectorBlackList: [
         'h-\\[',
+        'w-\\[',
         'left-\\[',
         'text-\\[',
         'mr-\\['

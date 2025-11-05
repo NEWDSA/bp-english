@@ -11,6 +11,8 @@
 				</div>
 				<div class="nav-divider"></div>
 
+				<div class="nav-item active">Product Introduction</div>
+				<div class="nav-divider"></div>
 				<router-link to="/industry-background" class="nav-item">Industry Background</router-link>
 				<div class="nav-divider"></div>
 				<router-link to="/market-demand" class="nav-item">Market Demand</router-link>
@@ -18,20 +20,118 @@
 				<router-link to="/business-model" class="nav-item">Business Model</router-link>
 				<div class="nav-divider"></div>
 				<router-link to="/team-composition" class="nav-item">Team Composition</router-link>
-				<div class="nav-divider"></div>
-				<div class="nav-item active">Product Introduction</div>
 			</div>
 		</nav>
 
 		<!-- 背景视频 -->
-		<video
-			class="absolute inset-0 w-full h-full object-cover"
-			src="../assets/video/video-1.mp4"
-			autoplay
-			muted
-			loop
-			playsinline
-		></video>
+		<video class="absolute inset-0 w-full h-full object-cover" src="../assets/video/video-1.mp4" autoplay muted loop
+			playsinline></video>
+
+		<!-- 左侧导航菜单 -->
+		<div class="left-section">
+			<div class="left-nav-list" ref="navListRef">
+				<!-- 动态连接线 -->
+				<div class="main-vertical-line" :style="{
+					top: lineTop,
+					height: lineHeight
+				}"></div>
+
+				<div class="left-nav-item" ref="firstNavItemRef"
+					:class="{ active: activeNavItem === 'market-research' }"
+					@click="setActiveNavItem('market-research')">
+					<span class="nav-text">市场调查</span>
+				</div>
+				<div class="left-nav-item" :class="{ active: activeNavItem === 'advantages' }"
+					@click="setActiveNavItem('advantages')">
+					<span class="nav-text">水翼艇优势</span>
+				</div>
+				<div class="left-nav-item" ref="lastNavItemRef" :class="{ active: activeNavItem === 'pain-points' }"
+					@click="setActiveNavItem('pain-points')">
+					<span class="nav-text">传统电动船舶痛点</span>
+				</div>
+			</div>
+		</div>
+
+		<!-- 市场调查弹窗 -->
+		<div v-if="activeNavItem === 'market-research'" class="modal-overlay" @click="closeMarketResearchModal">
+			<div class="market-research-modal" @click.stop>
+				<!-- 关闭按钮 -->
+				<button class="modal-close-btn" @click="closeMarketResearchModal">×</button>
+
+				<!-- 弹窗标题 -->
+				<div class="modal-title">市场调查</div>
+
+				<!-- 弹窗内容 -->
+				<div class="modal-content-wrapper">
+					<!-- 左侧面板：水翼艇优势 -->
+					<div class="modal-left-panel">
+						<div class="panel-header">水翼艇优势</div>
+
+						<!-- 第一部分：什么是水翼船 -->
+						<div class="panel-section">
+							<div class="section-title">1. 什么是水翼船?</div>
+							<div class="section-text">
+								水翼船是一种"水上飞机"般的船舶。当加速时，船体下方的水翼产生升力，将整个船体抬离水面，只有细长的水翼支柱接触水面。这种设计大大减少了水阻力，显著提高了航行速度和效率。
+							</div>
+						</div>
+
+						<!-- 第二部分：性能对比 -->
+						<div class="panel-section">
+							<div class="section-title">2. 水翼艇相比传统船舶性能如何?</div>
+							<div class="performance-list">
+								<div class="performance-item">
+									<div class="performance-label">阻力可降低80%</div>
+									<div class="performance-bar">
+										<div class="performance-bar-fill red-bar" style="width: 100%"></div>
+									</div>
+								</div>
+								<div class="performance-item">
+									<div class="performance-label">稳性可提升30%-70%</div>
+									<div class="performance-bar">
+										<div class="performance-bar-fill orange-bar" style="width: 70%"></div>
+									</div>
+								</div>
+								<div class="performance-item">
+									<div class="performance-label">航速可提升30%-50%</div>
+									<div class="performance-bar">
+										<div class="performance-bar-fill orange-bar" style="width: 50%"></div>
+									</div>
+								</div>
+								<div class="performance-item">
+									<div class="performance-label">能耗可降低30%-50%</div>
+									<div class="performance-bar">
+										<div class="performance-bar-fill orange-bar" style="width: 50%"></div>
+									</div>
+								</div>
+								<div class="performance-item">
+									<div class="performance-label">推进效率可提升20%-40%</div>
+									<div class="performance-bar">
+										<div class="performance-bar-fill orange-bar" style="width: 40%"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- 右侧面板：水翼艇VS传统船舶 -->
+					<div class="modal-right-panel">
+						<!-- 标题区域 -->
+						<div class="panel-header-section">
+							<div class="panel-header">水翼艇VS传统船舶</div>
+						</div>
+						<!-- 内容区域 -->
+						<div class="panel-content">
+							<!-- 背景视频 -->
+							<video class="panel-background-video" src="../assets/shuiyiting.mp4" autoplay muted loop
+								playsinline></video>
+							<!-- 视频遮罩层 -->
+							<div class="panel-video-overlay"></div>
+							<!-- 内容 -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<!-- 右侧产品规格区域 -->
 		<div class="right-section">
@@ -115,12 +215,73 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
+import { ref, onMounted, onUpdated, onUnmounted, nextTick } from 'vue'
+
 const router = useRouter()
+
+// 当前激活的导航项
+const activeNavItem = ref<string | null>(null)
+
+// 导航项引用
+const navListRef = ref<HTMLElement | null>(null)
+const firstNavItemRef = ref<HTMLElement | null>(null)
+const lastNavItemRef = ref<HTMLElement | null>(null)
+
+// 连接线高度和位置
+const lineHeight = ref('0px')
+const lineTop = ref('0px')
+
+// 计算连接线的位置和高度
+const updateLinePosition = () => {
+	nextTick(() => {
+		if (firstNavItemRef.value && lastNavItemRef.value && navListRef.value) {
+			const firstRect = firstNavItemRef.value.getBoundingClientRect()
+			const lastRect = lastNavItemRef.value.getBoundingClientRect()
+			const listRect = navListRef.value.getBoundingClientRect()
+
+			// 计算第一个导航项相对于列表容器的位置
+			const firstTop = firstRect.top - listRect.top + firstRect.height / 2
+			// 计算最后一个导航项相对于列表容器的位置
+			const lastTop = lastRect.top - listRect.top + lastRect.height / 2
+
+			// 连接线从第一个导航项的中心开始，到最后一个导航项的中心结束
+			lineTop.value = `${firstTop}px`
+			lineHeight.value = `${lastTop - firstTop}px`
+		}
+	})
+}
 
 // 导航到首页
 const goHome = () => {
 	router.push('/')
 }
+
+// 设置激活的导航项
+const setActiveNavItem = (item: string) => {
+	activeNavItem.value = activeNavItem.value === item ? null : item
+}
+
+// 关闭市场调查弹窗
+const closeMarketResearchModal = () => {
+	activeNavItem.value = null
+}
+
+// 组件挂载后计算连接线位置
+onMounted(() => {
+	updateLinePosition()
+	// 监听窗口大小变化
+	window.addEventListener('resize', updateLinePosition)
+})
+
+// 组件更新后重新计算
+onUpdated(() => {
+	updateLinePosition()
+})
+
+// 组件卸载时移除事件监听器
+onUnmounted(() => {
+	window.removeEventListener('resize', updateLinePosition)
+})
 
 </script>
 
@@ -136,8 +297,8 @@ const goHome = () => {
 }
 
 .home-btn:hover {
-	/* background: rgba(0, 212, 255, 0.2);
-	transform: scale(1.1); */
+	background: rgba(0, 212, 255, 0.2);
+	transform: scale(1.1);
 }
 
 .home-icon {
@@ -159,7 +320,7 @@ const goHome = () => {
 	backdrop-filter: blur(10px);
 	z-index: 40;
 	padding: 15px 0;
-  font-family: 'Arial', sans-serif !important;
+	font-family: 'Arial', sans-serif !important;
 }
 
 .nav-container {
@@ -223,6 +384,7 @@ const goHome = () => {
 	height: 20px;
 	background: rgba(255, 255, 255, 0.3);
 }
+
 /* 顶部导航栏.start */
 
 
@@ -235,6 +397,7 @@ const goHome = () => {
 	gap: 15px;
 	box-shadow: 0 0 10px #646464;
 }
+
 /* 右侧产品规格面板 */
 .product-specs-panel {
 	position: absolute;
@@ -249,6 +412,7 @@ const goHome = () => {
 	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 	padding-left: 29px;
 }
+
 /* 船舶名称头部样式 */
 .ship-name-header {
 	width: 409px;
@@ -262,6 +426,7 @@ const goHome = () => {
 	/* justify-content: center; */
 	margin-left: -29px;
 }
+
 /* 船舶名称头部样式 */
 .ship-name-header {
 	width: 409px;
@@ -275,6 +440,7 @@ const goHome = () => {
 	/* justify-content: center; */
 	margin-left: -29px;
 }
+
 .specs-title {
 	font-size: 24px;
 	font-weight: 300;
@@ -342,6 +508,497 @@ const goHome = () => {
 	font-weight: 600;
 	text-align: right;
 }
+
+/* 左侧导航菜单样式 */
+.left-section {
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	z-index: 10;
+}
+
+.left-nav-list {
+	position: absolute;
+	left: 140px;
+	top: 50%;
+	transform: translateY(-50%) translateY(100px);
+	display: flex;
+	flex-direction: column;
+	gap: 99px;
+	padding-left: 20px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	min-height: 60vh;
+	justify-content: flex-start;
+	z-index: 10000;
+}
+
+/* 动态连接线样式 */
+.main-vertical-line {
+	position: absolute;
+	left: 0;
+	width: 2px;
+	background: rgba(255, 255, 255, 0.8);
+	z-index: 1;
+}
+
+.left-nav-item {
+	display: flex;
+	align-items: center;
+	position: relative;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+.left-nav-item::before {
+	content: '';
+	position: absolute;
+	left: -20px;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 8px;
+	height: 2px;
+	background: rgba(255, 255, 255, 0.8);
+	z-index: 3;
+}
+
+.left-nav-item:hover .nav-text {
+	color: #00d4ff;
+	transform: translateX(5px);
+}
+
+.left-nav-item.active .nav-text {
+	color: #00d4ff;
+}
+
+.left-nav-item.active::before {
+	background: #00d4ff;
+}
+
+.nav-text {
+	font-size: 16px;
+	font-weight: 500;
+	color: #FFFFFF;
+	transition: all 0.3s ease;
+	white-space: nowrap;
+}
+
+/* 颜色价格区域特殊样式 */
+.color-price-section {
+	gap: 15px;
+}
+
+.color-price-content {
+	display: flex;
+	flex-direction: row;
+	gap: 20px;
+	width: 100%;
+	align-items: center;
+	margin-left: 80px;
+}
+
+.color-options {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 8px 20px;
+	width: 100%;
+	max-width: 260px;
+	position: relative;
+}
+
+.color-swatch {
+	width: 135px;
+	height: 25px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	position: relative;
+	pointer-events: auto;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.color-swatch:hover {
+	transform: scale(1.1);
+	border-color: #3CC8C8;
+}
+
+.color-swatch.active {
+	border-color: #00d4ff;
+	border-width: 3px;
+	transform: scale(1.1);
+	box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
+
+.purchase-btn {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	background: rgba(255, 255, 255, 0.8);
+	margin-left: 300px;
+	color: #000000;
+	width: 353px;
+	height: 69px;
+	padding: 15px 25px;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+.purchase-btn:hover {
+	background: rgba(255, 255, 255, 1);
+	transform: translateY(-2px);
+}
+
+.price-icon {
+	width: 20px;
+	height: 20px;
+	object-fit: contain;
+}
+
+.purchase-text {
+	font-size: 14px;
+	color: #000000;
+}
+
+/* 市场调查弹窗样式 */
+.modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(40, 40, 40, 0.95);
+	backdrop-filter: blur(20px);
+	z-index: 20000;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	padding: 0;
+	margin: 0;
+}
+
+.market-research-modal {
+	position: relative;
+	width: 100%;
+	/* height: calc(100vh - 100px); */
+	max-width: 100%;
+	/* max-height: calc(100vh - 100px); */
+	height: 100%;
+	background: rgba(40, 40, 40, 0.95);
+	backdrop-filter: blur(20px);
+	border-radius: 0;
+	border: none;
+	box-shadow: none;
+	overflow-y: auto;
+	overflow-x: hidden;
+	margin: 0;
+	padding: 0;
+	margin-top: 0;
+	margin-bottom: 100px;
+}
+
+.modal-close-btn {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	width: 32px;
+	height: 32px;
+	background: rgba(255, 255, 255, 0.1);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	border-radius: 50%;
+	color: #FFFFFF;
+	font-size: 24px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.3s ease;
+	z-index: 10;
+}
+
+.modal-close-btn:hover {
+	background: rgba(255, 255, 255, 0.2);
+	transform: scale(1.1);
+}
+
+.modal-title {
+	font-size: 24px;
+	font-weight: 500;
+	color: #FFFFFF;
+	padding: 20px 40px 15px 40px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-content-wrapper {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 30px;
+	padding: 25px 40px 30px 40px;
+	height: calc(100vh - 100px);
+	/* height: 100%; */
+	overflow-y: auto;
+}
+
+.modal-left-panel,
+.modal-right-panel {
+	display: flex;
+	flex-direction: column;
+	gap: 18px;
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	border-radius: 12px;
+	padding: 20px;
+	position: relative;
+	overflow: hidden;
+}
+
+.modal-right-panel {
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+}
+
+.panel-header-section {
+	position: relative;
+	z-index: 2;
+	padding: 20px;
+	background: rgba(255, 255, 255, 0.05);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.panel-content {
+	position: relative;
+	flex: 1;
+	overflow: hidden;
+	border-radius: 0 0 12px 12px;
+}
+
+.panel-background-video {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	z-index: 0;
+}
+
+.panel-video-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.4);
+	z-index: 1;
+}
+
+.panel-content-inner {
+	position: relative;
+	z-index: 2;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 18px;
+	height: 100%;
+}
+
+.panel-header {
+	font-size: 18px;
+	font-weight: 600;
+	color: #FF6B35;
+	padding: 8px 0;
+	border-bottom: 2px solid #FF6B35;
+}
+
+.panel-section {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.section-title {
+	font-size: 16px;
+	font-weight: 600;
+	color: #FFFFFF;
+	margin-bottom: 8px;
+}
+
+.section-text {
+	font-size: 13px;
+	line-height: 1.6;
+	color: rgba(255, 255, 255, 0.9);
+	text-align: justify;
+}
+
+.performance-list {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+}
+
+.performance-item {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.performance-label {
+	font-size: 13px;
+	color: rgba(255, 255, 255, 0.9);
+	font-weight: 500;
+}
+
+.performance-bar {
+	width: 100%;
+	height: 20px;
+	background: rgba(255, 255, 255, 0.1);
+	border-radius: 4px;
+	overflow: hidden;
+	position: relative;
+}
+
+.performance-bar-fill {
+	height: 100%;
+	border-radius: 4px;
+	transition: width 0.6s ease;
+}
+
+.red-bar {
+	background: linear-gradient(90deg, #FF4444, #FF6B35);
+}
+
+.orange-bar {
+	background: linear-gradient(90deg, #FF6B35, #FF8C42);
+}
+
+.speed-section {
+	text-align: center;
+	padding: 12px 0;
+}
+
+.go-text {
+	font-size: 36px;
+	font-weight: bold;
+	color: #FFFFFF;
+	margin-bottom: 6px;
+}
+
+.speed-info {
+	font-size: 14px;
+	color: rgba(255, 255, 255, 0.9);
+	letter-spacing: 1px;
+}
+
+.boat-comparison {
+	margin: 12px 0;
+	min-height: 150px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.boat-image-container {
+	position: relative;
+	width: 100%;
+	height: 150px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.traditional-boat,
+.hydrofoil-boat {
+	width: 80%;
+	height: 60px;
+	background: rgba(100, 100, 100, 0.3);
+	border-radius: 8px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+}
+
+.hydrofoil-boat {
+	background: rgba(0, 150, 255, 0.3);
+}
+
+.boat-label {
+	position: absolute;
+	top: -20px;
+	left: 10px;
+	font-size: 12px;
+	color: rgba(255, 255, 255, 0.8);
+}
+
+.lift-indicator {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	font-size: 12px;
+	font-weight: bold;
+	color: #FF6B35;
+}
+
+.charts-section {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+	margin-top: 12px;
+}
+
+.chart-container {
+	background: rgba(30, 30, 30, 0.8);
+	border-radius: 8px;
+	padding: 12px;
+}
+
+.chart-title {
+	font-size: 13px;
+	font-weight: 600;
+	color: rgba(255, 255, 255, 0.9);
+	margin-bottom: 8px;
+}
+
+.chart-placeholder {
+	width: 100%;
+	height: 120px;
+}
+
+.chart-svg {
+	width: 100%;
+	height: 100%;
+}
+
+@media (max-width: 1024px) {
+	.modal-content-wrapper {
+		grid-template-columns: 1fr;
+		gap: 20px;
+		padding: 20px 30px 25px 30px;
+	}
+
+	.modal-title {
+		font-size: 20px;
+		padding: 15px 30px 12px 30px;
+	}
+
+	.panel-header {
+		font-size: 16px;
+	}
+
+	.section-title {
+		font-size: 14px;
+	}
+
+	.section-text {
+		font-size: 12px;
+	}
+}
+
 /* 响应式设计 */
 @media (max-width: 768px) {
 	.main-content {
@@ -359,23 +1016,14 @@ const goHome = () => {
 	}
 
 	.left-section,
-	.center-section,
 	.right-section {
 		padding: 20px;
-	}
-
-	.highlights-grid {
-		grid-template-columns: 1fr;
-	}
-
-	.boat-3d-model {
-		width: 350px;
-		height: 220px;
 	}
 
 	.product-specs-panel {
 		max-width: 100%;
 	}
 }
+
 /* 弹窗样式.end */
 </style>

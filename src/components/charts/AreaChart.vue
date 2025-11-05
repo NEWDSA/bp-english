@@ -347,8 +347,15 @@ onMounted(async () => {
 
     // 添加ResizeObserver以更准确地跟踪容器大小
     if (window.ResizeObserver) {
-      resizeObserver = new ResizeObserver(() => {
-        handleResize()
+      resizeObserver = new ResizeObserver((entries) => {
+        for (let entry of entries) {
+          if (entry.target === chartRef.value) {
+            // 使用requestAnimationFrame以获得平滑的调整
+            requestAnimationFrame(() => {
+              handleResize()
+            })
+          }
+        }
       })
     }
 
@@ -416,10 +423,11 @@ const initChart = () => {
     const containerRect = chartRef.value.getBoundingClientRect()
     console.log(`初始化图表尺寸: ${containerRect.width}x${containerRect.height}`)
 
-    // 初始化新的图表实例
+    // 初始化新的图表实例，使用自动尺寸
     chartInstance = echarts.init(chartRef.value, null, {
-      width: containerRect.width,
-      height: containerRect.height
+      renderer: 'canvas',
+      width: 'auto',
+      height: 'auto'
     })
 
     if (!chartInstance) {
@@ -496,14 +504,11 @@ onUnmounted(() => {
 
 // 处理窗口大小调整
 const handleResize = () => {
-  if (chartInstance && chartRef.value) {
+  if (chartInstance && chartRef.value && !chartInstance.isDisposed()) {
     try {
-      // 使用setTimeout确保DOM已完成更新
-      setTimeout(() => {
-        if (chartInstance && !chartInstance.isDisposed()) {
-          chartInstance.resize()
-        }
-      }, 100)
+      // 立即调整大小以提高响应性
+      chartInstance.resize()
+      console.log('Area chart resized')
     } catch (error) {
       console.error('调整图表大小出错:', error)
     }

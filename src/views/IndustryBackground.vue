@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, watch, nextTick } from 'vue'
 import EChartsComponent from '../components/EChartsComponent.vue';
 import GlobeComponent from '../components/GlobeComponent.vue';
 import Navigation from '../components/Navigation.vue';
@@ -8,7 +8,6 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 
 // 页面相关状态
-
 const chartData = ref([
   { title: 'Global Yacht Sales', subtitle: 'Market size and trends', type: 'line', id: 'yacht-sales' },
   { title: 'Water Sports Equipment', subtitle: 'Revenue by category', type: 'bar', id: 'equipment' },
@@ -52,16 +51,25 @@ const calculateChartHeight = () => {
   const titleHeight = 82
   // 底部内边距 (pb-8 = 2rem = 32px)
   const paddingBottom = 32
-  // 网格间距 (3行之间的间距：移动端 gap-4 = 8px * 2 = 16px，桌面端 gap-6)
-  const gridGap = window.innerWidth >= 1024 ? 12 * 2 : 8 * 2 // 3行之间有2个间隙
-  const gridTitle = window.innerWidth <= 1600 ? 40 * 3 : window.innerWidth > 1600 && window.innerWidth <= 1920 ? 46 * 3 : 68 * 3
 
-  console.log(navHeight, titleHeight, paddingBottom, gridGap)
+  // 根据是否选择了地区调整计算
+  if (selectedCity.value) {
+    // Global视图：3行图表
+    const gridGap = window.innerWidth >= 1024 ? 12 * 2 : 8 * 2 // 3行之间有2个间隙
+    const gridTitle = window.innerWidth <= 1600 ? 40 * 3 : window.innerWidth > 1600 && window.innerWidth <= 1920 ? 46 * 3 : 68 * 3
+    const availableHeight = window.innerHeight - navHeight - titleHeight - paddingBottom - gridGap - gridTitle
+    const calculatedChartHeight = Math.floor(availableHeight / 3) // 3行图表
+    chartHeight.value = `${calculatedChartHeight}px`
+  } else {
+    // 选择了地区：只有2行图表
+    const gridGap = window.innerWidth >= 1024 ? 12 * 1 : 8 * 1 // 2行之间有1个间隙
+    const gridTitle = window.innerWidth <= 1600 ? 40 * 2 : window.innerWidth > 1600 && window.innerWidth <= 1920 ? 46 * 2 : 60 * 2
+    const availableHeight = window.innerHeight - navHeight - titleHeight - paddingBottom - gridGap - gridTitle
+    const calculatedChartHeight = Math.floor(availableHeight / 2) // 2行图表
+    chartHeight.value = `${calculatedChartHeight}px`
+  }
 
-  const availableHeight = window.innerHeight - navHeight - titleHeight - paddingBottom - gridGap - gridTitle
-  const calculatedChartHeight = Math.floor(availableHeight / 3) // 3行图表
-
-  chartHeight.value = `${calculatedChartHeight}px`
+  console.log('Chart height calculated:', chartHeight.value, 'Selected city:', selectedCity.value)
 }
 
 onMounted(() => {
@@ -134,7 +142,118 @@ const handleCityClick = (cityInfo) => {
   isAmericaSelected.value = cityInfo.country === 'United States'
   isMiddleEastSelected.value = cityInfo.country === 'United Arab Emirates' || cityInfo.region === 'Middle East'
   console.log('City selected:', cityInfo.city, cityInfo.country, 'Is China:', isChinaSelected.value, 'Is Southeast Asia:', isSoutheastAsiaSelected.value, 'Is Italy:', isItalySelected.value, 'Is America:', isAmericaSelected.value, 'Is Middle East:', isMiddleEastSelected.value)
+  // 重新计算图表高度
+  calculateChartHeight()
 }
+
+// 处理地球背景点击事件 - 切换到Global数据
+const handleGlobeClick = () => {
+  selectedCity.value = null
+  isChinaSelected.value = false
+  isSoutheastAsiaSelected.value = false
+  isItalySelected.value = false
+  isAmericaSelected.value = false
+  isMiddleEastSelected.value = false
+  console.log('Globe clicked: Reset to Global data')
+  // 重新计算图表高度
+  calculateChartHeight()
+}
+
+// 数字滚动动画函数
+const animateNumber = (element, start, end, duration = 1500, isPercentage = false, isCurrency = false) => {
+  if (!element) return
+
+  const startTime = Date.now()
+  const diff = end - start
+
+  const animate = () => {
+    const currentTime = Date.now()
+    const elapsed = currentTime - startTime
+    const progress = Math.min(elapsed / duration, 1)
+
+    // 使用缓动函数让动画更自然
+    const easeOutQuart = 1 - Math.pow(1 - progress, 4)
+    const current = start + diff * easeOutQuart
+
+    // 格式化显示
+    let displayValue = ''
+    if (isCurrency) {
+      displayValue = '$' + Math.round(current).toLocaleString()
+      if (end >= 1000000000) {
+        displayValue = '$' + (current / 1000000000).toFixed(0) + '亿'
+      } else if (end >= 100000000) {
+        displayValue = '$' + (current / 100000000).toFixed(0) + '亿'
+      }
+    } else if (isPercentage) {
+      displayValue = Math.round(current) + '%'
+    } else {
+      // 船艇数量
+      if (current < 1) {
+        displayValue = current.toFixed(1) + '艘'
+      } else if (element.classList.contains('boat-value') && isSoutheastAsiaSelected.value) {
+        displayValue = '2-5艘'
+      } else {
+        displayValue = Math.round(current) + '艘'
+      }
+    }
+
+    element.textContent = displayValue
+
+    if (progress < 1) {
+      requestAnimationFrame(animate)
+    }
+  }
+
+  requestAnimationFrame(animate)
+}
+
+// 触发所有数字动画
+const triggerNumberAnimations = () => {
+  nextTick(() => {
+    // GDP动画
+    const gdpElement = document.querySelector('.gdp-value')
+    if (gdpElement) {
+      const targetValue = parseFloat(gdpElement.getAttribute('data-value')) || 0
+      if (targetValue > 0) {
+        animateNumber(gdpElement, 0, targetValue, 1500, false, true)
+      }
+    }
+
+    // 收入比例动画
+    const incomeElement = document.querySelector('.income-value')
+    if (incomeElement) {
+      const targetValue = parseFloat(incomeElement.getAttribute('data-value')) || 0
+      if (targetValue > 0) {
+        animateNumber(incomeElement, 0, targetValue, 1500, true)
+      }
+    }
+
+    // 产业规模动画
+    const industryElement = document.querySelector('.industry-value')
+    if (industryElement) {
+      const targetValue = parseFloat(industryElement.getAttribute('data-value')) || 0
+      if (targetValue > 0) {
+        animateNumber(industryElement, 0, targetValue * 100000000, 1500, false, true)
+      }
+    }
+
+    // 船艇拥有量动画
+    const boatElement = document.querySelector('.boat-value')
+    if (boatElement) {
+      const targetValue = parseFloat(boatElement.getAttribute('data-value')) || 0
+      if (targetValue > 0) {
+        animateNumber(boatElement, 0, targetValue, 1500)
+      }
+    }
+  })
+}
+
+// 监听selectedCity变化，触发动画
+watch(selectedCity, (newValue) => {
+  if (newValue) {
+    triggerNumberAnimations()
+  }
+})
 </script>
 
 <template>
@@ -150,6 +269,8 @@ const handleCityClick = (cityInfo) => {
         </div>
         <div class="nav-divider"></div>
 
+        <router-link to="/product-introduction" class="nav-item">Product Introduction</router-link>
+        <div class="nav-divider"></div>
         <div class="nav-item active">Industry Background</div>
         <div class="nav-divider"></div>
         <router-link to="/market-demand" class="nav-item">Market Demand</router-link>
@@ -157,8 +278,6 @@ const handleCityClick = (cityInfo) => {
         <router-link to="/business-model" class="nav-item">Business Model</router-link>
         <div class="nav-divider"></div>
         <router-link to="/team-composition" class="nav-item">Team Composition</router-link>
-        <div class="nav-divider"></div>
-        <router-link to="/product-introduction" class="nav-item">Product Introduction</router-link>
       </div>
     </nav>
 
@@ -176,19 +295,9 @@ const handleCityClick = (cityInfo) => {
           </div>
 
           <!-- 图表网格布局 -->
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 xl:gap-6">
-            <!-- 图表1：全球小型游艇制造业 -->
-            <div class="text-white">
-              <div class="flex items-center h-12">
-                <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
-                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">{{ isChinaSelected ? "China's small yacht manufacturing industry" : isSoutheastAsiaSelected ? "Small yacht manufacturing industry in Southeast Asia" : isItalySelected ? "Italian small yacht manufacturing industry" : isAmericaSelected ? "Small yacht manufacturing industry in the United States" : isMiddleEastSelected ? "Small yacht manufacturing industry in the Middle East" : "Global small yacht manufacturing industry" }}</p>
-              </div>
-              <div :style="{ height: chartHeight }">
-                <EChartsComponent chart-type="bar" :selected-city="selectedCity" @chart-click="handleChartClick" />
-              </div>
-            </div>
-
-            <!-- 图表2：全球小型游艇销售市场规模 -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 xl:gap-4">
+           
+            <!-- 图表1：全球小型游艇销售市场规模 -->
             <div class="text-white">
               <div class="flex items-center h-12">
                 <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
@@ -199,38 +308,7 @@ const handleCityClick = (cityInfo) => {
               </div>
             </div>
 
-            <!-- 图表3：全球水上户外运动装备市场规模（增长率） -->
-            <div class="text-white">
-              <div class="flex items-center h-12 z-2 relative">
-                <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
-                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">
-                  <template v-if="isChinaSelected">Water sports equipment in China(growth rate)</template>
-                  <template v-else-if="isSoutheastAsiaSelected">Water sports equipment in Southeast Asia(growth rate)</template>
-                  <template v-else-if="isItalySelected">Water sports equipment in Italy(growth rate)</template>
-                  <template v-else-if="isAmericaSelected">Water sports equipment in USA(growth rate)</template>
-                  <template v-else-if="isMiddleEastSelected">Water sports equipment in the Middle East(growth rate)</template>
-                  <template v-else>
-                    Global market size of water outdoor sports equipment<br>(growth rate)
-                  </template>
-                </p>
-              </div>
-              <div :style="{ height: chartHeight }">
-                <EChartsComponent chart-type="line" :selected-city="selectedCity" @chart-click="handleChartClick" />
-              </div>
-            </div>
-
-            <!-- 图表4：全球的休闲游艇规模 -->
-            <div class="text-white">
-              <div class="flex items-center h-12">
-                <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
-                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">{{ isChinaSelected ? "China's leisure yacht scale" : isSoutheastAsiaSelected ? "The scale of leisure yachts in Southeast Asia" : isItalySelected ? "The scale of leisure yachts in Italy" : isAmericaSelected ? "Recreational yachting in the United States" : isMiddleEastSelected ? "The scale of leisure yachts in the Middle East" : "Global leisure yachting market size" }}</p>
-              </div>
-              <div :style="{ height: chartHeight }">
-                <EChartsComponent chart-type="scatter" :selected-city="selectedCity" @chart-click="handleChartClick" />
-              </div>
-            </div>
-
-            <!-- 图表5：全球船舶租赁市场规模 -->
+            <!-- 图表2：全球船舶租赁市场规模 -->
             <div class="text-white">
               <div class="flex items-center h-12">
                 <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
@@ -241,14 +319,228 @@ const handleCityClick = (cityInfo) => {
               </div>
             </div>
 
-            <!-- 图表6：全球船东年龄结构 -->
-            <div class="text-white">
+            <!-- 图表3：全球船东年龄结构 -->
+            <div v-if="!selectedCity" class="text-white">
               <div class="flex items-center h-12">
                 <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
                 <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">{{ isChinaSelected ? "Age structure of Chinese ship owners" : isSoutheastAsiaSelected ? "Age structure of shipowners in Southeast Asia" : isItalySelected ? "Age structure of Italian shipowners" : isAmericaSelected ? "Age structure of American shipowners" : isMiddleEastSelected ? "Age structure of shipowners in the Middle East" : "Age structure of global shipowners" }}</p>
               </div>
               <div :style="{ height: chartHeight }">
                 <EChartsComponent chart-type="pie" :selected-city="selectedCity" @chart-click="handleChartClick" />
+              </div>
+            </div>
+
+            <!-- 文本 -->
+            <div v-if="!selectedCity" class="text-white">
+              <!-- 数据下方放行业趋势、结论 -->
+              <div class="flex items-center h-12">
+                <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
+                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">数据下方放行业趋势、结论</p>
+              </div>
+              <div class="bg-gray-900/50 rounded-xl overflow-hidden" :style="{ height: chartHeight }">
+                <div class="content-scroll-container h-full overflow-auto p-4 lg:p-6">
+                  <div class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">
+                    未来船舶发展呈现出"电动化"与"智能化"深度融合的明确趋势
+                  </div>
+
+                  <!-- 政策 -->
+                  <div class="flex items-center mt-6 lg:mt-10">
+                    <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">电动化</p>
+                    <img src="../assets/icon-12.png" alt="Icon" class="w-[14px] lg:w-[16px] mr-2 ml-2 lg:mr-3 lg:ml-3" />
+                    <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">智能化</p>
+                  </div>
+                  <div class="mt-2 text-[11px] lg:text-[12px] 2xl:text-[16px] leading-6 lg:leading-8 space-y-2">
+                    <p class="flex"><img src="../assets/icon-13.png" alt="Icon" class="flex-shrink-0 w-[16px] lg:w-[18px] h-[16px] lg:h-[18px] mr-2 lg:mr-3 mt-0.5 lg:mt-1" />环保法规要求：全球主要国家海事均发布船舶零排放法规，未来将逐步禁止油船进入水域。</p>
+                    <p class="flex"><img src="../assets/icon-14.png" alt="Icon" class="flex-shrink-0 w-[18px] lg:w-[20px] h-[18px] lg:h-[20px] mr-2 lg:mr-3 mt-0.5 lg:mt-1" />"三电"下放：中国电池、电机、电控技术&产业链随新能源汽车发展已成熟，三电技术将逐步下放其他交通工具领域，引领能源技术变革。目前主流船艇公司均逐步推出电动船艇产品，力图抢占市场。</p>
+                    <p class="flex"><img src="../assets/icon-15.png" alt="Icon" class="flex-shrink-0 w-[18px] lg:w-[20px] h-[18px] lg:h-[20px] mr-2 lg:mr-3 mt-0.5 lg:mt-1" />智能化趋势：电动化不应是简单的"油转电"，而是全新品类的全面升级；在其他行业我们已经看到了智能化设计在不断颠覆并替代传统产品，算力芯片、AI技术已较为成熟，可快速迁移。</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 数据+结论 -->
+          <div v-if="selectedCity" class="flex flex-col flex-1">
+            <!-- 地区特点数据 -->
+            <div class="text-white flex-shrink-0">
+              <div class="flex items-center h-12">
+                <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
+                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">地区经济与产业数据</p>
+              </div>
+              <div class="bg-gray-900/50 rounded-xl">
+                <div class="p-2 xl:p-4 2xl:p-6">
+                  <!-- 横向排列的数据 -->
+                  <div class="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4 lg:gap-5 xl:gap-6">
+                    <!-- GDP数据 -->
+                    <div class="text-center">
+                      <p class="text-cyan-400 text-[9px] sm:text-[10px] md:text-xs lg:text-sm font-semibold mb-1 sm:mb-2 md:mb-3 lg:mb-4 xl:mb-6">人均GDP{{
+                        isChinaSelected ? ' (中国大陆)' :
+                        isSoutheastAsiaSelected ? ' (印尼)' :
+                        isItalySelected ? ' (意大利)' :
+                        isAmericaSelected ? ' (美国)' :
+                        isMiddleEastSelected ? ' (阿联酋)' :
+                        ''
+                      }}</p>
+                      <p class="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl font-bold text-white gdp-value mb-1 sm:mb-1 md:mb-2" :data-value="
+                        isChinaSelected ? '13445' :
+                        isSoutheastAsiaSelected ? '4960' :
+                        isItalySelected ? '40437' :
+                        isAmericaSelected ? '85876' :
+                        isMiddleEastSelected ? '53813' :
+                        '0'
+                      ">{{
+                        isChinaSelected ? '$13,445' :
+                        isSoutheastAsiaSelected ? '$4,960' :
+                        isItalySelected ? '$40,437' :
+                        isAmericaSelected ? '$85,876' :
+                        isMiddleEastSelected ? '$53,813' :
+                        '全球平均水平'
+                      }}</p>
+                      <div class="text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs text-gray-400 leading-relaxed">
+                        <p class="mt-1 sm:mt-2 md:mt-3 lg:mt-4 xl:mt-6 hidden md:block">超$3000是游艇经济萌芽临界点,超过10,000美元时，划艇等水上运动会更受欢迎</p>
+                      </div>
+                    </div>
+
+                    <!-- 家庭收入分布 -->
+                    <div class="text-center">
+                      <p class="text-cyan-400 text-[9px] sm:text-[10px] md:text-xs lg:text-sm font-semibold mb-1 sm:mb-2 md:mb-3 lg:mb-4 xl:mb-6">家庭年收入>50万{{
+                        isSoutheastAsiaSelected ? ' (新加坡)' :
+                        isMiddleEastSelected ? ' (沙特)' :
+                        isItalySelected ? ' (意大利)' :
+                        ''
+                      }}</p>
+                      <p class="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl font-bold text-white income-value mb-1 sm:mb-1 md:mb-2" :data-value="
+                        isChinaSelected ? '4' :
+                        isSoutheastAsiaSelected ? '15' :
+                        isItalySelected ? '28' :
+                        isAmericaSelected ? '45' :
+                        isMiddleEastSelected ? '7' :
+                        '0'
+                      ">{{
+                        isChinaSelected ? '4%' :
+                        isSoutheastAsiaSelected ? '15%' :
+                        isItalySelected ? '28%' :
+                        isAmericaSelected ? '45%' :
+                        isMiddleEastSelected ? '7%' :
+                        '各地区差异较大'
+                      }}</p>
+                      <div class="text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs text-gray-400 leading-relaxed">
+                        <p class="mt-1 sm:mt-2 md:mt-3 lg:mt-4 xl:mt-6 hidden md:block">人均月收入超过2万元的家庭有能力租用游艇，年收入超过50万元以上的家庭，则有能力购买游艇</p>
+                      </div>
+                    </div>
+
+                    <!-- 产业规模 -->
+                    <div class="text-center">
+                      <p class="text-cyan-400 text-[9px] sm:text-[10px] md:text-xs lg:text-sm font-semibold mb-1 sm:mb-2 md:mb-3 lg:mb-4 xl:mb-6">休闲船艇产业链{{
+                        isItalySelected ? ' (欧洲)' :
+                        ''
+                      }}</p>
+                      <p class="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl font-bold text-white industry-value mb-1 sm:mb-1 md:mb-2" :data-value="
+                        isChinaSelected ? '60' :
+                        isSoutheastAsiaSelected ? '12' :
+                        isItalySelected ? '250' :
+                        isAmericaSelected ? '750' :
+                        isMiddleEastSelected ? '20' :
+                        '0'
+                      ">{{
+                        isChinaSelected ? '$60亿' :
+                        isSoutheastAsiaSelected ? '$12亿' :
+                        isItalySelected ? '$250亿' :
+                        isAmericaSelected ? '$750亿' :
+                        isMiddleEastSelected ? '$20亿' :
+                        '全球市场规模'
+                      }}</p>
+                      <div class="text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs text-gray-400 leading-relaxed">
+                        <p class="mt-1 sm:mt-2 md:mt-3 lg:mt-4 xl:mt-6 hidden md:block">产业规模反映基础设施完善程度</p>
+                      </div>
+                    </div>
+
+                    <!-- 船艇拥有量 -->
+                    <div class="text-center">
+                      <p class="text-cyan-400 text-[9px] sm:text-[10px] md:text-xs lg:text-sm font-semibold mb-1 sm:mb-2 md:mb-3 lg:mb-4 xl:mb-6">船艇拥有量</p>
+                      <p class="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl font-bold text-white boat-value mb-1 sm:mb-1 md:mb-2" :data-value="
+                        isChinaSelected ? '0.5' :
+                        isSoutheastAsiaSelected ? '3.5' :
+                        isItalySelected ? '10' :
+                        isAmericaSelected ? '15' :
+                        isMiddleEastSelected ? '8' :
+                        '0'
+                      ">{{
+                        isChinaSelected ? '0.5艘' :
+                        isSoutheastAsiaSelected ? '2-5艘' :
+                        isItalySelected ? '10艘' :
+                        isAmericaSelected ? '15艘' :
+                        isMiddleEastSelected ? '8艘' :
+                        '全球平均水平'
+                      }}</p>
+                      <div class="text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs text-gray-400 leading-relaxed">
+                        <p class="mt-1 sm:mt-2 md:mt-3 lg:mt-4 xl:mt-6 hidden md:block">每百户家庭拥有船艇数量</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 法规文字 -->
+            <div class="text-white flex flex-col flex-1">
+              <div class="flex items-center h-10 md:h-12 flex-shrink-0">
+                <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
+                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">水污染禁航法规</p>
+              </div>
+              <div class="bg-gray-900/50 rounded-xl overflow-hidden flex-1">
+                <div class="content-scroll-container h-full overflow-auto p-3 md:p-4 lg:p-6 xl:p-8">
+                  <div class="text-[10px] sm:text-xs lg:text-sm 2xl:text-[15px] text-gray-200 space-y-3 lg:space-y-4">
+                    <template v-if="isChinaSelected">
+                      <p class="text-cyan-400 font-semibold">国家排放标准：</p>
+                      <p>根据中国的《船舶排放控制区规定》，中国设有"排放控制区"，包括长江、珠江等沿海和内河的主要水道，对船舶的排放提出了严格要求，特别是二氧化氮（NOx）、颗粒物（PM）以及废气排放。</p>
+
+                      <p class="text-cyan-400 font-semibold mt-4 lg:mt-6">长江：</p>
+                      <p>根据《长江船舶排放控制区（2018年修订）》规定，所有航行的船舶必须符合排放标准，尤其是燃油船舶要达到更严格的排放标准，部分区域直接禁止高排放船只入水。</p>
+
+                      <p class="text-cyan-400 font-semibold mt-4 lg:mt-6">港口与码头管理：</p>
+                      <p>中国很多沿海城市的码头对排放超标的船舶有禁止入港的规定，并对在港船只要求使用低硫燃料或符合排放标准的动力系统。</p>
+                    </template>
+
+                    <template v-else-if="isSoutheastAsiaSelected">
+                      <p class="text-cyan-400 font-semibold">马来西亚：</p>
+                      <p>马来西亚部分地区（如兰卡威、槟城等海岛）对燃油船实行严格的区域限制，特别是在保护区，部分海域禁止使用内燃机动力的船只。</p>
+
+                      <p class="text-cyan-400 font-semibold mt-4 lg:mt-6">新加坡：</p>
+                      <p>新加坡有严格的港口管理法规，要求船舶在入港时必须符合环境排放标准，并对内燃机船实施限制，尤其是在海洋保护区。</p>
+
+                      <p class="text-cyan-400 font-semibold mt-4 lg:mt-6">泰国：</p>
+                      <p>泰国的普吉岛等热门旅游地区对高排放船舶（如一些老旧的渔船）进行了限制，逐步鼓励使用低排放或电动的船只。</p>
+                    </template>
+
+                    <template v-else-if="isItalySelected">
+                      <p class="text-cyan-400 font-semibold">欧盟指令：</p>
+                      <p>欧洲出台了《休闲船艇指令（RCD，2013/53/EU）》，规定了船舶排放要求，涵盖气候变化（温室气体）、空气污染（颗粒物、氮氧化物）以及噪声污染等内容。指令要求所有进入欧盟市场的船舶必须符合环境保护标准。2018年，欧盟更新了船舶排放标准，要求所有新船必须满足更严格的排放要求。氮氧化物、碳氢化合物等污染物的排放量将进一步减少。</p>
+
+                      <p class="text-cyan-400 font-semibold mt-4 lg:mt-6">意大利湖泊：</p>
+                      <p>意大利的多个湖泊（如Lake Garda、Lake Bracciano、Lake Vico）对燃油动力船有严格的禁航令，尤其是在环保保护区和旅游保护区。例如，意大利湖区禁止使用高污染的船舶，并推动更多电动船只或环保船舶的使用。意大利部分水域限制噪音水平超过某一标准的船舶进入，尤其是在敏感生态区域和度假区。部分湖泊也设有排放限制，例如规定只有符合欧盟排放标准的船舶才允许进入。</p>
+                    </template>
+
+                    <template v-else-if="isAmericaSelected">
+                      <p class="text-cyan-400 font-semibold">Lake Tahoe：</p>
+                      <p>自1999年起，California州严格禁止二冲程化油器发动机进入湖泊。这意味着湖区内不得使用老旧的污染性较强的发动机。</p>
+
+                      <p class="text-cyan-400 font-semibold mt-4 lg:mt-6">EPA Tier 4标准（2010）：</p>
+                      <p>2010年推出的《美国船舶排放标准》（EPA's Tier 4 Standards），规定了小型船舶、游艇的排放限值。联邦标准（EPA）为新船和发动机制定了严格的排放标准，其中包括低硫燃料要求以及二氧化氮（NOx）、碳氢化合物和颗粒物（PM）的限制。</p>
+
+                      <p class="text-cyan-400 font-semibold mt-4 lg:mt-6">噪音标准：</p>
+                      <p>很多州，如加利福尼亚州，要求游艇和小型船舶的噪音不能超过特定的噪音标准（如75 dB）。这些要求适用于大部分船舶，包括游艇和水上摩托。</p>
+                    </template>
+
+                    <template v-else-if="isMiddleEastSelected">
+                      <p class="text-cyan-400 font-semibold">阿联酋：</p>
+                      <p>阿联酋迪拜的部分海域和码头限制内燃机动力船舶，特别是在靠近海洋保护区和高端旅游区（如朱美拉海滩）。迪拜的环境保护署（DEWA）要求船舶满足环保标准，逐步推广使用电动船和低排放动力的船只。</p>
+
+                      <p class="text-cyan-400 font-semibold mt-4 lg:mt-6">沙特阿拉伯：</p>
+                      <p>沙特的红海区域和海湾沿岸的一些水域已开始对高污染船舶进行限制，尤其是老旧船舶，并鼓励使用更环保的船舶。</p>
+                    </template>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -367,7 +659,7 @@ const handleCityClick = (cityInfo) => {
 
             <!-- 地球组件 -->
             <div class="absolute inset-0 flex items-center justify-center">
-              <GlobeComponent @city-click="handleCityClick" />
+              <GlobeComponent @city-click="handleCityClick" @globe-click="handleGlobeClick" />
             </div>
           </div>
 
@@ -557,5 +849,28 @@ const handleCityClick = (cityInfo) => {
 	background: rgba(255, 255, 255, 0.3);
 }
 /* 顶部导航栏.start */
+
+/* 自定义滚动条样式 */
+.content-scroll-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.content-scroll-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.content-scroll-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.content-scroll-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.content-scroll-container::-webkit-scrollbar-corner {
+  background: transparent;
+}
 
 </style>
