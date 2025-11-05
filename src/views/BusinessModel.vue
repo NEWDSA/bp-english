@@ -2531,7 +2531,8 @@ onMounted(() => {
 
 .c-content-panel .close-content-btn {
 	color: #333333;
-	background: rgba(0, 0, 0, 0.1);
+	/* background: rgba(0, 0, 0, 0.1); */
+	background:#ffffff;
 }
 
 .b-content-panel .close-content-btn {
@@ -2545,7 +2546,8 @@ onMounted(() => {
 }
 
 .c-content-panel .close-content-btn:hover {
-	background: rgba(0, 0, 0, 0.2);
+	/* background: rgba(0, 0, 0, 0.2); */
+	background:#ffffff;
 }
 
 .b-content-panel .close-content-btn:hover {
