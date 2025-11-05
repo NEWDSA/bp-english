@@ -335,24 +335,24 @@ watch(selectedCity, (newValue) => {
               <!-- 数据下方放行业趋势、结论 -->
               <div class="flex items-center h-12">
                 <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
-                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">数据下方放行业趋势、结论</p>
+                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">Industry trends and conclusions are placed below the data.</p>
               </div>
               <div class="bg-gray-900/50 rounded-xl overflow-hidden" :style="{ height: chartHeight }">
                 <div class="content-scroll-container h-full overflow-auto p-4 lg:p-6">
                   <div class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">
-                    未来船舶发展呈现出"电动化"与"智能化"深度融合的明确趋势
+                    The future development of ships shows a clear trend of deep integration of "electrification" and "intelligentization".
                   </div>
 
                   <!-- 政策 -->
                   <div class="flex items-center mt-6 lg:mt-10">
-                    <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">电动化</p>
+                    <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">Electrification</p>
                     <img src="../assets/icon-12.png" alt="Icon" class="w-[14px] lg:w-[16px] mr-2 ml-2 lg:mr-3 lg:ml-3" />
-                    <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">智能化</p>
+                    <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">Intelligent</p>
                   </div>
                   <div class="mt-2 text-[11px] lg:text-[12px] 2xl:text-[16px] leading-6 lg:leading-8 space-y-2">
-                    <p class="flex"><img src="../assets/icon-13.png" alt="Icon" class="flex-shrink-0 w-[16px] lg:w-[18px] h-[16px] lg:h-[18px] mr-2 lg:mr-3 mt-0.5 lg:mt-1" />环保法规要求：全球主要国家海事均发布船舶零排放法规，未来将逐步禁止油船进入水域。</p>
-                    <p class="flex"><img src="../assets/icon-14.png" alt="Icon" class="flex-shrink-0 w-[18px] lg:w-[20px] h-[18px] lg:h-[20px] mr-2 lg:mr-3 mt-0.5 lg:mt-1" />"三电"下放：中国电池、电机、电控技术&产业链随新能源汽车发展已成熟，三电技术将逐步下放其他交通工具领域，引领能源技术变革。目前主流船艇公司均逐步推出电动船艇产品，力图抢占市场。</p>
-                    <p class="flex"><img src="../assets/icon-15.png" alt="Icon" class="flex-shrink-0 w-[18px] lg:w-[20px] h-[18px] lg:h-[20px] mr-2 lg:mr-3 mt-0.5 lg:mt-1" />智能化趋势：电动化不应是简单的"油转电"，而是全新品类的全面升级；在其他行业我们已经看到了智能化设计在不断颠覆并替代传统产品，算力芯片、AI技术已较为成熟，可快速迁移。</p>
+                    <p class="flex"><img src="../assets/icon-13.png" alt="Icon" class="flex-shrink-0 w-[16px] lg:w-[18px] h-[16px] lg:h-[18px] mr-2 lg:mr-3 mt-0.5 lg:mt-1" />Environmental regulations require that major maritime authorities around the world issue zero-emission regulations for ships, and oil tankers will be gradually banned from entering their waterways in the future.</p>
+                    <p class="flex"><img src="../assets/icon-14.png" alt="Icon" class="flex-shrink-0 w-[18px] lg:w-[20px] h-[18px] lg:h-[20px] mr-2 lg:mr-3 mt-0.5 lg:mt-1" />The "three-electric" technologies (battery, motor, and electronic control) are being transferred to other transportation sectors: With the development of new energy vehicles, China's battery, motor, and electronic control technologies and industrial chains have matured, leading to a revolution in energy technology. Currently, major boat companies are gradually launching electric boat products, striving to seize market share.</p>
+                    <p class="flex"><img src="../assets/icon-15.png" alt="Icon" class="flex-shrink-0 w-[18px] lg:w-[20px] h-[18px] lg:h-[20px] mr-2 lg:mr-3 mt-0.5 lg:mt-1" />Intelligentization trend: Electrification should not be a simple "oil-to-electric" conversion, but a comprehensive upgrade of a completely new product category; in other industries, we have already seen intelligent design constantly disrupting and replacing traditional products, and computing chips and AI technology are relatively mature and can be quickly migrated.</p>
                   </div>
                 </div>
               </div>
@@ -365,7 +365,7 @@ watch(selectedCity, (newValue) => {
             <div class="text-white flex-shrink-0">
               <div class="flex items-center h-12">
                 <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
-                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">地区经济与产业数据</p>
+                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">Regional economic and industrial data</p>
               </div>
               <div class="bg-gray-900/50 rounded-xl">
                 <div class="p-2 xl:p-4 2xl:p-6">
@@ -373,12 +373,12 @@ watch(selectedCity, (newValue) => {
                   <div class="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4 lg:gap-5 xl:gap-6">
                     <!-- GDP数据 -->
                     <div class="text-center">
-                      <p class="text-cyan-400 text-[9px] sm:text-[10px] md:text-xs lg:text-sm font-semibold mb-1 sm:mb-2 md:mb-3 lg:mb-4 xl:mb-6">人均GDP{{
-                        isChinaSelected ? ' (中国大陆)' :
-                        isSoutheastAsiaSelected ? ' (印尼)' :
-                        isItalySelected ? ' (意大利)' :
-                        isAmericaSelected ? ' (美国)' :
-                        isMiddleEastSelected ? ' (阿联酋)' :
+                      <p class="text-cyan-400 text-[9px] sm:text-[10px] md:text-xs lg:text-sm font-semibold mb-1 sm:mb-2 md:mb-3 lg:mb-4 xl:mb-6">GDP per capita{{
+                        isChinaSelected ? ' (Chinese mainland)' :
+                        isSoutheastAsiaSelected ? ' (Indonesia)' :
+                        isItalySelected ? ' (Italy)' :
+                        isAmericaSelected ? ' (USA)' :
+                        isMiddleEastSelected ? ' (UAE)' :
                         ''
                       }}</p>
                       <p class="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl font-bold text-white gdp-value mb-1 sm:mb-1 md:mb-2" :data-value="
@@ -394,19 +394,19 @@ watch(selectedCity, (newValue) => {
                         isItalySelected ? '$40,437' :
                         isAmericaSelected ? '$85,876' :
                         isMiddleEastSelected ? '$53,813' :
-                        '全球平均水平'
+                        'Global average level'
                       }}</p>
                       <div class="text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs text-gray-400 leading-relaxed">
-                        <p class="mt-1 sm:mt-2 md:mt-3 lg:mt-4 xl:mt-6 hidden md:block">超$3000是游艇经济萌芽临界点,超过10,000美元时，划艇等水上运动会更受欢迎</p>
+                        <p class="mt-1 sm:mt-2 md:mt-3 lg:mt-4 xl:mt-6 hidden md:block">$3,000 is the tipping point for the yachting economy to begin to take off; when it exceeds $10,000, water sports such as rowing become more popular.</p>
                       </div>
                     </div>
 
                     <!-- 家庭收入分布 -->
                     <div class="text-center">
-                      <p class="text-cyan-400 text-[9px] sm:text-[10px] md:text-xs lg:text-sm font-semibold mb-1 sm:mb-2 md:mb-3 lg:mb-4 xl:mb-6">家庭年收入>50万{{
-                        isSoutheastAsiaSelected ? ' (新加坡)' :
-                        isMiddleEastSelected ? ' (沙特)' :
-                        isItalySelected ? ' (意大利)' :
+                      <p class="text-cyan-400 text-[9px] sm:text-[10px] md:text-xs lg:text-sm font-semibold mb-1 sm:mb-2 md:mb-3 lg:mb-4 xl:mb-6">Annual household income > 500,000{{
+                        isSoutheastAsiaSelected ? ' (Singapore)' :
+                        isMiddleEastSelected ? ' (Saudi Arabia)' :
+                        isItalySelected ? ' (Italy)' :
                         ''
                       }}</p>
                       <p class="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl font-bold text-white income-value mb-1 sm:mb-1 md:mb-2" :data-value="
@@ -422,17 +422,17 @@ watch(selectedCity, (newValue) => {
                         isItalySelected ? '28%' :
                         isAmericaSelected ? '45%' :
                         isMiddleEastSelected ? '7%' :
-                        '各地区差异较大'
+                        'Significant differences exist between regions.'
                       }}</p>
                       <div class="text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs text-gray-400 leading-relaxed">
-                        <p class="mt-1 sm:mt-2 md:mt-3 lg:mt-4 xl:mt-6 hidden md:block">人均月收入超过2万元的家庭有能力租用游艇，年收入超过50万元以上的家庭，则有能力购买游艇</p>
+                        <p class="mt-1 sm:mt-2 md:mt-3 lg:mt-4 xl:mt-6 hidden md:block">Families with a per capita monthly income exceeding 20,000 yuan can afford to rent a yacht, while families with an annual income exceeding 500,000 yuan can afford to buy one.</p>
                       </div>
                     </div>
 
                     <!-- 产业规模 -->
                     <div class="text-center">
-                      <p class="text-cyan-400 text-[9px] sm:text-[10px] md:text-xs lg:text-sm font-semibold mb-1 sm:mb-2 md:mb-3 lg:mb-4 xl:mb-6">休闲船艇产业链{{
-                        isItalySelected ? ' (欧洲)' :
+                      <p class="text-cyan-400 text-[9px] sm:text-[10px] md:text-xs lg:text-sm font-semibold mb-1 sm:mb-2 md:mb-3 lg:mb-4 xl:mb-6">Leisure boat industry chain{{
+                        isItalySelected ? ' (Europe)' :
                         ''
                       }}</p>
                       <p class="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl font-bold text-white industry-value mb-1 sm:mb-1 md:mb-2" :data-value="
@@ -443,21 +443,21 @@ watch(selectedCity, (newValue) => {
                         isMiddleEastSelected ? '20' :
                         '0'
                       ">{{
-                        isChinaSelected ? '$60亿' :
-                        isSoutheastAsiaSelected ? '$12亿' :
-                        isItalySelected ? '$250亿' :
-                        isAmericaSelected ? '$750亿' :
-                        isMiddleEastSelected ? '$20亿' :
-                        '全球市场规模'
+                        isChinaSelected ? '$6 billion' :
+                        isSoutheastAsiaSelected ? '$1.2 billion' :
+                        isItalySelected ? '$25 billion' :
+                        isAmericaSelected ? '$75 billion' :
+                        isMiddleEastSelected ? '$2 billion' :
+                        'Global market size'
                       }}</p>
                       <div class="text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs text-gray-400 leading-relaxed">
-                        <p class="mt-1 sm:mt-2 md:mt-3 lg:mt-4 xl:mt-6 hidden md:block">产业规模反映基础设施完善程度</p>
+                        <p class="mt-1 sm:mt-2 md:mt-3 lg:mt-4 xl:mt-6 hidden md:block">Industry size reflects the level of infrastructure development.</p>
                       </div>
                     </div>
 
                     <!-- 船艇拥有量 -->
                     <div class="text-center">
-                      <p class="text-cyan-400 text-[9px] sm:text-[10px] md:text-xs lg:text-sm font-semibold mb-1 sm:mb-2 md:mb-3 lg:mb-4 xl:mb-6">船艇拥有量</p>
+                      <p class="text-cyan-400 text-[9px] sm:text-[10px] md:text-xs lg:text-sm font-semibold mb-1 sm:mb-2 md:mb-3 lg:mb-4 xl:mb-6">Boat ownership</p>
                       <p class="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl font-bold text-white boat-value mb-1 sm:mb-1 md:mb-2" :data-value="
                         isChinaSelected ? '0.5' :
                         isSoutheastAsiaSelected ? '3.5' :
@@ -466,15 +466,15 @@ watch(selectedCity, (newValue) => {
                         isMiddleEastSelected ? '8' :
                         '0'
                       ">{{
-                        isChinaSelected ? '0.5艘' :
-                        isSoutheastAsiaSelected ? '2-5艘' :
-                        isItalySelected ? '10艘' :
-                        isAmericaSelected ? '15艘' :
-                        isMiddleEastSelected ? '8艘' :
-                        '全球平均水平'
+                        isChinaSelected ? '0.5 ships' :
+                        isSoutheastAsiaSelected ? '2-5 ships' :
+                        isItalySelected ? '10 ships' :
+                        isAmericaSelected ? '15 ships' :
+                        isMiddleEastSelected ? '8 ships' :
+                        'Global average level'
                       }}</p>
                       <div class="text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs text-gray-400 leading-relaxed">
-                        <p class="mt-1 sm:mt-2 md:mt-3 lg:mt-4 xl:mt-6 hidden md:block">每百户家庭拥有船艇数量</p>
+                        <p class="mt-1 sm:mt-2 md:mt-3 lg:mt-4 xl:mt-6 hidden md:block">Number of boats per 100 households</p>
                       </div>
                     </div>
                   </div>
