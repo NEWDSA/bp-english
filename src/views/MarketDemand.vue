@@ -500,7 +500,7 @@ const updateRightContent = (contentType) => {
     }
   } else if (contentType === 'usa') {
     rightContent.value = {
-      name: 'Sarah Johnson William',
+      name: 'William',
       title: 'Founder of a leasing company',
       bio: 'Operating water sports equipment and boat rentals in the Florida Keys, our clients are mostly family vacationers and diving enthusiasts, hoping to provide new options that are more environmentally friendly and easy to operate.',
       requirements: [
@@ -647,14 +647,16 @@ const nextImage = () => {
         <!-- 圆圈容器 -->
         <div class="relative w-[830px] h-[830px] max-w-full max-h-full circle-container">
           <!-- 830x830 白色圆圈 -->
-          <div class="ring"></div>
-
-          <!-- 地球组件 -->
-          <div class="globeStyle absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div class="globeWith">
-              <GlobeComponent :load-data="false" />
+          <div class="ring">
+            <!-- 地球组件 -->
+            <div class="globeStyle absolute inset-0 flex items-center justify-center pointer-events-none">
+              <div class="globeWith">
+                <GlobeComponent :load-data="false" />
+              </div>
             </div>
           </div>
+
+          
 
           <!-- 沿圆圈定位的图标 -->
           <div class="absolute top-0 left-0 w-full h-full pointer-events-auto">
@@ -1221,8 +1223,8 @@ const nextImage = () => {
 }
 
 .globeStyle {
-  left: -900px;
-  top: 100px;
+  top: 0px;
+  left: 60px;
 }
 
 .globeWith {
