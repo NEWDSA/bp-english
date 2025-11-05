@@ -4,8 +4,15 @@
 		<div class="overlay-mask" v-if="showOverlay">
 			<!-- 初始方块 - 对角线分割 -->
 			<div class="overlay-blocks" v-if="!showCContent && !showBContent">
+				<!-- block_1 和 block_2 放在容器外部，以便显示在容器上方 -->
+				<div class="block_1"></div>
+				<div class="block_2"></div>
 				<!-- 内层矩形容器 -->
 				<div class="overlay-inner-container">
+					<!-- B区域 - 左侧 -->
+					<div class="region-b-left"></div>
+					<!-- C区域 - 右侧 -->
+					<div class="region-c-right"></div>
 					<!-- 对角线分割线 -->
 					<div class="diagonal-line diagonal-line-1"></div>
 					<div class="diagonal-line diagonal-line-2"></div>
@@ -15,23 +22,16 @@
 					<div class="block block-c" @click="showCContentPanel">C</div>
 				</div>
 			</div>
-			
+
 			<!-- C方块的内容面板 - 全屏 -->
 			<div class="c-content-panel" v-if="showCContent">
 				<button class="close-content-btn" @click="backToBlocks">✕</button>
-				<div class="c-content-wrapper">
-					<h2 class="c-content-title">C 方块内容</h2>
-					<div class="c-content-body">
-						<p>这里是点击C方块后显示的内容区域</p>
-						<p>您可以在这里添加任何需要展示的信息</p>
-					</div>
-				</div>
 			</div>
-			
+
 			<!-- B方块的内容面板 - 全屏 -->
 			<div class="b-content-panel" v-if="showBContent">
 				<button class="close-content-btn" @click="backToBlocks">✕</button>
-				
+
 				<!-- B方块显示主要内容 -->
 				<div class="main-content">
 					<!-- 左侧面板：Revenue Model + Channel Strategy -->
@@ -53,28 +53,34 @@
 								<div class="strategy-subtitle">Domestic (B-end water area operator)</div>
 								<div class="strategy-content">
 									<p class="strategy-label">Positioning:</p>
-									<p class="strategy-text">To provide a full cycle hydrofoil operation solution for scenic
+									<p class="strategy-text">To provide a full cycle hydrofoil operation solution for
+										scenic
 										spots, passenger transport companies, and hotels.</p>
 
 									<p class="strategy-label">Core module:</p>
 									<p class="strategy-text">Fleet operation and maintenance (equipment support)+safety
 										management (real-time monitoring)</p>
-									<p class="strategy-text">Product operation (leasing system)+dock support (infrastructure
+									<p class="strategy-text">Product operation (leasing system)+dock support
+										(infrastructure
 										support)</p>
 								</div>
 							</div>
 
 							<div class="strategy-section">
-								<h4 class="strategy-subtitle">Overseas business (C-end private enterprises/private berth users)
+								<h4 class="strategy-subtitle">Overseas business (C-end private enterprises/private berth
+									users)
 								</h4>
 								<div class="strategy-content">
 									<p class="strategy-label">Positioning:</p>
-									<p class="strategy-text">To build an intelligent hydrofoil boat lifestyle ecosystem for
+									<p class="strategy-text">To build an intelligent hydrofoil boat lifestyle ecosystem
+										for
 										middle-class private berth users.</p>
 
 									<p class="strategy-label">Core module:</p>
-									<p class="strategy-text">Map service (navigation planning)+APP service (remote control)</p>
-									<p class="strategy-text">Additional services (customized maintenance/social functions)</p>
+									<p class="strategy-text">Map service (navigation planning)+APP service (remote
+										control)</p>
+									<p class="strategy-text">Additional services (customized maintenance/social
+										functions)</p>
 								</div>
 							</div>
 						</div>
@@ -85,7 +91,7 @@
 						<div class="map-container" @click="showContent('lake')">
 						</div>
 					</div>
-					
+
 					<!-- 右侧面板：详细内容 -->
 					<div class="right-panel">
 						<!-- Revenue Model 弹窗 -->
@@ -108,7 +114,7 @@
 								</div>
 							</div>
 						</div>
-						
+
 						<!-- 内容面板 -->
 						<div class="content-panel" v-if="activeContent && activeContent !== 'revenue'">
 							<!-- Lake Como 案例内容 -->
@@ -124,7 +130,8 @@
 
 								<!-- 描述文字 -->
 								<p class="description-text">
-									Each hotel has an average of 100 rooms, totaling 400 rooms, calculated based on the number
+									Each hotel has an average of 100 rooms, totaling 400 rooms, calculated based on the
+									number
 									of tourists during the off-season.
 								</p>
 
@@ -231,7 +238,8 @@
 							</div>
 
 							<!-- Lake详情面板 -->
-							<div v-if="activeContent === 'lake' && showLakeDetail" class="lake-content" @click="hideContent">
+							<div v-if="activeContent === 'lake' && showLakeDetail" class="lake-content"
+								@click="hideContent">
 								<!-- Transportation Demand 部分 -->
 								<div class="transportation-demand-section">
 									<div class="main-title">Daily average number of boat tourists</div>
@@ -263,7 +271,8 @@
 
 								<!-- 游客数据部分 -->
 								<div class="tourist-data-section">
-									<div class="section-title">The daily average number of tourists taking boats on Lake Como,
+									<div class="section-title">The daily average number of tourists taking boats on Lake
+										Como,
 										calculated based on the peak and off peak seasons</div>
 
 									<!-- 柱状图 -->
@@ -440,7 +449,8 @@
 											<span class="data-value">750 people</span>
 										</div>
 										<div class="data-item">
-											<span class="data-label">During the off-season, tourists staying overnight use boats
+											<span class="data-label">During the off-season, tourists staying overnight
+												use boats
 												(75%)</span>
 											<span class="data-value">450 people</span>
 										</div>
@@ -450,7 +460,8 @@
 											<span class="data-value">1312 people</span>
 										</div>
 										<div class="data-item">
-											<span class="data-label">Tourists staying overnight during peak season use boats
+											<span class="data-label">Tourists staying overnight during peak season use
+												boats
 												(75%)</span>
 											<span class="data-value">900 people</span>
 										</div>
@@ -483,7 +494,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<!-- 顶部导航栏 -->
 		<nav class="top-nav">
 			<div class="nav-container">
@@ -1107,13 +1118,13 @@ let chart4Instance = null
 
 function renderRevenueChart() {
 	if (!revenueChartRef.value) return
-	
+
 	// 如果实例已存在，先销毁它（因为DOM元素可能已经改变）
 	if (revenueChartInstance) {
 		revenueChartInstance.dispose()
 		revenueChartInstance = null
 	}
-	
+
 	// 重新创建实例
 	revenueChartInstance = echarts.init(revenueChartRef.value)
 
@@ -1193,7 +1204,7 @@ function renderModalCharts() {
 		chart1Instance = echarts.init(chart1Ref.value)
 		const option1 = {
 			title: {
-				text: 'When the cost of a single ship is 28,000$,break even sales volume is achieved',
+				text: 'When the price of a single ship is 28,000$,break even sales volume is achieved',
 				textStyle: { fontSize: 16, color: '#333', fontWeight: 'normal' },
 				top: 5,
 				left: 'center'
@@ -1207,18 +1218,18 @@ function renderModalCharts() {
 				left: 'center',
 				itemGap: 20
 			},
-			graphic: {
-				type: 'text',
-				left: '5%',
-				bottom: '7%',
-				style: {
-					text: 'Price: US Dollars',
-					fontSize: '1vw',
-					color: '#333',
-					textAlign: 'left',
-					textVerticalAlign: 'bottom'
-				}
-			},
+			// graphic: {
+			// 	type: 'text',
+			// 	left: '5%',
+			// 	bottom: '7%',
+			// 	style: {
+			// 		text: 'Price: US Dollars',
+			// 		fontSize: '1vw',
+			// 		color: '#333',
+			// 		textAlign: 'left',
+			// 		textVerticalAlign: 'bottom'
+			// 	}
+			// },
 			xAxis: {
 				type: 'category',
 				// 字体大小10px
@@ -1281,7 +1292,7 @@ function renderModalCharts() {
 		chart2Instance = echarts.init(chart2Ref.value)
 		const option2 = {
 			title: {
-				text: 'When the cost of a single ship is 31,000$, break even sales volume is achieved',
+				text: 'When the price of a single ship is 31,000$, break even sales volume is achieved',
 				textStyle: { fontSize: 16, color: '#333', fontWeight: 'normal' },
 				top: 5,
 				left: 'center'
@@ -1294,18 +1305,18 @@ function renderModalCharts() {
 				left: 'center',
 				itemGap: 20
 			},
-			graphic: {
-				type: 'text',
-				left: '5%',
-				bottom: '7%',
-				style: {
-					text: 'Price: US Dollars',
-					fontSize: '1vw',
-					color: '#333',
-					textAlign: 'left',
-					textVerticalAlign: 'bottom'
-				}
-			},
+			// graphic: {
+			// 	type: 'text',
+			// 	left: '5%',
+			// 	bottom: '7%',
+			// 	style: {
+			// 		text: 'Price: US Dollars',
+			// 		fontSize: '1vw',
+			// 		color: '#333',
+			// 		textAlign: 'left',
+			// 		textVerticalAlign: 'bottom'
+			// 	}
+			// },
 			xAxis: {
 				type: 'category',
 
@@ -1369,7 +1380,7 @@ function renderModalCharts() {
 		chart3Instance = echarts.init(chart3Ref.value)
 		const option3 = {
 			title: {
-				text: 'When the cost of a single ship is 35,000$, break even sales volume is achieved',
+				text: 'When the price of a single ship is 35,000$, break even sales volume is achieved',
 				textStyle: { fontSize: 16, color: '#333', fontWeight: 'normal' },
 				top: 5,
 				left: 'center'
@@ -1388,18 +1399,18 @@ function renderModalCharts() {
 				left: 'center',
 				itemGap: 20
 			},
-			graphic: {
-				type: 'text',
-				left: '5%',
-				bottom: '7%',
-				style: {
-					text: 'Price: US Dollars',
-					fontSize: '1vw',
-					color: '#333',
-					textAlign: 'left',
-					textVerticalAlign: 'bottom'
-				}
-			},
+			// graphic: {
+			// 	type: 'text',
+			// 	left: '5%',
+			// 	bottom: '7%',
+			// 	style: {
+			// 		text: 'Price: US Dollars',
+			// 		fontSize: '1vw',
+			// 		color: '#333',
+			// 		textAlign: 'left',
+			// 		textVerticalAlign: 'bottom'
+			// 	}
+			// },
 			xAxis: {
 				type: 'category',
 				data: [
@@ -1525,7 +1536,7 @@ function renderModalCharts() {
 		chart4Instance = echarts.init(chart4Ref.value)
 		const option4 = {
 			title: {
-				text: 'When the cost of a single ship is 41,000$, break even sales volume is achieved',
+				text: 'When the price of a single ship is 41,000$, break even sales volume is achieved',
 				textStyle: { fontSize: 16, color: '#333', fontWeight: 'normal' },
 				top: 5,
 				left: 'center'
@@ -1544,18 +1555,18 @@ function renderModalCharts() {
 				left: 'center',
 				itemGap: 20
 			},
-			graphic: {
-				type: 'text',
-				left: '5%',
-				bottom: '7%',
-				style: {
-					text: 'Price: US Dollars',
-					fontSize: '1vw',
-					color: '#333',
-					textAlign: 'left',
-					textVerticalAlign: 'bottom'
-				}
-			},
+			// graphic: {
+			// 	type: 'text',
+			// 	left: '5%',
+			// 	bottom: '7%',
+			// 	style: {
+			// 		text: 'Price: US Dollars',
+			// 		fontSize: '1vw',
+			// 		color: '#333',
+			// 		textAlign: 'left',
+			// 		textVerticalAlign: 'bottom'
+			// 	}
+			// },
 			xAxis: {
 				type: 'category',
 				data: ['9.57', '9.43', '9.29', '9.14', '9.00', '8.86', '8.71', '8.57', '8.43', '8.29', '8.14', '8.00', '7.86', '7.71', '7.57'],
@@ -1634,7 +1645,7 @@ function renderModalCharts() {
 					type: 'line',
 					z: 3,
 					yAxisIndex: 0,
-					data: [13, 14, 14, 15, 15, 16, 16, 17, 18, 19, 20, 21, 23, 24,26],
+					data: [13, 14, 14, 15, 15, 16, 16, 17, 18, 19, 20, 21, 23, 24, 26],
 					smooth: true,
 					symbol: 'circle',
 					symbolSize: 3,
@@ -2065,20 +2076,81 @@ onMounted(() => {
 
 /* 内层矩形容器 - 带圆角和边框 */
 .overlay-inner-container {
-	position: relative;
-	width: 95%;
-	max-width: 1200px;
-	height: 95%;
-	max-height: 800px;
+	position: absolute;
+	top: 130px;
+	left: 50px;
+	right: 50px;
+	bottom: 50px;
 	background-color: #ffffff;
-	border: 3px solid #000000;
+	/* border: 3px solid #000000; */
 	border-radius: 20px;
 	box-shadow: 0 0 0 8px #ffffff;
 	overflow: hidden;
+	z-index: 1;
+}
+
+/* B区域 - 左侧，蓝色 */
+.region-b-left {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 50%;
+	height: 100%;
+	background-color: #0066FF;
+	z-index: 0;
+}
+
+/* C区域 - 右侧，青绿色 */
+.region-c-right {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 50%;
+	height: 100%;
+	background-color: #5ea5aa;
+	z-index: 0;
+}
+
+/* 响应式断点 - 内层容器 - 平板 */
+@media (max-width: 1024px) {
+	.overlay-inner-container {
+		top: 110px;
+		left: 30px;
+		right: 30px;
+		bottom: 30px;
+		border-radius: 16px;
+		box-shadow: 0 0 0 6px #ffffff;
+	}
+}
+
+/* 响应式断点 - 内层容器 - 小屏幕 */
+@media (max-width: 768px) {
+	.overlay-inner-container {
+		top: 100px;
+		left: 20px;
+		right: 20px;
+		bottom: 20px;
+		border: 2px solid #000000;
+		border-radius: 12px;
+		box-shadow: 0 0 0 4px #ffffff;
+	}
+}
+
+/* 响应式断点 - 内层容器 - 手机 */
+@media (max-width: 480px) {
+	.overlay-inner-container {
+		top: 90px;
+		left: 10px;
+		right: 10px;
+		bottom: 10px;
+		border: 2px solid #000000;
+		border-radius: 8px;
+		box-shadow: 0 0 0 3px #ffffff;
+	}
 }
 
 /* 对角线分割线 */
-.diagonal-line {
+/* .diagonal-line {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -2099,19 +2171,47 @@ onMounted(() => {
 	background-color: #000000;
 	transform: translate(-50%, -50%) rotate(-45deg);
 	transform-origin: center center;
-}
+} */
 
-/* 第二条对角线 - 也是从右上到左下，与第一条距离10px */
-.diagonal-line-2::before {
+/* 第二条对角线 - 也是从右上到左下，与第一条距离50px */
+/* .diagonal-line-2::before {
 	content: '';
 	position: absolute;
-	top: calc(50% + 7.07px);
-	left: calc(50% - 7.07px);
+	top: calc(50% + 35.35px);
+	left: calc(50% - 35.35px);
 	width: 3px;
 	height: 160%;
 	background-color: #000000;
 	transform: translate(-50%, -50%) rotate(-45deg);
 	transform-origin: center center;
+} */
+
+/* 响应式断点 - 对角线 - 小屏幕 */
+@media (max-width: 768px) {
+
+	.diagonal-line::before,
+	.diagonal-line-2::before {
+		width: 2px;
+	}
+
+	.diagonal-line-2::before {
+		top: calc(50% + 28.28px);
+		left: calc(50% - 28.28px);
+	}
+}
+
+/* 响应式断点 - 对角线 - 手机 */
+@media (max-width: 480px) {
+
+	.diagonal-line::before,
+	.diagonal-line-2::before {
+		width: 1.5px;
+	}
+
+	.diagonal-line-2::before {
+		top: calc(50% + 21.21px);
+		left: calc(50% - 21.21px);
+	}
 }
 
 /* 方块基础样式 - 改为圆圈 */
@@ -2130,6 +2230,88 @@ onMounted(() => {
 	position: absolute;
 	cursor: pointer;
 	background-color: #ffffff;
+}
+
+.block_1 {
+	content: '';
+	position: absolute;
+	top: 132px;
+	left: 440px;
+	width: 70px;
+	height: 50px;
+	/* border: 10px solid pink; */
+	background-color: #ffffff;
+	transform: rotate(180deg);
+	transform-origin: top center;
+	z-index: 10000;
+}
+
+/* 响应式断点 - block_1 - 平板 */
+@media (max-width: 1024px) {
+	.block_1 {
+		top: 112px;
+		left: 475px;
+		height: 40px;
+	}
+}
+
+/* 响应式断点 - block_1 - 小屏幕 */
+@media (max-width: 768px) {
+	.block_1 {
+		top: 102px;
+		left: 465px;
+		height: 30px;
+	}
+}
+
+/* 响应式断点 - block_1 - 手机 */
+@media (max-width: 480px) {
+	.block_1 {
+		top: 92px;
+		left: 455px;
+		height: 30px;
+	}
+}
+
+.block_2 {
+	content: '';
+	position: absolute;
+	bottom: 53px;
+	left: 1340px;
+	width: 70px;
+	height: 50px;
+	background-color: #ffffff;
+	/* border: 1px solid pink; */
+	transform: rotate(180deg);
+	transform-origin: bottom center;
+	z-index: 10000;
+}
+
+/* 响应式断点 - block_2 - 平板 */
+@media (max-width: 1024px) {
+	.block_2 {
+		bottom: 30px;
+		left: 475px;
+		height: 40px;
+	}
+}
+
+/* 响应式断点 - block_2 - 小屏幕 */
+@media (max-width: 768px) {
+	.block_2 {
+		bottom: 20px;
+		left: 465px;
+		height: 30px;
+	}
+}
+
+/* 响应式断点 - block_2 - 手机 */
+@media (max-width: 480px) {
+	.block_2 {
+		bottom: 10px;
+		left: 455px;
+		height: 30px;
+	}
 }
 
 /* B方块样式 - 左上角 */
@@ -2162,20 +2344,78 @@ onMounted(() => {
 	transform: scale(1.05);
 }
 
+/* 响应式断点 - 方块 - 平板 */
+@media (max-width: 1024px) {
+	.block {
+		width: 70px;
+		height: 70px;
+		font-size: 32px;
+	}
+
+	.block-b {
+		top: 15px;
+		left: 15px;
+	}
+
+	.block-c {
+		bottom: 15px;
+		right: 15px;
+	}
+}
+
+/* 响应式断点 - 方块 - 小屏幕 */
+@media (max-width: 768px) {
+	.block {
+		width: 60px;
+		height: 60px;
+		font-size: 28px;
+	}
+
+	.block-b {
+		top: 12px;
+		left: 12px;
+	}
+
+	.block-c {
+		bottom: 12px;
+		right: 12px;
+	}
+}
+
+/* 响应式断点 - 方块 - 手机 */
+@media (max-width: 480px) {
+	.block {
+		width: 50px;
+		height: 50px;
+		font-size: 24px;
+		border: 1.5px solid #000000;
+	}
+
+	.block-b {
+		top: 8px;
+		left: 8px;
+	}
+
+	.block-c {
+		bottom: 8px;
+		right: 8px;
+	}
+}
+
 
 /* C方块内容面板 - 全屏 */
 .c-content-panel {
 	width: 100%;
 	height: 100%;
-	background: rgba(255, 255, 255, 0.95);
-	backdrop-filter: blur(20px);
-	padding: 100px 40px 40px;
+	background-image: url('../assets/c_clinet_bg.png');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
 	position: absolute;
 	top: 0;
 	left: 0;
 	animation: fadeInScale 0.5s ease-out;
 	overflow-y: auto;
-	/*  */
 }
 
 /* B方块内容面板 - 全屏 */
@@ -2285,6 +2525,7 @@ onMounted(() => {
 		opacity: 0;
 		transform: scale(0.9);
 	}
+
 	to {
 		opacity: 1;
 		transform: scale(1);
@@ -2358,10 +2599,10 @@ onMounted(() => {
 	backdrop-filter: blur(10px);
 }
 
-.home-btn:hover {
-	/* background: rgba(0, 212, 255, 0.2);
-	transform: scale(1.1); */
-}
+/* .home-btn:hover {
+	background: rgba(0, 212, 255, 0.2);
+	transform: scale(1.1);
+} */
 
 .home-icon {
 	width: 25px;
