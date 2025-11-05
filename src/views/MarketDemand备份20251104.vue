@@ -22,15 +22,10 @@ const activeIcon = ref('icon-8')
 // lib-flexible 适配相关
 let cleanupFlexible = null
 
-// 核心需求内容显示状态
-const showCoreRequirements = ref(true)
-
 // 使用默认内容初始化
 onMounted(() => {
   updateMiddleContent('china')
   updateRightContent('default')
-  // 首次进入显示核心需求内容
-  showCoreRequirements.value = true
 })
 
 onUnmounted(() => {
@@ -122,7 +117,7 @@ const updateMiddleContent = (contentType) => {
         </p>
       </div>
 
-      <div class="mb-5">
+      <div>
         <div class="flex items-center mb-2">
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
           <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Market opportunity:</h3>
@@ -132,17 +127,6 @@ const updateMiddleContent = (contentType) => {
           <p>The tourism economy in the Mediterranean and Nordic islands is developed, and there is a stable demand for green and efficient sea transportation tools.</p>
           <p>The EU's "Green Agreement" drives the upgrade of traditional shipping, providing huge subsidies and policy benefits for new energy ships.</p>
           <p>The water sports culture is profound, and 67% of the general public prefer leisure and</p>
-        </div>
-      </div>
-
-      <div>
-        <div class="flex items-center mb-2">
-          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Market demand:</h3>
-        </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5">
-          <p>Driven by strict regulations, and pursuing zero emissions, high performance, quiet comfort, there is strong demand from high-end consumers (C-end), while maintaining a balance between B-end and C-end.</p>
-          <p>Focusing on the European market, it has made great strides in environmental protection, intelligence, comfort, and tranquility, which aligns with policy guidance and high-quality tourism standards.</p>
         </div>
       </div>
     `
@@ -189,7 +173,7 @@ const updateMiddleContent = (contentType) => {
         </p>
       </div>
 
-      <div class="mb-5">
+      <div>
         <div class="flex items-center mb-2">
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
           <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Market opportunity:</h3>
@@ -198,17 +182,6 @@ const updateMiddleContent = (contentType) => {
           <p>LNG expansion plans in countries such as Qatar and Saudi Arabia have generated a demand for high-end, green shipping solutions.</p>
           <p>Saudi Arabia's "2030 Vision" vigorously develops tourism and logistics industries, and large-scale tourism projects in the Red Sea require supporting maritime transportation.</p>
           <p>The wealthy class is vast and an important sales market for top luxury yachts worldwide.</p>
-        </div>
-      </div>
-
-      <div>
-        <div class="flex items-center mb-2">
-          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Market Demand:</h3>
-        </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5">
-          <p>The ultra-wealthy market is price-insensitive, seeking ultimate luxury, cutting-edge technology, highly personalized customization, and top-tier service.</p>
-          <p>Targeting high-end B2B and top-tier B2C clients, it primarily caters to top Middle Eastern clients and high-end resorts globally, pursuing the ultimate in design, craftsmanship, technology, and exclusive service, becoming a symbol of status and power.</p>
         </div>
       </div>
     `
@@ -254,7 +227,7 @@ const updateMiddleContent = (contentType) => {
         </p>
       </div>
 
-      <div class="mb-5">
+      <div>
         <div class="flex items-center mb-2">
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
           <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Market opportunity:</h3>
@@ -263,17 +236,6 @@ const updateMiddleContent = (contentType) => {
           <p>The United States is the world's largest yacht consumer market, with a water sports equipment market size of $79.9 billion by 2023.</p>
           <p>There are numerous national parks and private lakes, and there are a large number of government orders for the upgrading of green transportation within the scenic areas.</p>
           <p>The demand for outdoor leisure and entertainment continues to be strong, and the rental market is active.</p>
-        </div>
-      </div>
-
-      <div>
-        <div class="flex items-center mb-2">
-          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Market Demand:</h3>
-        </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5">
-          <p>The world's largest yacht market experiences robust rental demand, with a strong focus on ease of operation, wear resistance, and low maintenance costs. Primarily driven by individual consumers, the market focuses on the US rental market, emphasizing cost-effectiveness, durability, and low maintenance.</p>
-          <p>The core focus is meeting the high-frequency, multi-user commercial operation needs.</p>
         </div>
       </div>
     `
@@ -319,7 +281,7 @@ const updateMiddleContent = (contentType) => {
         </p>
       </div>
 
-      <div class="mb-5">
+      <div>
         <div class="flex items-center mb-2">
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
           <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Market opportunity:</h3>
@@ -329,17 +291,6 @@ const updateMiddleContent = (contentType) => {
           <p>The demand for gas powered boats in the market has significantly increased.</p>
           <p>The green and intelligent transformation of inland and coastal vessels is a clear direction, and the plan is to achieve comprehensive green and intelligent transformation of inland vessels by 2030.</p>
           <p>The "the Belt and Road" initiative has deepened cooperation with Southeast Asia, the Middle East and other places, bringing demand for engineering ships related to infrastructure.</p>
-        </div>
-      </div>
-
-      <div>
-        <div class="flex items-center mb-2">
-          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Market Demand:</h3>
-        </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5">
-          <p>Following the national policy of green and intelligent development, this B2B-driven product emphasizes ease of management and comprehensive after-sales service.</p>
-          <p>The Premium Experience version targets the Chinese market, focusing on environmental friendliness, intelligence, comfort, and tranquility, aligning with policy guidance and high-quality tourism standards.</p>
         </div>
       </div>
     `
@@ -386,7 +337,7 @@ const updateMiddleContent = (contentType) => {
         </p>
       </div>
 
-      <div class="mb-5">
+      <div>
         <div class="flex items-center mb-2">
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
           <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Market opportunity:</h3>
@@ -395,18 +346,6 @@ const updateMiddleContent = (contentType) => {
           <p>Southeast Asia's island tourism industry is recovering rapidly, and the development of new vacation projects is driving demand for new transportation tools.</p>
           <p>The growth of regional trade and the deepening of the "the Belt and Road" initiative promote the development of green offshore shipping.</p>
           <p>The upgrading of infrastructure in various countries has led to an increase in demand for ships related to port dredging and engineering construction.</p>
-        </div>
-      </div>
-
-      <div>
-        <div class="flex items-center mb-2">
-          <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-          <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Market Demand:</h3>
-        </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5">
-          <p>Tropical marine environments require high corrosion resistance; the recovery of tourism has spurred demand for multi-functional vessels that can serve both transportation and sightseeing purposes. </p>
-          <p>Emphasizing B2B and targeting the Southeast Asian market, the vessels highlight cost-effectiveness, durability, and low maintenance costs.</p>
-          <p>The core requirement is to meet the high-frequency, multi-user commercial operation needs.</p>
         </div>
       </div>
     `
@@ -582,16 +521,6 @@ const openModal = (imageSet, index = 0) => {
   document.body.style.overflow = 'hidden'
 }
 
-// 切换核心需求内容显示
-const toggleCoreRequirements = () => {
-  showCoreRequirements.value = !showCoreRequirements.value
-}
-
-// 关闭核心需求内容
-const closeCoreRequirements = () => {
-  showCoreRequirements.value = false
-}
-
 const closeModal = () => {
   showModal.value = false
   // 恢复body滚动
@@ -639,7 +568,7 @@ const nextImage = () => {
     </nav>
 
     <!-- 主内容容器 -->
-    <div v-show="!showCoreRequirements" class="flex flex-col lg:flex-row mt-[71px] main-content-container">
+    <div class="flex flex-col lg:flex-row mt-[71px] main-content-container">
       <!-- 左侧内容 -->
       <div class="w-[28%] flex items-center justify-center relative min-w-0">
         <!-- 圆圈容器 -->
@@ -724,7 +653,7 @@ const nextImage = () => {
         </div>
 
         <!-- 右侧内容 -->
-        <div class="flex-2 px-0 py-4 lg:py-8 min-w-0">
+        <div class="flex-2 flex items-start justify-center px-0 py-4 lg:py-8 min-w-0">
           <div class="text-white w-full max-w-4xl pl-4 pr-8 ">
             <div class="bg-size-[100%_auto] bg-no-repeat rounded-[10px] shadow-xl border border-white/20 overflow-hidden bg-white/10"
                  :style="`background-image: url('${rightContent.backgroundImage}'); background-blend-mode: overlay;`">
@@ -763,25 +692,12 @@ const nextImage = () => {
               </div>
             </div>
           </div>
-
-          <!-- 核心需求切换按钮 -->
-          <button
-            v-if="!showCoreRequirements"
-            @click="toggleCoreRequirements"
-            class="mt-8 ml-6 px-6 py-3 rounded-lg flex items-center gap-3 bg-gray-600/80 hover:bg-gray-500/80 text-block shadow-xl hover:shadow-gray-500/30 transition-all duration-300 group">
-            <span class="text-sm md:text-base lg:text-lg font-semibold tracking-wide">
-              Core detailed requirements
-            </span>
-            <svg class="w-6 h-6 transition-transform group-hover:translate-x-2 animate-bounce-right" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5-5 5M6 12h12" />
-            </svg>
-          </button>
         </div>
       </div>
     </div>
 
     <!-- 底部内容：图片画廊 -->
-    <div v-show="!showCoreRequirements" class="fixed bottom-0 left-0 right-0 h-[120px] sm:h-[140px] md:h-[160px] lg:h-[180px] xl:h-[200px] 2xl:h-[220px] overflow-x-auto bottom-gallery">
+    <div class="fixed bottom-0 left-0 right-0 h-[120px] sm:h-[140px] md:h-[160px] lg:h-[180px] xl:h-[200px] 2xl:h-[220px] overflow-x-auto bottom-gallery">
       <div class="relative w-full h-full flex justify-center items-end">
         <!-- 图片1 -->
         <div class="gallery-item" @click="openModal(1)">
@@ -796,7 +712,7 @@ const nextImage = () => {
           ></video>
           <div class="image-mask absolute inset-0 bg-black/30 flex items-center justify-center transition-opacity duration-300">
             <div class="text-content bg-black/50 px-4 py-2 rounded w-full text-center">
-              <p class="text-white text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[22px]">Daily commute</p>
+              <p class="text-white text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[22px]">Inter island transportation</p>
             </div>
           </div>
         </div>
@@ -814,7 +730,7 @@ const nextImage = () => {
           ></video>
           <div class="image-mask absolute inset-0 bg-black/30 flex items-center justify-center transition-opacity duration-300">
             <div class="text-content bg-black/50 px-4 py-2 rounded w-full text-center">
-              <p class="text-white text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[22px]">Leisure and vacation</p>
+              <p class="text-white text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[22px]">Urban water system transportation</p>
             </div>
           </div>
         </div>
@@ -832,7 +748,7 @@ const nextImage = () => {
           ></video>
           <div class="image-mask absolute inset-0 bg-black/30 flex items-center justify-center transition-opacity duration-300">
             <div class="text-content bg-black/50 px-4 py-2 rounded w-full text-center">
-              <p class="text-white text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[22px]">Business activities</p>
+              <p class="text-white text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[22px]">Water sports and fishing</p>
             </div>
           </div>
         </div>
@@ -850,156 +766,7 @@ const nextImage = () => {
           ></video>
           <div class="image-mask absolute inset-0 bg-black/30 flex items-center justify-center transition-opacity duration-300">
             <div class="text-content bg-black/50 px-4 py-2 rounded w-full text-center">
-              <p class="text-white text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[22px]">Water sports</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 核心需求内容覆盖层 -->
-    <div v-if="showCoreRequirements" class="fixed inset-0 z-40 bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900 flex items-center justify-center" style="margin-top: 71px;">
-      <!-- 关闭按钮 -->
-      <button
-        @click="closeCoreRequirements"
-        class="absolute top-6 right-6 text-white bg-white/20 backdrop-blur-sm hover:bg-white/30 rounded-full p-3 z-50 transition-all duration-300 group">
-        <svg class="w-6 h-6 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </button>
-
-      <!-- 核心需求内容区域 -->
-      <div class="w-full h-full overflow-auto p-8 md:p-12 lg:p-16">
-        <div class="max-w-6xl mx-auto">
-          <!-- 标题 -->
-          <div class="text-center mb-12">
-            <h1 class="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4">
-              Core Requirements Analysis
-            </h1>
-            <p class="text-lg md:text-xl text-gray-300">
-              Understanding market demands across different regions
-            </p>
-          </div>
-
-          <!-- 需求内容网格 -->
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- 欧洲市场 -->
-            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300">
-              <div class="flex items-center mb-4">
-                <img src="/src/assets/icon-6.png" alt="Europe" class="w-12 h-12 mr-3" />
-                <h3 class="text-xl font-semibold text-white">European Market</h3>
-              </div>
-              <ul class="space-y-2 text-gray-200">
-                <li class="flex items-start">
-                  <span class="w-2 h-2 bg-cyan-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></span>
-                  <span>Zero emissions compliance with EU regulations</span>
-                </li>
-                <li class="flex items-start">
-                  <span class="w-2 h-2 bg-cyan-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></span>
-                  <span>High-tech experience and performance</span>
-                </li>
-                <li class="flex items-start">
-                  <span class="w-2 h-2 bg-cyan-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></span>
-                  <span>Comprehensive after-sales network</span>
-                </li>
-              </ul>
-            </div>
-
-            <!-- 东南亚市场 -->
-            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300">
-              <div class="flex items-center mb-4">
-                <img src="/src/assets/icon-7.png" alt="Southeast Asia" class="w-12 h-12 mr-3" />
-                <h3 class="text-xl font-semibold text-white">Southeast Asian Market</h3>
-              </div>
-              <ul class="space-y-2 text-gray-200">
-                <li class="flex items-start">
-                  <span class="w-2 h-2 bg-cyan-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></span>
-                  <span>Cost-effectiveness and low operating costs</span>
-                </li>
-                <li class="flex items-start">
-                  <span class="w-2 h-2 bg-cyan-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></span>
-                  <span>High corrosion resistance for tropical marine</span>
-                </li>
-                <li class="flex items-start">
-                  <span class="w-2 h-2 bg-cyan-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></span>
-                  <span>Multi-functional vessels for various needs</span>
-                </li>
-              </ul>
-            </div>
-
-            <!-- 中国市场 -->
-            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300">
-              <div class="flex items-center mb-4">
-                <img src="/src/assets/icon-8.png" alt="China" class="w-12 h-12 mr-3" />
-                <h3 class="text-xl font-semibold text-white">Chinese Market</h3>
-              </div>
-              <ul class="space-y-2 text-gray-200">
-                <li class="flex items-start">
-                  <span class="w-2 h-2 bg-cyan-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></span>
-                  <span>Environmental protection and smart technology</span>
-                </li>
-                <li class="flex items-start">
-                  <span class="w-2 h-2 bg-cyan-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></span>
-                  <span>Easy management and comprehensive after-sales</span>
-                </li>
-                <li class="flex items-start">
-                  <span class="w-2 h-2 bg-cyan-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></span>
-                  <span>B2B focus with government and SOEs</span>
-                </li>
-              </ul>
-            </div>
-
-            <!-- 美国市场 -->
-            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300">
-              <div class="flex items-center mb-4">
-                <img src="/src/assets/icon-9.png" alt="USA" class="w-12 h-12 mr-3" />
-                <h3 class="text-xl font-semibold text-white">American Market</h3>
-              </div>
-              <ul class="space-y-2 text-gray-200">
-                <li class="flex items-start">
-                  <span class="w-2 h-2 bg-cyan-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></span>
-                  <span>Easy operation for beginners</span>
-                </li>
-                <li class="flex items-start">
-                  <span class="w-2 h-2 bg-cyan-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></span>
-                  <span>Durability for high-frequency rental use</span>
-                </li>
-                <li class="flex items-start">
-                  <span class="w-2 h-2 bg-cyan-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></span>
-                  <span>Low maintenance costs and easy parts supply</span>
-                </li>
-              </ul>
-            </div>
-
-            <!-- 中东市场 -->
-            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300">
-              <div class="flex items-center mb-4">
-                <img src="/src/assets/icon-10.png" alt="Middle East" class="w-12 h-12 mr-3" />
-                <h3 class="text-xl font-semibold text-white">Middle Eastern Market</h3>
-              </div>
-              <ul class="space-y-2 text-gray-200">
-                <li class="flex items-start">
-                  <span class="w-2 h-2 bg-cyan-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></span>
-                  <span>Ultimate luxury and customization</span>
-                </li>
-                <li class="flex items-start">
-                  <span class="w-2 h-2 bg-cyan-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></span>
-                  <span>Top design and craftsmanship</span>
-                </li>
-                <li class="flex items-start">
-                  <span class="w-2 h-2 bg-cyan-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></span>
-                  <span>Global after-sales and crew training</span>
-                </li>
-              </ul>
-            </div>
-
-            <!-- 总结 -->
-            <div class="bg-gradient-to-br from-cyan-600/20 to-blue-600/20 backdrop-blur-sm rounded-xl p-6 border border-cyan-400/30 md:col-span-2 lg:col-span-3">
-              <h3 class="text-2xl font-semibold text-white mb-4">Market Strategy Overview</h3>
-              <p class="text-gray-200 leading-relaxed">
-                Our comprehensive market approach addresses diverse regional needs, from Europe's strict environmental standards to the Middle East's luxury demands.
-                Each market requires tailored solutions that balance performance, sustainability, and local preferences, ensuring our products meet specific regional requirements while maintaining global quality standards.
-              </p>
+              <p class="text-white text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[22px]">Tourist attraction</p>
             </div>
           </div>
         </div>
@@ -1558,23 +1325,5 @@ const nextImage = () => {
 
 .content-scroll-container::-webkit-scrollbar-corner {
   background: transparent;
-}
-
-/* 右跳动动画 */
-@keyframes bounce-right {
-  0%, 100% {
-    transform: translateY(-0%) translateX(0);
-  }
-  50% {
-    transform: translateY(-0%) translateX(-10px);
-  }
-}
-
-.animate-bounce-right {
-  animation: bounce-right 2s ease-in-out infinite;
-}
-
-.animate-bounce-right:hover {
-  animation-play-state: paused;
 }
 </style>
