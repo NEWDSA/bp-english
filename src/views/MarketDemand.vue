@@ -13,6 +13,7 @@ import icon10_1 from '../assets/icon-10-1.png'
 import icon10_2 from '../assets/icon-10-2.png'
 // import Navigation from '../components/Navigation.vue'
 // import CountryCircle from '../components/CountryCircle.vue'
+import GlobeComponent from '../components/GlobeComponent.vue'
 import { useRouter } from 'vue-router'
 const router = useRouter()
 
@@ -638,17 +639,26 @@ const nextImage = () => {
       </div>
     </nav>
 
+<!-- 地球组件 -->
     <!-- 主内容容器 -->
-    <div v-show="!showCoreRequirements" class="flex flex-col lg:flex-row mt-[71px] main-content-container">
+    <div v-if="!showCoreRequirements" class="flex flex-col lg:flex-row mt-[71px] main-content-container">
       <!-- 左侧内容 -->
       <div class="w-[28%] flex items-center justify-center relative min-w-0">
+        
         <!-- 圆圈容器 -->
         <div class="relative w-[830px] h-[830px] max-w-full max-h-full circle-container">
           <!-- 830x830 白色圆圈 -->
           <div class="ring"></div>
 
+          <!-- 地球组件 -->
+          <div class="absolute left-[-900px] top-[-50px] inset-0 flex items-center justify-center pointer-events-none">
+            <div class="w-[830px] h-[830px]">
+              <GlobeComponent />
+            </div>
+          </div>
+
           <!-- 沿圆圈定位的图标 -->
-          <div class="absolute top-0 left-0 w-full h-full">
+          <div class="absolute top-0 left-0 w-full h-full pointer-events-auto">
             <!-- 图标6 - 30度 -->
             <div class="absolute icon-6-container icon-container transition-all duration-300 flex items-center cursor-pointer" @click="activateIcon('icon-6-container', 'european', 'european')" @mouseenter="activateIcon('icon-6-container', 'european', 'european')">
               <!-- 白色圆点 10x10 -->
