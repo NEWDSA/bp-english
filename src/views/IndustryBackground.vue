@@ -180,20 +180,20 @@ const animateNumber = (element, start, end, duration = 1500, isPercentage = fals
     if (isCurrency) {
       displayValue = '$' + Math.round(current).toLocaleString()
       if (end >= 1000000000) {
-        displayValue = '$' + (current / 1000000000).toFixed(0) + '亿'
+        displayValue = '$' + (current / 1000000000).toFixed(0) + 'billion'
       } else if (end >= 100000000) {
-        displayValue = '$' + (current / 100000000).toFixed(0) + '亿'
+        displayValue = '$' + (current / 100000000).toFixed(0) + 'billion'
       }
     } else if (isPercentage) {
       displayValue = Math.round(current) + '%'
     } else {
       // 船艇数量
       if (current < 1) {
-        displayValue = current.toFixed(1) + '艘'
+        displayValue = current.toFixed(1) + 'ships'
       } else if (element.classList.contains('boat-value') && isSoutheastAsiaSelected.value) {
-        displayValue = '2-5艘'
+        displayValue = '2-5 ships'
       } else {
-        displayValue = Math.round(current) + '艘'
+        displayValue = Math.round(current) + 'ships'
       }
     }
 
@@ -335,24 +335,24 @@ watch(selectedCity, (newValue) => {
               <!-- 数据下方放行业趋势、结论 -->
               <div class="flex items-center h-12">
                 <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
-                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">数据下方放行业趋势、结论</p>
+                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">Industry Trends</p>
               </div>
               <div class="bg-gray-900/50 rounded-xl overflow-hidden" :style="{ height: chartHeight }">
                 <div class="content-scroll-container h-full overflow-auto p-4 lg:p-6">
                   <div class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">
-                    未来船舶发展呈现出"电动化"与"智能化"深度融合的明确趋势
+                    The future development of ships shows a clear trend of deep integration of "electrification" and "intelligentization".
                   </div>
 
                   <!-- 政策 -->
                   <div class="flex items-center mt-6 lg:mt-10">
-                    <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">电动化</p>
+                    <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">Electrification</p>
                     <img src="../assets/icon-12.png" alt="Icon" class="w-[14px] lg:w-[16px] mr-2 ml-2 lg:mr-3 lg:ml-3" />
-                    <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">智能化</p>
+                    <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">Intelligent</p>
                   </div>
                   <div class="mt-2 text-[11px] lg:text-[12px] 2xl:text-[16px] leading-6 lg:leading-8 space-y-2">
-                    <p class="flex"><img src="../assets/icon-13.png" alt="Icon" class="flex-shrink-0 w-[16px] lg:w-[18px] h-[16px] lg:h-[18px] mr-2 lg:mr-3 mt-0.5 lg:mt-1" />环保法规要求：全球主要国家海事均发布船舶零排放法规，未来将逐步禁止油船进入水域。</p>
-                    <p class="flex"><img src="../assets/icon-14.png" alt="Icon" class="flex-shrink-0 w-[18px] lg:w-[20px] h-[18px] lg:h-[20px] mr-2 lg:mr-3 mt-0.5 lg:mt-1" />"三电"下放：中国电池、电机、电控技术&产业链随新能源汽车发展已成熟，三电技术将逐步下放其他交通工具领域，引领能源技术变革。目前主流船艇公司均逐步推出电动船艇产品，力图抢占市场。</p>
-                    <p class="flex"><img src="../assets/icon-15.png" alt="Icon" class="flex-shrink-0 w-[18px] lg:w-[20px] h-[18px] lg:h-[20px] mr-2 lg:mr-3 mt-0.5 lg:mt-1" />智能化趋势：电动化不应是简单的"油转电"，而是全新品类的全面升级；在其他行业我们已经看到了智能化设计在不断颠覆并替代传统产品，算力芯片、AI技术已较为成熟，可快速迁移。</p>
+                    <p class="flex"><img src="../assets/icon-13.png" alt="Icon" class="flex-shrink-0 w-[16px] lg:w-[18px] h-[16px] lg:h-[18px] mr-2 lg:mr-3 mt-0.5 lg:mt-1" />Environmental regulations require that major maritime authorities around the world issue zero-emission regulations for ships, and oil tankers will be gradually banned from entering their waterways in the future.</p>
+                    <p class="flex"><img src="../assets/icon-14.png" alt="Icon" class="flex-shrink-0 w-[18px] lg:w-[20px] h-[18px] lg:h-[20px] mr-2 lg:mr-3 mt-0.5 lg:mt-1" />The "three-electric" technologies (battery, motor, and electronic control) are being transferred to other transportation sectors: With the development of new energy vehicles, China's battery, motor, and electronic control technologies and industrial chains have matured, leading to a revolution in energy technology. Currently, major boat companies are gradually launching electric boat products, striving to seize market share.</p>
+                    <p class="flex"><img src="../assets/icon-15.png" alt="Icon" class="flex-shrink-0 w-[18px] lg:w-[20px] h-[18px] lg:h-[20px] mr-2 lg:mr-3 mt-0.5 lg:mt-1" />Intelligentization trend: Electrification should not be a simple "oil-to-electric" conversion, but a comprehensive upgrade of a completely new product category; in other industries, we have already seen intelligent design constantly disrupting and replacing traditional products, and computing chips and AI technology are relatively mature and can be quickly migrated.</p>
                   </div>
                 </div>
               </div>
@@ -365,23 +365,16 @@ watch(selectedCity, (newValue) => {
             <div class="text-white flex-shrink-0">
               <div class="flex items-center h-12">
                 <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
-                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">地区经济与产业数据</p>
+                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">Regional economic and industrial data</p>
               </div>
               <div class="bg-gray-900/50 rounded-xl">
-                <div class="p-3 md:p-4 lg:p-6 xl:p-8">
+                <div class="p-2 xl:p-4 2xl:p-6">
                   <!-- 横向排列的数据 -->
-                  <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-5 xl:gap-6">
+                  <div class="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4 lg:gap-5 xl:gap-6">
                     <!-- GDP数据 -->
                     <div class="text-center">
-                      <p class="text-cyan-400 text-[10px] sm:text-xs md:text-sm font-semibold mb-2 md:mb-4 lg:mb-6">人均GDP{{
-                        isChinaSelected ? ' (中国大陆)' :
-                        isSoutheastAsiaSelected ? ' (印尼)' :
-                        isItalySelected ? ' (意大利)' :
-                        isAmericaSelected ? ' (美国)' :
-                        isMiddleEastSelected ? ' (阿联酋)' :
-                        ''
-                      }}</p>
-                      <p class="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-bold text-white gdp-value mb-1 md:mb-2" :data-value="
+                      <p class="text-cyan-400 text-[9px] sm:text-[10px] md:text-xs lg:text-sm font-semibold mb-1 sm:mb-2 md:mb-3 lg:mb-4 xl:mb-6">GDP per capita</p>
+                      <p class="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl font-bold text-white gdp-value mb-1 sm:mb-1 md:mb-2" :data-value="
                         isChinaSelected ? '13445' :
                         isSoutheastAsiaSelected ? '4960' :
                         isItalySelected ? '40437' :
@@ -394,26 +387,27 @@ watch(selectedCity, (newValue) => {
                         isItalySelected ? '$40,437' :
                         isAmericaSelected ? '$85,876' :
                         isMiddleEastSelected ? '$53,813' :
-                        '全球平均水平'
+                        'Global average level'
                       }}</p>
-                      <div class="text-[9px] sm:text-[10px] md:text-xs text-gray-400 leading-relaxed">
-                        <!-- <p>{{
-                          isChinaSelected || isSoutheastAsiaSelected ? 'GDP>$3k游艇萌芽' :
-                          '远超$10k普及门槛'
-                        }}</p> -->
-                        <p class="mt-2 md:mt-4 lg:mt-6 hidden sm:block">超$3000是游艇经济萌芽临界点,超过10,000美元时，划艇等水上运动会更受欢迎</p>
+                      <div class="text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs text-gray-400 leading-relaxed">
+                        <p>
+                          {{
+                            isChinaSelected ? 'Chinese mainland' :
+                            isSoutheastAsiaSelected ? 'Indonesia' :
+                            isItalySelected ? 'Italy' :
+                            isAmericaSelected ? 'USA' :
+                            isMiddleEastSelected ? 'UAE' :
+                            ''
+                          }}
+                        </p>
+                        <p class="mt-1 sm:mt-2 lg:mt-4 xl:mt-4 md:mt-3 hidden md:block">$3,000 is the tipping point for the nascent yacht economy.</p>
                       </div>
                     </div>
 
                     <!-- 家庭收入分布 -->
                     <div class="text-center">
-                      <p class="text-cyan-400 text-[10px] sm:text-xs md:text-sm font-semibold mb-2 md:mb-4 lg:mb-6">家庭年收入>50万人民币{{
-                        isSoutheastAsiaSelected ? ' (新加坡)' :
-                        isMiddleEastSelected ? ' (沙特)' :
-                        isItalySelected ? ' (意大利)' :
-                        ''
-                      }}</p>
-                      <p class="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-bold text-white income-value mb-1 md:mb-2" :data-value="
+                      <p class="text-cyan-400 text-[9px] sm:text-[10px] md:text-xs lg:text-sm font-semibold mb-1 sm:mb-2 md:mb-3 lg:mb-4 xl:mb-6">Annual income > 500,000 RMB</p>
+                      <p class="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl font-bold text-white income-value mb-1 sm:mb-1 md:mb-2" :data-value="
                         isChinaSelected ? '4' :
                         isSoutheastAsiaSelected ? '15' :
                         isItalySelected ? '28' :
@@ -426,21 +420,25 @@ watch(selectedCity, (newValue) => {
                         isItalySelected ? '28%' :
                         isAmericaSelected ? '45%' :
                         isMiddleEastSelected ? '7%' :
-                        '各地区差异较大'
+                        'Significant differences exist between regions.'
                       }}</p>
-                      <div class="text-[9px] sm:text-[10px] md:text-xs text-gray-400 leading-relaxed">
-                        <!-- <p>家庭比例</p> -->
-                        <p class="mt-2 md:mt-4 lg:mt-6 hidden sm:block">人均月收入超过2万元的家庭有能力租用游艇，年收入超过50万元以上的家庭，则有能力购买游艇</p>
+                      <div class="text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs text-gray-400 leading-relaxed">
+                        <p>
+                          {{
+                            isSoutheastAsiaSelected ? 'Singapore' :
+                            isMiddleEastSelected ? 'Saudi Arabia' :
+                            isItalySelected ? 'Italy' :
+                            ''
+                          }}
+                        </p>
+                        <p class="mt-1 sm:mt-2 lg:mt-4 xl:mt-4 md:mt-3 hidden md:block">Families with an annual income exceeding 500,000 yuan have the ability to purchase a yacht.</p>
                       </div>
                     </div>
 
                     <!-- 产业规模 -->
                     <div class="text-center">
-                      <p class="text-cyan-400 text-[10px] sm:text-xs md:text-sm font-semibold mb-2 md:mb-4 lg:mb-6">休闲船艇产业链{{
-                        isItalySelected ? ' (欧洲)' :
-                        ''
-                      }}</p>
-                      <p class="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-bold text-white industry-value mb-1 md:mb-2" :data-value="
+                      <p class="text-cyan-400 text-[9px] sm:text-[10px] md:text-xs lg:text-sm font-semibold mb-1 sm:mb-2 md:mb-3 lg:mb-4 xl:mb-6">Leisure boat industry chain</p>
+                      <p class="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl font-bold text-white industry-value mb-1 sm:mb-1 md:mb-2" :data-value="
                         isChinaSelected ? '60' :
                         isSoutheastAsiaSelected ? '12' :
                         isItalySelected ? '250' :
@@ -448,23 +446,28 @@ watch(selectedCity, (newValue) => {
                         isMiddleEastSelected ? '20' :
                         '0'
                       ">{{
-                        isChinaSelected ? '$60亿' :
-                        isSoutheastAsiaSelected ? '$12亿' :
-                        isItalySelected ? '$250亿' :
-                        isAmericaSelected ? '$750亿' :
-                        isMiddleEastSelected ? '$20亿' :
-                        '全球市场规模'
+                        isChinaSelected ? '$6 billion' :
+                        isSoutheastAsiaSelected ? '$1.2 billion' :
+                        isItalySelected ? '$25 billion' :
+                        isAmericaSelected ? '$75 billion' :
+                        isMiddleEastSelected ? '$2 billion' :
+                        'Global market size'
                       }}</p>
-                      <div class="text-[9px] sm:text-[10px] md:text-xs text-gray-400 leading-relaxed">
-                        <!-- <p>美元</p> -->
-                        <p class="mt-2 md:mt-4 lg:mt-6 hidden sm:block">产业规模反映基础设施完善程度</p>
+                      <div class="text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs text-gray-400 leading-relaxed">
+                        <p class="min-h-[20px]">
+                          {{
+                            isItalySelected ? 'Europe' :
+                            ''
+                          }}
+                        </p>
+                        <p class="mt-1 sm:mt-2 lg:mt-4 xl:mt-4 md:mt-3 hidden md:block">Industry size reflects the level of infrastructure development.</p>
                       </div>
                     </div>
 
                     <!-- 船艇拥有量 -->
                     <div class="text-center">
-                      <p class="text-cyan-400 text-[10px] sm:text-xs md:text-sm font-semibold mb-2 md:mb-4 lg:mb-6">船艇拥有量</p>
-                      <p class="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-bold text-white boat-value mb-1 md:mb-2" :data-value="
+                      <p class="text-cyan-400 text-[9px] sm:text-[10px] md:text-xs lg:text-sm font-semibold mb-1 sm:mb-2 md:mb-3 lg:mb-4 xl:mb-6">Boat ownership</p>
+                      <p class="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl font-bold text-white boat-value mb-1 sm:mb-1 md:mb-2" :data-value="
                         isChinaSelected ? '0.5' :
                         isSoutheastAsiaSelected ? '3.5' :
                         isItalySelected ? '10' :
@@ -472,19 +475,16 @@ watch(selectedCity, (newValue) => {
                         isMiddleEastSelected ? '8' :
                         '0'
                       ">{{
-                        isChinaSelected ? '0.5艘' :
-                        isSoutheastAsiaSelected ? '2-5艘' :
-                        isItalySelected ? '10艘' :
-                        isAmericaSelected ? '15艘' :
-                        isMiddleEastSelected ? '8艘' :
-                        '全球平均水平'
+                        isChinaSelected ? '0.5 ships' :
+                        isSoutheastAsiaSelected ? '2-5 ships' :
+                        isItalySelected ? '10 ships' :
+                        isAmericaSelected ? '15 ships' :
+                        isMiddleEastSelected ? '8 ships' :
+                        'Global average level'
                       }}</p>
-                      <div class="text-[9px] sm:text-[10px] md:text-xs text-gray-400 leading-relaxed">
-                        <!-- <p>{{
-                          isSoutheastAsiaSelected ? '各国差异' :
-                          ''
-                        }}</p> -->
-                        <p class="mt-2 md:mt-4 lg:mt-6 hidden sm:block">每百户家庭拥有船艇数量</p>
+                      <div class="text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs text-gray-400 leading-relaxed">
+                        <p>per 100 households</p>
+                        <p class="mt-1 sm:mt-2 lg:mt-4 xl:mt-4 md:mt-3 hidden md:block">Reflecting the popularity of water sports</p>
                       </div>
                     </div>
                   </div>
@@ -496,58 +496,58 @@ watch(selectedCity, (newValue) => {
             <div class="text-white flex flex-col flex-1">
               <div class="flex items-center h-10 md:h-12 flex-shrink-0">
                 <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
-                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">水污染禁航法规</p>
+                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">Water pollution navigation ban regulations</p>
               </div>
               <div class="bg-gray-900/50 rounded-xl overflow-hidden flex-1">
                 <div class="content-scroll-container h-full overflow-auto p-3 md:p-4 lg:p-6 xl:p-8">
                   <div class="text-[10px] sm:text-xs lg:text-sm 2xl:text-[15px] text-gray-200 space-y-3 lg:space-y-4">
                     <template v-if="isChinaSelected">
-                      <p class="text-cyan-400 font-semibold">国家排放标准：</p>
-                      <p>根据中国的《船舶排放控制区规定》，中国设有"排放控制区"，包括长江、珠江等沿海和内河的主要水道，对船舶的排放提出了严格要求，特别是二氧化氮（NOx）、颗粒物（PM）以及废气排放。</p>
+                      <p class="text-cyan-400 font-semibold">National Emission Standards:</p>
+                      <p>According to China's "Ship Emission Control Area Regulations", China has established "Emission Control Areas" including major coastal and inland waterways such as the Yangtze River and Pearl River, imposing strict requirements on ship emissions, particularly nitrogen oxides (NOx), particulate matter (PM), and exhaust emissions.</p>
 
-                      <p class="text-cyan-400 font-semibold mt-4 lg:mt-6">长江：</p>
-                      <p>根据《长江船舶排放控制区（2018年修订）》规定，所有航行的船舶必须符合排放标准，尤其是燃油船舶要达到更严格的排放标准，部分区域直接禁止高排放船只入水。</p>
+                      <p class="text-cyan-400 font-semibold mt-4 lg:mt-6">Yangtze River:</p>
+                      <p>According to the "Yangtze River Ship Emission Control Area (Revised 2018)" regulations, all navigating vessels must comply with emission standards. Fuel-powered vessels in particular must meet stricter emission standards, with some areas directly prohibiting high-emission vessels from entering waters.</p>
 
-                      <p class="text-cyan-400 font-semibold mt-4 lg:mt-6">港口与码头管理：</p>
-                      <p>中国很多沿海城市的码头对排放超标的船舶有禁止入港的规定，并对在港船只要求使用低硫燃料或符合排放标准的动力系统。</p>
+                      <p class="text-cyan-400 font-semibold mt-4 lg:mt-6">Port and Terminal Management:</p>
+                      <p>Many coastal city terminals in China have regulations prohibiting vessels with excessive emissions from entering ports, and require vessels in port to use low-sulfur fuel or power systems that meet emission standards.</p>
                     </template>
 
                     <template v-else-if="isSoutheastAsiaSelected">
-                      <p class="text-cyan-400 font-semibold">马来西亚：</p>
-                      <p>马来西亚部分地区（如兰卡威、槟城等海岛）对燃油船实行严格的区域限制，特别是在保护区，部分海域禁止使用内燃机动力的船只。</p>
+                      <p class="text-cyan-400 font-semibold">Malaysia:</p>
+                      <p>Certain regions in Malaysia (such as Langkawi and Penang islands) impose strict regional restrictions on fuel-powered boats, particularly in protected areas, with some waters prohibiting the use of internal combustion engine vessels.</p>
 
-                      <p class="text-cyan-400 font-semibold mt-4 lg:mt-6">新加坡：</p>
-                      <p>新加坡有严格的港口管理法规，要求船舶在入港时必须符合环境排放标准，并对内燃机船实施限制，尤其是在海洋保护区。</p>
+                      <p class="text-cyan-400 font-semibold mt-4 lg:mt-6">Singapore:</p>
+                      <p>Singapore has strict port management regulations requiring vessels to comply with environmental emission standards when entering ports, and implements restrictions on internal combustion engine vessels, especially in marine protected areas.</p>
 
-                      <p class="text-cyan-400 font-semibold mt-4 lg:mt-6">泰国：</p>
-                      <p>泰国的普吉岛等热门旅游地区对高排放船舶（如一些老旧的渔船）进行了限制，逐步鼓励使用低排放或电动的船只。</p>
+                      <p class="text-cyan-400 font-semibold mt-4 lg:mt-6">Thailand:</p>
+                      <p>Popular tourist areas in Thailand such as Phuket have imposed restrictions on high-emission vessels (such as some old fishing boats), gradually encouraging the use of low-emission or electric boats.</p>
                     </template>
 
                     <template v-else-if="isItalySelected">
-                      <p class="text-cyan-400 font-semibold">欧盟指令：</p>
-                      <p>欧洲出台了《休闲船艇指令（RCD，2013/53/EU）》，规定了船舶排放要求，涵盖气候变化（温室气体）、空气污染（颗粒物、氮氧化物）以及噪声污染等内容。指令要求所有进入欧盟市场的船舶必须符合环境保护标准。2018年，欧盟更新了船舶排放标准，要求所有新船必须满足更严格的排放要求。氮氧化物、碳氢化合物等污染物的排放量将进一步减少。</p>
+                      <p class="text-cyan-400 font-semibold">EU Directives:</p>
+                      <p>Europe has introduced the "Recreational Craft Directive (RCD, 2013/53/EU)", which specifies vessel emission requirements covering climate change (greenhouse gases), air pollution (particulate matter, nitrogen oxides), and noise pollution. The directive requires all vessels entering the EU market to comply with environmental protection standards. In 2018, the EU updated vessel emission standards, requiring all new vessels to meet stricter emission requirements. Emissions of nitrogen oxides, hydrocarbons, and other pollutants will be further reduced.</p>
 
-                      <p class="text-cyan-400 font-semibold mt-4 lg:mt-6">意大利湖泊：</p>
-                      <p>意大利的多个湖泊（如Lake Garda、Lake Bracciano、Lake Vico）对燃油动力船有严格的禁航令，尤其是在环保保护区和旅游保护区。例如，意大利湖区禁止使用高污染的船舶，并推动更多电动船只或环保船舶的使用。意大利部分水域限制噪音水平超过某一标准的船舶进入，尤其是在敏感生态区域和度假区。部分湖泊也设有排放限制，例如规定只有符合欧盟排放标准的船舶才允许进入。</p>
+                      <p class="text-cyan-400 font-semibold mt-4 lg:mt-6">Italian Lakes:</p>
+                      <p>Multiple Italian lakes (such as Lake Garda, Lake Bracciano, Lake Vico) have strict navigation bans on fuel-powered boats, especially in environmental protection and tourist protection areas. For example, Italian lake districts prohibit the use of highly polluting vessels and promote the use of more electric or eco-friendly boats. Some Italian waters restrict vessels exceeding certain noise level standards from entering, especially in sensitive ecological areas and resort areas. Some lakes also have emission restrictions, for example, stipulating that only vessels meeting EU emission standards are allowed to enter.</p>
                     </template>
 
                     <template v-else-if="isAmericaSelected">
-                      <p class="text-cyan-400 font-semibold">Lake Tahoe：</p>
-                      <p>自1999年起，California州严格禁止二冲程化油器发动机进入湖泊。这意味着湖区内不得使用老旧的污染性较强的发动机。</p>
+                      <p class="text-cyan-400 font-semibold">Lake Tahoe:</p>
+                      <p>Since 1999, California has strictly prohibited two-stroke carbureted engines from entering the lake. This means that old, heavily polluting engines cannot be used in the lake area.</p>
 
-                      <p class="text-cyan-400 font-semibold mt-4 lg:mt-6">EPA Tier 4标准（2010）：</p>
-                      <p>2010年推出的《美国船舶排放标准》（EPA's Tier 4 Standards），规定了小型船舶、游艇的排放限值。联邦标准（EPA）为新船和发动机制定了严格的排放标准，其中包括低硫燃料要求以及二氧化氮（NOx）、碳氢化合物和颗粒物（PM）的限制。</p>
+                      <p class="text-cyan-400 font-semibold mt-4 lg:mt-6">EPA Tier 4 Standards (2010):</p>
+                      <p>The "U.S. Marine Emission Standards" (EPA's Tier 4 Standards) introduced in 2010 specify emission limits for small vessels and yachts. Federal standards (EPA) have established strict emission standards for new vessels and engines, including low-sulfur fuel requirements and limits on nitrogen dioxide (NOx), hydrocarbons, and particulate matter (PM).</p>
 
-                      <p class="text-cyan-400 font-semibold mt-4 lg:mt-6">噪音标准：</p>
-                      <p>很多州，如加利福尼亚州，要求游艇和小型船舶的噪音不能超过特定的噪音标准（如75 dB）。这些要求适用于大部分船舶，包括游艇和水上摩托。</p>
+                      <p class="text-cyan-400 font-semibold mt-4 lg:mt-6">Noise Standards:</p>
+                      <p>Many states, such as California, require that noise from yachts and small vessels not exceed specific noise standards (e.g., 75 dB). These requirements apply to most vessels, including yachts and personal watercraft.</p>
                     </template>
 
                     <template v-else-if="isMiddleEastSelected">
-                      <p class="text-cyan-400 font-semibold">阿联酋：</p>
-                      <p>阿联酋迪拜的部分海域和码头限制内燃机动力船舶，特别是在靠近海洋保护区和高端旅游区（如朱美拉海滩）。迪拜的环境保护署（DEWA）要求船舶满足环保标准，逐步推广使用电动船和低排放动力的船只。</p>
+                      <p class="text-cyan-400 font-semibold">United Arab Emirates:</p>
+                      <p>Some waters and terminals in Dubai, UAE restrict internal combustion engine vessels, particularly near marine protected areas and high-end tourist areas (such as Jumeirah Beach). Dubai's environmental protection authority (DEWA) requires vessels to meet environmental standards and gradually promotes the use of electric boats and low-emission powered vessels.</p>
 
-                      <p class="text-cyan-400 font-semibold mt-4 lg:mt-6">沙特阿拉伯：</p>
-                      <p>沙特的红海区域和海湾沿岸的一些水域已开始对高污染船舶进行限制，尤其是老旧船舶，并鼓励使用更环保的船舶。</p>
+                      <p class="text-cyan-400 font-semibold mt-4 lg:mt-6">Saudi Arabia:</p>
+                      <p>Some waters in Saudi Arabia's Red Sea region and Gulf coast have begun restricting highly polluting vessels, especially old vessels, and encouraging the use of more environmentally friendly ships.</p>
                     </template>
                   </div>
                 </div>
