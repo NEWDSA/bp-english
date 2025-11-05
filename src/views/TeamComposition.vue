@@ -1250,7 +1250,7 @@ button {
 }
 
 .presentation-title {
-    font-size: clamp(1.4rem, 2.2vw, 2.5rem);
+    font-size: clamp(1.2rem, 1.9vw, 2.1rem);
     font-weight: 700;
     color: #ffffff;
     margin: 0 0 clamp(1.5rem, 3vh, 2.5rem) 0;
@@ -1281,7 +1281,7 @@ button {
 }
 
 .block-title {
-    font-size: clamp(1rem, 1.8vw, 2rem);
+    font-size: clamp(0.85rem, 1.5vw, 1.7rem);
     font-weight: 600;
     color: #ffffff;
     margin: 0 0 clamp(0.6rem, 1vh, 1rem) 0;
@@ -1290,11 +1290,10 @@ button {
 }
 
 .block-text {
-    font-size: clamp(0.8rem, 1.1vw, 1.3rem);
-    color: #ffffff;
+    font-size: clamp(0.7rem, 0.95vw, 1.1rem);
+    color: rgba(255, 255, 255, 0.7);
     line-height: 1.5;
     margin: 0 0 clamp(0.6rem, 1vh, 1rem) 0;
-    opacity: 0.9;
 }
 
 .block-text:last-child {
@@ -1302,7 +1301,7 @@ button {
 }
 
 .block-primary-text {
-    font-size: clamp(1rem, 1.4vw, 1.5rem);
+    font-size: clamp(0.85rem, 1.2vw, 1.3rem);
     font-weight: 600;
     color: #ffffff;
     line-height: 1.5;
@@ -1336,17 +1335,16 @@ button {
 
 .bullet {
     color: #ffffff;
-    font-size: clamp(0.9rem, 1.4vw, 2rem);
+    font-size: clamp(0.75rem, 1.2vw, 1.7rem);
     font-weight: bold;
     flex-shrink: 0;
     width: clamp(15px, 1.5vw, 25px);
 }
 
 .achievement-desc {
-    font-size: clamp(0.7rem, 1vw, 1.2rem);
-    color: #ffffff;
+    font-size: clamp(0.6rem, 0.85vw, 1rem);
+    color: rgba(255, 255, 255, 0.7);
     line-height: 1.4;
-    opacity: 0.9;
     flex: 1;
 }
 
@@ -1490,17 +1488,18 @@ button {
 .works-image-wrapper {
     position: relative;
     width: 100%;
-    flex: 1;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
+    display: block;
     overflow: hidden;
+    margin-bottom: 0;
+    line-height: 0;
 }
 
 .works-image {
     width: 100%;
-    height: 100%;
-    object-fit: contain;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    object-position: top;
     transition: all 0.3s ease;
 }
 
@@ -1528,7 +1527,8 @@ button {
     color: white;
     padding: 15px 10px;
     width: 100%;
-    background: rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+    margin-top: 0;
 }
 
 .works-title {
