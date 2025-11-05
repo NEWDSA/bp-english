@@ -500,7 +500,7 @@ const updateRightContent = (contentType) => {
     }
   } else if (contentType === 'usa') {
     rightContent.value = {
-      name: 'Sarah Johnson',
+      name: 'Sarah Johnson William',
       title: 'Founder of a leasing company',
       bio: 'Operating water sports equipment and boat rentals in the Florida Keys, our clients are mostly family vacationers and diving enthusiasts, hoping to provide new options that are more environmentally friendly and easy to operate.',
       requirements: [
@@ -651,9 +651,9 @@ const nextImage = () => {
           <div class="ring"></div>
 
           <!-- 地球组件 -->
-          <div class="absolute left-[-900px] top-[-50px] inset-0 flex items-center justify-center pointer-events-none">
-            <div class="w-[830px] h-[830px]">
-              <GlobeComponent />
+          <div class="globeStyle absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div class="globeWith">
+              <GlobeComponent :load-data="false" />
             </div>
           </div>
 
@@ -1224,6 +1224,16 @@ const nextImage = () => {
 	height: 830px;
 	border: 3px solid white;
 	border-radius: 50%;
+}
+
+.globeStyle {
+  left: -900px;
+  top: 100px;
+}
+
+.globeWith {
+  width: 830px;
+  height: 830px;
 }
 
 .icon-6-container {

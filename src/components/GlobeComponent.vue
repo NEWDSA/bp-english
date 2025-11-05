@@ -13,6 +13,13 @@ import earthPhoto from '../assets/earth-blue-marble.jpg';
 import * as satellite from '../assets/satellite.mjs'
 import { csvParseRows } from '../assets/d3-dsv.mjs'
 
+const props = defineProps({
+  loadData: {
+    type: Boolean,
+    default: true
+  }
+})
+
 const emit = defineEmits(['city-click', 'globe-click'])
 
 const globeContainer = ref(null)
@@ -171,11 +178,14 @@ onMounted(async () => {
 
         console.log('Globe initialized, loading satellite data...')
 
-        // 加载卫星数据
-        loadSatelliteData()
+        // 根据 props.loadData 决定是否加载数据
+        if (props.loadData) {
+          // 加载卫星数据
+          loadSatelliteData()
 
-        // 加载航空数据
-        loadAirlineData()
+          // 加载航空数据
+          loadAirlineData()
+        }
 
       } catch (error) {
         console.error('Error initializing globe:', error)
