@@ -1206,7 +1206,7 @@ function renderModalCharts() {
 		chart1Instance = echarts.init(chart1Ref.value)
 		const option1 = {
 			title: {
-				text: 'When the price of a single ship is 28,000$,break even sales volume is achieved',
+				text: 'When the cost of a single ship is 28,000$,break even sales volume is achieved',
 				textStyle: { fontSize: 16, color: '#333', fontWeight: 'normal' },
 				top: 5,
 				left: 'center'
@@ -1235,7 +1235,7 @@ function renderModalCharts() {
 			xAxis: {
 				type: 'category',
 				// 字体大小10px
-				data: ['4.79', '4.71', '4.64', '4.57', '4.50', '4.43', '4.36', '4.29', '4.21', '4.14', '4.07'],
+				data: ['47,900', '47,100', '46,400', '45,700', '45,000', '44,300', '43,600', '42,900', '42,100', '41,400', '40,700'],
 				axisLabel: { color: '#666', fontSize: 8, show: true },
 				axisTick: { show: false },
 				axisLine: { show: false },
@@ -1294,7 +1294,7 @@ function renderModalCharts() {
 		chart2Instance = echarts.init(chart2Ref.value)
 		const option2 = {
 			title: {
-				text: 'When the price of a single ship is 31,000$, break even sales volume is achieved',
+				text: 'When the cost of a single ship is 31,000$, break even sales volume is achieved',
 				textStyle: { fontSize: 16, color: '#333', fontWeight: 'normal' },
 				top: 5,
 				left: 'center'
@@ -1322,7 +1322,7 @@ function renderModalCharts() {
 			xAxis: {
 				type: 'category',
 
-				data: ['5.29', '5.21', '5.14', '5.07', '5.00', '4.93', '4.86', '4.79', '4.71', '4.64', '4.57', '4.50'],
+				data: ['52,900', '52,100', '51,400', '50,700', '50,000', '49,300', '48,600', '47,900', '47,100', '46,400', '45,700', '45,000'],
 				axisLabel: { color: '#666', fontSize: 8, show: true },
 				axisTick: { show: false },
 				axisLine: { show: false },
@@ -1382,7 +1382,7 @@ function renderModalCharts() {
 		chart3Instance = echarts.init(chart3Ref.value)
 		const option3 = {
 			title: {
-				text: 'When the price of a single ship is 35,000$, break even sales volume is achieved',
+				text: 'When the cost of a single ship is 35,000$, break even sales volume is achieved',
 				textStyle: { fontSize: 16, color: '#333', fontWeight: 'normal' },
 				top: 5,
 				left: 'center'
@@ -1416,9 +1416,9 @@ function renderModalCharts() {
 			xAxis: {
 				type: 'category',
 				data: [
-					'8.00', '7.86', '7.71', '7.57', '7.43',
-					'7.29', '7.14', '7.00', '6.86', '6.71',
-					'6.57', '6.42', '6.29', '6.14', '6.00'
+					'80,000', '78,600', '77,100', '75,700', '74,300',
+					'72,900', '71,400', '70,000', '68,600', '67,100',
+					'65,700', '64,200', '62,900', '61,400', '60,000'
 				],
 				position: 'bottom',
 				axisLabel: {
@@ -1538,7 +1538,7 @@ function renderModalCharts() {
 		chart4Instance = echarts.init(chart4Ref.value)
 		const option4 = {
 			title: {
-				text: 'When the price of a single ship is 41,000$, break even sales volume is achieved',
+				text: 'When the cost of a single ship is 41,000$, break even sales volume is achieved',
 				textStyle: { fontSize: 16, color: '#333', fontWeight: 'normal' },
 				top: 5,
 				left: 'center'
@@ -1571,7 +1571,7 @@ function renderModalCharts() {
 			// },
 			xAxis: {
 				type: 'category',
-				data: ['9.57', '9.43', '9.29', '9.14', '9.00', '8.86', '8.71', '8.57', '8.43', '8.29', '8.14', '8.00', '7.86', '7.71', '7.57'],
+				data: ['95,700', '94,300', '92,900', '91,400', '90,000', '88,600', '87,100', '85,700', '84,300', '82,900', '81,400', '80,000', '78,600', '77,100', '75,700'],
 				position: 'bottom',
 				axisLabel: {
 					show: true,
