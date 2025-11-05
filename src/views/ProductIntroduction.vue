@@ -151,12 +151,12 @@
 						<button class="competitor-tab" :class="{ active: competitorTab === '10-15w' }"
 							@click="setCompetitorTab('10-15w')">
 							<!-- Hydrofoil 10-15w Euro -->
-							 H2o vs 10~15w Euro
+							 H2o vs €100,000 - €150,000
 						</button>
 						<button class="competitor-tab" :class="{ active: competitorTab === '18w' }"
 							@click="setCompetitorTab('18w')">
 							<!-- Hydrofoil 18w Euro -->
-							 H2o vs 18w Euro
+							 H2o vs €180,000
 						</button>
 						<button class="competitor-tab" :class="{ active: competitorTab === 'vs-others' }"
 							@click="setCompetitorTab('vs-others')">
@@ -1680,7 +1680,7 @@ onUnmounted(() => {
 /* Tab切换样式 */
 .competitor-tabs {
 	display: flex;
-	gap: 10px;
+	gap: 30px;
 	width: 100%;
 	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 	margin-bottom: 25px;
@@ -1767,6 +1767,12 @@ onUnmounted(() => {
 
 /* 18w tab的图片缩小 */
 .tab-panel.four-col-tab .competitor-image-wrapper {
+	max-height: 150px;
+	height: 150px;
+}
+
+/* vs-others tab的图片缩小 */
+.tab-panel.vs-others-tab .competitor-image-wrapper {
 	max-height: 150px;
 	height: 150px;
 }
@@ -2074,7 +2080,7 @@ onUnmounted(() => {
 	border: 1px solid rgba(255, 255, 255, 0.2);
 	border-radius: 12px;
 	padding: 20px 25px;
-	margin-top: 0;
+	margin-top: 30px;
 }
 
 .competitor-conclusion .conclusion-title {
