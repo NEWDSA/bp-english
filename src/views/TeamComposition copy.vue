@@ -11,8 +11,6 @@
                 </div>
                 <div class="nav-divider"></div>
 
-                <router-link to="/product-introduction" class="nav-item">Product Introduction</router-link>
-                <div class="nav-divider"></div>
                 <router-link to="/industry-background" class="nav-item">Industry Background</router-link>
                 <div class="nav-divider"></div>
                 <router-link to="/market-demand" class="nav-item">Market Demand</router-link>
@@ -20,6 +18,8 @@
                 <router-link to="/business-model" class="nav-item">Business Model</router-link>
                 <div class="nav-divider"></div>
                 <div class="nav-item active">Team Composition</div>
+                <div class="nav-divider"></div>
+                <router-link to="/product-introduction" class="nav-item">Product Introduction</router-link>
             </div>
         </nav>
         <!-- 团队详情页 -->
@@ -27,7 +27,7 @@
         <div class="bg-gradient-to-br to-magenta-900 overflow-hidden" style="height: calc(100vh - 56px);">
             <div class="flex h-full">
                 <!-- 左侧人物区域 -->
-                <div class="w-[32%] md:w-[34%] lg:w-[36%] relative overflow-hidden flex-shrink-0">
+                <div class="w-[36%] relative overflow-hidden">
                     <!-- 背景图 -->
                     <div class="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-500"
                         :style="{ backgroundImage: `url(${selectedMember.image})` }"></div>
@@ -36,48 +36,48 @@
                     <div class="absolute inset-0 bg-black/30"></div>
 
                     <!-- 竖线与圆点 -->
-                    <div class="absolute left-6 md:left-8 lg:left-[40px] top-1/4 bottom-1/4 w-1 bg-white/30 z-20"></div>
-                    <div class="absolute left-4 md:left-6 lg:left-[32px] top-1/2 transform -translate-y-1/2 z-30">
+                    <div class="absolute left-[40px] top-1/4 bottom-1/4 w-1 bg-white/30 z-20"></div>
+                    <div class="absolute left-[32px] top-1/2 transform -translate-y-1/2 z-30">
                         <div
-                            class="w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 bg-white rounded-full flex items-center justify-center text-sm font-bold shadow-lg">
+                            class="w-6 h-6 bg-white rounded-full flex items-center justify-center text-sm font-bold shadow-lg">
                         </div>
                     </div>
 
                     <!-- 姓名与职位 -->
-                    <div class="absolute left-12 md:left-16 lg:left-20 top-1/4 z-20">
+                    <div class="absolute left-20 top-1/4 z-20">
                         <span
-                            class="font-bold text-white tracking-wider text-[24px] sm:text-[28px] md:text-[32px] lg:text-[36px] xl:text-[32px] 2xl:text-[36px] font-[Times_New_Roman] transition-all duration-500">
+                            class="font-bold text-white tracking-wider text-[36px] font-[Times_New_Roman] transition-all duration-500">
                             {{ selectedMember.enName }}
                         </span>
                     </div>
-                    <div class="absolute left-12 md:left-16 lg:left-20 bottom-1/4 z-20">
+                    <div class="absolute left-20 bottom-1/4 z-20">
                         <h2
-                            class="text-[40px] sm:text-[48px] md:text-[56px] lg:text-[64px] xl:text-[56px] 2xl:text-[64px] font-bold text-white tracking-wider font-[Times_New_Roman] transition-all duration-500">
+                            class="text-[64px] font-bold text-white tracking-wider font-[Times_New_Roman] transition-all duration-500">
                             {{ selectedMember.role }}
                         </h2>
                     </div>
                 </div>
                 <!-- 右侧内容区域 -->
                 <div
-                    class="w-[68%] md:w-[66%] lg:w-[64%] bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900 flex flex-col justify-between min-w-0">
+                    class="w-[64%] bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900 flex flex-col justify-between">
                     <div class="flex flex-col h-full">
                         <!-- 成员介绍区域 -->
                         <div v-if="!showWhoWeAreContent && !showInvestmentHighlightsContent"
-                            class="px-4 sm:px-6 md:px-8 lg:px-10 xl:px-10 2xl:px-12 py-6 md:py-8 lg:py-10 flex gap-3 sm:gap-4 md:gap-5 lg:gap-6 xl:gap-8 overflow-y-auto 2xl:h-[560px] xl:h-[400px]">
-                            <div class="flex-1 min-w-0">
+                            class="px-12 py-10 flex gap-8 overflow-y-auto 2xl:h-[560px] xl:h-[400px]">
+                            <div class="max-w-4xl flex-shrink-0">
                                 <!-- 经历部分 (只有吴关和龚亮显示) -->
                                 <div v-if="selectedMember.name === '吴关' || selectedMember.name === '龚亮'"
-                                    class="2xl:mb-10 mb-4 md:mb-6">
-                                    <span class="text-base sm:text-lg md:text-xl lg:text-xl xl:text-lg 2xl:text-xl text-white mb-3 md:mb-4 flex items-center">
-                                        <span class="w-1.5 h-1.5 md:w-2 md:h-2 bg-white/60 rounded-full mr-2 md:mr-3"></span>
+                                    class="2xl:mb-10 mb-6">
+                                    <span class="text-xl text-white mb-4 flex items-center">
+                                        <span class="w-2 h-2 bg-white/60 rounded-full mr-3"></span>
                                         Experience
                                     </span>
-                                    <div class="pl-3 md:pl-4 lg:pl-5 space-y-2">
+                                    <div class="pl-5 space-y-2">
                                         <div v-for="(item, index) in formatListItems(selectedMember.professionalQualifications)"
                                             :key="`qual-${index}`" class="flex items-start group">
-                                            <span class="text-white/70 mr-2 md:mr-3 mt-1.5 text-[10px] sm:text-xs flex-shrink-0">▸</span>
+                                            <span class="text-white/70 mr-3 mt-1.5 text-xs">▸</span>
                                             <p
-                                                class="text-white/90 text-sm sm:text-base md:text-base lg:text-base xl:text-sm 2xl:text-base leading-relaxed flex-1 min-w-0 group-hover:text-white transition-colors break-words">
+                                                class="text-white/90 text-base leading-relaxed flex-1 group-hover:text-white transition-colors">
                                                 {{ item }}
                                             </p>
                                         </div>
@@ -86,14 +86,14 @@
 
                                 <!-- 专长领域部分 (只有非吴关和非龚亮显示) -->
                                 <div v-if="selectedMember.name !== '吴关' && selectedMember.name !== '龚亮'"
-                                    class="2xl:mb-10 mb-4 md:mb-6">
-                                    <span class="text-base sm:text-lg md:text-xl lg:text-xl xl:text-lg 2xl:text-xl text-white mb-3 md:mb-4 flex items-center">
-                                        <span class="w-1.5 h-1.5 md:w-2 md:h-2 bg-white/60 rounded-full mr-2 md:mr-3"></span>
+                                    class="2xl:mb-10 mb-6">
+                                    <span class="text-xl text-white mb-4 flex items-center">
+                                        <span class="w-2 h-2 bg-white/60 rounded-full mr-3"></span>
                                         Areas of expertise
                                     </span>
                                     <div
-                                        class="pl-3 md:pl-4 lg:pl-5 bg-white/10 rounded-xl p-3 sm:p-4 md:p-5 lg:p-6 border border-white/20 backdrop-blur-sm">
-                                        <p class="text-white/90 text-sm sm:text-base md:text-base lg:text-base xl:text-sm 2xl:text-base leading-relaxed whitespace-pre-wrap break-words overflow-wrap-anywhere">
+                                        class="pl-5 bg-white/10 rounded-xl p-6 border border-white/20 backdrop-blur-sm">
+                                        <p class="text-white/90 text-base leading-relaxed whitespace-pre-wrap">
                                             {{ formatExpertiseWithLineBreaks(selectedMember.areasOfExpertise) }}
                                         </p>
                                     </div>
@@ -101,12 +101,12 @@
 
                                 <!-- 主要职责部分 (只有非吴关和非龚亮显示) -->
                                 <div v-if="selectedMember.name !== '吴关' && selectedMember.name !== '龚亮'">
-                                    <span class="text-base sm:text-lg md:text-xl lg:text-xl xl:text-lg 2xl:text-xl text-white mb-3 md:mb-4 flex items-center">
-                                        <span class="w-1.5 h-1.5 md:w-2 md:h-2 bg-white/60 rounded-full mr-2 md:mr-3"></span>
+                                    <span class="text-xl text-white mb-4 flex items-center">
+                                        <span class="w-2 h-2 bg-white/60 rounded-full mr-3"></span>
                                         Main Responsibilities
                                     </span>
-                                    <div class="pl-3 md:pl-4 lg:pl-5">
-                                        <p class="text-white/90 text-sm sm:text-base md:text-base lg:text-base xl:text-sm 2xl:text-base leading-loose break-words overflow-wrap-anywhere">
+                                    <div class="pl-5">
+                                        <p class="text-white/90 text-base leading-loose text-justify">
                                             {{ selectedMember.description }}
                                         </p>
                                     </div>
@@ -114,68 +114,56 @@
 
                                 <!-- 个人简介部分 (只有吴关和龚亮显示) -->
                                 <div v-if="selectedMember.name === '吴关' || selectedMember.name === '龚亮'">
-                                    <span class="text-base sm:text-lg md:text-xl lg:text-xl xl:text-lg 2xl:text-xl text-white mb-3 md:mb-4 flex items-center">
-                                        <span class="w-1.5 h-1.5 md:w-2 md:h-2 bg-white/60 rounded-full mr-2 md:mr-3"></span>
+                                    <span class="text-xl text-white mb-4 flex items-center">
+                                        <span class="w-2 h-2 bg-white/60 rounded-full mr-3"></span>
                                         Personal Profile
                                     </span>
-                                    <div class="pl-3 md:pl-4 lg:pl-5">
-                                        <p class="text-white/90 text-sm sm:text-base md:text-base lg:text-base xl:text-sm 2xl:text-base leading-loose break-words overflow-wrap-anywhere">
+                                    <div class="pl-5">
+                                        <p class="text-white/90 text-base leading-loose text-justify">
                                             {{ selectedMember.introduction }}
                                         </p>
                                     </div>
                                 </div>
                             </div>
                             <!-- Who we are 和 Investment Cases 按钮区域 -->
-                            <div class="flex flex-col gap-3 md:gap-4 flex-shrink-0 self-start min-w-fit">
-                                <div class="info-frame cursor-pointer whitespace-nowrap" @click="showWhoWeAreModal">
-                                    <h3 class="info-title text-sm sm:text-base md:text-lg lg:text-lg xl:text-base 2xl:text-lg">Team Introduction</h3>
+                            <div class="flex flex-col gap-4 flex-shrink-0 self-start">
+                                <div class="info-frame cursor-pointer" @click="showWhoWeAreModal">
+                                    <h3 class="info-title">Team Introduction</h3>
                                 </div>
-                                <div class="info-frame cursor-pointer whitespace-nowrap" @click="showInvestmentHighlightsModal">
-                                    <h3 class="info-title text-sm sm:text-base md:text-lg lg:text-lg xl:text-base 2xl:text-lg">Investment Cases</h3>
+                                <div class="info-frame cursor-pointer" @click="showInvestmentHighlightsModal">
+                                    <h3 class="info-title">Investment Cases</h3>
                                 </div>
                             </div>
                         </div>
 
                         <!-- 底部团队轮播区域 -->
                         <div v-if="!showWhoWeAreContent && !showInvestmentHighlightsContent"
-                            class="border-gray-200 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-10 2xl:px-12 py-4 md:py-6 lg:py-8">
+                            class="border-gray-200 px-12 py-8">
                             <!-- 标题 -->
-                            <div class="flex items-center justify-between mb-4 md:mb-6">
+                            <div class="flex items-center justify-between mb-6">
                                 <h3
-                                    class="text-xl sm:text-2xl md:text-2xl lg:text-3xl xl:text-2xl 2xl:text-3xl bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                                    class="text-3xl bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
                                     Y-H2O Team</h3>
                             </div>
 
                             <!-- 履带式轮播容器 -->
-                            <div class="relative w-full px-2 sm:px-3 md:px-4 overflow-hidden carousel-container">
+                            <div class="relative w-full px-4 overflow-hidden">
                                 <div class="flex transition-transform duration-500 ease-in-out"
                                     :style="{ transform: `translateX(-${scrollPosition}px)` }">
                                     <!-- 单一卡片组，使用两次循环实现无限滚动效果 -->
                                     <template v-for="cycle in 2" :key="cycle">
                                         <div v-for="(member, index) in teamMembers" :key="`${cycle}-${index}`"
                                             @click="handleCardClick(index)" 
-                                            class="flex-shrink-0 mr-[30px] cursor-pointer"
-                                            :style="{
+                                            :class="[
+                                                'rounded-2xl p-4 cursor-pointer group flex-shrink-0 relative overflow-hidden border-white/20 mr-[30px] bg-cover bg-center ',
+                                                selectedIndex === index ? 'h-[360px]' : 'h-[320px]'
+                                            ]" :style="{
                                                 width: '256px',
-                                                zIndex: selectedIndex === index ? 20 : 10
+                                                boxSizing: 'border-box',
+                                                boxShadow: '0 0 10px rgba(0,0,0,0.15)',
+                                                zIndex: selectedIndex === index ? 20 : 10,
+                                                backgroundImage: `url(${member.image})`
                                             }">
-                                            <!-- 图片部分 -->
-                                            <div 
-                                                :class="[
-                                                    'rounded-2xl p-4 relative overflow-hidden border-white/20 bg-cover bg-center',
-                                                    selectedIndex === index ? 'h-[360px]' : 'h-[320px]'
-                                                ]" 
-                                                :style="{
-                                                    boxSizing: 'border-box',
-                                                    boxShadow: '0 0 10px rgba(0,0,0,0.15)',
-                                                    backgroundImage: `url(${member.image})`
-                                                }">
-                                            </div>
-                                            <!-- 名字部分 -->
-                                            <div class="mt-3 text-center">
-                                                <!-- <div class="text-white text-base font-medium">{{ member.name }}</div> -->
-                                                <div class="text-gray-300 text-sm mt-1">{{ member.enName }}</div>
-                                            </div>
                                         </div>
                                     </template>
                                 </div>
@@ -201,8 +189,8 @@
                                 </button> -->
 
                                 <!-- 公司名称 -->
-                                <div class="absolute left-[calc(50%+200px)] sm:left-[calc(50%+250px)] md:left-[calc(50%+300px)] lg:left-[calc(50%+350px)] xl:left-[calc(50%+350px)] 2xl:left-[calc(50%+370px)]">
-                                    <h2 class="text-lg sm:text-xl md:text-xl lg:text-2xl xl:text-xl 2xl:text-2xl text-white">Y-H2O</h2>
+                                <div class="absolute left-[calc(50%+370px)]">
+                                    <h2 class="text-2xl text-white">Y-H2O</h2>
                                 </div>
                             </div>
                         </div>
@@ -355,65 +343,67 @@
                         <div class="works-images-grid">
                             <template v-for="i in 6" :key="i">
                                 <div class="works-image-item">
-                                    <!-- 图片部分 -->
-                                    <div class="works-image-wrapper">
-                                        <img :src="getWorkImage(i)" :alt="`Work ${i}`" class="works-image" />
+                                    <img :src="getWorkImage(i)" :alt="`Work ${i}`" class="works-image" />
+
+                                    <!-- 第一张图片文字 -->
+                                    <div v-if="i === 1" class="works-text-overlay">
+                                        <div class="works-number">1</div>
+                                        <div class="works-title">The Definer of the Future Water-X Pontoon</div>
+                                        <div class="works-project">Project: Wuhu Pearl</div>
+                                        <div class="works-date">Launch Date: September 2022</div>
+                                        <div class="works-location">Location: Wuhu, Anhui</div>
                                     </div>
 
-                                    <!-- 文字部分 -->
-                                    <div class="works-text-content">
-                                        <div class="works-number">{{ i }}</div>
-                                        <!-- 第一张图片文字 -->
-                                        <template v-if="i === 1">
-                                            <div class="works-title">The Definer of the Future Water-X Pontoon</div>
-                                            <div class="works-project">Project: Wuhu Pearl</div>
-                                            <div class="works-date">Launch Date: September 2022</div>
-                                            <div class="works-location">Location: Wuhu, Anhui</div>
-                                        </template>
+                                    <!-- 第二张图片文字 -->
+                                    <div v-if="i === 2" class="works-text-overlay">
+                                        <div class="works-number">2</div>
+                                        <div class="works-title">Definer of maritime cultural tourism vessels</div>
+                                        <div class="works-project">Project: Xunxian 1 and 2</div>
+                                        <div class="works-date">Landing Date: May 2017</div>
+                                        <div class="works-location">Location: Yantai, Qinhuangdao</div>
+                                    </div>
 
-                                        <!-- 第二张图片文字 -->
-                                        <template v-if="i === 2">
-                                            <div class="works-title">Definer of maritime cultural tourism vessels</div>
-                                            <div class="works-project">Project: Xunxian 1 and 2</div>
-                                            <div class="works-date">Landing Date: May 2017</div>
-                                            <div class="works-location">Location: Yantai, Qinhuangdao</div>
-                                        </template>
+                                    <!-- 第三张图片文字 -->
+                                    <div v-if="i === 3" class="works-text-overlay">
+                                        <div class="works-number">3</div>
+                                        <div class="works-title">Rich resources on B-side and G-side</div>
+                                        <div class="works-project">Project: Jiuzhou Bay No. 1 (Nezha)</div>
+                                        <div class="works-date">Landing Date: October 2020</div>
+                                        <div class="works-location">Location: Zhuhai, Guangdong</div>
+                                    </div>
 
-                                        <!-- 第三张图片文字 -->
-                                        <template v-if="i === 3">
-                                            <div class="works-title">Rich resources on B-side and G-side</div>
-                                            <div class="works-project">Project: Jiuzhou Bay No. 1 (Nezha)</div>
-                                            <div class="works-date">Landing Date: October 2020</div>
-                                            <div class="works-location">Location: Zhuhai, Guangdong</div>
-                                        </template>
+                                    <!-- 第四张图片文字 -->
+                                    <div v-if="i === 4" class="works-text-overlay">
+                                        <div class="works-number">4</div>
+                                        <div class="works-title">Pioneer of consumer transportation</div>
+                                        <div class="works-project">Project: Kun</div>
+                                        <div class="works-date">Landing Date: April 2024</div>
+                                        <div class="works-location">Location: Weihai, Shandong</div>
+                                    </div>
 
-                                        <!-- 第四张图片文字 -->
-                                        <template v-if="i === 4">
-                                            <div class="works-title">Pioneer of consumer transportation</div>
-                                            <div class="works-project">Project: Kun</div>
-                                            <div class="works-date">Landing Date: April 2024</div>
-                                            <div class="works-location">Location: Weihai, Shandong</div>
-                                        </template>
+                                    <!-- 第五张图片文字 -->
+                                    <div v-if="i === 5" class="works-text-overlay">
+                                        <div class="works-number">5</div>
+                                        <div class="works-title">Complete domestic and overseas channel network</div>
+                                        <div class="works-project">Project: ADAMAS</div>
+                                        <div class="works-date">Launch Date: March 2025</div>
+                                        <div class="works-location">Location: Ho Chi Minh City, Vietnam</div>
+                                    </div>
 
-                                        <!-- 第五张图片文字 -->
-                                        <template v-if="i === 5">
-                                            <div class="works-title">Complete domestic and overseas channel network</div>
-                                            <div class="works-project">Project: ADAMAS</div>
-                                            <div class="works-date">Launch Date: March 2025</div>
-                                            <div class="works-location">Location: Ho Chi Minh City, Vietnam</div>
-                                        </template>
-
-                                        <!-- 第六张图片文字 -->
-                                        <template v-if="i === 6">
-                                            <div class="works-title">Designer of the country's first smart yacht</div>
-                                            <div class="works-project">Project: Smart Boat No. 1</div>
-                                            <div class="works-date">Landing Date: October 2022</div>
-                                            <div class="works-location">Location: Guangdong-Hong Kong-Macao Greater Bay Area</div>
-                                            <div class="works-extra">"Smart Yacht Interior Design Technology Research Report"</div>
-                                            <div class="works-extra">"Smart Yacht Independent Development Project"</div>
-                                            <div class="works-extra">"Research on Exterior and Interior Design Technology of Medium-Sized Luxury Cruise Ships"</div>
-                                            <div class="works-extra">"2023 Forward-Looking Research Project"</div>
-                                        </template>
+                                    <!-- 第六张图片文字 -->
+                                    <div v-if="i === 6" class="works-text-overlay">
+                                        <div class="works-number">6</div>
+                                        <div class="works-title">Designer of the country's first smart yacht</div>
+                                        <div class="works-project">Project: Smart Boat No. 1</div>
+                                        <div class="works-date">Landing Date: October 2022</div>
+                                        <div class="works-location">Location: Guangdong-Hong Kong-Macao Greater Bay Area
+                                        </div>
+                                        <div class="works-extra">"Smart Yacht Interior Design Technology Research
+                                            Report"</div>
+                                        <div class="works-extra">"Smart Yacht Independent Development Project"</div>
+                                        <div class="works-extra">"Research on Exterior and Interior Design Technology of
+                                            Medium-Sized Luxury Cruise Ships"</div>
+                                        <div class="works-extra">"2023 Forward-Looking Research Project"</div>
                                     </div>
                                 </div>
                             </template>
@@ -574,151 +564,10 @@ const selectMember = (index: number) => {
     updateScrollPosition(index)
 }
 
-// 滑动切换成员（基于当前位置，避免回退）
-const swipeToMember = (direction: 'next' | 'previous', currentPosition?: number) => {
-    const groupLength = teamMembers.value.length * CARD_TOTAL_WIDTH
-    const lastIndex = teamMembers.value.length - 1
-    const currentIndex = selectedIndex.value
-    
-    // 使用传入的当前位置，如果没有则使用 scrollPosition
-    const actualCurrentPosition = currentPosition ?? scrollPosition.value
-    
-    let targetIndex: number
-    let targetPosition: number
-    
-    if (direction === 'next') {
-        if (currentIndex === lastIndex) {
-            // 从最后一张切换到第一张（循环）
-            targetIndex = 0
-            targetPosition = groupLength // 先移动到第二组的第一张
-        } else {
-            targetIndex = currentIndex + 1
-            // 基于实际当前位置计算目标位置，确保平滑过渡
-            targetPosition = targetIndex * CARD_TOTAL_WIDTH
-        }
-    } else {
-        // previous
-        if (currentIndex === 0) {
-            // 从第一张切换到最后一张（循环）
-            targetIndex = lastIndex
-            targetPosition = groupLength + lastIndex * CARD_TOTAL_WIDTH // 先移动到第二组的最后一张
-        } else {
-            targetIndex = currentIndex - 1
-            // 基于实际当前位置计算目标位置，确保平滑过渡
-            targetPosition = targetIndex * CARD_TOTAL_WIDTH
-        }
-    }
-    
-    selectedIndex.value = targetIndex
-    
-    // 如果是循环切换，需要特殊处理
-    if ((direction === 'next' && currentIndex === lastIndex) || 
-        (direction === 'previous' && currentIndex === 0)) {
-        const container = document.querySelector('.flex.transition-transform') as HTMLElement
-        
-        // 先平滑过渡到第二组
-        scrollPosition.value = targetPosition
-        
-        // 等待动画完成后，重置到第一组对应位置
-        setTimeout(() => {
-            if (container) {
-                container.style.transition = 'none'
-                container.style.transform = ''
-            }
-            // 重置到第一组对应位置
-            scrollPosition.value = targetIndex * CARD_TOTAL_WIDTH
-            setTimeout(() => {
-                if (container) {
-                    container.style.transition = 'transform 500ms ease-in-out'
-                }
-            }, 50)
-        }, 500)
-    } else {
-        // 正常切换，直接更新到目标位置
-        scrollPosition.value = targetPosition
-    }
-}
-
 // 处理卡片点击
 const handleCardClick = (index: number) => {
-    selectMemberByClick(index)
+    selectMember(index)
 }
-
-// 选择成员（点击方式）
-const selectMemberByClick = (index: number) => {
-    const currentScrollPos = scrollPosition.value
-    const groupLength = teamMembers.value.length * CARD_TOTAL_WIDTH
-    const lastIndex = teamMembers.value.length - 1
-    
-    // 判断当前在第一组还是第二组（使用更精确的判断，避免边界问题）
-    const isInFirstGroup = currentScrollPos <= groupLength * 0.5
-    
-    // 如果在第二组，点击时跳回第一组对应位置（瞬间跳转，不需要动画）
-    if (!isInFirstGroup) {
-        selectedIndex.value = index
-        scrollPosition.value = index * CARD_TOTAL_WIDTH
-        const container = document.querySelector('.flex.transition-transform') as HTMLElement
-        if (container) {
-            // 瞬间跳转，保持 transition 禁用状态
-            container.style.transition = 'none'
-            container.style.transform = `translateX(-${index * CARD_TOTAL_WIDTH}px)`
-            // 在下一个 tick 恢复过渡效果，但不移除内联样式，保持当前位置
-            setTimeout(() => {
-                if (container) {
-                    container.style.transition = 'transform 500ms ease-in-out'
-                }
-            }, 50)
-        }
-        return
-    }
-    
-    // 在第一组内处理循环效果
-    // 情况1：从第一组最后一张切换到第一张，实现循环效果（从左向右滑动）
-    if (selectedIndex.value === lastIndex && index === 0) {
-        selectedIndex.value = 0
-        
-        const container = document.querySelector('.flex.transition-transform') as HTMLElement
-        if (container) {
-            // 先平滑过渡到第二组的第一张位置
-            scrollPosition.value = groupLength
-            
-            // 等待第一个动画完成后，再平滑滚动回第一组的第一张
-            setTimeout(() => {
-                if (container) {
-                    // 清除内联 transform（如果有），让 Vue 的 :style 绑定完全接管
-                    container.style.transform = ''
-                    // 平滑滚动回第一组的第一张
-                    scrollPosition.value = 0
-                }
-            }, 500) // 等待第一个过渡动画完成（500ms）
-        }
-    }
-    // 情况2：从第一组第一张切换到最后一张，实现反向循环效果（从右向左滑动）
-    else if (selectedIndex.value === 0 && index === lastIndex) {
-        selectedIndex.value = lastIndex
-        
-        const container = document.querySelector('.flex.transition-transform') as HTMLElement
-        if (container) {
-            // 先平滑过渡到第二组的最后一张位置
-            scrollPosition.value = groupLength + lastIndex * CARD_TOTAL_WIDTH
-            
-            // 等待第一个动画完成后，再平滑滚动回第一组的最后一张
-            setTimeout(() => {
-                if (container) {
-                    // 清除内联 transform（如果有），让 Vue 的 :style 绑定完全接管
-                    container.style.transform = ''
-                    // 平滑滚动回第一组的最后一张
-                    scrollPosition.value = lastIndex * CARD_TOTAL_WIDTH
-                }
-            }, 500) // 等待第一个过渡动画完成（500ms）
-        }
-    }
-    // 其他情况：在第一组内正常切换
-    else {
-        selectMember(index)
-    }
-}
-
 
 // 更新滚动位置
 const updateScrollPosition = (index: number) => {
@@ -1149,27 +998,9 @@ button {
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 12px;
-    padding: 12px;
+    padding: 20px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
-}
-
-@media (min-width: 768px) {
-    .info-frame {
-        padding: 16px;
-    }
-}
-
-@media (min-width: 1024px) {
-    .info-frame {
-        padding: 20px;
-    }
-}
-
-@media (min-width: 1536px) {
-    .info-frame {
-        padding: 20px;
-    }
 }
 
 .info-frame:hover {
@@ -1180,6 +1011,7 @@ button {
 }
 
 .info-title {
+    font-size: 18px;
     font-weight: 500;
     color: #ffffff;
     text-align: center;
@@ -1470,15 +1302,13 @@ button {
 .works-image-item {
     position: relative;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     background: rgba(0, 0, 0, 0.1);
     border-radius: 0;
     overflow: hidden;
     transition: all 0.3s ease;
     cursor: pointer;
-    height: 100%;
 }
 
 .works-image-item:hover {
@@ -1487,19 +1317,9 @@ button {
     box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
 }
 
-.works-image-wrapper {
-    position: relative;
-    width: 100%;
-    flex: 1;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    overflow: hidden;
-}
-
 .works-image {
-    width: 100%;
-    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
     object-fit: contain;
     transition: all 0.3s ease;
 }
@@ -1508,34 +1328,40 @@ button {
     transform: scale(1.05);
 }
 
-.works-number {
-    color: #ffffff;
-    font-size: 18px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 8px;
-}
-
-/* 文字内容区域 */
-.works-text-content {
+/* 简洁的文字覆盖层 */
+.works-text-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     text-align: center;
     color: white;
-    padding: 15px 10px;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.3);
+    padding: 50px 10px 10px 10px;
+}
+
+.works-number {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
 }
 
 .works-title {
     font-size: 12px;
     margin-bottom: 6px;
     line-height: 1.2;
-    font-weight: 600;
 }
 
 .works-project,
@@ -1543,15 +1369,13 @@ button {
 .works-location {
     font-size: 10px;
     margin-bottom: 3px;
-    opacity: 0.9;
 }
 
 .works-extra {
     font-size: 8px;
-    margin-bottom: 2px;
+    margin-bottom: 1px;
     font-style: italic;
     color: white;
-    opacity: 0.8;
 }
 
 /* 响应式适配 */
@@ -1595,61 +1419,6 @@ button {
         min-width: 0;
         flex-shrink: 0;
     }
-
-    .works-text-content {
-        padding: 10px 5px;
-    }
-
-    .works-title {
-        font-size: 10px;
-        margin-bottom: 4px;
-    }
-
-    .works-project,
-    .works-date,
-    .works-location {
-        font-size: 8px;
-        margin-bottom: 2px;
-    }
-
-    .works-extra {
-        font-size: 7px;
-        margin-bottom: 1px;
-    }
-}
-
-/* 防止文本溢出和滚动条 */
-.break-words {
-    word-break: break-word;
-    overflow-wrap: break-word;
-}
-
-.overflow-wrap-anywhere {
-    overflow-wrap: anywhere;
-    word-break: break-word;
-}
-
-/* 确保flex容器不会溢出 */
-.min-w-0 {
-    min-width: 0;
-}
-
-/* 拖拽时禁用过渡效果 */
-.transition-none {
-    transition: none !important;
-}
-
-/* 轮播容器样式 */
-.carousel-container {
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    cursor: grab;
-}
-
-.carousel-container:active {
-    cursor: grabbing;
 }
 
 </style>

@@ -36,75 +36,621 @@
 					height: lineHeight
 				}"></div>
 
-				<div class="left-nav-item" ref="firstNavItemRef"
-					:class="{ active: activeNavItem === 'market-research' }"
-					@click="setActiveNavItem('market-research')">
-					<span class="nav-text">市场调查</span>
-				</div>
-				<div class="left-nav-item" :class="{ active: activeNavItem === 'advantages' }"
+				<div class="left-nav-item" ref="firstNavItemRef" :class="{ active: activeNavItem === 'advantages' }"
 					@click="setActiveNavItem('advantages')">
-					<span class="nav-text">水翼艇优势</span>
+					<span class="nav-text">Hydrofoil Advantages</span>
 				</div>
-				<div class="left-nav-item" ref="lastNavItemRef" :class="{ active: activeNavItem === 'pain-points' }"
+				<div class="left-nav-item" :class="{ active: activeNavItem === 'pain-points' }"
 					@click="setActiveNavItem('pain-points')">
-					<span class="nav-text">传统电动船舶痛点</span>
+					<span class="nav-text">Traditional Electric Boat Pain Points</span>
+				</div>
+				<div class="left-nav-item" ref="lastNavItemRef"
+					:class="{ active: activeNavItem === 'competitor-analysis' }"
+					@click="setActiveNavItem('competitor-analysis')">
+					<span class="nav-text">Competitor Analysis</span>
 				</div>
 			</div>
 		</div>
 
-		<!-- 市场调查弹窗 -->
-		<div v-if="activeNavItem === 'market-research'" class="modal-overlay" @click="closeMarketResearchModal">
+		<!-- 传统电动船舶痛点弹窗 -->
+		<div v-if="activeNavItem === 'pain-points'" class="modal-overlay" @click="closePainPointsModal">
 			<div class="market-research-modal" @click.stop>
+				<!-- 背景图片 -->
+				<div class="pain-points-background"></div>
 				<!-- 关闭按钮 -->
-				<button class="modal-close-btn" @click="closeMarketResearchModal">×</button>
+
 
 				<!-- 弹窗标题 -->
-				<div class="modal-title">市场调查</div>
+				<div class="modal-title flex justify-between">Traditional Electric Boat Pain Points
+					<button class="modal-close-btn" @click="closePainPointsModal">×</button>
+				</div>
+
+				<!-- 弹窗内容 -->
+				<div class="modal-content-wrapper">
+					<!-- 左侧空白区域 -->
+					<div class="modal-left-panel" style="visibility: hidden;"></div>
+
+					<!-- 右侧内容区域 -->
+					<div class="modal-right-panel">
+						<div class="panel-header-section">
+							<div class="panel-header">Traditional Electric Boat Pain Points</div>
+						</div>
+						<!-- 内容 -->
+						<div class="panel-content">
+							<div class="panel-content-inner">
+								<!-- 结论部分 -->
+								<div class="panel-section">
+									<div class="conclusion-title">Conclusion:</div>
+									<div class="conclusion-content">
+										<div class="conclusion-item">
+											<span class="conclusion-number">1.</span>
+											<span class="conclusion-text">Weight & Resistance: Electric boats have higher values due to battery pack weight and hull design;</span>
+										</div>
+										<div class="conclusion-item">
+											<span class="conclusion-number">2.</span>
+											<span
+												class="conclusion-text">Size Requirements: To compensate for energy density disadvantages, electric boats need larger hulls to accommodate more batteries or optimize hydrodynamic performance.</span>
+										</div>
+									</div>
+								</div>
+
+								<!-- 常规船体 VS 水翼艇对比 -->
+								<div class="panel-section">
+									<div class="comparison-title">Conventional Hull vs Hydrofoil</div>
+									<div class="comparison-bars">
+										<div class="comparison-bar-item">
+											<div class="comparison-bar">
+												<div class="comparison-bar-fill" style="width: 72.8%"></div>
+												<span class="comparison-bar-text">Wetted area reduction: 72.8%</span>
+											</div>
+										</div>
+										<div class="comparison-bar-item">
+											<div class="comparison-bar">
+												<div class="comparison-bar-fill" style="width: 63.1%"></div>
+												<span class="comparison-bar-text">Frictional resistance reduction: 63.1%</span>
+											</div>
+										</div>
+										<div class="comparison-bar-item">
+											<div class="comparison-bar">
+												<div class="comparison-bar-fill" style="width: 63.2%"></div>
+												<span class="comparison-bar-text">Maximum energy consumption reduction: 63.2%</span>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<!-- 解决办法 -->
+								<div class="panel-section">
+									<div class="solutions-title">Solutions:</div>
+									<div class="solutions-grid">
+										<div class="solution-item">■ Controllable Cost</div>
+										<div class="solution-item">■ High Efficiency & Energy Saving</div>
+										<div class="solution-item">■ Quick Profitability</div>
+										<div class="solution-item">■ Policy Avoidance</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 竞品分析弹窗 -->
+		<div v-if="activeNavItem === 'competitor-analysis'" class="modal-overlay" @click="closeCompetitorAnalysisModal">
+			<div class="market-research-modal" @click.stop>
+				<!-- 弹窗标题 -->
+				<div class="modal-title flex justify-between">Competitor Analysis
+					<button class="modal-close-btn" @click="closeCompetitorAnalysisModal">×</button>
+				</div>
+
+				<!-- 弹窗内容 -->
+				<div class="modal-content-wrapper competitor-analysis-wrapper">
+					<!-- Tab切换 -->
+					<div class="competitor-tabs">
+						<button class="competitor-tab" :class="{ active: competitorTab === '10-15w' }"
+							@click="setCompetitorTab('10-15w')">
+							<!-- Hydrofoil 10-15w Euro -->
+							 H2o vs 10~15w Euro
+						</button>
+						<button class="competitor-tab" :class="{ active: competitorTab === '18w' }"
+							@click="setCompetitorTab('18w')">
+							<!-- Hydrofoil 18w Euro -->
+							 H2o vs 18w Euro
+						</button>
+						<button class="competitor-tab" :class="{ active: competitorTab === 'vs-others' }"
+							@click="setCompetitorTab('vs-others')">
+							<!-- VS Other Hydrofoils -->
+							 H2o vs other
+						</button>
+					</div>
+
+					<!-- Tab内容 -->
+					<div class="competitor-tab-content">
+					<!-- 水翼艇10-15w欧元 -->
+					<div v-if="competitorTab === '10-15w'" class="tab-panel three-col-tab">
+							<!-- 产品图片 -->
+							<div class="competitor-grid">
+								<!-- 空白占位符 -->
+								<div class="competitor-spacer"></div>
+								
+								<!-- "御"水翼艇 -->
+								<div class="competitor-item">
+									<div class="competitor-image-wrapper">
+										<img src="../assets/shuiyiting.png" alt="御水翼艇" class="competitor-image" />
+									</div>
+								</div>
+
+							<!-- Alfastreet 23 Cabin EVO Electric -->
+							<div class="competitor-item">
+								<div class="competitor-image-wrapper">
+									<img src="../assets/bb1.png" alt="Alfastreet 23 Cabin EVO Electric" class="competitor-image" />
+								</div>
+							</div>
+
+							<!-- X-Shore 1 -->
+							<div class="competitor-item">
+								<div class="competitor-image-wrapper">
+									<img src="../assets/bb2.png" alt="X-Shore 1" class="competitor-image" />
+								</div>
+							</div>
+							</div>
+
+							<!-- 性能对比表格 -->
+							<div class="comparison-table-wrapper">
+								<table class="comparison-table">
+									<tbody>
+										<tr>
+											<td>Speed</td>
+											<td>40</td>
+											<td>33</td>
+											<td>55</td>
+										</tr>
+										<tr>
+											<td>Range at Full Speed (km)</td>
+											<td>40</td>
+											<td>30</td>
+											<td>33</td>
+										</tr>
+										<tr>
+											<td>Power-to-Speed Ratio (kW/kn)</td>
+											<td>1:1</td>
+											<td>2:1</td>
+											<td>6:1</td>
+										</tr>
+										<tr>
+											<td>Battery Weight</td>
+											<td>~220kg</td>
+											<td>~300kg</td>
+											<td>~500kg</td>
+										</tr>
+										<tr>
+											<td>Motor Power</td>
+											<td>40kw</td>
+											<td>30kw</td>
+											<td>120kw</td>
+										</tr>
+										<tr>
+											<td>Max Occupancy</td>
+											<td>5</td>
+											<td>8</td>
+											<td>5</td>
+										</tr>
+										<tr>
+											<td>Price (New Boat)</td>
+											<td>€150,000</td>
+											<td>€134,800</td>
+											<td>€100,000 ~ €155,900 （不含增值税） </td>
+										</tr>
+										<tr>
+											<td>Comfort</td>
+											<td>
+												<div class="stars">★★★★</div>
+											</td>
+											<td>
+												<div class="stars">★★★</div>
+											</td>
+											<td>
+												<div class="stars">★★★</div>
+											</td>
+										</tr>
+										<tr>
+											<td>Battery Capacity</td>
+											<td>40kwh</td>
+											<td>30kwh</td>
+											<td>63kwh</td>
+										</tr>
+										<tr>
+											<td>Exterior Design</td>
+											<td>
+												<div class="stars">★★★★★</div>
+											</td>
+											<td>
+												<div class="stars">★★★</div>
+											</td>
+											<td>
+												<div class="stars">★★</div>
+											</td>
+										</tr>
+										<tr>
+											<td>Functionality / Intelligence</td>
+											<td>
+												<div class="stars">★★★★★</div>
+											</td>
+											<td>
+												<div class="stars">★★</div>
+											</td>
+											<td>
+												<div class="stars">★★★</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+					<!-- 水翼艇18w欧元 -->
+					<div v-if="competitorTab === '18w'" class="tab-panel four-col-tab">
+							<!-- 产品图片 -->
+							<div class="competitor-grid">
+								<!-- 空白占位符 -->
+								<div class="competitor-spacer"></div>
+								
+								<!-- "御"水翼艇 -->
+								<div class="competitor-item">
+									<div class="competitor-image-wrapper">
+										<img src="../assets/shuiyiting.png" alt="御水翼艇" class="competitor-image" />
+									</div>
+								</div>
+
+								<!-- Q-Yachts Q30 -->
+								<div class="competitor-item">
+									<div class="competitor-image-wrapper">
+										<img src="../assets/other1.png" alt="Q-Yachts Q30" class="competitor-image" />
+									</div>
+								</div>
+
+								<!-- RAND Spirit 25 Electric -->
+								<div class="competitor-item">
+									<div class="competitor-image-wrapper">
+										<img src="../assets/other2.png" alt="RAND Spirit 25 Electric" class="competitor-image" />
+									</div>
+								</div>
+
+								<!-- Frauscher 740 Mirage Air -->
+								<div class="competitor-item">
+									<div class="competitor-image-wrapper">
+										<img src="../assets/other3.png" alt="Frauscher 740 Mirage Air" class="competitor-image" />
+									</div>
+								</div>
+							</div>
+
+							<!-- 性能对比表格 -->
+							<div class="comparison-table-wrapper">
+								<table class="comparison-table">
+									<tbody>
+										<tr>
+											<td>Speed</td>
+											<td>40</td>
+											<td>25.9</td>
+											<td>51</td>
+											<td>26</td>
+										</tr>
+										<tr>
+											<td>Range at Full Speed (km)</td>
+											<td>40</td>
+											<td>38.85</td>
+											<td>23</td>
+											<td>19</td>
+										</tr>
+										<tr>
+											<td>Power-to-Speed Ratio (kW/kn)</td>
+											<td>1:1</td>
+											<td>2:1</td>
+											<td>3:1</td>
+											<td>2:1</td>
+										</tr>
+										<tr>
+											<td>Battery Weight</td>
+											<td>~220kg</td>
+											<td>~240kg</td>
+											<td>~625kg</td>
+											<td>~320kg</td>
+										</tr>
+										<tr>
+											<td>Motor Power</td>
+											<td>40kw</td>
+											<td>2*10kw</td>
+											<td>170kw</td>
+											<td>60kw</td>
+										</tr>
+										<tr>
+											<td>Max Occupancy</td>
+											<td>5</td>
+											<td>8</td>
+											<td>6</td>
+											<td>7</td>
+										</tr>
+										<tr>
+											<td>Price (New Boat) (€)</td>
+											<td>€150,000</td>
+											<td>€183,000</td>
+											<td>€185,000 from</td>
+											<td>€232,720 from (excl. VAT)</td>
+										</tr>
+										<tr>
+											<td>Comfort</td>
+											<td>
+												<div class="stars">★★★★</div>
+											</td>
+											<td>
+												<div class="stars">★★★</div>
+											</td>
+											<td>
+												<div class="stars">★★★</div>
+											</td>
+											<td>
+												<div class="stars">★★★</div>
+											</td>
+										</tr>
+										<tr>
+											<td>Battery Capacity</td>
+											<td>40kwh</td>
+											<td>30kwh</td>
+											<td>63 kWh Lithium Battery</td>
+											<td>40kWh</td>
+										</tr>
+										<tr>
+											<td>Exterior Design</td>
+											<td>
+												<div class="stars">★★★★★</div>
+											</td>
+											<td>
+												<div class="stars">★★★★</div>
+											</td>
+											<td>
+												<div class="stars">★★★</div>
+											</td>
+											<td>
+												<div class="stars">★★★★</div>
+											</td>
+										</tr>
+										<tr>
+											<td>Functionality / Intelligence</td>
+											<td>
+												<div class="stars">★★★★★</div>
+											</td>
+											<td>
+												<div class="stars">★★★</div>
+											</td>
+											<td>
+												<div class="stars">★★</div>
+											</td>
+											<td>
+												<div class="stars">★★★★</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+						<!-- VS 其他水翼艇 -->
+						<div v-if="competitorTab === 'vs-others'" class="tab-panel vs-others-tab">
+							<!-- <div class="competitor-title">5米级水翼艇颠覆性重构小艇性能天花板</div> -->
+							<div class="competitor-grid">
+								<!-- 空白占位符，与表格第一列对齐 -->
+								<div class="competitor-spacer"></div>
+
+								<!-- 我们的产品 -->
+								<div class="competitor-item">
+									<div class="competitor-image-wrapper">
+										<img src="../assets/shuiyiting.png" alt="御水翼艇" class="competitor-image" />
+									</div>
+								</div>
+
+								<!-- 友商A -->
+								<div class="competitor-item">
+									<div class="competitor-image-wrapper">
+										<img src="../assets/other1.png" alt="友商A" class="competitor-image" />
+									</div>
+								</div>
+
+								<!-- 友商B -->
+								<div class="competitor-item">
+									<div class="competitor-image-wrapper">
+										<img src="../assets/other2.png" alt="友商B" class="competitor-image" />
+									</div>
+								</div>
+
+								<!-- 友商C -->
+								<div class="competitor-item">
+									<div class="competitor-image-wrapper">
+										<img src="../assets/other3.png" alt="友商C" class="competitor-image" />
+									</div>
+								</div>
+
+							<!-- 友商D -->
+							<div class="competitor-item">
+								<div class="competitor-image-wrapper">
+									<img src="../assets/other4.png" alt="友商D" class="competitor-image" />
+								</div>
+							</div>
+							</div>
+
+							<!-- 性能对比表格 -->
+							<div class="comparison-table-wrapper">
+								<table class="comparison-table">
+									<tbody>
+										<tr>
+											<td>Speed</td>
+											<td>40KM/H</td>
+											<td>33KM/H</td>
+											<td>55KM/H</td>
+											<td>25.9KM/H</td>
+											<td>51KM/H</td>
+											<!-- <td>26KM/H</td> -->
+										</tr>
+										<tr>
+											<td>Range at Full Speed (km)</td>
+											<td>40</td>
+											<td>30</td>
+											<td>33</td>
+											<td>38.85</td>
+											<td>23</td>
+											<!-- <td>19</td> -->
+										</tr>
+										<tr>
+											<td>Power-to-Speed Ratio (kW / kn)</td>
+											<td>1:1</td>
+											<td>1.7:1</td>
+											<td>1:6</td>
+											<td>2:1</td>
+											<td>3:1</td>
+											<!-- <td>2:1</td> -->
+										</tr>
+										<tr>
+											<td>Battery Weight</td>
+											<td>~220kg</td>
+											<td>~300kg</td>
+											<td>~500kg</td>
+											<td>~240kg</td>
+											<td>~625kg</td>
+											<!-- <td>~320kg</td> -->
+										</tr>
+										<tr>
+											<td>Motor Power</td>
+											<td>40kw</td>
+											<td>30kw</td>
+											<td>120kw</td>
+											<td>2*10kw</td>
+											<td>170kw</td>
+											<!-- <td>60kw</td> -->
+										</tr>
+										<tr>
+											<td>Max Occupancy</td>
+											<td>5</td>
+											<td>8</td>
+											<td>5</td>
+											<td>8</td>
+											<td>6</td>
+											<!-- <td>7</td> -->
+										</tr>
+										<tr>
+											<td>Price (New Boat) (€)</td>
+											<td>€150,000</td>
+											<td>€134,800</td>
+											<td>€100,000 ~€155,900</td>
+											<td>€183,000</td>
+											<td>€185,000 from</td>
+											<!-- <td>€232 720</td> -->
+										</tr>
+										<tr>
+											<td>User-Friendliness</td>
+											<td>
+												<!-- 4星 -->
+												<div class="stars">★★★★</div>
+											</td>
+											<td>
+												<!-- 3.星 -->
+												<div class="stars">★★★</div>
+											</td>
+											<td>
+												<!-- 3.星  -->
+												<div class="stars">★★★</div>
+											</td>
+											<td>
+												<div class="stars">★★★★</div>
+											</td>
+											<td>
+												<div class="stars">★★</div>
+											</td>
+											<!-- <td>
+												<div class="stars">★★</div>
+											</td> -->
+										</tr>
+									</tbody>
+								</table>
+							</div>
+
+							<!-- 结论部分 -->
+							<div class="competitor-conclusion">
+								<div class="conclusion-title">Conclusion:</div>
+								<div class="conclusion-content">
+									<div class="conclusion-item">
+										<span class="conclusion-bullet">•</span>
+										<span class="conclusion-text">Compared to traditional electric boats in the 100,000 Euro range, the "YU" hydrofoil has leading advantages in core performance and sailing experience;</span>
+									</div>
+									<div class="conclusion-item">
+										<span class="conclusion-bullet">•</span>
+										<span class="conclusion-text">In terms of energy efficiency, quietness, and comfort, it has reached the level of products in the 170,000 Euro range;</span>
+									</div>
+									<div class="conclusion-item">
+										<span class="conclusion-bullet">•</span>
+										<span
+											class="conclusion-text">Compared to other electric yachts on the market that also use hydrofoil technology, it highlights its more competitive price while maintaining core performance comparable to more expensive models.</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 水翼艇优势弹窗 -->
+		<div v-if="activeNavItem === 'advantages'" class="modal-overlay" @click="closeAdvantagesModal">
+			<div class="market-research-modal" @click.stop>
+				<!-- 关闭按钮 -->
+				<button class="modal-close-btn" @click="closeAdvantagesModal">×</button>
+
+				<!-- 弹窗标题 -->
+				<div class="modal-title">Hydrofoil Advantages</div>
 
 				<!-- 弹窗内容 -->
 				<div class="modal-content-wrapper">
 					<!-- 左侧面板：水翼艇优势 -->
 					<div class="modal-left-panel">
-						<div class="panel-header">水翼艇优势</div>
+						<div class="panel-header">Hydrofoil Advantages</div>
 
 						<!-- 第一部分：什么是水翼船 -->
 						<div class="panel-section">
-							<div class="section-title">1. 什么是水翼船?</div>
+							<div class="section-title">1. What is a Hydrofoil?</div>
 							<div class="section-text">
-								水翼船是一种"水上飞机"般的船舶。当加速时，船体下方的水翼产生升力，将整个船体抬离水面，只有细长的水翼支柱接触水面。这种设计大大减少了水阻力，显著提高了航行速度和效率。
+								A hydrofoil is a boat-like "seaplane" vessel. When accelerating, the hydrofoils beneath the hull generate lift, lifting the entire hull out of the water, with only slender hydrofoil struts touching the water. This design significantly reduces water resistance and dramatically improves sailing speed and efficiency.
 							</div>
 						</div>
 
 						<!-- 第二部分：性能对比 -->
 						<div class="panel-section">
-							<div class="section-title">2. 水翼艇相比传统船舶性能如何?</div>
+							<div class="section-title">2. How does the hydrofoil perform compared to traditional boats?</div>
 							<div class="performance-list">
 								<div class="performance-item">
-									<div class="performance-label">阻力可降低80%</div>
+									<div class="performance-label">Drag reduction: up to 80%</div>
 									<div class="performance-bar">
 										<div class="performance-bar-fill red-bar" style="width: 100%"></div>
 									</div>
 								</div>
 								<div class="performance-item">
-									<div class="performance-label">稳性可提升30%-70%</div>
+									<div class="performance-label">Stability improvement: 30%-70%</div>
 									<div class="performance-bar">
 										<div class="performance-bar-fill orange-bar" style="width: 70%"></div>
 									</div>
 								</div>
 								<div class="performance-item">
-									<div class="performance-label">航速可提升30%-50%</div>
+									<div class="performance-label">Speed increase: 30%-50%</div>
 									<div class="performance-bar">
 										<div class="performance-bar-fill orange-bar" style="width: 50%"></div>
 									</div>
 								</div>
 								<div class="performance-item">
-									<div class="performance-label">能耗可降低30%-50%</div>
+									<div class="performance-label">Energy consumption reduction: 30%-50%</div>
 									<div class="performance-bar">
 										<div class="performance-bar-fill orange-bar" style="width: 50%"></div>
 									</div>
 								</div>
 								<div class="performance-item">
-									<div class="performance-label">推进效率可提升20%-40%</div>
+									<div class="performance-label">Propulsion efficiency increase: 20%-40%</div>
 									<div class="performance-bar">
 										<div class="performance-bar-fill orange-bar" style="width: 40%"></div>
 									</div>
@@ -117,7 +663,7 @@
 					<div class="modal-right-panel">
 						<!-- 标题区域 -->
 						<div class="panel-header-section">
-							<div class="panel-header">水翼艇VS传统船舶</div>
+							<div class="panel-header">Hydrofoil vs Traditional Boat</div>
 						</div>
 						<!-- 内容区域 -->
 						<div class="panel-content">
@@ -261,9 +807,25 @@ const setActiveNavItem = (item: string) => {
 	activeNavItem.value = activeNavItem.value === item ? null : item
 }
 
-// 关闭市场调查弹窗
-const closeMarketResearchModal = () => {
+// 关闭水翼艇优势弹窗
+const closeAdvantagesModal = () => {
 	activeNavItem.value = null
+}
+
+// 关闭传统电动船舶痛点弹窗
+const closePainPointsModal = () => {
+	activeNavItem.value = null
+}
+
+// 关闭竞品分析弹窗
+const closeCompetitorAnalysisModal = () => {
+	activeNavItem.value = null
+}
+
+// 竞品分析tab切换
+const competitorTab = ref('vs-others')
+const setCompetitorTab = (tab: string) => {
+	competitorTab.value = tab
 }
 
 // 组件挂载后计算连接线位置
@@ -706,9 +1268,13 @@ onUnmounted(() => {
 	right: 15px;
 	width: 32px;
 	height: 32px;
+	min-width: 32px;
+	min-height: 32px;
+	max-width: 32px;
+	max-height: 32px;
 	background: rgba(255, 255, 255, 0.1);
 	border: 1px solid rgba(255, 255, 255, 0.3);
-	border-radius: 50%;
+	border-radius: 50% !important;
 	color: #FFFFFF;
 	font-size: 24px;
 	cursor: pointer;
@@ -717,11 +1283,16 @@ onUnmounted(() => {
 	justify-content: center;
 	transition: all 0.3s ease;
 	z-index: 10;
+	line-height: 1;
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
 }
 
 .modal-close-btn:hover {
 	background: rgba(255, 255, 255, 0.2);
 	transform: scale(1.1);
+	border-radius: 50% !important;
 }
 
 .modal-title {
@@ -734,7 +1305,7 @@ onUnmounted(() => {
 
 .modal-content-wrapper {
 	display: grid;
-	grid-template-columns: 1fr 1fr;
+	grid-template-columns: 2fr 1fr;
 	gap: 30px;
 	padding: 25px 40px 30px 40px;
 	height: calc(100vh - 100px);
@@ -783,6 +1354,7 @@ onUnmounted(() => {
 	width: 100%;
 	height: 100%;
 	object-fit: contain;
+	object-position: center;
 	z-index: 0;
 }
 
@@ -803,7 +1375,8 @@ onUnmounted(() => {
 	display: flex;
 	flex-direction: column;
 	gap: 18px;
-	height: 100%;
+	min-height: 0;
+	overflow-y: auto;
 }
 
 .panel-header {
@@ -818,6 +1391,7 @@ onUnmounted(() => {
 	display: flex;
 	flex-direction: column;
 	gap: 12px;
+	width: 100%;
 }
 
 .section-title {
@@ -873,6 +1447,130 @@ onUnmounted(() => {
 
 .orange-bar {
 	background: linear-gradient(90deg, #FF6B35, #FF8C42);
+}
+
+/* 传统电动船舶痛点弹窗背景 */
+.pain-points-modal {
+	position: relative;
+	overflow: hidden;
+}
+
+.pain-points-background {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-image: url('../assets/electron_vs.png');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	z-index: 0;
+	opacity: 0.3;
+}
+
+.pain-points-modal .modal-title,
+.pain-points-modal .modal-content-wrapper,
+.pain-points-modal .modal-close-btn {
+	position: relative;
+	z-index: 2;
+}
+
+/* 传统电动船舶痛点样式 */
+.conclusion-title,
+.comparison-title,
+.solutions-title {
+	font-size: 20px;
+	font-weight: 700;
+	color: #FFFFFF;
+	margin-bottom: 20px;
+}
+
+.conclusion-content {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+
+.conclusion-item {
+	display: flex;
+	align-items: flex-start;
+	gap: 8px;
+	font-size: 14px;
+	line-height: 1.8;
+	color: rgba(255, 255, 255, 0.9);
+}
+
+.conclusion-number {
+	font-weight: 600;
+	color: #FFFFFF;
+	flex-shrink: 0;
+}
+
+.conclusion-text {
+	flex: 1;
+}
+
+.comparison-bars {
+	display: flex;
+	flex-direction: column;
+	gap: 18px;
+}
+
+.comparison-bar-item {
+	width: 100%;
+}
+
+.comparison-bar {
+	position: relative;
+	width: 100%;
+	height: 32px;
+	background: rgba(255, 255, 255, 0.1);
+	border-radius: 4px;
+	overflow: hidden;
+}
+
+.comparison-bar-fill {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100%;
+	background: linear-gradient(90deg, #FFD700, #FF6B35);
+	border-radius: 4px;
+	transition: width 0.6s ease;
+}
+
+.comparison-bar-text {
+	position: absolute;
+	left: 12px;
+	top: 50%;
+	transform: translateY(-50%);
+	font-size: 14px;
+	font-weight: 600;
+	color: #FFFFFF;
+	z-index: 2;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.solutions-grid {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 15px;
+	width: 100%;
+	max-width: 100%;
+}
+
+.solution-item {
+	background: #FF4444;
+	color: #FFFFFF;
+	padding: 15px 20px;
+	border-radius: 8px;
+	font-size: 16px;
+	font-weight: 500;
+	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .speed-section {
@@ -969,9 +1667,449 @@ onUnmounted(() => {
 	height: 120px;
 }
 
+/* 竞品分析弹窗样式 */
+.competitor-analysis-wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 30px 40px;
+	grid-template-columns: 1fr;
+	gap: 25px;
+}
+
+/* Tab切换样式 */
+.competitor-tabs {
+	display: flex;
+	gap: 10px;
+	width: 100%;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+	margin-bottom: 25px;
+}
+
+.competitor-tab {
+	background: transparent;
+	border: none;
+	padding: 12px 24px;
+	font-size: 14px;
+	font-weight: 500;
+	color: rgba(255, 255, 255, 0.6);
+	cursor: pointer;
+	transition: all 0.3s ease;
+	position: relative;
+	border-bottom: 2px solid transparent;
+	margin-bottom: -1px;
+}
+
+.competitor-tab:hover {
+	color: rgba(255, 255, 255, 0.8);
+}
+
+.competitor-tab.active {
+	color: #FF6B35;
+	border-bottom-color: #FF6B35;
+}
+
+.competitor-tab-content {
+	width: 100%;
+}
+
+.tab-panel {
+	width: 100%;
+}
+
+.tab-placeholder {
+	text-align: center;
+	padding: 60px 20px;
+	color: rgba(255, 255, 255, 0.5);
+	font-size: 16px;
+}
+
+.competitor-title {
+	background: #FF6B35;
+	color: #FFFFFF;
+	padding: 12px 40px;
+	border-radius: 12px;
+	font-size: 18px;
+	font-weight: 600;
+	text-align: center;
+	white-space: nowrap;
+}
+
+.competitor-grid {
+	display: grid;
+	grid-template-columns: 200px repeat(6, 1fr);
+	gap: 0;
+	width: 100%;
+	max-width: 100%;
+	align-items: stretch;
+}
+
+/* VS 其他水翼艇 tab的网格布局（5列） */
+.tab-panel.vs-others-tab .competitor-grid {
+	grid-template-columns: 200px repeat(5, 1fr);
+}
+
+/* 10-15w tab的网格布局（3列） */
+.tab-panel.three-col-tab .competitor-grid {
+	grid-template-columns: 200px repeat(3, 1fr);
+}
+
+/* 10-15w tab的图片缩小 */
+.tab-panel.three-col-tab .competitor-image-wrapper {
+	max-height: 150px;
+	height: 150px;
+}
+
+/* 18w tab的网格布局（4列） */
+.tab-panel.four-col-tab .competitor-grid {
+	grid-template-columns: 200px repeat(4, 1fr);
+}
+
+/* 18w tab的图片缩小 */
+.tab-panel.four-col-tab .competitor-image-wrapper {
+	max-height: 150px;
+	height: 150px;
+}
+
+.competitor-spacer {
+	/* 空白占位符，与表格第一列对齐 */
+	display: block;
+}
+
+.competitor-item {
+	grid-column: span 1;
+}
+
+.competitor-item {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background: transparent;
+	border: none;
+	border-radius: 0;
+	padding: 15px;
+	transition: all 0.3s ease;
+}
+
+.competitor-item:hover {
+	background: transparent;
+	transform: none;
+	box-shadow: none;
+}
+
+.competitor-image-wrapper {
+	width: 100%;
+	height: 100%;
+	min-height: 120px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: rgba(0, 0, 0, 0.3);
+	border-radius: 8px;
+	overflow: hidden;
+	padding: 10px;
+	box-sizing: border-box;
+}
+
+.competitor-image {
+	width: 100%;
+	height: 100%;
+	max-width: 100%;
+	max-height: 100%;
+	object-fit: contain;
+}
+
+.competitor-label {
+	font-size: 18px;
+	font-weight: 600;
+	color: #FFFFFF;
+	text-align: center;
+}
+
+@media (max-width: 1400px) {
+	.competitor-grid {
+		gap: 15px;
+	}
+
+	.competitor-image-wrapper {
+		height: 160px;
+	}
+
+	.competitor-item {
+		padding: 12px;
+	}
+}
+
+@media (max-width: 1024px) {
+	.competitor-grid {
+		grid-template-columns: repeat(5, 1fr);
+		gap: 12px;
+	}
+
+	.competitor-image-wrapper {
+		height: 140px;
+	}
+
+	.competitor-item {
+		padding: 10px;
+	}
+}
+
+@media (max-width: 768px) {
+	.competitor-grid {
+		grid-template-columns: repeat(5, 1fr);
+		gap: 8px;
+	}
+
+	.competitor-image-wrapper {
+		height: 120px;
+	}
+
+	.competitor-item {
+		padding: 8px;
+	}
+
+	.competitor-analysis-wrapper {
+		padding: 20px;
+	}
+}
+
+/* 性能对比表格样式 */
+.comparison-table-wrapper {
+	width: 100%;
+	max-width: 100%;
+	overflow-x: auto;
+	margin-top: 0;
+	display: flex;
+	justify-content: flex-start;
+}
+
+.comparison-table {
+	width: 100%;
+	border-collapse: collapse;
+	background: rgba(60, 60, 60, 0.8);
+	border-radius: 8px;
+	overflow: hidden;
+	table-layout: fixed;
+}
+
+/* 第一列（项目列）固定宽度，与网格第一列对齐 */
+.comparison-table th:first-child,
+.comparison-table td:first-child {
+	width: 200px;
+	box-sizing: border-box;
+}
+
+/* 后6列与competitor-item宽度一致 */
+.comparison-table th:not(:first-child),
+.comparison-table td:not(:first-child) {
+	width: calc((100% - 200px) / 6);
+	box-sizing: border-box;
+}
+
+/* VS 其他水翼艇 tab的表格列宽（5列） */
+.tab-panel.vs-others-tab .comparison-table th:not(:first-child),
+.tab-panel.vs-others-tab .comparison-table td:not(:first-child) {
+	width: calc((100% - 200px) / 5);
+}
+
+/* 10-15w tab的表格列宽（3列） */
+.tab-panel.three-col-tab .comparison-table th:not(:first-child),
+.tab-panel.three-col-tab .comparison-table td:not(:first-child) {
+	width: calc((100% - 200px) / 3);
+}
+
+/* 18w tab的表格列宽（4列） */
+.tab-panel.four-col-tab .comparison-table th:not(:first-child),
+.tab-panel.four-col-tab .comparison-table td:not(:first-child) {
+	width: calc((100% - 200px) / 4);
+}
+
+.comparison-table thead {
+	background: rgba(40, 40, 40, 0.9);
+}
+
+.comparison-table th {
+	padding: 10px 12px;
+	text-align: center;
+	font-size: 13px;
+	font-weight: 600;
+	color: #FFFFFF;
+	border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.comparison-table th:first-child {
+	text-align: left;
+	padding-left: 20px;
+}
+
+.comparison-table tbody tr {
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.comparison-table tbody tr:last-child {
+	border-bottom: none;
+}
+
+.comparison-table td {
+	padding: 8px 12px;
+	text-align: center;
+	font-size: 12px;
+	color: rgba(255, 255, 255, 0.9);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.comparison-table td:first-child {
+	text-align: left;
+	padding-left: 20px;
+	font-weight: 500;
+	background: rgba(40, 40, 40, 0.5);
+	color: #FFFFFF;
+}
+
+.comparison-table .stars {
+	color: #FF6B35;
+	font-size: 16px;
+	letter-spacing: 2px;
+}
+
+@media (max-width: 1400px) {
+
+	/* 考虑15px gap */
+	.comparison-table th:not(:first-child),
+	.comparison-table td:not(:first-child) {
+		width: calc((100% - 180px - 4 * 15px) / 5);
+	}
+}
+
+@media (max-width: 1024px) {
+
+	.comparison-table th,
+	.comparison-table td {
+		padding: 8px 6px;
+		font-size: 11px;
+	}
+
+	.comparison-table th:first-child,
+	.comparison-table td:first-child {
+		padding-left: 12px;
+		min-width: 150px;
+	}
+
+	/* 考虑12px gap */
+	.comparison-table th:not(:first-child),
+	.comparison-table td:not(:first-child) {
+		width: calc((100% - 150px) / 6);
+	}
+
+	.competitor-conclusion {
+		padding: 15px 20px;
+	}
+
+	.competitor-conclusion .conclusion-title {
+		font-size: 15px;
+		margin-bottom: 12px;
+	}
+
+	.competitor-conclusion .conclusion-text {
+		font-size: 13px;
+	}
+}
+
+@media (max-width: 768px) {
+	.comparison-table-wrapper {
+		overflow-x: scroll;
+	}
+
+	.comparison-table {
+		min-width: 800px;
+	}
+
+	.comparison-table th,
+	.comparison-table td {
+		padding: 6px 4px;
+		font-size: 10px;
+	}
+
+	.comparison-table th:first-child,
+	.comparison-table td:first-child {
+		min-width: 120px;
+		padding-left: 10px;
+	}
+
+	/* 考虑8px gap */
+	.comparison-table th:not(:first-child),
+	.comparison-table td:not(:first-child) {
+		width: calc((100% - 120px) / 6);
+	}
+
+	.competitor-conclusion {
+		padding: 12px 15px;
+	}
+
+	.competitor-conclusion .conclusion-title {
+		font-size: 14px;
+		margin-bottom: 10px;
+	}
+
+	.competitor-conclusion .conclusion-text {
+		font-size: 12px;
+	}
+
+	.competitor-conclusion .conclusion-bullet {
+		font-size: 16px;
+	}
+}
+
 .chart-svg {
 	width: 100%;
 	height: 100%;
+}
+
+/* 竞品分析结论样式 */
+.competitor-conclusion {
+	width: 100%;
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	border-radius: 12px;
+	padding: 20px 25px;
+	margin-top: 0;
+}
+
+.competitor-conclusion .conclusion-title {
+	font-size: 16px;
+	font-weight: 700;
+	color: #FFFFFF;
+	margin-bottom: 15px;
+}
+
+.competitor-conclusion .conclusion-content {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.competitor-conclusion .conclusion-item {
+	display: flex;
+	align-items: flex-start;
+	gap: 10px;
+	line-height: 1.6;
+}
+
+.competitor-conclusion .conclusion-bullet {
+	color: #FF6B35;
+	font-size: 18px;
+	font-weight: bold;
+	flex-shrink: 0;
+	line-height: 1.4;
+}
+
+.competitor-conclusion .conclusion-text {
+	font-size: 14px;
+	color: rgba(255, 255, 255, 0.9);
+	flex: 1;
+	line-height: 1.6;
 }
 
 @media (max-width: 1024px) {
