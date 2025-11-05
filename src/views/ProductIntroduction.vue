@@ -56,7 +56,7 @@
 		<div v-if="activeNavItem === 'pain-points'" class="modal-overlay" @click="closePainPointsModal">
 			<div class="market-research-modal" @click.stop>
 				<!-- 背景图片 -->
-				<div class="pain-points-background"></div>
+				<img src="../assets/electron_vs.png" alt="Traditional Electric Boat Pain Points" class="pain-points-background" />
 				<!-- 关闭按钮 -->
 
 
@@ -143,17 +143,17 @@
 						<button class="competitor-tab" :class="{ active: competitorTab === '10-15w' }"
 							@click="setCompetitorTab('10-15w')">
 							<!-- Hydrofoil 10-15w Euro -->
-							YU vs €100,000 - €150,000
+							YU VS (€100,000 - €150,000) Electric Yacht
 						</button>
 						<button class="competitor-tab" :class="{ active: competitorTab === '18w' }"
 							@click="setCompetitorTab('18w')">
 							<!-- Hydrofoil 18w Euro -->
-							YU vs €180,000
+							YU VS (€180,000) Electric Yacht
 						</button>
 						<button class="competitor-tab" :class="{ active: competitorTab === 'vs-others' }"
 							@click="setCompetitorTab('vs-others')">
 							<!-- VS Other Hydrofoils -->
-							YU vs other
+							YU VS Other Electric Hydrofoils
 						</button>
 					</div>
 
@@ -194,7 +194,7 @@
 								<table class="comparison-table">
 									<tbody>
 										<tr>
-											<td>Speed</td>
+											<td>Maximum Speed (km/h)</td>
 											<td>65</td>
 											<td>33</td>
 											<td>55</td>
@@ -206,7 +206,7 @@
 											<td>33</td>
 										</tr>
 										<tr>
-											<td>Power-to-Speed Ratio (kW/kn)</td>
+											<td>Power-to-Speed Ratio (kw/kn)</td>
 											<td>1:1</td>
 											<td>2:1</td>
 											<td>6:1</td>
@@ -325,7 +325,7 @@
 								<table class="comparison-table">
 									<tbody>
 										<tr>
-											<td>Speed</td>
+											<td>Maximum Speed (km/h)</td>
 											<td>65</td>
 											<td>25.9</td>
 											<td>51</td>
@@ -339,7 +339,7 @@
 											<td>19</td>
 										</tr>
 										<tr>
-											<td>Power-to-Speed Ratio (kW/kn)</td>
+											<td>Power-to-Speed Ratio (kw/kn)</td>
 											<td>1:1</td>
 											<td>2:1</td>
 											<td>3:1</td>
@@ -478,7 +478,7 @@
 								<table class="comparison-table">
 									<tbody>
 										<tr>
-											<td>Speed</td>
+											<td>Maximum Speed (km/h)</td>
 											<td>65</td>
 											<td>24</td>
 											<td>28</td>
@@ -1619,12 +1619,9 @@ onUnmounted(() => {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background-image: url('../assets/electron_vs.png');
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
+	object-fit: cover;
+	object-position: center;
 	z-index: 0;
-	opacity: 0.6;
 }
 
 .pain-points-modal .modal-title,

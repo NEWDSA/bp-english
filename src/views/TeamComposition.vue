@@ -180,10 +180,10 @@
                                                 'rounded-2xl p-4 relative overflow-hidden border-white/20 bg-cover bg-center',
                                                 selectedIndex === index ? 'h-[360px]' : 'h-[320px]'
                                             ]" :style="{
-                                                    boxSizing: 'border-box',
-                                                    boxShadow: '0 0 10px rgba(0,0,0,0.15)',
-                                                    backgroundImage: `url(${member.image})`
-                                                }">
+                                                boxSizing: 'border-box',
+                                                boxShadow: '0 0 10px rgba(0,0,0,0.15)',
+                                                backgroundImage: `url(${member.image})`
+                                            }">
                                             </div>
                                             <!-- 名字部分 -->
                                             <div class="mt-3 text-center">
