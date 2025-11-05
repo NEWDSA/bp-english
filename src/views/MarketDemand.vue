@@ -626,6 +626,8 @@ const nextImage = () => {
         </div>
         <div class="nav-divider"></div>
 
+        <router-link to="/product-introduction" class="nav-item">Product Introduction</router-link>
+        <div class="nav-divider"></div>
         <router-link to="/industry-background" class="nav-item">Industry Background</router-link>
         <div class="nav-divider"></div>
         <div class="nav-item active">Market Demand</div>
@@ -633,8 +635,6 @@ const nextImage = () => {
         <router-link to="/business-model" class="nav-item">Business Model</router-link>
         <div class="nav-divider"></div>
         <router-link to="/team-composition" class="nav-item">Team Composition</router-link>
-        <div class="nav-divider"></div>
-        <router-link to="/product-introduction" class="nav-item">Product Introduction</router-link>
       </div>
     </nav>
 
