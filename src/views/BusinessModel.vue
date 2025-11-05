@@ -1,25 +1,27 @@
 <template>
 	<div class="business-model">
 		<!-- 前置覆盖层 -->
-		<div class="overlay-mask" v-if="showOverlay">
+		<div class="overlay-mask bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900" v-if="showOverlay">
 			<!-- 初始方块 - 对角线分割 -->
 			<div class="overlay-blocks" v-if="!showCContent && !showBContent">
-				<!-- block_1 和 block_2 放在容器外部，以便显示在容器上方 -->
-				<div class="block_1"></div>
-				<div class="block_2"></div>
 				<!-- 内层矩形容器 -->
 				<div class="overlay-inner-container">
 					<!-- B区域 - 左侧 -->
-					<div class="region-b-left"></div>
+					<div class="region-b-left" @click="showBContentPanel">
+						<div class="region-content">
+							<div class="region-label">B</div>
+							<div class="region-text">Business</div>
+						</div>
+					</div>
 					<!-- C区域 - 右侧 -->
-					<div class="region-c-right"></div>
-					<!-- 对角线分割线 -->
-					<div class="diagonal-line diagonal-line-1"></div>
-					<div class="diagonal-line diagonal-line-2"></div>
-					<!-- B方块 - 左上角 -->
-					<div class="block block-b" @click="showBContentPanel">B</div>
-					<!-- C方块 - 右下角 -->
-					<div class="block block-c" @click="showCContentPanel">C</div>
+					<div class="region-c-right" @click="showCContentPanel">
+						<div class="region-content">
+							<div class="region-label">C</div>
+							<div class="region-text">Consumer</div>
+						</div>
+					</div>
+					<!-- 中间分割线 -->
+					<div class="center-divider"></div>
 				</div>
 			</div>
 
@@ -2081,34 +2083,197 @@ onMounted(() => {
 	left: 50px;
 	right: 50px;
 	bottom: 50px;
-	background-color: #ffffff;
+	/* background-color: #ffffff; */
 	/* border: 3px solid #000000; */
 	border-radius: 20px;
-	box-shadow: 0 0 0 8px #ffffff;
+	/* box-shadow: 0 0 0 8px #ffffff; */
 	overflow: hidden;
 	z-index: 1;
 }
 
-/* B区域 - 左侧，蓝色 */
+/* B区域 - 左侧，现代玻璃拟态效果 */
 .region-b-left {
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 50%;
 	height: 100%;
-	background-color: #0066FF;
-	z-index: 0;
+	background: url('../assets/bs_bg.png') center/cover no-repeat;
+	cursor: pointer;
+	transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+	overflow: hidden;
+	position: relative;
+	z-index: 1;
 }
 
-/* C区域 - 右侧，青绿色 */
+.region-b-left::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: linear-gradient(135deg,
+		rgba(20, 30, 48, 0.32) 0%,
+		rgba(36, 59, 85, 0.2) 100%);
+	backdrop-filter: blur(15px) saturate(120%);
+	-webkit-backdrop-filter: blur(15px) saturate(120%);
+	z-index: 1;
+}
+
+.region-b-left::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: linear-gradient(135deg,
+		rgba(0, 212, 255, 0.08) 0%,
+		transparent 50%,
+		rgba(0, 150, 255, 0.05) 100%);
+	z-index: 2;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+
+.region-b-left:hover::after {
+	opacity: 1;
+}
+
+.region-b-left:hover {
+	transform: scale(1.01);
+}
+
+/* C区域 - 右侨，现代玻璃拟态效果 */
 .region-c-right {
 	position: absolute;
 	top: 0;
 	right: 0;
 	width: 50%;
 	height: 100%;
-	background-color: #5ea5aa;
-	z-index: 0;
+	background: url('../assets/c_clinet_bg.png') center/cover no-repeat;
+	cursor: pointer;
+	transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+	overflow: hidden;
+	z-index: 1;
+}
+
+.region-c-right::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: linear-gradient(135deg,
+		rgba(36, 59, 85, 0.2) 0%,
+		rgba(20, 30, 48, 0.32) 100%);
+	backdrop-filter: blur(15px) saturate(120%);
+	-webkit-backdrop-filter: blur(15px) saturate(120%);
+	z-index: 1;
+}
+
+.region-c-right::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: linear-gradient(135deg,
+		rgba(94, 165, 170, 0.05) 0%,
+		transparent 50%,
+		rgba(0, 212, 255, 0.08) 100%);
+	z-index: 2;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+
+.region-c-right:hover::after {
+	opacity: 1;
+}
+
+.region-c-right:hover {
+	transform: scale(1.01);
+}
+
+/* 区域内容 - B和C的文字容器 */
+.region-content {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 10;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 20px;
+	pointer-events: none;
+}
+
+/* 区域标签 - 大字母 */
+.region-label {
+	font-size: clamp(80px, 10vw, 140px);
+	font-weight: 800;
+	color: rgba(255, 255, 255, 0.95);
+	text-shadow:
+		0 0 30px rgba(0, 212, 255, 0.4),
+		0 0 60px rgba(0, 212, 255, 0.2),
+		0 10px 40px rgba(0, 0, 0, 0.4);
+	letter-spacing: -5px;
+	line-height: 1;
+	transition: all 0.3s ease;
+	font-family: 'Helvetica Neue', sans-serif;
+}
+
+/* 区域文字 - 说明文字 */
+.region-text {
+	font-size: clamp(18px, 2vw, 26px);
+	font-weight: 300;
+	color: rgba(255, 255, 255, 0.7);
+	letter-spacing: 6px;
+	text-transform: uppercase;
+	transition: all 0.3s ease;
+	font-family: 'Helvetica Neue', sans-serif;
+}
+
+.region-b-left:hover .region-label,
+.region-c-right:hover .region-label {
+	transform: scale(1.08);
+	text-shadow:
+		0 0 50px rgba(0, 212, 255, 0.6),
+		0 0 100px rgba(0, 212, 255, 0.3),
+		0 15px 50px rgba(0, 0, 0, 0.5);
+}
+
+.region-b-left:hover .region-text,
+.region-c-right:hover .region-text {
+	letter-spacing: 10px;
+	color: rgba(255, 255, 255, 0.9);
+}
+
+/* 中间分割线 */
+.center-divider {
+	position: absolute;
+	top: 10%;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 1px;
+	height: 80%;
+	background: linear-gradient(
+		180deg,
+		transparent 0%,
+		rgba(255, 255, 255, 0.1) 10%,
+		rgba(255, 255, 255, 0.2) 50%,
+		rgba(255, 255, 255, 0.1) 90%,
+		transparent 100%
+	);
+	z-index: 10;
+	box-shadow:
+		0 0 10px rgba(0, 212, 255, 0.2),
+		0 0 20px rgba(0, 212, 255, 0.1);
 }
 
 /* 响应式断点 - 内层容器 - 平板 */
@@ -2214,22 +2379,9 @@ onMounted(() => {
 	}
 }
 
-/* 方块基础样式 - 改为圆圈 */
+/* 隐藏原来的方块，因为B和C现在直接显示在区域中 */
 .block {
-	width: 80px;
-	height: 80px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 36px;
-	font-weight: 700;
-	color: #000000;
-	border-radius: 50%;
-	transition: all 0.3s ease;
-	border: 2px solid #000000;
-	position: absolute;
-	cursor: pointer;
-	background-color: #ffffff;
+	display: none;
 }
 
 .block_1 {
@@ -2315,92 +2467,9 @@ onMounted(() => {
 }
 
 /* B方块样式 - 左上角 */
-.block-b {
-	top: 20px;
-	left: 20px;
-}
+/* 删除不再需要的 block-b 和 block-c 样式 */
 
-.block-b:hover {
-	transform: scale(1.1);
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-.block-b:active {
-	transform: scale(1.05);
-}
-
-/* C方块样式 - 右下角 */
-.block-c {
-	bottom: 20px;
-	right: 20px;
-}
-
-.block-c:hover {
-	transform: scale(1.1);
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-.block-c:active {
-	transform: scale(1.05);
-}
-
-/* 响应式断点 - 方块 - 平板 */
-@media (max-width: 1024px) {
-	.block {
-		width: 70px;
-		height: 70px;
-		font-size: 32px;
-	}
-
-	.block-b {
-		top: 15px;
-		left: 15px;
-	}
-
-	.block-c {
-		bottom: 15px;
-		right: 15px;
-	}
-}
-
-/* 响应式断点 - 方块 - 小屏幕 */
-@media (max-width: 768px) {
-	.block {
-		width: 60px;
-		height: 60px;
-		font-size: 28px;
-	}
-
-	.block-b {
-		top: 12px;
-		left: 12px;
-	}
-
-	.block-c {
-		bottom: 12px;
-		right: 12px;
-	}
-}
-
-/* 响应式断点 - 方块 - 手机 */
-@media (max-width: 480px) {
-	.block {
-		width: 50px;
-		height: 50px;
-		font-size: 24px;
-		border: 1.5px solid #000000;
-	}
-
-	.block-b {
-		top: 8px;
-		left: 8px;
-	}
-
-	.block-c {
-		bottom: 8px;
-		right: 8px;
-	}
-}
+/* 删除不再需要的方块响应式样式 */
 
 
 /* C方块内容面板 - 全屏 */
