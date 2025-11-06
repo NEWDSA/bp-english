@@ -376,14 +376,14 @@ watch(selectedCity, (newValue) => {
                       <p class="text-cyan-400 text-[9px] sm:text-[10px] md:text-[11px] lg:text-xs xl:text-sm font-semibold mb-1 sm:mb-1 md:mb-2 lg:mb-3 xl:mb-4 h-[28px] md:h-[32px] flex items-center justify-center">GDP per capita</p>
                       <p class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-bold text-white gdp-value mb-1 sm:mb-1 md:mb-1" :data-value="
                         isChinaSelected ? '13445' :
-                        isSoutheastAsiaSelected ? '4960' :
+                        isSoutheastAsiaSelected ? '91727' :
                         isItalySelected ? '40437' :
                         isAmericaSelected ? '85876' :
                         isMiddleEastSelected ? '53813' :
                         '0'
                       ">{{
                         isChinaSelected ? '$13,445' :
-                        isSoutheastAsiaSelected ? '$4,960' :
+                        isSoutheastAsiaSelected ? '$91,727' :
                         isItalySelected ? '$40,437' :
                         isAmericaSelected ? '$85,876' :
                         isMiddleEastSelected ? '$53,813' :
@@ -393,14 +393,14 @@ watch(selectedCity, (newValue) => {
                         <p class="min-h-[16px] md:min-h-[20px]">
                           {{
                             isChinaSelected ? 'Chinese mainland' :
-                            isSoutheastAsiaSelected ? 'Indonesia' :
+                            isSoutheastAsiaSelected ? 'Singapore' :
                             isItalySelected ? 'Italy' :
                             isAmericaSelected ? 'USA' :
                             isMiddleEastSelected ? 'UAE' :
                             ''
                           }}
                         </p>
-                        <p class="mt-1 sm:mt-1 md:mt-2 lg:mt-3 xl:mt-4 hidden lg:block">$3,000 is the tipping point for the nascent yacht economy.</p>
+                        <p class="mt-1 sm:mt-1 md:mt-2 lg:mt-3 xl:mt-4 hidden lg:block">Regions with a per capita GDP exceeding US$30,000 are beginning to allocate water-based assets.</p>
                       </div>
                     </div>
 
