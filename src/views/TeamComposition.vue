@@ -59,12 +59,28 @@
                 </div>
                 <!-- 右侧内容区域 -->
                 <div
-                    class="w-[68%] md:w-[66%] lg:w-[64%] bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900 flex flex-col justify-between min-w-0">
+                    class="w-[68%] md:w-[66%] lg:w-[64%] bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900 flex flex-col justify-between min-w-0 relative">
                     <div class="flex flex-col h-full">
+                        <!-- Who we are 和 Investment Cases 按钮区域 - 固定在右上角 -->
+                        <div v-if="!showWhoWeAreContent && !showInvestmentHighlightsContent"
+                            class="absolute top-6 right-4 sm:right-6 md:right-8 lg:right-10 xl:right-10 2xl:right-12 z-20 flex flex-col gap-3 md:gap-4">
+                            <div class="info-frame cursor-pointer whitespace-nowrap" @click="showWhoWeAreModal">
+                                <h3
+                                    class="info-title text-sm sm:text-base md:text-lg lg:text-lg xl:text-base 2xl:text-lg">
+                                    Team Introduction</h3>
+                            </div>
+                            <div class="info-frame cursor-pointer whitespace-nowrap"
+                                @click="showInvestmentHighlightsModal">
+                                <h3
+                                    class="info-title text-sm sm:text-base md:text-lg lg:text-lg xl:text-base 2xl:text-lg">
+                                    Excellent Cases</h3>
+                            </div>
+                        </div>
+
                         <!-- 成员介绍区域 -->
                         <div v-if="!showWhoWeAreContent && !showInvestmentHighlightsContent"
-                            class="px-4 sm:px-6 md:px-8 lg:px-10 xl:px-10 2xl:px-12 py-6 md:py-8 lg:py-10 flex gap-3 sm:gap-4 md:gap-5 lg:gap-6 xl:gap-8 overflow-y-auto 2xl:h-[560px] xl:h-[400px]">
-                            <div class="flex-1 min-w-0">
+                            class="pl-4 sm:pl-6 md:pl-8 lg:pl-10 xl:pl-10 2xl:pl-12 pr-[180px] sm:pr-[200px] md:pr-[220px] lg:pr-[240px] xl:pr-[240px] 2xl:pr-[260px] py-6 md:py-8 lg:py-10 overflow-y-auto 2xl:h-[560px] xl:h-[400px]">
+                            <div class="flex-1 min-w-0 max-w-full">
                                 <!-- 经历部分 (只有吴关和龚亮显示) -->
                                 <div v-if="selectedMember.name === '吴关' || selectedMember.name === '龚亮'"
                                     class="2xl:mb-10 mb-4 md:mb-6">
@@ -137,20 +153,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Who we are 和 Investment Cases 按钮区域 -->
-                            <div class="flex flex-col gap-3 md:gap-4 flex-shrink-0 self-start min-w-fit">
-                                <div class="info-frame cursor-pointer whitespace-nowrap" @click="showWhoWeAreModal">
-                                    <h3
-                                        class="info-title text-sm sm:text-base md:text-lg lg:text-lg xl:text-base 2xl:text-lg">
-                                        Team Introduction</h3>
-                                </div>
-                                <div class="info-frame cursor-pointer whitespace-nowrap"
-                                    @click="showInvestmentHighlightsModal">
-                                    <h3
-                                        class="info-title text-sm sm:text-base md:text-lg lg:text-lg xl:text-base 2xl:text-lg">
-                                        Excellent Cases</h3>
-                                </div>
-                            </div>
                         </div>
 
                         <!-- 底部团队轮播区域 -->
@@ -164,34 +166,42 @@
                             </div>
 
                             <!-- 履带式轮播容器 -->
-                            <div class="relative w-full px-2 sm:px-3 md:px-4 overflow-hidden carousel-container">
-                                <div class="flex transition-transform duration-500 ease-in-out"
-                                    :style="{ transform: `translateX(-${scrollPosition}px)` }">
-                                    <!-- 单一卡片组，使用两次循环实现无限滚动效果 -->
-                                    <template v-for="cycle in 2" :key="cycle">
-                                        <div v-for="(member, index) in teamMembers" :key="`${cycle}-${index}`"
-                                            @click="handleCardClick(index)"
-                                            class="flex-shrink-0 mr-[30px] cursor-pointer" :style="{
-                                                width: '256px',
-                                                zIndex: selectedIndex === index ? 20 : 10
-                                            }">
-                                            <!-- 图片部分 -->
-                                            <div :class="[
-                                                'rounded-2xl p-4 relative overflow-hidden border-white/20 bg-cover bg-center',
-                                                selectedIndex === index ? 'h-[360px]' : 'h-[320px]'
-                                            ]" :style="{
-                                                boxSizing: 'border-box',
-                                                boxShadow: '0 0 10px rgba(0,0,0,0.15)',
-                                                backgroundImage: `url(${member.image})`
-                                            }">
+                            <div class="relative w-full">
+                                <div class="px-2 sm:px-3 md:px-4 overflow-hidden carousel-container">
+                                    <div class="flex transition-transform duration-500 ease-in-out"
+                                        :style="{ transform: `translateX(-${scrollPosition}px)` }">
+                                        <!-- 单一卡片组，使用两次循环实现无限滚动效果 -->
+                                        <template v-for="cycle in 2" :key="cycle">
+                                            <div v-for="(member, index) in teamMembers" :key="`${cycle}-${index}`"
+                                                @click="handleCardClick(index)"
+                                                class="flex-shrink-0 mr-[30px] cursor-pointer" :style="{
+                                                    width: '256px',
+                                                    zIndex: selectedIndex === index ? 20 : 10
+                                                }">
+                                                <!-- 图片部分 -->
+                                                <div :class="[
+                                                    'rounded-2xl p-4 relative overflow-hidden border-white/20 bg-cover bg-center',
+                                                    selectedIndex === index ? 'h-[360px]' : 'h-[320px]'
+                                                ]" :style="{
+                                                    boxSizing: 'border-box',
+                                                    boxShadow: '0 0 10px rgba(0,0,0,0.15)',
+                                                    backgroundImage: `url(${member.image})`
+                                                }">
+                                                </div>
+                                                <!-- 名字部分 -->
+                                                <div class="mt-3 text-center">
+                                                    <!-- <div class="text-white text-base font-medium">{{ member.name }}</div> -->
+                                                    <div class="text-gray-300 text-sm mt-1">{{ member.enName }}</div>
+                                                </div>
                                             </div>
-                                            <!-- 名字部分 -->
-                                            <div class="mt-3 text-center">
-                                                <!-- <div class="text-white text-base font-medium">{{ member.name }}</div> -->
-                                                <div class="text-gray-300 text-sm mt-1">{{ member.enName }}</div>
-                                            </div>
-                                        </div>
-                                    </template>
+                                        </template>
+                                    </div>
+                                </div>
+                                <!-- 公司名称 - 定位在轮播容器最右端底部 -->
+                                <div class="absolute bottom-[-8px] right-0 z-30">
+                                    <h2
+                                        class="text-lg sm:text-xl md:text-xl lg:text-2xl xl:text-xl 2xl:text-2xl text-white">
+                                        Y-H2O</h2>
                                 </div>
                             </div>
 
@@ -213,14 +223,6 @@
                                             stroke-width="2.5" />
                                     </svg>
                                 </button> -->
-
-                                <!-- 公司名称 -->
-                                <div
-                                    class="absolute left-[calc(50%+200px)] sm:left-[calc(50%+250px)] md:left-[calc(50%+300px)] lg:left-[calc(50%+350px)] xl:left-[calc(50%+350px)] 2xl:left-[calc(50%+370px)]">
-                                    <h2
-                                        class="text-lg sm:text-xl md:text-xl lg:text-2xl xl:text-xl 2xl:text-2xl text-white">
-                                        Y-H2O</h2>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -492,6 +494,26 @@ const teamMembers = ref([
         introduction: 'A seasoned private equity fund manager with a combined legal and financial background, he studied at China University of Political Science and Law and Stanford University, possessing solid industrial and capital operation capabilities. He has long been involved in technology transfer, industrial fund management, and IPO consulting, leading investments and exits in several well-known projects such as BLT, Andon Health, and Tengdun Technology, accumulating rich experience in capital operations and practical application. He previously worked at Blackstone Group, participating in numerous mergers and acquisitions of internationally renowned companies. Currently, he serves as an entrepreneurship mentor at several universities, dedicated to promoting the integration of technological innovation and capital, and contributing to high-quality industrial development.',
     },
     {
+        name: '陈宗强',
+        enName: 'John',
+        role: 'IE',
+        image: qiang,
+        description: '• Emotional Interaction Engine • Digital twin simulation • Compile level code optimization',
+        professionalQualifications: '1. Graduated from Maoming Radio and Television University in 2012 with a diploma in Computer Engineering. 2. Possesses many years of experience in 3D modeling, virtual reality (VR), and interactive visualization development. 3. Currently working as a VR Display Engineer/Technical Lead at Hangzhou Yihai Ship Design Co., Ltd. 4. Previously worked at Guangzhou Lanyue Ship Design Co., Ltd., Hangzhou Jingtuke Co., Ltd., and Juzhong Decoration Co., Ltd., engaged in interior design and virtual display system development.',
+        areasOfExpertise: '1. 3D Modeling and Visualization Design: Proficient in using Unreal Engine (UE4/UE5) for 3D scene building, lighting optimization, and material creation, capable of independently developing virtual model homes and ship VR displays. 2. Virtual Reality and Interactive Development: Familiar with functional modules such as the Blueprint system, GAS (Gameplay Ability System), UMG/Slate, and possess the ability to optimize project performance and implement specialized features. 3. Interface and Motion Design: Expertise in the creation and implementation of UI motion effects, capable of independently completing interface layout, interactive animation, and logo dynamic interpretation design from concept to finished product. 4. Interior Design and Visual Aesthetics: Possess a deep appreciation for spatial aesthetics and design, with a precise grasp of color, proportion, and materiality, and the ability to integrate innovative technology and artistic trends to create high-quality presentations.',
+        introduction: 'With over eight years of experience in 3D design and virtual reality development, he has long focused on developing virtual reality projects using Unreal Engine (UE4/UE5), participating in the VR visualization design of several large-scale ship and real estate projects, including the "Zhongwei Fuyu 32-meter Ferry," "Foshan Sanlong Bay," and "Vietnam Cruise Ship P4500-01." In these projects, he was responsible for scene construction, interactive logic development, motion effect implementation, and performance optimization, demonstrating excellent technical innovation and artistic integration capabilities. Chen Zongqiang excels at combining modern design aesthetics with digital technology, bringing high-quality, immersive visual experiences to the fields of ship interior design and virtual display.',
+    },
+    {
+        name: '郑志彦',
+        enName: 'Zhiliao Zheng',
+        role: 'SP',
+        image: zhiliao,
+        description: '• Analyze industry trends and competitor dynamics • Participate in business negotiations, sign sales contracts, and ensure their execution • Expand new customers, maintain key customer relationships, and promote long-term cooperation',
+        professionalQualifications: `1. Graduated in 2010 from the International Economics and Trade program at South China Agricultural University, Zhujiang College (Bachelor's degree). 2. Possesses over 15 years of experience in the high-end industry and yacht sector, including over 10 years of experience in sales and marketing management for high-end luxury brands. 3. Currently serves as co-founder and general manager of Shenzhen Tingyouqu Technology Co., Ltd., responsible for corporate strategic planning, market expansion, and brand building. 4. Previously served as Senior Client Director at Hainan Haitianshengyan Exhibition Co., Ltd., and Sales Director at Shenzhen Haizhilan Yacht Service Co., Ltd.`,
+        areasOfExpertise: '1. Yacht Industry and High-End Market Operations: Possess extensive yacht industry resources and business ecosystem insights, and be familiar with yacht sales, brand promotion, investment strategies, and customer service systems. 2. Market Strategy and Brand Management: Expertise in developing marketing and public relations strategies, with the ability to integrate resources, shape brand image, and drive performance growth. 3. Customer Relationships and Business Development: Long-term service to high-end client groups, with expertise in key account management, negotiation, and channel development, and possessing exceptional communication and leadership skills. 4. Business Management and Strategic Execution: Founded the "Ting Youqu" platform from scratch, achieving success from startup to profitability, demonstrating exceptional strategic thinking and team execution.',
+        introduction: 'Zheng Zhiyan, a graduate of Zhujiang College of South China Agricultural University with a degree in International Economics and Trade, is currently the co-founder and General Manager of Shenzhen Tingyouqu Technology Co., Ltd., with over 15 years of experience in the yacht and high-end industries. He initially worked for international freight forwarding companies DHL and Senator, accumulating a background in international trade and logistics. He later transitioned to the yacht industry, serving as Sales Director of Ocean Blue Yachts and Senior Account Director of Hai Tian Sheng Yan, delving into luxury brand marketing and high-end customer service. In 2019, he founded the "Tingyouqu" yacht industry platform, which achieved profitability and secured capital support within just two years. With extensive experience in yacht sales, marketing planning, branding, and business operations, Zheng Zhiyan is a high-end market operations expert who combines strategic vision with practical skills.',
+    },
+    {
         name: '陈坤灵',
         enName: 'Leo',
         role: 'COO',
@@ -512,16 +534,6 @@ const teamMembers = ref([
         introduction: `With eight years of experience in product design and film and television creative work, Zhang Shibin possesses both technical research and development and artistic creativity. He led the design and interactive system development of China's first unmanned cargo ship, "Jindouyun No. 0," and participated in several innovative ship projects, including the "Yu" hydrofoil and the Yunzhou leisure platform series. Early in his career, he worked in the film and television industry on modeling and special effects for theatrical productions such as *Armor Hero*, *Star Alliance*, and *Beast Girl*, demonstrating strong visual creativity and brand communication capabilities. Zhang Shibin excels at combining digital art with shipbuilding industrial design, driving innovation throughout the entire product development process from concept design to market launch. He is a cross-disciplinary product designer with both industrial aesthetics and engineering logic.`,
     },
     {
-        name: '陈宗强',
-        enName: 'John',
-        role: 'IE',
-        image: qiang,
-        description: '• Emotional Interaction Engine • Digital twin simulation • Compile level code optimization',
-        professionalQualifications: '1. Graduated from Maoming Radio and Television University in 2012 with a diploma in Computer Engineering. 2. Possesses many years of experience in 3D modeling, virtual reality (VR), and interactive visualization development. 3. Currently working as a VR Display Engineer/Technical Lead at Hangzhou Yihai Ship Design Co., Ltd. 4. Previously worked at Guangzhou Lanyue Ship Design Co., Ltd., Hangzhou Jingtuke Co., Ltd., and Juzhong Decoration Co., Ltd., engaged in interior design and virtual display system development.',
-        areasOfExpertise: '1. 3D Modeling and Visualization Design: Proficient in using Unreal Engine (UE4/UE5) for 3D scene building, lighting optimization, and material creation, capable of independently developing virtual model homes and ship VR displays. 2. Virtual Reality and Interactive Development: Familiar with functional modules such as the Blueprint system, GAS (Gameplay Ability System), UMG/Slate, and possess the ability to optimize project performance and implement specialized features. 3. Interface and Motion Design: Expertise in the creation and implementation of UI motion effects, capable of independently completing interface layout, interactive animation, and logo dynamic interpretation design from concept to finished product. 4. Interior Design and Visual Aesthetics: Possess a deep appreciation for spatial aesthetics and design, with a precise grasp of color, proportion, and materiality, and the ability to integrate innovative technology and artistic trends to create high-quality presentations.',
-        introduction: 'With over eight years of experience in 3D design and virtual reality development, he has long focused on developing virtual reality projects using Unreal Engine (UE4/UE5), participating in the VR visualization design of several large-scale ship and real estate projects, including the "Zhongwei Fuyu 32-meter Ferry," "Foshan Sanlong Bay," and "Vietnam Cruise Ship P4500-01." In these projects, he was responsible for scene construction, interactive logic development, motion effect implementation, and performance optimization, demonstrating excellent technical innovation and artistic integration capabilities. Chen Zongqiang excels at combining modern design aesthetics with digital technology, bringing high-quality, immersive visual experiences to the fields of ship interior design and virtual display.',
-    },
-    {
         name: '刘胤霆',
         enName: 'Jeff',
         role: 'SE',
@@ -530,16 +542,6 @@ const teamMembers = ref([
         professionalQualifications: '1: Graduated from South China University of Technology (Bachelor of Engineering) in Mechanical Engineering in 2023, GPA 3.2/4 2: Currently studying for a Master of Mechanical Engineering (Automotive and Racing Engineering) at Politecnico di Milano, Italy, GPA 23/30 3: Language proficiency: Chinese (native), English (IELTS 7.5), Italian (A2) 4: Proficient in engineering software such as MATLAB, SolidWorks, Ansys Fluent, AutoCAD, Python, and Adams Car 5: Experienced in electric vehicle and aerodynamics research, having won second prize in the China University Student Electric Formula Competition',
         areasOfExpertise: '1. Mechanical and Vehicle Engineering Design: Proficient in mechanical system design, transmission and power structure analysis, and CAD/CAE modeling and simulation. 2. Fluid and Aerodynamic Analysis: Familiar with CFD-based aerodynamic simulation and able to optimize vehicle aerodynamic performance using Ansys Fluent. 3. Electric and Hybrid System Design: Experienced in designing DC-DC power systems and emergency braking (EBS) systems; familiar with electric vehicle control logic and electrical safety architecture. 4. Multidisciplinary Collaborative Modeling and Verification: Able to combine theoretical mechanics, vehicle dynamics, and engineering simulation to complete virtual testing and performance analysis of complex mechanical systems.',
         introduction: `A mechanical engineer, currently pursuing a Master's degree in Automotive and Motorsports Engineering at the Polytechnic University of Milan, Italy. During his time at South China University of Technology, he served as a member of the electronic control team for a Formula E racing team, leading the development of DC-DC power conversion and EBS safety systems; the project won a second-place national award. His research focuses on vehicle aerodynamics and hybrid power system optimization. He is skilled in using CFD technology to analyze ground effects and vehicle aerodynamic performance, and possesses a deep understanding of improving energy efficiency in vehicle design. Liu Yinting combines a solid foundation in engineering theory with an international research perspective, enabling him to conduct mechanical and vehicle engineering design with a systematic approach, providing innovative solutions for intelligent and green transportation.`,
-    },
-    {
-        name: '郑志彦',
-        enName: 'Zhiliao Zheng',
-        role: 'SP',
-        image: zhiliao,
-        description: '• Analyze industry trends and competitor dynamics • Participate in business negotiations, sign sales contracts, and ensure their execution • Expand new customers, maintain key customer relationships, and promote long-term cooperation',
-        professionalQualifications: `1. Graduated in 2010 from the International Economics and Trade program at South China Agricultural University, Zhujiang College (Bachelor's degree). 2. Possesses over 15 years of experience in the high-end industry and yacht sector, including over 10 years of experience in sales and marketing management for high-end luxury brands. 3. Currently serves as co-founder and general manager of Shenzhen Tingyouqu Technology Co., Ltd., responsible for corporate strategic planning, market expansion, and brand building. 4. Previously served as Senior Client Director at Hainan Haitianshengyan Exhibition Co., Ltd., and Sales Director at Shenzhen Haizhilan Yacht Service Co., Ltd.`,
-        areasOfExpertise: '1. Yacht Industry and High-End Market Operations: Possess extensive yacht industry resources and business ecosystem insights, and be familiar with yacht sales, brand promotion, investment strategies, and customer service systems. 2. Market Strategy and Brand Management: Expertise in developing marketing and public relations strategies, with the ability to integrate resources, shape brand image, and drive performance growth. 3. Customer Relationships and Business Development: Long-term service to high-end client groups, with expertise in key account management, negotiation, and channel development, and possessing exceptional communication and leadership skills. 4. Business Management and Strategic Execution: Founded the "Ting Youqu" platform from scratch, achieving success from startup to profitability, demonstrating exceptional strategic thinking and team execution.',
-        introduction: 'Zheng Zhiyan, a graduate of Zhujiang College of South China Agricultural University with a degree in International Economics and Trade, is currently the co-founder and General Manager of Shenzhen Tingyouqu Technology Co., Ltd., with over 15 years of experience in the yacht and high-end industries. He initially worked for international freight forwarding companies DHL and Senator, accumulating a background in international trade and logistics. He later transitioned to the yacht industry, serving as Sales Director of Ocean Blue Yachts and Senior Account Director of Hai Tian Sheng Yan, delving into luxury brand marketing and high-end customer service. In 2019, he founded the "Tingyouqu" yacht industry platform, which achieved profitability and secured capital support within just two years. With extensive experience in yacht sales, marketing planning, branding, and business operations, Zheng Zhiyan is a high-end market operations expert who combines strategic vision with practical skills.',
     }
 ])
 
