@@ -140,6 +140,8 @@ const getChartOptions = () => {
   const regionData = generateRegionData()
   const axisVisible = props.isDetailed
 
+  console.log("props.selectedCity && props.selectedCity.country ? props.selectedCity.country == 'United Arab Emirates' ? 2 : 6 : 20", props.selectedCity && props.selectedCity.country ? props.selectedCity.country == 'United Arab Emirates' ? 2 : 6 : 20);
+
   return {
     backgroundColor: 'transparent',
     legend: props.isDetailed ? {
@@ -186,7 +188,8 @@ const getChartOptions = () => {
       type: 'value',
       show: false,
       min: 0,
-      max: 20,
+      max: props.selectedCity && props.selectedCity.country ?
+        (props.selectedCity.country === 'United Arab Emirates' ? 2 : 7) : 20,
       axisLabel: {
         show: axisVisible,
         color: '#ffffff',
@@ -440,6 +443,9 @@ watch(() => props.selectedCity, (newCity) => {
     chartInstance.setOption({
       xAxis: {
         data: newOptions.xAxis.data
+      },
+      yAxis: {
+        max: newOptions.yAxis.max
       },
       series: [{
         data: newOptions.series[0].data
