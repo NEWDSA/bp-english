@@ -505,7 +505,7 @@ const teamMembers = ref([
     },
     {
         name: '郑志彦',
-        enName: 'Zhiliao Zheng',
+        enName: 'Zheng Zhiyan',
         role: 'SP',
         image: zhiliao,
         description: '• Analyze industry trends and competitor dynamics • Participate in business negotiations, sign sales contracts, and ensure their execution • Expand new customers, maintain key customer relationships, and promote long-term cooperation',
