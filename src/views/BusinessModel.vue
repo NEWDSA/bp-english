@@ -2152,7 +2152,7 @@ onMounted(() => {
 	right: 0;
 	width: 50%;
 	height: 100%;
-	background: url('../assets/c_clinet_bg.png') center/cover no-repeat;
+	background: url('../assets/c_clinet_bg.jpg') center/cover no-repeat;
 	cursor: pointer;
 	transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 	overflow: hidden;
@@ -2474,10 +2474,11 @@ onMounted(() => {
 
 /* C方块内容面板 - 全屏 */
 .c-content-panel {
+	margin-top: 71px;
 	width: 100%;
-	height: 100%;
-	background-image: url('../assets/c_clinet_bg.png');
-	background-size: cover;
+	height: calc(100% - 71px);
+	background-image: url('../assets/c_clinet_bg.jpg');
+	background-size: 100% 100%;
 	background-position: center;
 	background-repeat: no-repeat;
 	position: absolute;
@@ -3518,8 +3519,8 @@ onMounted(() => {
 
 .close-btn {
 	position: absolute;
-	top: 20px;
-	right: 20px;
+	top: 6px;
+	right: 6px;
 	background: rgba(255, 255, 255, 0.1);
 	backdrop-filter: blur(10px);
 	border: 1px solid rgba(255, 255, 255, 0.2);
