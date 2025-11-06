@@ -219,7 +219,7 @@
 										</tr>
 										<tr>
 											<td>Motor Power</td>
-											<td>40kw</td>
+											<td>>20kw</td>
 											<td>30kw</td>
 											<td>120kw</td>
 										</tr>
@@ -354,7 +354,7 @@
 										</tr>
 										<tr>
 											<td>Motor Power</td>
-											<td>40kw</td>
+											<td>>20kw</td>
 											<td>2*10kw</td>
 											<td>170kw</td>
 											<td>60kw</td>
@@ -367,7 +367,7 @@
 											<td>7</td>
 										</tr>
 										<tr>
-											<td>Price (New Boat) (€)</td>
+											<td>Price (New Boat)</td>
 											<td>€150,000</td>
 											<td>€183,000</td>
 											<td>€185,000 from</td>
@@ -504,7 +504,7 @@
 											<td>2:1</td>
 										</tr>
 										<tr>
-											<td>Cost-effectiveness(€)</td>
+											<td>Cost-effectiveness</td>
 											<!-- <td>€35,000</td> -->
 											<td>€150,000</td>
 											<td>€35，700</td>
