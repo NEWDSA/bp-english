@@ -79,8 +79,8 @@
 
                         <!-- 成员介绍区域 -->
                         <div v-if="!showWhoWeAreContent && !showInvestmentHighlightsContent"
-                            class="px-4 sm:px-6 md:px-8 lg:px-10 xl:px-10 2xl:px-12 py-6 md:py-8 lg:py-10 overflow-y-auto 2xl:h-[560px] xl:h-[400px]">
-                            <div class="flex-1 min-w-0">
+                            class="pl-4 sm:pl-6 md:pl-8 lg:pl-10 xl:pl-10 2xl:pl-12 pr-[180px] sm:pr-[200px] md:pr-[220px] lg:pr-[240px] xl:pr-[240px] 2xl:pr-[260px] py-6 md:py-8 lg:py-10 overflow-y-auto 2xl:h-[560px] xl:h-[400px]">
+                            <div class="flex-1 min-w-0 max-w-full">
                                 <!-- 经历部分 (只有吴关和龚亮显示) -->
                                 <div v-if="selectedMember.name === '吴关' || selectedMember.name === '龚亮'"
                                     class="2xl:mb-10 mb-4 md:mb-6">
