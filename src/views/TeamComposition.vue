@@ -240,7 +240,7 @@
                         <div class="presentation-left">
                             <h1 class="presentation-title">Team Introduction</h1>
 
-                            <div class="content-block">
+                            <div class="intro-text-block">
                                 <p class="block-text">The world's first high-performance intelligent hydrofoil focused
                                     on consumer
                                     and industry-grade applications addresses the high energy consumption and low
@@ -254,7 +254,7 @@
                                 </p>
                             </div>
 
-                            <div class="content-block">
+                            <div class="achievements-block">
                                 <div class="achievements-list">
                                     <div class="achievement-row">
                                         <span class="bullet">•</span>
@@ -1277,7 +1277,7 @@ button {
 }
 
 .presentation-title {
-    font-size: clamp(1.2rem, 1.9vw, 2.1rem);
+    font-size: clamp(1.5rem, 2.2vw, 2.5rem);
     font-weight: 700;
     color: #ffffff;
     margin: 0 0 clamp(1.5rem, 3vh, 2.5rem) 0;
@@ -1297,8 +1297,33 @@ button {
 .presentation-right {
     display: flex;
     flex-direction: column;
-    gap: clamp(1.5rem, 3vh, 3rem);
+    gap: clamp(1rem, 2vh, 2rem);
     height: 100%;
+}
+
+.intro-text-block {
+    margin-bottom: clamp(3rem, 1vh, 1rem);
+}
+
+/* 左侧团队介绍专属样式 */
+.presentation-left .intro-text-block .block-text {
+    font-size: clamp(1rem, 1.3vw, 1.5rem);
+    line-height: 1.8;
+}
+
+.presentation-left .achievements-list .achievement-desc {
+    font-size: clamp(0.95rem, 1.2vw, 1.4rem);
+    color: #ffffff;
+}
+
+.presentation-left .achievements-list .bullet {
+    font-size: clamp(1rem, 1.5vw, 2rem);
+}
+
+.achievements-block {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .content-block {
@@ -1339,13 +1364,13 @@ button {
 .achievements-list {
     display: flex;
     flex-direction: column;
-    gap: clamp(0.8rem, 1.2vh, 1.5rem);
+    gap: clamp(0.6rem, 1vh, 1.2rem);
 }
 
 .achievement-row {
     display: flex;
     align-items: flex-start;
-    gap: clamp(0.8rem, 1.2vw, 1.5rem);
+    gap: clamp(0.6rem, 1vw, 1.2rem);
 }
 
 .year-label {
