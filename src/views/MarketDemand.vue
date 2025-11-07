@@ -24,14 +24,12 @@ const activeIcon = ref('icon-8')
 let cleanupFlexible = null
 
 // 核心需求内容显示状态
-const showCoreRequirements = ref(true)
+const showCoreRequirements = ref(false)
 
 // 使用默认内容初始化
 onMounted(() => {
   updateMiddleContent('china')
   updateRightContent('default')
-  // 首次进入显示核心需求内容
-  showCoreRequirements.value = true
 })
 
 onUnmounted(() => {
@@ -761,7 +759,7 @@ const nextImage = () => {
                   </p>
 
                   <div>
-                    <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] items-center">
+                    <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] mb-2 items-center">
                       Core Requirements:
                     </h3>
                     <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px]">
@@ -873,10 +871,8 @@ const nextImage = () => {
       <!-- 关闭按钮 -->
       <button
         @click="closeCoreRequirements"
-        class="button-focus absolute top-4 md:top-6 lg:top-8 xl:top-10 right-4 md:right-6 lg:right-8 xl:right-10 text-gray-300 bg-black/50 backdrop-blur-sm hover:bg-black/70 rounded-full p-2 md:p-3 z-50 transition-all duration-300 group">
-        <svg class="w-5 h-5 md:w-6 md:h-6 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-        </svg>
+        class="button-focus absolute top-2 md:top-4 right-2 md:right-4 text-gray-300 bg-black/50 backdrop-blur-sm hover:bg-black/70 rounded-full p-2 md:p-2 z-50 transition-all duration-300 group">
+        <img src="../assets/icon-17.png" alt="返回" class="w-6 h-6">
       </button>
 
       <!-- 核心需求内容区域 -->
@@ -884,10 +880,10 @@ const nextImage = () => {
         <div class="max-w-[1600px] mx-auto h-full overflow-y-auto custom-scrollbar">
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6 lg:gap-8">
             <!-- 左侧容器：包含产品特点列表和版本对比卡片 -->
-            <div class="lg:col-span-8 space-y-3 md:space-y-4 lg:space-y-6 bg-white/10 rounded-lg p-3 md:p-4 lg:p-6">
+            <div class="lg:col-span-8 space-y-3 md:space-y-4 [@media(min-width:2000px)]:space-y-6 bg-white/10 rounded-lg p-3 md:p-4 [@media(min-width:2000px)]:p-6">
               <!-- 产品特点列表 -->
               <div>
-                <ul class="space-y-2 md:space-y-3 lg:space-y-4 text-white">
+                <ul class="space-y-2 [@media(min-width:2000px)]:space-y-3 text-white">
                   <li class="flex items-start">
                     <span class="w-1.5 h-1.5 md:w-2 md:h-2 bg-white rounded-full mr-2 md:mr-3 mt-1 md:mt-1.5 lg:mt-2 flex-shrink-0"></span>
                     <span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-xl [@media(min-width:2000px)]:text-[24px]">AI obstacle avoidance system + forward-looking sonar, with tilt angle control ≤1° to ensure excellent stability and low noise.</span>
@@ -994,11 +990,11 @@ const nextImage = () => {
               <div class="mt-6 md:mt-8 lg:mt-10">
                 <p class="text-white text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-xl [@media(min-width:1920px)]:text-[24px] font-medium mb-2 md:mb-3 lg:mb-4">Potential demand that can generate a premium – product differentiation</p>
                 <div class="bg-white/10 rounded-lg p-2 md:p-3 flex flex-col md:flex-row items-center h-auto md:h-[60px] lg:h-[80px] xl:h-[100px] gap-2 md:gap-0">
-                  <span class="flex-1 text-center text-white text-xs sm:text-sm md:text-base lg:text-base xl:text-lg [@media(min-width:1920px)]:text-[18px] py-1">Intelligent</span>
+                  <span class="flex-1 text-center text-white text-xs sm:text-sm md:text-base lg:text-base xl:text-lg [@media(min-width:1920px)]:text-[24px] py-1">Intelligent</span>
                   <div class="hidden md:block w-px h-4 lg:h-5 xl:h-6 bg-white/30"></div>
-                  <span class="flex-1 text-center text-white text-xs sm:text-sm md:text-base lg:text-base xl:text-lg [@media(min-width:1920px)]:text-[18px] py-1">Social attributes</span>
+                  <span class="flex-1 text-center text-white text-xs sm:text-sm md:text-base lg:text-base xl:text-lg [@media(min-width:1920px)]:text-[24px] py-1">Social attributes</span>
                   <div class="hidden md:block w-px h-4 lg:h-5 xl:h-6 bg-white/30"></div>
-                  <span class="flex-1 text-center text-white text-xs sm:text-sm md:text-base lg:text-base xl:text-lg [@media(min-width:1920px)]:text-[18px] py-1">Brand Culture</span>
+                  <span class="flex-1 text-center text-white text-xs sm:text-sm md:text-base lg:text-base xl:text-lg [@media(min-width:1920px)]:text-[24px] py-1">Brand Culture</span>
                 </div>
               </div>
 

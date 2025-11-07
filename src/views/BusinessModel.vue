@@ -480,18 +480,12 @@
 		<div class="revenue-modal" v-if="activeContent === 'revenue'" @click="hideContent">
 			<div class="revenue-modal-content" @click.stop>
 				<button class="close-btn" @click="hideContent">×</button>
-				<div class="charts-grid">
+				<div class="charts-grid charts-grid-two">
 					<div class="chart-item">
 						<div ref="chart1Ref" class="modal-chart"></div>
 					</div>
 					<div class="chart-item">
 						<div ref="chart2Ref" class="modal-chart"></div>
-					</div>
-					<div class="chart-item">
-						<div ref="chart3Ref" class="modal-chart"></div>
-					</div>
-					<div class="chart-item">
-						<div ref="chart4Ref" class="modal-chart"></div>
 					</div>
 				</div>
 			</div>
@@ -1211,12 +1205,12 @@ function renderModalCharts() {
 				top: 5,
 				left: 'center'
 			},
-			grid: { top: 50, bottom: 80, left: 40, right: 40 },
+			grid: { top: 60, bottom: 100, left: 50, right: 50 },
 
 			legend: {
 				data: ['Annual breakeven sales volume (units)', 'Gross profit margin'],
-				bottom: '1%',
-				textStyle: { fontSize: '1vw' },
+				bottom: '5%',
+				textStyle: { fontSize: 12 },
 				left: 'center',
 				itemGap: 20
 			},
@@ -1299,11 +1293,11 @@ function renderModalCharts() {
 				top: 5,
 				left: 'center'
 			},
-			grid: { top: 50, bottom: 80, left: 40, right: 40 },
+			grid: { top: 60, bottom: 100, left: 50, right: 50 },
 			legend: {
 				data: ['Annual breakeven sales volume (units)', 'Gross profit margin'],
-				bottom: '1%',
-				textStyle: { fontSize: '1vw' },
+				bottom: '5%',
+				textStyle: { fontSize: 12 },
 				left: 'center',
 				itemGap: 20
 			},
@@ -3493,12 +3487,13 @@ onMounted(() => {
 	border-radius: 20px;
 	width: 100%;
 	height: 100%;
-	padding: 5px;
+	padding: 0;
 	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3),
 		0 0 0 1px rgba(255, 255, 255, 0.1) inset;
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
+	position: relative;
 }
 
 .modal-header {
@@ -3519,29 +3514,29 @@ onMounted(() => {
 
 .close-btn {
 	position: absolute;
-	top: 6px;
-	right: 6px;
-	background: rgba(255, 255, 255, 0.1);
+	top: 10px;
+	right: 10px;
+	background: rgba(0, 0, 0, 0.05);
 	backdrop-filter: blur(10px);
-	border: 1px solid rgba(255, 255, 255, 0.2);
-	font-size: 32px;
-	color: rgba(255, 255, 255, 0.8);
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	font-size: 24px;
+	color: rgba(0, 0, 0, 0.6);
 	cursor: pointer;
 	padding: 0;
-	width: 40px;
-	height: 40px;
+	width: 36px;
+	height: 36px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	border-radius: 50%;
 	transition: all 0.3s ease;
-	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+	text-shadow: none;
 	z-index: 10;
 }
 
 .close-btn:hover {
-	background: rgba(255, 255, 255, 0.2);
-	color: rgba(255, 255, 255, 1);
+	background: rgba(0, 0, 0, 0.1);
+	color: rgba(0, 0, 0, 0.8);
 	transform: scale(1.1);
 }
 
@@ -3557,6 +3552,13 @@ onMounted(() => {
 	box-sizing: border-box;
 }
 
+.charts-grid.charts-grid-two {
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr;
+	gap: 0;
+	padding: 0;
+}
+
 .charts-grid::before {
 	content: '';
 	position: absolute;
@@ -3566,6 +3568,22 @@ onMounted(() => {
 	height: 1px;
 	background-color: #ffffff;
 	transform: translateY(-50%);
+	z-index: 1;
+}
+
+.charts-grid.charts-grid-two::before {
+	display: none;
+}
+
+.charts-grid.charts-grid-two::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 50%;
+	width: 1px;
+	background-color: #d0d0d0;
+	transform: translateX(-50%);
 	z-index: 1;
 }
 
@@ -3596,6 +3614,10 @@ onMounted(() => {
 	box-shadow: none;
 }
 
+.charts-grid-two .chart-item {
+	padding: 0;
+}
+
 .chart-item-title {
 	font-size: 18px;
 	font-weight: 600;
@@ -3608,6 +3630,10 @@ onMounted(() => {
 	width: 100%;
 	height: 100%;
 	min-height: 200px;
+}
+
+.charts-grid-two .modal-chart {
+	min-height: 100%;
 }
 
 @keyframes fadeIn {
