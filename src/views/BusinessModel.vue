@@ -27,7 +27,37 @@
 
 			<!-- C方块的内容面板 - 全屏 -->
 			<div class="c-content-panel" v-if="showCContent">
-				<button class="close-content-btn" @click="backToBlocks">✕</button>
+				<!-- 关闭按钮 -->
+				<button
+					@click="backToBlocks"
+					class="button-focus absolute top-2 md:top-4 right-2 md:right-4 text-gray-300 bg-black/50 backdrop-blur-sm hover:bg-black/70 rounded-full p-2 md:p-2 z-50 transition-all duration-300 group">
+					<img src="../assets/icon-17.png" alt="返回" class="w-6 h-6">
+				</button>
+				
+				<!-- 内容 -->
+				<div>
+					<!-- 图片左上角 -->
+					<div>
+						<p>赛事等高端活动</p>
+						<p>参与或赞助高端水上赛事<br/>主办品鉴会、水域试驾体验日</p>
+					</div>
+					<!-- 图片左下角 -->
+					<div>
+						<p>线上平台与数字触点</p>
+						<p>官方独立站<br/>(品牌故事/技术详解/线上预约试驾)<br/>社交媒体矩阵<br/>“lns/Youtube/Tiktok“</p>
+					</div>
+					<img src="../assets/c_clinet_bg.png" alt="中间图片">
+					<!-- 图片右上角 -->
+					<div>
+						<p>行业展会与媒体</p>
+						<p>参与主流游艇展<br/>游艇行业协会平台曝光<br/>头部行业媒体/OL合作</p>
+					</div>
+					<!-- 图片右下角 -->
+					<div>
+						<p>线下销售网络</p>
+						<p>海外代售/合作:<br/>与国际知名游艇经销商建立合作<br/>国内渠道:入驻高端游艇俱乐部,与高端旅游度假区合作</p>
+					</div>
+				</div>
 			</div>
 
 			<!-- B方块的内容面板 - 全屏 -->
@@ -2470,13 +2500,14 @@ onMounted(() => {
 	margin-top: 71px;
 	width: 100%;
 	height: calc(100% - 71px);
-	background-image: url('../assets/c_clinet_bg.jpg');
+	/*  background-image: url('../assets/c_clinet_bg.png');
 	background-size: 100% 100%;
 	background-position: center;
-	background-repeat: no-repeat;
+	background-repeat: no-repeat; */
 	position: absolute;
 	top: 0;
-	left: 0;
+	left: 0; 
+	background: #121727;
 	animation: fadeInScale 0.5s ease-out;
 	overflow-y: auto;
 }
