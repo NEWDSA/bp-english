@@ -1257,7 +1257,7 @@ function renderModalCharts() {
 				left: '40',
 				bottom: '25',
 				style: {
-					text: 'Horizontal axis (Price: US Dollars)',
+					text: 'Horizontal axis (Price: Euro)',
 					fontSize: 10,
 					color: '#666',
 					textAlign: 'left',
@@ -1266,7 +1266,7 @@ function renderModalCharts() {
 			},
 			xAxis: {
 				type: 'category',
-				data: ['47,900', '47,100', '46,400', '45,700', '45,000', '44,300', '43,600', '42,900', '42,100', '41,400', '40,700'],
+				data: ['145,000', '140,000', '135,000', '130,000', '125,000', '120,000', '115,000', '110,000', '105,000', '100,000', '95,000'],
 				axisLabel: { color: '#666', fontSize: 8, show: true },
 				axisTick: { show: false },
 				axisLine: { show: false },
@@ -1283,7 +1283,7 @@ function renderModalCharts() {
 				{
 					name: 'Annual breakeven sales volume (units)',
 					type: 'bar',
-					data: [43, 45, 47.2, 50.0, 53.1, 56.7, 60.8, 65.5, 70.9, 77.4, 85.2],
+					data: [4.4, 4.6, 4.8, 5.1, 5.3, 5.6, 5.9, 6.2, 6.6, 7.1, 7.6],
 					itemStyle: { color: '#00d4ff' },
 					label: {
 						show: true,
@@ -1296,7 +1296,7 @@ function renderModalCharts() {
 				{
 					name: 'Gross profit margin',
 					type: 'bar',
-					data: [25, 24, 23, 23, 22, 21, 20, 19, 18, 16, 15],
+					data: [75.5, 75.0, 74.4, 73.8, 73.2, 72.5, 71.7, 70.9, 70.0, 69.0, 67.9],
 					itemStyle: { color: '#FFC27A' },
 					label: {
 						show: true,
@@ -1343,7 +1343,7 @@ function renderModalCharts() {
 				left: '40',
 				bottom: '25',
 				style: {
-					text: 'Horizontal axis (Price: US Dollars)',
+					text: 'Horizontal axis (Price: Euro)',
 					fontSize: 10,
 					color: '#666',
 					textAlign: 'left',
@@ -1353,7 +1353,7 @@ function renderModalCharts() {
 			xAxis: {
 				type: 'category',
 
-				data: ['52,900', '52,100', '51,400', '50,700', '50,000', '49,300', '48,600', '47,900', '47,100', '46,400', '45,700', '45,000'],
+				data: ['225,000', '220,000', '215,000', '210,000', '205,000', '200,000', '195,000', '190,000', '185,000', '180,000', '175,000'],
 				axisLabel: { color: '#666', fontSize: 8, show: true },
 				axisTick: { show: false },
 				axisLine: { show: false },
@@ -1370,7 +1370,7 @@ function renderModalCharts() {
 				{
 					name: 'Annual breakeven sales volume (units)',
 					type: 'bar',
-					data: [38, 40, 42, 44, 46, 49, 52, 56, 60, 64, 69, 75],
+					data: [2.9, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.9, 4.0],
 					itemStyle: { color: '#00d4ff' },
 					label: {
 						show: true,
@@ -1384,7 +1384,7 @@ function renderModalCharts() {
 					name: 'Gross profit margin',
 					type: 'bar',
 					// data: [12, 15, 18, 22, 25, 28, 32, 35, 38, 42, 45, 48],
-					data: [26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15],
+					data: [73.8, 73.4, 73.0, 72.6, 72.2, 71.8, 71.3, 70.8, 70.3, 69.7, 69.1],
 					itemStyle: { color: '#FFC27A' },
 					label: {
 						show: true,
