@@ -1239,26 +1239,26 @@ function renderModalCharts() {
 		const option1 = {
 			title: {
 				text: 'When the cost of three single-unit ships is €21,000, the break-even sales volume is reached',
-				textStyle: { fontSize: 16, color: '#333', fontWeight: 'normal' },
-				top: 5,
+				textStyle: { fontSize: 20, color: '#333', fontWeight: 'normal' },
+				top: 50,
 				left: 'center'
 			},
-			grid: { top: 60, bottom: 100, left: 50, right: 50 },
+			grid: { top: 100, bottom: 160, left: 50, right: 50 },
 
 			legend: {
 				data: ['Annual breakeven sales volume (units)', 'Gross profit margin'],
-				bottom: '5%',
+				bottom: '7%',
 				textStyle: { fontSize: 12 },
 				left: 'center',
-				itemGap: 20
+				itemGap: 40
 			},
 			graphic: {
 				type: 'text',
 				left: '40',
-				bottom: '25',
+				bottom: '9%',
 				style: {
 					text: 'Horizontal axis (Price: Euro)',
-					fontSize: 10,
+					fontSize: 12,
 					color: '#666',
 					textAlign: 'left',
 					textVerticalAlign: 'middle'
@@ -1267,7 +1267,7 @@ function renderModalCharts() {
 			xAxis: {
 				type: 'category',
 				data: ['145,000', '140,000', '135,000', '130,000', '125,000', '120,000', '115,000', '110,000', '105,000', '100,000', '95,000'],
-				axisLabel: { color: '#666', fontSize: 8, show: true },
+				axisLabel: { color: '#666', fontSize: 16, show: true },
 				axisTick: { show: false },
 				axisLine: { show: false },
 				splitLine: { show: false }
@@ -1288,7 +1288,7 @@ function renderModalCharts() {
 					label: {
 						show: true,
 						position: 'top',
-						fontSize: 8,
+						fontSize: 18,
 						color: '#333',
 						formatter: '{c}'
 					}
@@ -1301,7 +1301,7 @@ function renderModalCharts() {
 					label: {
 						show: true,
 						position: 'top',
-						fontSize: 8,
+						fontSize: 18,
 						color: '#333',
 						formatter: '{c}%'
 					}
@@ -1326,25 +1326,25 @@ function renderModalCharts() {
 		const option2 = {
 			title: {
 				text: 'When the cost of a five-seat version single boat is €36,500, the break-even sales volume is reached',
-				textStyle: { fontSize: 16, color: '#333', fontWeight: 'normal' },
-				top: 5,
+				textStyle: { fontSize: 20, color: '#333', fontWeight: 'normal' },
+				top: 50,
 				left: 'center'
 			},
-			grid: { top: 60, bottom: 100, left: 50, right: 50 },
+			grid: { top: 100, bottom: 160, left: 50, right: 50 },
 			legend: {
 				data: ['Annual breakeven sales volume (units)', 'Gross profit margin'],
-				bottom: '5%',
+				bottom: '7%',
 				textStyle: { fontSize: 12 },
 				left: 'center',
-				itemGap: 20
+				itemGap: 40
 			},
 			graphic: {
 				type: 'text',
 				left: '40',
-				bottom: '25',
+				bottom: '9%',
 				style: {
 					text: 'Horizontal axis (Price: Euro)',
-					fontSize: 10,
+					fontSize: 12,
 					color: '#666',
 					textAlign: 'left',
 					textVerticalAlign: 'middle'
@@ -1354,7 +1354,7 @@ function renderModalCharts() {
 				type: 'category',
 
 				data: ['225,000', '220,000', '215,000', '210,000', '205,000', '200,000', '195,000', '190,000', '185,000', '180,000', '175,000'],
-				axisLabel: { color: '#666', fontSize: 8, show: true },
+				axisLabel: { color: '#666', fontSize: 16, show: true },
 				axisTick: { show: false },
 				axisLine: { show: false },
 				splitLine: { show: false }
@@ -1375,7 +1375,7 @@ function renderModalCharts() {
 					label: {
 						show: true,
 						position: 'top',
-						fontSize: 8,
+						fontSize: 18,
 						color: '#333',
 						formatter: '{c}'
 					}
@@ -1389,7 +1389,7 @@ function renderModalCharts() {
 					label: {
 						show: true,
 						position: 'top',
-						fontSize: 8,
+						fontSize: 18,
 						color: '#333',
 						formatter: '{c}%'
 					}
