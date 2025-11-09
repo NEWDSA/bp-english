@@ -1247,7 +1247,7 @@ function renderModalCharts() {
 
 			legend: {
 				data: ['Annual breakeven sales volume (units)', 'Gross profit margin'],
-				bottom: '7%',
+				bottom: '6%',
 				textStyle: { fontSize: 12 },
 				left: 'center',
 				itemGap: 40
@@ -1255,7 +1255,7 @@ function renderModalCharts() {
 			graphic: {
 				type: 'text',
 				left: '40',
-				bottom: '9%',
+				bottom: '7%',
 				style: {
 					text: 'Horizontal axis (Price: Euro)',
 					fontSize: 12,
@@ -1267,22 +1267,40 @@ function renderModalCharts() {
 			xAxis: {
 				type: 'category',
 				data: ['145,000', '140,000', '135,000', '130,000', '125,000', '120,000', '115,000', '110,000', '105,000', '100,000', '95,000'],
-				axisLabel: { color: '#666', fontSize: 16, show: true },
+				axisLabel: { color: '#666', fontSize: 16, show: true, margin: 20 },
 				axisTick: { show: false },
 				axisLine: { show: false },
 				splitLine: { show: false }
 			},
-			yAxis: {
-				type: 'value',
-				axisLabel: { show: false },
-				axisTick: { show: false },
-				axisLine: { show: false },
-				splitLine: { show: false }
-			},
+			yAxis: [
+				{
+					type: 'value',
+					position: 'left',
+					min: 0,
+					max: 30,
+					show: false,
+					axisLabel: { show: false },
+					axisTick: { show: false },
+					axisLine: { show: false },
+					splitLine: { show: false }
+				},
+				{
+					type: 'value',
+					position: 'right',
+					min: 60,
+					max: 80,
+					show: false,
+					axisLabel: { show: false },
+					axisTick: { show: false },
+					axisLine: { show: false },
+					splitLine: { show: false }
+				}
+			],
 			series: [
 				{
 					name: 'Annual breakeven sales volume (units)',
 					type: 'bar',
+					yAxisIndex: 0,
 					data: [4.4, 4.6, 4.8, 5.1, 5.3, 5.6, 5.9, 6.2, 6.6, 7.1, 7.6],
 					itemStyle: { color: '#00d4ff' },
 					label: {
@@ -1296,6 +1314,7 @@ function renderModalCharts() {
 				{
 					name: 'Gross profit margin',
 					type: 'bar',
+					yAxisIndex: 1,
 					data: [75.5, 75.0, 74.4, 73.8, 73.2, 72.5, 71.7, 70.9, 70.0, 69.0, 67.9],
 					itemStyle: { color: '#FFC27A' },
 					label: {
@@ -1333,7 +1352,7 @@ function renderModalCharts() {
 			grid: { top: 100, bottom: 160, left: 50, right: 50 },
 			legend: {
 				data: ['Annual breakeven sales volume (units)', 'Gross profit margin'],
-				bottom: '7%',
+				bottom: '6%',
 				textStyle: { fontSize: 12 },
 				left: 'center',
 				itemGap: 40
@@ -1341,7 +1360,7 @@ function renderModalCharts() {
 			graphic: {
 				type: 'text',
 				left: '40',
-				bottom: '9%',
+				bottom: '7%',
 				style: {
 					text: 'Horizontal axis (Price: Euro)',
 					fontSize: 12,
@@ -1354,22 +1373,40 @@ function renderModalCharts() {
 				type: 'category',
 
 				data: ['225,000', '220,000', '215,000', '210,000', '205,000', '200,000', '195,000', '190,000', '185,000', '180,000', '175,000'],
-				axisLabel: { color: '#666', fontSize: 16, show: true },
+				axisLabel: { color: '#666', fontSize: 16, show: true, margin: 20 },
 				axisTick: { show: false },
 				axisLine: { show: false },
 				splitLine: { show: false }
 			},
-			yAxis: {
-				type: 'value',
-				axisLabel: { show: false },
-				axisTick: { show: false },
-				axisLine: { show: false },
-				splitLine: { show: false }
-			},
+			yAxis: [
+				{
+					type: 'value',
+					position: 'left',
+					min: 0,
+					max: 20,
+					show: false,
+					axisLabel: { show: false },
+					axisTick: { show: false },
+					axisLine: { show: false },
+					splitLine: { show: false }
+				},
+				{
+					type: 'value',
+					position: 'right',
+					min: 65,
+					max: 75,
+					show: false,
+					axisLabel: { show: false },
+					axisTick: { show: false },
+					axisLine: { show: false },
+					splitLine: { show: false }
+				}
+			],
 			series: [
 				{
 					name: 'Annual breakeven sales volume (units)',
 					type: 'bar',
+					yAxisIndex: 0,
 					data: [2.9, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.9, 4.0],
 					itemStyle: { color: '#00d4ff' },
 					label: {
@@ -1383,6 +1420,7 @@ function renderModalCharts() {
 				{
 					name: 'Gross profit margin',
 					type: 'bar',
+					yAxisIndex: 1,
 					// data: [12, 15, 18, 22, 25, 28, 32, 35, 38, 42, 45, 48],
 					data: [73.8, 73.4, 73.0, 72.6, 72.2, 71.8, 71.3, 70.8, 70.3, 69.7, 69.1],
 					itemStyle: { color: '#FFC27A' },
