@@ -1225,6 +1225,44 @@ function renderRevenueChart() {
 
 // 渲染模态框图表
 function renderModalCharts() {
+	// 获取屏幕宽度用于响应式字体大小
+	const screenWidth = window.innerWidth
+	// 根据屏幕宽度动态计算字体大小
+	const getTitleFontSize = () => {
+		if (screenWidth <= 1440) return 12
+		if (screenWidth <= 1680) return 13
+		if (screenWidth <= 1920) return 16
+		return 20
+	}
+
+	const getAxisLabelFontSize = () => {
+		if (screenWidth <= 1440) return 10
+		if (screenWidth <= 1680) return 12
+		if (screenWidth <= 1920) return 14
+		return 16
+	}
+
+	const getSeriesLabelFontSize = () => {
+		if (screenWidth <= 1440) return 12
+		if (screenWidth <= 1680) return 12
+		if (screenWidth <= 1920) return 16
+		return 18
+	}
+
+	const getLegendFontSize = () => {
+		if (screenWidth <= 1440) return 10
+		if (screenWidth <= 1680) return 10
+		if (screenWidth <= 1920) return 11
+		return 12
+	}
+
+	const getGraphicFontSize = () => {
+		if (screenWidth <= 1440) return 10
+		if (screenWidth <= 1680) return 10
+		if (screenWidth <= 1920) return 11
+		return 12
+	}
+
 	// Chart 1: 左上角 - 年度数据柱状图（蓝色和橙色）
 	if (chart1Ref.value) {
 		// 销毁旧实例
@@ -1236,29 +1274,41 @@ function renderModalCharts() {
 		// 重新创建实例
 		//3840.2160
 		chart1Instance = echarts.init(chart1Ref.value)
+
+		const titleFontSize = getTitleFontSize()
+		const axisLabelFontSize = getAxisLabelFontSize()
+		const seriesLabelFontSize = getSeriesLabelFontSize()
+		const legendFontSize = getLegendFontSize()
+		const graphicFontSize = getGraphicFontSize()
+
 		const option1 = {
 			title: {
 				text: 'When the cost of three single-unit ships is €21,000, the break-even sales volume is reached',
-				textStyle: { fontSize: 20, color: '#333', fontWeight: 'normal' },
-				top: 50,
+				textStyle: { fontSize: titleFontSize, color: '#333', fontWeight: 'normal' },
+				top: screenWidth <= 1280 ? 30 : 50,
 				left: 'center'
 			},
-			grid: { top: 100, bottom: 160, left: 50, right: 50 },
+			grid: {
+				top: screenWidth <= 1280 ? 80 : 100,
+				bottom: screenWidth <= 1280 ? 120 : 160,
+				left: screenWidth <= 1280 ? 40 : 50,
+				right: screenWidth <= 1280 ? 40 : 50
+			},
 
 			legend: {
 				data: ['Annual breakeven sales volume (units)', 'Gross profit margin'],
-				bottom: '6%',
-				textStyle: { fontSize: 12 },
+				bottom: screenWidth <= 1920 ? '10%' : '6%',
+				textStyle: { fontSize: legendFontSize },
 				left: 'center',
-				itemGap: 40
+				itemGap: screenWidth <= 1920 ? 20 : 40
 			},
 			graphic: {
 				type: 'text',
 				left: '40',
-				bottom: '7%',
+				bottom: screenWidth <= 1920 ? '18%' : '7%',
 				style: {
 					text: 'Horizontal axis (Price: Euro)',
-					fontSize: 12,
+					fontSize: graphicFontSize,
 					color: '#666',
 					textAlign: 'left',
 					textVerticalAlign: 'middle'
@@ -1269,11 +1319,11 @@ function renderModalCharts() {
 				data: ['145,000', '140,000', '135,000', '130,000', '125,000', '120,000', '115,000', '110,000', '105,000', '100,000', '95,000'],
 				axisLabel: {
 					color: '#666',
-					fontSize: 16,
+					fontSize: axisLabelFontSize,
 					show: true,
-					margin: 20,
+					margin: screenWidth <= 1280 ? 15 : 20,
 					interval: 0,  // 强制显示所有标签
-					rotate: 0,    // 不旋转标签
+					rotate: screenWidth <= 1280 ? 45 : 0,    // 小屏幕旋转标签
 					formatter: function(value, index) {
 						// 120,000 is at index 5
 						if (index === 5) {
@@ -1284,7 +1334,7 @@ function renderModalCharts() {
 					rich: {
 						highlight: {
 							color: '#00d3f3',
-							fontSize: 16,  
+							fontSize: axisLabelFontSize,
 						}
 					}
 				},
@@ -1326,7 +1376,7 @@ function renderModalCharts() {
 					label: {
 						show: true,
 						position: 'top',
-						fontSize: 18,
+						fontSize: seriesLabelFontSize,
 						formatter: function(params) {
 							// 5.6 is at index 5
 							if (params.dataIndex === 5) {
@@ -1337,7 +1387,7 @@ function renderModalCharts() {
 						rich: {
 							highlight: {
 								color: '#00d3f3',
-								fontSize: 18,
+								fontSize: seriesLabelFontSize,
 							}
 						}
 					}
@@ -1351,7 +1401,7 @@ function renderModalCharts() {
 					label: {
 						show: true,
 						position: 'top',
-						fontSize: 18,
+						fontSize: seriesLabelFontSize,
 						formatter: function(params) {
 							// 72.5% is at index 5
 							if (params.dataIndex === 5) {
@@ -1362,7 +1412,7 @@ function renderModalCharts() {
 						rich: {
 							highlight: {
 								color: '#00d3f3',
-								fontSize: 18,
+								fontSize: seriesLabelFontSize,
 							}
 						}
 					}
@@ -1384,28 +1434,41 @@ function renderModalCharts() {
 		}
 		// 重新创建实例
 		chart2Instance = echarts.init(chart2Ref.value)
+
+		// 使用之前定义的响应式字体大小函数
+		const titleFontSize = getTitleFontSize()
+		const axisLabelFontSize = getAxisLabelFontSize()
+		const seriesLabelFontSize = getSeriesLabelFontSize()
+		const legendFontSize = getLegendFontSize()
+		const graphicFontSize = getGraphicFontSize()
+
 		const option2 = {
 			title: {
 				text: 'When the cost of a five-seat version single boat is €36,500, the break-even sales volume is reached',
-				textStyle: { fontSize: 20, color: '#333', fontWeight: 'normal' },
-				top: 50,
+				textStyle: { fontSize: titleFontSize, color: '#333', fontWeight: 'normal' },
+				top: screenWidth <= 1280 ? 30 : 50,
 				left: 'center'
 			},
-			grid: { top: 100, bottom: 160, left: 50, right: 50 },
+			grid: {
+				top: screenWidth <= 1280 ? 80 : 100,
+				bottom: screenWidth <= 1280 ? 120 : 160,
+				left: screenWidth <= 1280 ? 40 : 50,
+				right: screenWidth <= 1280 ? 40 : 50
+			},
 			legend: {
 				data: ['Annual breakeven sales volume (units)', 'Gross profit margin'],
-				bottom: '6%',
-				textStyle: { fontSize: 12 },
+				bottom: screenWidth <= 1920 ? '10%' : '6%',
+				textStyle: { fontSize: legendFontSize },
 				left: 'center',
-				itemGap: 40
+				itemGap: screenWidth <= 1920 ? 20 : 40
 			},
 			graphic: {
 				type: 'text',
 				left: '40',
-				bottom: '7%',
+				bottom: screenWidth <= 1920 ? '18%' : '7%',
 				style: {
 					text: 'Horizontal axis (Price: Euro)',
-					fontSize: 12,
+					fontSize: graphicFontSize,
 					color: '#666',
 					textAlign: 'left',
 					textVerticalAlign: 'middle'
@@ -1417,11 +1480,11 @@ function renderModalCharts() {
 				data: ['225,000', '220,000', '215,000', '210,000', '205,000', '200,000', '195,000', '190,000', '185,000', '180,000', '175,000'],
 				axisLabel: {
 					color: '#666',
-					fontSize: 16,
+					fontSize: axisLabelFontSize,
 					show: true,
-					margin: 20,
+					margin: screenWidth <= 1280 ? 15 : 20,
 					interval: 0,  // 强制显示所有标签
-					rotate: 0,    // 不旋转标签
+					rotate: screenWidth <= 1280 ? 45 : 0,    // 小屏幕旋转标签
 					formatter: function(value, index) {
 						// 200,000 is at index 5
 						if (index === 5) {
@@ -1432,7 +1495,7 @@ function renderModalCharts() {
 					rich: {
 						highlight: {
 							color: '#00d3f3',
-							fontSize: 16,  
+							fontSize: axisLabelFontSize,
 						}
 					}
 				},
@@ -1474,7 +1537,7 @@ function renderModalCharts() {
 					label: {
 						show: true,
 						position: 'top',
-						fontSize: 18,
+						fontSize: seriesLabelFontSize,
 						formatter: function(params) {
 							// 3.4 is at index 5
 							if (params.dataIndex === 5) {
@@ -1485,7 +1548,7 @@ function renderModalCharts() {
 						rich: {
 							highlight: {
 								color: '#00d3f3',
-								fontSize: 18,
+								fontSize: seriesLabelFontSize,
 							}
 						}
 					}
@@ -1500,7 +1563,7 @@ function renderModalCharts() {
 					label: {
 						show: true,
 						position: 'top',
-						fontSize: 18,
+						fontSize: seriesLabelFontSize,
 						formatter: function(params) {
 							// 71.8% is at index 5
 							if (params.dataIndex === 5) {
@@ -1511,7 +1574,7 @@ function renderModalCharts() {
 						rich: {
 							highlight: {
 								color: '#00d3f3',
-								fontSize: 18,
+								fontSize: seriesLabelFontSize,
 							}
 						}
 					}
@@ -2126,21 +2189,9 @@ function onWindowResize() {
 			demandChartInstance.resize()
 			renderDemandChart()
 		}
-		if (chart1Instance) {
-			chart1Instance.resize()
-			renderChart1()
-		}
-		if (chart2Instance) {
-			chart2Instance.resize()
-			renderChart2()
-		}
-		if (chart3Instance) {
-			chart3Instance.resize()
-			renderChart3()
-		}
-		if (chart4Instance) {
-			chart4Instance.resize()
-			renderChart4()
+		// 重新渲染模态框图表（包含Chart 1-4）以应用新的响应式字体大小
+		if (activeContent.value === 'revenue' && (chart1Instance || chart2Instance || chart3Instance || chart4Instance)) {
+			renderModalCharts()
 		}
 	}, 150)
 }
@@ -2189,9 +2240,6 @@ function goHome() {
 	router.push('/')
 }
 
-onMounted(() => {
-	// 页面加载完成后的初始化逻辑
-})
 </script>
 
 <style scoped>
