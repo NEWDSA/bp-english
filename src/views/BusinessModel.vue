@@ -33,36 +33,44 @@
 					class="button-focus absolute top-2 md:top-4 right-2 md:right-4 text-gray-300 bg-black/50 backdrop-blur-sm hover:bg-black/70 rounded-full p-2 md:p-2 z-50 transition-all duration-300 group">
 					<img src="../assets/icon-17.png" alt="返回" class="w-6 h-6">
 				</button>
-				
+
 				<!-- 内容 -->
-				<div>
+				<div class="c-content-wrapper">
 					<!-- 图片左上角 -->
-					<div>
-						<p>赛事等高端活动</p>
-						<p>参与或赞助高端水上赛事<br/>主办品鉴会、水域试驾体验日</p>
+					<div class="content-section top-left">
+						<h3 class="content-section-title">High-end events such as competitions</h3>
+						<p class="section-text">Participate in or sponsor high-end water sports events; <br/>organize product appreciation events and water driving experience days.</p>
 					</div>
 					<!-- 图片左下角 -->
-					<div>
-						<p>线上平台与数字触点</p>
-						<p>官方独立站<br/>(品牌故事/技术详解/线上预约试驾)<br/>社交媒体矩阵<br/>“lns/Youtube/Tiktok“</p>
+					<div class="content-section bottom-left">
+						<h3 class="content-section-title">Online platforms and digital touchpoints</h3>
+						<p class="section-text">Official independent website (brand story/technical details/online test drive booking)<br/>Social media matrix: Instagram/YouTube/TikTok</p>
 					</div>
-					<img src="../assets/c_clinet_bg.png" alt="中间图片">
+					<!-- 中间图片 -->
+					<div class="center-image-container">
+						<img src="../assets/c_clinet_bg.png" alt="Hydrofoil Boat" class="center-image">
+					</div>
 					<!-- 图片右上角 -->
-					<div>
-						<p>行业展会与媒体</p>
-						<p>参与主流游艇展<br/>游艇行业协会平台曝光<br/>头部行业媒体/OL合作</p>
+					<div class="content-section top-right">
+						<h3 class="content-section-title">Industry exhibitions and media</h3>
+						<p class="section-text">Participate in mainstream yacht shows<br/>Yacht industry association platform exposed</br>Leading industry media/KOL cooperation</p>
 					</div>
 					<!-- 图片右下角 -->
-					<div>
-						<p>线下销售网络</p>
-						<p>海外代售/合作:<br/>与国际知名游艇经销商建立合作<br/>国内渠道:入驻高端游艇俱乐部,与高端旅游度假区合作</p>
+					<div class="content-section bottom-right">
+						<h3 class="content-section-title">Offline sales network</h3>
+						<p class="section-text">Overseas Sales/Partnerships: <br/>Establishing partnerships with internationally renowned yacht dealers<br/>Domestic channels: <br/>Establish a presence in high-end yacht clubs and collaborate with upscale tourist resorts.</p>
 					</div>
 				</div>
 			</div>
 
 			<!-- B方块的内容面板 - 全屏 -->
 			<div class="b-content-panel" v-if="showBContent">
-				<button class="close-content-btn" @click="backToBlocks">✕</button>
+				<!-- 关闭按钮 -->
+				<button
+					@click="backToBlocks"
+					class="button-focus absolute top-8 md:top-30 right-8 md:right-4 text-gray-300 bg-black/50 backdrop-blur-sm hover:bg-black/70 rounded-full p-2 md:p-2 z-50 transition-all duration-300 group">
+					<img src="../assets/icon-17.png" alt="返回" class="w-6 h-6">
+				</button>
 
 				<!-- B方块显示主要内容 -->
 				<div class="main-content">
@@ -2175,7 +2183,7 @@ onMounted(() => {
 	right: 0;
 	width: 50%;
 	height: 100%;
-	background: url('../assets/c_clinet_bg.jpg') center/cover no-repeat;
+	background: url('../assets/c_clinet_bg.png') center/cover no-repeat;
 	cursor: pointer;
 	transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 	overflow: hidden;
@@ -2584,12 +2592,152 @@ onMounted(() => {
 }
 
 .c-content-wrapper {
-	display: flex;
-	flex-direction: column;
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+	grid-template-rows: 1fr auto 1fr;
 	align-items: center;
 	justify-content: center;
 	height: 100%;
-	padding-top: 40px;
+	width: 100%;
+	position: relative;
+	padding: 20px 40px;
+	margin: 0 auto;
+}
+
+/* 内容区域样式 */
+.c-content-wrapper .content-section {
+	position: relative;
+	padding: 20px;
+	z-index: 2;
+	min-width: 400px;
+}
+
+.c-content-wrapper .content-section.top-left {
+	grid-column: 1;
+	grid-row: 1 / span 2;
+	text-align: left;
+	align-self: center;
+	padding-bottom: 90%;
+}
+
+.c-content-wrapper .content-section.top-right {
+	grid-column: 3;
+	grid-row: 1 / span 2;
+	text-align: left;
+	align-self: center;
+	justify-self: end;
+	padding-bottom: 90%;
+}
+
+.c-content-wrapper .content-section.bottom-left {
+	grid-column: 1;
+	grid-row: 2 / span 2;
+	text-align: left;
+	align-self: center;
+	padding-top: 90%;
+}
+
+.c-content-wrapper .content-section.bottom-right {
+	grid-column: 3;
+	grid-row: 2 / span 2;
+	text-align: left;
+	align-self: center;
+	justify-self: end;
+	padding-top: 90%;
+}
+
+/* 中间图片容器 */
+.c-content-wrapper .center-image-container {
+	grid-column: 2;
+	grid-row: 2;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+}
+
+.c-content-wrapper .center-image {
+	max-width: 1400px;
+	width: 100%;
+	height: auto;
+	object-fit: contain;
+}
+
+/* 标题样式 */
+.c-content-wrapper .content-section-title {
+	font-size: 20px;
+	font-weight: bold;
+	color: #ffffff;
+	margin-bottom: 10px;
+	line-height: 1.3;
+}
+
+/* 文本样式 */
+.c-content-wrapper .section-text {
+	font-size: 14px;
+	color: rgba(255, 255, 255, 0.8);
+	line-height: 1.6;
+}
+
+/* 响应式布局 */
+@media (max-width: 1200px) {
+	.c-content-wrapper {
+		padding: 40px 30px;
+	}
+
+	.c-content-wrapper .center-image {
+		max-width: 550px;
+	}
+
+	.c-content-wrapper .content-section {
+		min-width: 300px;
+	}
+
+	.c-content-wrapper .content-section-title {
+		font-size: 18px;
+	}
+
+	.c-content-wrapper .section-text {
+		font-size: 13px;
+	}
+}
+
+@media (max-width: 768px) {
+	.c-content-wrapper {
+		display: flex;
+		flex-direction: column;
+		padding: 30px 20px;
+		gap: 30px;
+	}
+
+	.c-content-wrapper .content-section {
+		text-align: left !important;
+		align-self: center !important;
+		min-width: auto;
+		width: 100%;
+		padding-top: 20px !important;
+		padding-bottom: 20px !important;
+	}
+
+	.c-content-wrapper .center-image-container {
+		order: -1;
+	}
+
+	.c-content-wrapper .center-image {
+		max-width: 400px;
+	}
+
+	.c-content-wrapper .content-section::before {
+		display: none;
+	}
+
+	.c-content-wrapper .content-section-title {
+		font-size: 16px;
+	}
+
+	.c-content-wrapper .section-text {
+		font-size: 12px;
+	}
 }
 
 .c-content-title {
