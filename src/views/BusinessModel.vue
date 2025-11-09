@@ -1267,7 +1267,27 @@ function renderModalCharts() {
 			xAxis: {
 				type: 'category',
 				data: ['145,000', '140,000', '135,000', '130,000', '125,000', '120,000', '115,000', '110,000', '105,000', '100,000', '95,000'],
-				axisLabel: { color: '#666', fontSize: 16, show: true, margin: 20 },
+				axisLabel: {
+					color: '#666',
+					fontSize: 16,
+					show: true,
+					margin: 20,
+					interval: 0,  // 强制显示所有标签
+					rotate: 0,    // 不旋转标签
+					formatter: function(value, index) {
+						// 120,000 is at index 5
+						if (index === 5) {
+							return '{highlight|' + value + '}';
+						}
+						return value;
+					},
+					rich: {
+						highlight: {
+							color: '#00d3f3',
+							fontSize: 16,  
+						}
+					}
+				},
 				axisTick: { show: false },
 				axisLine: { show: false },
 				splitLine: { show: false }
@@ -1307,8 +1327,19 @@ function renderModalCharts() {
 						show: true,
 						position: 'top',
 						fontSize: 18,
-						color: '#333',
-						formatter: '{c}'
+						formatter: function(params) {
+							// 5.6 is at index 5
+							if (params.dataIndex === 5) {
+								return '{highlight|' + params.value + '}';
+							}
+							return params.value;
+						},
+						rich: {
+							highlight: {
+								color: '#00d3f3',
+								fontSize: 18,
+							}
+						}
 					}
 				},
 				{
@@ -1321,8 +1352,19 @@ function renderModalCharts() {
 						show: true,
 						position: 'top',
 						fontSize: 18,
-						color: '#333',
-						formatter: '{c}%'
+						formatter: function(params) {
+							// 72.5% is at index 5
+							if (params.dataIndex === 5) {
+								return '{highlight|' + params.value + '%}';
+							}
+							return params.value + '%';
+						},
+						rich: {
+							highlight: {
+								color: '#00d3f3',
+								fontSize: 18,
+							}
+						}
 					}
 				}
 			]
@@ -1373,7 +1415,27 @@ function renderModalCharts() {
 				type: 'category',
 
 				data: ['225,000', '220,000', '215,000', '210,000', '205,000', '200,000', '195,000', '190,000', '185,000', '180,000', '175,000'],
-				axisLabel: { color: '#666', fontSize: 16, show: true, margin: 20 },
+				axisLabel: {
+					color: '#666',
+					fontSize: 16,
+					show: true,
+					margin: 20,
+					interval: 0,  // 强制显示所有标签
+					rotate: 0,    // 不旋转标签
+					formatter: function(value, index) {
+						// 200,000 is at index 5
+						if (index === 5) {
+							return '{highlight|' + value + '}';
+						}
+						return value;
+					},
+					rich: {
+						highlight: {
+							color: '#00d3f3',
+							fontSize: 16,  
+						}
+					}
+				},
 				axisTick: { show: false },
 				axisLine: { show: false },
 				splitLine: { show: false }
@@ -1413,8 +1475,19 @@ function renderModalCharts() {
 						show: true,
 						position: 'top',
 						fontSize: 18,
-						color: '#333',
-						formatter: '{c}'
+						formatter: function(params) {
+							// 3.4 is at index 5
+							if (params.dataIndex === 5) {
+								return '{highlight|' + params.value + '}';
+							}
+							return params.value;
+						},
+						rich: {
+							highlight: {
+								color: '#00d3f3',
+								fontSize: 18,
+							}
+						}
 					}
 				},
 				{
@@ -1428,8 +1501,19 @@ function renderModalCharts() {
 						show: true,
 						position: 'top',
 						fontSize: 18,
-						color: '#333',
-						formatter: '{c}%'
+						formatter: function(params) {
+							// 71.8% is at index 5
+							if (params.dataIndex === 5) {
+								return '{highlight|' + params.value + '%}';
+							}
+							return params.value + '%';
+						},
+						rich: {
+							highlight: {
+								color: '#00d3f3',
+								fontSize: 18,
+							}
+						}
 					}
 				}
 			]
