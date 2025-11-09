@@ -1586,23 +1586,23 @@ button {
 }
 
 .works-title {
-    font-size: 12px;
-    margin-bottom: 6px;
-    line-height: 1.2;
+    font-size: 14px;
+    margin-bottom: 8px;
+    line-height: 1.3;
     font-weight: 600;
 }
 
 .works-project,
 .works-date,
 .works-location {
-    font-size: 10px;
-    margin-bottom: 3px;
+    font-size: 12px;
+    margin-bottom: 4px;
     opacity: 0.9;
 }
 
 .works-extra {
-    font-size: 8px;
-    margin-bottom: 2px;
+    font-size: 10px;
+    margin-bottom: 3px;
     font-style: italic;
     color: white;
     opacity: 0.8;
@@ -1655,20 +1655,20 @@ button {
     }
 
     .works-title {
-        font-size: 10px;
-        margin-bottom: 4px;
+        font-size: 12px;
+        margin-bottom: 5px;
     }
 
     .works-project,
     .works-date,
     .works-location {
-        font-size: 8px;
-        margin-bottom: 2px;
+        font-size: 10px;
+        margin-bottom: 3px;
     }
 
     .works-extra {
-        font-size: 7px;
-        margin-bottom: 1px;
+        font-size: 9px;
+        margin-bottom: 2px;
     }
 }
 
