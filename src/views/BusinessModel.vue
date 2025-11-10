@@ -31,20 +31,20 @@
 				<button
 					@click="backToBlocks"
 					class="button-focus absolute top-2 md:top-4 right-2 md:right-4 text-gray-300 bg-black/50 backdrop-blur-sm hover:bg-black/70 rounded-full p-2 md:p-2 z-50 transition-all duration-300 group">
-					<img src="../assets/icon-17.png" alt="返回" class="w-6 h-6">
+					<img src="../assets/icon-17.png" alt="返回" class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6">
 				</button>
 
 				<!-- 内容 -->
 				<div class="c-content-wrapper">
 					<!-- 图片左上角 -->
 					<div class="content-section top-left">
-						<h3 class="content-section-title">High-end events such as competitions</h3>
-						<p class="section-text">Participate in or sponsor high-end water sports events; <br/>organize product appreciation events and water driving experience days.</p>
+						<h3 class="content-section-title text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl">High-end events such as competitions</h3>
+						<p class="section-text text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg">Participate in or sponsor high-end water sports events; <br/>organize product appreciation events and water driving experience days.</p>
 					</div>
 					<!-- 图片左下角 -->
 					<div class="content-section bottom-left">
-						<h3 class="content-section-title">Online platforms and digital touchpoints</h3>
-						<p class="section-text">Official independent website (brand story/technical details/online test drive booking)<br/>Social media matrix: Instagram/YouTube/TikTok</p>
+						<h3 class="content-section-title text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl">Online platforms and digital touchpoints</h3>
+						<p class="section-text text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg">Official independent website (brand story/technical details/online test drive booking)<br/>Social media matrix: Instagram/YouTube/TikTok</p>
 					</div>
 					<!-- 中间图片 -->
 					<div class="center-image-container">
@@ -52,13 +52,13 @@
 					</div>
 					<!-- 图片右上角 -->
 					<div class="content-section top-right">
-						<h3 class="content-section-title">Industry exhibitions and media</h3>
-						<p class="section-text">Participate in mainstream yacht shows<br/>Yacht industry association platform exposed</br>Leading industry media/KOL cooperation</p>
+						<h3 class="content-section-title text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl">Industry exhibitions and media</h3>
+						<p class="section-text text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg">Participate in mainstream yacht shows<br/>Yacht industry association platform exposed</br>Leading industry media/KOL cooperation</p>
 					</div>
 					<!-- 图片右下角 -->
 					<div class="content-section bottom-right">
-						<h3 class="content-section-title">Offline sales network</h3>
-						<p class="section-text">Overseas Sales/Partnerships: <br/>Establishing partnerships with internationally renowned yacht dealers<br/>Domestic channels: <br/>Establish a presence in high-end yacht clubs and collaborate with upscale tourist resorts.</p>
+						<h3 class="content-section-title text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl">Offline sales network</h3>
+						<p class="section-text text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg">Overseas Sales/Partnerships: <br/>Establishing partnerships with internationally renowned yacht dealers<br/>Domestic channels: <br/>Establish a presence in high-end yacht clubs and collaborate with upscale tourist resorts.</p>
 					</div>
 				</div>
 			</div>
@@ -2684,10 +2684,18 @@ function goHome() {
 	background-repeat: no-repeat; */
 	position: absolute;
 	top: 0;
-	left: 0; 
+	left: 0;
 	background: #121727;
 	animation: fadeInScale 0.5s ease-out;
 	overflow-y: auto;
+}
+
+/* 小屏幕适配 */
+@media (max-width: 640px) {
+	.c-content-panel {
+		margin-top: 60px;
+		height: calc(100% - 60px);
+	}
 }
 
 /* B方块内容面板 - 全屏 */
@@ -2774,12 +2782,34 @@ function goHome() {
 	margin: 0 auto;
 }
 
+/* 小屏幕适配 */
+@media (max-width: 640px) {
+	.c-content-wrapper {
+		padding: 15px 20px;
+	}
+}
+
 /* 内容区域样式 */
 .c-content-wrapper .content-section {
 	position: relative;
 	padding: 20px;
 	z-index: 2;
 	min-width: 400px;
+}
+
+/* 小屏幕适配 */
+@media (max-width: 1024px) {
+	.c-content-wrapper .content-section {
+		min-width: 280px;
+		padding: 15px;
+	}
+}
+
+@media (max-width: 640px) {
+	.c-content-wrapper .content-section {
+		min-width: unset;
+		padding: 10px;
+	}
 }
 
 .c-content-wrapper .content-section.top-left {
@@ -2816,6 +2846,31 @@ function goHome() {
 	padding-top: 90%;
 }
 
+/* 小屏幕适配 */
+@media (max-width: 1024px) {
+	.c-content-wrapper .content-section.top-left,
+	.c-content-wrapper .content-section.top-right {
+		padding-bottom: 50%;
+	}
+
+	.c-content-wrapper .content-section.bottom-left,
+	.c-content-wrapper .content-section.bottom-right {
+		padding-top: 50%;
+	}
+}
+
+@media (max-width: 640px) {
+	.c-content-wrapper .content-section.top-left,
+	.c-content-wrapper .content-section.top-right {
+		padding-bottom: 20px;
+	}
+
+	.c-content-wrapper .content-section.bottom-left,
+	.c-content-wrapper .content-section.bottom-right {
+		padding-top: 20px;
+	}
+}
+
 /* 中间图片容器 */
 .c-content-wrapper .center-image-container {
 	grid-column: 2;
@@ -2833,9 +2888,22 @@ function goHome() {
 	object-fit: contain;
 }
 
+/* 小屏幕适配 */
+@media (max-width: 1024px) {
+	.c-content-wrapper .center-image {
+		max-width: 800px;
+	}
+}
+
+@media (max-width: 640px) {
+	.c-content-wrapper .center-image {
+		max-width: 300px;
+	}
+}
+
 /* 标题样式 */
 .c-content-wrapper .content-section-title {
-	font-size: 20px;
+	font-size: 30px;
 	font-weight: bold;
 	color: #ffffff;
 	margin-bottom: 10px;
@@ -2844,7 +2912,7 @@ function goHome() {
 
 /* 文本样式 */
 .c-content-wrapper .section-text {
-	font-size: 14px;
+	font-size: 20px;
 	color: rgba(255, 255, 255, 0.8);
 	line-height: 1.6;
 }
@@ -2861,14 +2929,6 @@ function goHome() {
 
 	.c-content-wrapper .content-section {
 		min-width: 300px;
-	}
-
-	.c-content-wrapper .content-section-title {
-		font-size: 18px;
-	}
-
-	.c-content-wrapper .section-text {
-		font-size: 13px;
 	}
 }
 
@@ -2900,13 +2960,27 @@ function goHome() {
 	.c-content-wrapper .content-section::before {
 		display: none;
 	}
+}
 
-	.c-content-wrapper .content-section-title {
-		font-size: 16px;
+/* 超小屏幕适配 */
+@media (max-width: 480px) {
+	.c-content-wrapper {
+		display: flex;
+		flex-direction: column;
+		padding: 15px 10px;
+		gap: 20px;
 	}
 
-	.c-content-wrapper .section-text {
-		font-size: 12px;
+	.c-content-wrapper .center-image-container {
+		margin-bottom: 15px;
+	}
+
+	.c-content-wrapper .center-image {
+		max-width: 250px;
+	}
+
+	.c-content-wrapper .content-section {
+		padding: 10px !important;
 	}
 }
 
