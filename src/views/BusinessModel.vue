@@ -514,6 +514,22 @@
 			</div>
 		</div>
 
+		<!-- Revenue Model 弹窗 -->
+		<div class="revenue-modal" v-if="activeContent === 'revenue'" @click="hideContent">
+			<div class="revenue-modal-content" @click.stop>
+				<button class="close-btn" @click="hideContent">×</button>
+				<div class="charts-grid charts-grid-two">
+					<div class="chart-item">
+						<div ref="chart1Ref" class="modal-chart"></div>
+					</div>
+					<div class="chart-item">
+						<div ref="chart2Ref" class="modal-chart"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
 		<!-- 顶部导航栏 -->
 		<TopNavigation />
 
