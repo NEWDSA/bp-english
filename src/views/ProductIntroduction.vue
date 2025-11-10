@@ -41,7 +41,7 @@
 
 		<!-- 左侧导航菜单 -->
 		<div class="left-section" :class="{ 'left-section-open': isNavMenuOpen }">
-			<div class="absolute left-5 sm:left-10 md:left-12 lg:left-14 xl:left-16 2xl:left-20 top-[calc(84px+30px)] bottom-[30px] bg-[rgba(100,100,100,0.3)] backdrop-blur-[20px] border border-white/30 rounded-[10px] shadow-[0_8px_32px_rgba(0,0,0,0.3)] min-w-[200px] sm:min-w-[240px] md:min-w-[260px] lg:min-w-[270px] xl:min-w-[280px] z-[10000] flex flex-col box-border overflow-y-auto overflow-x-hidden custom-scrollbar" ref="leftNavWrapperRef">
+			<div class="absolute left-5 sm:left-10 md:left-12 lg:left-14 xl:left-16 2xl:left-20 top-1/2 -translate-y-1/2 max-h-[calc(100vh-84px-120px)] bg-[rgba(100,100,100,0.3)] backdrop-blur-[20px] border border-white/30 rounded-[10px] shadow-[0_8px_32px_rgba(0,0,0,0.3)] min-w-[200px] sm:min-w-[240px] md:min-w-[260px] lg:min-w-[270px] xl:min-w-[280px] z-[10000] flex flex-col box-border overflow-y-auto overflow-x-hidden custom-scrollbar" ref="leftNavWrapperRef" :style="{ height: leftNavHeight }">
 				<div class="left-nav-list" ref="navListRef">
 					<div class="left-nav-item" ref="firstNavItemRef" :class="{ active: activeNavItem === 'advantages' }"
 						@click="setActiveNavItem('advantages')">
@@ -207,7 +207,7 @@
 								<table class="comparison-table text-base sm:text-lg md:text-xl lg:text-xl">
 									<tbody>
 										<tr>
-											<td>Maximum Speed (km/h)</td>
+											<td>Maximum Speed(km/h)</td>
 											<td class="yu-column">65</td>
 											<td>33</td>
 											<td>55</td>
@@ -784,12 +784,12 @@
 
 		<!-- 右侧产品规格区域 -->
 		<div class="right-section">
-			<div class="absolute right-5 sm:right-10 md:right-12 lg:right-16 xl:right-20 2xl:right-[100px] top-[calc(84px+30px)] bottom-[30px] bg-[rgba(100,100,100,0.3)] backdrop-blur-[20px] rounded-[10px] border border-white/30 shadow-[0_8px_32px_rgba(0,0,0,0.3)] w-auto min-w-fit max-w-[calc(100vw-40px)] sm:max-w-[calc(100vw-80px)] md:max-w-[calc(100vw-120px)] lg:max-w-[calc(100vw-160px)] xl:max-w-[calc(100vw-200px)] 2xl:max-w-[calc(100vw-300px)] flex flex-col overflow-hidden custom-scrollbar" ref="productSpecsPanelRef">
+			<div class="absolute right-5 sm:right-10 md:right-12 lg:right-16 xl:right-20 2xl:right-[100px] top-1/2 -translate-y-1/2 max-h-[calc(100vh-84px-120px)] bg-[rgba(100,100,100,0.3)] backdrop-blur-[20px] rounded-[10px] border border-white/30 shadow-[0_8px_32px_rgba(0,0,0,0.3)] w-auto min-w-fit max-w-[calc(100vw-40px)] sm:max-w-[calc(100vw-80px)] md:max-w-[calc(100vw-120px)] lg:max-w-[calc(100vw-160px)] xl:max-w-[calc(100vw-200px)] 2xl:max-w-[calc(100vw-300px)] flex flex-col overflow-hidden custom-scrollbar" ref="productSpecsPanelRef" style="height: fit-content;">
 				<!-- <h3 class="specs-title">Ship name: YU</h3> -->
 				<div class="w-full min-h-[48px] sm:min-h-[50px] md:min-h-[54px] lg:min-h-[56px] xl:min-h-[58px] bg-[#646464] rounded-t-[10px] flex items-center flex-shrink-0 px-4 sm:px-5 md:px-6 lg:px-7 xl:px-[29px]">
 					<span class="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl font-[350] text-white leading-tight not-italic normal-case whitespace-nowrap">Model: YU</span>
 				</div>
-				<div class="flex-1 overflow-y-auto overflow-x-hidden pl-4 sm:pl-5 md:pl-6 lg:pl-7 xl:pl-[29px] pr-4 sm:pr-5 md:pr-6 lg:pr-7 xl:pr-[29px]">
+				<div class="overflow-y-auto overflow-x-hidden pl-4 sm:pl-5 md:pl-6 lg:pl-7 xl:pl-[29px] pr-4 sm:pr-5 md:pr-6 lg:pr-7 xl:pr-[29px] pb-4 sm:pb-5 md:pb-6 lg:pb-7 xl:pb-[29px]">
 				<!-- 主要尺寸 -->
 				<div class="p-2">
 					<div class="flex justify-between items-center cursor-pointer rounded-[5px]">
@@ -1010,11 +1010,13 @@ const toggleFullscreen = () => {
 // 窗口大小变化处理函数
 const handleResize = () => {
 	updateLinePosition()
+	syncLeftNavHeight()
 }
 
 // 组件挂载后计算连接线位置
 onMounted(() => {
 	updateLinePosition()
+	syncLeftNavHeight()
 	// 监听窗口大小变化
 	window.addEventListener('resize', handleResize)
 
@@ -1032,6 +1034,7 @@ onMounted(() => {
 // 组件更新后重新计算
 onUpdated(() => {
 	updateLinePosition()
+	syncLeftNavHeight()
 })
 
 // 组件卸载时移除事件监听器
@@ -1377,7 +1380,7 @@ onUnmounted(() => {
 	grid-template-columns: repeat(3, 1fr);
 	gap: 8px 20px;
 	width: 100%;
-	max-width: 260px;
+	max-width: 300px;
 	position: relative;
 }
 
@@ -2382,7 +2385,7 @@ onUnmounted(() => {
 
 .competitor-grid {
 	display: grid;
-	grid-template-columns: 200px repeat(6, calc((100% - 200px) / 6));
+	grid-template-columns: 320px repeat(6, calc((100% - 320px) / 6));
 	gap: 0;
 	width: 100%;
 	max-width: 100%;
@@ -2393,22 +2396,28 @@ onUnmounted(() => {
 
 /* VS 其他水翼艇 tab的网格布局（5列） */
 .tab-panel.vs-others-tab .competitor-grid {
-	grid-template-columns: 200px 260px repeat(4, calc((100% - 200px - 260px) / 4));
+	grid-template-columns: 420px 400px repeat(4, calc((100% - 420px - 400px) / 4));
 }
 
 /* 10-15w tab的网格布局（3列） */
 .tab-panel.three-col-tab .competitor-grid {
-	grid-template-columns: 200px 260px repeat(2, calc((100% - 200px - 260px) / 2));
+	grid-template-columns: 320px 400px repeat(2, calc((100% - 320px - 400px) / 2));
 }
 
 /* 18w tab的网格布局（4列） */
 .tab-panel.four-col-tab .competitor-grid {
-	grid-template-columns: 200px 260px repeat(3, calc((100% - 200px - 260px) / 3));
+	grid-template-columns: 320px 400px repeat(3, calc((100% - 320px - 400px) / 3));
 }
 
 .competitor-spacer {
 	/* 空白占位符，与表格第一列对齐 */
 	display: block;
+	width: 320px;
+}
+
+/* VS 其他水翼艇 tab的空白占位符需要更宽 */
+.tab-panel.vs-others-tab .competitor-spacer {
+	width: 420px;
 }
 
 .competitor-item {
@@ -2449,7 +2458,7 @@ onUnmounted(() => {
 }
 
 .competitor-item.yu-column .competitor-image-wrapper {
-	width: 260px;
+	width: 400px;
 	height: 170px;
 	min-height: 170px;
 }
@@ -2553,8 +2562,15 @@ onUnmounted(() => {
 /* 第一列（项目列）固定宽度，与网格第一列对齐 */
 .comparison-table th:first-child,
 .comparison-table td:first-child {
-	width: 200px;
+	width: 320px;
 	box-sizing: border-box;
+	white-space: nowrap;
+}
+
+/* VS 其他水翼艇 tab的第一列需要更宽 */
+.tab-panel.vs-others-tab .comparison-table th:first-child,
+.tab-panel.vs-others-tab .comparison-table td:first-child {
+	width: 420px;
 }
 
 /* 统一非首列宽度（后续覆盖） */
@@ -2566,25 +2582,25 @@ onUnmounted(() => {
 /* 御水翼艇列宽度 */
 .comparison-table td.yu-column,
 .comparison-table th.yu-column {
-	width: 260px;
+	width: 400px;
 }
 
 /* VS 其他水翼艇 tab的数据列宽（除御水翼艇列外共有4列） */
 .tab-panel.vs-others-tab .comparison-table td:not(:first-child):not(.yu-column),
 .tab-panel.vs-others-tab .comparison-table th:not(:first-child):not(.yu-column) {
-	width: calc((100% - 200px - 260px) / 4);
+	width: calc((100% - 420px - 400px) / 4);
 }
 
 /* 10-15w tab的数据列宽（除御水翼艇列外共有2列） */
 .tab-panel.three-col-tab .comparison-table td:not(:first-child):not(.yu-column),
 .tab-panel.three-col-tab .comparison-table th:not(:first-child):not(.yu-column) {
-	width: calc((100% - 200px - 260px) / 2);
+	width: calc((100% - 320px - 400px) / 2);
 }
 
 /* 18w tab的数据列宽（除御水翼艇列外共有3列） */
 .tab-panel.four-col-tab .comparison-table td:not(:first-child):not(.yu-column),
 .tab-panel.four-col-tab .comparison-table th:not(:first-child):not(.yu-column) {
-	width: calc((100% - 200px - 260px) / 3);
+	width: calc((100% - 320px - 400px) / 3);
 }
 
 .comparison-table thead {
