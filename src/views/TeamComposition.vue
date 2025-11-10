@@ -374,7 +374,7 @@
                                            playsinline>
                                     </video>
                                 </div>
-                                <div class="flex-1 flex flex-col justify-center items-center text-center text-white px-2.5 py-[15px] w-full box-border mb-10">
+                                <div class="flex-1 flex flex-col items-center text-center text-white px-2.5 py-[15px] w-full box-border mb-10 mt-[6vh]">
                                     <div class="text-white text-[20px] font-bold flex items-center justify-center mb-10">1</div>
                                     <div class="text-[20px] mb-2">The Definer of the Future Water-X Pontoon</div>
                                     <div class="text-[18px] mb-1 text-white/70">Project: Wuhu Pearl</div>
@@ -394,7 +394,7 @@
                                            playsinline>
                                     </video>
                                 </div>
-                                <div class="flex-1 flex flex-col justify-center items-center text-center text-white px-2.5 py-[15px] w-full box-border mb-10">
+                                <div class="flex-1 flex flex-col items-center text-center text-white px-2.5 py-[15px] w-full box-border mb-10 mt-[6vh]">
                                     <div class="text-white text-[20px] font-bold flex items-center justify-center mb-10">2</div>
                                     <div class="text-[20px] mb-2">Definer of maritime cultural tourism vessels</div>
                                     <div class="text-[18px] mb-1 text-white/70">Project: Xunxian 1 and 2</div>
@@ -408,7 +408,7 @@
                                 <div class="relative w-full h-[350px] flex-shrink-0 block mb-0 bg-cover bg-bottom bg-no-repeat transition-all duration-300 hover:scale-105"
                                      :style="{ backgroundImage: `url(${getWorkImage(3)})` }">
                                 </div>
-                                <div class="flex-1 flex flex-col justify-center items-center text-center text-white px-2.5 py-[15px] w-full box-border mb-10">
+                                <div class="flex-1 flex flex-col items-center text-center text-white px-2.5 py-[15px] w-full box-border mb-10 mt-[6vh]">
                                     <div class="text-white text-[20px] font-bold flex items-center justify-center mb-10">3</div>
                                     <div class="text-[20px] mb-2">Rich resources on B-side and G-side</div>
                                     <div class="text-[18px] mb-1 text-white/70">Project: Jiuzhou Bay No. 1 (Nezha)</div>
@@ -428,7 +428,7 @@
                                            playsinline>
                                     </video>
                                 </div>
-                                <div class="flex-1 flex flex-col justify-center items-center text-center text-white px-2.5 py-[15px] w-full box-border mb-10">
+                                <div class="flex-1 flex flex-col items-center text-center text-white px-2.5 py-[15px] w-full box-border mb-10 mt-[6vh]">
                                     <div class="text-white text-[20px] font-bold flex items-center justify-center mb-10">4</div>
                                     <div class="text-[20px] mb-2">Pioneer of consumer transportation</div>
                                     <div class="text-[18px] mb-1 text-white/70">Project: Kun</div>
@@ -448,7 +448,7 @@
                                            playsinline>
                                     </video>
                                 </div>
-                                <div class="flex-1 flex flex-col justify-center items-center text-center text-white px-2.5 py-[15px] w-full box-border mb-10">
+                                <div class="flex-1 flex flex-col items-center text-center text-white px-2.5 py-[15px] w-full box-border mb-10 mt-[6vh]">
                                     <div class="text-white text-[20px] font-bold flex items-center justify-center mb-10">5</div>
                                     <div class="text-[20px] mb-2">Complete domestic and overseas channel network</div>
                                     <div class="text-[18px] mb-1 text-white/70">Project: ADAMAS</div>
@@ -471,11 +471,11 @@
                                            playsinline>
                                     </video>
                                 </div>
-                                <div class="flex-1 flex flex-col justify-end text-center text-white px-2.5 py-[15px] w-full box-border mb-10">
+                                <div class="flex-1 flex flex-col text-center text-white px-2.5 py-[15px] w-full box-border mb-10 mt-[6vh]">
                                     <div class="text-white text-[20px] font-bold flex items-center justify-center mb-10">6</div>
                                     <div class="text-[20px] mb-2">Designer of the country's first smart yacht</div>
                                     <!-- 文字部分 -->
-                                    <div class="max-h-[190px] overflow-y-auto">
+                                    <div class="max-h-[230px] overflow-y-auto">
                                         <div class="text-[18px] mb-1 text-white/70">Project: Smart Boat No. 1</div>
                                         <div class="text-[18px] mb-1 text-white/70">Landing Date: October 2022</div>
                                         <div class="text-[18px] mb-1 text-white/70">Location: Guangdong-Hong Kong-Macao Greater Bay Area</div>
