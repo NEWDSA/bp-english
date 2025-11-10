@@ -8,37 +8,48 @@
 			playsinline></video>
 
 		<!-- 左侧悬浮按钮 -->
-		<div class="left-nav-toggle-btn" @click="toggleNavMenu">
+		<div class="fixed left-[-28px] w-16 h-16 bg-[rgba(0,212,255,0.2)] backdrop-blur-[10px] border border-[rgba(0,212,255,0.3)] rounded-full flex items-center justify-center cursor-pointer z-[10001] transition-[top] duration-300 ease-in-out text-[#00d4ff] overflow-hidden hover:bg-[rgba(0,212,255,0.3)] hover:border-[rgba(0,212,255,0.5)] hover:scale-110" ref="leftNavToggleBtnRef" :style="{ top: leftNavToggleBtnTop }" @click="toggleNavMenu">
 			<svg v-if="!isNavMenuOpen" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-				stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+				stroke-width="1.5" stroke="currentColor" class="w-7 h-7 ml-3">
 				<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
 			</svg>
 			<svg v-else xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-				stroke="currentColor" class="w-6 h-6">
+				stroke="currentColor" class="w-7 h-7">
 				<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
 			</svg>
 		</div>
 
 		<!-- 左侧导航菜单 -->
 		<div class="left-section" :class="{ 'left-section-open': isNavMenuOpen }">
-			<div class="absolute left-5 sm:left-10 md:left-12 lg:left-14 xl:left-16 2xl:left-20 top-1/2 -translate-y-1/2 max-h-[calc(100vh-84px-120px)] bg-[rgba(100,100,100,0.3)] backdrop-blur-[20px] border border-white/30 rounded-[10px] shadow-[0_8px_32px_rgba(0,0,0,0.3)] min-w-[200px] sm:min-w-[240px] md:min-w-[260px] lg:min-w-[270px] xl:min-w-[280px] z-[10000] flex flex-col box-border overflow-y-auto overflow-x-hidden custom-scrollbar" ref="leftNavWrapperRef" :style="{ height: leftNavHeight }">
-				<div class="left-nav-list" ref="navListRef">
-					<div class="left-nav-item" ref="firstNavItemRef" :class="{ active: activeNavItem === 'advantages' }"
+			<div class="absolute left-5 sm:left-10 md:left-12 lg:left-14 xl:left-16 2xl:left-20 top-1/2 -translate-y-1/2 max-h-[calc(100vh-84px-120px)] bg-transparent z-[10000] flex flex-col box-border overflow-x-hidden custom-scrollbar" ref="leftNavWrapperRef">
+				<div class="left-nav-list" ref="navListRef" :style="{ gap: navListGap }">
+					<!-- 垂直时间线 -->
+					<div class="absolute left-[90px] sm:left-[96px] md:left-[102px] lg:left-[108px] xl:left-[114px] w-0.5 bg-white/30 z-[1]" :style="{ top: lineTop, height: lineHeight }"></div>
+					
+					<div class="left-nav-item w-[510px] sm:w-[570px] md:w-[630px] lg:w-[690px] xl:w-[730px]" ref="firstNavItemRef" :class="{ active: activeNavItem === 'advantages' }"
 						@click="setActiveNavItem('advantages')">
-						<span class="nav-text">Hydrofoil Advantages</span>
+						<div class="nav-item-number">01</div>
+						<div :class="['absolute left-[90px] sm:left-[96px] md:left-[102px] lg:left-[108px] xl:left-[114px] top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full z-[3] w-[7px] h-[7px]', activeNavItem === 'advantages' ? 'bg-[#ff4444] shadow-[0_0_15px_rgba(255,68,68,0.8)]' : 'bg-white shadow-[0_0_8px_rgba(255,255,255,0.5)]']"></div>
+						<span class="nav-text text-[30px]">Hydrofoil Advantages</span>
 					</div>
-					<div class="left-nav-item" :class="{ active: activeNavItem === 'pain-points' }"
+					<div class="left-nav-item w-[510px] sm:w-[570px] md:w-[630px] lg:w-[690px] xl:w-[730px]" :class="{ active: activeNavItem === 'pain-points' }"
 						@click="setActiveNavItem('pain-points')">
-						<span class="nav-text">Traditional Electric Boat Pain Points</span>
+						<div class="nav-item-number">02</div>
+						<div :class="['absolute left-[90px] sm:left-[96px] md:left-[102px] lg:left-[108px] xl:left-[114px] top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full z-[3] w-[7px] h-[7px]', activeNavItem === 'pain-points' ? 'bg-[#ff4444] shadow-[0_0_15px_rgba(255,68,68,0.8)]' : 'bg-white shadow-[0_0_8px_rgba(255,255,255,0.5)]']"></div>
+						<span class="nav-text text-[30px]">Traditional Electric Boat Pain Points2</span>
 					</div>
-					<div class="left-nav-item" ref="lastNavItemRef"
+					<div class="left-nav-item w-[510px] sm:w-[570px] md:w-[630px] lg:w-[690px] xl:w-[730px]"
 						:class="{ active: activeNavItem === 'competitor-analysis' }"
 						@click="setActiveNavItem('competitor-analysis')">
-						<span class="nav-text">Competitor Analysis</span>
+						<div class="nav-item-number">03</div>
+						<div :class="['absolute left-[90px] sm:left-[96px] md:left-[102px] lg:left-[108px] xl:left-[114px] top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full z-[3] w-[7px] h-[7px]', activeNavItem === 'competitor-analysis' ? 'bg-[#ff4444] shadow-[0_0_15px_rgba(255,68,68,0.8)]' : 'bg-white shadow-[0_0_8px_rgba(255,255,255,0.5)]']"></div>
+						<span class="nav-text text-[30px]">Competitor Analysis</span>
 					</div>
-					<div class="left-nav-item" ref="lastNavItemRef" :class="{ active: activeNavItem === 'three-mode-rudder' }"
+					<div class="left-nav-item w-[510px] sm:w-[570px] md:w-[630px] lg:w-[690px] xl:w-[730px]" ref="lastNavItemRef" :class="{ active: activeNavItem === 'three-mode-rudder' }"
 						@click="setActiveNavItem('three-mode-rudder')">
-						<span class="nav-text">Intelligent control three-mode rudder</span>
+						<div class="nav-item-number">04</div>
+						<div :class="['absolute left-[90px] sm:left-[96px] md:left-[102px] lg:left-[108px] xl:left-[114px] top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full z-[3] w-[7px] h-[7px]', activeNavItem === 'three-mode-rudder' ? 'bg-[#ff4444] shadow-[0_0_15px_rgba(255,68,68,0.8)]' : 'bg-white shadow-[0_0_8px_rgba(255,255,255,0.5)]']"></div>
+						<span class="nav-text text-[30px]">Intelligent control three-mode rudder</span>
 					</div>
 				</div>
 			</div>
@@ -54,22 +65,21 @@
 
 
 				<!-- 弹窗标题 -->
-				<div class="modal-title flex justify-between">Traditional Electric Boat Pain Points
+				<div class="modal-title flex justify-between">Traditional Electric Boat Pain Points3
 					<button class="modal-close-btn" @click="closePainPointsModal">×</button>
 				</div>
 
 				<!-- 弹窗内容 -->
-				<div class="modal-content-wrapper pain-points-content-wrapper">
+				<div class="modal-content-wrapper pain-points-content-wrapper !flex !justify-end">
 					<!-- 左侧面板：图表和数据可视化 -->
-					<div class="modal-left-panel pain-points-left-panel">
-						<!-- 左侧内容显示背景图片和图表 -->
-					</div>
+					<!-- <div class="modal-left-panel pain-points-left-panel">
+					</div> -->
 
 					<!-- 右侧内容区域 -->
-					<div class="modal-right-panel pain-points-right-panel"
+					<div class="modal-right-panel pain-points-right-panel mr-[20px]"
 						:class="{ 'pain-points-right-panel-expanded': showPainPointsContent }">
 						<!-- 如果未展开，显示可点击的div -->
-						<div v-if="!showPainPointsContent" class="pain-points-trigger-btn-inner"
+						<div v-if="!showPainPointsContent" class="pain-points-trigger-btn-inner !text-[24px]"
 							@click="showPainPointsContent = true">
 							Traditional Electric Boat Pain Points
 						</div>
@@ -77,7 +87,7 @@
 						<!-- 如果已展开，显示实际内容 -->
 						<template v-else>
 							<div class="panel-header-section">
-								<div class="panel-header">Traditional Electric Boat Pain Points</div>
+								<div class="panel-header !text-[24px]">Traditional Electric Boat Pain Points</div>
 								<button class="pain-points-close-btn" @click="showPainPointsContent = false"
 									title="Close">×</button>
 							</div>
@@ -86,16 +96,16 @@
 								<div class="panel-content-inner">
 									<!-- 结论部分 -->
 									<div class="panel-section">
-										<div class="conclusion-title">Conclusion:</div>
+										<div class="text-sm font-bold text-white mb-[15px] sm:text-base sm:mb-[18px] md:text-lg md:mb-5 !text-[20px]">Conclusion:</div>
 										<div class="conclusion-content">
 											<div class="conclusion-item">
 												<span class="conclusion-number">1.</span>
-												<span class="conclusion-text">Weight & Resistance: Electric boats have
+												<span class="conclusion-text !text-[18px]">Weight & Resistance: Electric boats have
 													higher values due to battery pack weight and hull design;</span>
 											</div>
 											<div class="conclusion-item">
 												<span class="conclusion-number">2.</span>
-												<span class="conclusion-text">Size Requirements: To compensate for
+												<span class="conclusion-text !text-[18px]">Size Requirements: To compensate for
 													energy density disadvantages, electric boats need larger hulls to
 													accommodate more batteries or optimize hydrodynamic
 													performance.</span>
@@ -105,12 +115,12 @@
 
 									<!-- 解决办法 -->
 									<div class="panel-section">
-										<div class="solutions-title">Solutions:</div>
+										<div class="text-sm font-bold text-white mb-[15px] sm:text-base sm:mb-[18px] md:text-lg md:mb-5 !text-[20px]">Solutions:</div>
 										<div class="solutions-grid">
-											<div class="solution-item">■ Controllable Cost</div>
-											<div class="solution-item">■ High Efficiency & Energy Saving</div>
-											<div class="solution-item">■ Quick Profitability</div>
-											<div class="solution-item">■ Policy Avoidance</div>
+											<div class="solution-item !text-[18px]">■ Controllable Cost</div>
+											<div class="solution-item !text-[18px]">■ High Efficiency & Energy Saving</div>
+											<div class="solution-item !text-[18px]">■ Quick Profitability</div>
+											<div class="solution-item !text-[18px]">■ Policy Avoidance</div>
 										</div>
 									</div>
 								</div>
@@ -133,17 +143,17 @@
 				<div class="modal-content-wrapper competitor-analysis-wrapper">
 					<!-- Tab切换 -->
 					<div class="competitor-tabs">
-						<button class="competitor-tab text-sm sm:text-base md:text-lg lg:text-xl" :class="{ active: competitorTab === '10-15w' }"
+						<button class="competitor-tab !text-[20px]" :class="{ active: competitorTab === '10-15w' }"
 							@click="setCompetitorTab('10-15w')">
 							<!-- Hydrofoil 10-15w Euro -->
 							YU VS (€100,000 - €150,000) Electric Yacht
 						</button>
-						<button class="competitor-tab text-sm sm:text-base md:text-lg lg:text-xl" :class="{ active: competitorTab === '18w' }"
+						<button class="competitor-tab !text-[20px]" :class="{ active: competitorTab === '18w' }"
 							@click="setCompetitorTab('18w')">
 							<!-- Hydrofoil 18w Euro -->
 							YU VS (€180,000) Electric Yacht
 						</button>
-						<button class="competitor-tab text-sm sm:text-base md:text-lg lg:text-xl" :class="{ active: competitorTab === 'vs-others' }"
+						<button class="competitor-tab !text-[20px]" :class="{ active: competitorTab === 'vs-others' }"
 							@click="setCompetitorTab('vs-others')">
 							<!-- VS Other Hydrofoils -->
 							YU VS Other Electric Hydrofoils
@@ -611,21 +621,21 @@
 				<div class="modal-title">Intelligent control three-mode rudder</div>
 
 				<!-- 弹窗内容 -->
-				<div class="modal-content-wrapper three-mode-rudder-wrapper">
+				<div class="modal-content-wrapper three-mode-rudder-wrapper !flex !items-stretch !justify-center !gap-5">
 					<!-- 左侧：方向盘详细展示 -->
-					<div class="three-mode-left-panel">
-						<div class="steering-wheel-container">
+					<div class="three-mode-left-panel !w-[1000px] !flex !items-center !justify-center !self-stretch">
+						<div class="steering-wheel-container !w-full !h-full">
 							<!-- 方向盘图片 -->
-							<div class="steering-wheel-image-wrapper">
-								<img src="../assets/driver.gif" alt="Intelligent control three-mode rudder" class="steering-wheel-image" />
+							<div class="steering-wheel-image-wrapper !w-full !h-full !max-w-none">
+								<img src="../assets/driver.gif" alt="Intelligent control three-mode rudder" class="steering-wheel-image !w-full !h-full !object-contain !max-w-none" />
 							</div>
 						</div>
 					</div>
 
 					<!-- 右侧：驾驶模式和车内视图 -->
-					<div class="three-mode-right-panel">
+					<div class="three-mode-right-panel !w-[1000px] !left-0 !flex !flex-col !self-stretch !items-center !justify-center">
 						<!-- 驾驶模式指示器 -->
-						<div class="driving-mode-box">
+						<div class="driving-mode-box !flex-shrink-0">
 							<div class="driving-mode-title">DRIVING MODE</div>
 							<div class="driving-mode-subtitle" v-if="drivingMode === 'normal'">FULL DRIVER CONTROL</div>
 							<div class="driving-mode-subtitle" v-else-if="drivingMode === 'sport'">REMOVE SPEED LIMIT</div>
@@ -634,10 +644,12 @@
 						</div>
 
 						<!-- 车内视图 - 点击切换模式 -->
-						<div class="interior-view-wrapper" @click="toggleDrivingMode">
-							<img v-if="drivingMode === 'normal'" src="../assets/driver1.png" alt="Car interior view - Normal mode" class="interior-view-image cursor-pointer" />
-							<img v-else-if="drivingMode === 'sport'" src="../assets/driver2.png" alt="Car interior view - Sport mode" class="interior-view-image cursor-pointer" />
-							<img v-else src="../assets/driver3.png" alt="Car interior view - Automatic mode" class="interior-view-image cursor-pointer" />
+						<div class="interior-view-wrapper !flex-shrink-0" @click="toggleDrivingMode">
+							<transition name="fade" mode="out-in">
+								<img v-if="drivingMode === 'normal'" key="normal" src="../assets/driver1.png" alt="Car interior view - Normal mode" class="interior-view-image cursor-pointer" />
+								<img v-else-if="drivingMode === 'sport'" key="sport" src="../assets/driver2.png" alt="Car interior view - Sport mode" class="interior-view-image cursor-pointer" />
+								<img v-else key="automatic" src="../assets/driver3.png" alt="Car interior view - Automatic mode" class="interior-view-image cursor-pointer" />
+							</transition>
 						</div>
 					</div>
 				</div>
@@ -657,12 +669,12 @@
 				<div class="modal-content-wrapper">
 					<!-- 左侧面板：水翼艇优势 -->
 					<div class="modal-left-panel">
-						<div class="panel-header">Hydrofoil Advantages</div>
+						<div class="panel-header !text-[24px]">Hydrofoil Advantages</div>
 
 						<!-- 第一部分：什么是水翼船 -->
 						<div class="panel-section">
-							<div class="section-title">1. What is a Hydrofoil?</div>
-							<div class="section-text">
+							<div class="section-title !text-[20px]">1. What is a Hydrofoil?</div>
+							<div class="section-text !text-[18px]">
 								A hydrofoil is a boat-like "seaplane" vessel. When accelerating, the hydrofoils beneath
 								the hull
 								generate lift, lifting the entire hull out of the water, with only slender hydrofoil
@@ -675,35 +687,35 @@
 
 						<!-- 第二部分：性能对比 -->
 						<div class="panel-section">
-							<div class="section-title">2. How does the hydrofoil perform compared to traditional boats?
+							<div class="section-title !text-[20px]">2. How does the hydrofoil perform compared to traditional boats?
 							</div>
 							<div class="performance-list">
 								<div class="performance-item">
-									<div class="performance-label">Drag reduction: up to 80%</div>
+									<div class="performance-label !text-[18px]">Drag reduction: up to 80%</div>
 									<div class="performance-bar">
 										<div class="performance-bar-fill red-bar" style="width: 100%"></div>
 									</div>
 								</div>
 								<div class="performance-item">
-									<div class="performance-label">Stability improvement: 30%-70%</div>
+									<div class="performance-label !text-[18px]">Stability improvement: 30%-70%</div>
 									<div class="performance-bar">
 										<div class="performance-bar-fill orange-bar" style="width: 70%"></div>
 									</div>
 								</div>
 								<div class="performance-item">
-									<div class="performance-label">Speed increase: 30%-50%</div>
+									<div class="performance-label !text-[18px]">Speed increase: 30%-50%</div>
 									<div class="performance-bar">
 										<div class="performance-bar-fill orange-bar" style="width: 50%"></div>
 									</div>
 								</div>
 								<div class="performance-item">
-									<div class="performance-label">Energy consumption reduction: 30%-50%</div>
+									<div class="performance-label !text-[18px]">Energy consumption reduction: 30%-50%</div>
 									<div class="performance-bar">
 										<div class="performance-bar-fill orange-bar" style="width: 50%"></div>
 									</div>
 								</div>
 								<div class="performance-item">
-									<div class="performance-label">Propulsion efficiency increase: 20%-40%</div>
+									<div class="performance-label !text-[18px]">Propulsion efficiency increase: 20%-40%</div>
 									<div class="performance-bar">
 										<div class="performance-bar-fill orange-bar" style="width: 40%"></div>
 									</div>
@@ -716,7 +728,7 @@
 					<div class="modal-right-panel">
 						<!-- 标题区域 -->
 						<div class="panel-header-section">
-							<div class="panel-header">Hydrofoil vs Traditional Boat</div>
+							<div class="panel-header !text-[24px]">Hydrofoil vs Traditional Boat</div>
 						</div>
 						<!-- 内容区域 -->
 						<div class="panel-content">
@@ -846,7 +858,7 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import { ref, onMounted, onUpdated, onUnmounted, nextTick } from 'vue'
+import { ref, onMounted, onUpdated, onUnmounted, nextTick, watch } from 'vue'
 import TopNavigation from '../components/TopNavigation.vue'
 
 const router = useRouter()
@@ -871,21 +883,51 @@ const firstNavItemRef = ref<HTMLElement | null>(null)
 const lastNavItemRef = ref<HTMLElement | null>(null)
 const leftNavWrapperRef = ref<HTMLElement | null>(null)
 const productSpecsPanelRef = ref<HTMLElement | null>(null)
+const leftNavToggleBtnRef = ref<HTMLElement | null>(null)
 
-// 左侧导航菜单高度
-const leftNavHeight = ref<string>('auto')
+// 导航列表间距
+const navListGap = ref<string>('15px')
 
 // 连接线高度和位置
 const lineHeight = ref('0px')
 const lineTop = ref('0px')
 
-// 同步左侧导航菜单高度到右侧产品规格区域
-const syncLeftNavHeight = () => {
+// 左侧悬浮按钮位置
+const leftNavToggleBtnTop = ref<string>('calc(84px + 30px)')
+
+// 计算并调整导航项之间的间距
+const adjustNavListGap = () => {
 	nextTick(() => {
-		if (productSpecsPanelRef.value) {
+		if (productSpecsPanelRef.value && navListRef.value) {
 			const rightPanelHeight = productSpecsPanelRef.value.offsetHeight
-			leftNavHeight.value = `${rightPanelHeight}px`
+			
+			// 获取列表的上下 padding
+			const listStyle = window.getComputedStyle(navListRef.value)
+			const paddingTop = parseFloat(listStyle.paddingTop) || 20
+			const paddingBottom = parseFloat(listStyle.paddingBottom) || 20
+			const listPadding = paddingTop + paddingBottom
+			
+			// 获取所有导航项的总高度
+			const navItems = navListRef.value.querySelectorAll('.left-nav-item')
+			let totalItemsHeight = 0
+			navItems.forEach((item: Element) => {
+				totalItemsHeight += (item as HTMLElement).offsetHeight
+			})
+			
+			// 计算需要的间距：(总高度 - 导航项总高度 - 上下padding) / 3（4个项有3个间距）
+			const availableHeight = rightPanelHeight - listPadding
+			const totalGap = availableHeight - totalItemsHeight
+			const gapValue = Math.max(0, totalGap / 3) // 确保不为负数
+			
+			navListGap.value = `${gapValue}px`
 		}
+	})
+}
+
+// 调整导航项间距以匹配右侧面板高度
+const syncNavListGap = () => {
+	nextTick(() => {
+		adjustNavListGap()
 	})
 }
 
@@ -905,6 +947,25 @@ const updateLinePosition = () => {
 			// 连接线从第一个导航项的中心开始，到最后一个导航项的中心结束
 			lineTop.value = `${firstTop}px`
 			lineHeight.value = `${lastTop - firstTop}px`
+		}
+	})
+}
+
+// 计算左侧悬浮按钮位置，使其与第一个导航项水平对齐
+const updateLeftNavToggleBtnPosition = () => {
+	nextTick(() => {
+		if (firstNavItemRef.value && leftNavToggleBtnRef.value) {
+			const firstNavItemRect = firstNavItemRef.value.getBoundingClientRect()
+			const toggleBtnHeight = leftNavToggleBtnRef.value.offsetHeight || 64
+			
+			// 计算第一个导航项的中心位置（相对于视口）
+			const firstNavItemCenter = firstNavItemRect.top + firstNavItemRect.height / 2
+			
+			// 将左侧悬浮按钮的中心与第一个导航项的中心对齐
+			// 按钮的 top = 第一个导航项中心 - 按钮高度的一半
+			const toggleBtnTop = firstNavItemCenter - toggleBtnHeight / 2
+			
+			leftNavToggleBtnTop.value = `${toggleBtnTop}px`
 		}
 	})
 }
@@ -986,13 +1047,23 @@ const toggleFullscreen = () => {
 // 窗口大小变化处理函数
 const handleResize = () => {
 	updateLinePosition()
-	syncLeftNavHeight()
+	syncNavListGap()
+	updateLeftNavToggleBtnPosition()
 }
+
+// 监听导航菜单打开/关闭状态，更新左侧悬浮按钮位置
+watch(isNavMenuOpen, () => {
+	// 等待菜单动画完成后再更新位置（CSS transition 是 0.3s）
+	setTimeout(() => {
+		updateLeftNavToggleBtnPosition()
+	}, 350)
+})
 
 // 组件挂载后计算连接线位置
 onMounted(() => {
 	updateLinePosition()
-	syncLeftNavHeight()
+	syncNavListGap()
+	updateLeftNavToggleBtnPosition()
 	// 监听窗口大小变化
 	window.addEventListener('resize', handleResize)
 
@@ -1010,7 +1081,8 @@ onMounted(() => {
 // 组件更新后重新计算
 onUpdated(() => {
 	updateLinePosition()
-	syncLeftNavHeight()
+	syncNavListGap()
+	updateLeftNavToggleBtnPosition()
 })
 
 // 组件卸载时移除事件监听器
@@ -1035,38 +1107,7 @@ onUnmounted(() => {
 /* 右侧产品规格面板 - 已改为 Tailwind CSS 类 */
 
 
-/* 左侧悬浮按钮样式 */
-.left-nav-toggle-btn {
-	position: fixed;
-	left: -24px;
-	top: calc(84px + 30px);
-	width: 48px;
-	height: 48px;
-	background: rgba(0, 212, 255, 0.2);
-	backdrop-filter: blur(10px);
-	border: 1px solid rgba(0, 212, 255, 0.3);
-	border-radius: 50%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	cursor: pointer;
-	z-index: 10001;
-	transition: all 0.3s ease;
-	color: #00d4ff;
-	overflow: hidden;
-}
-
-.left-nav-toggle-btn:hover {
-	background: rgba(0, 212, 255, 0.3);
-	border-color: rgba(0, 212, 255, 0.5);
-	transform: scale(1.1);
-}
-
-.left-nav-toggle-btn svg {
-	width: 24px;
-	height: 24px;
-	margin-left: 12px;
-}
+/* 左侧悬浮按钮样式 - 已改为 Tailwind CSS 类 */
 
 /* 左侧导航菜单样式 */
 .left-section {
@@ -1143,38 +1184,34 @@ onUnmounted(() => {
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	gap: 20px;
 	justify-content: flex-start;
-	padding: 15px 20px 20px 20px;
+	padding: 20px 0;
 }
 
 @media (min-width: 640px) {
 	.left-nav-list {
-		gap: 25px;
-		padding: 18px 25px 23px 25px;
+		padding: 25px 0;
 	}
 }
 
 @media (min-width: 1024px) {
 	.left-nav-list {
-		gap: 30px;
-		padding: 22px 32px 27px 32px;
+		padding: 30px 0;
 	}
 }
 
 @media (min-width: 1280px) {
 	.left-nav-list {
-		gap: 35px;
-		padding: 24px 36px 29px 36px;
+		padding: 35px 0;
 	}
 }
 
 @media (min-width: 1536px) {
 	.left-nav-list {
-		gap: 40px;
-		padding: 25px 40px 30px 40px;
+		padding: 40px 0;
 	}
 }
+
 
 .left-nav-item {
 	display: flex;
@@ -1182,57 +1219,148 @@ onUnmounted(() => {
 	position: relative;
 	cursor: pointer;
 	transition: all 0.3s ease;
-	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+	background: rgba(100, 100, 100, 0.3);
+	backdrop-filter: blur(20px);
+	border-radius: 12px;
+	padding: 12px 16px;
+	margin-left: 0;
+	margin-right: 0;
+	min-height: 60px;
+	overflow: visible;
+	z-index: 2;
 }
 
-.left-nav-item:last-child {
-	border-bottom: none;
+@media (min-width: 640px) {
+	.left-nav-item {
+		padding: 14px 18px;
+		min-height: 65px;
+	}
 }
 
-.left-nav-item:hover .nav-text {
-	color: #00d4ff;
+@media (min-width: 1024px) {
+	.left-nav-item {
+		padding: 16px 20px;
+		min-height: 70px;
+	}
+}
+
+@media (min-width: 1280px) {
+	.left-nav-item {
+		padding: 18px 22px;
+		min-height: 75px;
+	}
+}
+
+@media (min-width: 1536px) {
+	.left-nav-item {
+		padding: 20px 24px;
+		min-height: 80px;
+	}
+}
+
+/* 导航项数字 */
+.nav-item-number {
+	font-size: 16px;
+	font-weight: 600;
+	color: #FFFFFF;
+	margin-right: 12px;
+	min-width: 28px;
+	font-family: 'Arial', sans-serif;
+}
+
+@media (min-width: 640px) {
+	.nav-item-number {
+		font-size: 18px;
+		min-width: 32px;
+		margin-right: 14px;
+	}
+}
+
+@media (min-width: 1024px) {
+	.nav-item-number {
+		font-size: 20px;
+		min-width: 36px;
+		margin-right: 16px;
+	}
+}
+
+@media (min-width: 1280px) {
+	.nav-item-number {
+		font-size: 22px;
+		min-width: 40px;
+		margin-right: 18px;
+	}
+}
+
+@media (min-width: 1536px) {
+	.nav-item-number {
+		font-size: 24px;
+		min-width: 44px;
+		margin-right: 20px;
+	}
+}
+
+
+.left-nav-item:hover {
+	background: rgba(100, 100, 100, 0.4);
 	transform: translateX(5px);
 }
 
-.left-nav-item.active .nav-text {
-	color: #00d4ff;
+.left-nav-item:hover .nav-text {
+	color: #FFFFFF;
 }
 
+.left-nav-item.active {
+	background: rgba(100, 100, 100, 0.5);
+	box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+}
+
+.left-nav-item.active::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: linear-gradient(135deg, rgba(255, 0, 0, 0.3) 0%, transparent 50%),
+				linear-gradient(-135deg, rgba(255, 100, 0, 0.3) 0%, transparent 50%);
+	pointer-events: none;
+	z-index: 1;
+}
+
+
 .nav-text {
-	font-size: 18px;
 	font-weight: 500;
 	color: #FFFFFF;
 	transition: all 0.3s ease;
 	white-space: nowrap;
+	flex: 1;
+	position: relative;
+	z-index: 2;
+	margin-left: 70px;
 }
 
 @media (min-width: 640px) {
 	.nav-text {
-		font-size: 20px;
-	}
-}
-
-@media (min-width: 768px) {
-	.nav-text {
-		font-size: 22px;
+		margin-left: 74px;
 	}
 }
 
 @media (min-width: 1024px) {
 	.nav-text {
-		font-size: 24px;
+		margin-left: 78px;
 	}
 }
 
 @media (min-width: 1280px) {
 	.nav-text {
-		font-size: 26px;
+		margin-left: 82px;
 	}
 }
 
 @media (min-width: 1536px) {
 	.nav-text {
-		font-size: 30px;
+		margin-left: 86px;
 	}
 }
 
@@ -1866,40 +1994,6 @@ onUnmounted(() => {
 
 
 /* 传统电动船舶痛点样式 */
-.conclusion-title,
-.comparison-title,
-.solutions-title {
-	font-size: 14px;
-	font-weight: 700;
-	color: #FFFFFF;
-	margin-bottom: 15px;
-}
-
-@media (min-width: 640px) {
-	.conclusion-title,
-	.comparison-title,
-	.solutions-title {
-		font-size: 16px;
-		margin-bottom: 18px;
-	}
-}
-
-@media (min-width: 1024px) {
-	.conclusion-title,
-	.comparison-title,
-	.solutions-title {
-		font-size: 18px;
-		margin-bottom: 20px;
-	}
-}
-
-@media (min-width: 1536px) {
-	.conclusion-title,
-	.comparison-title,
-	.solutions-title {
-		font-size: 20px;
-	}
-}
 
 .conclusion-content {
 	display: flex;
@@ -2887,12 +2981,20 @@ onUnmounted(() => {
 .three-mode-right-panel {
 	display: flex;
 	flex-direction: column;
-	gap: 20px;
+	gap: 0;
 	align-items: stretch;
 	justify-content: center;
 	height: 100%;
 	position: relative;
 	left: -200px;
+}
+
+.three-mode-right-panel .driving-mode-box {
+	margin-bottom: 0;
+}
+
+.three-mode-right-panel .interior-view-wrapper {
+	margin-top: 0;
 }
 
 .mode-switch-buttons {
@@ -2930,6 +3032,9 @@ onUnmounted(() => {
 	border-radius: 8px;
 	padding: 20px;
 	text-align: center;
+	margin: 0;
+	margin-bottom: 0;
+	width: 100%;
 }
 
 .driving-mode-title {
@@ -2949,8 +3054,12 @@ onUnmounted(() => {
 	width: 100%;
 	position: relative;
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: center;
+	flex-shrink: 0;
+	min-height: 0;
+	margin: 0;
+	margin-top: 0;
 }
 
 .interior-view-image {
@@ -2958,6 +3067,17 @@ onUnmounted(() => {
 	height: auto;
 	object-fit: contain;
 	border-radius: 12px;
+}
+
+/* 图片切换渐变效果 */
+.fade-enter-active,
+.fade-leave-active {
+	transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+	opacity: 0;
 }
 
 /* 自定义滚动条样式 - 更不显眼 */

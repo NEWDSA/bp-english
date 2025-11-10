@@ -1,9 +1,9 @@
 <template>
 	<!-- 根据 MasterGo 封面设计还原（FRAME 名称：封面） -->
-	<section class="cover">
+	<section class="relative min-h-screen flex items-center justify-center bg-[#3B4756] overflow-hidden">
 		<!-- 视频背景 -->
 		<video
-			class="cover-video"
+			class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full w-full h-full object-cover z-[1]"
 			autoplay
 			muted
 			loop
@@ -11,6 +11,9 @@
 		>
 			<source :src="homeVideo" type="video/mp4">
 		</video>
+		<!-- 视频背景黑色遮罩 -->
+		<div class="absolute top-0 left-0 w-full h-full bg-black/10 z-[2] pointer-events-none"></div>
+		
 		<!-- 背景音乐 -->
 		<audio
 			ref="audioRef"
@@ -19,63 +22,112 @@
 			preload="auto"
 			:volume="0.5"
 		></audio>
+		
 		<!-- 音乐控制按钮 -->
 		<p
-			class="music-btn"
+			class="absolute bottom-[30px] right-[30px] w-[26px] h-[26px] rounded-full bg-white/50 border-2 border-white/30 cursor-pointer transition-all duration-300 z-20 flex items-center justify-center shadow-[0_4px_15px_rgba(0,0,0,0.2)] hover:scale-110 hover:bg-white/50 hover:shadow-[0_6px_20px_rgba(0,0,0,0.3)] active:scale-95 md:bottom-5 md:right-5 md:w-10 md:h-10"
 			@click="toggleMusic"
-			:class="{ 'is-playing': isPlaying }"
+			:class="{ 'animate-pulse': isPlaying }"
 			:aria-label="isPlaying ? 'Pause Music' : 'Play Music'"
 		>
-			<span class="music-icon">{{ isPlaying ? '🔊' : '🔇' }}</span>
+			<span class="text-xs leading-none md:text-base">{{ isPlaying ? '🔊' : '🔇' }}</span>
 		</p>
+		
 		<!-- 左上：CATALOGUE 块（标题与子项为一个整体） -->
-		<div class="catalogue-wrap" :class="{ 'is-open': showCatalogue }">
-			<!-- <button class="catalogue-head" type="button" @click="toggleCatalogue" :aria-expanded="showCatalogue ? 'true' : 'false'">CATALOGUE</button> -->
-			<div class="catalogue-head" @click="toggleCatalogue" :aria-expanded="showCatalogue ? 'true' : 'false'">CATALOGUE</div>
-			<ul v-if="showCatalogue" class="catalogue-list" role="list">
-				<li class="catalogue-item" @click="navigateToProduct">Product Introduction</li>
-				<li class="catalogue-item" @click="navigateToIndustry">Industry Background</li>
-				<li class="catalogue-item" @click="navigateToMarket">Market Demand</li>
-				<li class="catalogue-item" @click="navigateToBusiness">Business Model</li>
-				<li class="catalogue-item" @click="navigateToTeam">Team Composition</li>
-			</ul>
+		<div 
+			class="absolute top-[56px] left-[133px] text-[#DCDCDC] z-20 lg:top-[56px] lg:left-[133px] md:top-5 md:left-5 sm:top-[15px] sm:left-[15px]"
+			:class="{ 
+				'bg-white/15 backdrop-blur-[10px] rounded-2xl p-4 pb-3 border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)]': showCatalogue 
+			}"
+		>
+			<div 
+				class="text-[#DCDCDC] text-[28px] tracking-[0.08em] uppercase bg-transparent border-none cursor-pointer relative transition-all duration-300 py-2 px-4 rounded-lg font-bold drop-shadow-[2px_2px_4px_rgba(0,0,0,0.8)] hover:bg-white/10 hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(255,255,255,0.2)] after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-[#DCDCDC] after:transition-all after:duration-300 hover:after:w-full md:py-1.5 md:px-3"
+				:class="{ 'after:w-0': showCatalogue }"
+				@click="toggleCatalogue" 
+				:aria-expanded="showCatalogue ? 'true' : 'false'"
+			>
+				CATALOGUE
+			</div>
+			<transition name="slide-down">
+				<ul v-if="showCatalogue" class="list-none m-0 p-0 flex flex-col gap-3 mt-3 md:gap-2" role="list">
+					<li 
+						class="text-[#DCDCDC] text-[18px] leading-tight py-2.5 px-3 border-b border-[#DCDCDC]/35 whitespace-nowrap cursor-pointer transition-all duration-300 rounded-lg relative overflow-hidden font-bold drop-shadow-[1px_1px_3px_rgba(0,0,0,0.8)] hover:text-white hover:bg-white/10 hover:translate-x-1 before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-[#646cff] before:to-[#535bf2] before:scale-y-0 before:transition-transform before:duration-300 hover:before:scale-y-100 last:border-b-0 last:pb-2.5 md:py-2 md:px-2.5" 
+						@click="navigateToProduct"
+					>
+						Product Introduction
+					</li>
+					<li 
+						class="text-[#DCDCDC] text-[18px] leading-tight py-2.5 px-3 border-b border-[#DCDCDC]/35 whitespace-nowrap cursor-pointer transition-all duration-300 rounded-lg relative overflow-hidden font-bold drop-shadow-[1px_1px_3px_rgba(0,0,0,0.8)] hover:text-white hover:bg-white/10 hover:translate-x-1 before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-[#646cff] before:to-[#535bf2] before:scale-y-0 before:transition-transform before:duration-300 hover:before:scale-y-100 last:border-b-0 last:pb-2.5 md:py-2 md:px-2.5" 
+						@click="navigateToIndustry"
+					>
+						Industry Background
+					</li>
+					<li 
+						class="text-[#DCDCDC] text-[18px] leading-tight py-2.5 px-3 border-b border-[#DCDCDC]/35 whitespace-nowrap cursor-pointer transition-all duration-300 rounded-lg relative overflow-hidden font-bold drop-shadow-[1px_1px_3px_rgba(0,0,0,0.8)] hover:text-white hover:bg-white/10 hover:translate-x-1 before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-[#646cff] before:to-[#535bf2] before:scale-y-0 before:transition-transform before:duration-300 hover:before:scale-y-100 last:border-b-0 last:pb-2.5 md:py-2 md:px-2.5" 
+						@click="navigateToMarket"
+					>
+						Market Demand
+					</li>
+					<li 
+						class="text-[#DCDCDC] text-[18px] leading-tight py-2.5 px-3 border-b border-[#DCDCDC]/35 whitespace-nowrap cursor-pointer transition-all duration-300 rounded-lg relative overflow-hidden font-bold drop-shadow-[1px_1px_3px_rgba(0,0,0,0.8)] hover:text-white hover:bg-white/10 hover:translate-x-1 before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-[#646cff] before:to-[#535bf2] before:scale-y-0 before:transition-transform before:duration-300 hover:before:scale-y-100 last:border-b-0 last:pb-2.5 md:py-2 md:px-2.5" 
+						@click="navigateToBusiness"
+					>
+						Business Model
+					</li>
+					<li 
+						class="text-[#DCDCDC] text-[18px] leading-tight py-2.5 px-3 border-b border-[#DCDCDC]/35 whitespace-nowrap cursor-pointer transition-all duration-300 rounded-lg relative overflow-hidden font-bold drop-shadow-[1px_1px_3px_rgba(0,0,0,0.8)] hover:text-white hover:bg-white/10 hover:translate-x-1 before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-[#646cff] before:to-[#535bf2] before:scale-y-0 before:transition-transform before:duration-300 hover:before:scale-y-100 last:border-b-0 last:pb-2.5 md:py-2 md:px-2.5" 
+						@click="navigateToTeam"
+					>
+						Team Composition
+					</li>
+				</ul>
+			</transition>
 		</div>
 
 		<!-- 右上：圆形按钮（白底），覆盖一张图作为图标 -->
-		<button class="corner-btn" aria-label="version" @click="toggleCompanyInfo">
-			<img class="corner-btn__icon" alt="version" :src="yihaiLogo" />
+		<button 
+			class="absolute top-[56px] right-[178px] w-[58px] h-[58px] border-none bg-transparent p-0 cursor-pointer outline-none transition-all duration-300 z-20 hover:scale-110 active:scale-95 focus:outline-none focus-visible:outline-none !rounded-full overflow-hidden lg:top-[56px] lg:right-[178px] lg:w-[58px] lg:h-[58px] md:top-5 md:right-5 md:w-9 md:h-9 sm:top-[15px] sm:right-[15px]" 
+			style="border-radius: 100% !important;"
+			aria-label="version" 
+			@click="toggleCompanyInfo"
+		>
+			<img 
+				class="absolute top-0 left-0 w-full h-full object-cover rounded-full transition-transform duration-300 hover:rotate-[10deg] z-10" 
+				alt="version" 
+				:src="yihaiLogo" 
+			/>
 		</button>
 
 		<!-- 中心区域：公司信息内容 -->
 		<transition name="fade">
-			<div v-if="showCompanyInfo" class="company-info" @click="hideCompanyInfo">
-				<div class="company-info__content">
-					<div class="company-info__section">
-						<!-- <h3 class="company-info__title">Company Mission</h3> -->
-						 <p class="company-info__title">Company Mission:</p>
-						<p class="company-info__text">Leading the innovation of water transportation</p>
-						<p class="company-info__text">Build a globally leading marine technology brand</p>
+			<div 
+				v-if="showCompanyInfo" 
+				class="fixed top-0 left-0 w-screen h-screen z-10 bg-black/50 flex items-center justify-center" 
+				@click="hideCompanyInfo"
+			>
+				<div class="bg-white/[0.01] backdrop-blur-[10px] rounded-[20px] p-10 shadow-[0_20px_40px_rgba(0,0,0,0.3)] text-white text-center scale-[1.3] font-bold drop-shadow-[2px_2px_6px_rgba(0,0,0,0.9)] md:w-[95%] md:p-5 md:scale-100">
+					<div class="mb-[30px] last:mb-0">
+						<p class="text-lg font-semibold text-white mb-[15px] uppercase tracking-[0.5px] md:text-base">Company Mission:</p>
+						<p class="text-sm leading-relaxed text-white mb-2 last:mb-0 md:text-[13px]">Leading the innovation of water transportation</p>
+						<p class="text-sm leading-relaxed text-white mb-2 last:mb-0 md:text-[13px]">Build a globally leading marine technology brand</p>
 					</div>
 
-					<div class="company-info__section">
-						<!-- <h3 class="company-info__title">Company Vision:</h3> -->
-						<p class="company-info__title">Company Vision:</p>
-						<p class="company-info__text">The most rock-solid water operation platform</p>
-						<p class="company-info__text">Become the definer of the most energy-efficient and high-performance water economy</p>
-						<p class="company-info__text">Deliver the most superior watercraft in terms of performance</p>
+					<div class="mb-[30px] last:mb-0">
+						<p class="text-lg font-semibold text-white mb-[15px] uppercase tracking-[0.5px] md:text-base">Company Vision:</p>
+						<p class="text-sm leading-relaxed text-white mb-2 last:mb-0 md:text-[13px]">The most rock-solid water operation platform</p>
+						<p class="text-sm leading-relaxed text-white mb-2 last:mb-0 md:text-[13px]">Become the definer of the most energy-efficient and high-performance water economy</p>
+						<p class="text-sm leading-relaxed text-white mb-2 last:mb-0 md:text-[13px]">Deliver the most superior watercraft in terms of performance</p>
 					</div>
 
-					<div class="company-info__section">
-						<!-- <h3 class="company-info__title">Core Values</h3> -->
-						<p class="company-info__title">Core Values:</p>
-						<p class="company-info__text">Cooperation, innovation, and foresight</p>
+					<div class="mb-[30px] last:mb-0">
+						<p class="text-lg font-semibold text-white mb-[15px] uppercase tracking-[0.5px] md:text-base">Core Values:</p>
+						<p class="text-sm leading-relaxed text-white mb-2 last:mb-0 md:text-[13px]">Cooperation, innovation, and foresight</p>
 					</div>
 
-					<div class="company-info__section">
-						<!-- <h3 class="company-info__title">Management Philosophy</h3> -->
-						<p class="company-info__title">Management Philosophy:</p>
-						<p class="company-info__text">People-oriented, customer-first</p>
-						<p class="company-info__text">Progressing hand in hand for mutual benefit and win-win cooperation</p>
+					<div class="mb-[30px] last:mb-0">
+						<p class="text-lg font-semibold text-white mb-[15px] uppercase tracking-[0.5px] md:text-base">Management Philosophy:</p>
+						<p class="text-sm leading-relaxed text-white mb-2 last:mb-0 md:text-[13px]">People-oriented, customer-first</p>
+						<p class="text-sm leading-relaxed text-white mb-2 last:mb-0 md:text-[13px]">Progressing hand in hand for mutual benefit and win-win cooperation</p>
 					</div>
 				</div>
 			</div>
@@ -234,263 +286,20 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
-/* 封面尺寸与基底（FRAME: 1920x1080，背景色 paint_0:2635/#3B4756） */
-.cover {
-	position: relative;
-	min-height: 100vh;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background-color: #3B4756;
-	overflow: hidden;
+/* fade transition */
+.fade-enter-active, .fade-leave-active { 
+	transition: opacity .01s ease; 
+}
+.fade-enter-from, .fade-leave-to { 
+	opacity: 0; 
 }
 
-/* 视频背景样式 */
-.cover-video {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	min-width: 100%;
-	min-height: 100%;
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	z-index: 1;
-}
-
-/* 视频背景黑色遮罩 */
-.cover::after {
-	content: '';
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.1);
-	z-index: 2;
-	pointer-events: none;
-}
-
-/* 左上 catalogue 块：标题与展开后的子项同属一个容器 */
-.catalogue-wrap {
-	position: absolute;
-	top: 56px;
-	left: 133px;
-	color: #DCDCDC;
-	z-index: 20;
-}
-.catalogue-head {
-	color: #DCDCDC;
-	font-size: 20px;
-	letter-spacing: .08em;
-	text-transform: uppercase;
-	background: none;
-	border: none;
-	cursor: pointer;
-	position: relative;
-	transition: all 0.3s ease;
-	padding: 8px 16px;
-	border-radius: 8px;
-	font-weight: bold;
-	text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-}
-
-.catalogue-head::after {
-	content: '';
-	position: absolute;
-	bottom: -4px;
-	left: 0;
-	width: 0;
-	height: 2px;
-	background-color: #DCDCDC;
-	transition: width 0.3s ease;
-}
-
-.catalogue-head:hover::after {
-	width: 100%;
-}
-
-.catalogue-head:hover {
-	background: rgba(255,255,255,0.1);
-	transform: translateY(-2px);
-	box-shadow: 0 4px 12px rgba(255,255,255,0.2);
-}
-
-/* 当catalogue展开时，移除悬停效果 */
-.catalogue-wrap.is-open .catalogue-head:hover::after {
-	width: 0;
-}
-.catalogue-wrap.is-open {
-	background: rgba(255,255,255,0.15);
-	backdrop-filter: blur(10px);
-	border-radius: 16px;
-	padding: 16px 16px 12px;
-	border: 1px solid rgba(255,255,255,0.2);
-	box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-}
-
-/* 右上白色圆形按钮（34px 圆 + 42px 包裹） */
-.corner-btn {
-	position: absolute;
-	top: 56px;
-	right: 178px;
-	width: 58px;
-	height: 58px;
-	border: none;
-	background: none;
-	padding: 0;
-	cursor: pointer;
-	outline: none;
-	transition: all 0.3s ease;
-	z-index: 20;
-}
-
-.corner-btn:focus {
-	outline: none;
-}
-
-.corner-btn:focus-visible {
-	outline: none;
-}
-
-.corner-btn:hover {
-	transform: scale(1.1);
-}
-
-.corner-btn:active {
-	transform: scale(0.95);
-}
-
-.corner-btn::before {
-	content: '';
-	position: absolute;
-	top: 4px;
-	left: 4px;
-	width: 50px;
-	height: 50px;
-	border-radius: 50%;
-	background: #FFFFFF;
-	transition: all 0.3s ease;
-	box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-}
-
-.corner-btn:hover::before {
-	box-shadow: 0 4px 16px rgba(255,255,255,0.3);
-}
-
-.corner-btn__icon {
-	position: relative;
-	width: 58px;
-	height: 58px;
-	display: block;
-	object-fit: contain;
-	transition: transform 0.3s ease;
-}
-
-.corner-btn:hover .corner-btn__icon {
-	transform: rotate(10deg);
-}
-
-/* 音乐控制按钮 */
-.music-btn {
-	position: absolute;
-	bottom: 30px;
-	right: 30px;
-	width: 26px;
-	height: 26px;
-	border-radius: 50%;
-	background: rgba(255, 255, 255, 0.5);
-	border: 2px solid rgba(255, 255, 255, 0.3);
-	cursor: pointer;
-	transition: all 0.3s ease;
-	z-index: 20;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.music-btn:hover {
-	transform: scale(1.1);
-	background: rgba(255, 255, 255, 0.5);
-	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-}
-
-.music-btn:active {
-	transform: scale(0.95);
-}
-
-.music-btn.is-playing {
-	/* background: rgba(100, 108, 255, 0.9); */
-	animation: pulse 2s infinite;
-}
-
-.music-icon {
-	font-size: 12px;
-	line-height: 1;
-}
-
-@keyframes pulse {
-	0% {
-		box-shadow: 0 0 0 0 rgba(100, 108, 255, 0.7);
-	}
-	70% {
-		box-shadow: 0 0 0 10px rgba(100, 108, 255, 0);
-	}
-	100% {
-		box-shadow: 0 0 0 0 rgba(100, 108, 255, 0);
-	}
-}
-
-/* Catalogue panel 列表区域（容器背景由 .catalogue-wrap.is-open 提供） */
-.catalogue-panel { margin-top: 12px; width: 240px; }
-.catalogue-list {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	display: flex;
-	flex-direction: column;
-	gap: 12px;
+/* slide-down transition */
+.slide-down-enter-active {
 	animation: slideDown 0.3s ease-out;
 }
-.catalogue-item {
-	color: #DCDCDC;
-	font-size: 14px;
-	line-height: 1.2;
-	padding: 10px 12px;
-	border-bottom: 1px solid rgba(220,220,220,0.35);
-	white-space: nowrap;
-	cursor: pointer;
-	transition: all 0.3s ease;
-	border-radius: 8px;
-	position: relative;
-	overflow: hidden;
-	font-weight: bold;
-	text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
-}
-.catalogue-item:hover {
-	color: #ffffff;
-	background: rgba(255,255,255,0.1);
-	transform: translateX(5px);
-}
-.catalogue-item::before {
-	content: '';
-	position: absolute;
-	left: 0;
-	top: 0;
-	height: 100%;
-	width: 3px;
-	background: linear-gradient(135deg, #646cff, #535bf2);
-	transform: scaleY(0);
-	transition: transform 0.3s ease;
-}
-.catalogue-item:hover::before {
-	transform: scaleY(1);
-}
-.catalogue-item:last-child {
-	border-bottom: none;
-	padding-bottom: 10px;
+.slide-down-leave-active {
+	animation: slideDown 0.3s ease-out reverse;
 }
 
 @keyframes slideDown {
@@ -501,151 +310,6 @@ onBeforeUnmount(() => {
 	to {
 		opacity: 1;
 		transform: translateY(0);
-	}
-}
-
-/* fade transition */
-.fade-enter-active, .fade-leave-active { transition: opacity .01s ease; }
-.fade-enter-from, .fade-leave-to { opacity: 0; }
-
-/* 公司信息内容样式 */
-.company-info {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100vw;
-	height: 100vh;
-	z-index: 10;
-	background: rgba(0, 0, 0, 0.5);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.company-info__content {
-	background: rgba(255, 255, 255, 0.01);
-	backdrop-filter: blur(10px);
-	border-radius: 20px;
-	padding: 40px;
-	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-	color: #FFFFFF;
-	text-align: center;
-	transform: scale(1.3);
-	font-weight: bold;
-	text-shadow: 2px 2px 6px rgba(0,0,0,0.9);
-}
-
-.company-info__section {
-	margin-bottom: 30px;
-}
-
-.company-info__section:last-child {
-	margin-bottom: 0;
-}
-
-.company-info__title {
-	font-size: 18px;
-	font-weight: 600;
-	color: #FFFFFF;
-	margin-bottom: 15px;
-	text-transform: uppercase;
-	letter-spacing: 0.5px;
-}
-
-.company-info__text {
-	font-size: 14px;
-	line-height: 1.6;
-	color: #FFFFFF;
-	margin-bottom: 8px;
-}
-
-.company-info__text:last-child {
-	margin-bottom: 0;
-}
-
-/* 响应式设计 */
-@media (max-width: 768px) {
-	.company-info {
-		width: 95%;
-		padding: 20px;
-	}
-
-	.company-info__content {
-		padding: 30px 20px;
-	}
-
-	.company-info__title {
-		font-size: 16px;
-	}
-
-	.company-info__text {
-		font-size: 13px;
-	}
-
-	/* 移动端导航优化 */
-	.catalogue-wrap {
-		top: 20px;
-		left: 20px;
-	}
-
-	.catalogue-head {
-		font-size: 16px;
-		padding: 6px 12px;
-	}
-
-	.corner-btn {
-		top: 20px;
-		right: 20px;
-		width: 36px;
-		height: 36px;
-	}
-
-	.corner-btn::before {
-		top: 3px;
-		left: 3px;
-		width: 30px;
-		height: 30px;
-	}
-
-	.corner-btn__icon {
-		width: 36px;
-		height: 36px;
-	}
-
-	.catalogue-list {
-		gap: 8px;
-	}
-
-	.catalogue-item {
-		font-size: 10px;
-		padding: 8px 10px;
-	}
-
-	.music-btn {
-		bottom: 20px;
-		right: 20px;
-		width: 40px;
-		height: 40px;
-	}
-
-	.music-icon {
-		font-size: 16px;
-	}
-}
-
-@media (max-width: 480px) {
-	.catalogue-wrap {
-		top: 15px;
-		left: 15px;
-	}
-
-	.corner-btn {
-		top: 15px;
-		right: 15px;
-	}
-
-	.catalogue-head {
-		font-size: 14px;
 	}
 }
 </style>
