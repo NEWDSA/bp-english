@@ -3169,6 +3169,12 @@ onUnmounted(() => {
 	}
 }
 
+@media (min-width: 1920px) {
+	.comparison-table td {
+		padding: 16px 12px;
+	}
+}
+
 .comparison-table td:first-child {
 	text-align: left;
 	padding-left: 20px;
@@ -3561,24 +3567,24 @@ onUnmounted(() => {
 	color: rgba(255, 255, 255, 0.9);
 	flex: 1;
 	line-height: 1.6;
-	font-size: 15px;
+	font-size: 18px;
 }
 
 @media (max-width: 1919px) {
 	.competitor-conclusion .conclusion-text {
-		font-size: 14px;
+		font-size: 18px;
 	}
 }
 
 @media (max-width: 1600px) {
 	.competitor-conclusion .conclusion-text {
-		font-size: 13px;
+		font-size: 16px;
 	}
 }
 
 @media (max-width: 1366px) {
 	.competitor-conclusion .conclusion-text {
-		font-size: 12px;
+		font-size: 15px;
 	}
 }
 
