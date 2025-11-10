@@ -88,7 +88,7 @@ const updateMiddleContent = (contentType) => {
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
           <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Core customers:</h3>
         </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5 items-center mb-2">
+        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5 items-center mb-2 text-white/70">
           <p>tourism platforms, environmental logistics companies, high-end camping resorts</p>
           <p>technology elites and environmental pioneers, industry KOLs</p>
         </div>
@@ -106,7 +106,7 @@ const updateMiddleContent = (contentType) => {
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
           <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Basic information and requirements:</h3>
         </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5">
+        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5 text-white/70">
           <p>There are extremely high requirements for the environmental performance of ships, which comply with strict EU environmental regulations</p>
           <p>Emphasize innovative technology experience and pursue high performance and security, while also requiring a comprehensive after-sales and maintenance network</p>
         </div>
@@ -117,7 +117,7 @@ const updateMiddleContent = (contentType) => {
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
           <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Type:</h3>
         </div>
-        <p class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] leading-relaxed ml-5">
+        <p class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] leading-relaxed ml-5 text-white/70">
           High end sightseeing boat, green logistics boat, high-tech leisure boat, catering to both B-end procurement and C-end high-end consumers.
         </p>
       </div>
@@ -127,7 +127,7 @@ const updateMiddleContent = (contentType) => {
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
           <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Market opportunity:</h3>
         </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5">
+        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5 text-white/70">
           <p>The European Union is one of the world's largest markets for large LNG carriers, with a market share of approximately 30%.</p>
           <p>The tourism economy in the Mediterranean and Nordic islands is developed, and there is a stable demand for green and efficient sea transportation tools.</p>
           <p>The EU's "Green Agreement" drives the upgrade of traditional shipping, providing huge subsidies and policy benefits for new energy ships.</p>
@@ -140,7 +140,7 @@ const updateMiddleContent = (contentType) => {
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
           <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Market demand:</h3>
         </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5">
+        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5 text-white/70">
           <p>Driven by strict regulations, and pursuing zero emissions, high performance, quiet comfort, there is strong demand from high-end consumers (C-end), while maintaining a balance between B-end and C-end.</p>
           <p>Focusing on the European market, it has made great strides in environmental protection, intelligence, comfort, and tranquility, which aligns with policy guidance and high-quality tourism standards.</p>
         </div>
@@ -154,7 +154,7 @@ const updateMiddleContent = (contentType) => {
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
           <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Core customers:</h3>
         </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5 mb-5">
+        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5 mb-5 text-white/70">
           <p>Royal affiliated enterprises, national energy companies, high-end tourism development groups</p>
         </div>
 
@@ -172,7 +172,7 @@ const updateMiddleContent = (contentType) => {
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
           <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Basic information and requirements:</h3>
         </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5">
+        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5 text-white/70">
           <p>Pursuing ultimate luxury, customization, and high performance, with low price sensitivity</p>
           <p>As a symbol of identity and a 'mobile luxury palace', ships need to be designed to highlight their nobility</p>
           <p>Need to adapt to high temperature environments and meet specific religious and cultural customs</p>
@@ -184,7 +184,7 @@ const updateMiddleContent = (contentType) => {
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
           <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Type:</h3>
         </div>
-        <p class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] leading-relaxed ml-5">
+        <p class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] leading-relaxed ml-5 text-white/70">
           Mainly targeting the B-end market, government and state-owned enterprises, and some C-end users
         </p>
       </div>
@@ -194,7 +194,7 @@ const updateMiddleContent = (contentType) => {
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
           <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Market opportunity:</h3>
         </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5">
+        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5 text-white/70">
           <p>LNG expansion plans in countries such as Qatar and Saudi Arabia have generated a demand for high-end, green shipping solutions.</p>
           <p>Saudi Arabia's "2030 Vision" vigorously develops tourism and logistics industries, and large-scale tourism projects in the Red Sea require supporting maritime transportation.</p>
           <p>The wealthy class is vast and an important sales market for top luxury yachts worldwide.</p>
@@ -206,7 +206,7 @@ const updateMiddleContent = (contentType) => {
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
           <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Market Demand:</h3>
         </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5">
+        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5 text-white/70">
           <p>The ultra-wealthy market is price-insensitive, seeking ultimate luxury, cutting-edge technology, highly personalized customization, and top-tier service.</p>
           <p>Targeting high-end B2B and top-tier B2C clients, it primarily caters to top Middle Eastern clients and high-end resorts globally, pursuing the ultimate in design, craftsmanship, technology, and exclusive service, becoming a symbol of status and power.</p>
         </div>
@@ -220,14 +220,14 @@ const updateMiddleContent = (contentType) => {
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
           <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Core customers:</h3>
         </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5 mb-5">
+        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5 mb-5 text-white/70">
           <p>National Park Service, large boat rental chain brands, diving service companies</p>
         </div>
         <div class="flex items-center">
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
           <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Seed users: </h3>
         </div>
-         <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5 items-center">
+         <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5 items-center text-white/70">
           <p>yacht and water sports operators</p>
         </div>
       </div>
@@ -249,7 +249,7 @@ const updateMiddleContent = (contentType) => {
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
           <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Type:</h3>
         </div>
-        <p class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] leading-relaxed ml-5">
+        <p class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] leading-relaxed ml-5 text-white/70">
           High horsepower sports speedboat, family leisure boat, park shuttle boat, with a high market share in the C-end market.
         </p>
       </div>
@@ -259,7 +259,7 @@ const updateMiddleContent = (contentType) => {
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
           <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Market opportunity:</h3>
         </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5">
+        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5 text-white/70">
           <p>The United States is the world's largest yacht consumer market, with a water sports equipment market size of $79.9 billion by 2023.</p>
           <p>There are numerous national parks and private lakes, and there are a large number of government orders for the upgrading of green transportation within the scenic areas.</p>
           <p>The demand for outdoor leisure and entertainment continues to be strong, and the rental market is active.</p>
@@ -271,7 +271,7 @@ const updateMiddleContent = (contentType) => {
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
           <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Market Demand:</h3>
         </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5">
+        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5 text-white/70">
           <p>The world's largest yacht market experiences robust rental demand, with a strong focus on ease of operation, wear resistance, and low maintenance costs. Primarily driven by individual consumers, the market focuses on the US rental market, emphasizing cost-effectiveness, durability, and low maintenance.</p>
           <p>The core focus is meeting the high-frequency, multi-user commercial operation needs.</p>
         </div>
@@ -285,7 +285,7 @@ const updateMiddleContent = (contentType) => {
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
           <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Core customers:</h3>
         </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5 mb-5">
+        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5 mb-5 text-white/70">
           <p>local governments and large state-owned enterprises</p>
         </div>
 
@@ -293,7 +293,7 @@ const updateMiddleContent = (contentType) => {
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
           <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Seed users: </h3>
         </div>
-         <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5 items-center">
+         <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5 items-center text-white/70">
           <p>Yacht and water sports operators</p>
         </div>
       </div>
@@ -303,7 +303,7 @@ const updateMiddleContent = (contentType) => {
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
           <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Basic information and requirements:</h3>
         </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5">
+        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5 text-white/70">
           <p>The cost-effectiveness of higher products requires environmental protection and intelligent technology, which is easy to manage</p>
           <p>Comprehensive after-sales service</p>
         </div>
@@ -314,7 +314,7 @@ const updateMiddleContent = (contentType) => {
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
           <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Type:</h3>
         </div>
-        <p class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] leading-relaxed ml-5">
+        <p class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] leading-relaxed ml-5 text-white/70">
           Mainly targeting the B-end market, government and state-owned enterprises, and some C-end users
         </p>
       </div>
@@ -324,7 +324,7 @@ const updateMiddleContent = (contentType) => {
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
           <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Market opportunity:</h3>
         </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5">
+        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5 text-white/70">
           <p>China is the "core engine" of global shipbuilding, with a global share of over 45% in ship exports by 2024.</p>
           <p>The demand for gas powered boats in the market has significantly increased.</p>
           <p>The green and intelligent transformation of inland and coastal vessels is a clear direction, and the plan is to achieve comprehensive green and intelligent transformation of inland vessels by 2030.</p>
@@ -337,7 +337,7 @@ const updateMiddleContent = (contentType) => {
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
           <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Market Demand:</h3>
         </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5">
+        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5 text-white/70">
           <p>Following the national policy of green and intelligent development, this B2B-driven product emphasizes ease of management and comprehensive after-sales service.</p>
           <p>The Premium Experience version targets the Chinese market, focusing on environmental friendliness, intelligence, comfort, and tranquility, aligning with policy guidance and high-quality tourism standards.</p>
         </div>
@@ -351,7 +351,7 @@ const updateMiddleContent = (contentType) => {
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
           <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Core customers:</h3>
         </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5 mb-5">
+        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5 mb-5 text-white/70">
           <p>High end resort groups, emerging shipping companies, yacht clubs</p>
         </div>
 
@@ -369,7 +369,7 @@ const updateMiddleContent = (contentType) => {
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
           <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Basic information and requirements:</h3>
         </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5">
+        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5 text-white/70">
           <p>Highly concerned about the cost-effectiveness and operating costs of products</p>
           <p>Ships need to adapt to high temperature and high salinity tropical marine environments with strong corrosion resistance</p>
           <p>There are requirements for the product's multifunctionality (such as being able to meet both connectivity and sightseeing needs)</p>
@@ -381,7 +381,7 @@ const updateMiddleContent = (contentType) => {
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
           <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Type:</h3>
         </div>
-        <p class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] leading-relaxed ml-5">
+        <p class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] leading-relaxed ml-5 text-white/70">
           High end private yachts, island shuttle ships, and offshore transport ships are mainly purchased from the B-end.
         </p>
       </div>
@@ -391,7 +391,7 @@ const updateMiddleContent = (contentType) => {
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
           <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Market opportunity:</h3>
         </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5">
+        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5 text-white/70">
           <p>Southeast Asia's island tourism industry is recovering rapidly, and the development of new vacation projects is driving demand for new transportation tools.</p>
           <p>The growth of regional trade and the deepening of the "the Belt and Road" initiative promote the development of green offshore shipping.</p>
           <p>The upgrading of infrastructure in various countries has led to an increase in demand for ships related to port dredging and engineering construction.</p>
@@ -403,7 +403,7 @@ const updateMiddleContent = (contentType) => {
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
           <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Market Demand:</h3>
         </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5">
+        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5 text-white/70">
           <p>Tropical marine environments require high corrosion resistance; the recovery of tourism has spurred demand for multi-functional vessels that can serve both transportation and sightseeing purposes. </p>
           <p>Emphasizing B2B and targeting the Southeast Asian market, the vessels highlight cost-effectiveness, durability, and low maintenance costs.</p>
           <p>The core requirement is to meet the high-frequency, multi-user commercial operation needs.</p>
@@ -448,7 +448,7 @@ const updateMiddleContent = (contentType) => {
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
           <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Type:</h3>
         </div>
-        <p class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] leading-relaxed ml-5">
+        <p class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] leading-relaxed ml-5 text-white/70">
           High end private yachts, island shuttle ships, and offshore transport ships are mainly purchased from the B-end
         </p>
       </div>
@@ -458,7 +458,7 @@ const updateMiddleContent = (contentType) => {
           <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
           <h3 class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[26px] text-white">Market Opportunity:</h3>
         </div>
-        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5">
+        <div class="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-[20px] space-y-2 ml-5 text-white/70">
           <p>Southeast Asia's island tourism industry is recovering rapidly, driving demand for new transportation tools</p>
           <p>Growth of regional trade and "Belt and Road" initiative promote green offshore shipping development</p>
           <p>Infrastructure upgrading increases demand for port dredging and engineering construction ships</p>
@@ -808,9 +808,9 @@ const nextImage = () => {
         </div>
 
         <!-- 图片3 -->
-        <div class="gallery-item" @click="openModal(3)">
+        <div class="gallery-item" @click="openModal(4)">
           <video
-            :src="video8"
+            :src="video11"
             alt="Water sports and fishing"
             class="w-full h-full object-cover"
             autoplay
@@ -826,9 +826,9 @@ const nextImage = () => {
         </div>
 
         <!-- 图片4 -->
-        <div class="gallery-item" @click="openModal(4)">
+        <div class="gallery-item" @click="openModal(3)">
           <video
-            :src="video11"
+            :src="video8"
             alt="Tourist attraction"
             class="w-full h-full object-cover"
             autoplay
@@ -862,33 +862,33 @@ const nextImage = () => {
             <div class="lg:col-span-8 space-y-3 md:space-y-4 [@media(min-width:2000px)]:space-y-6 bg-white/10 backdrop-blur-sm shadow-lg rounded-lg p-3 md:p-4 [@media(min-width:2000px)]:p-6">
               <!-- 产品特点列表 -->
               <div>
-                <ul class="space-y-2 [@media(min-width:2000px)]:space-y-3 text-white">
+                <ul class="space-y-2 [@media(min-width:2000px)]:space-y-3 text-white/70">
                   <li class="flex items-start">
-                    <span class="w-1.5 h-1.5 md:w-2 md:h-2 bg-white rounded-full mr-2 md:mr-3 mt-1 md:mt-1.5 lg:mt-2 flex-shrink-0"></span>
+                    <span class="w-1.5 h-1.5 md:w-2 md:h-2 bg-white/70 rounded-full mr-2 md:mr-3 mt-1 md:mt-1.5 lg:mt-2 flex-shrink-0"></span>
                     <span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-xl [@media(min-width:2000px)]:text-[24px]">AI obstacle avoidance system + forward-looking sonar, with tilt angle control ≤1° to ensure excellent stability and low noise.</span>
                   </li>
                   <li class="flex items-start">
-                    <span class="w-1.5 h-1.5 md:w-2 md:h-2 bg-white rounded-full mr-2 md:mr-3 mt-1 md:mt-1.5 lg:mt-2 flex-shrink-0"></span>
+                    <span class="w-1.5 h-1.5 md:w-2 md:h-2 bg-white/70 rounded-full mr-2 md:mr-3 mt-1 md:mt-1.5 lg:mt-2 flex-shrink-0"></span>
                     <span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-xl [@media(min-width:2000px)]:text-[24px]">Low procurement costs, short payback period, high annual economic benefits, and excellent cost performance.</span>
                   </li>
                   <li class="flex items-start">
-                    <span class="w-1.5 h-1.5 md:w-2 md:h-2 bg-white rounded-full mr-2 md:mr-3 mt-1 md:mt-1.5 lg:mt-2 flex-shrink-0"></span>
+                    <span class="w-1.5 h-1.5 md:w-2 md:h-2 bg-white/70 rounded-full mr-2 md:mr-3 mt-1 md:mt-1.5 lg:mt-2 flex-shrink-0"></span>
                     <span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-xl [@media(min-width:2000px)]:text-[24px]">With speeds up to 20-40 km/h, high power-to-speed ratio, long range, and power outputs ranging from 15-40 kW, this vehicle boasts a high-performance engine.</span>
                   </li>
                   <li class="flex items-start">
-                    <span class="w-1.5 h-1.5 md:w-2 md:h-2 bg-white rounded-full mr-2 md:mr-3 mt-1 md:mt-1.5 lg:mt-2 flex-shrink-0"></span>
+                    <span class="w-1.5 h-1.5 md:w-2 md:h-2 bg-white/70 rounded-full mr-2 md:mr-3 mt-1 md:mt-1.5 lg:mt-2 flex-shrink-0"></span>
                     <span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-xl [@media(min-width:2000px)]:text-[24px]">It offers excellent stability, a user-friendly seat design, convenient operation, and additional comfort features such as ambient lighting and 3D sound.</span>
                   </li>
                   <li class="flex items-start">
-                    <span class="w-1.5 h-1.5 md:w-2 md:h-2 bg-white rounded-full mr-2 md:mr-3 mt-1 md:mt-1.5 lg:mt-2 flex-shrink-0"></span>
+                    <span class="w-1.5 h-1.5 md:w-2 md:h-2 bg-white/70 rounded-full mr-2 md:mr-3 mt-1 md:mt-1.5 lg:mt-2 flex-shrink-0"></span>
                     <span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-xl [@media(min-width:2000px)]:text-[24px]">Fully automated driving, AI obstacle avoidance system, and intelligent navigation control enhance ease of operation and technological sophistication.</span>
                   </li>
                   <li class="flex items-start">
-                    <span class="w-1.5 h-1.5 md:w-2 md:h-2 bg-white rounded-full mr-2 md:mr-3 mt-1 md:mt-1.5 lg:mt-2 flex-shrink-0"></span>
+                    <span class="w-1.5 h-1.5 md:w-2 md:h-2 bg-white/70 rounded-full mr-2 md:mr-3 mt-1 md:mt-1.5 lg:mt-2 flex-shrink-0"></span>
                     <span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-xl [@media(min-width:2000px)]:text-[24px]">High-end private yachts are positioned to suit business, leisure, or social occasions, and the brand's innovative image enhances users' sense of belonging.</span>
                   </li>
                   <li class="flex items-start">
-                    <span class="w-1.5 h-1.5 md:w-2 md:h-2 bg-white rounded-full mr-2 md:mr-3 mt-1 md:mt-1.5 lg:mt-2 flex-shrink-0"></span>
+                    <span class="w-1.5 h-1.5 md:w-2 md:h-2 bg-white/70 rounded-full mr-2 md:mr-3 mt-1 md:mt-1.5 lg:mt-2 flex-shrink-0"></span>
                     <span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-xl [@media(min-width:2000px)]:text-[24px]">With "continuously leading innovation and defining new industry standards" as its core, the brand culture is young, sporty, and cutting-edge.</span>
                   </li>
                 </ul>
