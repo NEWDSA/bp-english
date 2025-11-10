@@ -35,13 +35,13 @@
 		
 		<!-- 左上：CATALOGUE 块（标题与子项为一个整体） -->
 		<div 
-			class="absolute top-[56px] left-[133px] text-[#DCDCDC] z-20 lg:top-[56px] lg:left-[133px] md:top-5 md:left-5 sm:top-[15px] sm:left-[15px]"
+			class="absolute top-[8%] left-[8%] text-[#DCDCDC] z-20"
 			:class="{ 
-				'bg-white/15 backdrop-blur-[10px] rounded-2xl p-4 pb-3 border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)]': showCatalogue 
+				'bg-white/15 backdrop-blur-[10px] rounded-2xl p-6 pb-3 border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)]': showCatalogue 
 			}"
 		>
 			<div 
-				class="text-[#DCDCDC] text-[28px] tracking-[0.08em] uppercase bg-transparent border-none cursor-pointer relative transition-all duration-300 py-2 px-4 rounded-lg font-bold drop-shadow-[2px_2px_4px_rgba(0,0,0,0.8)] hover:bg-white/10 hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(255,255,255,0.2)] after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-[#DCDCDC] after:transition-all after:duration-300 hover:after:w-full md:py-1.5 md:px-3"
+				class="text-[#DCDCDC] text-[28px] tracking-[0.08em] uppercase bg-transparent border-none cursor-pointer relative transition-all duration-300 py-2 px-4 rounded-lg font-bold drop-shadow-[2px_2px_4px_rgba(0,0,0,0.8)] hover:bg-white/10 hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(255,255,255,0.2)] md:py-1.5 md:px-3"
 				:class="{ 'after:w-0': showCatalogue }"
 				@click="toggleCatalogue" 
 				:aria-expanded="showCatalogue ? 'true' : 'false'"
@@ -50,32 +50,32 @@
 			</div>
 			<transition name="slide-down">
 				<ul v-if="showCatalogue" class="list-none m-0 p-0 flex flex-col gap-3 mt-3 md:gap-2" role="list">
-					<li 
-						class="text-[#DCDCDC] text-[18px] leading-tight py-2.5 px-3 border-b border-[#DCDCDC]/35 whitespace-nowrap cursor-pointer transition-all duration-300 rounded-lg relative overflow-hidden font-bold drop-shadow-[1px_1px_3px_rgba(0,0,0,0.8)] hover:text-white hover:bg-white/10 hover:translate-x-1 before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-[#646cff] before:to-[#535bf2] before:scale-y-0 before:transition-transform before:duration-300 hover:before:scale-y-100 last:border-b-0 last:pb-2.5 md:py-2 md:px-2.5" 
+					<li
+						class="text-[#DCDCDC] text-[18px] leading-[36px] py-2.5 px-3 border-b border-[#DCDCDC]/35 whitespace-nowrap cursor-pointer transition-all duration-300 rounded-lg relative overflow-hidden font-bold drop-shadow-[1px_1px_3px_rgba(0,0,0,0.8)] hover:text-white hover:bg-white/10 hover:translate-x-1 before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-[#646cff] before:to-[#535bf2] before:scale-y-0 before:transition-transform before:duration-300 hover:before:scale-y-100 last:border-b-0 last:pb-2.5 md:py-2 md:px-2.5" 
 						@click="navigateToProduct"
 					>
 						Product Introduction
 					</li>
-					<li 
-						class="text-[#DCDCDC] text-[18px] leading-tight py-2.5 px-3 border-b border-[#DCDCDC]/35 whitespace-nowrap cursor-pointer transition-all duration-300 rounded-lg relative overflow-hidden font-bold drop-shadow-[1px_1px_3px_rgba(0,0,0,0.8)] hover:text-white hover:bg-white/10 hover:translate-x-1 before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-[#646cff] before:to-[#535bf2] before:scale-y-0 before:transition-transform before:duration-300 hover:before:scale-y-100 last:border-b-0 last:pb-2.5 md:py-2 md:px-2.5" 
+					<li
+						class="text-[#DCDCDC] text-[18px] leading-[36px] py-2.5 px-3 border-b border-[#DCDCDC]/35 whitespace-nowrap cursor-pointer transition-all duration-300 rounded-lg relative overflow-hidden font-bold drop-shadow-[1px_1px_3px_rgba(0,0,0,0.8)] hover:text-white hover:bg-white/10 hover:translate-x-1 before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-[#646cff] before:to-[#535bf2] before:scale-y-0 before:transition-transform before:duration-300 hover:before:scale-y-100 last:border-b-0 last:pb-2.5 md:py-2 md:px-2.5" 
 						@click="navigateToIndustry"
 					>
 						Industry Background
 					</li>
-					<li 
-						class="text-[#DCDCDC] text-[18px] leading-tight py-2.5 px-3 border-b border-[#DCDCDC]/35 whitespace-nowrap cursor-pointer transition-all duration-300 rounded-lg relative overflow-hidden font-bold drop-shadow-[1px_1px_3px_rgba(0,0,0,0.8)] hover:text-white hover:bg-white/10 hover:translate-x-1 before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-[#646cff] before:to-[#535bf2] before:scale-y-0 before:transition-transform before:duration-300 hover:before:scale-y-100 last:border-b-0 last:pb-2.5 md:py-2 md:px-2.5" 
+					<li
+						class="text-[#DCDCDC] text-[18px] leading-[36px] py-2.5 px-3 border-b border-[#DCDCDC]/35 whitespace-nowrap cursor-pointer transition-all duration-300 rounded-lg relative overflow-hidden font-bold drop-shadow-[1px_1px_3px_rgba(0,0,0,0.8)] hover:text-white hover:bg-white/10 hover:translate-x-1 before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-[#646cff] before:to-[#535bf2] before:scale-y-0 before:transition-transform before:duration-300 hover:before:scale-y-100 last:border-b-0 last:pb-2.5 md:py-2 md:px-2.5" 
 						@click="navigateToMarket"
 					>
 						Market Demand
 					</li>
-					<li 
-						class="text-[#DCDCDC] text-[18px] leading-tight py-2.5 px-3 border-b border-[#DCDCDC]/35 whitespace-nowrap cursor-pointer transition-all duration-300 rounded-lg relative overflow-hidden font-bold drop-shadow-[1px_1px_3px_rgba(0,0,0,0.8)] hover:text-white hover:bg-white/10 hover:translate-x-1 before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-[#646cff] before:to-[#535bf2] before:scale-y-0 before:transition-transform before:duration-300 hover:before:scale-y-100 last:border-b-0 last:pb-2.5 md:py-2 md:px-2.5" 
+					<li
+						class="text-[#DCDCDC] text-[18px] leading-[36px] py-2.5 px-3 border-b border-[#DCDCDC]/35 whitespace-nowrap cursor-pointer transition-all duration-300 rounded-lg relative overflow-hidden font-bold drop-shadow-[1px_1px_3px_rgba(0,0,0,0.8)] hover:text-white hover:bg-white/10 hover:translate-x-1 before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-[#646cff] before:to-[#535bf2] before:scale-y-0 before:transition-transform before:duration-300 hover:before:scale-y-100 last:border-b-0 last:pb-2.5 md:py-2 md:px-2.5" 
 						@click="navigateToBusiness"
 					>
 						Business Model
 					</li>
-					<li 
-						class="text-[#DCDCDC] text-[18px] leading-tight py-2.5 px-3 border-b border-[#DCDCDC]/35 whitespace-nowrap cursor-pointer transition-all duration-300 rounded-lg relative overflow-hidden font-bold drop-shadow-[1px_1px_3px_rgba(0,0,0,0.8)] hover:text-white hover:bg-white/10 hover:translate-x-1 before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-[#646cff] before:to-[#535bf2] before:scale-y-0 before:transition-transform before:duration-300 hover:before:scale-y-100 last:border-b-0 last:pb-2.5 md:py-2 md:px-2.5" 
+					<li
+						class="text-[#DCDCDC] text-[18px] leading-[36px] py-2.5 px-3 border-b border-[#DCDCDC]/35 whitespace-nowrap cursor-pointer transition-all duration-300 rounded-lg relative overflow-hidden font-bold drop-shadow-[1px_1px_3px_rgba(0,0,0,0.8)] hover:text-white hover:bg-white/10 hover:translate-x-1 before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-[#646cff] before:to-[#535bf2] before:scale-y-0 before:transition-transform before:duration-300 hover:before:scale-y-100 last:border-b-0 last:pb-2.5 md:py-2 md:px-2.5" 
 						@click="navigateToTeam"
 					>
 						Team Composition
@@ -85,8 +85,8 @@
 		</div>
 
 		<!-- 右上：圆形按钮（白底），覆盖一张图作为图标 -->
-		<button 
-			class="absolute top-[56px] right-[178px] w-[58px] h-[58px] border-none bg-transparent p-0 cursor-pointer outline-none transition-all duration-300 z-20 hover:scale-110 active:scale-95 focus:outline-none focus-visible:outline-none !rounded-full overflow-hidden lg:top-[56px] lg:right-[178px] lg:w-[58px] lg:h-[58px] md:top-5 md:right-5 md:w-9 md:h-9 sm:top-[15px] sm:right-[15px]" 
+		<div 
+			class="absolute top-[6%] right-[10%] w-[70px] h-[70px] bg-white border-none bg-transparent p-0 cursor-pointer outline-none transition-all duration-300 z-20 hover:scale-110 active:scale-95 focus:outline-none focus-visible:outline-none !rounded-full overflow-hidden" 
 			style="border-radius: 100% !important;"
 			aria-label="version" 
 			@click="toggleCompanyInfo"
@@ -96,38 +96,38 @@
 				alt="version" 
 				:src="yihaiLogo" 
 			/>
-		</button>
+		</div>
 
 		<!-- 中心区域：公司信息内容 -->
 		<transition name="fade">
-			<div 
-				v-if="showCompanyInfo" 
-				class="fixed top-0 left-0 w-screen h-screen z-10 bg-black/50 flex items-center justify-center" 
+			<div
+				v-if="showCompanyInfo"
+				class="fixed top-0 left-0 w-screen h-screen z-10 bg-black/50 flex items-center justify-center p-4 md:p-6 lg:p-8"
 				@click="hideCompanyInfo"
 			>
-				<div class="bg-white/[0.01] backdrop-blur-[10px] rounded-[20px] p-10 shadow-[0_20px_40px_rgba(0,0,0,0.3)] text-white text-center scale-[1.3] font-bold drop-shadow-[2px_2px_6px_rgba(0,0,0,0.9)] md:w-[95%] md:p-5 md:scale-100">
-					<div class="mb-[30px] last:mb-0">
-						<p class="text-lg font-semibold text-white mb-[15px] uppercase tracking-[0.5px] md:text-base">Company Mission:</p>
-						<p class="text-sm leading-relaxed text-white mb-2 last:mb-0 md:text-[13px]">Leading the innovation of water transportation</p>
-						<p class="text-sm leading-relaxed text-white mb-2 last:mb-0 md:text-[13px]">Build a globally leading marine technology brand</p>
+				<div class="bg-white/[0.01] backdrop-blur-[10px] rounded-[15px] [@media(min-width:1920px)]:p-20 p-10 shadow-[0_20px_40px_rgba(0,0,0,0.3)] text-white text-center font-bold drop-shadow-[2px_2px_6px_rgba(0,0,0,0.9)]">
+					<div class="mb-6 sm:mb-8 md:mb-10 lg:mb-12 [@media(min-width:1920px)]:mb-[50px] last:mb-0">
+						<p class="text-[18px] sm:text-[20px] md:text-[24px] lg:text-[28px] [@media(min-width:1920px)]:text-[30px] font-semibold text-white mb-2 sm:mb-3 md:mb-4 [@media(min-width:1920px)]:mb-[15px] uppercase tracking-[0.3px] sm:tracking-[0.4px] [@media(min-width:1920px)]:tracking-[0.5px]">Company Mission:</p>
+						<p class="text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px] [@media(min-width:1920px)]:text-[24px] leading-relaxed text-white mb-2 sm:mb-3 [@media(min-width:1920px)]:mb-4 last:mb-0">Leading the innovation of water transportation</p>
+						<p class="text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px] [@media(min-width:1920px)]:text-[24px] leading-relaxed text-white mb-2 sm:mb-3 [@media(min-width:1920px)]:mb-4 last:mb-0">Build a globally leading marine technology brand</p>
 					</div>
 
-					<div class="mb-[30px] last:mb-0">
-						<p class="text-lg font-semibold text-white mb-[15px] uppercase tracking-[0.5px] md:text-base">Company Vision:</p>
-						<p class="text-sm leading-relaxed text-white mb-2 last:mb-0 md:text-[13px]">The most rock-solid water operation platform</p>
-						<p class="text-sm leading-relaxed text-white mb-2 last:mb-0 md:text-[13px]">Become the definer of the most energy-efficient and high-performance water economy</p>
-						<p class="text-sm leading-relaxed text-white mb-2 last:mb-0 md:text-[13px]">Deliver the most superior watercraft in terms of performance</p>
+					<div class="mb-6 sm:mb-8 md:mb-10 lg:mb-12 [@media(min-width:1920px)]:mb-[50px] last:mb-0">
+						<p class="text-[18px] sm:text-[20px] md:text-[24px] lg:text-[28px] [@media(min-width:1920px)]:text-[30px] font-semibold text-white mb-2 sm:mb-3 md:mb-4 [@media(min-width:1920px)]:mb-[15px] uppercase tracking-[0.3px] sm:tracking-[0.4px] [@media(min-width:1920px)]:tracking-[0.5px]">Company Vision:</p>
+						<p class="text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px] [@media(min-width:1920px)]:text-[24px] leading-relaxed text-white mb-2 sm:mb-3 [@media(min-width:1920px)]:mb-4 last:mb-0">The most rock-solid water operation platform</p>
+						<p class="text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px] [@media(min-width:1920px)]:text-[24px] leading-relaxed text-white mb-2 sm:mb-3 [@media(min-width:1920px)]:mb-4 last:mb-0">Become the definer of the most energy-efficient and high-performance water economy</p>
+						<p class="text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px] [@media(min-width:1920px)]:text-[24px] leading-relaxed text-white mb-2 sm:mb-3 [@media(min-width:1920px)]:mb-4 last:mb-0">Deliver the most superior watercraft in terms of performance</p>
 					</div>
 
-					<div class="mb-[30px] last:mb-0">
-						<p class="text-lg font-semibold text-white mb-[15px] uppercase tracking-[0.5px] md:text-base">Core Values:</p>
-						<p class="text-sm leading-relaxed text-white mb-2 last:mb-0 md:text-[13px]">Cooperation, innovation, and foresight</p>
+					<div class="mb-6 sm:mb-8 md:mb-10 lg:mb-12 [@media(min-width:1920px)]:mb-[50px] last:mb-0">
+						<p class="text-[18px] sm:text-[20px] md:text-[24px] lg:text-[28px] [@media(min-width:1920px)]:text-[30px] font-semibold text-white mb-2 sm:mb-3 md:mb-4 [@media(min-width:1920px)]:mb-[15px] uppercase tracking-[0.3px] sm:tracking-[0.4px] [@media(min-width:1920px)]:tracking-[0.5px]">Core Values:</p>
+						<p class="text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px] [@media(min-width:1920px)]:text-[24px] leading-relaxed text-white mb-2 sm:mb-3 [@media(min-width:1920px)]:mb-4 last:mb-0">Cooperation, innovation, and foresight</p>
 					</div>
 
-					<div class="mb-[30px] last:mb-0">
-						<p class="text-lg font-semibold text-white mb-[15px] uppercase tracking-[0.5px] md:text-base">Management Philosophy:</p>
-						<p class="text-sm leading-relaxed text-white mb-2 last:mb-0 md:text-[13px]">People-oriented, customer-first</p>
-						<p class="text-sm leading-relaxed text-white mb-2 last:mb-0 md:text-[13px]">Progressing hand in hand for mutual benefit and win-win cooperation</p>
+					<div class="mb-6 sm:mb-8 md:mb-10 lg:mb-12 [@media(min-width:1920px)]:mb-[50px] last:mb-0">
+						<p class="text-[18px] sm:text-[20px] md:text-[24px] lg:text-[28px] [@media(min-width:1920px)]:text-[30px] font-semibold text-white mb-2 sm:mb-3 md:mb-4 [@media(min-width:1920px)]:mb-[15px] uppercase tracking-[0.3px] sm:tracking-[0.4px] [@media(min-width:1920px)]:tracking-[0.5px]">Management Philosophy:</p>
+						<p class="text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px] [@media(min-width:1920px)]:text-[24px] leading-relaxed text-white mb-2 sm:mb-3 [@media(min-width:1920px)]:mb-4 last:mb-0">People-oriented, customer-first</p>
+						<p class="text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px] [@media(min-width:1920px)]:text-[24px] leading-relaxed text-white mb-2 sm:mb-3 [@media(min-width:1920px)]:mb-4 last:mb-0">Progressing hand in hand for mutual benefit and win-win cooperation</p>
 					</div>
 				</div>
 			</div>
