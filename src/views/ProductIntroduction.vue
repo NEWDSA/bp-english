@@ -8,7 +8,7 @@
 			playsinline></video>
 
 		<!-- 左侧悬浮按钮 -->
-		<div class="fixed left-[-28px] w-16 h-16 bg-[rgba(0,212,255,0.2)] backdrop-blur-[10px] border border-[rgba(0,212,255,0.3)] rounded-full flex items-center justify-center cursor-pointer z-[10001] transition-[top] duration-300 ease-in-out text-[#00d4ff] overflow-hidden hover:bg-[rgba(0,212,255,0.3)] hover:border-[rgba(0,212,255,0.5)] hover:scale-110"
+		<div class="fixed left-[-28px] w-20 h-20 bg-[rgba(0,212,255,0.2)] backdrop-blur-[10px] border border-[rgba(0,212,255,0.3)] rounded-full flex items-center justify-center cursor-pointer z-[10001] transition-[top] duration-300 ease-in-out text-[#00d4ff] overflow-hidden hover:bg-[rgba(0,212,255,0.3)] hover:border-[rgba(0,212,255,0.5)] hover:scale-110 shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
 			ref="leftNavToggleBtnRef" :style="{ top: leftNavToggleBtnTop }" @click="toggleNavMenu">
 			<svg v-if="!isNavMenuOpen" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
 				stroke-width="1.5" stroke="currentColor" class="w-7 h-7 ml-3">
