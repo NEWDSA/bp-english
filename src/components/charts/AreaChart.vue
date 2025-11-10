@@ -210,7 +210,8 @@ const getChartOptions = () => {
       {
         type: 'value',
         position: 'right',
-        max: regionData.needSeparateAxis ? regionData.lineMax * 1.3 : 'dataMax',
+        max: (!props.selectedCity || !props.selectedCity.country) ? 8 :
+             (regionData.needSeparateAxis ? regionData.lineMax * 1.3 : 'dataMax'),
         min: regionData.needSeparateAxis ?
           (regionData.lineMin < 0 ? regionData.lineMin * 1.3 : regionData.lineMin * 0.7) :
           'dataMin',
