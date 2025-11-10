@@ -635,8 +635,6 @@ const nextImage = () => {
             </div>
           </div>
 
-          
-
           <!-- 沿圆圈定位的图标 -->
           <div class="absolute top-0 left-0 w-full h-full pointer-events-auto">
             <!-- 图标6 - 30度 -->
@@ -648,7 +646,7 @@ const nextImage = () => {
               <!-- 定位点 icon-11.png 8x11 -->
               <img src="/src/assets/icon-11.png" alt="定位点" class="w-[8px] h-[11px] object-contain ml-1 mr-2 icon-dot" />
               <!-- 位置名称 -->
-              <span class="text-white text-sm font-medium ml-1 shadow-lg icon-text">Italian</span>
+              <span class="text-white text-[22px] font-medium ml-1 shadow-lg icon-text">Italian</span>
             </div>
 
             <!-- 图标7 - 60度 -->
@@ -660,7 +658,7 @@ const nextImage = () => {
               <!-- 定位点 icon-11.png 8x11 -->
               <img src="/src/assets/icon-11.png" alt="定位点" class="w-[8px] h-[11px] object-contain ml-1 mr-2 icon-dot" />
               <!-- 位置名称 -->
-              <span class="text-white text-sm font-medium ml-1 shadow-lg icon-text">Southeast Asia</span>
+              <span class="text-white text-[22px] font-medium ml-1 shadow-lg icon-text">Southeast Asia</span>
             </div>
 
             <!-- 图标8 - 90度 -->
@@ -672,7 +670,7 @@ const nextImage = () => {
               <!-- 定位点 icon-11.png 8x11 -->
               <img src="/src/assets/icon-11.png" alt="定位点" class="w-[8px] h-[11px] object-contain ml-2 mr-2 icon-dot" />
               <!-- 位置名称 -->
-              <span class="text-white text-sm font-medium ml-1 shadow-lg icon-text">China</span>
+              <span class="text-white text-[22px] font-medium ml-1 shadow-lg icon-text">China</span>
             </div>
 
             <!-- 图标9 - 120度 -->
@@ -684,7 +682,7 @@ const nextImage = () => {
               <!-- 定位点 icon-11.png 8x11 -->
               <img src="/src/assets/icon-11.png" alt="定位点" class="w-[8px] h-[11px] object-contain ml-1 mr-2 icon-dot" />
               <!-- 位置名称 -->
-              <span class="text-white text-sm font-medium ml-1 shadow-lg icon-text">America</span>
+              <span class="text-white text-[22px] font-medium ml-1 shadow-lg icon-text">America</span>
             </div>
 
             <!-- 图标10 - 150度 -->
@@ -694,9 +692,9 @@ const nextImage = () => {
               <!-- 地图图片 icon-10.png 100x100 -->
               <img src="/src/assets/icon-10.png" alt="板块五" class="w-[100px] h-[100px] object-contain ml-[40px] icon-image" />
               <!-- 定位点 icon-11.png 8x11 -->
-              <img src="/src/assets/icon-11.png" alt="定位点" class="w-[8px] h-[11px] object-contain ml-1 mr-2 icon-dot" />
+              <img src="/src/assets/icon-11.png" alt="定位点" class="w-[8px] h-[11px] object-contain ml-4 mr-2 icon-dot" />
               <!-- 位置名称 -->
-              <span class="text-white text-sm font-medium ml-1 shadow-lg icon-text">Middle East</span>
+              <span class="text-white text-[22px] font-medium ml-1 shadow-lg icon-text">Middle East</span>
             </div>
           </div>
         </div>
@@ -771,7 +769,7 @@ const nextImage = () => {
     </div>
 
     <!-- 底部内容：图片画廊 -->
-    <div v-show="!showCoreRequirements" class="fixed bottom-0 left-0 right-0 h-[120px] sm:h-[140px] md:h-[160px] lg:h-[180px] xl:h-[200px] 2xl:h-[220px] overflow-x-auto bottom-gallery">
+    <div v-show="!showCoreRequirements" class="fixed bottom-0 left-0 right-0 h-[120px] sm:h-[160px] md:h-[180px] lg:h-[200px] xl:h-[220px] 2xl:h-[240px] overflow-x-auto bottom-gallery">
       <div class="relative w-full h-full flex justify-center items-end">
         <!-- 图片1 -->
         <div class="gallery-item" @click="openModal(1)">
@@ -1179,6 +1177,12 @@ const nextImage = () => {
   }
 }
 
+@media (min-width: 1920px) {
+  .gallery-item {
+    height: 190px;
+  }
+}
+
 .gallery-item:hover {
   height: 120px;
 }
@@ -1201,15 +1205,9 @@ const nextImage = () => {
   }
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1920px) {
   .gallery-item:hover {
-    height: 200px;
-  }
-}
-
-@media (min-width: 1536px) {
-  .gallery-item:hover {
-    height: 220px;
+    height: 240px;
   }
 }
 
