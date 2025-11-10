@@ -8,7 +8,8 @@
 			playsinline></video>
 
 		<!-- 左侧悬浮按钮 -->
-		<div class="fixed left-[-28px] w-16 h-16 bg-[rgba(0,212,255,0.2)] backdrop-blur-[10px] border border-[rgba(0,212,255,0.3)] rounded-full flex items-center justify-center cursor-pointer z-[10001] transition-[top] duration-300 ease-in-out text-[#00d4ff] overflow-hidden hover:bg-[rgba(0,212,255,0.3)] hover:border-[rgba(0,212,255,0.5)] hover:scale-110" ref="leftNavToggleBtnRef" :style="{ top: leftNavToggleBtnTop }" @click="toggleNavMenu">
+		<div class="fixed left-[-28px] w-16 h-16 bg-[rgba(0,212,255,0.2)] backdrop-blur-[10px] border border-[rgba(0,212,255,0.3)] rounded-full flex items-center justify-center cursor-pointer z-[10001] transition-[top] duration-300 ease-in-out text-[#00d4ff] overflow-hidden hover:bg-[rgba(0,212,255,0.3)] hover:border-[rgba(0,212,255,0.5)] hover:scale-110"
+			ref="leftNavToggleBtnRef" :style="{ top: leftNavToggleBtnTop }" @click="toggleNavMenu">
 			<svg v-if="!isNavMenuOpen" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
 				stroke-width="1.5" stroke="currentColor" class="w-7 h-7 ml-3">
 				<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -21,35 +22,47 @@
 
 		<!-- 左侧导航菜单 -->
 		<div class="left-section" :class="{ 'left-section-open': isNavMenuOpen }">
-			<div class="absolute left-5 sm:left-10 md:left-12 lg:left-14 xl:left-16 2xl:left-20 top-1/2 -translate-y-1/2 max-h-[calc(100vh-84px-120px)] bg-transparent z-[10000] flex flex-col box-border overflow-x-hidden custom-scrollbar" ref="leftNavWrapperRef">
+			<div class="absolute left-3 sm:left-5 md:left-8 lg:left-10 xl:left-14 2xl:left-20 top-1/2 -translate-y-1/2 max-h-[calc(100vh-84px-120px)] bg-transparent z-[10000] flex flex-col box-border overflow-x-hidden custom-scrollbar"
+				ref="leftNavWrapperRef">
 				<div class="left-nav-list" ref="navListRef" :style="{ gap: navListGap }">
 					<!-- 垂直时间线 -->
-					<div class="absolute left-[90px] sm:left-[96px] md:left-[102px] lg:left-[108px] xl:left-[114px] w-0.5 bg-white/30 z-[1]" :style="{ top: lineTop, height: lineHeight }"></div>
-					
-					<div class="left-nav-item w-[510px] sm:w-[570px] md:w-[630px] lg:w-[690px] xl:w-[730px]" ref="firstNavItemRef" :class="{ active: activeNavItem === 'advantages' }"
+					<div class="absolute left-[80px] sm:left-[90px] md:left-[96px] lg:left-[100px] xl:left-[108px] 2xl:left-[114px] w-0.5 bg-white/30 z-[1]"
+						:style="{ top: lineTop, height: lineHeight }"></div>
+
+					<div class="left-nav-item w-[450px] sm:w-[510px] md:w-[570px] lg:w-[600px] xl:w-[690px] 2xl:w-[730px] max-w-[730px]"
+						ref="firstNavItemRef" :class="{ active: activeNavItem === 'advantages' }"
 						@click="setActiveNavItem('advantages')">
 						<div class="nav-item-number">01</div>
-						<div :class="['absolute left-[90px] sm:left-[96px] md:left-[102px] lg:left-[108px] xl:left-[114px] top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full z-[3] w-[7px] h-[7px]', activeNavItem === 'advantages' ? 'bg-[#ff4444] shadow-[0_0_15px_rgba(255,68,68,0.8)]' : 'bg-white shadow-[0_0_8px_rgba(255,255,255,0.5)]']"></div>
-						<span class="nav-text text-[30px]">Hydrofoil Advantages</span>
+						<div
+							:class="['absolute left-[80px] sm:left-[90px] md:left-[96px] lg:left-[100px] xl:left-[108px] 2xl:left-[114px] top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full z-[3] w-[7px] h-[7px]', activeNavItem === 'advantages' ? 'bg-[#ff4444] shadow-[0_0_15px_rgba(255,68,68,0.8)]' : 'bg-white shadow-[0_0_8px_rgba(255,255,255,0.5)]']">
+						</div>
+						<span class="nav-text text-[24px] sm:text-[26px] md:text-[28px] lg:text-[30px]">Hydrofoil Advantages</span>
 					</div>
-					<div class="left-nav-item w-[510px] sm:w-[570px] md:w-[630px] lg:w-[690px] xl:w-[730px]" :class="{ active: activeNavItem === 'pain-points' }"
-						@click="setActiveNavItem('pain-points')">
+					<div class="left-nav-item w-[450px] sm:w-[510px] md:w-[570px] lg:w-[600px] xl:w-[690px] 2xl:w-[730px] max-w-[730px]"
+						:class="{ active: activeNavItem === 'pain-points' }" @click="setActiveNavItem('pain-points')">
 						<div class="nav-item-number">02</div>
-						<div :class="['absolute left-[90px] sm:left-[96px] md:left-[102px] lg:left-[108px] xl:left-[114px] top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full z-[3] w-[7px] h-[7px]', activeNavItem === 'pain-points' ? 'bg-[#ff4444] shadow-[0_0_15px_rgba(255,68,68,0.8)]' : 'bg-white shadow-[0_0_8px_rgba(255,255,255,0.5)]']"></div>
-						<span class="nav-text text-[30px]">Traditional Electric Boat Pain Points2</span>
+						<div
+							:class="['absolute left-[80px] sm:left-[90px] md:left-[96px] lg:left-[100px] xl:left-[108px] 2xl:left-[114px] top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full z-[3] w-[7px] h-[7px]', activeNavItem === 'pain-points' ? 'bg-[#ff4444] shadow-[0_0_15px_rgba(255,68,68,0.8)]' : 'bg-white shadow-[0_0_8px_rgba(255,255,255,0.5)]']">
+						</div>
+						<span class="nav-text text-[24px] sm:text-[26px] md:text-[28px] lg:text-[30px]">Traditional Electric Boat Pain Points2</span>
 					</div>
-					<div class="left-nav-item w-[510px] sm:w-[570px] md:w-[630px] lg:w-[690px] xl:w-[730px]"
+					<div class="left-nav-item w-[450px] sm:w-[510px] md:w-[570px] lg:w-[600px] xl:w-[690px] 2xl:w-[730px] max-w-[730px]"
 						:class="{ active: activeNavItem === 'competitor-analysis' }"
 						@click="setActiveNavItem('competitor-analysis')">
 						<div class="nav-item-number">03</div>
-						<div :class="['absolute left-[90px] sm:left-[96px] md:left-[102px] lg:left-[108px] xl:left-[114px] top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full z-[3] w-[7px] h-[7px]', activeNavItem === 'competitor-analysis' ? 'bg-[#ff4444] shadow-[0_0_15px_rgba(255,68,68,0.8)]' : 'bg-white shadow-[0_0_8px_rgba(255,255,255,0.5)]']"></div>
-						<span class="nav-text text-[30px]">Competitor Analysis</span>
+						<div
+							:class="['absolute left-[80px] sm:left-[90px] md:left-[96px] lg:left-[100px] xl:left-[108px] 2xl:left-[114px] top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full z-[3] w-[7px] h-[7px]', activeNavItem === 'competitor-analysis' ? 'bg-[#ff4444] shadow-[0_0_15px_rgba(255,68,68,0.8)]' : 'bg-white shadow-[0_0_8px_rgba(255,255,255,0.5)]']">
+						</div>
+						<span class="nav-text text-[24px] sm:text-[26px] md:text-[28px] lg:text-[30px]">Competitor Analysis</span>
 					</div>
-					<div class="left-nav-item w-[510px] sm:w-[570px] md:w-[630px] lg:w-[690px] xl:w-[730px]" ref="lastNavItemRef" :class="{ active: activeNavItem === 'three-mode-rudder' }"
+					<div class="left-nav-item w-[450px] sm:w-[510px] md:w-[570px] lg:w-[600px] xl:w-[690px] 2xl:w-[730px] max-w-[730px]"
+						ref="lastNavItemRef" :class="{ active: activeNavItem === 'three-mode-rudder' }"
 						@click="setActiveNavItem('three-mode-rudder')">
 						<div class="nav-item-number">04</div>
-						<div :class="['absolute left-[90px] sm:left-[96px] md:left-[102px] lg:left-[108px] xl:left-[114px] top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full z-[3] w-[7px] h-[7px]', activeNavItem === 'three-mode-rudder' ? 'bg-[#ff4444] shadow-[0_0_15px_rgba(255,68,68,0.8)]' : 'bg-white shadow-[0_0_8px_rgba(255,255,255,0.5)]']"></div>
-						<span class="nav-text text-[30px]">Intelligent control three-mode rudder</span>
+						<div
+							:class="['absolute left-[80px] sm:left-[90px] md:left-[96px] lg:left-[100px] xl:left-[108px] 2xl:left-[114px] top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full z-[3] w-[7px] h-[7px]', activeNavItem === 'three-mode-rudder' ? 'bg-[#ff4444] shadow-[0_0_15px_rgba(255,68,68,0.8)]' : 'bg-white shadow-[0_0_8px_rgba(255,255,255,0.5)]']">
+						</div>
+						<span class="nav-text text-[24px] sm:text-[26px] md:text-[28px] lg:text-[30px]">Intelligent control three-mode rudder</span>
 					</div>
 				</div>
 			</div>
@@ -96,16 +109,20 @@
 								<div class="panel-content-inner">
 									<!-- 结论部分 -->
 									<div class="panel-section">
-										<div class="text-sm font-bold text-white mb-[15px] sm:text-base sm:mb-[18px] md:text-lg md:mb-5 !text-[20px]">Conclusion:</div>
+										<div
+											class="text-sm font-bold text-white mb-[15px] sm:text-base sm:mb-[18px] md:text-lg md:mb-5 !text-[20px]">
+											Conclusion:</div>
 										<div class="conclusion-content">
 											<div class="conclusion-item">
 												<span class="conclusion-number">1.</span>
-												<span class="conclusion-text !text-[18px]">Weight & Resistance: Electric boats have
+												<span class="conclusion-text !text-[18px]">Weight & Resistance: Electric
+													boats have
 													higher values due to battery pack weight and hull design;</span>
 											</div>
 											<div class="conclusion-item">
 												<span class="conclusion-number">2.</span>
-												<span class="conclusion-text !text-[18px]">Size Requirements: To compensate for
+												<span class="conclusion-text !text-[18px]">Size Requirements: To
+													compensate for
 													energy density disadvantages, electric boats need larger hulls to
 													accommodate more batteries or optimize hydrodynamic
 													performance.</span>
@@ -115,10 +132,13 @@
 
 									<!-- 解决办法 -->
 									<div class="panel-section">
-										<div class="text-sm font-bold text-white mb-[15px] sm:text-base sm:mb-[18px] md:text-lg md:mb-5 !text-[20px]">Solutions:</div>
+										<div
+											class="text-sm font-bold text-white mb-[15px] sm:text-base sm:mb-[18px] md:text-lg md:mb-5 !text-[20px]">
+											Solutions:</div>
 										<div class="solutions-grid">
 											<div class="solution-item !text-[18px]">■ Controllable Cost</div>
-											<div class="solution-item !text-[18px]">■ High Efficiency & Energy Saving</div>
+											<div class="solution-item !text-[18px]">■ High Efficiency & Energy Saving
+											</div>
 											<div class="solution-item !text-[18px]">■ Quick Profitability</div>
 											<div class="solution-item !text-[18px]">■ Policy Avoidance</div>
 										</div>
@@ -143,17 +163,17 @@
 				<div class="modal-content-wrapper competitor-analysis-wrapper">
 					<!-- Tab切换 -->
 					<div class="competitor-tabs">
-						<button class="competitor-tab !text-[20px]" :class="{ active: competitorTab === '10-15w' }"
+						<button class="competitor-tab" :class="{ active: competitorTab === '10-15w' }"
 							@click="setCompetitorTab('10-15w')">
 							<!-- Hydrofoil 10-15w Euro -->
 							YU VS (€100,000 - €150,000) Electric Yacht
 						</button>
-						<button class="competitor-tab !text-[20px]" :class="{ active: competitorTab === '18w' }"
+						<button class="competitor-tab" :class="{ active: competitorTab === '18w' }"
 							@click="setCompetitorTab('18w')">
 							<!-- Hydrofoil 18w Euro -->
 							YU VS (€180,000) Electric Yacht
 						</button>
-						<button class="competitor-tab !text-[20px]" :class="{ active: competitorTab === 'vs-others' }"
+						<button class="competitor-tab" :class="{ active: competitorTab === 'vs-others' }"
 							@click="setCompetitorTab('vs-others')">
 							<!-- VS Other Hydrofoils -->
 							YU VS Other Electric Hydrofoils
@@ -172,7 +192,8 @@
 								<!-- "御"水翼艇 -->
 								<div class="competitor-item yu-column">
 									<div class="competitor-image-wrapper">
-										<video src="../assets/boat.mp4" alt="御水翼艇" class="competitor-image" autoplay loop muted playsinline></video>
+										<video src="../assets/boat.mp4" alt="御水翼艇" class="competitor-image" autoplay
+											loop muted playsinline></video>
 									</div>
 								</div>
 
@@ -194,7 +215,7 @@
 
 							<!-- 性能对比表格 -->
 							<div class="comparison-table-wrapper">
-								<table class="comparison-table text-base sm:text-lg md:text-xl lg:text-xl">
+								<table class="comparison-table">
 									<tbody>
 										<tr>
 											<td>Maximum Speed(km/h)</td>
@@ -295,7 +316,8 @@
 								<!-- "御"水翼艇 -->
 								<div class="competitor-item yu-column">
 									<div class="competitor-image-wrapper">
-										<video src="../assets/boat.mp4" alt="御水翼艇" class="competitor-image" autoplay loop muted playsinline></video>
+										<video src="../assets/boat.mp4" alt="御水翼艇" class="competitor-image" autoplay
+											loop muted playsinline></video>
 									</div>
 								</div>
 
@@ -325,7 +347,7 @@
 
 							<!-- 性能对比表格 -->
 							<div class="comparison-table-wrapper">
-								<table class="comparison-table text-base sm:text-lg md:text-xl lg:text-xl">
+								<table class="comparison-table">
 									<tbody>
 										<tr>
 											<td>Maximum Speed (km/h)</td>
@@ -443,7 +465,8 @@
 								<!-- 我们的产品 -->
 								<div class="competitor-item yu-column">
 									<div class="competitor-image-wrapper">
-										<video src="../assets/boat.mp4" alt="御水翼艇" class="competitor-image" autoplay loop muted playsinline></video>
+										<video src="../assets/boat.mp4" alt="御水翼艇" class="competitor-image" autoplay
+											loop muted playsinline></video>
 									</div>
 								</div>
 
@@ -478,7 +501,7 @@
 
 							<!-- 性能对比表格 -->
 							<div class="comparison-table-wrapper">
-								<table class="comparison-table text-base sm:text-lg md:text-xl lg:text-xl">
+								<table class="comparison-table">
 									<tbody>
 										<tr>
 											<td>Maximum Speed (km/h)</td>
@@ -579,7 +602,8 @@
 
 							<!-- 结论部分 -->
 							<div class="competitor-conclusion">
-								<div class="conclusion-title text-base sm:text-lg md:text-xl lg:text-2xl">Conclusion:</div>
+								<div class="conclusion-title">Conclusion:
+								</div>
 								<div class="conclusion-content">
 									<div class="conclusion-item text-sm sm:text-base md:text-lg">
 										<span class="conclusion-bullet">•</span>
@@ -612,8 +636,11 @@
 		</div>
 
 		<!-- 智能控制三模方向舵弹窗 -->
-		<div v-if="activeNavItem === 'three-mode-rudder'" class="fixed inset-0 w-screen h-screen bg-[rgba(40,40,40,0.6)] backdrop-blur-[20px] z-[20000] flex items-center justify-center p-0 m-0 overflow-hidden" @click="closeThreeModeRudderModal">
-			<div class="relative w-full h-full max-w-full max-h-screen bg-[rgba(40,40,40,0.95)] backdrop-blur-[20px] rounded-none border-none shadow-none overflow-y-auto overflow-x-hidden m-0 p-0 flex flex-col" @click.stop>
+		<div v-if="activeNavItem === 'three-mode-rudder'"
+			class="fixed inset-0 w-screen h-screen bg-[rgba(40,40,40,0.6)] backdrop-blur-[20px] z-[20000] flex items-center justify-center p-0 m-0 overflow-hidden"
+			@click="closeThreeModeRudderModal">
+			<div class="relative w-full h-full max-w-full max-h-screen bg-[rgba(40,40,40,0.95)] backdrop-blur-[20px] rounded-none border-none shadow-none overflow-y-auto overflow-x-hidden m-0 p-0 flex flex-col"
+				@click.stop>
 				<!-- 关闭按钮 -->
 				<button class="modal-close-btn" @click="closeThreeModeRudderModal">×</button>
 
@@ -621,34 +648,43 @@
 				<div class="modal-title">Intelligent control three-mode rudder</div>
 
 				<!-- 弹窗内容 -->
-				<div class="modal-content-wrapper three-mode-rudder-wrapper !flex !items-stretch !justify-center !gap-5">
+				<div
+					class="modal-content-wrapper three-mode-rudder-wrapper !flex !items-stretch !justify-center !gap-5">
 					<!-- 左侧：方向盘详细展示 -->
-					<div class="three-mode-left-panel !w-[1000px] !flex !items-center !justify-center !self-stretch">
+					<div class="three-mode-left-panel !w-full sm:!w-full md:!w-[800px] lg:!w-[900px] xl:!w-[1000px] !flex !items-center !justify-center !self-stretch">
 						<div class="steering-wheel-container !w-full !h-full">
 							<!-- 方向盘图片 -->
 							<div class="steering-wheel-image-wrapper !w-full !h-full !max-w-none">
-								<img src="../assets/driver.gif" alt="Intelligent control three-mode rudder" class="steering-wheel-image !w-full !h-full !object-contain !max-w-none" />
+								<img src="../assets/driver.gif" alt="Intelligent control three-mode rudder"
+									class="steering-wheel-image !w-full !h-full !object-contain !max-w-none" />
 							</div>
 						</div>
 					</div>
 
 					<!-- 右侧：驾驶模式和车内视图 -->
-					<div class="three-mode-right-panel !w-[1000px] !left-0 !flex !flex-col !self-stretch !items-center !justify-center">
+					<div
+						class="three-mode-right-panel !w-full sm:!w-full md:!w-[800px] lg:!w-[900px] xl:!w-[1000px] !left-0 !flex !flex-col !self-stretch !items-center !justify-center">
 						<!-- 驾驶模式指示器 -->
 						<div class="driving-mode-box !flex-shrink-0">
 							<div class="driving-mode-title">DRIVING MODE</div>
 							<div class="driving-mode-subtitle" v-if="drivingMode === 'normal'">FULL DRIVER CONTROL</div>
-							<div class="driving-mode-subtitle" v-else-if="drivingMode === 'sport'">REMOVE SPEED LIMIT</div>
+							<div class="driving-mode-subtitle" v-else-if="drivingMode === 'sport'">REMOVE SPEED LIMIT
+							</div>
 							<div class="driving-mode-subtitle" v-else>FULL-AUTOMATIC</div>
-							<div class="driving-mode-subtitle" v-if="drivingMode === 'automatic'" style="margin-top: 4px; font-size: 12px;">ROUTE PLANNING</div>
+							<div class="driving-mode-subtitle" v-if="drivingMode === 'automatic'"
+								style="margin-top: 4px; font-size: 12px;">ROUTE PLANNING</div>
 						</div>
 
 						<!-- 车内视图 - 点击切换模式 -->
 						<div class="interior-view-wrapper !flex-shrink-0" @click="toggleDrivingMode">
 							<transition name="fade" mode="out-in">
-								<img v-if="drivingMode === 'normal'" key="normal" src="../assets/driver1.png" alt="Car interior view - Normal mode" class="interior-view-image cursor-pointer" />
-								<img v-else-if="drivingMode === 'sport'" key="sport" src="../assets/driver2.png" alt="Car interior view - Sport mode" class="interior-view-image cursor-pointer" />
-								<img v-else key="automatic" src="../assets/driver3.png" alt="Car interior view - Automatic mode" class="interior-view-image cursor-pointer" />
+								<img v-if="drivingMode === 'normal'" key="normal" src="../assets/driver1.png"
+									alt="Car interior view - Normal mode" class="interior-view-image cursor-pointer" />
+								<img v-else-if="drivingMode === 'sport'" key="sport" src="../assets/driver2.png"
+									alt="Car interior view - Sport mode" class="interior-view-image cursor-pointer" />
+								<img v-else key="automatic" src="../assets/driver3.png"
+									alt="Car interior view - Automatic mode"
+									class="interior-view-image cursor-pointer" />
 							</transition>
 						</div>
 					</div>
@@ -687,7 +723,9 @@
 
 						<!-- 第二部分：性能对比 -->
 						<div class="panel-section">
-							<div class="section-title !text-[20px]">2. How does the hydrofoil perform compared to traditional boats?
+							<div class="section-title !text-[20px]">2. How does the hydrofoil perform compared to
+								traditional
+								boats?
 							</div>
 							<div class="performance-list">
 								<div class="performance-item">
@@ -709,13 +747,15 @@
 									</div>
 								</div>
 								<div class="performance-item">
-									<div class="performance-label !text-[18px]">Energy consumption reduction: 30%-50%</div>
+									<div class="performance-label !text-[18px]">Energy consumption reduction: 30%-50%
+									</div>
 									<div class="performance-bar">
 										<div class="performance-bar-fill orange-bar" style="width: 50%"></div>
 									</div>
 								</div>
 								<div class="performance-item">
-									<div class="performance-label !text-[18px]">Propulsion efficiency increase: 20%-40%</div>
+									<div class="performance-label !text-[18px]">Propulsion efficiency increase: 20%-40%
+									</div>
 									<div class="performance-bar">
 										<div class="performance-bar-fill orange-bar" style="width: 40%"></div>
 									</div>
@@ -762,12 +802,6 @@
 									</svg>
 								</button>
 							</div>
-							<!-- 视频右侧文案 -->
-							<div class="video-text-labels">
-								<div class="video-text-label">No waves</div>
-								<div class="video-text-label">Slightly bumpy</div>
-							</div>
-							<!-- 内容 -->
 						</div>
 					</div>
 				</div>
@@ -776,78 +810,144 @@
 
 		<!-- 右侧产品规格区域 -->
 		<div class="right-section">
-			<div class="absolute right-5 sm:right-10 md:right-12 lg:right-16 xl:right-20 2xl:right-[100px] top-1/2 -translate-y-1/2 max-h-[calc(100vh-84px-120px)] bg-[rgba(100,100,100,0.3)] backdrop-blur-[20px] rounded-[10px] border border-white/30 shadow-[0_8px_32px_rgba(0,0,0,0.3)] w-auto min-w-fit max-w-[calc(100vw-40px)] sm:max-w-[calc(100vw-80px)] md:max-w-[calc(100vw-120px)] lg:max-w-[calc(100vw-160px)] xl:max-w-[calc(100vw-200px)] 2xl:max-w-[calc(100vw-300px)] flex flex-col overflow-hidden custom-scrollbar" ref="productSpecsPanelRef" style="height: fit-content;">
+			<div class="absolute right-3 sm:right-5 md:right-8 lg:right-10 xl:right-16 2xl:right-[100px] top-1/2 -translate-y-1/2 max-h-[calc(100vh-84px-120px)] bg-[rgba(100,100,100,0.3)] backdrop-blur-[20px] rounded-[10px] border border-white/30 shadow-[0_8px_32px_rgba(0,0,0,0.3)] w-auto min-w-fit max-w-[calc(100vw-480px)] sm:max-w-[calc(100vw-520px)] md:max-w-[calc(100vw-580px)] lg:max-w-[calc(100vw-620px)] xl:max-w-[calc(100vw-720px)] 2xl:max-w-[calc(100vw-800px)] flex flex-col overflow-hidden custom-scrollbar"
+				ref="productSpecsPanelRef" style="height: fit-content;">
 				<!-- <h3 class="specs-title">Ship name: YU</h3> -->
-				<div class="w-full min-h-[48px] sm:min-h-[50px] md:min-h-[54px] lg:min-h-[56px] xl:min-h-[58px] bg-[#646464] rounded-t-[10px] flex items-center flex-shrink-0 px-4 sm:px-5 md:px-6 lg:px-7 xl:px-[29px]">
-					<span class="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl font-[350] text-white leading-tight not-italic normal-case whitespace-nowrap">Model: YU</span>
+				<div
+					class="w-full min-h-[48px] sm:min-h-[50px] md:min-h-[54px] lg:min-h-[56px] xl:min-h-[58px] bg-[#646464] rounded-t-[10px] flex items-center flex-shrink-0 px-4 sm:px-5 md:px-6 lg:px-7 xl:px-[29px]">
+					<span
+						class="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl font-[350] text-white leading-tight not-italic normal-case whitespace-nowrap">Model:
+						YU</span>
 				</div>
-				<div class="overflow-y-auto overflow-x-hidden pl-4 sm:pl-5 md:pl-6 lg:pl-7 xl:pl-[29px] pr-4 sm:pr-5 md:pr-6 lg:pr-7 xl:pr-[29px] pb-4 sm:pb-5 md:pb-6 lg:pb-7 xl:pb-[29px]">
-				<!-- 主要尺寸 -->
-				<div class="p-2">
-					<div class="flex justify-between items-center cursor-pointer rounded-[5px]">
-						<h4 class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-normal text-white">Principal dimension:</h4>
-						<div class="text-white text-xs transition-transform duration-300 ease-in-out">▼</div>
+				<div
+					class="overflow-y-auto overflow-x-hidden pl-4 sm:pl-5 md:pl-6 lg:pl-7 xl:pl-[29px] pr-4 sm:pr-5 md:pr-6 lg:pr-7 xl:pr-[29px] pb-4 sm:pb-5 md:pb-6 lg:pb-7 xl:pb-[29px]">
+					<!-- 主要尺寸 -->
+					<div class="p-2">
+						<div class="flex justify-between items-center cursor-pointer rounded-[5px]">
+							<h4 class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-normal text-white">
+								Principal
+								dimension:</h4>
+							<div class="text-white text-xs transition-transform duration-300 ease-in-out">▼</div>
+						</div>
+						<div class="flex flex-col gap-1.5">
+							<div
+								class="flex justify-between items-start py-1 border-b border-white/10 last:border-b-0 gap-3 sm:gap-4">
+								<span
+									class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white whitespace-nowrap">Total
+									length</span>
+								<span
+									class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white font-semibold text-right whitespace-nowrap">4.90
+									m</span>
+							</div>
+							<div
+								class="flex justify-between items-start py-1 border-b border-white/10 last:border-b-0 gap-3 sm:gap-4">
+								<span
+									class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white whitespace-nowrap">Total
+									width</span>
+								<span
+									class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white font-semibold text-right whitespace-nowrap">3.40
+									m</span>
+							</div>
+							<div
+								class="flex justify-between items-start py-1 border-b border-white/10 last:border-b-0 gap-3 sm:gap-4">
+								<span
+									class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white whitespace-nowrap">Draft</span>
+								<span
+									class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white font-semibold text-right whitespace-nowrap">1.20
+									m</span>
+							</div>
+							<div
+								class="flex justify-between items-start py-1 border-b border-white/10 last:border-b-0 gap-3 sm:gap-4">
+								<span
+									class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white whitespace-nowrap">Person
+									capacity</span>
+								<span
+									class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white font-semibold text-right whitespace-nowrap">3-5
+									people</span>
+							</div>
+						</div>
 					</div>
-					<div class="flex flex-col gap-1.5">
-						<div class="flex justify-between items-start py-1 border-b border-white/10 last:border-b-0 gap-3 sm:gap-4">
-							<span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white whitespace-nowrap">Total length</span>
-							<span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white font-semibold text-right whitespace-nowrap">4.90 m</span>
-						</div>
-						<div class="flex justify-between items-start py-1 border-b border-white/10 last:border-b-0 gap-3 sm:gap-4">
-							<span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white whitespace-nowrap">Total width</span>
-							<span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white font-semibold text-right whitespace-nowrap">3.40 m</span>
-						</div>
-						<div class="flex justify-between items-start py-1 border-b border-white/10 last:border-b-0 gap-3 sm:gap-4">
-							<span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white whitespace-nowrap">Draft</span>
-							<span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white font-semibold text-right whitespace-nowrap">1.20 m</span>
-						</div>
-						<div class="flex justify-between items-start py-1 border-b border-white/10 last:border-b-0 gap-3 sm:gap-4">
-							<span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white whitespace-nowrap">Person capacity</span>
-							<span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white font-semibold text-right whitespace-nowrap">3-5 people</span>
-						</div>
-					</div>
-				</div>
 
-				<!-- 动力、速度和续航 -->
-				<div class="p-2">
-					<div class="flex justify-between items-center cursor-pointer rounded-[5px]">
-						<!-- <h4 class="spec-category">Power, speed, and range:</h4> -->
-						<span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-normal text-white">Power, speed, and range:</span>
-						<div class="text-white text-xs transition-transform duration-300 ease-in-out">▼</div>
-					</div>
-					<div class="flex flex-col gap-1.5">
-						<div class="flex justify-between items-start py-1 border-b border-white/10 last:border-b-0 gap-3 sm:gap-4">
-							<span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white whitespace-nowrap">Cruising speed</span>
-							<span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white font-semibold text-right whitespace-nowrap">15/30 sections (kt)</span>
+					<!-- 动力、速度和续航 -->
+					<div class="p-2">
+						<div class="flex justify-between items-center cursor-pointer rounded-[5px]">
+							<!-- <h4 class="spec-category">Power, speed, and range:</h4> -->
+							<span
+								class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-normal text-white">Power,
+								speed, and range:</span>
+							<div class="text-white text-xs transition-transform duration-300 ease-in-out">▼</div>
 						</div>
-						<div class="flex justify-between items-start py-1 border-b border-white/10 last:border-b-0 gap-3 sm:gap-4">
-							<span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white whitespace-nowrap">Maximum speed</span>
-							<span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white font-semibold text-right whitespace-nowrap">18/35 sections(kt)</span>
-						</div>
-						<div class="flex justify-between items-start py-1 border-b border-white/10 last:border-b-0 gap-3 sm:gap-4">
-							<span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white whitespace-nowrap">Endurance</span>
-							<span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white font-semibold text-right whitespace-nowrap">2.5 hours (standard operating conditions)</span>
-						</div>
-						<div class="flex justify-between items-start py-1 border-b border-white/10 last:border-b-0 gap-3 sm:gap-4">
-							<span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white whitespace-nowrap">Propulsion power</span>
-							<span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white font-semibold text-right whitespace-nowrap">20kw/40 kw</span>
-						</div>
-						<div class="flex justify-between items-start py-1 border-b border-white/10 last:border-b-0 gap-3 sm:gap-4">
-							<span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white whitespace-nowrap">Charging method</span>
-							<span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white font-semibold text-right whitespace-nowrap">Equipped with dedicated charging stations</span>
-						</div>
-						<div class="flex justify-between items-start py-1 border-b border-white/10 last:border-b-0 gap-3 sm:gap-4">
-							<span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white whitespace-nowrap">Charging station</span>
-							<span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white font-semibold text-right whitespace-nowrap">380V 60A</span>
-						</div>
-						<div class="flex justify-between items-start py-1 border-b border-white/10 last:border-b-0 gap-3 sm:gap-4">
-							<span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white whitespace-nowrap">Charging time</span>
-							<span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white font-semibold text-right whitespace-nowrap">1.5 hours</span>
-						</div>
-						<div class="flex justify-between items-start py-1 border-b border-white/10 last:border-b-0 gap-3 sm:gap-4">
-							<span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white whitespace-nowrap">Charging power</span>
-							<span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white font-semibold text-right whitespace-nowrap">≤20kw</span>
-						</div>
+						<div class="flex flex-col gap-1.5">
+							<div
+								class="flex justify-between items-start py-1 border-b border-white/10 last:border-b-0 gap-3 sm:gap-4">
+								<span
+									class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white whitespace-nowrap">Cruising
+									speed</span>
+								<span
+									class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white font-semibold text-right whitespace-nowrap">15/30
+									sections (kt)</span>
+							</div>
+							<div
+								class="flex justify-between items-start py-1 border-b border-white/10 last:border-b-0 gap-3 sm:gap-4">
+								<span
+									class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white whitespace-nowrap">Maximum
+									speed</span>
+								<span
+									class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white font-semibold text-right whitespace-nowrap">18/35
+									sections(kt)</span>
+							</div>
+							<div
+								class="flex justify-between items-start py-1 border-b border-white/10 last:border-b-0 gap-3 sm:gap-4">
+								<span
+									class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white whitespace-nowrap">Endurance</span>
+								<span
+									class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white font-semibold text-right whitespace-nowrap">2.5
+									hours (standard operating conditions)</span>
+							</div>
+							<div
+								class="flex justify-between items-start py-1 border-b border-white/10 last:border-b-0 gap-3 sm:gap-4">
+								<span
+									class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white whitespace-nowrap">Propulsion
+									power</span>
+								<span
+									class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white font-semibold text-right whitespace-nowrap">20kw/40
+									kw</span>
+							</div>
+							<div
+								class="flex justify-between items-start py-1 border-b border-white/10 last:border-b-0 gap-3 sm:gap-4">
+								<span
+									class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white whitespace-nowrap">Charging
+									method</span>
+								<span
+									class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white font-semibold text-right whitespace-nowrap">Equipped
+									with dedicated charging stations</span>
+							</div>
+							<div
+								class="flex justify-between items-start py-1 border-b border-white/10 last:border-b-0 gap-3 sm:gap-4">
+								<span
+									class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white whitespace-nowrap">Charging
+									station</span>
+								<span
+									class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white font-semibold text-right whitespace-nowrap">380V
+									60A</span>
+							</div>
+							<div
+								class="flex justify-between items-start py-1 border-b border-white/10 last:border-b-0 gap-3 sm:gap-4">
+								<span
+									class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white whitespace-nowrap">Charging
+									time</span>
+								<span
+									class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white font-semibold text-right whitespace-nowrap">1.5
+									hours</span>
+							</div>
+							<div
+								class="flex justify-between items-start py-1 border-b border-white/10 last:border-b-0 gap-3 sm:gap-4">
+								<span
+									class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white whitespace-nowrap">Charging
+									power</span>
+								<span
+									class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] text-white font-semibold text-right whitespace-nowrap">≤20kw</span>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -900,25 +1000,25 @@ const adjustNavListGap = () => {
 	nextTick(() => {
 		if (productSpecsPanelRef.value && navListRef.value) {
 			const rightPanelHeight = productSpecsPanelRef.value.offsetHeight
-			
+
 			// 获取列表的上下 padding
 			const listStyle = window.getComputedStyle(navListRef.value)
 			const paddingTop = parseFloat(listStyle.paddingTop) || 20
 			const paddingBottom = parseFloat(listStyle.paddingBottom) || 20
 			const listPadding = paddingTop + paddingBottom
-			
+
 			// 获取所有导航项的总高度
 			const navItems = navListRef.value.querySelectorAll('.left-nav-item')
 			let totalItemsHeight = 0
 			navItems.forEach((item: Element) => {
 				totalItemsHeight += (item as HTMLElement).offsetHeight
 			})
-			
+
 			// 计算需要的间距：(总高度 - 导航项总高度 - 上下padding) / 3（4个项有3个间距）
 			const availableHeight = rightPanelHeight - listPadding
 			const totalGap = availableHeight - totalItemsHeight
 			const gapValue = Math.max(0, totalGap / 3) // 确保不为负数
-			
+
 			navListGap.value = `${gapValue}px`
 		}
 	})
@@ -957,14 +1057,14 @@ const updateLeftNavToggleBtnPosition = () => {
 		if (firstNavItemRef.value && leftNavToggleBtnRef.value) {
 			const firstNavItemRect = firstNavItemRef.value.getBoundingClientRect()
 			const toggleBtnHeight = leftNavToggleBtnRef.value.offsetHeight || 64
-			
+
 			// 计算第一个导航项的中心位置（相对于视口）
 			const firstNavItemCenter = firstNavItemRect.top + firstNavItemRect.height / 2
-			
+
 			// 将左侧悬浮按钮的中心与第一个导航项的中心对齐
 			// 按钮的 top = 第一个导航项中心 - 按钮高度的一半
 			const toggleBtnTop = firstNavItemCenter - toggleBtnHeight / 2
-			
+
 			leftNavToggleBtnTop.value = `${toggleBtnTop}px`
 		}
 	})
@@ -1323,7 +1423,7 @@ onUnmounted(() => {
 	right: 0;
 	bottom: 0;
 	background: linear-gradient(135deg, rgba(255, 0, 0, 0.3) 0%, transparent 50%),
-				linear-gradient(-135deg, rgba(255, 100, 0, 0.3) 0%, transparent 50%);
+		linear-gradient(-135deg, rgba(255, 100, 0, 0.3) 0%, transparent 50%);
 	pointer-events: none;
 	z-index: 1;
 }
@@ -1337,24 +1437,24 @@ onUnmounted(() => {
 	flex: 1;
 	position: relative;
 	z-index: 2;
-	margin-left: 70px;
+	margin-left: 60px;
 }
 
 @media (min-width: 640px) {
 	.nav-text {
-		margin-left: 74px;
+		margin-left: 68px;
 	}
 }
 
 @media (min-width: 1024px) {
 	.nav-text {
-		margin-left: 78px;
+		margin-left: 72px;
 	}
 }
 
 @media (min-width: 1280px) {
 	.nav-text {
-		margin-left: 82px;
+		margin-left: 78px;
 	}
 }
 
@@ -1651,6 +1751,25 @@ onUnmounted(() => {
 	flex: 1;
 	overflow: hidden;
 	border-radius: 0 0 12px 12px;
+	min-height: 500px;
+}
+
+@media (min-width: 640px) {
+	.panel-content {
+		min-height: 650px;
+	}
+}
+
+@media (min-width: 1024px) {
+	.panel-content {
+		min-height: 750px;
+	}
+}
+
+@media (min-width: 1280px) {
+	.panel-content {
+		min-height: 850px;
+	}
 }
 
 .panel-background-video {
@@ -2274,10 +2393,35 @@ onUnmounted(() => {
 /* Tab切换样式 */
 .competitor-tabs {
 	display: flex;
-	gap: 30px;
+	gap: 15px;
 	width: 100%;
 	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-	margin-bottom: 25px;
+	margin-bottom: 20px;
+	padding-bottom: 12px;
+	overflow-x: auto;
+}
+
+@media (min-width: 640px) {
+	.competitor-tabs {
+		gap: 20px;
+		margin-bottom: 22px;
+		padding-bottom: 14px;
+	}
+}
+
+@media (min-width: 1024px) {
+	.competitor-tabs {
+		gap: 25px;
+		margin-bottom: 24px;
+		padding-bottom: 15px;
+	}
+}
+
+@media (min-width: 1280px) {
+	.competitor-tabs {
+		gap: 30px;
+		margin-bottom: 25px;
+	}
 }
 
 .competitor-tab {
@@ -2291,6 +2435,26 @@ onUnmounted(() => {
 	position: relative;
 	border-bottom: 2px solid transparent;
 	margin-bottom: -1px;
+	border-radius: 8px 8px 0 0;
+	font-size: 18px;
+}
+
+@media (max-width: 1919px) {
+	.competitor-tab {
+		font-size: 16px;
+	}
+}
+
+@media (max-width: 1600px) {
+	.competitor-tab {
+		font-size: 14px;
+	}
+}
+
+@media (max-width: 1366px) {
+	.competitor-tab {
+		font-size: 13px;
+	}
 }
 
 @media (min-width: 640px) {
@@ -2319,11 +2483,14 @@ onUnmounted(() => {
 
 .competitor-tab:hover {
 	color: rgba(255, 255, 255, 0.8);
+	background: rgba(255, 255, 255, 0.05);
 }
 
 .competitor-tab.active {
 	color: #FF6B35;
 	border-bottom-color: #FF6B35;
+	background: rgba(255, 107, 53, 0.15);
+	border-bottom-width: 3px;
 }
 
 .competitor-tab-content {
@@ -2352,6 +2519,27 @@ onUnmounted(() => {
 	white-space: nowrap;
 }
 
+@media (max-width: 1919px) {
+	.competitor-title {
+		font-size: 16px;
+		padding: 10px 35px;
+	}
+}
+
+@media (max-width: 1600px) {
+	.competitor-title {
+		font-size: 14px;
+		padding: 8px 30px;
+	}
+}
+
+@media (max-width: 1366px) {
+	.competitor-title {
+		font-size: 13px;
+		padding: 8px 25px;
+	}
+}
+
 .competitor-grid {
 	display: grid;
 	grid-template-columns: 320px repeat(6, calc((100% - 320px) / 6));
@@ -2365,28 +2553,134 @@ onUnmounted(() => {
 
 /* VS 其他水翼艇 tab的网格布局（5列） */
 .tab-panel.vs-others-tab .competitor-grid {
-	grid-template-columns: 420px 400px repeat(4, calc((100% - 420px - 400px) / 4));
+	grid-template-columns: 250px repeat(5, calc((100% - 250px) / 5));
+}
+
+@media (min-width: 640px) {
+	.tab-panel.vs-others-tab .competitor-grid {
+		grid-template-columns: 350px repeat(5, calc((100% - 350px) / 5));
+	}
+}
+
+@media (min-width: 1024px) {
+	.tab-panel.vs-others-tab .competitor-grid {
+		grid-template-columns: 450px repeat(5, calc((100% - 450px) / 5));
+	}
+}
+
+@media (min-width: 1280px) {
+	.tab-panel.vs-others-tab .competitor-grid {
+		grid-template-columns: 550px repeat(5, calc((100% - 550px) / 5));
+	}
 }
 
 /* 10-15w tab的网格布局（3列） */
 .tab-panel.three-col-tab .competitor-grid {
-	grid-template-columns: 320px 400px repeat(2, calc((100% - 320px - 400px) / 2));
+	grid-template-columns: 200px repeat(3, calc((100% - 200px) / 3));
+}
+
+@media (min-width: 640px) {
+	.tab-panel.three-col-tab .competitor-grid {
+		grid-template-columns: 280px repeat(3, calc((100% - 280px) / 3));
+	}
+}
+
+@media (min-width: 1024px) {
+	.tab-panel.three-col-tab .competitor-grid {
+		grid-template-columns: 380px repeat(3, calc((100% - 380px) / 3));
+	}
+}
+
+@media (min-width: 1280px) {
+	.tab-panel.three-col-tab .competitor-grid {
+		grid-template-columns: 450px repeat(3, calc((100% - 450px) / 3));
+	}
 }
 
 /* 18w tab的网格布局（4列） */
 .tab-panel.four-col-tab .competitor-grid {
-	grid-template-columns: 320px 400px repeat(3, calc((100% - 320px - 400px) / 3));
+	grid-template-columns: 200px repeat(4, calc((100% - 200px) / 4));
+}
+
+@media (min-width: 640px) {
+	.tab-panel.four-col-tab .competitor-grid {
+		grid-template-columns: 280px repeat(4, calc((100% - 280px) / 4));
+	}
+}
+
+@media (min-width: 1024px) {
+	.tab-panel.four-col-tab .competitor-grid {
+		grid-template-columns: 380px repeat(4, calc((100% - 380px) / 4));
+	}
+}
+
+@media (min-width: 1280px) {
+	.tab-panel.four-col-tab .competitor-grid {
+		grid-template-columns: 450px repeat(4, calc((100% - 450px) / 4));
+	}
 }
 
 .competitor-spacer {
 	/* 空白占位符，与表格第一列对齐 */
 	display: block;
-	width: 320px;
+	width: 200px;
+}
+
+@media (min-width: 640px) {
+	.competitor-spacer {
+		width: 280px;
+	}
+}
+
+@media (min-width: 1024px) {
+	.competitor-spacer {
+		width: 380px;
+	}
+}
+
+@media (min-width: 1280px) {
+	.competitor-spacer {
+		width: 450px;
+		max-width: 450px;
+	}
+}
+
+@media (min-width: 1920px) {
+	.competitor-spacer {
+		width: 450px;
+		max-width: 450px;
+	}
 }
 
 /* VS 其他水翼艇 tab的空白占位符需要更宽 */
 .tab-panel.vs-others-tab .competitor-spacer {
-	width: 420px;
+	width: 250px;
+}
+
+@media (min-width: 640px) {
+	.tab-panel.vs-others-tab .competitor-spacer {
+		width: 350px;
+	}
+}
+
+@media (min-width: 1024px) {
+	.tab-panel.vs-others-tab .competitor-spacer {
+		width: 450px;
+	}
+}
+
+@media (min-width: 1280px) {
+	.tab-panel.vs-others-tab .competitor-spacer {
+		width: 550px;
+		max-width: 550px;
+	}
+}
+
+@media (min-width: 1920px) {
+	.tab-panel.vs-others-tab .competitor-spacer {
+		width: 550px;
+		max-width: 550px;
+	}
 }
 
 .competitor-item {
@@ -2413,8 +2707,8 @@ onUnmounted(() => {
 
 .competitor-image-wrapper {
 	width: 200px;
-	height: 150px;
-	min-height: 150px;
+	height: 200px;
+	min-height: 200px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -2427,9 +2721,10 @@ onUnmounted(() => {
 }
 
 .competitor-item.yu-column .competitor-image-wrapper {
-	width: 400px;
-	height: 170px;
-	min-height: 170px;
+	width: 100%;
+	max-width: 400px;
+	height: 220px;
+	min-height: 220px;
 	margin: 0 auto;
 }
 
@@ -2451,6 +2746,8 @@ onUnmounted(() => {
 .competitor-item.yu-column .competitor-image-wrapper video.competitor-image {
 	object-fit: cover;
 	display: block;
+	width: 100%;
+	height: 100%;
 	margin: 0 auto;
 }
 
@@ -2467,8 +2764,8 @@ onUnmounted(() => {
 	}
 
 	.competitor-image-wrapper {
-		height: 150px;
-		min-height: 150px;
+		height: 200px;
+		min-height: 200px;
 	}
 
 	.competitor-item {
@@ -2483,8 +2780,8 @@ onUnmounted(() => {
 	}
 
 	.competitor-image-wrapper {
-		height: 150px;
-		min-height: 150px;
+		height: 200px;
+		min-height: 200px;
 	}
 
 	.competitor-item {
@@ -2499,8 +2796,8 @@ onUnmounted(() => {
 	}
 
 	.competitor-image-wrapper {
-		height: 150px;
-		min-height: 150px;
+		height: 200px;
+		min-height: 200px;
 	}
 
 	.competitor-item {
@@ -2529,20 +2826,101 @@ onUnmounted(() => {
 	border-radius: 8px;
 	overflow: hidden;
 	table-layout: fixed;
+	font-size: 16px;
+}
+
+@media (max-width: 1919px) {
+	.comparison-table {
+		font-size: 14px;
+	}
+}
+
+@media (max-width: 1600px) {
+	.comparison-table {
+		font-size: 13px;
+	}
+}
+
+@media (max-width: 1366px) {
+	.comparison-table {
+		font-size: 12px;
+	}
 }
 
 /* 第一列（项目列）固定宽度，与网格第一列对齐 */
 .comparison-table th:first-child,
 .comparison-table td:first-child {
-	width: 320px;
+	width: 200px;
 	box-sizing: border-box;
 	white-space: nowrap;
+}
+
+@media (min-width: 640px) {
+	.comparison-table th:first-child,
+	.comparison-table td:first-child {
+		width: 280px;
+	}
+}
+
+@media (min-width: 1024px) {
+	.comparison-table th:first-child,
+	.comparison-table td:first-child {
+		width: 380px;
+	}
+}
+
+@media (min-width: 1280px) {
+	.comparison-table th:first-child,
+	.comparison-table td:first-child {
+		width: 450px;
+		max-width: 450px;
+	}
+}
+
+@media (min-width: 1920px) {
+	/* 超大屏幕限制最大宽度，避免过宽 */
+	.comparison-table th:first-child,
+	.comparison-table td:first-child {
+		width: 450px;
+		max-width: 450px;
+	}
 }
 
 /* VS 其他水翼艇 tab的第一列需要更宽 */
 .tab-panel.vs-others-tab .comparison-table th:first-child,
 .tab-panel.vs-others-tab .comparison-table td:first-child {
-	width: 420px;
+	width: 250px;
+}
+
+@media (min-width: 640px) {
+	.tab-panel.vs-others-tab .comparison-table th:first-child,
+	.tab-panel.vs-others-tab .comparison-table td:first-child {
+		width: 350px;
+	}
+}
+
+@media (min-width: 1024px) {
+	.tab-panel.vs-others-tab .comparison-table th:first-child,
+	.tab-panel.vs-others-tab .comparison-table td:first-child {
+		width: 450px;
+	}
+}
+
+@media (min-width: 1280px) {
+	.tab-panel.vs-others-tab .comparison-table th:first-child,
+	.tab-panel.vs-others-tab .comparison-table td:first-child {
+		width: 550px;
+		max-width: 550px;
+	}
+}
+
+@media (min-width: 1920px) {
+	/* 超大屏幕限制最大宽度 */
+	.tab-panel.vs-others-tab .comparison-table th:first-child,
+	.tab-panel.vs-others-tab .comparison-table td:first-child {
+		width: 550px;
+		max-width: 550px;
+	}
 }
 
 /* 统一非首列宽度（后续覆盖） */
@@ -2557,22 +2935,85 @@ onUnmounted(() => {
 	width: auto;
 }
 
-/* VS 其他水翼艇 tab的数据列宽（除第一列外共有5列，全部平分） */
+/* VS 其他水翼艇 tab的数据列宽（第一列250px，其他5列等分） */
 .tab-panel.vs-others-tab .comparison-table td:not(:first-child),
 .tab-panel.vs-others-tab .comparison-table th:not(:first-child) {
-	width: calc((100% - 420px) / 5);
+	width: calc((100% - 250px) / 5);
 }
 
-/* 10-15w tab的数据列宽（除第一列外共有3列，全部平分） */
+@media (min-width: 640px) {
+	.tab-panel.vs-others-tab .comparison-table td:not(:first-child),
+	.tab-panel.vs-others-tab .comparison-table th:not(:first-child) {
+		width: calc((100% - 350px) / 5);
+	}
+}
+
+@media (min-width: 1024px) {
+	.tab-panel.vs-others-tab .comparison-table td:not(:first-child),
+	.tab-panel.vs-others-tab .comparison-table th:not(:first-child) {
+		width: calc((100% - 450px) / 5);
+	}
+}
+
+@media (min-width: 1280px) {
+	.tab-panel.vs-others-tab .comparison-table td:not(:first-child),
+	.tab-panel.vs-others-tab .comparison-table th:not(:first-child) {
+		width: calc((100% - 550px) / 5);
+	}
+}
+
+/* 10-15w tab的数据列宽（第一列200px，其他3列等分） */
 .tab-panel.three-col-tab .comparison-table td:not(:first-child),
 .tab-panel.three-col-tab .comparison-table th:not(:first-child) {
-	width: calc((100% - 320px) / 3);
+	width: calc((100% - 200px) / 3);
 }
 
-/* 18w tab的数据列宽（除第一列外共有4列，全部平分） */
+@media (min-width: 640px) {
+	.tab-panel.three-col-tab .comparison-table td:not(:first-child),
+	.tab-panel.three-col-tab .comparison-table th:not(:first-child) {
+		width: calc((100% - 280px) / 3);
+	}
+}
+
+@media (min-width: 1024px) {
+	.tab-panel.three-col-tab .comparison-table td:not(:first-child),
+	.tab-panel.three-col-tab .comparison-table th:not(:first-child) {
+		width: calc((100% - 380px) / 3);
+	}
+}
+
+@media (min-width: 1280px) {
+	.tab-panel.three-col-tab .comparison-table td:not(:first-child),
+	.tab-panel.three-col-tab .comparison-table th:not(:first-child) {
+		width: calc((100% - 450px) / 3);
+	}
+}
+
+/* 18w tab的数据列宽（第一列200px，其他4列等分） */
 .tab-panel.four-col-tab .comparison-table td:not(:first-child),
 .tab-panel.four-col-tab .comparison-table th:not(:first-child) {
-	width: calc((100% - 320px) / 4);
+	width: calc((100% - 200px) / 4);
+}
+
+@media (min-width: 640px) {
+	.tab-panel.four-col-tab .comparison-table td:not(:first-child),
+	.tab-panel.four-col-tab .comparison-table th:not(:first-child) {
+		width: calc((100% - 280px) / 4);
+	}
+}
+
+@media (min-width: 1024px) {
+	.tab-panel.four-col-tab .comparison-table td:not(:first-child),
+	.tab-panel.four-col-tab .comparison-table th:not(:first-child) {
+		width: calc((100% - 380px) / 4);
+	}
+}
+
+@media (min-width: 1280px) {
+	.tab-panel.four-col-tab .comparison-table td:not(:first-child),
+	.tab-panel.four-col-tab .comparison-table th:not(:first-child) {
+		width: calc((100% - 450px) / 4);
+	}
 }
 
 .comparison-table thead {
@@ -2585,6 +3026,24 @@ onUnmounted(() => {
 	font-weight: 600;
 	color: #FFFFFF;
 	border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@media (max-width: 1919px) {
+	.comparison-table th {
+		padding: 7px 9px;
+	}
+}
+
+@media (max-width: 1600px) {
+	.comparison-table th {
+		padding: 6px 8px;
+	}
+}
+
+@media (max-width: 1366px) {
+	.comparison-table th {
+		padding: 5px 7px;
+	}
 }
 
 @media (min-width: 640px) {
@@ -2604,6 +3063,24 @@ onUnmounted(() => {
 	padding-left: 20px;
 }
 
+@media (max-width: 1919px) {
+	.comparison-table th:first-child {
+		padding-left: 18px;
+	}
+}
+
+@media (max-width: 1600px) {
+	.comparison-table th:first-child {
+		padding-left: 16px;
+	}
+}
+
+@media (max-width: 1366px) {
+	.comparison-table th:first-child {
+		padding-left: 14px;
+	}
+}
+
 .comparison-table tbody tr {
 	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -2617,6 +3094,24 @@ onUnmounted(() => {
 	text-align: center;
 	color: rgba(255, 255, 255, 0.9);
 	border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 1919px) {
+	.comparison-table td {
+		padding: 5px 9px;
+	}
+}
+
+@media (max-width: 1600px) {
+	.comparison-table td {
+		padding: 4px 8px;
+	}
+}
+
+@media (max-width: 1366px) {
+	.comparison-table td {
+		padding: 4px 7px;
+	}
 }
 
 @media (min-width: 640px) {
@@ -2639,6 +3134,24 @@ onUnmounted(() => {
 	color: #FFFFFF;
 }
 
+@media (max-width: 1919px) {
+	.comparison-table td:first-child {
+		padding-left: 18px;
+	}
+}
+
+@media (max-width: 1600px) {
+	.comparison-table td:first-child {
+		padding-left: 16px;
+	}
+}
+
+@media (max-width: 1366px) {
+	.comparison-table td:first-child {
+		padding-left: 14px;
+	}
+}
+
 /* 突出显示我们的产品列 */
 .comparison-table td.yu-column {
 	background: rgba(0, 212, 255, 0.15) !important;
@@ -2653,6 +3166,11 @@ onUnmounted(() => {
 
 .competitor-item.yu-column {
 	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
 }
 
 .competitor-item.yu-column .competitor-image-wrapper {
@@ -2667,6 +3185,27 @@ onUnmounted(() => {
 	letter-spacing: 2px;
 }
 
+@media (max-width: 1919px) {
+	.comparison-table .stars {
+		font-size: 14px;
+		letter-spacing: 1.5px;
+	}
+}
+
+@media (max-width: 1600px) {
+	.comparison-table .stars {
+		font-size: 13px;
+		letter-spacing: 1.5px;
+	}
+}
+
+@media (max-width: 1366px) {
+	.comparison-table .stars {
+		font-size: 12px;
+		letter-spacing: 1px;
+	}
+}
+
 @media (max-width: 1400px) {
 
 	/* 考虑15px gap */
@@ -2676,7 +3215,61 @@ onUnmounted(() => {
 	}
 }
 
+@media (max-width: 1366px) {
+	/* 小屏幕电脑适配 (1366x768等) */
+	.right-section > div {
+		max-width: calc(100vw - 480px) !important;
+	}
+	
+	.left-nav-item {
+		width: 400px !important;
+	}
+	
+	.left-nav-item .nav-text {
+		margin-left: 56px !important;
+		font-size: 22px !important;
+	}
+	
+	.left-nav-list > div[class*="absolute"] {
+		left: 70px !important;
+	}
+	
+	.left-nav-item > div[class*="absolute"] {
+		left: 70px !important;
+	}
+	
+	.competitor-tabs {
+		gap: 10px;
+		padding-bottom: 10px;
+	}
+	
+	.competitor-tab {
+		padding: 8px 15px !important;
+		font-size: 16px !important;
+	}
+}
+
 @media (max-width: 1024px) {
+	.right-section > div {
+		max-width: calc(100vw - 450px) !important;
+	}
+	
+	.left-nav-item {
+		width: 380px !important;
+	}
+	
+	.left-nav-item .nav-text {
+		margin-left: 52px !important;
+		font-size: 20px !important;
+	}
+	
+	.left-nav-list > div[class*="absolute"] {
+		left: 65px !important;
+	}
+	
+	.left-nav-item > div[class*="absolute"] {
+		left: 65px !important;
+	}
 
 	.comparison-table th,
 	.comparison-table td {
@@ -2755,10 +3348,53 @@ onUnmounted(() => {
 	margin-top: 30px;
 }
 
+@media (max-width: 1919px) {
+	.competitor-conclusion {
+		padding: 18px 22px;
+		margin-top: 25px;
+	}
+}
+
+@media (max-width: 1600px) {
+	.competitor-conclusion {
+		padding: 16px 20px;
+		margin-top: 22px;
+	}
+}
+
+@media (max-width: 1366px) {
+	.competitor-conclusion {
+		padding: 14px 18px;
+		margin-top: 20px;
+	}
+}
+
 .competitor-conclusion .conclusion-title {
 	font-weight: 700;
 	color: #FFFFFF;
 	margin-bottom: 12px;
+	font-size: 22px;
+}
+
+@media (max-width: 1919px) {
+	.competitor-conclusion .conclusion-title {
+		font-size: 20px;
+		margin-bottom: 11px;
+	}
+}
+
+@media (max-width: 1600px) {
+	.competitor-conclusion .conclusion-title {
+		font-size: 18px;
+		margin-bottom: 10px;
+	}
+}
+
+@media (max-width: 1366px) {
+	.competitor-conclusion .conclusion-title {
+		font-size: 16px;
+		margin-bottom: 9px;
+	}
 }
 
 @media (min-width: 640px) {
@@ -2785,6 +3421,24 @@ onUnmounted(() => {
 	gap: 12px;
 }
 
+@media (max-width: 1919px) {
+	.competitor-conclusion .conclusion-content {
+		gap: 11px;
+	}
+}
+
+@media (max-width: 1600px) {
+	.competitor-conclusion .conclusion-content {
+		gap: 10px;
+	}
+}
+
+@media (max-width: 1366px) {
+	.competitor-conclusion .conclusion-content {
+		gap: 9px;
+	}
+}
+
 .competitor-conclusion .conclusion-item {
 	display: flex;
 	align-items: flex-start;
@@ -2792,12 +3446,48 @@ onUnmounted(() => {
 	line-height: 1.6;
 }
 
+@media (max-width: 1919px) {
+	.competitor-conclusion .conclusion-item {
+		gap: 9px;
+	}
+}
+
+@media (max-width: 1600px) {
+	.competitor-conclusion .conclusion-item {
+		gap: 8px;
+	}
+}
+
+@media (max-width: 1366px) {
+	.competitor-conclusion .conclusion-item {
+		gap: 7px;
+	}
+}
+
 .competitor-conclusion .conclusion-bullet {
 	color: #FF6B35;
-	font-size: 14px;
+	font-size: 16px;
 	font-weight: bold;
 	flex-shrink: 0;
 	line-height: 1.4;
+}
+
+@media (max-width: 1919px) {
+	.competitor-conclusion .conclusion-bullet {
+		font-size: 14px;
+	}
+}
+
+@media (max-width: 1600px) {
+	.competitor-conclusion .conclusion-bullet {
+		font-size: 13px;
+	}
+}
+
+@media (max-width: 1366px) {
+	.competitor-conclusion .conclusion-bullet {
+		font-size: 12px;
+	}
 }
 
 @media (min-width: 640px) {
@@ -2828,6 +3518,25 @@ onUnmounted(() => {
 	color: rgba(255, 255, 255, 0.9);
 	flex: 1;
 	line-height: 1.6;
+	font-size: 15px;
+}
+
+@media (max-width: 1919px) {
+	.competitor-conclusion .conclusion-text {
+		font-size: 14px;
+	}
+}
+
+@media (max-width: 1600px) {
+	.competitor-conclusion .conclusion-text {
+		font-size: 13px;
+	}
+}
+
+@media (max-width: 1366px) {
+	.competitor-conclusion .conclusion-text {
+		font-size: 12px;
+	}
 }
 
 @media (max-width: 1024px) {
@@ -2875,20 +3584,34 @@ onUnmounted(() => {
 
 /* 智能控制三模方向舵样式 */
 .three-mode-rudder-wrapper {
-	display: grid;
-	grid-template-columns: 2fr 1fr;
+	display: flex;
+	flex-direction: column;
 	gap: 20px;
-	padding: 20px;
+	padding: 15px;
 	align-items: center;
 	flex: 1;
 	min-height: 0;
 }
 
-@media (max-width: 1024px) {
+@media (min-width: 640px) {
 	.three-mode-rudder-wrapper {
-		grid-template-columns: 1fr;
+		padding: 20px;
 		gap: 20px;
-		min-height: auto;
+	}
+}
+
+@media (min-width: 1024px) {
+	.three-mode-rudder-wrapper {
+		flex-direction: row;
+		gap: 20px;
+		padding: 20px 30px;
+	}
+}
+
+@media (min-width: 1280px) {
+	.three-mode-rudder-wrapper {
+		gap: 30px;
+		padding: 25px 40px;
 	}
 }
 
@@ -2897,7 +3620,22 @@ onUnmounted(() => {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	height: 100%;
+	width: 100%;
+	height: auto;
+	min-height: 300px;
+}
+
+@media (min-width: 640px) {
+	.three-mode-left-panel {
+		min-height: 400px;
+	}
+}
+
+@media (min-width: 1024px) {
+	.three-mode-left-panel {
+		height: 100%;
+		min-height: 500px;
+	}
 }
 
 .steering-wheel-container {
@@ -2987,9 +3725,17 @@ onUnmounted(() => {
 	gap: 0;
 	align-items: stretch;
 	justify-content: center;
-	height: 100%;
+	width: 100%;
+	height: auto;
 	position: relative;
-	left: -200px;
+	left: 0;
+}
+
+@media (min-width: 1024px) {
+	.three-mode-right-panel {
+		height: 100%;
+		left: -200px;
+	}
 }
 
 .three-mode-right-panel .driving-mode-box {

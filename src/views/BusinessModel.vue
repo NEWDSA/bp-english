@@ -1287,7 +1287,7 @@ function renderModalCharts() {
 			graphic: {
 				type: 'text',
 				left: '40',
-				bottom: screenWidth <= 1920 ? '18%' : '7%',
+				bottom: screenWidth <= 1920 ? '10%' : '7%',
 				style: {
 					text: 'Horizontal axis (Price: Euro)',
 					fontSize: graphicFontSize,
@@ -1447,7 +1447,7 @@ function renderModalCharts() {
 			graphic: {
 				type: 'text',
 				left: '40',
-				bottom: screenWidth <= 1920 ? '18%' : '7%',
+				bottom: screenWidth <= 1920 ? '10%' : '7%',
 				style: {
 					text: 'Horizontal axis (Price: Euro)',
 					fontSize: graphicFontSize,
