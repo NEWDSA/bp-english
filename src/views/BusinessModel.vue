@@ -27,12 +27,50 @@
 
 			<!-- C方块的内容面板 - 全屏 -->
 			<div class="c-content-panel" v-if="showCContent">
-				<button class="close-content-btn" @click="backToBlocks">✕</button>
+				<!-- 关闭按钮 -->
+				<button
+					@click="backToBlocks"
+					class="button-focus absolute top-2 md:top-4 right-2 md:right-4 text-gray-300 bg-black/50 backdrop-blur-sm hover:bg-black/70 rounded-full p-2 md:p-2 z-50 transition-all duration-300 group">
+					<img src="../assets/icon-17.png" alt="返回" class="w-6 h-6">
+				</button>
+
+				<!-- 内容 -->
+				<div class="c-content-wrapper">
+					<!-- 图片左上角 -->
+					<div class="content-section top-left">
+						<h3 class="content-section-title">High-end events such as competitions</h3>
+						<p class="section-text">Participate in or sponsor high-end water sports events; <br/>organize product appreciation events and water driving experience days.</p>
+					</div>
+					<!-- 图片左下角 -->
+					<div class="content-section bottom-left">
+						<h3 class="content-section-title">Online platforms and digital touchpoints</h3>
+						<p class="section-text">Official independent website (brand story/technical details/online test drive booking)<br/>Social media matrix: Instagram/YouTube/TikTok</p>
+					</div>
+					<!-- 中间图片 -->
+					<div class="center-image-container">
+						<img src="../assets/c_clinet_bg.png" alt="Hydrofoil Boat" class="center-image">
+					</div>
+					<!-- 图片右上角 -->
+					<div class="content-section top-right">
+						<h3 class="content-section-title">Industry exhibitions and media</h3>
+						<p class="section-text">Participate in mainstream yacht shows<br/>Yacht industry association platform exposed</br>Leading industry media/KOL cooperation</p>
+					</div>
+					<!-- 图片右下角 -->
+					<div class="content-section bottom-right">
+						<h3 class="content-section-title">Offline sales network</h3>
+						<p class="section-text">Overseas Sales/Partnerships: <br/>Establishing partnerships with internationally renowned yacht dealers<br/>Domestic channels: <br/>Establish a presence in high-end yacht clubs and collaborate with upscale tourist resorts.</p>
+					</div>
+				</div>
 			</div>
 
 			<!-- B方块的内容面板 - 全屏 -->
 			<div class="b-content-panel" v-if="showBContent">
-				<button class="close-content-btn" @click="backToBlocks">✕</button>
+				<!-- 关闭按钮 -->
+				<button
+					@click="backToBlocks"
+					class="button-focus absolute top-8 md:top-30 right-8 md:right-4 text-gray-300 bg-black/50 backdrop-blur-sm hover:bg-black/70 rounded-full p-2 md:p-2 z-50 transition-all duration-300 group">
+					<img src="../assets/icon-17.png" alt="返回" class="w-6 h-6">
+				</button>
 
 				<!-- B方块显示主要内容 -->
 				<div class="main-content">
@@ -1187,6 +1225,44 @@ function renderRevenueChart() {
 
 // 渲染模态框图表
 function renderModalCharts() {
+	// 获取屏幕宽度用于响应式字体大小
+	const screenWidth = window.innerWidth
+	// 根据屏幕宽度动态计算字体大小
+	const getTitleFontSize = () => {
+		if (screenWidth <= 1440) return 12
+		if (screenWidth <= 1680) return 13
+		if (screenWidth <= 1920) return 16
+		return 20
+	}
+
+	const getAxisLabelFontSize = () => {
+		if (screenWidth <= 1440) return 10
+		if (screenWidth <= 1680) return 12
+		if (screenWidth <= 1920) return 14
+		return 16
+	}
+
+	const getSeriesLabelFontSize = () => {
+		if (screenWidth <= 1440) return 12
+		if (screenWidth <= 1680) return 12
+		if (screenWidth <= 1920) return 16
+		return 18
+	}
+
+	const getLegendFontSize = () => {
+		if (screenWidth <= 1440) return 10
+		if (screenWidth <= 1680) return 10
+		if (screenWidth <= 1920) return 11
+		return 12
+	}
+
+	const getGraphicFontSize = () => {
+		if (screenWidth <= 1440) return 10
+		if (screenWidth <= 1680) return 10
+		if (screenWidth <= 1920) return 11
+		return 12
+	}
+
 	// Chart 1: 左上角 - 年度数据柱状图（蓝色和橙色）
 	if (chart1Ref.value) {
 		// 销毁旧实例
@@ -1198,29 +1274,41 @@ function renderModalCharts() {
 		// 重新创建实例
 		//3840.2160
 		chart1Instance = echarts.init(chart1Ref.value)
+
+		const titleFontSize = getTitleFontSize()
+		const axisLabelFontSize = getAxisLabelFontSize()
+		const seriesLabelFontSize = getSeriesLabelFontSize()
+		const legendFontSize = getLegendFontSize()
+		const graphicFontSize = getGraphicFontSize()
+
 		const option1 = {
 			title: {
 				text: 'When the cost of three single-unit ships is €21,000, the break-even sales volume is reached',
-				textStyle: { fontSize: 16, color: '#333', fontWeight: 'normal' },
-				top: 5,
+				textStyle: { fontSize: titleFontSize, color: '#333', fontWeight: 'normal' },
+				top: screenWidth <= 1280 ? 30 : 50,
 				left: 'center'
 			},
-			grid: { top: 60, bottom: 100, left: 50, right: 50 },
+			grid: {
+				top: screenWidth <= 1280 ? 80 : 100,
+				bottom: screenWidth <= 1280 ? 120 : 160,
+				left: screenWidth <= 1280 ? 40 : 50,
+				right: screenWidth <= 1280 ? 40 : 50
+			},
 
 			legend: {
 				data: ['Annual breakeven sales volume (units)', 'Gross profit margin'],
-				bottom: '5%',
-				textStyle: { fontSize: 12 },
+				bottom: screenWidth <= 1920 ? '10%' : '6%',
+				textStyle: { fontSize: legendFontSize },
 				left: 'center',
-				itemGap: 20
+				itemGap: screenWidth <= 1920 ? 20 : 40
 			},
 			graphic: {
 				type: 'text',
 				left: '40',
-				bottom: '25',
+				bottom: screenWidth <= 1920 ? '18%' : '7%',
 				style: {
-					text: 'Horizontal axis (Price: US Dollars)',
-					fontSize: 10,
+					text: 'Horizontal axis (Price: Euro)',
+					fontSize: graphicFontSize,
 					color: '#666',
 					textAlign: 'left',
 					textVerticalAlign: 'middle'
@@ -1228,44 +1316,105 @@ function renderModalCharts() {
 			},
 			xAxis: {
 				type: 'category',
-				data: ['47,900', '47,100', '46,400', '45,700', '45,000', '44,300', '43,600', '42,900', '42,100', '41,400', '40,700'],
-				axisLabel: { color: '#666', fontSize: 8, show: true },
+				data: ['145,000', '140,000', '135,000', '130,000', '125,000', '120,000', '115,000', '110,000', '105,000', '100,000', '95,000'],
+				axisLabel: {
+					color: '#666',
+					fontSize: axisLabelFontSize,
+					show: true,
+					margin: screenWidth <= 1280 ? 15 : 20,
+					interval: 0,  // 强制显示所有标签
+					rotate: screenWidth <= 1280 ? 45 : 0,    // 小屏幕旋转标签
+					formatter: function(value, index) {
+						// 120,000 is at index 5
+						if (index === 5) {
+							return '{highlight|' + value + '}';
+						}
+						return value;
+					},
+					rich: {
+						highlight: {
+							color: '#00d3f3',
+							fontSize: axisLabelFontSize,
+						}
+					}
+				},
 				axisTick: { show: false },
 				axisLine: { show: false },
 				splitLine: { show: false }
 			},
-			yAxis: {
-				type: 'value',
-				axisLabel: { show: false },
-				axisTick: { show: false },
-				axisLine: { show: false },
-				splitLine: { show: false }
-			},
+			yAxis: [
+				{
+					type: 'value',
+					position: 'left',
+					min: 0,
+					max: 30,
+					show: false,
+					axisLabel: { show: false },
+					axisTick: { show: false },
+					axisLine: { show: false },
+					splitLine: { show: false }
+				},
+				{
+					type: 'value',
+					position: 'right',
+					min: 60,
+					max: 80,
+					show: false,
+					axisLabel: { show: false },
+					axisTick: { show: false },
+					axisLine: { show: false },
+					splitLine: { show: false }
+				}
+			],
 			series: [
 				{
 					name: 'Annual breakeven sales volume (units)',
 					type: 'bar',
-					data: [43, 45, 47.2, 50.0, 53.1, 56.7, 60.8, 65.5, 70.9, 77.4, 85.2],
+					yAxisIndex: 0,
+					data: [4.4, 4.6, 4.8, 5.1, 5.3, 5.6, 5.9, 6.2, 6.6, 7.1, 7.6],
 					itemStyle: { color: '#00d4ff' },
 					label: {
 						show: true,
 						position: 'top',
-						fontSize: 8,
-						color: '#333',
-						formatter: '{c}'
+						fontSize: seriesLabelFontSize,
+						formatter: function(params) {
+							// 5.6 is at index 5
+							if (params.dataIndex === 5) {
+								return '{highlight|' + params.value + '}';
+							}
+							return params.value;
+						},
+						rich: {
+							highlight: {
+								color: '#00d3f3',
+								fontSize: seriesLabelFontSize,
+							}
+						}
 					}
 				},
 				{
 					name: 'Gross profit margin',
 					type: 'bar',
-					data: [25, 24, 23, 23, 22, 21, 20, 19, 18, 16, 15],
+					yAxisIndex: 1,
+					data: [75.5, 75.0, 74.4, 73.8, 73.2, 72.5, 71.7, 70.9, 70.0, 69.0, 67.9],
 					itemStyle: { color: '#FFC27A' },
 					label: {
 						show: true,
 						position: 'top',
-						fontSize: 8,
-						color: '#333',
-						formatter: '{c}%'
+						fontSize: seriesLabelFontSize,
+						formatter: function(params) {
+							// 72.5% is at index 5
+							if (params.dataIndex === 5) {
+								return '{highlight|' + params.value + '%}';
+							}
+							return params.value + '%';
+						},
+						rich: {
+							highlight: {
+								color: '#00d3f3',
+								fontSize: seriesLabelFontSize,
+							}
+						}
 					}
 				}
 			]
@@ -1285,28 +1434,41 @@ function renderModalCharts() {
 		}
 		// 重新创建实例
 		chart2Instance = echarts.init(chart2Ref.value)
+
+		// 使用之前定义的响应式字体大小函数
+		const titleFontSize = getTitleFontSize()
+		const axisLabelFontSize = getAxisLabelFontSize()
+		const seriesLabelFontSize = getSeriesLabelFontSize()
+		const legendFontSize = getLegendFontSize()
+		const graphicFontSize = getGraphicFontSize()
+
 		const option2 = {
 			title: {
 				text: 'When the cost of a five-seat version single boat is €36,500, the break-even sales volume is reached',
-				textStyle: { fontSize: 16, color: '#333', fontWeight: 'normal' },
-				top: 5,
+				textStyle: { fontSize: titleFontSize, color: '#333', fontWeight: 'normal' },
+				top: screenWidth <= 1280 ? 30 : 50,
 				left: 'center'
 			},
-			grid: { top: 60, bottom: 100, left: 50, right: 50 },
+			grid: {
+				top: screenWidth <= 1280 ? 80 : 100,
+				bottom: screenWidth <= 1280 ? 120 : 160,
+				left: screenWidth <= 1280 ? 40 : 50,
+				right: screenWidth <= 1280 ? 40 : 50
+			},
 			legend: {
 				data: ['Annual breakeven sales volume (units)', 'Gross profit margin'],
-				bottom: '5%',
-				textStyle: { fontSize: 12 },
+				bottom: screenWidth <= 1920 ? '10%' : '6%',
+				textStyle: { fontSize: legendFontSize },
 				left: 'center',
-				itemGap: 20
+				itemGap: screenWidth <= 1920 ? 20 : 40
 			},
 			graphic: {
 				type: 'text',
 				left: '40',
-				bottom: '25',
+				bottom: screenWidth <= 1920 ? '18%' : '7%',
 				style: {
-					text: 'Horizontal axis (Price: US Dollars)',
-					fontSize: 10,
+					text: 'Horizontal axis (Price: Euro)',
+					fontSize: graphicFontSize,
 					color: '#666',
 					textAlign: 'left',
 					textVerticalAlign: 'middle'
@@ -1315,45 +1477,106 @@ function renderModalCharts() {
 			xAxis: {
 				type: 'category',
 
-				data: ['52,900', '52,100', '51,400', '50,700', '50,000', '49,300', '48,600', '47,900', '47,100', '46,400', '45,700', '45,000'],
-				axisLabel: { color: '#666', fontSize: 8, show: true },
+				data: ['225,000', '220,000', '215,000', '210,000', '205,000', '200,000', '195,000', '190,000', '185,000', '180,000', '175,000'],
+				axisLabel: {
+					color: '#666',
+					fontSize: axisLabelFontSize,
+					show: true,
+					margin: screenWidth <= 1280 ? 15 : 20,
+					interval: 0,  // 强制显示所有标签
+					rotate: screenWidth <= 1280 ? 45 : 0,    // 小屏幕旋转标签
+					formatter: function(value, index) {
+						// 200,000 is at index 5
+						if (index === 5) {
+							return '{highlight|' + value + '}';
+						}
+						return value;
+					},
+					rich: {
+						highlight: {
+							color: '#00d3f3',
+							fontSize: axisLabelFontSize,
+						}
+					}
+				},
 				axisTick: { show: false },
 				axisLine: { show: false },
 				splitLine: { show: false }
 			},
-			yAxis: {
-				type: 'value',
-				axisLabel: { show: false },
-				axisTick: { show: false },
-				axisLine: { show: false },
-				splitLine: { show: false }
-			},
+			yAxis: [
+				{
+					type: 'value',
+					position: 'left',
+					min: 0,
+					max: 20,
+					show: false,
+					axisLabel: { show: false },
+					axisTick: { show: false },
+					axisLine: { show: false },
+					splitLine: { show: false }
+				},
+				{
+					type: 'value',
+					position: 'right',
+					min: 65,
+					max: 75,
+					show: false,
+					axisLabel: { show: false },
+					axisTick: { show: false },
+					axisLine: { show: false },
+					splitLine: { show: false }
+				}
+			],
 			series: [
 				{
 					name: 'Annual breakeven sales volume (units)',
 					type: 'bar',
-					data: [38, 40, 42, 44, 46, 49, 52, 56, 60, 64, 69, 75],
+					yAxisIndex: 0,
+					data: [2.9, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.9, 4.0],
 					itemStyle: { color: '#00d4ff' },
 					label: {
 						show: true,
 						position: 'top',
-						fontSize: 8,
-						color: '#333',
-						formatter: '{c}'
+						fontSize: seriesLabelFontSize,
+						formatter: function(params) {
+							// 3.4 is at index 5
+							if (params.dataIndex === 5) {
+								return '{highlight|' + params.value + '}';
+							}
+							return params.value;
+						},
+						rich: {
+							highlight: {
+								color: '#00d3f3',
+								fontSize: seriesLabelFontSize,
+							}
+						}
 					}
 				},
 				{
 					name: 'Gross profit margin',
 					type: 'bar',
+					yAxisIndex: 1,
 					// data: [12, 15, 18, 22, 25, 28, 32, 35, 38, 42, 45, 48],
-					data: [26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15],
+					data: [73.8, 73.4, 73.0, 72.6, 72.2, 71.8, 71.3, 70.8, 70.3, 69.7, 69.1],
 					itemStyle: { color: '#FFC27A' },
 					label: {
 						show: true,
 						position: 'top',
-						fontSize: 8,
-						color: '#333',
-						formatter: '{c}%'
+						fontSize: seriesLabelFontSize,
+						formatter: function(params) {
+							// 71.8% is at index 5
+							if (params.dataIndex === 5) {
+								return '{highlight|' + params.value + '%}';
+							}
+							return params.value + '%';
+						},
+						rich: {
+							highlight: {
+								color: '#00d3f3',
+								fontSize: seriesLabelFontSize,
+							}
+						}
 					}
 				}
 			]
@@ -1966,21 +2189,9 @@ function onWindowResize() {
 			demandChartInstance.resize()
 			renderDemandChart()
 		}
-		if (chart1Instance) {
-			chart1Instance.resize()
-			renderChart1()
-		}
-		if (chart2Instance) {
-			chart2Instance.resize()
-			renderChart2()
-		}
-		if (chart3Instance) {
-			chart3Instance.resize()
-			renderChart3()
-		}
-		if (chart4Instance) {
-			chart4Instance.resize()
-			renderChart4()
+		// 重新渲染模态框图表（包含Chart 1-4）以应用新的响应式字体大小
+		if (activeContent.value === 'revenue' && (chart1Instance || chart2Instance || chart3Instance || chart4Instance)) {
+			renderModalCharts()
 		}
 	}, 150)
 }
@@ -2029,9 +2240,6 @@ function goHome() {
 	router.push('/')
 }
 
-onMounted(() => {
-	// 页面加载完成后的初始化逻辑
-})
 </script>
 
 <style scoped>
@@ -2145,7 +2353,7 @@ onMounted(() => {
 	right: 0;
 	width: 50%;
 	height: 100%;
-	background: url('../assets/c_clinet_bg.jpg') center/cover no-repeat;
+	background: url('../assets/c_clinet_bg.png') center/cover no-repeat;
 	cursor: pointer;
 	transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 	overflow: hidden;
@@ -2470,13 +2678,14 @@ onMounted(() => {
 	margin-top: 71px;
 	width: 100%;
 	height: calc(100% - 71px);
-	background-image: url('../assets/c_clinet_bg.jpg');
+	/*  background-image: url('../assets/c_clinet_bg.png');
 	background-size: 100% 100%;
 	background-position: center;
-	background-repeat: no-repeat;
+	background-repeat: no-repeat; */
 	position: absolute;
 	top: 0;
-	left: 0;
+	left: 0; 
+	background: #121727;
 	animation: fadeInScale 0.5s ease-out;
 	overflow-y: auto;
 }
@@ -2553,12 +2762,152 @@ onMounted(() => {
 }
 
 .c-content-wrapper {
-	display: flex;
-	flex-direction: column;
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+	grid-template-rows: 1fr auto 1fr;
 	align-items: center;
 	justify-content: center;
 	height: 100%;
-	padding-top: 40px;
+	width: 100%;
+	position: relative;
+	padding: 20px 40px;
+	margin: 0 auto;
+}
+
+/* 内容区域样式 */
+.c-content-wrapper .content-section {
+	position: relative;
+	padding: 20px;
+	z-index: 2;
+	min-width: 400px;
+}
+
+.c-content-wrapper .content-section.top-left {
+	grid-column: 1;
+	grid-row: 1 / span 2;
+	text-align: left;
+	align-self: center;
+	padding-bottom: 90%;
+}
+
+.c-content-wrapper .content-section.top-right {
+	grid-column: 3;
+	grid-row: 1 / span 2;
+	text-align: left;
+	align-self: center;
+	justify-self: end;
+	padding-bottom: 90%;
+}
+
+.c-content-wrapper .content-section.bottom-left {
+	grid-column: 1;
+	grid-row: 2 / span 2;
+	text-align: left;
+	align-self: center;
+	padding-top: 90%;
+}
+
+.c-content-wrapper .content-section.bottom-right {
+	grid-column: 3;
+	grid-row: 2 / span 2;
+	text-align: left;
+	align-self: center;
+	justify-self: end;
+	padding-top: 90%;
+}
+
+/* 中间图片容器 */
+.c-content-wrapper .center-image-container {
+	grid-column: 2;
+	grid-row: 2;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+}
+
+.c-content-wrapper .center-image {
+	max-width: 1400px;
+	width: 100%;
+	height: auto;
+	object-fit: contain;
+}
+
+/* 标题样式 */
+.c-content-wrapper .content-section-title {
+	font-size: 20px;
+	font-weight: bold;
+	color: #ffffff;
+	margin-bottom: 10px;
+	line-height: 1.3;
+}
+
+/* 文本样式 */
+.c-content-wrapper .section-text {
+	font-size: 14px;
+	color: rgba(255, 255, 255, 0.8);
+	line-height: 1.6;
+}
+
+/* 响应式布局 */
+@media (max-width: 1200px) {
+	.c-content-wrapper {
+		padding: 40px 30px;
+	}
+
+	.c-content-wrapper .center-image {
+		max-width: 550px;
+	}
+
+	.c-content-wrapper .content-section {
+		min-width: 300px;
+	}
+
+	.c-content-wrapper .content-section-title {
+		font-size: 18px;
+	}
+
+	.c-content-wrapper .section-text {
+		font-size: 13px;
+	}
+}
+
+@media (max-width: 768px) {
+	.c-content-wrapper {
+		display: flex;
+		flex-direction: column;
+		padding: 30px 20px;
+		gap: 30px;
+	}
+
+	.c-content-wrapper .content-section {
+		text-align: left !important;
+		align-self: center !important;
+		min-width: auto;
+		width: 100%;
+		padding-top: 20px !important;
+		padding-bottom: 20px !important;
+	}
+
+	.c-content-wrapper .center-image-container {
+		order: -1;
+	}
+
+	.c-content-wrapper .center-image {
+		max-width: 400px;
+	}
+
+	.c-content-wrapper .content-section::before {
+		display: none;
+	}
+
+	.c-content-wrapper .content-section-title {
+		font-size: 16px;
+	}
+
+	.c-content-wrapper .section-text {
+		font-size: 12px;
+	}
 }
 
 .c-content-title {
