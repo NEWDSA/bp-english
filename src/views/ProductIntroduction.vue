@@ -79,7 +79,7 @@
 
 				<!-- 弹窗标题 -->
 				<div class="modal-title flex justify-between">Traditional Electric Boat Pain Points3
-					<button class="modal-close-btn" @click="closePainPointsModal">×</button>
+					<div class="modal-close-btn" @click="closePainPointsModal">×</div>
 				</div>
 
 				<!-- 弹窗内容 -->
@@ -156,7 +156,7 @@
 			<div class="market-research-modal" @click.stop>
 				<!-- 弹窗标题 -->
 				<div class="modal-title flex justify-between">Competitor Analysis
-					<button class="modal-close-btn" @click="closeCompetitorAnalysisModal">×</button>
+					<div class="modal-close-btn" @click="closeCompetitorAnalysisModal">×</div>
 				</div>
 
 				<!-- 弹窗内容 -->
@@ -642,7 +642,7 @@
 			<div class="relative w-full h-full max-w-full max-h-screen bg-[rgba(40,40,40,0.95)] backdrop-blur-[20px] rounded-none border-none shadow-none overflow-y-auto overflow-x-hidden m-0 p-0 flex flex-col"
 				@click.stop>
 				<!-- 关闭按钮 -->
-				<button class="modal-close-btn" @click="closeThreeModeRudderModal">×</button>
+				<div class="modal-close-btn" @click="closeThreeModeRudderModal">×</div>
 
 				<!-- 弹窗标题 -->
 				<div class="modal-title">Intelligent control three-mode rudder</div>
@@ -696,7 +696,7 @@
 		<div v-if="activeNavItem === 'advantages'" class="modal-overlay" @click="closeAdvantagesModal">
 			<div class="market-research-modal" @click.stop>
 				<!-- 关闭按钮 -->
-				<button class="modal-close-btn" @click="closeAdvantagesModal">×</button>
+				<div class="modal-close-btn" @click="closeAdvantagesModal">×</div>
 
 				<!-- 弹窗标题 -->
 				<div class="modal-title">Hydrofoil Advantages</div>
@@ -1583,12 +1583,12 @@ onUnmounted(() => {
 	position: absolute;
 	top: 15px;
 	right: 15px;
-	width: 32px;
-	height: 32px;
-	min-width: 32px;
-	min-height: 32px;
-	max-width: 32px;
-	max-height: 32px;
+	width: 48px;
+	height: 48px;
+	min-width: 48px;
+	min-height: 48px;
+	max-width: 48px;
+	max-height: 48px;
 	background: rgba(255, 255, 255, 0.1);
 	border: 1px solid rgba(255, 255, 255, 0.3);
 	border-radius: 50% !important;
@@ -1600,7 +1600,7 @@ onUnmounted(() => {
 	justify-content: center;
 	transition: all 0.3s ease;
 	z-index: 10;
-	line-height: 1;
+	line-height: 58px;
 	box-sizing: border-box;
 	padding: 0;
 	margin: 0;
@@ -3739,7 +3739,7 @@ onUnmounted(() => {
 }
 
 .three-mode-right-panel .driving-mode-box {
-	margin-bottom: 0;
+	margin-bottom: 14px;
 }
 
 .three-mode-right-panel .interior-view-wrapper {
