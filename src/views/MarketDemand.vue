@@ -11,6 +11,7 @@ import icon9_1 from '../assets/icon-9-1.png'
 import icon9_2 from '../assets/icon-9-2.png'
 import icon10_1 from '../assets/icon-10-1.png'
 import icon10_2 from '../assets/icon-10-2.png'
+import TopNavigation from '../components/TopNavigation.vue';
 // import Navigation from '../components/Navigation.vue'
 // import CountryCircle from '../components/CountryCircle.vue'
 import GlobeComponent from '../components/GlobeComponent.vue'
@@ -613,32 +614,12 @@ const nextImage = () => {
 <template>
   <div class="bg-center bg-no-repeat relative flex flex-col w-full overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900"
     :style="`background: url('${icon3}'); background-size: 100% 100%; height: 100vh; font-family: 'Arial', sans-serif !important;`">
-    <!-- 导航栏 -->
+    
     <!-- 顶部导航栏 -->
-    <nav class="top-nav">
-      <div class="nav-container">
-        <!-- 返回首页按钮 -->
-        <div class="home-btn" @click="goHome">
-          <div class="home-icon">
-            <img src="../assets/nav_back.png" alt="Home" />
-          </div>
-        </div>
-        <div class="nav-divider"></div>
-
-        <router-link to="/product-introduction" class="nav-item">Product Introduction</router-link>
-        <div class="nav-divider"></div>
-        <router-link to="/industry-background" class="nav-item">Industry Background</router-link>
-        <div class="nav-divider"></div>
-        <div class="nav-item active">Market Demand</div>
-        <div class="nav-divider"></div>
-        <router-link to="/business-model" class="nav-item">Business Model</router-link>
-        <div class="nav-divider"></div>
-        <router-link to="/team-composition" class="nav-item">Team Composition</router-link>
-      </div>
-    </nav>
+		<TopNavigation />
 
     <!-- 主内容容器 -->
-    <div v-if="!showCoreRequirements" class="flex flex-col lg:flex-row mt-[71px] main-content-container">
+    <div v-if="!showCoreRequirements" class="flex flex-col lg:flex-row main-content-container">
       <!-- 左侧内容 -->
       <div class="w-[28%] flex items-center justify-center relative min-w-0">
         
@@ -1058,108 +1039,6 @@ const nextImage = () => {
 <style scoped>
 .button-focus {
   outline: none !important;
-}
-
-/* 顶部导航栏 */
-.home-btn {
-	cursor: pointer;
-	transition: all 0.3s ease;
-	padding: 5px;
-	border-radius: 50%;
-	/* background: rgba(255, 255, 255, 0.1); */
-	backdrop-filter: blur(10px);
-}
-
-.home-btn:hover {
-	/* background: rgba(0, 212, 255, 0.2);
-	transform: scale(1.1); */
-}
-
-.home-icon {
-	width: 25px;
-	height: 25px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.home-icon img {
-	width: 100%;
-	height: 100%;
-	object-fit: contain;
-}
-.top-nav {
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	background: rgba(0, 0, 0, 0.8);
-	backdrop-filter: blur(10px);
-	z-index: 40;
-	padding: 15px 0;
-  font-family: 'Arial', sans-serif !important;
-}
-
-.nav-container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	gap: 12px;
-	max-width: 1200px;
-	margin: 0 auto;
-	padding: 0 12px;
-	flex-wrap: wrap;
-}
-
-@media (min-width: 1024px) {
-	.nav-container {
-		gap: 20px;
-		padding: 0 20px;
-		flex-wrap: nowrap;
-	}
-}
-
-.nav-item {
-	padding: 8px 12px;
-	cursor: pointer;
-	transition: all 0.3s ease;
-	position: relative;
-	font-size: 12px;
-	font-weight: 500;
-	text-decoration: none;
-	color: #ffffff;
-	text-align: center;
-}
-
-@media (min-width: 1024px) {
-	.nav-item {
-		padding: 10px 20px;
-		font-size: 14px;
-	}
-}
-
-.nav-item:hover {
-	color: #00d4ff;
-}
-
-.nav-item.active {
-	color: #00d4ff;
-}
-
-.nav-item.active::after {
-	content: '';
-	position: absolute;
-	bottom: -5px;
-	left: 0;
-	right: 0;
-	height: 2px;
-	background: #00d4ff;
-}
-
-.nav-divider {
-	width: 1px;
-	height: 20px;
-	background: rgba(255, 255, 255, 0.3);
 }
 
 /* 圆圈容器响应式缩放 */

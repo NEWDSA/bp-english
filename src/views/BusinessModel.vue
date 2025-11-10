@@ -514,43 +514,8 @@
 			</div>
 		</div>
 
-		<!-- Revenue Model 弹窗 -->
-		<div class="revenue-modal" v-if="activeContent === 'revenue'" @click="hideContent">
-			<div class="revenue-modal-content" @click.stop>
-				<button class="close-btn" @click="hideContent">×</button>
-				<div class="charts-grid charts-grid-two">
-					<div class="chart-item">
-						<div ref="chart1Ref" class="modal-chart"></div>
-					</div>
-					<div class="chart-item">
-						<div ref="chart2Ref" class="modal-chart"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-
 		<!-- 顶部导航栏 -->
-		<nav class="top-nav">
-			<div class="nav-container">
-				<!-- 返回首页按钮 -->
-				<div class="home-btn" @click="goHome">
-					<div class="home-icon">
-						<img src="../assets/nav_back.png" alt="Home" />
-					</div>
-				</div>
-				<div class="nav-divider"></div>
-
-				<router-link to="/product-introduction" class="nav-item">Product Introduction</router-link>
-				<div class="nav-divider"></div>
-				<router-link to="/industry-background" class="nav-item">Industry Background</router-link>
-				<div class="nav-divider"></div>
-				<router-link to="/market-demand" class="nav-item">Market Demand</router-link>
-				<div class="nav-divider"></div>
-				<div class="nav-item active">Business Model</div>
-				<div class="nav-divider"></div>
-				<router-link to="/team-composition" class="nav-item">Team Composition</router-link>
-			</div>
-		</nav>
+		<TopNavigation />
 
 		<!-- 主要内容区域 - 只在覆盖层完全关闭时显示 -->
 		<div class="main-content" v-if="!showOverlay">
@@ -1019,6 +984,7 @@
 import { ref, onMounted, onBeforeUnmount, watchEffect, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import * as echarts from 'echarts'
+import TopNavigation from '../components/TopNavigation.vue';
 
 const router = useRouter()
 
@@ -3018,92 +2984,6 @@ function goHome() {
 		opacity: 1;
 		transform: scale(1);
 	}
-}
-
-/* 顶部导航栏 */
-.top-nav {
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	background: rgba(0, 0, 0, 0.8);
-	backdrop-filter: blur(10px);
-	z-index: 10000;
-	padding: 15px 0;
-}
-
-.nav-container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	gap: 20px;
-	max-width: 1200px;
-	margin: 0 auto;
-	padding: 0 20px;
-}
-
-.nav-item {
-	padding: 10px 20px;
-	cursor: pointer;
-	transition: all 0.3s ease;
-	position: relative;
-	font-size: 14px;
-	font-weight: 500;
-	text-decoration: none;
-	color: #ffffff;
-}
-
-.nav-item:hover {
-	color: #00d4ff;
-}
-
-.nav-item.active {
-	color: #00d4ff;
-}
-
-.nav-item.active::after {
-	content: '';
-	position: absolute;
-	bottom: -5px;
-	left: 0;
-	right: 0;
-	height: 2px;
-	background: #00d4ff;
-}
-
-.nav-divider {
-	width: 1px;
-	height: 20px;
-	background: rgba(255, 255, 255, 0.3);
-}
-
-/* 首页按钮样式 */
-.home-btn {
-	cursor: pointer;
-	transition: all 0.3s ease;
-	padding: 5px;
-	border-radius: 50%;
-	/* background: rgba(255, 255, 255, 0.1); */
-	backdrop-filter: blur(10px);
-}
-
-/* .home-btn:hover {
-	background: rgba(0, 212, 255, 0.2);
-	transform: scale(1.1);
-} */
-
-.home-icon {
-	width: 25px;
-	height: 25px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.home-icon img {
-	width: 100%;
-	height: 100%;
-	object-fit: contain;
 }
 
 /* 主要内容区域 */

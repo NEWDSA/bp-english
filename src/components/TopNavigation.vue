@@ -1,6 +1,6 @@
 <template>
 	<!-- 顶部导航栏 -->
-	<nav class="flex-shrink-0 bg-black/80 backdrop-blur-[10px] z-40 py-[15px] font-['Arial',sans-serif]">
+	<nav :class="route.path == '/business-model' ? `top-nav flex-shrink-0 bg-black/80 backdrop-blur-[10px] z-40 py-[15px] font-['Arial',sans-serif]` : `flex-shrink-0 bg-black/80 backdrop-blur-[10px] z-40 py-[15px] font-['Arial',sans-serif]`">
 		<div class="flex justify-center items-center gap-3 max-w-[1200px] mx-auto px-3 flex-wrap lg:gap-5 lg:px-5 lg:flex-nowrap md:gap-[10px] md:flex-nowrap">
 			<!-- 返回首页按钮 -->
 			<div class="cursor-pointer transition-all duration-300 p-[5px] rounded-full backdrop-blur-[10px] hover:bg-[rgba(0,212,255,0.2)] hover:scale-110" @click="goHome">
@@ -40,3 +40,12 @@ const isActive = (path: string) => {
 }
 </script>
 
+<style scoped>
+.top-nav {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 10000;
+}
+</style>
