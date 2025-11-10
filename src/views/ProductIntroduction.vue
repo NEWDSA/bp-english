@@ -2430,6 +2430,7 @@ onUnmounted(() => {
 	width: 400px;
 	height: 170px;
 	min-height: 170px;
+	margin: 0 auto;
 }
 
 .competitor-image {
@@ -2449,6 +2450,8 @@ onUnmounted(() => {
 
 .competitor-item.yu-column .competitor-image-wrapper video.competitor-image {
 	object-fit: cover;
+	display: block;
+	margin: 0 auto;
 }
 
 .competitor-label {
@@ -2548,28 +2551,28 @@ onUnmounted(() => {
 	box-sizing: border-box;
 }
 
-/* 御水翼艇列宽度 */
+/* 御水翼艇列宽度 - 与其他数据列平分 */
 .comparison-table td.yu-column,
 .comparison-table th.yu-column {
-	width: 400px;
+	width: auto;
 }
 
-/* VS 其他水翼艇 tab的数据列宽（除御水翼艇列外共有4列） */
-.tab-panel.vs-others-tab .comparison-table td:not(:first-child):not(.yu-column),
-.tab-panel.vs-others-tab .comparison-table th:not(:first-child):not(.yu-column) {
-	width: calc((100% - 420px - 400px) / 4);
+/* VS 其他水翼艇 tab的数据列宽（除第一列外共有5列，全部平分） */
+.tab-panel.vs-others-tab .comparison-table td:not(:first-child),
+.tab-panel.vs-others-tab .comparison-table th:not(:first-child) {
+	width: calc((100% - 420px) / 5);
 }
 
-/* 10-15w tab的数据列宽（除御水翼艇列外共有2列） */
-.tab-panel.three-col-tab .comparison-table td:not(:first-child):not(.yu-column),
-.tab-panel.three-col-tab .comparison-table th:not(:first-child):not(.yu-column) {
-	width: calc((100% - 320px - 400px) / 2);
+/* 10-15w tab的数据列宽（除第一列外共有3列，全部平分） */
+.tab-panel.three-col-tab .comparison-table td:not(:first-child),
+.tab-panel.three-col-tab .comparison-table th:not(:first-child) {
+	width: calc((100% - 320px) / 3);
 }
 
-/* 18w tab的数据列宽（除御水翼艇列外共有3列） */
-.tab-panel.four-col-tab .comparison-table td:not(:first-child):not(.yu-column),
-.tab-panel.four-col-tab .comparison-table th:not(:first-child):not(.yu-column) {
-	width: calc((100% - 320px - 400px) / 3);
+/* 18w tab的数据列宽（除第一列外共有4列，全部平分） */
+.tab-panel.four-col-tab .comparison-table td:not(:first-child),
+.tab-panel.four-col-tab .comparison-table th:not(:first-child) {
+	width: calc((100% - 320px) / 4);
 }
 
 .comparison-table thead {
