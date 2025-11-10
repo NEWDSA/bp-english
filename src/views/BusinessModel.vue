@@ -9,15 +9,15 @@
 					<!-- B区域 - 左侧 -->
 					<div class="region-b-left" @click="showBContentPanel">
 						<div class="region-content">
-							<div class="region-label">B</div>
-							<div class="region-text">Business</div>
+							<div class="region-label text-[80px] sm:text-[100px] md:text-[120px] lg:text-[140px]">B</div>
+							<div class="region-text text-lg sm:text-xl md:text-2xl">Business</div>
 						</div>
 					</div>
 					<!-- C区域 - 右侧 -->
 					<div class="region-c-right" @click="showCContentPanel">
 						<div class="region-content">
-							<div class="region-label">C</div>
-							<div class="region-text">Consumer</div>
+							<div class="region-label text-[80px] sm:text-[100px] md:text-[120px] lg:text-[140px]">C</div>
+							<div class="region-text text-lg sm:text-xl md:text-2xl">Consumer</div>
 						</div>
 					</div>
 					<!-- 中间分割线 -->
@@ -75,51 +75,51 @@
 				<!-- B方块显示主要内容 -->
 				<div class="main-content">
 					<!-- 左侧面板：Revenue Model + Channel Strategy -->
-					<div class="left-panel">
+					<div class="left-panel !w-[550px] !min-w-[550px] !max-w-[550px]">
 						<!-- 收入模型图表 -->
-						<div class="chart-card revenue-hover-card" :class="{ 'revenue-selected': isRevenueSelected }"
+						<div class="chart-card revenue-hover-card w-[514px] h-[304px]" :class="{ 'revenue-selected': isRevenueSelected }"
 							@click="showContent('revenue')">
-							<h3 class="chart-title">Revenue Model</h3>
-							<div class="chart-container">
+							<h3 class="chart-title text-[20px]">Revenue Model</h3>
+							<div class="chart-container h-[230px]">
 								<div ref="revenueChartRef" class="revenue-echart"></div>
 							</div>
 						</div>
 
 						<!-- 渠道策略 -->
 						<div class="strategy-card">
-							<h3 class="strategy-title">Channel Strategy</h3>
+							<h3 class="strategy-title text-[26px]">Channel Strategy</h3>
 
 							<div class="strategy-section">
-								<div class="strategy-subtitle">Domestic (B-end water area operator)</div>
+								<div class="strategy-subtitle text-[22px] whitespace-nowrap">Domestic (B-end water area operator)</div>
 								<div class="strategy-content">
-									<p class="strategy-label">Positioning:</p>
-									<p class="strategy-text">To provide a full cycle hydrofoil operation solution for
+									<p class="strategy-label text-[21px]">Positioning:</p>
+									<p class="strategy-text text-[18px]">To provide a full cycle hydrofoil operation solution for
 										scenic
 										spots, passenger transport companies, and hotels.</p>
 
-									<p class="strategy-label">Core module:</p>
-									<p class="strategy-text">Fleet operation and maintenance (equipment support)+safety
+									<p class="strategy-label text-[21px]">Core module:</p>
+									<p class="strategy-text text-[18px]">Fleet operation and maintenance (equipment support)+safety
 										management (real-time monitoring)</p>
-									<p class="strategy-text">Product operation (leasing system)+dock support
+									<p class="strategy-text text-[18px]">Product operation (leasing system)+dock support
 										(infrastructure
 										support)</p>
 								</div>
 							</div>
 
 							<div class="strategy-section">
-								<h4 class="strategy-subtitle">Overseas business (C-end private enterprises/private berth
+								<h4 class="strategy-subtitle text-[22px]">Overseas business (C-end private enterprises/private berth
 									users)
 								</h4>
 								<div class="strategy-content">
-									<p class="strategy-label">Positioning:</p>
-									<p class="strategy-text">To build an intelligent hydrofoil boat lifestyle ecosystem
+									<p class="strategy-label text-[21px]">Positioning:</p>
+									<p class="strategy-text text-[18px]">To build an intelligent hydrofoil boat lifestyle ecosystem
 										for
 										middle-class private berth users.</p>
 
-									<p class="strategy-label">Core module:</p>
-									<p class="strategy-text">Map service (navigation planning)+APP service (remote
+									<p class="strategy-label text-[21px]">Core module:</p>
+									<p class="strategy-text text-[18px]">Map service (navigation planning)+APP service (remote
 										control)</p>
-									<p class="strategy-text">Additional services (customized maintenance/social
+									<p class="strategy-text text-[18px]">Additional services (customized maintenance/social
 										functions)</p>
 								</div>
 							</div>
@@ -135,12 +135,12 @@
 					<!-- 右侧面板：详细内容 -->
 					<div class="right-panel">
 						<!-- 内容面板 -->
-						<div class="content-panel" v-if="activeContent && activeContent !== 'revenue'">
+						<div class="content-panel w-[614px]" v-if="activeContent && activeContent !== 'revenue'">
 							<!-- Lake Como 案例内容 -->
 							<div v-if="activeContent === 'lake' && !showLakeDetail" class="lake-content"
 								@click="showLakeDetailPanel">
-								<div class="content-title">The case of Lake Como</div>
-								<div class="content-subtitle">Daily average number of tourists</div>
+								<div class="content-title text-[26px] mb-[10.67px]">The case of Lake Como</div>
+								<div class="content-subtitle text-[18px] mb-[26.67px]">Daily average number of tourists</div>
 
 								<!-- ECharts 圆环图 -->
 								<div class="pie-chart-container">
@@ -148,110 +148,110 @@
 								</div>
 
 								<!-- 描述文字 -->
-								<p class="description-text">
+								<p class="description-text text-[18px] my-[26.67px]">
 									Each hotel has an average of 100 rooms, totaling 400 rooms, calculated based on the
 									number
 									of tourists during the off-season.
 								</p>
 
 								<!-- 柱状图 -->
-								<div class="bar-charts">
+								<div class="bar-charts my-[26.67px]">
 									<div class="bar-row">
-										<div class="bar-item filled"></div>
-										<div class="bar-item filled"></div>
-										<div class="bar-item filled"></div>
-										<div class="bar-item filled"></div>
-										<div class="bar-item filled"></div>
-										<div class="bar-item filled"></div>
-										<div class="bar-item filled"></div>
-										<div class="bar-item filled"></div>
-										<div class="bar-item filled"></div>
-										<div class="bar-item filled"></div>
-										<div class="bar-item filled"></div>
-										<div class="bar-item filled"></div>
-										<div class="bar-item filled"></div>
-										<div class="bar-item filled"></div>
-										<div class="bar-item filled"></div>
-										<div class="bar-item filled"></div>
-										<div class="bar-item filled"></div>
-										<div class="bar-item filled"></div>
-										<div class="bar-item filled"></div>
-										<div class="bar-item filled"></div>
-										<div class="bar-item empty"></div>
-										<div class="bar-item empty"></div>
-										<div class="bar-item empty"></div>
-										<div class="bar-item empty"></div>
-										<div class="bar-item empty"></div>
+										<div class="bar-item filled w-[16px] h-[16px]"></div>
+										<div class="bar-item filled w-[16px] h-[16px]"></div>
+										<div class="bar-item filled w-[16px] h-[16px]"></div>
+										<div class="bar-item filled w-[16px] h-[16px]"></div>
+										<div class="bar-item filled w-[16px] h-[16px]"></div>
+										<div class="bar-item filled w-[16px] h-[16px]"></div>
+										<div class="bar-item filled w-[16px] h-[16px]"></div>
+										<div class="bar-item filled w-[16px] h-[16px]"></div>
+										<div class="bar-item filled w-[16px] h-[16px]"></div>
+										<div class="bar-item filled w-[16px] h-[16px]"></div>
+										<div class="bar-item filled w-[16px] h-[16px]"></div>
+										<div class="bar-item filled w-[16px] h-[16px]"></div>
+										<div class="bar-item filled w-[16px] h-[16px]"></div>
+										<div class="bar-item filled w-[16px] h-[16px]"></div>
+										<div class="bar-item filled w-[16px] h-[16px]"></div>
+										<div class="bar-item filled w-[16px] h-[16px]"></div>
+										<div class="bar-item filled w-[16px] h-[16px]"></div>
+										<div class="bar-item filled w-[16px] h-[16px]"></div>
+										<div class="bar-item filled w-[16px] h-[16px]"></div>
+										<div class="bar-item filled w-[16px] h-[16px]"></div>
+										<div class="bar-item empty w-[16px] h-[16px]"></div>
+										<div class="bar-item empty w-[16px] h-[16px]"></div>
+										<div class="bar-item empty w-[16px] h-[16px]"></div>
+										<div class="bar-item empty w-[16px] h-[16px]"></div>
+										<div class="bar-item empty w-[16px] h-[16px]"></div>
 									</div>
 									<div class="bar-row">
-										<div class="bar-item filled"></div>
-										<div class="bar-item filled"></div>
-										<div class="bar-item filled"></div>
-										<div class="bar-item filled"></div>
-										<div class="bar-item filled"></div>
-										<div class="bar-item filled"></div>
-										<div class="bar-item filled"></div>
-										<div class="bar-item filled"></div>
-										<div class="bar-item filled"></div>
-										<div class="bar-item filled"></div>
-										<div class="bar-item filled"></div>
-										<div class="bar-item filled"></div>
-										<div class="bar-item empty"></div>
-										<div class="bar-item empty"></div>
-										<div class="bar-item empty"></div>
-										<div class="bar-item empty"></div>
-										<div class="bar-item empty"></div>
-										<div class="bar-item empty"></div>
-										<div class="bar-item empty"></div>
-										<div class="bar-item empty"></div>
-										<div class="bar-item empty"></div>
-										<div class="bar-item empty"></div>
-										<div class="bar-item empty"></div>
-										<div class="bar-item empty"></div>
-										<div class="bar-item empty"></div>
+										<div class="bar-item filled w-[16px] h-[16px]"></div>
+										<div class="bar-item filled w-[16px] h-[16px]"></div>
+										<div class="bar-item filled w-[16px] h-[16px]"></div>
+										<div class="bar-item filled w-[16px] h-[16px]"></div>
+										<div class="bar-item filled w-[16px] h-[16px]"></div>
+										<div class="bar-item filled w-[16px] h-[16px]"></div>
+										<div class="bar-item filled w-[16px] h-[16px]"></div>
+										<div class="bar-item filled w-[16px] h-[16px]"></div>
+										<div class="bar-item filled w-[16px] h-[16px]"></div>
+										<div class="bar-item filled w-[16px] h-[16px]"></div>
+										<div class="bar-item filled w-[16px] h-[16px]"></div>
+										<div class="bar-item filled w-[16px] h-[16px]"></div>
+										<div class="bar-item empty w-[16px] h-[16px]"></div>
+										<div class="bar-item empty w-[16px] h-[16px]"></div>
+										<div class="bar-item empty w-[16px] h-[16px]"></div>
+										<div class="bar-item empty w-[16px] h-[16px]"></div>
+										<div class="bar-item empty w-[16px] h-[16px]"></div>
+										<div class="bar-item empty w-[16px] h-[16px]"></div>
+										<div class="bar-item empty w-[16px] h-[16px]"></div>
+										<div class="bar-item empty w-[16px] h-[16px]"></div>
+										<div class="bar-item empty w-[16px] h-[16px]"></div>
+										<div class="bar-item empty w-[16px] h-[16px]"></div>
+										<div class="bar-item empty w-[16px] h-[16px]"></div>
+										<div class="bar-item empty w-[16px] h-[16px]"></div>
+										<div class="bar-item empty w-[16px] h-[16px]"></div>
 									</div>
 									<div class="bar-row">
-										<div class="bar-item filled"></div>
-										<div class="bar-item filled"></div>
-										<div class="bar-item filled"></div>
-										<div class="bar-item filled"></div>
-										<div class="bar-item empty"></div>
-										<div class="bar-item empty"></div>
-										<div class="bar-item empty"></div>
-										<div class="bar-item empty"></div>
-										<div class="bar-item empty"></div>
-										<div class="bar-item empty"></div>
-										<div class="bar-item empty"></div>
-										<div class="bar-item empty"></div>
-										<div class="bar-item empty"></div>
-										<div class="bar-item empty"></div>
-										<div class="bar-item empty"></div>
-										<div class="bar-item empty"></div>
-										<div class="bar-item empty"></div>
-										<div class="bar-item empty"></div>
-										<div class="bar-item empty"></div>
-										<div class="bar-item empty"></div>
-										<div class="bar-item empty"></div>
-										<div class="bar-item empty"></div>
-										<div class="bar-item empty"></div>
-										<div class="bar-item empty"></div>
-										<div class="bar-item empty"></div>
+										<div class="bar-item filled w-[16px] h-[16px]"></div>
+										<div class="bar-item filled w-[16px] h-[16px]"></div>
+										<div class="bar-item filled w-[16px] h-[16px]"></div>
+										<div class="bar-item filled w-[16px] h-[16px]"></div>
+										<div class="bar-item empty w-[16px] h-[16px]"></div>
+										<div class="bar-item empty w-[16px] h-[16px]"></div>
+										<div class="bar-item empty w-[16px] h-[16px]"></div>
+										<div class="bar-item empty w-[16px] h-[16px]"></div>
+										<div class="bar-item empty w-[16px] h-[16px]"></div>
+										<div class="bar-item empty w-[16px] h-[16px]"></div>
+										<div class="bar-item empty w-[16px] h-[16px]"></div>
+										<div class="bar-item empty w-[16px] h-[16px]"></div>
+										<div class="bar-item empty w-[16px] h-[16px]"></div>
+										<div class="bar-item empty w-[16px] h-[16px]"></div>
+										<div class="bar-item empty w-[16px] h-[16px]"></div>
+										<div class="bar-item empty w-[16px] h-[16px]"></div>
+										<div class="bar-item empty w-[16px] h-[16px]"></div>
+										<div class="bar-item empty w-[16px] h-[16px]"></div>
+										<div class="bar-item empty w-[16px] h-[16px]"></div>
+										<div class="bar-item empty w-[16px] h-[16px]"></div>
+										<div class="bar-item empty w-[16px] h-[16px]"></div>
+										<div class="bar-item empty w-[16px] h-[16px]"></div>
+										<div class="bar-item empty w-[16px] h-[16px]"></div>
+										<div class="bar-item empty w-[16px] h-[16px]"></div>
+										<div class="bar-item empty w-[16px] h-[16px]"></div>
 									</div>
 								</div>
 
 								<!-- 图例 -->
 								<div class="legend">
 									<div class="legend-item">
-										<span class="legend-label">Daily average number of tourists</span>
-										<span class="legend-value">10000 people</span>
+										<span class="legend-label text-[18px]">Daily average number of tourists</span>
+										<span class="legend-value text-[18px]">10000 people</span>
 									</div>
 									<div class="legend-item">
-										<span class="legend-label">Hotel load capacity</span>
-										<span class="legend-value">1200 people</span>
+										<span class="legend-label text-[18px]">Hotel load capacity</span>
+										<span class="legend-value text-[18px]">1200 people</span>
 									</div>
 									<div class="legend-item">
-										<span class="legend-label">Overnight tourists (50% occupancy rate)</span>
-										<span class="legend-value">400-600 people</span>
+										<span class="legend-label text-[18px]">Overnight tourists (50% occupancy rate)</span>
+										<span class="legend-value text-[18px]">400-600 people</span>
 									</div>
 								</div>
 							</div>
@@ -261,8 +261,8 @@
 								@click="hideContent">
 								<!-- Transportation Demand 部分 -->
 								<div class="transportation-demand-section">
-									<div class="main-title">Daily average number of boat tourists</div>
-									<div class="section-title">Transportation Demand</div>
+								<div class="main-title text-xs sm:text-sm md:text-base mb-[13px]">Daily average number of boat tourists</div>
+								<div class="section-title text-[18px] mb-[13px]">Transportation Demand</div>
 
 									<!-- ECharts 半环形图 -->
 									<div class="demand-chart-container">
@@ -274,225 +274,217 @@
 												<div class="label-text">in the lake area</div>
 											</div>
 											<div class="chart-label-right">
-												<div class="label-text">Connection Requirements</div>
+												<div class="label-text text-xs sm:text-sm md:text-base">Connection Requirements</div>
 											</div>
 											<div class="chart-label-bottom">
-												<div class="label-text">Other Requirements</div>
+												<div class="label-text text-xs sm:text-sm md:text-base">Other Requirements</div>
 											</div>
 										</div>
 									</div>
 									<!-- 描述文字 -->
 									<div class="demand-description">
-										<p>Each ship has a passenger capacity of 4 people</p>
-										<p>The total demand for hydrofoil boats is 25-38</p>
+										<p class="text-[10px] sm:text-xs md:text-sm">Each ship has a passenger capacity of 4 people</p>
+										<p class="text-[10px] sm:text-xs md:text-sm">The total demand for hydrofoil boats is 25-38</p>
 									</div>
 								</div>
 
 								<!-- 游客数据部分 -->
-								<div class="tourist-data-section">
-									<div class="section-title">The daily average number of tourists taking boats on Lake
+								<div class="tourist-data-section mt-[12px]">
+									<div class="section-title mb-[13px]">The daily average number of tourists taking boats on Lake
 										Como,
 										calculated based on the peak and off peak seasons</div>
 
 									<!-- 柱状图 -->
-									<div class="bar-charts">
+									<div class="bar-charts my-[26.67px]">
 										<div class="bar-row">
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
 										</div>
 										<div class="bar-row">
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
 										</div>
 										<div class="bar-row">
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
 										</div>
 										<div class="bar-row">
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
 										</div>
 										<div class="bar-row">
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
-											<div class="bar-item empty"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
 										</div>
 										<div class="bar-row">
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
-											<div class="bar-item filled"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
 										</div>
 									</div>
 
 									<!-- 详细数据列表 -->
 									<div class="data-list">
-										<div class="data-item">
-											<span class="data-label">Proportion of boat tourists during the off-season
-												(7.5%)</span>
-											<span class="data-value">750 people</span>
+										<div class="data-item mb-[6px]">
+											<span class="data-label text-[10px] sm:text-xs md:text-sm whitespace-nowrap">Proportion of boat tourists during the off-season (7.5%)</span>
+											<span class="data-value text-[10px] sm:text-xs md:text-sm whitespace-nowrap">750 people</span>
+										</div>
+										<div class="data-item mb-[6px]">
+											<span class="data-label text-[10px] sm:text-xs md:text-sm whitespace-nowrap">During the off-season, tourists staying overnight use boats (75%)</span>
+											<span class="data-value text-[10px] sm:text-xs md:text-sm whitespace-nowrap">450 people</span>
+										</div>
+										<div class="data-item mb-[6px]">
+											<span class="data-label text-[10px] sm:text-xs md:text-sm whitespace-nowrap">Proportion of boat tourists during peak season (7.5%)</span>
+											<span class="data-value text-[10px] sm:text-xs md:text-sm whitespace-nowrap">1312 people</span>
+										</div>
+										<div class="data-item mb-[6px]">
+											<span class="data-label text-[10px] sm:text-xs md:text-sm whitespace-nowrap">Tourists staying overnight during peak season use boats (75%)</span>
+											<span class="data-value text-[10px] sm:text-xs md:text-sm whitespace-nowrap">900 people</span>
+										</div>
+										<div class="data-item mb-[6px]">
+											<span class="data-label text-[10px] sm:text-xs md:text-sm whitespace-nowrap">Average daily number of boat tourists during the off-season</span>
+											<span class="data-value text-[10px] sm:text-xs md:text-sm whitespace-nowrap">1200 people</span>
 										</div>
 										<div class="data-item">
-											<span class="data-label">During the off-season, tourists staying overnight
-												use boats
-												(75%)</span>
-											<span class="data-value">450 people</span>
-										</div>
-										<div class="data-item">
-											<span class="data-label">Proportion of boat tourists during peak season
-												(7.5%)</span>
-											<span class="data-value">1312 people</span>
-										</div>
-										<div class="data-item">
-											<span class="data-label">Tourists staying overnight during peak season use
-												boats
-												(75%)</span>
-											<span class="data-value">900 people</span>
-										</div>
-										<div class="data-item">
-											<span class="data-label">Average daily number of boat tourists during the
-												off-season</span>
-											<span class="data-value">1200 people</span>
-										</div>
-										<div class="data-item">
-											<span class="data-label">Average daily number of boat tourists during peak
-												season</span>
-											<span class="data-value">2212 people</span>
+											<span class="data-label text-[10px] sm:text-xs md:text-sm whitespace-nowrap">Average daily number of boat tourists during peak season</span>
+											<span class="data-value text-[10px] sm:text-xs md:text-sm whitespace-nowrap">2212 people</span>
 										</div>
 									</div>
 								</div>
@@ -500,13 +492,13 @@
 
 							<!-- 其他内容面板可以在这里添加 -->
 							<div v-if="activeContent === 'tourists'" class="tourists-content">
-								<div class="content-title">Daily average number of boat tourists</div>
-								<p>Tourist data content will be displayed here.</p>
+								<div class="content-title text-base sm:text-lg md:text-xl lg:text-2xl">Daily average number of boat tourists</div>
+								<p class="text-xs sm:text-sm md:text-base">Tourist data content will be displayed here.</p>
 							</div>
 
 							<div v-if="activeContent === 'profit'" class="profit-content">
-								<div class="content-title">Operating profit and loss statement</div>
-								<p>Profit and loss data will be displayed here.</p>
+								<div class="content-title text-base sm:text-lg md:text-xl lg:text-2xl">Operating profit and loss statement</div>
+								<p class="text-xs sm:text-sm md:text-base">Profit and loss data will be displayed here.</p>
 							</div>
 						</div>
 					</div>
@@ -538,9 +530,9 @@
 			<!-- 左侧面板：Revenue Model + Channel Strategy -->
 			<div class="left-panel">
 				<!-- 收入模型图表 -->
-				<div class="chart-card revenue-hover-card" :class="{ 'revenue-selected': isRevenueSelected }"
+				<div class="chart-card revenue-hover-card w-[514px] h-[304px]" :class="{ 'revenue-selected': isRevenueSelected }"
 					@click="showContent('revenue')">
-					<h3 class="chart-title">Revenue Model</h3>
+					<h3 class="chart-title text-[20px]">Revenue Model</h3>
 					<div class="chart-container">
 						<div ref="revenueChartRef" class="revenue-echart"></div>
 					</div>
@@ -549,34 +541,34 @@
 
 				<!-- 渠道策略 -->
 				<div class="strategy-card">
-					<h3 class="strategy-title">Channel Strategy</h3>
+					<h3 class="strategy-title text-[26px]">Channel Strategy</h3>
 
 					<div class="strategy-section">
-						<div class="strategy-subtitle">Domestic (B-end water area operator)</div>
+						<div class="strategy-subtitle text-[22px] whitespace-nowrap">Domestic (B-end water area operator)</div>
 						<div class="strategy-content">
-							<p class="strategy-label">Positioning:</p>
-							<p class="strategy-text">To provide a full cycle hydrofoil operation solution for scenic
+							<p class="strategy-label text-[21px]">Positioning:</p>
+							<p class="strategy-text text-[18px]">To provide a full cycle hydrofoil operation solution for scenic
 								spots, passenger transport companies, and hotels.</p>
 
-							<p class="strategy-label">Core module:</p>
-							<p class="strategy-text">Fleet operation and maintenance (equipment support)+safety
+							<p class="strategy-label text-[21px]">Core module:</p>
+							<p class="strategy-text text-[18px]">Fleet operation and maintenance (equipment support)+safety
 								management (real-time monitoring)</p>
-							<p class="strategy-text">Product operation (leasing system)+dock support (infrastructure
+							<p class="strategy-text text-[18px]">Product operation (leasing system)+dock support (infrastructure
 								support)</p>
 						</div>
 					</div>
 
 					<div class="strategy-section">
-						<h4 class="strategy-subtitle">Overseas business (C-end private enterprises/private berth users)
+						<h4 class="strategy-subtitle text-[22px]">Overseas business (C-end private enterprises/private berth users)
 						</h4>
 						<div class="strategy-content">
-							<p class="strategy-label">Positioning:</p>
-							<p class="strategy-text">To build an intelligent hydrofoil boat lifestyle ecosystem for
+							<p class="strategy-label text-[21px]">Positioning:</p>
+							<p class="strategy-text text-[18px]">To build an intelligent hydrofoil boat lifestyle ecosystem for
 								middle-class private berth users.</p>
 
-							<p class="strategy-label">Core module:</p>
-							<p class="strategy-text">Map service (navigation planning)+APP service (remote control)</p>
-							<p class="strategy-text">Additional services (customized maintenance/social functions)</p>
+							<p class="strategy-label text-[21px]">Core module:</p>
+							<p class="strategy-text text-[18px]">Map service (navigation planning)+APP service (remote control)</p>
+							<p class="strategy-text text-[18px]">Additional services (customized maintenance/social functions)</p>
 						</div>
 					</div>
 				</div>
@@ -625,8 +617,8 @@
 					<!-- Lake Como 案例内容 -->
 					<div v-if="activeContent === 'lake' && !showLakeDetail" class="lake-content"
 						@click="showLakeDetailPanel">
-						<div class="content-title">The case of Lake Como</div>
-						<div class="content-subtitle">Daily average number of tourists</div>
+						<div class="content-title text-[26px] mb-[10.67px]">The case of Lake Como</div>
+						<div class="content-subtitle text-[18px] mb-[26.67px]">Daily average number of tourists</div>
 
 						<!-- ECharts 圆环图 -->
 						<div class="pie-chart-container">
@@ -634,109 +626,109 @@
 						</div>
 
 						<!-- 描述文字 -->
-						<p class="description-text">
+						<p class="description-text text-[18px] my-[26.67px]">
 							Each hotel has an average of 100 rooms, totaling 400 rooms, calculated based on the number
 							of tourists during the off-season.
 						</p>
 
 						<!-- 柱状图 -->
-						<div class="bar-charts">
+						<div class="bar-charts my-[26.67px]">
 							<div class="bar-row">
-								<div class="bar-item filled"></div>
-								<div class="bar-item filled"></div>
-								<div class="bar-item filled"></div>
-								<div class="bar-item filled"></div>
-								<div class="bar-item filled"></div>
-								<div class="bar-item filled"></div>
-								<div class="bar-item filled"></div>
-								<div class="bar-item filled"></div>
-								<div class="bar-item filled"></div>
-								<div class="bar-item filled"></div>
-								<div class="bar-item filled"></div>
-								<div class="bar-item filled"></div>
-								<div class="bar-item filled"></div>
-								<div class="bar-item filled"></div>
-								<div class="bar-item filled"></div>
-								<div class="bar-item filled"></div>
-								<div class="bar-item filled"></div>
-								<div class="bar-item filled"></div>
-								<div class="bar-item filled"></div>
-								<div class="bar-item filled"></div>
-								<div class="bar-item empty"></div>
-								<div class="bar-item empty"></div>
-								<div class="bar-item empty"></div>
-								<div class="bar-item empty"></div>
-								<div class="bar-item empty"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
 							</div>
 							<div class="bar-row">
-								<div class="bar-item filled"></div>
-								<div class="bar-item filled"></div>
-								<div class="bar-item filled"></div>
-								<div class="bar-item filled"></div>
-								<div class="bar-item filled"></div>
-								<div class="bar-item filled"></div>
-								<div class="bar-item filled"></div>
-								<div class="bar-item filled"></div>
-								<div class="bar-item filled"></div>
-								<div class="bar-item filled"></div>
-								<div class="bar-item filled"></div>
-								<div class="bar-item filled"></div>
-								<div class="bar-item empty"></div>
-								<div class="bar-item empty"></div>
-								<div class="bar-item empty"></div>
-								<div class="bar-item empty"></div>
-								<div class="bar-item empty"></div>
-								<div class="bar-item empty"></div>
-								<div class="bar-item empty"></div>
-								<div class="bar-item empty"></div>
-								<div class="bar-item empty"></div>
-								<div class="bar-item empty"></div>
-								<div class="bar-item empty"></div>
-								<div class="bar-item empty"></div>
-								<div class="bar-item empty"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
 							</div>
 							<div class="bar-row">
-								<div class="bar-item filled"></div>
-								<div class="bar-item filled"></div>
-								<div class="bar-item filled"></div>
-								<div class="bar-item filled"></div>
-								<div class="bar-item empty"></div>
-								<div class="bar-item empty"></div>
-								<div class="bar-item empty"></div>
-								<div class="bar-item empty"></div>
-								<div class="bar-item empty"></div>
-								<div class="bar-item empty"></div>
-								<div class="bar-item empty"></div>
-								<div class="bar-item empty"></div>
-								<div class="bar-item empty"></div>
-								<div class="bar-item empty"></div>
-								<div class="bar-item empty"></div>
-								<div class="bar-item empty"></div>
-								<div class="bar-item empty"></div>
-								<div class="bar-item empty"></div>
-								<div class="bar-item empty"></div>
-								<div class="bar-item empty"></div>
-								<div class="bar-item empty"></div>
-								<div class="bar-item empty"></div>
-								<div class="bar-item empty"></div>
-								<div class="bar-item empty"></div>
-								<div class="bar-item empty"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
 							</div>
 						</div>
 
 						<!-- 图例 -->
 						<div class="legend">
 							<div class="legend-item">
-								<span class="legend-label">Daily average number of tourists</span>
-								<span class="legend-value">10000 people</span>
+								<span class="legend-label text-[18px]">Daily average number of tourists</span>
+								<span class="legend-value text-[18px]">10000 people</span>
 							</div>
 							<div class="legend-item">
-								<span class="legend-label">Hotel load capacity</span>
-								<span class="legend-value">1200 people</span>
+								<span class="legend-label text-[18px]">Hotel load capacity</span>
+								<span class="legend-value text-[18px]">1200 people</span>
 							</div>
 							<div class="legend-item">
-								<span class="legend-label">Overnight tourists (50% occupancy rate)</span>
-								<span class="legend-value">400-600 people</span>
+								<span class="legend-label text-[18px]">Overnight tourists (50% occupancy rate)</span>
+								<span class="legend-value text-[18px]">400-600 people</span>
 							</div>
 						</div>
 					</div>
@@ -745,8 +737,8 @@
 					<div v-if="activeContent === 'lake' && showLakeDetail" class="lake-content" @click="hideContent">
 						<!-- Transportation Demand 部分 -->
 						<div class="transportation-demand-section">
-							<div class="main-title">Daily average number of boat tourists</div>
-							<div class="section-title">Transportation Demand</div>
+								<div class="main-title text-xs sm:text-sm md:text-base mb-[13px]">Daily average number of boat tourists</div>
+								<div class="section-title text-[18px] mb-[13px]">Transportation Demand</div>
 
 							<!-- ECharts 半环形图 -->
 							<div class="demand-chart-container">
@@ -754,14 +746,14 @@
 								<!-- 引导线连接的文字 -->
 								<div class="chart-labels">
 									<div class="chart-label-left">
-										<div class="label-text">Daily transportation demand</div>
-										<div class="label-text">in the lake area</div>
+										<div class="label-text text-xs sm:text-sm md:text-base">Daily transportation demand</div>
+										<div class="label-text text-xs sm:text-sm md:text-base">in the lake area</div>
 									</div>
 									<div class="chart-label-right">
-										<div class="label-text">Connection Requirements</div>
+										<div class="label-text text-xs sm:text-sm md:text-base">Connection Requirements</div>
 									</div>
 									<div class="chart-label-bottom">
-										<div class="label-text">Other Requirements</div>
+										<div class="label-text text-xs sm:text-sm md:text-base">Other Requirements</div>
 									</div>
 								</div>
 							</div>
@@ -773,208 +765,202 @@
 						</div>
 
 						<!-- 游客数据部分 -->
-						<div class="tourist-data-section">
-							<div class="section-title">The daily average number of tourists taking boats on Lake Como,
-								calculated based on the peak and off peak seasons</div>
+						<div class="tourist-data-section mt-[12px]">
+									<div class="section-title text-[11px] sm:text-xs md:text-sm mb-[13px]">The daily average number of tourists taking boats on Lake Como,
+										calculated based on the peak and off peak seasons</div>
 
 							<!-- 柱状图 -->
-							<div class="bar-charts">
+							<div class="bar-charts my-[26.67px]">
 								<!-- 第一行：11个filled + 4个empty = 15个方块 -->
 								<div class="bar-row">
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
 								</div>
 								<div class="bar-row">
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
 								</div>
 								<div class="bar-row">
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
 								</div>
 								<div class="bar-row">
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
 								</div>
 								<div class="bar-row">
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
-									<div class="bar-item empty"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
+											<div class="bar-item empty w-[16px] h-[16px]"></div>
 								</div>
 								<div class="bar-row">
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
-									<div class="bar-item filled"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
+											<div class="bar-item filled w-[16px] h-[16px]"></div>
 								</div>
 							</div>
 
 							<!-- 详细数据列表 -->
 							<div class="data-list">
-								<div class="data-item">
-									<span class="data-label">Proportion of boat tourists during the off-season
-										(7.5%)</span>
-									<span class="data-value">750 people</span>
+								<div class="data-item mb-[6px]">
+									<span class="data-label whitespace-nowrap">Proportion of boat tourists during the off-season (7.5%)</span>
+									<span class="data-value whitespace-nowrap">750 people</span>
+								</div>
+								<div class="data-item mb-[6px]">
+									<span class="data-label whitespace-nowrap">During the off-season, tourists staying overnight use boats (75%)</span>
+									<span class="data-value whitespace-nowrap">450 people</span>
+								</div>
+								<div class="data-item mb-[6px]">
+									<span class="data-label whitespace-nowrap">Proportion of boat tourists during peak season (7.5%)</span>
+									<span class="data-value whitespace-nowrap">1312 people</span>
+								</div>
+								<div class="data-item mb-[6px]">
+									<span class="data-label whitespace-nowrap">Tourists staying overnight during peak season use boats (75%)</span>
+									<span class="data-value whitespace-nowrap">900 people</span>
+								</div>
+								<div class="data-item mb-[6px]">
+									<span class="data-label whitespace-nowrap">Average daily number of boat tourists during the off-season</span>
+									<span class="data-value whitespace-nowrap">1200 people</span>
 								</div>
 								<div class="data-item">
-									<span class="data-label">During the off-season, tourists staying overnight use boats
-										(75%)</span>
-									<span class="data-value">450 people</span>
-								</div>
-								<div class="data-item">
-									<span class="data-label">Proportion of boat tourists during peak season
-										(7.5%)</span>
-									<span class="data-value">1312 people</span>
-								</div>
-								<div class="data-item">
-									<span class="data-label">Tourists staying overnight during peak season use boats
-										(75%)</span>
-									<span class="data-value">900 people</span>
-								</div>
-								<div class="data-item">
-									<span class="data-label">Average daily number of boat tourists during the
-										off-season</span>
-									<span class="data-value">1200 people</span>
-								</div>
-								<div class="data-item">
-									<span class="data-label">Average daily number of boat tourists during peak
-										season</span>
-									<span class="data-value">2212 people</span>
+									<span class="data-label whitespace-nowrap">Average daily number of boat tourists during peak season</span>
+									<span class="data-value whitespace-nowrap">2212 people</span>
 								</div>
 							</div>
 						</div>
@@ -2398,7 +2384,6 @@ function goHome() {
 
 /* 区域标签 - 大字母 */
 .region-label {
-	font-size: clamp(80px, 10vw, 140px);
 	font-weight: 800;
 	color: rgba(255, 255, 255, 0.95);
 	text-shadow:
@@ -2413,7 +2398,6 @@ function goHome() {
 
 /* 区域文字 - 说明文字 */
 .region-text {
-	font-size: clamp(18px, 2vw, 26px);
 	font-weight: 300;
 	color: rgba(255, 255, 255, 0.7);
 	letter-spacing: 6px;
@@ -2711,7 +2695,6 @@ function goHome() {
 	border: none;
 	width: 50px;
 	height: 50px;
-	font-size: 20px;
 	border-radius: 50%;
 	cursor: pointer;
 	transition: all 0.3s ease;
@@ -2720,6 +2703,7 @@ function goHome() {
 	justify-content: center;
 	z-index: 10001;
 	line-height: 1;
+	font-size: 20px;
 }
 
 .c-content-panel .close-content-btn {
@@ -2885,7 +2869,6 @@ function goHome() {
 
 /* 标题样式 */
 .c-content-wrapper .content-section-title {
-	font-size: 30px;
 	font-weight: bold;
 	color: #ffffff;
 	margin-bottom: 10px;
@@ -2894,7 +2877,6 @@ function goHome() {
 
 /* 文本样式 */
 .c-content-wrapper .section-text {
-	font-size: 20px;
 	color: rgba(255, 255, 255, 0.8);
 	line-height: 1.6;
 }
@@ -2967,7 +2949,6 @@ function goHome() {
 }
 
 .c-content-title {
-	font-size: 48px;
 	font-weight: 700;
 	color: #333333;
 	margin-bottom: 40px;
@@ -2979,7 +2960,6 @@ function goHome() {
 }
 
 .c-content-body {
-	font-size: 24px;
 	color: #666666;
 	line-height: 1.8;
 	text-align: center;
@@ -3079,7 +3059,6 @@ function goHome() {
 }
 
 .panel-title {
-	font-size: 24px;
 	font-weight: 700;
 	color: #ffffff;
 	margin-bottom: 15px;
@@ -3087,15 +3066,13 @@ function goHome() {
 }
 
 .panel-subtitle {
-	font-size: 16px;
 	color: #cccccc;
 	line-height: 1.6;
 }
 
 /* 图表卡片 */
 .chart-card {
-	width: 386px;
-	height: 228px;
+	/* 宽度和高度由 Tailwind 类控制 */
 	/* background: #FFFFFF; */
 	background: rgba(255, 255, 255, 0.08);
 	border-radius: 10px 10px 10px 10px;
@@ -3206,7 +3183,6 @@ function goHome() {
 }
 
 .chart-title {
-	font-size: 16px;
 	font-weight: 700;
 	margin-bottom: 12px;
 	color: #ffffff;
@@ -3215,7 +3191,7 @@ function goHome() {
 }
 
 .chart-container {
-	height: 160px;
+	/* 高度由 Tailwind 类控制 */
 	display: flex;
 	align-items: end;
 	gap: 5px;
@@ -3238,7 +3214,6 @@ function goHome() {
 }
 
 .strategy-title {
-	font-size: 20px;
 	font-weight: 600;
 	margin-bottom: 13px;
 	color: #ffffff;
@@ -3253,7 +3228,6 @@ function goHome() {
 }
 
 .strategy-subtitle {
-	font-size: clamp(14px, 1.3vw, 17px);
 	font-weight: 500;
 	color: #ffffff;
 	margin-bottom: clamp(6px, 0.8vh, 10px);
@@ -3265,14 +3239,12 @@ function goHome() {
 }
 
 .strategy-label {
-	font-size: clamp(13px, 1.2vw, 16px);
 	font-weight: 600;
 	color: #ffffff;
 	margin: clamp(5px, 0.6vh, 7px) 0 clamp(3px, 0.4vh, 4px) 0;
 }
 
 .strategy-text {
-	font-size: clamp(11px, 1vw, 14px);
 	line-height: 1.4;
 	color: #cccccc;
 	margin: clamp(3px, 0.4vh, 4px) 0;
@@ -3483,7 +3455,6 @@ function goHome() {
 
 .overlay-text {
 	position: absolute;
-	font-size: 13px;
 	font-weight: 600;
 	color: #ffffff;
 	background: transparent;
@@ -3518,12 +3489,13 @@ function goHome() {
 
 /* 内容面板样式 */
 .content-panel {
-	width: 461px;
+	/* 宽度由 Tailwind 类控制 */
 	/* height: 520px; */
 	/* backdrop-filter: blur(15px); */
 	/* border-radius: 15px; */
 	/* padding: 25px; */
-	/* overflow-y: auto; */
+	overflow-y: auto;
+	max-height: calc(100vh - 100px);
 	/* animation: slideIn 0.5s ease-out; */
 	border: 1px solid rgba(0, 212, 255, 0.3);
 	background: rgba(255, 255, 255, 0.005);
@@ -3540,17 +3512,15 @@ function goHome() {
 
 
 .main-title {
-	font-size: 14px;
 	font-weight: 600;
 	color: #ffffff;
-	margin-bottom: 8px;
+	/* margin-bottom 由 Tailwind 类控制 */
 }
 
 .section-title {
-	font-size: 13px;
 	/* font-weight: 600; */
 	color: #ffffff;
-	margin-bottom: 10px;
+	/* margin-bottom 由 Tailwind 类控制 */
 	/* text-align: center; */
 	/* background: rgba(0, 212, 255, 0.8); */
 	padding: 6px 10px;
@@ -3568,6 +3538,7 @@ function goHome() {
 .demand-chart-container .demand-chart-echarts {
 	width: 100%;
 	height: 160px;
+	/* height: 100%; */
 }
 
 .chart-labels {
@@ -3600,7 +3571,6 @@ function goHome() {
 
 .label-text {
 	color: #ffffff;
-	font-size: 14px;
 	line-height: 1.2;
 	margin: 2px 0;
 }
@@ -3611,7 +3581,6 @@ function goHome() {
 }
 
 .demand-description p {
-	font-size: 11px;
 	color: #cccccc;
 	line-height: 1.3;
 	margin: 3px 0;
@@ -3619,9 +3588,7 @@ function goHome() {
 }
 
 /* 游客数据部分 */
-.tourist-data-section {
-	margin-top: 12px;
-}
+/* margin-top 由 Tailwind 类控制 */
 
 /* 数据列表 */
 .data-list {
@@ -3641,14 +3608,12 @@ function goHome() {
 }
 
 .data-label {
-	font-size: 11px;
 	color: #ffffff;
 	flex: 1;
 	line-height: 1.2;
 }
 
 .data-value {
-	font-size: 11px;
 	font-weight: 600;
 	color: #00d4ff;
 	margin-left: 8px;
@@ -3674,7 +3639,6 @@ function goHome() {
 	margin-bottom: 30px;
 	cursor: pointer;
 	color: #00d4ff;
-	font-size: 16px;
 	font-weight: 600;
 	transition: all 0.3s ease;
 }
@@ -3684,23 +3648,19 @@ function goHome() {
 	transform: translateX(-5px);
 }
 
-.back-icon {
-	font-size: 20px;
-}
 
 .content-title {
-	font-size: 20px;
 	/* font-weight: 700; */
 	color: #ffffff;
-	margin-bottom: 8px;
+	/* margin-bottom 由 Tailwind 类控制 */
 	text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+	/* 字体大小由 Tailwind 类控制 */
 }
 
 .content-subtitle {
-	font-size: 14px;
 	font-weight: 500;
 	color: #cccccc;
-	margin-bottom: 20px;
+	/* margin-bottom 由 Tailwind 类控制 */
 }
 
 /* ECharts 圆环图样式 */
@@ -3716,17 +3676,14 @@ function goHome() {
 }
 
 .description-text {
-	font-size: 14px;
 	color: #cccccc;
 	line-height: 1.6;
-	margin: 20px 0;
+	/* margin 由 Tailwind 类控制 */
 	text-align: center;
 }
 
 /* 柱状图样式 */
-.bar-charts {
-	margin: 20px 0;
-}
+/* margin 由 Tailwind 类控制 */
 
 .bar-row {
 	display: flex;
@@ -3736,8 +3693,7 @@ function goHome() {
 }
 
 .bar-item {
-	width: 12px;
-	height: 12px;
+	/* width 和 height 由 Tailwind 类控制 */
 	border-radius: 2px;
 }
 
@@ -3767,12 +3723,10 @@ function goHome() {
 }
 
 .legend-label {
-	font-size: 14px;
 	color: #cccccc;
 }
 
 .legend-value {
-	font-size: 14px;
 	font-weight: 600;
 	color: #00d4ff;
 }
@@ -3824,7 +3778,6 @@ function goHome() {
 }
 
 .modal-title {
-	font-size: 11px;
 	font-weight: 700;
 	color: #333333;
 	margin: 0;
@@ -3837,7 +3790,6 @@ function goHome() {
 	background: rgba(0, 0, 0, 0.05);
 	backdrop-filter: blur(10px);
 	border: 1px solid rgba(0, 0, 0, 0.1);
-	font-size: 24px;
 	color: rgba(0, 0, 0, 0.6);
 	cursor: pointer;
 	padding: 0;
@@ -3850,6 +3802,7 @@ function goHome() {
 	transition: all 0.3s ease;
 	text-shadow: none;
 	z-index: 10;
+	font-size: 24px;
 }
 
 .close-btn:hover {
@@ -3937,7 +3890,6 @@ function goHome() {
 }
 
 .chart-item-title {
-	font-size: 18px;
 	font-weight: 600;
 	color: #333333;
 	margin: 0 0 15px 0;
