@@ -240,7 +240,7 @@
                     <div class="presentation-grid">
                         <!-- 左侧：团队介绍 -->
                         <div class="presentation-left">
-                            <h1 class="presentation-title">Team Introduction</h1>
+                            <h1 class="presentation-title">Who we are?</h1>
 
                             <div class="intro-text-block">
                                 <p class="block-text">The world's first high-performance intelligent hydrofoil focused
@@ -298,9 +298,9 @@
                             </div>
                         </div>
 
-                        <!-- 右侧：优秀案例 -->
+                        <!-- 右侧：投资亮点 -->
                         <div class="presentation-right">
-                            <h1 class="presentation-title">Excellent Cases</h1>
+                            <h1 class="presentation-title">Investment Highlights</h1>
 
                             <div class="content-block">
                                 <p class="block-primary-text">Hydrofoil integration is the best solution for ship
@@ -322,11 +322,11 @@
                                     product
                                     innovation
                                     capabilities, and leading industry development.</p>
-                                <p class="block-primary-text">Adhering to self-developed and self-produced components
+                                <p class="block-text">Adhering to self-developed and self-produced components
                                     across the
                                     entire
                                     industrial chain, with modular assembly lines.</p>
-                                <p class="block-primary-text">Insisting on original design, perfecting the product
+                                <p class="block-text">Insisting on original design, perfecting the product
                                     matrix, and
                                     developing
                                     self-developed intelligent control systems, including a three-mode intelligent
@@ -338,27 +338,10 @@
                                     absolute
                                     leadership in
                                     the consumer market.</p>
-                                <p class="block-primary-text">Past products have gained recognition from leading
-                                    domestic and
-                                    international
-                                    clients and have been implemented in multiple scenarios such as technology,
-                                    transportation,
-                                    consumption, and cultural tourism, with 80% of revenue coming from the
-                                    transportation sector.
-                                    Based on its technological accumulation and significant advantages, the company has
-                                    made early
-                                    strides in consumer-grade intelligent water transportation.</p>
-                                <p class="block-text">It has established partnerships with several leading domestic
-                                    (overseas-oriented) companies to jointly promote the implementation of A1+ water
-                                    transportation
-                                    vehicles.</p>
-                                <p class="block-text">The company will release a new product form this July, with no
-                                    competitors in
-                                    the same size segment. Combining its experience across the entire chain of "product
-                                    definition,
-                                    technological innovation, supply chain, and channels," the company aims to establish
-                                    an absolute
-                                    leading advantage.</p>
+                                <p class="block-text">Our products have gained recognition from leading domestic and international clients and have been implemented in various scenarios, including technology, transportation, consumption, and cultural tourism. 80% of our revenue comes from the transportation sector.</p>
+                                <p class="block-primary-text">Based on its technological accumulation and significant advantages, it has made early arrangements for consumer-grade intelligent water transportation.</p>
+                                <p class="block-text">We have taken the lead in partnering with several leading domestic (overseas-oriented) companies to jointly promote the application of AI + water transportation.</p>
+                                <p class="block-text">The company will release a new product form in July this year, which will have no competitors in the same size. Combining its experience in the entire chain of "product definition - technological innovation - supply chain - channels", it will establish an absolute leading advantage.</p>
                             </div>
                         </div>
                     </div>
@@ -1279,7 +1262,7 @@ button {
 }
 
 .presentation-title {
-    font-size: clamp(1.5rem, 2.2vw, 2.5rem);
+    font-size: 30px;
     font-weight: 700;
     color: #ffffff;
     margin: 0 0 clamp(1.5rem, 3vh, 2.5rem) 0;
@@ -1309,13 +1292,14 @@ button {
 
 /* 左侧团队介绍专属样式 */
 .presentation-left .intro-text-block .block-text {
-    font-size: clamp(1rem, 1.3vw, 1.5rem);
+    font-size: 20px;
     line-height: 1.8;
+    color: #ffffff;
 }
 
 .presentation-left .achievements-list .achievement-desc {
-    font-size: clamp(0.95rem, 1.2vw, 1.4rem);
-    color: #ffffff;
+    font-size: 18px;
+    
 }
 
 .presentation-left .achievements-list .bullet {
@@ -1344,7 +1328,7 @@ button {
 }
 
 .block-text {
-    font-size: clamp(0.7rem, 0.95vw, 1.1rem);
+    font-size: 18px;
     color: rgba(255, 255, 255, 0.7);
     line-height: 1.5;
     margin: 0 0 clamp(0.6rem, 1vh, 1rem) 0;
@@ -1355,8 +1339,7 @@ button {
 }
 
 .block-primary-text {
-    font-size: clamp(0.85rem, 1.2vw, 1.3rem);
-    font-weight: 600;
+    font-size: 20px;
     color: #ffffff;
     line-height: 1.5;
     margin: 0 0 clamp(0.8rem, 1.2vh, 1.2rem) 0;
@@ -1388,7 +1371,7 @@ button {
 }
 
 .bullet {
-    color: #ffffff;
+    color: rgba(255, 255, 255, 0.7);
     font-size: clamp(0.75rem, 1.2vw, 1.7rem);
     font-weight: bold;
     flex-shrink: 0;
