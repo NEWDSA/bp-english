@@ -1193,6 +1193,7 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+
 /* 顶部导航栏.start */
 /* 弹窗样式.start */
 /* 右侧区域：传统船数据 */
@@ -2439,6 +2440,7 @@ onUnmounted(() => {
 	display: flex;
 	gap: 15px;
 	width: 100%;
+	flex-shrink: 0;
 	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 	margin-bottom: 20px;
 	padding-bottom: 12px;
@@ -2539,6 +2541,31 @@ onUnmounted(() => {
 
 .competitor-tab-content {
 	width: 100%;
+	flex:1;
+    overflow-y: auto;
+}
+
+/* 自定义滚动条样式 */
+.competitor-tab-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.competitor-tab-content::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.competitor-tab-content::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.competitor-tab-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.competitor-tab-content::-webkit-scrollbar-corner {
+  background: transparent;
 }
 
 .tab-panel {
