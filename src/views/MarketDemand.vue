@@ -624,12 +624,12 @@ const nextImage = () => {
       <div class="w-[28%] flex items-center justify-center relative min-w-0">
         
         <!-- 圆圈容器 -->
-        <div class="relative w-[830px] h-[830px] max-w-full max-h-full circle-container">
+        <div class="relative w-[43.23vw] h-[43.23vw] max-w-full max-h-full circle-container">
           <!-- 830x830 白色圆圈 -->
           <div class="ring">
             <!-- 地球组件 -->
             <div class="globeStyle absolute inset-0 flex items-center justify-center pointer-events-none">
-              <div class="globeWith">
+              <div class="w-[43.23vw] h-[43.23vw]">
                 <GlobeComponent :load-data="false" />
               </div>
             </div>
@@ -646,7 +646,7 @@ const nextImage = () => {
               <!-- 定位点 icon-11.png 8x11 -->
               <img src="/src/assets/icon-11.png" alt="定位点" class="w-[8px] h-[11px] object-contain ml-1 mr-2 icon-dot" />
               <!-- 位置名称 -->
-              <span class="text-white text-[22px] font-medium ml-1 shadow-lg icon-text">Italian</span>
+              <span class="text-white text-[18px] font-medium ml-1 shadow-lg icon-text">Italian</span>
             </div>
 
             <!-- 图标7 - 60度 -->
@@ -658,7 +658,7 @@ const nextImage = () => {
               <!-- 定位点 icon-11.png 8x11 -->
               <img src="/src/assets/icon-11.png" alt="定位点" class="w-[8px] h-[11px] object-contain ml-1 mr-2 icon-dot" />
               <!-- 位置名称 -->
-              <span class="text-white text-[22px] font-medium ml-1 shadow-lg icon-text">Southeast Asia</span>
+              <span class="text-white text-[18px] font-medium ml-1 shadow-lg icon-text">Southeast Asia</span>
             </div>
 
             <!-- 图标8 - 90度 -->
@@ -670,7 +670,7 @@ const nextImage = () => {
               <!-- 定位点 icon-11.png 8x11 -->
               <img src="/src/assets/icon-11.png" alt="定位点" class="w-[8px] h-[11px] object-contain ml-2 mr-2 icon-dot" />
               <!-- 位置名称 -->
-              <span class="text-white text-[22px] font-medium ml-1 shadow-lg icon-text">China</span>
+              <span class="text-white text-[18px] font-medium ml-1 shadow-lg icon-text">China</span>
             </div>
 
             <!-- 图标9 - 120度 -->
@@ -682,7 +682,7 @@ const nextImage = () => {
               <!-- 定位点 icon-11.png 8x11 -->
               <img src="/src/assets/icon-11.png" alt="定位点" class="w-[8px] h-[11px] object-contain ml-1 mr-2 icon-dot" />
               <!-- 位置名称 -->
-              <span class="text-white text-[22px] font-medium ml-1 shadow-lg icon-text">America</span>
+              <span class="text-white text-[18px] font-medium ml-1 shadow-lg icon-text">America</span>
             </div>
 
             <!-- 图标10 - 150度 -->
@@ -694,7 +694,7 @@ const nextImage = () => {
               <!-- 定位点 icon-11.png 8x11 -->
               <img src="/src/assets/icon-11.png" alt="定位点" class="w-[8px] h-[11px] object-contain ml-4 mr-2 icon-dot" />
               <!-- 位置名称 -->
-              <span class="text-white text-[22px] font-medium ml-1 shadow-lg icon-text">Middle East</span>
+              <span class="text-white text-[18px] font-medium ml-1 shadow-lg icon-text">Middle East</span>
             </div>
           </div>
         </div>
@@ -859,7 +859,7 @@ const nextImage = () => {
         <div class="max-w-[1600px] mx-auto h-full overflow-y-auto custom-scrollbar">
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6 lg:gap-8">
             <!-- 左侧容器：包含产品特点列表和版本对比卡片 -->
-            <div class="lg:col-span-8 space-y-3 md:space-y-4 [@media(min-width:2000px)]:space-y-6 bg-white/10 rounded-lg p-3 md:p-4 [@media(min-width:2000px)]:p-6">
+            <div class="lg:col-span-8 space-y-3 md:space-y-4 [@media(min-width:2000px)]:space-y-6 bg-white/10 backdrop-blur-sm shadow-lg rounded-lg p-3 md:p-4 [@media(min-width:2000px)]:p-6">
               <!-- 产品特点列表 -->
               <div>
                 <ul class="space-y-2 [@media(min-width:2000px)]:space-y-3 text-white">
@@ -941,7 +941,7 @@ const nextImage = () => {
             </div>
 
             <!-- 右侧信息栏 -->
-            <div class="lg:col-span-4 space-y-3 md:space-y-4 lg:space-y-6 bg-white/10 rounded-lg p-3 md:p-4 lg:p-6">
+            <div class="lg:col-span-4 space-y-3 md:space-y-4 lg:space-y-6 bg-white/10 backdrop-blur-sm shadow-lg rounded-lg p-3 md:p-4 lg:p-6">
               <!-- 产品力核心指标 -->
               <div>
                 <p class="text-white text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-xl [@media(min-width:2000px)]:text-[24px] font-medium mb-2 md:mb-3 lg:mb-4">The four core needs of all modes of transportation – the core of product strength</p>
@@ -1087,47 +1087,42 @@ const nextImage = () => {
 
 .ring {
   position: absolute;
-  left: -600px;
-  top: -50px;
-	width: 830px;
-	height: 830px;
-	border: 3px solid white;
+  left: -31.25vw; /* -600px */
+  top: -2.6vw; /* -50px */
+	width: 43.23vw; /* 830px */
+	height: 43.23vw; /* 830px */
+	border: 0.156vw solid white; /* 3px */
 	border-radius: 50%;
 }
 
 .globeStyle {
-  top: 0px;
-  left: 60px;
-}
-
-.globeWith {
-  width: 830px;
-  height: 830px;
+  top: 0;
+  left: 3.125vw; /* 60px */
 }
 
 .icon-6-container {
-	top: 20px;
-	left: 100px;
+	top: 1.04vw; /* 20px */
+	left: 5.21vw; /* 100px */
 }
 
 .icon-7-container {
-	top: 130px;
-	left: 180px;
+	top: 6.77vw; /* 130px */
+	left: 9.375vw; /* 180px */
 }
 
 .icon-8-container {
-	top: 270px;
-	left: 221px;
+	top: 14.06vw; /* 270px */
+	left: 11.51vw; /* 221px */
 }
 
 .icon-9-container {
-	top: 410px;
-	left: 213px;
+	top: 21.35vw; /* 410px */
+	left: 11.3vw; /* 213px */
 }
 
 .icon-10-container {
-	top: 550px;
-	left: 150px;
+	top: 28.65vw; /* 550px */
+	left: 8.3vw; /* 150px */
 }
 
 /* 确保图标容器在缩放时保持在正确位置 */
@@ -1253,9 +1248,9 @@ const nextImage = () => {
 .dot-container-dot::after {
   content: '';
   position: absolute;
-  width: 30px;
-  height: 30px;
-  border: 1px solid white;
+  width: 1.56vw; /* 30px */
+  height: 1.56vw; /* 30px */
+  border: 0.052vw solid white; /* 1px */
   border-radius: 50%;
   top: 50%;
   left: 50%;
