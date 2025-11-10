@@ -85,8 +85,8 @@
 		</div>
 
 		<!-- 右上：圆形按钮（白底），覆盖一张图作为图标 -->
-		<button 
-			class="absolute top-[6%] right-[10%] w-[70px] h-[70px] border-none bg-transparent p-0 cursor-pointer outline-none transition-all duration-300 z-20 hover:scale-110 active:scale-95 focus:outline-none focus-visible:outline-none !rounded-full overflow-hidden" 
+		<div 
+			class="absolute top-[6%] right-[10%] w-[70px] h-[70px] bg-white border-none bg-transparent p-0 cursor-pointer outline-none transition-all duration-300 z-20 hover:scale-110 active:scale-95 focus:outline-none focus-visible:outline-none !rounded-full overflow-hidden" 
 			style="border-radius: 100% !important;"
 			aria-label="version" 
 			@click="toggleCompanyInfo"
@@ -96,38 +96,38 @@
 				alt="version" 
 				:src="yihaiLogo" 
 			/>
-		</button>
+		</div>
 
 		<!-- 中心区域：公司信息内容 -->
 		<transition name="fade">
-			<div 
-				v-if="showCompanyInfo" 
-				class="fixed top-0 left-0 w-screen h-screen z-10 bg-black/50 flex items-center justify-center" 
+			<div
+				v-if="showCompanyInfo"
+				class="fixed top-0 left-0 w-screen h-screen z-10 bg-black/50 flex items-center justify-center p-4 md:p-6 lg:p-8"
 				@click="hideCompanyInfo"
 			>
-				<div class="bg-white/[0.01] backdrop-blur-[10px] rounded-[20px] px-10 py-20 md:px-10 md:py-20 shadow-[0_20px_40px_rgba(0,0,0,0.3)] text-white text-center scale-[1.3] font-bold drop-shadow-[2px_2px_6px_rgba(0,0,0,0.9)] md:scale-100">
-					<div class="mb-[50px] last:mb-0">
-						<p class="text-[30px] font-semibold text-white mb-[15px] uppercase tracking-[0.5px]">Company Mission:</p>
-						<p class="text-[24px] leading-relaxed text-white mb-4 last:mb-0">Leading the innovation of water transportation</p>
-						<p class="text-[24px] leading-relaxed text-white mb-4 last:mb-0">Build a globally leading marine technology brand</p>
+				<div class="bg-white/[0.01] backdrop-blur-[10px] rounded-[15px] [@media(min-width:1920px)]:p-20 p-10 shadow-[0_20px_40px_rgba(0,0,0,0.3)] text-white text-center font-bold drop-shadow-[2px_2px_6px_rgba(0,0,0,0.9)]">
+					<div class="mb-6 sm:mb-8 md:mb-10 lg:mb-12 [@media(min-width:1920px)]:mb-[50px] last:mb-0">
+						<p class="text-[18px] sm:text-[20px] md:text-[24px] lg:text-[28px] [@media(min-width:1920px)]:text-[30px] font-semibold text-white mb-2 sm:mb-3 md:mb-4 [@media(min-width:1920px)]:mb-[15px] uppercase tracking-[0.3px] sm:tracking-[0.4px] [@media(min-width:1920px)]:tracking-[0.5px]">Company Mission:</p>
+						<p class="text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px] [@media(min-width:1920px)]:text-[24px] leading-relaxed text-white mb-2 sm:mb-3 [@media(min-width:1920px)]:mb-4 last:mb-0">Leading the innovation of water transportation</p>
+						<p class="text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px] [@media(min-width:1920px)]:text-[24px] leading-relaxed text-white mb-2 sm:mb-3 [@media(min-width:1920px)]:mb-4 last:mb-0">Build a globally leading marine technology brand</p>
 					</div>
 
-					<div class="mb-[50px] last:mb-0">
-						<p class="text-[30px] font-semibold text-white mb-[15px] uppercase tracking-[0.5px]">Company Vision:</p>
-						<p class="text-[24px] leading-relaxed text-white mb-4 last:mb-0">The most rock-solid water operation platform</p>
-						<p class="text-[24px] leading-relaxed text-white mb-4 last:mb-0">Become the definer of the most energy-efficient and high-performance water economy</p>
-						<p class="text-[24px] leading-relaxed text-white mb-4 last:mb-0">Deliver the most superior watercraft in terms of performance</p>
+					<div class="mb-6 sm:mb-8 md:mb-10 lg:mb-12 [@media(min-width:1920px)]:mb-[50px] last:mb-0">
+						<p class="text-[18px] sm:text-[20px] md:text-[24px] lg:text-[28px] [@media(min-width:1920px)]:text-[30px] font-semibold text-white mb-2 sm:mb-3 md:mb-4 [@media(min-width:1920px)]:mb-[15px] uppercase tracking-[0.3px] sm:tracking-[0.4px] [@media(min-width:1920px)]:tracking-[0.5px]">Company Vision:</p>
+						<p class="text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px] [@media(min-width:1920px)]:text-[24px] leading-relaxed text-white mb-2 sm:mb-3 [@media(min-width:1920px)]:mb-4 last:mb-0">The most rock-solid water operation platform</p>
+						<p class="text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px] [@media(min-width:1920px)]:text-[24px] leading-relaxed text-white mb-2 sm:mb-3 [@media(min-width:1920px)]:mb-4 last:mb-0">Become the definer of the most energy-efficient and high-performance water economy</p>
+						<p class="text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px] [@media(min-width:1920px)]:text-[24px] leading-relaxed text-white mb-2 sm:mb-3 [@media(min-width:1920px)]:mb-4 last:mb-0">Deliver the most superior watercraft in terms of performance</p>
 					</div>
 
-					<div class="mb-[50px] last:mb-0">
-						<p class="text-[30px] font-semibold text-white mb-[15px] uppercase tracking-[0.5px]">Core Values:</p>
-						<p class="text-[24px] leading-relaxed text-white mb-4 last:mb-0">Cooperation, innovation, and foresight</p>
+					<div class="mb-6 sm:mb-8 md:mb-10 lg:mb-12 [@media(min-width:1920px)]:mb-[50px] last:mb-0">
+						<p class="text-[18px] sm:text-[20px] md:text-[24px] lg:text-[28px] [@media(min-width:1920px)]:text-[30px] font-semibold text-white mb-2 sm:mb-3 md:mb-4 [@media(min-width:1920px)]:mb-[15px] uppercase tracking-[0.3px] sm:tracking-[0.4px] [@media(min-width:1920px)]:tracking-[0.5px]">Core Values:</p>
+						<p class="text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px] [@media(min-width:1920px)]:text-[24px] leading-relaxed text-white mb-2 sm:mb-3 [@media(min-width:1920px)]:mb-4 last:mb-0">Cooperation, innovation, and foresight</p>
 					</div>
 
-					<div class="mb-[50px] last:mb-0">
-						<p class="text-[30px] font-semibold text-white mb-[15px] uppercase tracking-[0.5px]">Management Philosophy:</p>
-						<p class="text-[24px] leading-relaxed text-white mb-4 last:mb-0">People-oriented, customer-first</p>
-						<p class="text-[24px] leading-relaxed text-white mb-4 last:mb-0">Progressing hand in hand for mutual benefit and win-win cooperation</p>
+					<div class="mb-6 sm:mb-8 md:mb-10 lg:mb-12 [@media(min-width:1920px)]:mb-[50px] last:mb-0">
+						<p class="text-[18px] sm:text-[20px] md:text-[24px] lg:text-[28px] [@media(min-width:1920px)]:text-[30px] font-semibold text-white mb-2 sm:mb-3 md:mb-4 [@media(min-width:1920px)]:mb-[15px] uppercase tracking-[0.3px] sm:tracking-[0.4px] [@media(min-width:1920px)]:tracking-[0.5px]">Management Philosophy:</p>
+						<p class="text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px] [@media(min-width:1920px)]:text-[24px] leading-relaxed text-white mb-2 sm:mb-3 [@media(min-width:1920px)]:mb-4 last:mb-0">People-oriented, customer-first</p>
+						<p class="text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px] [@media(min-width:1920px)]:text-[24px] leading-relaxed text-white mb-2 sm:mb-3 [@media(min-width:1920px)]:mb-4 last:mb-0">Progressing hand in hand for mutual benefit and win-win cooperation</p>
 					</div>
 				</div>
 			</div>
