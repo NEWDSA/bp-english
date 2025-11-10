@@ -3212,6 +3212,29 @@ function goHome() {
 	overflow-y: auto;
 	max-height: calc(100vh - 280px);
 }
+/* 自定义滚动条样式 */
+.strategy-card::-webkit-scrollbar {
+  width: 6px;
+}
+
+.strategy-card::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.strategy-card::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.strategy-card::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.strategy-card::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
 
 .strategy-title {
 	font-weight: 600;
