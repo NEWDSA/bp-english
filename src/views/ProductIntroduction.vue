@@ -101,8 +101,8 @@
 						<template v-else>
 							<div class="panel-header-section">
 								<div class="panel-header !text-[24px]">Traditional Electric Boat Pain Points</div>
-								<button class="pain-points-close-btn" @click="showPainPointsContent = false"
-									title="Close">×</button>
+								<div class="pain-points-close-btn" @click="showPainPointsContent = false"
+									title="Close">×</div>
 							</div>
 							<!-- 内容 -->
 							<div class="panel-content">
@@ -163,21 +163,21 @@
 				<div class="modal-content-wrapper competitor-analysis-wrapper">
 					<!-- Tab切换 -->
 					<div class="competitor-tabs">
-						<button class="competitor-tab" :class="{ active: competitorTab === '10-15w' }"
+						<div class="competitor-tab" :class="{ active: competitorTab === '10-15w' }"
 							@click="setCompetitorTab('10-15w')">
 							<!-- Hydrofoil 10-15w Euro -->
 							YU VS (€100,000 - €150,000) Electric Yacht
-						</button>
-						<button class="competitor-tab" :class="{ active: competitorTab === '18w' }"
+						</div>
+						<div class="competitor-tab" :class="{ active: competitorTab === '18w' }"
 							@click="setCompetitorTab('18w')">
 							<!-- Hydrofoil 18w Euro -->
 							YU VS (€180,000) Electric Yacht
-						</button>
-						<button class="competitor-tab" :class="{ active: competitorTab === 'vs-others' }"
+						</div>
+						<div class="competitor-tab" :class="{ active: competitorTab === 'vs-others' }"
 							@click="setCompetitorTab('vs-others')">
 							<!-- VS Other Hydrofoils -->
 							YU VS Other Electric Hydrofoils
-						</button>
+						</div>
 					</div>
 
 					<!-- Tab内容 -->
@@ -218,7 +218,7 @@
 								<table class="comparison-table">
 									<tbody>
 										<tr>
-											<td>Maximum Speed(km/h)</td>
+											<td>Maximum Speed (km/h)</td>
 											<td class="yu-column">65</td>
 											<td>33</td>
 											<td>55</td>
@@ -1737,6 +1737,7 @@ onUnmounted(() => {
 	padding: 0;
 	margin: 0;
 	flex-shrink: 0;
+	line-height: 60px;
 }
 
 .pain-points-close-btn:hover {
@@ -2225,6 +2226,7 @@ onUnmounted(() => {
 }
 
 .solution-item {
+	height: 84px;
 	background: #FF4444;
 	color: #FFFFFF;
 	padding: 12px 16px;
@@ -2477,7 +2479,7 @@ onUnmounted(() => {
 
 @media (min-width: 1536px) {
 	.competitor-tab {
-		padding: 12px 120px;
+		padding: 18px 120px;
 	}
 }
 
@@ -2695,7 +2697,7 @@ onUnmounted(() => {
 	background: transparent;
 	border: none;
 	border-radius: 0;
-	padding: 0;
+	padding: 0 10px;
 	transition: all 0.3s ease;
 }
 
@@ -2706,7 +2708,7 @@ onUnmounted(() => {
 }
 
 .competitor-image-wrapper {
-	width: 200px;
+	width: 100%;
 	height: 200px;
 	min-height: 200px;
 	display: flex;
@@ -2722,7 +2724,6 @@ onUnmounted(() => {
 
 .competitor-item.yu-column .competitor-image-wrapper {
 	width: 100%;
-	max-width: 400px;
 	height: 220px;
 	min-height: 220px;
 	margin: 0 auto;
