@@ -36,7 +36,8 @@
 						<div
 							:class="['absolute left-[80px] sm:left-[90px] md:left-[96px] lg:left-[100px] xl:left-[108px] 2xl:left-[114px] top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full z-[3] w-[7px] h-[7px]', activeNavItem === 'advantages' ? 'bg-[#ff4444] shadow-[0_0_15px_rgba(255,68,68,0.8)]' : 'bg-white shadow-[0_0_8px_rgba(255,255,255,0.5)]']">
 						</div>
-						<span class="nav-text text-[24px] sm:text-[26px] md:text-[28px] lg:text-[30px]">Hydrofoil Advantages</span>
+						<span class="nav-text text-[24px] sm:text-[26px] md:text-[28px] lg:text-[30px]">Hydrofoil
+							Advantages</span>
 					</div>
 					<div class="left-nav-item w-[450px] sm:w-[510px] md:w-[570px] lg:w-[600px] xl:w-[690px] 2xl:w-[730px] max-w-[730px]"
 						:class="{ active: activeNavItem === 'pain-points' }" @click="setActiveNavItem('pain-points')">
@@ -44,7 +45,8 @@
 						<div
 							:class="['absolute left-[80px] sm:left-[90px] md:left-[96px] lg:left-[100px] xl:left-[108px] 2xl:left-[114px] top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full z-[3] w-[7px] h-[7px]', activeNavItem === 'pain-points' ? 'bg-[#ff4444] shadow-[0_0_15px_rgba(255,68,68,0.8)]' : 'bg-white shadow-[0_0_8px_rgba(255,255,255,0.5)]']">
 						</div>
-						<span class="nav-text text-[24px] sm:text-[26px] md:text-[28px] lg:text-[30px]">Traditional Electric Boat Pain Points2</span>
+						<span class="nav-text text-[24px] sm:text-[26px] md:text-[28px] lg:text-[30px]">Traditional
+							Electric Boat Pain Points2</span>
 					</div>
 					<div class="left-nav-item w-[450px] sm:w-[510px] md:w-[570px] lg:w-[600px] xl:w-[690px] 2xl:w-[730px] max-w-[730px]"
 						:class="{ active: activeNavItem === 'competitor-analysis' }"
@@ -53,7 +55,8 @@
 						<div
 							:class="['absolute left-[80px] sm:left-[90px] md:left-[96px] lg:left-[100px] xl:left-[108px] 2xl:left-[114px] top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full z-[3] w-[7px] h-[7px]', activeNavItem === 'competitor-analysis' ? 'bg-[#ff4444] shadow-[0_0_15px_rgba(255,68,68,0.8)]' : 'bg-white shadow-[0_0_8px_rgba(255,255,255,0.5)]']">
 						</div>
-						<span class="nav-text text-[24px] sm:text-[26px] md:text-[28px] lg:text-[30px]">Competitor Analysis</span>
+						<span class="nav-text text-[24px] sm:text-[26px] md:text-[28px] lg:text-[30px]">Competitor
+							Analysis</span>
 					</div>
 					<div class="left-nav-item w-[450px] sm:w-[510px] md:w-[570px] lg:w-[600px] xl:w-[690px] 2xl:w-[730px] max-w-[730px]"
 						ref="lastNavItemRef" :class="{ active: activeNavItem === 'three-mode-rudder' }"
@@ -62,7 +65,8 @@
 						<div
 							:class="['absolute left-[80px] sm:left-[90px] md:left-[96px] lg:left-[100px] xl:left-[108px] 2xl:left-[114px] top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full z-[3] w-[7px] h-[7px]', activeNavItem === 'three-mode-rudder' ? 'bg-[#ff4444] shadow-[0_0_15px_rgba(255,68,68,0.8)]' : 'bg-white shadow-[0_0_8px_rgba(255,255,255,0.5)]']">
 						</div>
-						<span class="nav-text text-[24px] sm:text-[26px] md:text-[28px] lg:text-[30px]">Intelligent control three-mode rudder</span>
+						<span class="nav-text text-[24px] sm:text-[26px] md:text-[28px] lg:text-[30px]">Intelligent
+							control three-mode rudder</span>
 					</div>
 				</div>
 			</div>
@@ -101,8 +105,8 @@
 						<template v-else>
 							<div class="panel-header-section">
 								<div class="panel-header !text-[24px]">Traditional Electric Boat Pain Points</div>
-								<div class="pain-points-close-btn" @click="showPainPointsContent = false"
-									title="Close">×</div>
+								<div class="pain-points-close-btn" @click="showPainPointsContent = false" title="Close">
+									×</div>
 							</div>
 							<!-- 内容 -->
 							<div class="panel-content">
@@ -191,7 +195,7 @@
 
 								<!-- "御"水翼艇 -->
 								<div class="competitor-item yu-column">
-									<div class="competitor-image-wrapper">
+									<div class="competitor-image-wrapper" style="height:230px;">
 										<video src="../assets/boat.mp4" alt="御水翼艇" class="competitor-image" autoplay
 											loop muted playsinline></video>
 									</div>
@@ -315,7 +319,7 @@
 
 								<!-- "御"水翼艇 -->
 								<div class="competitor-item yu-column">
-									<div class="competitor-image-wrapper">
+									<div class="competitor-image-wrapper" style="height:230px;">
 										<video src="../assets/boat.mp4" alt="御水翼艇" class="competitor-image" autoplay
 											loop muted playsinline></video>
 									</div>
@@ -464,7 +468,7 @@
 
 								<!-- 我们的产品 -->
 								<div class="competitor-item yu-column">
-									<div class="competitor-image-wrapper">
+									<div class="competitor-image-wrapper" style="height:230px;">
 										<video src="../assets/boat.mp4" alt="御水翼艇" class="competitor-image" autoplay
 											loop muted playsinline></video>
 									</div>
@@ -651,7 +655,8 @@
 				<div
 					class="modal-content-wrapper three-mode-rudder-wrapper !flex !items-stretch !justify-center !gap-5">
 					<!-- 左侧：方向盘详细展示 -->
-					<div class="three-mode-left-panel !w-full sm:!w-full md:!w-[800px] lg:!w-[900px] xl:!w-[1000px] !flex !items-center !justify-center !self-stretch">
+					<div
+						class="three-mode-left-panel !w-full sm:!w-full md:!w-[800px] lg:!w-[900px] xl:!w-[1000px] !flex !items-center !justify-center !self-stretch">
 						<div class="steering-wheel-container !w-full !h-full">
 							<!-- 方向盘图片 -->
 							<div class="steering-wheel-image-wrapper !w-full !h-full !max-w-none">
@@ -1193,7 +1198,6 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-
 /* 顶部导航栏.start */
 /* 弹窗样式.start */
 /* 右侧区域：传统船数据 */
@@ -1852,7 +1856,7 @@ onUnmounted(() => {
 	.video-control-btn {
 		padding: 6px;
 	}
-	
+
 	.video-control-btn svg {
 		width: 16px;
 		height: 16px;
@@ -1864,7 +1868,7 @@ onUnmounted(() => {
 	.video-control-btn {
 		padding: 10px;
 	}
-	
+
 	.video-control-btn svg {
 		width: 20px;
 		height: 20px;
@@ -1876,7 +1880,7 @@ onUnmounted(() => {
 	.video-control-btn {
 		padding: 12px;
 	}
-	
+
 	.video-control-btn svg {
 		width: 24px;
 		height: 24px;
@@ -1888,7 +1892,7 @@ onUnmounted(() => {
 	.video-control-btn {
 		padding: 14px;
 	}
-	
+
 	.video-control-btn svg {
 		width: 28px;
 		height: 28px;
@@ -2541,31 +2545,31 @@ onUnmounted(() => {
 
 .competitor-tab-content {
 	width: 100%;
-	flex:1;
-    overflow-y: auto;
+	flex: 1;
+	overflow-y: auto;
 }
 
 /* 自定义滚动条样式 */
 .competitor-tab-content::-webkit-scrollbar {
-  width: 6px;
+	width: 6px;
 }
 
 .competitor-tab-content::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 3px;
+	background: rgba(255, 255, 255, 0.1);
+	border-radius: 3px;
 }
 
 .competitor-tab-content::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 3px;
+	background: rgba(255, 255, 255, 0.3);
+	border-radius: 3px;
 }
 
 .competitor-tab-content::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.5);
+	background: rgba(255, 255, 255, 0.5);
 }
 
 .competitor-tab-content::-webkit-scrollbar-corner {
-  background: transparent;
+	background: transparent;
 }
 
 .tab-panel {
@@ -2617,7 +2621,7 @@ onUnmounted(() => {
 	gap: 0;
 	width: 100%;
 	max-width: 100%;
-	align-items: stretch;
+	align-items: baseline;
 	margin-left: 0;
 	margin-bottom: 20px;
 }
@@ -2926,6 +2930,7 @@ onUnmounted(() => {
 }
 
 @media (min-width: 640px) {
+
 	.comparison-table th:first-child,
 	.comparison-table td:first-child {
 		width: 280px;
@@ -2933,6 +2938,7 @@ onUnmounted(() => {
 }
 
 @media (min-width: 1024px) {
+
 	.comparison-table th:first-child,
 	.comparison-table td:first-child {
 		width: 380px;
@@ -2940,6 +2946,7 @@ onUnmounted(() => {
 }
 
 @media (min-width: 1280px) {
+
 	.comparison-table th:first-child,
 	.comparison-table td:first-child {
 		width: 450px;
@@ -2948,6 +2955,7 @@ onUnmounted(() => {
 }
 
 @media (min-width: 1920px) {
+
 	/* 超大屏幕限制最大宽度，避免过宽 */
 	.comparison-table th:first-child,
 	.comparison-table td:first-child {
@@ -2963,6 +2971,7 @@ onUnmounted(() => {
 }
 
 @media (min-width: 640px) {
+
 	.tab-panel.vs-others-tab .comparison-table th:first-child,
 	.tab-panel.vs-others-tab .comparison-table td:first-child {
 		width: 350px;
@@ -2970,6 +2979,7 @@ onUnmounted(() => {
 }
 
 @media (min-width: 1024px) {
+
 	.tab-panel.vs-others-tab .comparison-table th:first-child,
 	.tab-panel.vs-others-tab .comparison-table td:first-child {
 		width: 450px;
@@ -2977,6 +2987,7 @@ onUnmounted(() => {
 }
 
 @media (min-width: 1280px) {
+
 	.tab-panel.vs-others-tab .comparison-table th:first-child,
 	.tab-panel.vs-others-tab .comparison-table td:first-child {
 		width: 550px;
@@ -2985,6 +2996,7 @@ onUnmounted(() => {
 }
 
 @media (min-width: 1920px) {
+
 	/* 超大屏幕限制最大宽度 */
 	.tab-panel.vs-others-tab .comparison-table th:first-child,
 	.tab-panel.vs-others-tab .comparison-table td:first-child {
@@ -3012,6 +3024,7 @@ onUnmounted(() => {
 }
 
 @media (min-width: 640px) {
+
 	.tab-panel.vs-others-tab .comparison-table td:not(:first-child),
 	.tab-panel.vs-others-tab .comparison-table th:not(:first-child) {
 		width: calc((100% - 350px) / 5);
@@ -3019,6 +3032,7 @@ onUnmounted(() => {
 }
 
 @media (min-width: 1024px) {
+
 	.tab-panel.vs-others-tab .comparison-table td:not(:first-child),
 	.tab-panel.vs-others-tab .comparison-table th:not(:first-child) {
 		width: calc((100% - 450px) / 5);
@@ -3026,6 +3040,7 @@ onUnmounted(() => {
 }
 
 @media (min-width: 1280px) {
+
 	.tab-panel.vs-others-tab .comparison-table td:not(:first-child),
 	.tab-panel.vs-others-tab .comparison-table th:not(:first-child) {
 		width: calc((100% - 550px) / 5);
@@ -3039,6 +3054,7 @@ onUnmounted(() => {
 }
 
 @media (min-width: 640px) {
+
 	.tab-panel.three-col-tab .comparison-table td:not(:first-child),
 	.tab-panel.three-col-tab .comparison-table th:not(:first-child) {
 		width: calc((100% - 280px) / 3);
@@ -3046,6 +3062,7 @@ onUnmounted(() => {
 }
 
 @media (min-width: 1024px) {
+
 	.tab-panel.three-col-tab .comparison-table td:not(:first-child),
 	.tab-panel.three-col-tab .comparison-table th:not(:first-child) {
 		width: calc((100% - 380px) / 3);
@@ -3053,6 +3070,7 @@ onUnmounted(() => {
 }
 
 @media (min-width: 1280px) {
+
 	.tab-panel.three-col-tab .comparison-table td:not(:first-child),
 	.tab-panel.three-col-tab .comparison-table th:not(:first-child) {
 		width: calc((100% - 450px) / 3);
@@ -3066,6 +3084,7 @@ onUnmounted(() => {
 }
 
 @media (min-width: 640px) {
+
 	.tab-panel.four-col-tab .comparison-table td:not(:first-child),
 	.tab-panel.four-col-tab .comparison-table th:not(:first-child) {
 		width: calc((100% - 280px) / 4);
@@ -3073,6 +3092,7 @@ onUnmounted(() => {
 }
 
 @media (min-width: 1024px) {
+
 	.tab-panel.four-col-tab .comparison-table td:not(:first-child),
 	.tab-panel.four-col-tab .comparison-table th:not(:first-child) {
 		width: calc((100% - 380px) / 4);
@@ -3080,6 +3100,7 @@ onUnmounted(() => {
 }
 
 @media (min-width: 1280px) {
+
 	.tab-panel.four-col-tab .comparison-table td:not(:first-child),
 	.tab-panel.four-col-tab .comparison-table th:not(:first-child) {
 		width: calc((100% - 450px) / 4);
@@ -3292,33 +3313,34 @@ onUnmounted(() => {
 }
 
 @media (max-width: 1366px) {
+
 	/* 小屏幕电脑适配 (1366x768等) */
-	.right-section > div {
+	.right-section>div {
 		max-width: calc(100vw - 480px) !important;
 	}
-	
+
 	.left-nav-item {
 		width: 400px !important;
 	}
-	
+
 	.left-nav-item .nav-text {
 		margin-left: 56px !important;
 		font-size: 22px !important;
 	}
-	
-	.left-nav-list > div[class*="absolute"] {
+
+	.left-nav-list>div[class*="absolute"] {
 		left: 70px !important;
 	}
-	
-	.left-nav-item > div[class*="absolute"] {
+
+	.left-nav-item>div[class*="absolute"] {
 		left: 70px !important;
 	}
-	
+
 	.competitor-tabs {
 		gap: 10px;
 		padding-bottom: 10px;
 	}
-	
+
 	.competitor-tab {
 		padding: 8px 15px !important;
 		font-size: 16px !important;
@@ -3326,24 +3348,24 @@ onUnmounted(() => {
 }
 
 @media (max-width: 1024px) {
-	.right-section > div {
+	.right-section>div {
 		max-width: calc(100vw - 450px) !important;
 	}
-	
+
 	.left-nav-item {
 		width: 380px !important;
 	}
-	
+
 	.left-nav-item .nav-text {
 		margin-left: 52px !important;
 		font-size: 20px !important;
 	}
-	
-	.left-nav-list > div[class*="absolute"] {
+
+	.left-nav-list>div[class*="absolute"] {
 		left: 65px !important;
 	}
-	
-	.left-nav-item > div[class*="absolute"] {
+
+	.left-nav-item>div[class*="absolute"] {
 		left: 65px !important;
 	}
 
