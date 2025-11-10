@@ -8,7 +8,7 @@
 			playsinline></video>
 
 		<!-- 左侧悬浮按钮 -->
-		<div class="fixed left-[-28px] w-20 h-20 bg-[rgba(0,212,255,0.2)] backdrop-blur-[10px] border border-[rgba(0,212,255,0.3)] rounded-full flex items-center justify-center cursor-pointer z-[10001] transition-[top] duration-300 ease-in-out text-[#00d4ff] overflow-hidden hover:bg-[rgba(0,212,255,0.3)] hover:border-[rgba(0,212,255,0.5)] hover:scale-110 shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
+		<div class="fixed left-[-28px] w-20 h-20 bg-[rgba(0,212,255,0.2)] backdrop-blur-[10px] border border-[rgba(0,212,255,0.3)] rounded-full flex items-center justify-center cursor-pointer z-[10001] text-[#00d4ff] overflow-hidden hover:bg-[rgba(0,212,255,0.3)] hover:border-[rgba(0,212,255,0.5)] shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
 			ref="leftNavToggleBtnRef" :style="{ top: leftNavToggleBtnTop }" @click="toggleNavMenu">
 			<svg v-if="!isNavMenuOpen" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
 				stroke-width="1.5" stroke="currentColor" class="w-7 h-7 ml-3">
@@ -1823,7 +1823,7 @@ onUnmounted(() => {
 
 .video-controls {
 	position: absolute;
-	bottom: 20px;
+	bottom: 30px;
 	right: 20px;
 	display: flex;
 	gap: 12px;
@@ -1831,9 +1831,7 @@ onUnmounted(() => {
 }
 
 .video-control-btn {
-	width: 44px;
-	height: 44px;
-	border-radius: 50%;
+	/* border-radius: 50%; */
 	background: rgba(0, 0, 0, 0.6);
 	backdrop-filter: blur(10px);
 	border: 1px solid rgba(255, 255, 255, 0.3);
@@ -1844,17 +1842,61 @@ onUnmounted(() => {
 	justify-content: center;
 	transition: all 0.3s ease;
 	pointer-events: auto;
+	padding: 8px;
+}
+
+/* 小屏幕 (手机) */
+@media (max-width: 640px) {
+	.video-control-btn {
+		padding: 6px;
+	}
+	
+	.video-control-btn svg {
+		width: 16px;
+		height: 16px;
+	}
+}
+
+/* 中等屏幕 (平板) */
+@media (min-width: 641px) and (max-width: 1024px) {
+	.video-control-btn {
+		padding: 10px;
+	}
+	
+	.video-control-btn svg {
+		width: 20px;
+		height: 20px;
+	}
+}
+
+/* 大屏幕 (桌面, 1025px - 1600px) */
+@media (min-width: 1025px) and (max-width: 1600px) {
+	.video-control-btn {
+		padding: 12px;
+	}
+	
+	.video-control-btn svg {
+		width: 24px;
+		height: 24px;
+	}
+}
+
+/* 超大屏幕 (1601px+) */
+@media (min-width: 1601px) {
+	.video-control-btn {
+		padding: 14px;
+	}
+	
+	.video-control-btn svg {
+		width: 28px;
+		height: 28px;
+	}
 }
 
 .video-control-btn:hover {
 	background: rgba(0, 0, 0, 0.8);
 	border-color: rgba(255, 255, 255, 0.5);
 	transform: scale(1.1);
-}
-
-.video-control-btn svg {
-	width: 20px;
-	height: 20px;
 }
 
 .panel-content-inner {
