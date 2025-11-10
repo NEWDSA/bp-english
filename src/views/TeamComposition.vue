@@ -191,7 +191,7 @@
                                                 <!-- 名字部分 -->
                                                 <div class="mt-3 text-center">
                                                     <!-- <div class="text-white text-base font-medium">{{ member.name }}</div> -->
-                                                    <div class="text-gray-300 text-sm mt-1">{{ member.enName }}</div>
+                                                    <div class="text-gray-300 text-[18px] mt-1">{{ member.enName }}</div>
                                                 </div>
                                             </div>
                                         </template>
@@ -228,22 +228,22 @@
                     </div>
                 </div>
             </div>
-            <!-- Who we are 中间显示内容 -->
-            <div v-if="showWhoWeAreContent" class="overlay-content-display">
-                <div class="overlay-close-btn" @click="closeWhoWeAreContent">
+            <!-- 团队介绍 -->
+            <div v-if="showWhoWeAreContent" class="fixed inset-0 bg-black/70 backdrop-blur-[10px] z-[1000] flex justify-center items-center p-5">
+                <div class="absolute top-[30px] right-[30px] bg-white/10 border border-white/30 text-white cursor-pointer p-3 w-12 h-12 flex items-center justify-center rounded-full transition-all duration-300 z-[1001] hover:bg-white/20 hover:text-[#00d4ff] hover:scale-110" @click="closeWhoWeAreContent">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                     </svg>
                 </div>
 
-                <div class="overlay-content">
-                    <div class="presentation-grid">
+                <div class="w-[95%] max-w-none h-[85vh] flex flex-col justify-start px-[2vw] overflow-y-auto">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-[clamp(2rem,4vw,6rem)] h-full items-start w-full">
                         <!-- 左侧：团队介绍 -->
-                        <div class="presentation-left">
-                            <h1 class="presentation-title">Who we are?</h1>
+                        <div class="flex flex-col gap-[clamp(1rem,2vh,2rem)] h-full">
+                            <p class="text-[30px] font-bold text-white mb-[clamp(1.5rem,3vh,2.5rem)] text-left">Who we are?</p>
 
-                            <div class="intro-text-block">
-                                <p class="block-text">The world's first high-performance intelligent hydrofoil focused
+                            <div class="mb-[clamp(3rem,1vh,1rem)]">
+                                <p class="text-[20px] leading-[2] text-white">The world's first high-performance intelligent hydrofoil focused
                                     on consumer
                                     and industry-grade applications addresses the high energy consumption and low
                                     efficiency of
@@ -256,42 +256,42 @@
                                 </p>
                             </div>
 
-                            <div class="achievements-block">
-                                <div class="achievements-list">
-                                    <div class="achievement-row">
-                                        <span class="bullet">•</span>
-                                        <span class="achievement-desc">Earliest domestic entrant into consumer-grade
+                            <div class="flex-1 flex flex-col">
+                                <div class="flex flex-col gap-[clamp(0.6rem,1vh,1.2rem)]">
+                                    <div class="flex items-center gap-[clamp(0.6rem,1vw,1.2rem)]">
+                                        <span class="text-white/70 text-[24px] flex-shrink-0">•</span>
+                                        <span class="text-[18px] text-white/70 flex-1">Earliest domestic entrant into consumer-grade
                                             water transportation (2015)</span>
                                     </div>
-                                    <div class="achievement-row">
-                                        <span class="bullet">•</span>
-                                        <span class="achievement-desc">Earliest define the direction of new waterborne
+                                    <div class="flex items-center gap-[clamp(0.6rem,1vw,1.2rem)]">
+                                        <span class="text-white/70 text-[24px] leading-[1.8] flex-shrink-0">•</span>
+                                        <span class="text-[18px] text-white/70 leading-[1.8] flex-1">Earliest define the direction of new waterborne
                                             cultural tourism vessels in China (2016)</span>
                                     </div>
-                                    <div class="achievement-row">
-                                        <span class="bullet">•</span>
-                                        <span class="achievement-desc">The company with the strongest integration
+                                    <div class="flex items-center gap-[clamp(0.6rem,1vw,1.2rem)]">
+                                        <span class="text-white/70 text-[24px] leading-[1.8] flex-shrink-0">•</span>
+                                        <span class="text-[18px] text-white/70 leading-[1.8] flex-1">The company with the strongest integration
                                             capability in the national boat industry chain</span>
                                     </div>
-                                    <div class="achievement-row">
-                                        <span class="bullet">•</span>
-                                        <span class="achievement-desc">The company that completed the 5M-class hydrofoil
+                                    <div class="flex items-center gap-[clamp(0.6rem,1vw,1.2rem)]">
+                                        <span class="text-white/70 text-[24px] leading-[1.8] flex-shrink-0">•</span>
+                                        <span class="text-[18px] text-white/70 leading-[1.8] flex-1">The company that completed the 5M-class hydrofoil
                                             model experiment globally (2024)</span>
                                     </div>
-                                    <div class="achievement-row">
-                                        <span class="bullet">•</span>
-                                        <span class="achievement-desc">The company that completed the design, R&D, and
+                                    <div class="flex items-center gap-[clamp(0.6rem,1vw,1.2rem)]">
+                                        <span class="text-white/70 text-[24px] leading-[1.8] flex-shrink-0">•</span>
+                                        <span class="text-[18px] text-white/70 leading-[1.8] flex-1">The company that completed the design, R&D, and
                                             production of the 5M hydrofoil globally (2025)</span>
                                     </div>
-                                    <div class="achievement-row">
-                                        <span class="bullet">•</span>
-                                        <span class="achievement-desc">The company with the strongest boat design
+                                    <div class="flex items-center gap-[clamp(0.6rem,1vw,1.2rem)]">
+                                        <span class="text-white/70 text-[24px] leading-[1.8] flex-shrink-0">•</span>
+                                        <span class="text-[18px] text-white/70 leading-[1.8] flex-1">The company with the strongest boat design
                                             capabilities in China, having designed and defined numerous cutting-edge
                                             waterborne technology products.</span>
                                     </div>
-                                    <div class="achievement-row">
-                                        <span class="bullet">•</span>
-                                        <span class="achievement-desc">The company possesses outstanding R&D
+                                    <div class="flex items-center gap-[clamp(0.6rem,1vw,1.2rem)]">
+                                        <span class="text-white/70 text-[24px] leading-[1.8] flex-shrink-0">•</span>
+                                        <span class="text-[18px] text-white/70 leading-[1.8] flex-1">The company possesses outstanding R&D
                                             capabilities, with a closed-loop system and process.</span>
                                     </div>
                                 </div>
@@ -299,136 +299,212 @@
                         </div>
 
                         <!-- 右侧：投资亮点 -->
-                        <div class="presentation-right">
-                            <h1 class="presentation-title">Investment Highlights</h1>
+                        <div class="flex flex-col gap-[clamp(1rem,2vh,2rem)] h-full">
+                            <p class="text-[30px] font-bold text-white mb-[clamp(1.5rem,3vh,2.5rem)] text-left">Investment Highlights</p>
 
-                            <div class="content-block">
-                                <p class="block-primary-text">Hydrofoil integration is the best solution for ship
+                            <div class="flex-1 flex flex-col">
+                                <p class="text-[20px] text-white leading-[1.5] mb-[clamp(0.8rem,1.2vh,1.2rem)] opacity-100">Hydrofoil integration is the best solution for ship
                                     electrification, unlocking
                                     a trillion-dollar market.</p>
-                                <p class="block-text">Currently, ship electrification is limited to simple
+                                <p class="text-[18px] text-white/70 leading-[1.5] mb-[clamp(0.6rem,1vh,1rem)] flex items-start">
+                                    <span class="inline-block w-2 h-2 bg-[#bbbab9] rounded-full mr-4 mt-[10px] flex-shrink-0"></span>
+                                    <span class="leading-[1.8]">Currently, ship electrification is limited to simple
                                     oil-to-electric
                                     conversion, failing to fundamentally address the contradiction between energy
                                     consumption and
                                     propulsion efficiency. Hydrofoil technology can truly solve and completely
                                     revolutionize the
-                                    energy management model of traditional boats.</p>
-                                <p class="block-text">High-performance hydrofoils have proven their value in multiple
+                                    energy management model of traditional boats.</span>
+                                </p>
+                                <p class="text-[18px] text-white/70 leading-[1.5] mb-[clamp(0.6rem,1vh,1rem)] flex items-start">
+                                    <span class="inline-block w-2 h-2 bg-[#bbbab9] rounded-full mr-4 mt-[10px] flex-shrink-0"></span>
+                                    <span class="leading-[1.8]">High-performance hydrofoils have proven their value in multiple
                                     scenarios,
                                     with leading overseas companies already investing heavily, while the domestic market
                                     remains
-                                    largely untapped.</p>
-                                <p class="block-primary-text">Mastering the core industrial chain, possessing superior
+                                    largely untapped.</span>
+                                </p>
+                                <p class="text-[20px] text-white leading-[1.5] mb-[clamp(0.8rem,1.2vh,1.2rem)] opacity-100 mt-4">Mastering the core industrial chain, possessing superior
                                     product
                                     innovation
                                     capabilities, and leading industry development.</p>
-                                <p class="block-text">Adhering to self-developed and self-produced components
+                                <p class="text-[18px] text-white/70 leading-[1.5] mb-[clamp(0.6rem,1vh,1rem)] flex items-start">
+                                    <span class="inline-block w-2 h-2 bg-[#bbbab9] rounded-full mr-4 mt-[10px] flex-shrink-0"></span>
+                                    <span>Adhering to self-developed and self-produced components
                                     across the
                                     entire
-                                    industrial chain, with modular assembly lines.</p>
-                                <p class="block-text">Insisting on original design, perfecting the product
+                                    industrial chain, with modular assembly lines.</span>
+                                </p>
+                                <p class="text-[18px] text-white/70 leading-[1.5] mb-[clamp(0.6rem,1vh,1rem)] flex items-start">
+                                    <span class="inline-block w-2 h-2 bg-[#bbbab9] rounded-full mr-4 mt-[10px] flex-shrink-0"></span>
+                                    <span class="leading-[1.8]">Insisting on original design, perfecting the product
                                     matrix, and
                                     developing
                                     self-developed intelligent control systems, including a three-mode intelligent
                                     steering wheel,
                                     intelligent cockpit, terminal sales program, high-strength modular hydrofoils, and
                                     high-strength
-                                    lightweight hull materials and processes.</p>
-                                <p class="block-primary-text">Actively pursuing a global strategy to quickly achieve
+                                    lightweight hull materials and processes.</span>
+                                </p>
+                                <p class="text-[20px] text-white leading-[1.5] mb-[clamp(0.8rem,1.2vh,1.2rem)] opacity-100 mt-4">Actively pursuing a global strategy to quickly achieve
                                     absolute
                                     leadership in
                                     the consumer market.</p>
-                                <p class="block-text">Our products have gained recognition from leading domestic and international clients and have been implemented in various scenarios, including technology, transportation, consumption, and cultural tourism. 80% of our revenue comes from the transportation sector.</p>
-                                <p class="block-primary-text">Based on its technological accumulation and significant advantages, it has made early arrangements for consumer-grade intelligent water transportation.</p>
-                                <p class="block-text">We have taken the lead in partnering with several leading domestic (overseas-oriented) companies to jointly promote the application of AI + water transportation.</p>
-                                <p class="block-text">The company will release a new product form in July this year, which will have no competitors in the same size. Combining its experience in the entire chain of "product definition - technological innovation - supply chain - channels", it will establish an absolute leading advantage.</p>
+                                <p class="text-[18px] text-white/70 leading-[1.5] mb-[clamp(0.6rem,1vh,1rem)] flex items-start">
+                                    <span class="inline-block w-2 h-2 bg-[#bbbab9] rounded-full mr-4 mt-[10px] flex-shrink-0"></span>
+                                    <span class="leading-[1.8]">Our products have gained recognition from leading domestic and international clients and have been implemented in various scenarios, including technology, transportation, consumption, and cultural tourism. 80% of our revenue comes from the transportation sector.</span>
+                                </p>
+                                <p class="text-[20px] text-white leading-[1.5] mb-[clamp(0.8rem,1.2vh,1.2rem)] opacity-100 mt-4">Based on its technological accumulation and significant advantages, it has made early arrangements for consumer-grade intelligent water transportation.</p>
+                                <p class="text-[18px] text-white/70 leading-[1.5] mb-[clamp(0.6rem,1vh,1rem)] flex items-start">
+                                    <span class="inline-block w-2 h-2 bg-[#bbbab9] rounded-full mr-4 mt-[10px] flex-shrink-0"></span>
+                                    <span class="leading-[1.8]">We have taken the lead in partnering with several leading domestic (overseas-oriented) companies to jointly promote the application of AI + water transportation.</span>
+                                </p>
+                                <p class="text-[18px] text-white/70 leading-[1.5] mb-[clamp(0.6rem,1vh,1rem)] flex items-start">
+                                    <span class="inline-block w-2 h-2 bg-[#bbbab9] rounded-full mr-4 mt-[10px] flex-shrink-0"></span>
+                                    <span class="leading-[1.8]">The company will release a new product form in July this year, which will have no competitors in the same size. Combining its experience in the entire chain of "product definition - technological innovation - supply chain - channels", it will establish an absolute leading advantage.</span>
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Investment Cases 中间显示内容 -->
-            <div v-if="showInvestmentHighlightsContent" class="works-fullscreen-modal"
+            <!-- 优秀案例 -->
+            <div v-if="showInvestmentHighlightsContent"
+                class="fixed inset-0 bg-white/10 backdrop-blur-[25px] backdrop-saturate-[180%] z-[2000] flex justify-center items-center animate-fadeIn"
                 @click="closeInvestmentHighlightsContent">
-                <div class="works-modal-wrapper" @click.stop>
+                <div class="flex justify-center items-center w-full h-full relative" @click.stop>
                     <!-- 关闭按钮 -->
-                    <button class="works-close-btn" @click="closeInvestmentHighlightsContent">
+                    <div @click="closeInvestmentHighlightsContent" class="absolute top-[30px] right-[30px] bg-white/10 border border-white/30 text-white cursor-pointer p-3 w-12 h-12 flex items-center justify-center rounded-full transition-all duration-300 z-[1001] hover:bg-white/20 hover:text-[#00d4ff] hover:scale-110">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" />
+                            <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                         </svg>
-                    </button>
+                    </div>
 
-                    <div class="works-modal-content">
-                        <div class="works-images-grid">
-                            <template v-for="i in 6" :key="i">
-                                <div class="works-image-item">
-                                    <!-- 图片部分 -->
-                                    <div class="works-image-wrapper">
-                                        <img :src="getWorkImage(i)" :alt="`Work ${i}`" class="works-image" />
-                                    </div>
+                    <div class="w-[95vw] h-[70vh] min-h-[800px] flex flex-col overflow-hidden">
+                        <div class="w-full h-full grid grid-cols-6 grid-rows-1 gap-2.5 justify-center content-center p-5">
+                            <!-- 第一个项目 - 视频 -->
+                            <div class="relative flex flex-col items-center justify-start bg-black/10 rounded-none overflow-hidden transition-all duration-300 cursor-pointer h-full hover:scale-[1.02] hover:border-cyan-400/30 hover:shadow-[0_10px_30px_rgba(0,212,255,0.2)]">
+                                <div class="relative w-full h-[350px] flex-shrink-0 block overflow-hidden mb-0 leading-[0]">
+                                    <video :src="getWorkVideo(1)"
+                                           class="w-full h-full block object-cover object-center transition-all duration-300 hover:scale-105"
+                                           autoplay
+                                           muted
+                                           loop
+                                           playsinline>
+                                    </video>
+                                </div>
+                                <div class="flex-1 flex flex-col justify-center items-center text-center text-white px-2.5 py-[15px] w-full box-border mb-10">
+                                    <div class="text-white text-[20px] font-bold flex items-center justify-center mb-10">1</div>
+                                    <div class="text-[20px] mb-2">The Definer of the Future Water-X Pontoon</div>
+                                    <div class="text-[18px] mb-1 text-white/70">Project: Wuhu Pearl</div>
+                                    <div class="text-[18px] mb-1 text-white/70">Launch Date: September 2022</div>
+                                    <div class="text-[18px] mb-1 text-white/70">Location: Wuhu, Anhui</div>
+                                </div>
+                            </div>
 
+                            <!-- 第二个项目 - 视频 -->
+                            <div class="relative flex flex-col items-center justify-start bg-black/10 rounded-none overflow-hidden transition-all duration-300 cursor-pointer h-full hover:scale-[1.02] hover:border-cyan-400/30 hover:shadow-[0_10px_30px_rgba(0,212,255,0.2)]">
+                                <div class="relative w-full h-[350px] flex-shrink-0 block overflow-hidden mb-0 leading-[0]">
+                                    <video :src="getWorkVideo(2)"
+                                           class="w-full h-full block object-cover object-center transition-all duration-300 hover:scale-105"
+                                           autoplay
+                                           muted
+                                           loop
+                                           playsinline>
+                                    </video>
+                                </div>
+                                <div class="flex-1 flex flex-col justify-center items-center text-center text-white px-2.5 py-[15px] w-full box-border mb-10">
+                                    <div class="text-white text-[20px] font-bold flex items-center justify-center mb-10">2</div>
+                                    <div class="text-[20px] mb-2">Definer of maritime cultural tourism vessels</div>
+                                    <div class="text-[18px] mb-1 text-white/70">Project: Xunxian 1 and 2</div>
+                                    <div class="text-[18px] mb-1 text-white/70">Landing Date: May 2017</div>
+                                    <div class="text-[18px] mb-1 text-white/70">Location: Yantai, Qinhuangdao</div>
+                                </div>
+                            </div>
+
+                            <!-- 第三个项目 - 图片 -->
+                            <div class="relative flex flex-col items-center justify-start bg-black/10 rounded-none overflow-hidden transition-all duration-300 cursor-pointer h-full hover:scale-[1.02] hover:border-cyan-400/30 hover:shadow-[0_10px_30px_rgba(0,212,255,0.2)]">
+                                <div class="relative w-full h-[350px] flex-shrink-0 block mb-0 bg-cover bg-bottom bg-no-repeat transition-all duration-300 hover:scale-105"
+                                     :style="{ backgroundImage: `url(${getWorkImage(3)})` }">
+                                </div>
+                                <div class="flex-1 flex flex-col justify-center items-center text-center text-white px-2.5 py-[15px] w-full box-border mb-10">
+                                    <div class="text-white text-[20px] font-bold flex items-center justify-center mb-10">3</div>
+                                    <div class="text-[20px] mb-2">Rich resources on B-side and G-side</div>
+                                    <div class="text-[18px] mb-1 text-white/70">Project: Jiuzhou Bay No. 1 (Nezha)</div>
+                                    <div class="text-[18px] mb-1 text-white/70">Landing Date: October 2020</div>
+                                    <div class="text-[18px] mb-1 text-white/70">Location: Zhuhai, Guangdong</div>
+                                </div>
+                            </div>
+
+                            <!-- 第四个项目 - 视频 -->
+                            <div class="relative flex flex-col items-center justify-start bg-black/10 rounded-none overflow-hidden transition-all duration-300 cursor-pointer h-full hover:scale-[1.02] hover:border-cyan-400/30 hover:shadow-[0_10px_30px_rgba(0,212,255,0.2)]">
+                                <div class="relative w-full h-[350px] flex-shrink-0 block overflow-hidden mb-0 leading-[0]">
+                                    <video :src="getWorkVideo(4)"
+                                           class="w-full h-full block object-cover object-center transition-all duration-300 hover:scale-105"
+                                           autoplay
+                                           muted
+                                           loop
+                                           playsinline>
+                                    </video>
+                                </div>
+                                <div class="flex-1 flex flex-col justify-center items-center text-center text-white px-2.5 py-[15px] w-full box-border mb-10">
+                                    <div class="text-white text-[20px] font-bold flex items-center justify-center mb-10">4</div>
+                                    <div class="text-[20px] mb-2">Pioneer of consumer transportation</div>
+                                    <div class="text-[18px] mb-1 text-white/70">Project: Kun</div>
+                                    <div class="text-[18px] mb-1 text-white/70">Landing Date: April 2024</div>
+                                    <div class="text-[18px] mb-1 text-white/70">Location: Weihai, Shandong</div>
+                                </div>
+                            </div>
+
+                            <!-- 第五个项目 - 视频 -->
+                            <div class="relative flex flex-col items-center justify-start bg-black/10 rounded-none overflow-hidden transition-all duration-300 cursor-pointer h-full hover:scale-[1.02] hover:border-cyan-400/30 hover:shadow-[0_10px_30px_rgba(0,212,255,0.2)]">
+                                <div class="relative w-full h-[350px] flex-shrink-0 block overflow-hidden mb-0 leading-[0]">
+                                    <video :src="getWorkVideo(5)"
+                                           class="w-full h-full block object-cover object-center transition-all duration-300 hover:scale-105"
+                                           autoplay
+                                           muted
+                                           loop
+                                           playsinline>
+                                    </video>
+                                </div>
+                                <div class="flex-1 flex flex-col justify-center items-center text-center text-white px-2.5 py-[15px] w-full box-border mb-10">
+                                    <div class="text-white text-[20px] font-bold flex items-center justify-center mb-10">5</div>
+                                    <div class="text-[20px] mb-2">Complete domestic and overseas channel network</div>
+                                    <div class="text-[18px] mb-1 text-white/70">Project: ADAMAS</div>
+                                    <div class="text-[18px] mb-1 text-white/70">Launch Date: March 2025</div>
+                                    <div class="text-[18px] mb-1 text-white/70">Location: Ho Chi Minh City, Vietnam</div>
+                                </div>
+                            </div>
+
+                            <!-- 第六个项目 - 图片 -->
+                            <div class="relative flex flex-col items-center justify-start bg-black/10 rounded-none overflow-hidden transition-all duration-300 cursor-pointer h-full hover:scale-[1.02] hover:border-cyan-400/30 hover:shadow-[0_10px_30px_rgba(0,212,255,0.2)]">
+                                <!-- <div class="relative w-full h-[350px] block mb-0 bg-cover bg-bottom  bg-no-repeat transition-all duration-300 hover:scale-105"
+                                     :style="{ backgroundImage: `url(${getWorkImage(6)})` }">
+                                </div> -->
+                               <div class="relative w-full h-[350px] flex-shrink-0 block overflow-hidden mb-0 leading-[0]">
+                                    <video :src="getWorkVideo(6)"
+                                           class="w-full h-full block object-cover object-center transition-all duration-300 hover:scale-105"
+                                           autoplay
+                                           muted
+                                           loop
+                                           playsinline>
+                                    </video>
+                                </div>
+                                <div class="flex-1 flex flex-col justify-end text-center text-white px-2.5 py-[15px] w-full box-border mb-10">
+                                    <div class="text-white text-[20px] font-bold flex items-center justify-center mb-10">6</div>
+                                    <div class="text-[20px] mb-2">Designer of the country's first smart yacht</div>
                                     <!-- 文字部分 -->
-                                    <div class="works-text-content">
-                                        <div class="works-number">{{ i }}</div>
-                                        <!-- 第一张图片文字 -->
-                                        <template v-if="i === 1">
-                                            <div class="works-title">The Definer of the Future Water-X Pontoon</div>
-                                            <div class="works-project">Project: Wuhu Pearl</div>
-                                            <div class="works-date">Launch Date: September 2022</div>
-                                            <div class="works-location">Location: Wuhu, Anhui</div>
-                                        </template>
-
-                                        <!-- 第二张图片文字 -->
-                                        <template v-if="i === 2">
-                                            <div class="works-title">Definer of maritime cultural tourism vessels</div>
-                                            <div class="works-project">Project: Xunxian 1 and 2</div>
-                                            <div class="works-date">Landing Date: May 2017</div>
-                                            <div class="works-location">Location: Yantai, Qinhuangdao</div>
-                                        </template>
-
-                                        <!-- 第三张图片文字 -->
-                                        <template v-if="i === 3">
-                                            <div class="works-title">Rich resources on B-side and G-side</div>
-                                            <div class="works-project">Project: Jiuzhou Bay No. 1 (Nezha)</div>
-                                            <div class="works-date">Landing Date: October 2020</div>
-                                            <div class="works-location">Location: Zhuhai, Guangdong</div>
-                                        </template>
-
-                                        <!-- 第四张图片文字 -->
-                                        <template v-if="i === 4">
-                                            <div class="works-title">Pioneer of consumer transportation</div>
-                                            <div class="works-project">Project: Kun</div>
-                                            <div class="works-date">Landing Date: April 2024</div>
-                                            <div class="works-location">Location: Weihai, Shandong</div>
-                                        </template>
-
-                                        <!-- 第五张图片文字 -->
-                                        <template v-if="i === 5">
-                                            <div class="works-title">Complete domestic and overseas channel network
-                                            </div>
-                                            <div class="works-project">Project: ADAMAS</div>
-                                            <div class="works-date">Launch Date: March 2025</div>
-                                            <div class="works-location">Location: Ho Chi Minh City, Vietnam</div>
-                                        </template>
-
-                                        <!-- 第六张图片文字 -->
-                                        <template v-if="i === 6">
-                                            <div class="works-title">Designer of the country's first smart yacht</div>
-                                            <div class="works-project">Project: Smart Boat No. 1</div>
-                                            <div class="works-date">Landing Date: October 2022</div>
-                                            <div class="works-location">Location: Guangdong-Hong Kong-Macao Greater Bay
-                                                Area</div>
-                                            <div class="works-extra">"Smart Yacht Interior Design Technology Research
-                                                Report"</div>
-                                            <div class="works-extra">"Smart Yacht Independent Development Project"</div>
-                                            <div class="works-extra">"Research on Exterior and Interior Design
-                                                Technology of Medium-Sized Luxury Cruise Ships"</div>
-                                            <div class="works-extra">"2023 Forward-Looking Research Project"</div>
-                                        </template>
+                                    <div class="max-h-[190px] overflow-y-auto">
+                                        <div class="text-[18px] mb-1 text-white/70">Project: Smart Boat No. 1</div>
+                                        <div class="text-[18px] mb-1 text-white/70">Landing Date: October 2022</div>
+                                        <div class="text-[18px] mb-1 text-white/70">Location: Guangdong-Hong Kong-Macao Greater Bay Area</div>
+                                        <div class="text-[18px] mb-[3px] italic text-white/60">"Smart Yacht Interior Design Technology Research Report"</div>
+                                        <div class="text-[18px] mb-[3px] italic text-white/60">"Smart Yacht Independent Development Project"</div>
+                                        <div class="text-[18px] mb-[3px] italic text-white/60">"Research on Exterior and Interior Design Technology of Medium-Sized Luxury Cruise Ships"</div>
+                                        <div class="text-[18px] mb-[3px] italic text-white/60">"2023 Forward-Looking Research Project"</div>
                                     </div>
                                 </div>
-                            </template>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -787,7 +863,12 @@ function closeInvestmentHighlightsContent() {
 
 // 获取作品图片路径
 function getWorkImage(index: number) {
-    return new URL(`../assets/work${index}.png`, import.meta.url).href
+    return new URL(`../assets/work${index}.gif`, import.meta.url).href
+}
+
+// 获取作品视频路径
+function getWorkVideo(index: number) {
+    return new URL(`../assets/work${index}.mp4`, import.meta.url).href
 }
 
 // 上一个成员 - 履带式向左移动
@@ -821,6 +902,22 @@ const previousMember = () => {
 </script>
 
 <style scoped>
+/* Tailwind animation for fadeIn effect */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        backdrop-filter: blur(0px);
+    }
+    to {
+        opacity: 1;
+        backdrop-filter: blur(20px);
+    }
+}
+
+.animate-fadeIn {
+    animation: fadeIn 0.4s ease-out;
+}
+
 /* 顶部导航栏.start */
 .home-btn {
     cursor: pointer;
@@ -984,18 +1081,6 @@ const previousMember = () => {
     }
 }
 
-@keyframes fade-in-up {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 @keyframes shimmer {
     0% {
         background-position: -200% 0;
@@ -1042,35 +1127,6 @@ const previousMember = () => {
 .bg-gradient-to-b {
     background-size: 200% 200%;
     animation: shimmer 8s ease-in-out infinite;
-}
-
-/* 卡片进入动画 */
-.grid>div {
-    animation: fade-in-up 0.6s ease-out;
-}
-
-.grid>div:nth-child(1) {
-    animation-delay: 0.1s;
-}
-
-.grid>div:nth-child(2) {
-    animation-delay: 0.2s;
-}
-
-.grid>div:nth-child(3) {
-    animation-delay: 0.3s;
-}
-
-.grid>div:nth-child(4) {
-    animation-delay: 0.4s;
-}
-
-.grid>div:nth-child(5) {
-    animation-delay: 0.5s;
-}
-
-.grid>div:nth-child(6) {
-    animation-delay: 0.6s;
 }
 
 /* 渐变文字效果 */
@@ -1196,219 +1252,6 @@ button {
     color: #ffffff;
     text-align: center;
     margin: 0;
-}
-
-/* 蒙版内容显示样式 */
-.overlay-content-display {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(10px);
-    z-index: 1000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    animation: overlayFadeIn 0.3s ease-out;
-}
-
-@keyframes overlayFadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-.overlay-close-btn {
-    position: absolute;
-    top: 30px;
-    right: 30px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: #ffffff;
-    cursor: pointer;
-    padding: 12px;
-    width: 48px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    transition: all 0.3s ease;
-    z-index: 1001;
-}
-
-.overlay-close-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
-    color: #00d4ff;
-    transform: scale(1.1);
-}
-
-.overlay-content {
-    width: 95%;
-    max-width: none;
-    height: 85vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding: 0 2vw;
-    overflow-y: auto;
-}
-
-.presentation-title {
-    font-size: 30px;
-    font-weight: 700;
-    color: #ffffff;
-    margin: 0 0 clamp(1.5rem, 3vh, 2.5rem) 0;
-    text-align: left;
-}
-
-.presentation-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(2rem, 4vw, 6rem);
-    height: 100%;
-    align-items: start;
-    width: 100%;
-}
-
-.presentation-left,
-.presentation-right {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(1rem, 2vh, 2rem);
-    height: 100%;
-}
-
-.intro-text-block {
-    margin-bottom: clamp(3rem, 1vh, 1rem);
-}
-
-/* 左侧团队介绍专属样式 */
-.presentation-left .intro-text-block .block-text {
-    font-size: 20px;
-    line-height: 1.8;
-    color: #ffffff;
-}
-
-.presentation-left .achievements-list .achievement-desc {
-    font-size: 18px;
-    
-}
-
-.presentation-left .achievements-list .bullet {
-    font-size: clamp(1rem, 1.5vw, 2rem);
-}
-
-.achievements-block {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.content-block {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.block-title {
-    font-size: clamp(0.85rem, 1.5vw, 1.7rem);
-    font-weight: 600;
-    color: #ffffff;
-    margin: 0 0 clamp(0.6rem, 1vh, 1rem) 0;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-    padding-bottom: clamp(0.3rem, 0.6vh, 0.6rem);
-}
-
-.block-text {
-    font-size: 18px;
-    color: rgba(255, 255, 255, 0.7);
-    line-height: 1.5;
-    margin: 0 0 clamp(0.6rem, 1vh, 1rem) 0;
-}
-
-.block-text:last-child {
-    margin-bottom: 0;
-}
-
-.block-primary-text {
-    font-size: 20px;
-    color: #ffffff;
-    line-height: 1.5;
-    margin: 0 0 clamp(0.8rem, 1.2vh, 1.2rem) 0;
-    opacity: 1;
-}
-
-.achievements-list {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(0.6rem, 1vh, 1.2rem);
-}
-
-.achievement-row {
-    display: flex;
-    align-items: flex-start;
-    gap: clamp(0.6rem, 1vw, 1.2rem);
-}
-
-.year-label {
-    background: rgba(255, 255, 255, 0.2);
-    color: #ffffff;
-    font-size: clamp(0.7rem, 1.1vw, 1.4rem);
-    font-weight: 700;
-    padding: clamp(0.2rem, 0.4vh, 0.5rem) clamp(0.6rem, 1vw, 1rem);
-    border-radius: 15px;
-    min-width: clamp(50px, 4vw, 80px);
-    text-align: center;
-    flex-shrink: 0;
-}
-
-.bullet {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: clamp(0.75rem, 1.2vw, 1.7rem);
-    font-weight: bold;
-    flex-shrink: 0;
-    width: clamp(15px, 1.5vw, 25px);
-}
-
-.achievement-desc {
-    font-size: clamp(0.6rem, 0.85vw, 1rem);
-    color: rgba(255, 255, 255, 0.7);
-    line-height: 1.4;
-    flex: 1;
-}
-
-/* 响应式适配 */
-@media (max-width: 1024px) {
-    .presentation-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-
-    .overlay-content {
-        height: 90vh;
-        overflow-y: auto;
-    }
-}
-
-@media (max-width: 768px) {
-    .overlay-content {
-        width: 95%;
-        padding: 0 1rem;
-        height: 95vh;
-    }
-
-    .presentation-title {
-        font-size: clamp(2rem, 6vw, 3rem);
-        margin-bottom: 1.5rem;
-    }
 }
 
 /* 全屏作品展示弹窗样式 */
