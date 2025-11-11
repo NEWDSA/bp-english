@@ -2685,6 +2685,96 @@ function goHome() {
 	padding-right: 10px;
 }
 
+/* 响应式布局 - 修复比例问题 */
+@media (max-width: 1920px) {
+	.b-content-panel .main-content {
+		padding-left: 100px;
+		padding-right: 20px;
+	}
+	
+	.b-content-panel .left-panel {
+		width: 480px !important;
+		min-width: 480px !important;
+		max-width: 480px !important;
+	}
+	
+	.b-content-panel .content-panel {
+		width: 540px !important;
+	}
+}
+
+@media (max-width: 1600px) {
+	.b-content-panel .main-content {
+		padding-left: 60px;
+		padding-right: 20px;
+		gap: 12px;
+	}
+	
+	.b-content-panel .left-panel {
+		width: 420px !important;
+		min-width: 420px !important;
+		max-width: 420px !important;
+	}
+	
+	.b-content-panel .content-panel {
+		width: 480px !important;
+	}
+	
+	.b-content-panel .chart-card.revenue-hover-card {
+		width: 100% !important;
+		max-width: 100% !important;
+	}
+}
+
+@media (max-width: 1366px) {
+	.b-content-panel .main-content {
+		padding-left: 40px;
+		padding-right: 15px;
+		gap: 10px;
+	}
+	
+	.b-content-panel .left-panel {
+		width: 380px !important;
+		min-width: 380px !important;
+		max-width: 380px !important;
+		padding: 12px;
+	}
+	
+	.b-content-panel .content-panel {
+		width: 420px !important;
+	}
+	
+	.b-content-panel .chart-card.revenue-hover-card {
+		width: 100% !important;
+		height: auto !important;
+		min-height: 260px;
+	}
+	
+	.b-content-panel .chart-container {
+		height: 200px !important;
+	}
+}
+
+@media (max-width: 1024px) {
+	.b-content-panel .main-content {
+		padding-left: 20px;
+		padding-right: 15px;
+		flex-direction: column;
+		overflow-y: auto;
+	}
+	
+	.b-content-panel .left-panel {
+		width: 100% !important;
+		min-width: 100% !important;
+		max-width: 100% !important;
+		height: auto !important;
+	}
+	
+	.b-content-panel .content-panel {
+		width: 100% !important;
+	}
+}
+
 /* 关闭按钮 - 统一样式 */
 .close-content-btn {
 	position: fixed;
@@ -2994,6 +3084,39 @@ function goHome() {
 	padding-right: 10px;
 }
 
+/* 响应式布局 - 主内容区域 */
+@media (max-width: 1920px) {
+	.main-content {
+		padding-left: 100px;
+		padding-right: 20px;
+	}
+}
+
+@media (max-width: 1600px) {
+	.main-content {
+		padding-left: 60px;
+		padding-right: 20px;
+		gap: 12px;
+	}
+}
+
+@media (max-width: 1366px) {
+	.main-content {
+		padding-left: 40px;
+		padding-right: 15px;
+		gap: 10px;
+	}
+}
+
+@media (max-width: 1024px) {
+	.main-content {
+		padding-left: 20px;
+		padding-right: 15px;
+		flex-direction: column;
+		overflow-y: auto;
+	}
+}
+
 /* 左侧面板：Revenue Model + Channel Strategy */
 .left-panel {
 	flex: 0 0 416px;
@@ -3005,6 +3128,41 @@ function goHome() {
 	gap: 12px;
 	overflow: hidden;
 	height: calc(100vh - 80px);
+}
+
+/* 响应式布局 - 左侧面板 */
+@media (max-width: 1920px) {
+	.left-panel {
+		flex: 0 0 480px;
+		min-width: 480px;
+		max-width: 480px;
+	}
+}
+
+@media (max-width: 1600px) {
+	.left-panel {
+		flex: 0 0 420px;
+		min-width: 420px;
+		max-width: 420px;
+	}
+}
+
+@media (max-width: 1366px) {
+	.left-panel {
+		flex: 0 0 380px;
+		min-width: 380px;
+		max-width: 380px;
+		padding: 12px;
+	}
+}
+
+@media (max-width: 1024px) {
+	.left-panel {
+		flex: 1 1 100%;
+		min-width: 100%;
+		max-width: 100%;
+		height: auto;
+	}
 }
 
 /* 中间面板：Lake Como 地图 */
@@ -3513,12 +3671,8 @@ function goHome() {
 /* 内容面板样式 */
 .content-panel {
 	/* 宽度由 Tailwind 类控制 */
-	/* height: 520px; */
-	/* backdrop-filter: blur(15px); */
-	/* border-radius: 15px; */
-	/* padding: 25px; */
 	overflow-y: auto;
-	max-height: calc(100vh - 100px);
+	height: calc(100vh - 180px - 100px);
 	/* animation: slideIn 0.5s ease-out; */
 	border: 1px solid rgba(0, 212, 255, 0.3);
 	background: rgba(255, 255, 255, 0.005);
@@ -3526,10 +3680,29 @@ function goHome() {
 	padding: 10px;
 	margin: 5px;
 	position: fixed;
-	top: 50%;
+	top: 180px;
 	right: 20px;
-	transform: translateY(-50%);
+	bottom: 100px;
+	transform: none;
 	z-index: 1000;
+}
+
+/* 响应式布局 - 内容面板高度和位置 */
+@media (max-width: 1024px) {
+	.content-panel {
+		height: calc(100vh - 100px - 100px);
+		top: 100px;
+		right: 10px;
+	}
+}
+
+@media (max-width: 768px) {
+	.content-panel {
+		height: calc(100vh - 90px - 100px);
+		top: 90px;
+		right: 5px;
+		padding: 8px;
+	}
 }
 
 
