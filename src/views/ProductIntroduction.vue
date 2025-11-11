@@ -109,8 +109,8 @@
 									×</div>
 							</div>
 							<!-- 内容 -->
-							<div class="panel-content">
-								<div class="panel-content-inner">
+							<div class="panel-content pain-points-panel-content">
+								<div class="panel-content-inner custom-scrollbar">
 									<!-- 结论部分 -->
 									<div class="panel-section">
 										<div
@@ -712,57 +712,53 @@
 					<div class="modal-left-panel">
 						<div class="panel-header !text-[24px]">Hydrofoil Advantages</div>
 
-						<!-- 第一部分：什么是水翼船 -->
-						<div class="panel-section">
-							<div class="section-title !text-[20px]">1. What is a Hydrofoil?</div>
-							<div class="section-text !text-[18px]">
-								A hydrofoil is a boat-like "seaplane" vessel. When accelerating, the hydrofoils beneath
-								the hull
-								generate lift, lifting the entire hull out of the water, with only slender hydrofoil
-								struts
-								touching the water. This design significantly reduces water resistance and dramatically
-								improves
-								sailing speed and efficiency.
+						<div class="modal-left-content custom-scrollbar">
+							<!-- 第一部分：什么是水翼船 -->
+							<div class="panel-section">
+								<div class="section-title !text-[20px]">1. What is a Hydrofoil?</div>
+								<div class="section-text !text-[18px]">
+									A hydrofoil is a boat-like "seaplane" vessel. When accelerating, the hydrofoils beneath the hull
+									generate lift, lifting the entire hull out of the water, with only slender hydrofoil struts
+									touching the water. This design significantly reduces water resistance and dramatically improves
+									sailing speed and efficiency.
+								</div>
 							</div>
-						</div>
 
-						<!-- 第二部分：性能对比 -->
-						<div class="panel-section">
-							<div class="section-title !text-[20px]">2. How does the hydrofoil perform compared to
-								traditional
-								boats?
-							</div>
-							<div class="performance-list">
-								<div class="performance-item">
-									<div class="performance-label !text-[18px]">Drag reduction: up to 80%</div>
-									<div class="performance-bar">
-										<div class="performance-bar-fill red-bar" style="width: 100%"></div>
-									</div>
+							<!-- 第二部分：性能对比 -->
+							<div class="panel-section">
+								<div class="section-title !text-[20px]">2. How does the hydrofoil perform compared to traditional
+									boats?
 								</div>
-								<div class="performance-item">
-									<div class="performance-label !text-[18px]">Stability improvement: 30%-70%</div>
-									<div class="performance-bar">
-										<div class="performance-bar-fill orange-bar" style="width: 70%"></div>
+								<div class="performance-list">
+									<div class="performance-item">
+										<div class="performance-label !text-[18px]">Drag reduction: up to 80%</div>
+										<div class="performance-bar">
+											<div class="performance-bar-fill red-bar" style="width: 100%"></div>
+										</div>
 									</div>
-								</div>
-								<div class="performance-item">
-									<div class="performance-label !text-[18px]">Speed increase: 30%-50%</div>
-									<div class="performance-bar">
-										<div class="performance-bar-fill orange-bar" style="width: 50%"></div>
+									<div class="performance-item">
+										<div class="performance-label !text-[18px]">Stability improvement: 30%-70%</div>
+										<div class="performance-bar">
+											<div class="performance-bar-fill orange-bar" style="width: 70%"></div>
+										</div>
 									</div>
-								</div>
-								<div class="performance-item">
-									<div class="performance-label !text-[18px]">Energy consumption reduction: 30%-50%
+									<div class="performance-item">
+										<div class="performance-label !text-[18px]">Speed increase: 30%-50%</div>
+										<div class="performance-bar">
+											<div class="performance-bar-fill orange-bar" style="width: 50%"></div>
+										</div>
 									</div>
-									<div class="performance-bar">
-										<div class="performance-bar-fill orange-bar" style="width: 50%"></div>
+									<div class="performance-item">
+										<div class="performance-label !text-[18px]">Energy consumption reduction: 30%-50%</div>
+										<div class="performance-bar">
+											<div class="performance-bar-fill orange-bar" style="width: 50%"></div>
+										</div>
 									</div>
-								</div>
-								<div class="performance-item">
-									<div class="performance-label !text-[18px]">Propulsion efficiency increase: 20%-40%
-									</div>
-									<div class="performance-bar">
-										<div class="performance-bar-fill orange-bar" style="width: 40%"></div>
+									<div class="performance-item">
+										<div class="performance-label !text-[18px]">Propulsion efficiency increase: 20%-40%</div>
+										<div class="performance-bar">
+											<div class="performance-bar-fill orange-bar" style="width: 40%"></div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -1703,6 +1699,21 @@ onUnmounted(() => {
 	overflow: hidden;
 }
 
+.modal-left-panel {
+	height: 100%;
+}
+
+.modal-left-content {
+	display: flex;
+	flex-direction: column;
+	gap: 18px;
+	flex: 1;
+	overflow-y: auto;
+	overflow-x: hidden;
+	padding-right: 16px;
+	box-sizing: border-box;
+}
+
 .modal-right-panel {
 	padding: 0;
 	display: flex;
@@ -1760,7 +1771,7 @@ onUnmounted(() => {
 	min-height: 500px;
 }
 
-@media (min-width: 640px) {
+/* @media (min-width: 640px) {
 	.panel-content {
 		min-height: 650px;
 	}
@@ -1776,7 +1787,7 @@ onUnmounted(() => {
 	.panel-content {
 		min-height: 850px;
 	}
-}
+} */
 
 .panel-background-video {
 	position: absolute;
@@ -1784,7 +1795,7 @@ onUnmounted(() => {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	object-fit: contain;
+	object-fit: cover;
 	object-position: center;
 	z-index: 0;
 }
@@ -2157,6 +2168,20 @@ onUnmounted(() => {
 	backdrop-filter: blur(10px) !important;
 	border: 1px solid rgba(255, 255, 255, 0.2) !important;
 	border-radius: 12px !important;
+}
+
+.pain-points-panel-content {
+	display: flex;
+	flex-direction: column;
+	min-height: 0 !important;
+	max-height: calc(100vh - 260px);
+	overflow: hidden;
+}
+
+.pain-points-panel-content .panel-content-inner {
+	flex: 1;
+	overflow-y: auto;
+	overflow-x: hidden;
 }
 
 
@@ -3955,5 +3980,31 @@ onUnmounted(() => {
 .custom-scrollbar {
 	scrollbar-width: thin;
 	scrollbar-color: rgba(255, 255, 255, 0.15) rgba(255, 255, 255, 0.05);
+}
+
+.pain-points-panel-content {
+	position: relative;
+	flex: 1;
+	overflow: hidden;
+	border-radius: 0 0 12px 12px;
+	min-height: 500px;
+}
+
+@media (min-width: 640px) {
+	.pain-points-panel-content {
+		min-height: 650px;
+	}
+}
+
+@media (min-width: 1024px) {
+	.pain-points-panel-content {
+		min-height: 750px;
+	}
+}
+
+@media (min-width: 1280px) {
+	.pain-points-panel-content {
+		min-height: 850px;
+	}
 }
 </style>
