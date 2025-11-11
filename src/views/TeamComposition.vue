@@ -361,7 +361,7 @@
                         </svg>
                     </div>
 
-                    <div class="w-[95vw] h-[70vh] min-h-[800px] flex flex-col overflow-hidden">
+                    <div class="w-[95vw] h-[70vh] min-h-[780px] flex flex-col overflow-hidden">
                         <div class="w-full h-full grid grid-cols-6 grid-rows-1 gap-2.5 justify-center content-center p-5">
                             <!-- 第一个项目 - 视频 -->
                             <div class="relative flex flex-col items-center justify-start bg-black/10 rounded-none overflow-hidden transition-all duration-300 cursor-pointer h-full hover:scale-[1.02] hover:border-cyan-400/30 hover:shadow-[0_10px_30px_rgba(0,212,255,0.2)]">
@@ -471,11 +471,11 @@
                                            playsinline>
                                     </video>
                                 </div>
-                                <div class="flex-1 flex flex-col text-center text-white px-2.5 py-[15px] w-full box-border mb-10 mt-[6vh]">
+                                <div class="flex-1 flex flex-col text-center text-white px-2.5 py-[15px] w-full box-border mt-[6vh]">
                                     <div class="text-white text-[20px] font-bold flex items-center justify-center mb-10">6</div>
                                     <div class="text-[20px] mb-2">Designer of the country's first smart yacht</div>
                                     <!-- 文字部分 -->
-                                    <div class="max-h-[230px] overflow-y-auto">
+                                    <div class="max-h-[180px] [@media(min-width:1920px)]:max-h-[230px] overflow-y-auto pb-10">
                                         <div class="text-[18px] mb-1 text-white/70">Project: Smart Boat No. 1</div>
                                         <div class="text-[18px] mb-1 text-white/70">Landing Date: October 2022</div>
                                         <div class="text-[18px] mb-1 text-white/70">Location: Guangdong-Hong Kong-Macao Greater Bay Area</div>

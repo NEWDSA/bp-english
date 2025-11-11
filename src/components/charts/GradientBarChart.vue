@@ -145,7 +145,7 @@ const getChartOptions = () => {
   return {
     backgroundColor: 'transparent',
     legend: props.isDetailed ? {
-      bottom: '3%',
+      bottom: '1%',
       left: 'center',
       itemGap: 80,
       textStyle: {
@@ -169,7 +169,7 @@ const getChartOptions = () => {
       left: '5%',
       right: '5%',
       top: '10%',
-      bottom: '15%'
+      bottom: props.isDetailed ? '19%' : '15%',
     },
     xAxis: {
       type: 'category',
