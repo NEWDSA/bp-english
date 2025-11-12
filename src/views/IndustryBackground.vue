@@ -282,7 +282,7 @@ watch(selectedCity, (newValue) => {
             <div class="text-white">
               <div class="flex items-center h-12">
                 <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
-                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">{{ isChinaSelected ? "China's Small Yacht Sales Market" : isSoutheastAsiaSelected ? "Water sports equipment in Southeast Asia" : isItalySelected ? "Italian small yacht sales market" : isAmericaSelected ? "Size of the Small Yacht Sales Market in the United States" : isMiddleEastSelected ? "Scale of Small Yacht Sales Market in the Middle East" : "Global small yacht sales market size" }}</p>
+                <p class="text-sm md:text-[20px]">{{ isChinaSelected ? "China's Small Yacht Sales Market" : isSoutheastAsiaSelected ? "Water sports equipment in Southeast Asia" : isItalySelected ? "Italian small yacht sales market" : isAmericaSelected ? "Size of the Small Yacht Sales Market in the United States" : isMiddleEastSelected ? "Scale of Small Yacht Sales Market in the Middle East" : "Global small yacht sales market size" }}</p>
               </div>
               <div :style="{ height: chartHeight }">
                 <EChartsComponent chart-type="area" :selected-city="selectedCity" @chart-click="handleChartClick" />
@@ -293,7 +293,7 @@ watch(selectedCity, (newValue) => {
             <div class="text-white">
               <div class="flex items-center h-12">
                 <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
-                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">{{ isChinaSelected ? "China's ship leasing market" : isSoutheastAsiaSelected ? "The ship leasing market in Southeast Asia" : isItalySelected ? "The scale of the Italian ship leasing market" : isAmericaSelected ? "The scale of the US ship leasing market" : isMiddleEastSelected ? "The scale of the ship leasing market in the Middle East" : "Global ship leasing market size" }}</p>
+                <p class="text-sm md:text-[20px]">{{ isChinaSelected ? "China's ship leasing market" : isSoutheastAsiaSelected ? "The ship leasing market in Southeast Asia" : isItalySelected ? "The scale of the Italian ship leasing market" : isAmericaSelected ? "The scale of the US ship leasing market" : isMiddleEastSelected ? "The scale of the ship leasing market in the Middle East" : "Global ship leasing market size" }}</p>
               </div>
               <div :style="{ height: chartHeight }">
                 <EChartsComponent chart-type="gradientBar" :selected-city="selectedCity" @chart-click="handleChartClick" />
@@ -304,7 +304,7 @@ watch(selectedCity, (newValue) => {
             <div v-if="!selectedCity" class="text-white">
               <div class="flex items-center h-12">
                 <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
-                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">{{ isChinaSelected ? "Age structure of Chinese ship owners" : isSoutheastAsiaSelected ? "Age structure of shipowners in Southeast Asia" : isItalySelected ? "Age structure of Italian shipowners" : isAmericaSelected ? "Age structure of American shipowners" : isMiddleEastSelected ? "Age structure of shipowners in the Middle East" : "Age structure of global shipowners" }}</p>
+                <p class="text-sm md:text-[20px]">{{ isChinaSelected ? "Age structure of Chinese ship owners" : isSoutheastAsiaSelected ? "Age structure of shipowners in Southeast Asia" : isItalySelected ? "Age structure of Italian shipowners" : isAmericaSelected ? "Age structure of American shipowners" : isMiddleEastSelected ? "Age structure of shipowners in the Middle East" : "Age structure of global shipowners" }}</p>
               </div>
               <div :style="{ height: chartHeight }">
                 <EChartsComponent chart-type="pie" :selected-city="selectedCity" @chart-click="handleChartClick" />
@@ -316,11 +316,11 @@ watch(selectedCity, (newValue) => {
               <!-- 数据下方放行业趋势、结论 -->
               <div class="flex items-center h-12">
                 <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
-                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">Industry Trends</p>
+                <p class="text-sm md:text-[20px]">Industry Trends</p>
               </div>
               <div class="bg-gray-900/50 rounded-xl overflow-hidden" :style="{ height: chartHeight }">
                 <div class="content-scroll-container h-full overflow-auto p-4 lg:p-6">
-                  <div class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">
+                  <div class="text-sm md:text-[18px]">
                     The future development of ships shows a clear trend of deep integration of "electrification" and "intelligentization".
                   </div>
 
@@ -330,7 +330,7 @@ watch(selectedCity, (newValue) => {
                     <img src="../assets/icon-12.png" alt="Icon" class="w-[14px] lg:w-[16px] mr-2 ml-2 lg:mr-3 lg:ml-3" />
                     <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">Intelligent</p> -->
                   </div>
-                  <div class="mt-2 text-[11px] lg:text-[12px] 2xl:text-[16px] leading-6 lg:leading-8 space-y-2">
+                  <div class="mt-2 text-[16px] md:text-[18px] leading-6 lg:leading-8 space-y-2">
                     <p class="flex"><img src="../assets/icon-13.png" alt="Icon" class="flex-shrink-0 w-[16px] lg:w-[18px] h-[16px] lg:h-[18px] mr-2 lg:mr-3 mt-0.5 lg:mt-1" />Environmental regulations require that major maritime authorities around the world issue zero-emission regulations for ships, and oil tankers will be gradually banned from entering their waterways in the future.</p>
                     <p class="flex"><img src="../assets/icon-14.png" alt="Icon" class="flex-shrink-0 w-[18px] lg:w-[20px] h-[18px] lg:h-[20px] mr-2 lg:mr-3 mt-0.5 lg:mt-1" />The "three-electric" technologies (battery, motor, and electronic control) are being transferred to other transportation sectors: With the development of new energy vehicles, China's battery, motor, and electronic control technologies and industrial chains have matured, leading to a revolution in energy technology. Currently, major boat companies are gradually launching electric boat products, striving to seize market share.</p>
                     <p class="flex"><img src="../assets/icon-15.png" alt="Icon" class="flex-shrink-0 w-[18px] lg:w-[20px] h-[18px] lg:h-[20px] mr-2 lg:mr-3 mt-0.5 lg:mt-1" />Intelligentization trend: Electrification should not be a simple "oil-to-electric" conversion, but a comprehensive upgrade of a completely new product category; in other industries, we have already seen intelligent design constantly disrupting and replacing traditional products, and computing chips and AI technology are relatively mature and can be quickly migrated.</p>
@@ -346,7 +346,7 @@ watch(selectedCity, (newValue) => {
             <div class="text-white flex-shrink-0">
               <div class="flex items-center h-10 md:h-12">
                 <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
-                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">Regional economic and industrial data</p>
+                <p class="text-sm md:text-[20px]">Regional economic and industrial data</p>
               </div>
               <div class="bg-gray-900/50 rounded-xl">
                 <div class="p-2 md:p-3 lg:p-4 xl:p-4 2xl:p-6">
@@ -354,8 +354,8 @@ watch(selectedCity, (newValue) => {
                   <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-2 md:gap-3 lg:gap-4 xl:gap-5">
                     <!-- GDP数据 -->
                     <div class="text-center">
-                      <p class="text-cyan-400 text-[9px] sm:text-[10px] md:text-[11px] lg:text-xs xl:text-sm font-semibold mb-1 sm:mb-1 md:mb-2 lg:mb-3 xl:mb-4 h-[28px] md:h-[32px] flex items-center justify-center">GDP per capita</p>
-                      <p class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-bold text-white gdp-value mb-1 sm:mb-1 md:mb-1" :data-value="
+                      <p class="text-cyan-400 text-[18px] md:text-[20px] mb-1 sm:mb-1 md:mb-2 lg:mb-3 xl:mb-4 h-[28px] md:h-[32px] flex items-center justify-center">GDP per capita</p>
+                      <p class="text-2xl md:text-[30px] font-bold text-white gdp-value mb-1 sm:mb-1 md:mb-1" :data-value="
                         isChinaSelected ? '13445' :
                         isSoutheastAsiaSelected ? '91727' :
                         isItalySelected ? '40437' :
@@ -370,8 +370,8 @@ watch(selectedCity, (newValue) => {
                         isMiddleEastSelected ? '$53,813' :
                         'Global average level'
                       }}</p>
-                      <div class="text-[8px] sm:text-[9px] md:text-[10px] lg:text-[11px] xl:text-xs text-gray-400 leading-relaxed">
-                        <p class="min-h-[16px] md:min-h-[20px]">
+                      <div class="text-[16px] md:text-[18px] text-gray-400 leading-relaxed">
+                        <p class="min-h-[16px] md:min-h-[30px]">
                           {{
                             isChinaSelected ? 'Chinese mainland' :
                             isSoutheastAsiaSelected ? 'Singapore' :
@@ -381,14 +381,14 @@ watch(selectedCity, (newValue) => {
                             ''
                           }}
                         </p>
-                        <p class="mt-1 sm:mt-1 md:mt-2 lg:mt-3 xl:mt-4 hidden lg:block">Regions with a per capita GDP exceeding US$30,000 are beginning to allocate water-based assets.</p>
+                        <p class="mt-1 sm:mt-1 md:mt-2 lg:mt-3 xl:mt-4 hidden lg:block text-gray-500 text-[16px] md:text-[18px]">Regions with a per capita GDP exceeding US$30,000 are beginning to allocate water-based assets.</p>
                       </div>
                     </div>
 
                     <!-- 家庭收入分布 -->
                     <div class="text-center">
-                      <p class="text-cyan-400 text-[9px] sm:text-[10px] md:text-[11px] lg:text-xs xl:text-sm font-semibold mb-1 sm:mb-1 md:mb-2 lg:mb-3 xl:mb-4 h-[28px] md:h-[32px] flex items-center justify-center">Annual income<br class="sm:hidden"/> > 500,000 RMB</p>
-                      <p class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-bold text-white income-value mb-1 sm:mb-1 md:mb-1" :data-value="
+                      <p class="text-cyan-400 text-[18px] md:text-[20px] mb-1 sm:mb-1 md:mb-2 lg:mb-3 xl:mb-4 h-[28px] md:h-[32px] flex items-center justify-center">Annual income<br class="sm:hidden"/> > 500,000 RMB</p>
+                      <p class="text-2xl md:text-[30px] font-bold text-white income-value mb-1 sm:mb-1 md:mb-1" :data-value="
                         isChinaSelected ? '4' :
                         isSoutheastAsiaSelected ? '15' :
                         isItalySelected ? '28' :
@@ -403,8 +403,8 @@ watch(selectedCity, (newValue) => {
                         isMiddleEastSelected ? '7%' :
                         'Significant differences exist between regions.'
                       }}</p>
-                      <div class="text-[8px] sm:text-[9px] md:text-[10px] lg:text-[11px] xl:text-xs text-gray-400 leading-relaxed">
-                        <p class="min-h-[16px] md:min-h-[20px]">
+                      <div class="text-[16px] md:text-[18px] text-gray-400 leading-relaxed">
+                        <p class="min-h-[16px] md:min-h-[30px]">
                           {{
                             isSoutheastAsiaSelected ? 'Singapore' :
                             isMiddleEastSelected ? 'Saudi Arabia' :
@@ -412,14 +412,14 @@ watch(selectedCity, (newValue) => {
                             ''
                           }}
                         </p>
-                        <p class="mt-1 sm:mt-1 md:mt-2 lg:mt-3 xl:mt-4 hidden lg:block">Families with an annual income exceeding 500,000 yuan have the ability to purchase a yacht.</p>
+                        <p class="mt-1 sm:mt-1 md:mt-2 lg:mt-3 xl:mt-4 hidden lg:block text-gray-500 text-[16px] md:text-[18px]">Families with an annual income exceeding 500,000 yuan have the ability to purchase a yacht.</p>
                       </div>
                     </div>
 
                     <!-- 产业规模 -->
                     <div class="text-center">
-                      <p class="text-cyan-400 text-[9px] sm:text-[10px] md:text-[11px] lg:text-xs xl:text-sm font-semibold mb-1 sm:mb-1 md:mb-2 lg:mb-3 xl:mb-4 h-[28px] md:h-[32px] flex items-center justify-center">Leisure boat<br class="sm:hidden"/> industry chain</p>
-                      <p class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-bold text-white industry-value mb-1 sm:mb-1 md:mb-1" :data-value="
+                      <p class="text-cyan-400 text-[18px] md:text-[20px] mb-1 sm:mb-1 md:mb-2 lg:mb-3 xl:mb-4 h-[28px] md:h-[32px] flex items-center justify-center">Leisure boat<br class="sm:hidden"/> industry chain</p>
+                      <p class="text-2xl md:text-[30px] font-bold text-white industry-value mb-1 sm:mb-1 md:mb-1" :data-value="
                         isChinaSelected ? '60' :
                         isSoutheastAsiaSelected ? '12' :
                         isItalySelected ? '250' :
@@ -434,21 +434,21 @@ watch(selectedCity, (newValue) => {
                         isMiddleEastSelected ? '$2 billion' :
                         'Global market size'
                       }}</p>
-                      <div class="text-[8px] sm:text-[9px] md:text-[10px] lg:text-[11px] xl:text-xs text-gray-400 leading-relaxed">
-                        <p class="min-h-[16px] md:min-h-[20px]">
+                      <div class="text-[16px] md:text-[18px] text-gray-400 leading-relaxed">
+                        <p class="min-h-[16px] md:min-h-[30px]">
                           {{
                             isItalySelected ? 'Europe' :
                             ''
                           }}
                         </p>
-                        <p class="mt-1 sm:mt-1 md:mt-2 lg:mt-3 xl:mt-4 hidden lg:block">Industry size reflects the level of infrastructure development.</p>
+                        <p class="mt-1 md:mt-2 lg:mt-3 xl:mt-4 hidden lg:block text-gray-500 text-[16px] md:text-[18px]">Industry size reflects the level of infrastructure development.</p>
                       </div>
                     </div>
 
                     <!-- 船艇拥有量 -->
                     <div class="text-center">
-                      <p class="text-cyan-400 text-[9px] sm:text-[10px] md:text-[11px] lg:text-xs xl:text-sm font-semibold mb-1 sm:mb-1 md:mb-2 lg:mb-3 xl:mb-4 h-[28px] md:h-[32px] flex items-center justify-center">Boat ownership</p>
-                      <p class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-bold text-white boat-value mb-1 sm:mb-1 md:mb-1" :data-value="
+                      <p class="text-cyan-400 text-[18px] md:text-[20px] mb-1 sm:mb-1 md:mb-2 lg:mb-3 xl:mb-4 h-[28px] md:h-[32px] flex items-center justify-center">Boat ownership</p>
+                      <p class="text-2xl md:text-[30px] font-bold text-white boat-value mb-1 sm:mb-1 md:mb-1" :data-value="
                         isChinaSelected ? '0.5' :
                         isSoutheastAsiaSelected ? '3.5' :
                         isItalySelected ? '10' :
@@ -463,9 +463,9 @@ watch(selectedCity, (newValue) => {
                         isMiddleEastSelected ? '8 ships' :
                         'Global average level'
                       }}</p>
-                      <div class="text-[8px] sm:text-[9px] md:text-[10px] lg:text-[11px] xl:text-xs text-gray-400 leading-relaxed">
+                      <div class="text-[16px] md:text-[18px] text-gray-400 leading-relaxed">
                         <p>per 100 households</p>
-                        <p class="mt-1 sm:mt-1 md:mt-2 lg:mt-3 xl:mt-4 hidden lg:block">Reflecting the popularity of water sports</p>
+                        <p class="mt-1 sm:mt-1 md:mt-2 lg:mt-3 xl:mt-4 hidden lg:block text-gray-500 text-[16px] md:text-[18px]">Reflecting the popularity of water sports</p>
                       </div>
                     </div>
                   </div>
@@ -477,58 +477,58 @@ watch(selectedCity, (newValue) => {
             <div class="text-white flex flex-col flex-1 min-h-0 mt-3 md:mt-4">
               <div class="flex items-center h-8 md:h-10 flex-shrink-0">
                 <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
-                <p class="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-[18px]">Water pollution navigation ban regulations</p>
+                <p class="text-sm md:text-[20px]">Water pollution navigation ban regulations</p>
               </div>
               <div class="bg-gray-900/50 rounded-xl overflow-hidden flex-1 min-h-0">
                 <div class="content-scroll-container h-full overflow-y-auto overflow-x-hidden p-3 md:p-4 lg:p-5 xl:p-6">
                   <div class="text-[9px] sm:text-[10px] md:text-xs lg:text-sm xl:text-sm 2xl:text-[15px] text-gray-200 space-y-2 md:space-y-3 lg:space-y-4">
                     <template v-if="isChinaSelected">
-                      <p class="text-cyan-400 font-semibold">National Emission Standards:</p>
-                      <p>According to China's "Ship Emission Control Area Regulations", China has established "Emission Control Areas" including major coastal and inland waterways such as the Yangtze River and Pearl River, imposing strict requirements on ship emissions, particularly nitrogen oxides (NOx), particulate matter (PM), and exhaust emissions.</p>
+                      <p class="text-cyan-400 text-[20px]">National Emission Standards:</p>
+                      <p class="text-[18px]">According to China's "Ship Emission Control Area Regulations", China has established "Emission Control Areas" including major coastal and inland waterways such as the Yangtze River and Pearl River, imposing strict requirements on ship emissions, particularly nitrogen oxides (NOx), particulate matter (PM), and exhaust emissions.</p>
 
-                      <p class="text-cyan-400 font-semibold mt-4 lg:mt-6">Yangtze River:</p>
-                      <p>According to the "Yangtze River Ship Emission Control Area (Revised 2018)" regulations, all navigating vessels must comply with emission standards. Fuel-powered vessels in particular must meet stricter emission standards, with some areas directly prohibiting high-emission vessels from entering waters.</p>
+                      <p class="text-cyan-400 text-[20px] mt-4 lg:mt-6">Yangtze River:</p>
+                      <p class="text-[18px]">According to the "Yangtze River Ship Emission Control Area (Revised 2018)" regulations, all navigating vessels must comply with emission standards. Fuel-powered vessels in particular must meet stricter emission standards, with some areas directly prohibiting high-emission vessels from entering waters.</p>
 
-                      <p class="text-cyan-400 font-semibold mt-4 lg:mt-6">Port and Terminal Management:</p>
-                      <p>Many coastal city terminals in China have regulations prohibiting vessels with excessive emissions from entering ports, and require vessels in port to use low-sulfur fuel or power systems that meet emission standards.</p>
+                      <p class="text-cyan-400 text-[20px] mt-4 lg:mt-6">Port and Terminal Management:</p>
+                      <p class="text-[18px]">Many coastal city terminals in China have regulations prohibiting vessels with excessive emissions from entering ports, and require vessels in port to use low-sulfur fuel or power systems that meet emission standards.</p>
                     </template>
 
                     <template v-else-if="isSoutheastAsiaSelected">
-                      <p class="text-cyan-400 font-semibold">Malaysia:</p>
-                      <p>Certain regions in Malaysia (such as Langkawi and Penang islands) impose strict regional restrictions on fuel-powered boats, particularly in protected areas, with some waters prohibiting the use of internal combustion engine vessels.</p>
+                      <p class="text-cyan-400 text-[20px]">Malaysia:</p>
+                      <p class="text-[18px]">Certain regions in Malaysia (such as Langkawi and Penang islands) impose strict regional restrictions on fuel-powered boats, particularly in protected areas, with some waters prohibiting the use of internal combustion engine vessels.</p>
 
-                      <p class="text-cyan-400 font-semibold mt-4 lg:mt-6">Singapore:</p>
-                      <p>Singapore has strict port management regulations requiring vessels to comply with environmental emission standards when entering ports, and implements restrictions on internal combustion engine vessels, especially in marine protected areas.</p>
+                      <p class="text-cyan-400 text-[20px] mt-4 lg:mt-6">Singapore:</p>
+                      <p class="text-[18px]">Singapore has strict port management regulations requiring vessels to comply with environmental emission standards when entering ports, and implements restrictions on internal combustion engine vessels, especially in marine protected areas.</p>
 
-                      <p class="text-cyan-400 font-semibold mt-4 lg:mt-6">Thailand:</p>
-                      <p>Popular tourist areas in Thailand such as Phuket have imposed restrictions on high-emission vessels (such as some old fishing boats), gradually encouraging the use of low-emission or electric boats.</p>
+                      <p class="text-cyan-400 text-[20px] mt-4 lg:mt-6">Thailand:</p>
+                      <p class="text-[18px]">Popular tourist areas in Thailand such as Phuket have imposed restrictions on high-emission vessels (such as some old fishing boats), gradually encouraging the use of low-emission or electric boats.</p>
                     </template>
 
                     <template v-else-if="isItalySelected">
-                      <p class="text-cyan-400 font-semibold">EU Directives:</p>
-                      <p>Europe has introduced the "Recreational Craft Directive (RCD, 2013/53/EU)", which specifies vessel emission requirements covering climate change (greenhouse gases), air pollution (particulate matter, nitrogen oxides), and noise pollution. The directive requires all vessels entering the EU market to comply with environmental protection standards. In 2018, the EU updated vessel emission standards, requiring all new vessels to meet stricter emission requirements. Emissions of nitrogen oxides, hydrocarbons, and other pollutants will be further reduced.</p>
+                      <p class="text-cyan-400 text-[20px]">EU Directives:</p>
+                      <p class="text-[18px]">Europe has introduced the "Recreational Craft Directive (RCD, 2013/53/EU)", which specifies vessel emission requirements covering climate change (greenhouse gases), air pollution (particulate matter, nitrogen oxides), and noise pollution. The directive requires all vessels entering the EU market to comply with environmental protection standards. In 2018, the EU updated vessel emission standards, requiring all new vessels to meet stricter emission requirements. Emissions of nitrogen oxides, hydrocarbons, and other pollutants will be further reduced.</p>
 
-                      <p class="text-cyan-400 font-semibold mt-4 lg:mt-6">Italian Lakes:</p>
-                      <p>Multiple Italian lakes (such as Lake Garda, Lake Bracciano, Lake Vico) have strict navigation bans on fuel-powered boats, especially in environmental protection and tourist protection areas. For example, Italian lake districts prohibit the use of highly polluting vessels and promote the use of more electric or eco-friendly boats. Some Italian waters restrict vessels exceeding certain noise level standards from entering, especially in sensitive ecological areas and resort areas. Some lakes also have emission restrictions, for example, stipulating that only vessels meeting EU emission standards are allowed to enter.</p>
+                      <p class="text-cyan-400 text-[20px] mt-4 lg:mt-6">Italian Lakes:</p>
+                      <p class="text-[18px]">Multiple Italian lakes (such as Lake Garda, Lake Bracciano, Lake Vico) have strict navigation bans on fuel-powered boats, especially in environmental protection and tourist protection areas. For example, Italian lake districts prohibit the use of highly polluting vessels and promote the use of more electric or eco-friendly boats. Some Italian waters restrict vessels exceeding certain noise level standards from entering, especially in sensitive ecological areas and resort areas. Some lakes also have emission restrictions, for example, stipulating that only vessels meeting EU emission standards are allowed to enter.</p>
                     </template>
 
                     <template v-else-if="isAmericaSelected">
-                      <p class="text-cyan-400 font-semibold">Lake Tahoe:</p>
-                      <p>Since 1999, California has strictly prohibited two-stroke carbureted engines from entering the lake. This means that old, heavily polluting engines cannot be used in the lake area.</p>
+                      <p class="text-cyan-400 text-[20px]">Lake Tahoe:</p>
+                      <p class="text-[18px]">Since 1999, California has strictly prohibited two-stroke carbureted engines from entering the lake. This means that old, heavily polluting engines cannot be used in the lake area.</p>
 
-                      <p class="text-cyan-400 font-semibold mt-4 lg:mt-6">EPA Tier 4 Standards (2010):</p>
-                      <p>The "U.S. Marine Emission Standards" (EPA's Tier 4 Standards) introduced in 2010 specify emission limits for small vessels and yachts. Federal standards (EPA) have established strict emission standards for new vessels and engines, including low-sulfur fuel requirements and limits on nitrogen dioxide (NOx), hydrocarbons, and particulate matter (PM).</p>
+                      <p class="text-cyan-400 text-[20px] mt-4 lg:mt-6">EPA Tier 4 Standards (2010):</p>
+                      <p class="text-[18px]">The "U.S. Marine Emission Standards" (EPA's Tier 4 Standards) introduced in 2010 specify emission limits for small vessels and yachts. Federal standards (EPA) have established strict emission standards for new vessels and engines, including low-sulfur fuel requirements and limits on nitrogen dioxide (NOx), hydrocarbons, and particulate matter (PM).</p>
 
-                      <p class="text-cyan-400 font-semibold mt-4 lg:mt-6">Noise Standards:</p>
-                      <p>Many states, such as California, require that noise from yachts and small vessels not exceed specific noise standards (e.g., 75 dB). These requirements apply to most vessels, including yachts and personal watercraft.</p>
+                      <p class="text-cyan-400 text-[20px] mt-4 lg:mt-6">Noise Standards:</p>
+                      <p class="text-[18px]">Many states, such as California, require that noise from yachts and small vessels not exceed specific noise standards (e.g., 75 dB). These requirements apply to most vessels, including yachts and personal watercraft.</p>
                     </template>
 
                     <template v-else-if="isMiddleEastSelected">
-                      <p class="text-cyan-400 font-semibold">United Arab Emirates:</p>
-                      <p>Some waters and terminals in Dubai, UAE restrict internal combustion engine vessels, particularly near marine protected areas and high-end tourist areas (such as Jumeirah Beach). Dubai's environmental protection authority (DEWA) requires vessels to meet environmental standards and gradually promotes the use of electric boats and low-emission powered vessels.</p>
+                      <p class="text-cyan-400 text-[20px]">United Arab Emirates:</p>
+                      <p class="text-[18px]">Some waters and terminals in Dubai, UAE restrict internal combustion engine vessels, particularly near marine protected areas and high-end tourist areas (such as Jumeirah Beach). Dubai's environmental protection authority (DEWA) requires vessels to meet environmental standards and gradually promotes the use of electric boats and low-emission powered vessels.</p>
 
-                      <p class="text-cyan-400 font-semibold mt-4 lg:mt-6">Saudi Arabia:</p>
-                      <p>Some waters in Saudi Arabia's Red Sea region and Gulf coast have begun restricting highly polluting vessels, especially old vessels, and encouraging the use of more environmentally friendly ships.</p>
+                      <p class="text-cyan-400 text-[20px] mt-4 lg:mt-6">Saudi Arabia:</p>
+                      <p class="text-[18px]">Some waters in Saudi Arabia's Red Sea region and Gulf coast have begun restricting highly polluting vessels, especially old vessels, and encouraging the use of more environmentally friendly ships.</p>
                     </template>
                   </div>
                 </div>

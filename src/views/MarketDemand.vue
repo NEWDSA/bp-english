@@ -1102,12 +1102,12 @@ const nextImage = () => {
 
 .icon-6-container {
 	top: 1.04vw; /* 20px */
-	left: 5.21vw; /* 100px */
+	left: 4.6vw; /* 100px */
 }
 
 .icon-7-container {
 	top: 6.77vw; /* 130px */
-	left: 9.375vw; /* 180px */
+	left: 9.1vw; /* 180px */
 }
 
 .icon-8-container {
