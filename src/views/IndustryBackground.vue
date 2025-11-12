@@ -348,8 +348,8 @@ watch(selectedCity, (newValue) => {
                 <div class="w-1 h-1 bg-white rounded-full mr-3"></div>
                 <p class="text-sm md:text-[20px]">Regional economic and industrial data</p>
               </div>
-              <div class="bg-gray-900/50 rounded-xl">
-                <div class="p-2 md:p-3 lg:p-4 xl:p-4 2xl:p-6">
+              <div class="bg-gray-900/50 rounded-xl overflow-hidden" :style="{ height: `calc(${chartHeight} + 8vh)` }">
+                <div class="p-2 md:p-3 lg:p-4 xl:p-4 2xl:p-6 content-scroll-container h-full overflow-y-auto">
                   <!-- 横向排列的数据 -->
                   <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-2 md:gap-3 lg:gap-4 xl:gap-5">
                     <!-- GDP数据 -->
