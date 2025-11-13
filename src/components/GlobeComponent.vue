@@ -43,7 +43,7 @@ onMounted(async () => {
     // 添加窗口大小变化监听器
     window.addEventListener('resize', handleResize)
 
-    // 等待DOM完全准备就绪，多次检查
+    // 延迟加载 Globe 组件（优化首屏加载）
     setTimeout(async () => {
       if (!globeContainer.value || !(globeContainer.value instanceof HTMLElement)) {
         console.error('Globe container not found or invalid')
@@ -179,12 +179,17 @@ onMounted(async () => {
         console.log('Globe initialized, loading satellite data...')
 
         // 根据 props.loadData 决定是否加载数据
+        // 延迟加载数据，优化首屏性能
         if (props.loadData) {
-          // 加载卫星数据
-          loadSatelliteData()
+          // 延迟加载卫星数据（等待地球初始化完成）
+          setTimeout(() => {
+            loadSatelliteData()
+          }, 1000)
 
-          // 加载航空数据
-          loadAirlineData()
+          // 延迟加载航空数据
+          setTimeout(() => {
+            loadAirlineData()
+          }, 1500)
         }
 
       } catch (error) {

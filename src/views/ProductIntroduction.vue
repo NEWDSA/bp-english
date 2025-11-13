@@ -4,8 +4,8 @@
 		<TopNavigation />
 
 		<!-- 背景视频 -->
-		<video class="absolute inset-0 w-full h-full object-cover" src="../assets/video/video-1.mp4" autoplay muted loop
-			playsinline></video>
+		<video class="absolute inset-0 w-full h-full object-cover" v-lazy-load="video1Src" autoplay muted loop
+			playsinline preload="metadata"></video>
 
 		<!-- 左侧悬浮按钮 -->
 		<div class="fixed left-[-28px] w-20 h-20 bg-[rgba(0,212,255,0.2)] backdrop-blur-[10px] border border-[rgba(0,212,255,0.3)] rounded-full flex items-center justify-center cursor-pointer z-[10001] text-[#00d4ff] overflow-hidden hover:bg-[rgba(0,212,255,0.3)] hover:border-[rgba(0,212,255,0.5)] shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
@@ -196,7 +196,7 @@
 								<!-- "御"水翼艇 -->
 								<div class="competitor-item yu-column">
 									<div class="competitor-image-wrapper" style="height:230px;">
-										<video src="../assets/boat.mp4" alt="御水翼艇" class="competitor-image" autoplay
+										<video v-lazy-load="boatVideoSrc" alt="御水翼艇" class="competitor-image" autoplay
 											loop muted playsinline></video>
 									</div>
 								</div>
@@ -320,7 +320,7 @@
 								<!-- "御"水翼艇 -->
 								<div class="competitor-item yu-column">
 									<div class="competitor-image-wrapper" style="height:230px;">
-										<video src="../assets/boat.mp4" alt="御水翼艇" class="competitor-image" autoplay
+										<video v-lazy-load="boatVideoSrc" alt="御水翼艇" class="competitor-image" autoplay
 											loop muted playsinline></video>
 									</div>
 								</div>
@@ -469,7 +469,7 @@
 								<!-- 我们的产品 -->
 								<div class="competitor-item yu-column">
 									<div class="competitor-image-wrapper" style="height:230px;">
-										<video src="../assets/boat.mp4" alt="御水翼艇" class="competitor-image" autoplay
+										<video v-lazy-load="boatVideoSrc" alt="御水翼艇" class="competitor-image" autoplay
 											loop muted playsinline></video>
 									</div>
 								</div>
@@ -774,7 +774,7 @@
 						<!-- 内容区域 -->
 						<div class="panel-content">
 							<!-- 背景视频 -->
-							<video ref="videoRef" class="panel-background-video" src="../assets/shuiyiting.mp4" muted
+							<video ref="videoRef" class="panel-background-video" v-lazy-load="shuiyitingVideoSrc" muted
 								loop playsinline @click="togglePlayPause"></video>
 							<!-- 视频遮罩层 -->
 							<!-- <div class="panel-video-overlay"></div> -->
@@ -963,6 +963,11 @@ import { ref, onMounted, onUpdated, onUnmounted, nextTick, watch } from 'vue'
 import TopNavigation from '../components/TopNavigation.vue'
 
 const router = useRouter()
+
+// 视频路径 - 使用 new URL 获取资源路径，避免将视频打包到 JS bundle 中
+const video1Src = new URL('../assets/video/video-1.mp4', import.meta.url).href
+const boatVideoSrc = new URL('../assets/boat.mp4', import.meta.url).href
+const shuiyitingVideoSrc = new URL('../assets/shuiyiting.mp4', import.meta.url).href
 
 // 当前激活的导航项
 const activeNavItem = ref<string | null>(null)

@@ -552,19 +552,20 @@ const goHome = () => {
 	router.push('/')
 }
 
-import video1 from '../assets/video/3-2_compressed.mp4'
-import video2 from '../assets/video/3-1_compressed.mp4'
-import video3 from '../assets/video/3-3_compressed.mp4'
-import video4 from '../assets/video/2-2_compressed.mp4'
-import video5 from '../assets/video/2-1_compressed.mp4'
-import video6 from '../assets/video/2-3_compressed.mp4'
-import video7 from '../assets/video/2-4_compressed.mp4'
-import video8 from '../assets/video/1-1_compressed.mp4'
-import video9 from '../assets/video/1-2_compressed.mp4'
-import video10 from '../assets/video/1-4_compressed.mp4'
-import video11 from '../assets/video/4-1_compressed.mp4'
-import video12 from '../assets/video/4-2_compressed.mp4'
-import video13 from '../assets/video/4-3_compressed.mp4'
+// 使用 new URL 获取资源路径，避免将视频打包到 JS bundle 中
+const video1 = new URL('../assets/video/3-2_compressed.mp4', import.meta.url).href
+const video2 = new URL('../assets/video/3-1_compressed.mp4', import.meta.url).href
+const video3 = new URL('../assets/video/3-3_compressed.mp4', import.meta.url).href
+const video4 = new URL('../assets/video/2-2_compressed.mp4', import.meta.url).href
+const video5 = new URL('../assets/video/2-1_compressed.mp4', import.meta.url).href
+const video6 = new URL('../assets/video/2-3_compressed.mp4', import.meta.url).href
+const video7 = new URL('../assets/video/2-4_compressed.mp4', import.meta.url).href
+const video8 = new URL('../assets/video/1-1_compressed.mp4', import.meta.url).href
+const video9 = new URL('../assets/video/1-2_compressed.mp4', import.meta.url).href
+const video10 = new URL('../assets/video/1-4_compressed.mp4', import.meta.url).href
+const video11 = new URL('../assets/video/4-1_compressed.mp4', import.meta.url).href
+const video12 = new URL('../assets/video/4-2_compressed.mp4', import.meta.url).href
+const video13 = new URL('../assets/video/4-3_compressed.mp4', import.meta.url).href
 
 // 每个画廊项的图片集
 const imageSets = {
@@ -774,13 +775,14 @@ const nextImage = () => {
         <!-- 图片1 -->
         <div class="gallery-item" @click="openModal(1)">
           <video
-            :src="video1"
+            v-lazy-load="video1"
             alt="Inter island transportation"
             class="w-full h-full object-cover"
             autoplay
             muted
             loop
             playsinline
+            preload="metadata"
           ></video>
           <div class="image-mask absolute inset-0 bg-black/30 flex items-center justify-center transition-opacity duration-300">
             <div class="text-content bg-black/50 px-4 py-2 rounded w-full text-center">
@@ -792,13 +794,14 @@ const nextImage = () => {
         <!-- 图片2 -->
         <div class="gallery-item" @click="openModal(2)">
           <video
-            :src="video7"
+            v-lazy-load="video7"
             alt="Urban water system transportation"
             class="w-full h-full object-cover"
             autoplay
             muted
             loop
             playsinline
+            preload="metadata"
           ></video>
           <div class="image-mask absolute inset-0 bg-black/30 flex items-center justify-center transition-opacity duration-300">
             <div class="text-content bg-black/50 px-4 py-2 rounded w-full text-center">
@@ -810,13 +813,14 @@ const nextImage = () => {
         <!-- 图片3 -->
         <div class="gallery-item" @click="openModal(4)">
           <video
-            :src="video11"
+            v-lazy-load="video11"
             alt="Water sports and fishing"
             class="w-full h-full object-cover"
             autoplay
             muted
             loop
             playsinline
+            preload="metadata"
           ></video>
           <div class="image-mask absolute inset-0 bg-black/30 flex items-center justify-center transition-opacity duration-300">
             <div class="text-content bg-black/50 px-4 py-2 rounded w-full text-center">
@@ -828,13 +832,14 @@ const nextImage = () => {
         <!-- 图片4 -->
         <div class="gallery-item" @click="openModal(3)">
           <video
-            :src="video8"
+            v-lazy-load="video8"
             alt="Tourist attraction"
             class="w-full h-full object-cover"
             autoplay
             muted
             loop
             playsinline
+            preload="metadata"
           ></video>
           <div class="image-mask absolute inset-0 bg-black/30 flex items-center justify-center transition-opacity duration-300">
             <div class="text-content bg-black/50 px-4 py-2 rounded w-full text-center">
@@ -1013,7 +1018,7 @@ const nextImage = () => {
         <!-- 当前图片 -->
         <template v-if="typeof currentImages[currentImageIndex] === 'string' && currentImages[currentImageIndex].endsWith('.mp4')">
           <video
-            :src="currentImages[currentImageIndex]"
+            v-lazy-load="currentImages[currentImageIndex]"
             :alt="`Gallery Video ${currentImageIndex + 1}`"
             class="w-full h-full object-contain rounded-lg"
             autoplay
@@ -1021,9 +1026,10 @@ const nextImage = () => {
             loop
             playsinline
             controls
+            preload="metadata"
           ></video>
         </template>
-        <img v-else :src="currentImages[currentImageIndex]" :alt="`Gallery Image ${currentImageIndex + 1}`" class="w-full h-full object-contain rounded-lg" />
+        <img v-else v-lazy-load="currentImages[currentImageIndex]" :alt="`Gallery Image ${currentImageIndex + 1}`" class="w-full h-full object-contain rounded-lg" />
 
         <!-- 图片计数器 -->
         <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white bg-black/50 px-4 py-2 rounded-full text-sm">

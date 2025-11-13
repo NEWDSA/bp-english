@@ -8,9 +8,9 @@
 			muted
 			loop
 			playsinline
-		>
-			<source :src="homeVideo" type="video/mp4">
-		</video>
+			preload="metadata"
+			v-lazy-load="homeVideo"
+		></video>
 		<!-- 视频背景黑色遮罩 -->
 		<div class="absolute top-0 left-0 w-full h-full bg-black/10 z-[2] pointer-events-none"></div>
 		
@@ -19,7 +19,7 @@
 			ref="audioRef"
 			:src="bgMusic"
 			loop
-			preload="auto"
+			preload="none"
 			:volume="0.5"
 		></audio>
 		
@@ -94,7 +94,7 @@
 			<img 
 				class="absolute top-0 left-0 w-full h-full object-cover rounded-full transition-transform duration-300 hover:rotate-[10deg] z-10" 
 				alt="version" 
-				:src="yihaiLogo" 
+				v-lazy-load="yihaiLogo"
 			/>
 		</div>
 
@@ -138,9 +138,10 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import homeVideo from '../assets/home_compressed.mp4'
-import yihaiLogo from '../assets/logoh20.png'
-import bgMusic from '../assets/video/music.mp3'
+// 使用 new URL 获取资源路径，避免将视频打包到 JS bundle 中
+const homeVideo = new URL('../assets/home_compressed.mp4', import.meta.url).href
+const yihaiLogo = new URL('../assets/logoh20.png', import.meta.url).href
+const bgMusic = new URL('../assets/video/music.mp3', import.meta.url).href
 
 const router = useRouter()
 const route = useRoute()
@@ -237,9 +238,13 @@ function navigateToProduct() {
 onMounted(() => {
 	document.addEventListener('keydown', onKeydown)
 
-	// 尝试播放音乐
+	// 延迟加载音频资源（用户交互后再加载）
 	const tryPlayMusic = () => {
 		if (audioRef.value) {
+			// 如果音频还没有加载，先加载
+			if (audioRef.value.readyState === 0) {
+				audioRef.value.load()
+			}
 			audioRef.value.volume = 0.5
 			audioRef.value.play().then(() => {
 				isPlaying.value = true
@@ -251,8 +256,12 @@ onMounted(() => {
 		}
 	}
 
-	// 立即尝试播放
-	tryPlayMusic()
+	// 延迟加载音频，等待用户交互
+	setTimeout(() => {
+		if (audioRef.value) {
+			audioRef.value.load()
+		}
+	}, 1000)
 
 	// 监听页面可见性变化
 	document.addEventListener('visibilitychange', () => {
