@@ -183,12 +183,12 @@ onMounted(async () => {
         if (props.loadData) {
           // 延迟加载卫星数据（等待地球初始化完成）
           setTimeout(() => {
-            loadSatelliteData()
+          loadSatelliteData()
           }, 1000)
 
           // 延迟加载航空数据
           setTimeout(() => {
-            loadAirlineData()
+          loadAirlineData()
           }, 1500)
         }
 

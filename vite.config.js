@@ -122,7 +122,19 @@ export default defineConfig({
   },
   // 优化依赖预构建
   optimizeDeps: {
-    include: ['vue', 'vue-router'],
-    exclude: ['three', 'globe.gl'], // 这些库体积大，按需加载
+    include: [
+      'vue', 
+      'vue-router',
+      'globe.gl', // 需要预构建以解决 frame-ticker 导出问题
+      'three', // 需要预构建以解决模块兼容性问题
+      'frame-ticker', // 显式包含 frame-ticker 以解决导出问题
+    ],
+    // 处理 globe.gl 的依赖问题
+    esbuildOptions: {
+      // 确保正确处理 CommonJS 模块
+      mainFields: ['module', 'main'],
+      // 处理 frame-ticker 的 CommonJS 导出
+      format: 'esm',
+    },
   },
 })
