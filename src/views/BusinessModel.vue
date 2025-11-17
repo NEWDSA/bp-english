@@ -1067,6 +1067,7 @@ import { ref, onMounted, onBeforeUnmount, watchEffect, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import * as echarts from 'echarts'
 import TopNavigation from '../components/TopNavigation.vue';
+import { stack } from 'three/tsl';
 
 const router = useRouter()
 
@@ -2294,7 +2295,7 @@ function renderChart4New() {
 			}
 		},
 		legend: {
-			data: ['Total Revenue', 'Cost of Goods Sold', 'Gross Profit', 'Contribution Margin', 'Pre-tax Net Profit', 'Gross Margin Rate'],
+			data: ['Total Revenue', 'Gross Profit', 'Contribution Margin', 'Pre-tax Net Profit', 'Gross Margin Rate'],
 			bottom: 5,
 			textStyle: { fontSize: 12 },
 			itemGap: 12
@@ -2354,35 +2355,33 @@ function renderChart4New() {
 			{
 				name: 'Total Revenue',
 				type: 'bar',
-				stack: 'total',
+				stack: 'revenue',
 				yAxisIndex: 0,
-				data: [16800000, 50400000, 104000000],
+				data: [14890000, 44670000, 92100000],
 				itemStyle: {
 					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
 						{ offset: 0, color: '#00d4ff' },
 						{ offset: 1, color: '#0099cc' }
 					])
 				},
-				barWidth: '40%',
+				barWidth: '20%',
 				label: {
-					show: true,
+					show: false,
 					position: 'top',
 					fontSize: 14,
 					formatter: function(params) {
-						// 计算堆叠总值：Total Revenue + Cost of Goods Sold
-						const cogsData = [1910000, 5730000, 11900000]
-						const totalValue = params.value + cogsData[params.dataIndex]
-						return '€' + (totalValue / 1000000).toFixed(1) + 'M'
+						// 显示堆叠总值：Total Revenue (净收入) + Cost of Goods Sold = 总收入
+						const totalRevenueData = [16800000, 50400000, 104000000]
+						return '€' + (totalRevenueData[params.dataIndex] / 1000000).toFixed(1) + 'M'
 					},
 					color: '#000000',
-					fontWeight: 'bold',
 					offset: [0, 10]
 				}
 			},
 			{
-				name: 'Cost of Goods Sold',
+				name: 'Less: Cost of Goods Sold (COGS)',
 				type: 'bar',
-				stack: 'total',
+				stack: 'revenue',
 				yAxisIndex: 0,
 				data: [1910000, 5730000, 11900000],
 				itemStyle: {
@@ -2392,7 +2391,7 @@ function renderChart4New() {
 						repeat: 'repeat'
 					}
 				},
-				barWidth: '40%',
+				barWidth: '20%',
 				label: {
 					show: true,
 					position: 'inside',
@@ -2405,10 +2404,84 @@ function renderChart4New() {
 				}
 			},
 			{
+				// 主要解决Total Revenue label显示问题
+				name: 'Total Revenue',
+				type: 'bar',
+				stack: 'revenue',
+				yAxisIndex: 0,
+				data: [10, 10, 10],
+				itemStyle: {
+					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+						{ offset: 0, color: '#00d4ff' },
+						{ offset: 1, color: '#0099cc' }
+					])
+				},
+				barWidth: '0%',
+				label: {
+					show: true,
+					position: 'top',
+					fontSize: 18,
+					formatter: function(params) {
+						// 显示堆叠总值：Total Revenue (净收入) + Cost of Goods Sold = 总收入
+						const totalRevenueData = [16800000, 50400000, 104000000]
+						return '€' + (totalRevenueData[params.dataIndex] / 1000000).toFixed(1) + 'M'
+					},
+					color: '#000000',
+					offset: [0, -2]
+				}
+			},
+			
+			{
 				name: 'Gross Profit',
 				type: 'bar',
+				stack: 'profit',
 				yAxisIndex: 0,
-				data: [14890000, 44670000, 92100000],
+				data: [11965000, 37155000, 79250000],
+				itemStyle: {
+					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+						{ offset: 0, color: '#67E0DC' },
+						{ offset: 1, color: '#4db3aa' }
+					])
+				},
+				barWidth: '20%',
+				label: {
+					show: false
+				}
+			},
+			{
+				name: 'Less: Other Variable Costs',
+				type: 'bar',
+				stack: 'profit',
+				yAxisIndex: 0,
+				data: [2925000, 7515000, 12850000],
+				itemStyle: {
+					color: {
+						type: 'pattern',
+						image: createDiagonalPattern('#4db3aa'),
+						repeat: 'repeat'
+					}
+				},
+				barWidth: '20%',
+				label: {
+					show: true,
+					position: 'inside',
+					fontSize: 12,
+					formatter: function(params) {
+						// 显示堆叠总值：Gross Profit的原始值
+						const grossProfitData = [2925000, 7515000, 12850000]
+						return '€' + (grossProfitData[params.dataIndex] / 1000000).toFixed(1) + 'M'
+					},
+					color: '#ffffff',
+					fontWeight: 'bold'
+				}
+			},
+			{
+				// 主要解决Gross Profit label显示问题
+				name: 'Gross Profit',
+				type: 'bar',
+				stack: 'profit',
+				yAxisIndex: 0,
+				data: [10, 10, 10],
 				itemStyle: {
 					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
 						{ offset: 0, color: '#67E0DC' },
@@ -2421,18 +2494,21 @@ function renderChart4New() {
 					position: 'top',
 					fontSize: 18,
 					formatter: function(params) {
-						return '€' + (params.value / 1000000).toFixed(1) + 'M'
+						// 显示堆叠总值：Total Revenue (净收入) + Cost of Goods Sold = 总收入
+						const totalRevenueData = [14890000, 44670000, 92100000]
+						return '€' + (totalRevenueData[params.dataIndex] / 1000000).toFixed(1) + 'M'
 					},
 					color: '#000000',
-					fontWeight: 'bold',
-					offset: [0, -8]
+					offset: [0, -2]
 				}
 			},
+
 			{
 				name: 'Contribution Margin',
 				type: 'bar',
+				stack: 'margin',
 				yAxisIndex: 0,
-				data: [11965000, 37155000, 79250000],
+				data: [11465000, 36530000, 78500000],
 				itemStyle: {
 					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
 						{ offset: 0, color: '#FFC107' },
@@ -2441,17 +2517,72 @@ function renderChart4New() {
 				},
 				barWidth: '20%',
 				label: {
+					show: false,
+					position: 'top',
+					fontSize: 18,
+					formatter: function(params) {
+						// 显示堆叠总值：Total Revenue (净收入) + Cost of Goods Sold = 总收入
+						const totalRevenueData = [11965000, 37155000, 79250000] ;
+						return '€' + (totalRevenueData[params.dataIndex] / 1000000).toFixed(1) + 'M'
+					},
+					color: '#000000',
+				}
+			},
+			{
+				name: 'Less: Annual Fixed Costs',
+				type: 'bar',
+				stack: 'margin',
+				yAxisIndex: 0,
+				data: [500000,625000,750000],
+				itemStyle: {
+					color: {
+						type: 'pattern',
+						image: createDiagonalPattern('#4db3aa'),
+						repeat: 'repeat'
+					}
+				},
+				barWidth: '20%',
+				label: {
+					show: true,
+					position: 'inside',
+					fontSize: 12,
+					formatter: function(params) {
+						// 显示堆叠总值：Gross Profit的原始值
+						const grossProfitData =[500000,625000,750000];
+						return '€' + (grossProfitData[params.dataIndex] / 1000000).toFixed(1) + 'M'
+					},
+					color: '#ffffff',
+					fontWeight: 'bold'
+				}
+			},
+			{
+				name: 'Contribution Margin',
+				type: 'bar',
+				stack: 'margin',
+				yAxisIndex: 0,
+				data: [10, 10, 10],
+				itemStyle: {
+					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+						{ offset: 0, color: '#FFC107' },
+						{ offset: 0.5, color: '#F57F17' }
+					])
+				},
+				barWidth: '0%',
+				label: {
 					show: true,
 					position: 'top',
 					fontSize: 18,
 					formatter: function(params) {
-						return '€' + (params.value / 1000000).toFixed(1) + 'M'
+						// 显示堆叠总值：Total Revenue (净收入) + Cost of Goods Sold = 总收入
+						const totalRevenueData = [11965000, 37155000, 79250000] ;
+						return '€' + (totalRevenueData[params.dataIndex] / 1000000).toFixed(1) + 'M'
 					},
 					color: '#000000',
-					fontWeight: 'bold',
-					offset: [0, -8]
+					offset: [0, -2]
 				}
 			},
+
+
 			{
 				name: 'Pre-tax Net Profit',
 				type: 'line',
