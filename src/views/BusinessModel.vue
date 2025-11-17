@@ -512,26 +512,26 @@
 				<button class="close-btn" @click="hideContent">×</button>
 
 				<!-- 页面导航 - 上一页按钮 (左侧) -->
-				<button
+				<p
 					class="nav-btn prev-btn nav-btn-left"
 					:class="{ 'disabled': currentRevenuePage === 1 }"
 					@click="prevRevenuePage"
 					:disabled="currentRevenuePage === 1">
-					<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+					<svg width="28px" height="28px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
 						<polyline points="15 18 9 12 15 6"></polyline>
 					</svg>
-				</button>
+				</p>
 
 				<!-- 页面导航 - 下一页按钮 (右侧) -->
-				<button
+				<p
 					class="nav-btn next-btn nav-btn-right"
 					:class="{ 'disabled': currentRevenuePage === 4 }"
 					@click="nextRevenuePage"
 					:disabled="currentRevenuePage === 4">
-					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+					<svg width="28px" height="28px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
 						<polyline points="9 18 15 12 9 6"></polyline>
 					</svg>
-				</button>
+				</p>
 
 				<!-- 页面指示器 (底部中心) -->
 				<div class="page-indicators">
@@ -540,7 +540,7 @@
 						:key="page"
 						class="page-dot"
 						:class="{ 'active': currentRevenuePage === page }"
-						@click="currentRevenuePage = page">
+						@click="goToRevenuePage(page)">
 					</span>
 				</div>
 
@@ -557,18 +557,22 @@
 				<!-- 页面2: 新增图表3和图表4 -->
 				<div v-if="currentRevenuePage === 2" class="charts-grid charts-grid-two">
 					<div class="chart-item">
+						<!-- 各年销售情况 -->
 						<div ref="chart3NewRef" class="modal-chart"></div>
 					</div>
 					<div class="chart-item">
+						<!--  Profit Statement / 利润表 -->
 						<div ref="chart4NewRef" class="modal-chart"></div>
 					</div>
 				</div>
 
 				<!-- 页面3: 新增图表5和图表6 -->
 				<div v-if="currentRevenuePage === 3" class="charts-grid charts-grid-two">
+					<!-- 投资回报分析 (基于500万欧元总投资) -->
 					<div class="chart-item">
 						<div ref="chart5NewRef" class="modal-chart"></div>
 					</div>
+					<!-- Cash Flow Analysis / 现金流分析 -->
 					<div class="chart-item">
 						<div ref="chart6NewRef" class="modal-chart"></div>
 					</div>
@@ -576,24 +580,45 @@
 
 				<!-- 页面4: 左侧图表7，右侧文字 -->
 				<div v-if="currentRevenuePage === 4" class="charts-grid charts-grid-mixed">
+					<!-- 关键绩效指标 -->
 					<div class="chart-item">
 						<div ref="chart7NewRef" class="modal-chart"></div>
 					</div>
+					<!-- 投资亮点 -->
 					<div class="text-content">
-						<h2 class="text-title">Revenue Growth Strategy</h2>
-						<div class="text-body">
-							<p>Our comprehensive revenue model demonstrates strong growth potential across multiple market segments. The hydrofoil technology offers significant advantages in both B2B and B2C markets.</p>
-							<br/>
-							<p><strong>Key Revenue Drivers:</strong></p>
-							<ul>
-								<li>• Premium pricing for innovative technology</li>
-								<li>• Recurring service and maintenance revenue</li>
-								<li>• Licensing opportunities for technology</li>
-								<li>• Expansion into emerging markets</li>
-							</ul>
-							<br/>
-							<p><strong>Projected Growth:</strong></p>
-							<p>We anticipate a compound annual growth rate (CAGR) of 35% over the next five years, driven by increasing demand for sustainable marine transportation and premium water sports experiences.</p>
+						<h2 class="text-title">Investment Highlights</h2>
+						<div class="text-body investment-highlights">
+							<div class="highlight-section">
+								<h3><strong>1. Extremely High Profitability</strong></h3>
+								<ul>
+									<li>a. Stable 88.6% gross margin across three years</li>
+									<li>b. Total net profit reaches €125.62 million in three years</li>
+								</ul>
+							</div>
+
+							<div class="highlight-section">
+								<h3><strong>2. Outstanding Investment Returns</strong></h3>
+								<ul>
+									<li>a. First-year ROI reaches 223.5%, recovering initial investment</li>
+									<li>b. Cumulative ROI exceeds 25x by the third year</li>
+								</ul>
+							</div>
+
+							<div class="highlight-section">
+								<h3><strong>3. Strong Cash Flow Generation</strong></h3>
+								<ul>
+									<li>a. Operating cash flow reaches €126.5 million in three years</li>
+									<li>b. Positive cash flow from the first year</li>
+								</ul>
+							</div>
+
+							<div class="highlight-section">
+								<h3><strong>4. Significant Growth Potential</strong></h3>
+								<ul>
+									<li>a. Revenue grows exponentially from €16.8M to €104M</li>
+									<li>b. Clear economies of scale demonstrated</li>
+								</ul>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -1063,6 +1088,15 @@ function prevRevenuePage() {
 function nextRevenuePage() {
 	if (currentRevenuePage.value < 4) {
 		currentRevenuePage.value++
+		nextTick(() => {
+			renderModalCharts()
+		})
+	}
+}
+
+function goToRevenuePage(page) {
+	if (page >= 1 && page <= 4) {
+		currentRevenuePage.value = page
 		nextTick(() => {
 			renderModalCharts()
 		})
@@ -1999,44 +2033,196 @@ function renderChart3New() {
 
 	const option = {
 		title: {
-			text: 'Market Share Analysis',
-			textStyle: { fontSize: 16, color: '#333', fontWeight: 'normal' },
-			top: 20,
+			text: '各年销售情况 (Annual Sales Situation)',
+			textStyle: { fontSize: 16, color: '#333', fontWeight: 'bold' },
+			top: 10,
 			left: 'center'
 		},
 		tooltip: {
-			trigger: 'item',
-			formatter: '{a} <br/>{b}: {c} ({d}%)'
+			trigger: 'axis',
+			axisPointer: { type: 'cross' },
+			formatter: function(params) {
+				let result = params[0].axisValue + '<br/>'
+				params.forEach(function(item) {
+					if (item.seriesName.includes('销售量')) {
+						result += item.marker + item.seriesName + ': ' + item.value + ' 台<br/>'
+					} else if (item.seriesName.includes('销售额') || item.seriesName.includes('总收入')) {
+						result += item.marker + item.seriesName + ': €' + (item.value / 1000000).toFixed(1) + 'M<br/>'
+					}
+				})
+				return result
+			}
 		},
 		legend: {
-			data: ['Luxury Segment', 'Tourism', 'Commercial Transport', 'Others'],
-			bottom: 10,
-			textStyle: { fontSize: 12 }
+			data: ['产品一销售量', '产品二销售量', '产品一销售额', '产品二销售额', '总收入'],
+			bottom: 5,
+			textStyle: { fontSize: 10 },
+			itemGap: 15
 		},
-		series: [{
-			name: 'Market Share',
-			type: 'pie',
-			radius: ['40%', '70%'],
-			center: ['50%', '55%'],
-			data: [
-				{ value: 45, name: 'Luxury Segment', itemStyle: { color: '#00d4ff' }},
-				{ value: 30, name: 'Tourism', itemStyle: { color: '#FFC27A' }},
-				{ value: 20, name: 'Commercial Transport', itemStyle: { color: '#67E0DC' }},
-				{ value: 5, name: 'Others', itemStyle: { color: '#C7C7CC' }}
-			],
-			emphasis: {
+		grid: {
+			left: '8%',
+			right: '8%',
+			top: '25%',
+			bottom: '20%',
+			containLabel: true
+		},
+		xAxis: {
+			type: 'category',
+			data: ['2026', '2027', '2028'],
+			axisLabel: { fontSize: 12, color: '#666' },
+			axisLine: { lineStyle: { color: '#ddd' } }
+		},
+		yAxis: [
+			{
+				type: 'value',
+				name: '销售量 (台)',
+				position: 'left',
+				axisLabel: {
+					formatter: '{value}',
+					fontSize: 11,
+					color: '#666'
+				},
+				axisLine: { lineStyle: { color: '#00d4ff' } },
+				splitLine: { lineStyle: { color: '#f0f0f0' } }
+			},
+			{
+				type: 'value',
+				name: '销售额 (€M)',
+				position: 'right',
+				axisLabel: {
+					formatter: function(value) {
+						return '€' + (value / 1000000).toFixed(0) + 'M'
+					},
+					fontSize: 11,
+					color: '#666'
+				},
+				axisLine: { lineStyle: { color: '#FFC27A' } },
+				splitLine: { show: false }
+			}
+		],
+		series: [
+			{
+				name: '产品一销售量',
+				type: 'bar',
+				yAxisIndex: 0,
+				data: [40, 120, 248],
 				itemStyle: {
-					shadowBlur: 10,
-					shadowOffsetX: 0,
-					shadowColor: 'rgba(0, 0, 0, 0.5)'
+					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+						{ offset: 0, color: '#00d4ff' },
+						{ offset: 1, color: '#0099cc' }
+					])
+				},
+				barWidth: '15%',
+				label: {
+					show: true,
+					position: 'top',
+					fontSize: 12,
+					formatter: '{c}台',
+					offset: [0, -12],
+					color: '#333',
+					fontWeight: 'bold'
 				}
 			},
-			label: {
-				show: true,
-				formatter: '{b}: {d}%',
-				fontSize: 12
+			{
+				name: '产品二销售量',
+				type: 'bar',
+				yAxisIndex: 0,
+				data: [60, 180, 371],
+				itemStyle: {
+					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+						{ offset: 0, color: '#67E0DC' },
+						{ offset: 1, color: '#4db3aa' }
+					])
+				},
+				barWidth: '15%',
+				label: {
+					show: true,
+					position: 'top',
+					fontSize: 12,
+					formatter: '{c}台',
+					offset: [0, -12],
+					color: '#333',
+					fontWeight: 'bold'
+				}
+			},
+			{
+				name: '产品一销售额',
+				type: 'line',
+				yAxisIndex: 1,
+				data: [4800000, 14400000, 29714286],
+				lineStyle: {
+					color: '#FFC27A',
+					width: 3
+				},
+				itemStyle: { color: '#FFC27A' },
+				symbol: 'circle',
+				symbolSize: 6,
+				label: {
+					show: true,
+					position: 'bottom',
+					fontSize: 11,
+					formatter: function(params) {
+						return '€' + (params.value / 1000000).toFixed(1) + 'M'
+					},
+					offset: [0, 8],
+					color: '#FFC27A',
+					fontWeight: 'bold'
+				}
+			},
+			{
+				name: '产品二销售额',
+				type: 'line',
+				yAxisIndex: 1,
+				data: [12000000, 36000000, 74285714],
+				lineStyle: {
+					color: '#FFB6C1',
+					width: 3
+				},
+				itemStyle: { color: '#FFB6C1' },
+				symbol: 'diamond',
+				symbolSize: 6,
+				label: {
+					show: true,
+					position: 'bottom',
+					fontSize: 11,
+					formatter: function(params) {
+						return '€' + (params.value / 1000000).toFixed(1) + 'M'
+					},
+					offset: [0, 8],
+					color: '#FFB6C1',
+					fontWeight: 'bold'
+				}
+			},
+			{
+				name: '总收入',
+				type: 'line',
+				yAxisIndex: 1,
+				data: [16800000, 50400000, 104000000],
+				lineStyle: {
+					color: '#FF6B6B',
+					width: 4,
+					type: 'dashed'
+				},
+				itemStyle: {
+					color: '#FF6B6B',
+					borderWidth: 2,
+					borderColor: '#fff'
+				},
+				symbol: 'rect',
+				symbolSize: 8,
+				label: {
+					show: true,
+					position: 'top',
+					fontSize: 12,
+					fontWeight: 'bold',
+					formatter: function(params) {
+						return '€' + (params.value / 1000000).toFixed(1) + 'M'
+					},
+					offset: [0, -10],
+					color: '#FF6B6B'
+				}
 			}
-		}]
+		]
 	}
 
 	chart3NewInstance.setOption(option)
@@ -2053,54 +2239,201 @@ function renderChart4New() {
 
 	const option = {
 		title: {
-			text: 'Revenue Growth Projection',
-			textStyle: { fontSize: 16, color: '#333', fontWeight: 'normal' },
-			top: 20,
+			text: 'Profit Statement Analysis / 利润表分析',
+			textStyle: { fontSize: 16, color: '#333', fontWeight: 'bold' },
+			top: 10,
 			left: 'center'
 		},
 		tooltip: {
-			trigger: 'axis'
+			trigger: 'axis',
+			formatter: function(params) {
+				let result = params[0].axisValue + '<br/>'
+				params.forEach(function(item) {
+					if (item.seriesName.includes('毛利率')) {
+						result += item.marker + item.seriesName + ': ' + item.value + '%<br/>'
+					} else if (item.value !== null && item.value !== undefined) {
+						result += item.marker + item.seriesName + ': €' + (Math.abs(item.value) / 1000000).toFixed(1) + 'M<br/>'
+					}
+				})
+				return result
+			}
 		},
 		legend: {
-			data: ['Revenue (€M)', 'Growth Rate (%)'],
-			bottom: 10,
-			textStyle: { fontSize: 12 }
+			data: ['总收入', '毛利润', '贡献毛利', '税前净利润', '毛利率'],
+			bottom: 5,
+			textStyle: { fontSize: 10 },
+			itemGap: 12
+		},
+		grid: {
+			left: '8%',
+			right: '8%',
+			top: '25%',
+			bottom: '20%',
+			containLabel: true
 		},
 		xAxis: {
 			type: 'category',
-			data: ['2024', '2025', '2026', '2027', '2028', '2029'],
-			axisLabel: { fontSize: 12 }
+			data: ['2026', '2027', '2028'],
+			axisLabel: { fontSize: 12, color: '#666' },
+			axisLine: { lineStyle: { color: '#ddd' } }
 		},
 		yAxis: [
 			{
 				type: 'value',
-				name: 'Revenue (€M)',
+				name: '金额 (€M)',
 				position: 'left',
-				axisLabel: { formatter: '{value}M', fontSize: 12 }
+				axisLabel: {
+					formatter: function(value) {
+						return '€' + (value / 1000000).toFixed(0) + 'M'
+					},
+					fontSize: 11,
+					color: '#666'
+				},
+				axisLine: { lineStyle: { color: '#00d4ff' } },
+				splitLine: { lineStyle: { color: '#f0f0f0' } }
 			},
 			{
 				type: 'value',
-				name: 'Growth (%)',
+				name: '毛利率 (%)',
 				position: 'right',
-				axisLabel: { formatter: '{value}%', fontSize: 12 }
+				min: 85,
+				max: 92,
+				axisLabel: {
+					formatter: '{value}%',
+					fontSize: 11,
+					color: '#666'
+				},
+				axisLine: { lineStyle: { color: '#FF6B6B' } },
+				splitLine: { show: false }
 			}
 		],
 		series: [
 			{
-				name: 'Revenue (€M)',
+				name: '总收入',
 				type: 'bar',
-				data: [2.1, 3.8, 6.7, 11.2, 18.5, 29.8],
-				itemStyle: { color: '#00d4ff' },
-				label: { show: true, position: 'top', fontSize: 10 }
+				yAxisIndex: 0,
+				data: [16800000, 50400000, 104000000],
+				itemStyle: {
+					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+						{ offset: 0, color: '#4CAF50' },
+						{ offset: 1, color: '#2E7D32' }
+					])
+				},
+				barWidth: '20%',
+				label: {
+					show: true,
+					position: 'top',
+					fontSize: 11,
+					formatter: function(params) {
+						return '€' + (params.value / 1000000).toFixed(1) + 'M'
+					},
+					color: '#2E7D32',
+					fontWeight: 'bold',
+					offset: [0, -8]
+				}
 			},
 			{
-				name: 'Growth Rate (%)',
+				name: '毛利润',
+				type: 'bar',
+				yAxisIndex: 0,
+				data: [14890000, 44670000, 92100000],
+				itemStyle: {
+					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+						{ offset: 0, color: '#8BC34A' },
+						{ offset: 1, color: '#689F38' }
+					])
+				},
+				barWidth: '20%',
+				label: {
+					show: true,
+					position: 'top',
+					fontSize: 11,
+					formatter: function(params) {
+						return '€' + (params.value / 1000000).toFixed(1) + 'M'
+					},
+					color: '#689F38',
+					fontWeight: 'bold',
+					offset: [0, -8]
+				}
+			},
+			{
+				name: '贡献毛利',
+				type: 'bar',
+				yAxisIndex: 0,
+				data: [11965000, 37155000, 79250000],
+				itemStyle: {
+					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+						{ offset: 0, color: '#FFC107' },
+						{ offset: 1, color: '#F57F17' }
+					])
+				},
+				barWidth: '20%',
+				label: {
+					show: true,
+					position: 'top',
+					fontSize: 11,
+					formatter: function(params) {
+						return '€' + (params.value / 1000000).toFixed(1) + 'M'
+					},
+					color: '#F57F17',
+					fontWeight: 'bold',
+					offset: [0, -8]
+				}
+			},
+			{
+				name: '税前净利润',
+				type: 'line',
+				yAxisIndex: 0,
+				data: [11173333, 36238333, 78208334],
+				lineStyle: {
+					color: '#2196F3',
+					width: 4
+				},
+				itemStyle: {
+					color: '#2196F3',
+					borderWidth: 3,
+					borderColor: '#fff'
+				},
+				symbol: 'circle',
+				symbolSize: 8,
+				label: {
+					show: true,
+					position: 'bottom',
+					fontSize: 12,
+					formatter: function(params) {
+						return '€' + (params.value / 1000000).toFixed(1) + 'M'
+					},
+					color: '#2196F3',
+					fontWeight: 'bold',
+					offset: [0, 12]
+				}
+			},
+			{
+				name: '毛利率',
 				type: 'line',
 				yAxisIndex: 1,
-				data: [null, 81, 76, 67, 65, 61],
-				itemStyle: { color: '#FFC27A' },
-				lineStyle: { width: 3 },
-				label: { show: true, position: 'top', fontSize: 10 }
+				data: [88.6, 88.6, 88.6],
+				lineStyle: {
+					color: '#FF6B6B',
+					width: 3,
+					type: 'dashed'
+				},
+				itemStyle: {
+					color: '#FF6B6B',
+					borderWidth: 2,
+					borderColor: '#fff'
+				},
+				symbol: 'diamond',
+				symbolSize: 6,
+				label: {
+					show: true,
+					position: 'bottom',
+					fontSize: 11,
+					formatter: '{c}%',
+					color: '#FF6B6B',
+					fontWeight: 'bold',
+					offset: [0, 8]
+				}
 			}
 		]
 	}
@@ -2119,45 +2452,196 @@ function renderChart5New() {
 
 	const option = {
 		title: {
-			text: 'Cost Structure Breakdown',
-			textStyle: { fontSize: 16, color: '#333', fontWeight: 'normal' },
-			top: 20,
+			text: 'Investment Return Analysis',
+			subtext: 'Based on €5M Total Investment',
+			textStyle: { fontSize: 16, color: '#333', fontWeight: 'bold' },
+			subtextStyle: { fontSize: 12, color: '#666' },
+			top: 10,
 			left: 'center'
 		},
 		tooltip: {
-			trigger: 'item',
-			formatter: '{a} <br/>{b}: {c}% ({d}%)'
+			trigger: 'axis',
+			axisPointer: { type: 'cross' },
+			formatter: function(params) {
+				let result = params[0].axisValue + '<br/>'
+				params.forEach(function(item) {
+					if (item.seriesName.includes('ROI')) {
+						result += item.marker + item.seriesName + ': ' + item.value + '%<br/>'
+					} else {
+						result += item.marker + item.seriesName + ': €' + (item.value / 1000000).toFixed(1) + 'M<br/>'
+					}
+				})
+				return result
+			}
 		},
 		legend: {
-			data: ['R&D', 'Manufacturing', 'Marketing', 'Operations', 'Other'],
-			bottom: 10,
-			textStyle: { fontSize: 12 }
+			data: ['Annual Net Profit', 'Cumulative Net Profit', 'Annual ROI', 'Cumulative ROI'],
+			bottom: 5,
+			textStyle: { fontSize: 10 },
+			itemGap: 15
 		},
-		series: [{
-			name: 'Cost Structure',
-			type: 'pie',
-			radius: '70%',
-			center: ['50%', '55%'],
-			data: [
-				{ value: 35, name: 'R&D', itemStyle: { color: '#00d4ff' }},
-				{ value: 30, name: 'Manufacturing', itemStyle: { color: '#FFC27A' }},
-				{ value: 15, name: 'Marketing', itemStyle: { color: '#67E0DC' }},
-				{ value: 12, name: 'Operations', itemStyle: { color: '#C7C7CC' }},
-				{ value: 8, name: 'Other', itemStyle: { color: '#FFB6C1' }}
-			],
-			emphasis: {
+		grid: {
+			left: '8%',
+			right: '8%',
+			top: '30%',
+			bottom: '25%',
+			containLabel: true
+		},
+		xAxis: {
+			type: 'category',
+			data: ['2026', '2027', '2028'],
+			axisLabel: { fontSize: 12, color: '#666' },
+			axisLine: { lineStyle: { color: '#ddd' } }
+		},
+		yAxis: [
+			{
+				type: 'value',
+				name: 'Net Profit (€M)',
+				position: 'left',
+				axisLabel: {
+					formatter: function(value) {
+						return '€' + (value / 1000000).toFixed(0) + 'M'
+					},
+					fontSize: 11,
+					color: '#666'
+				},
+				axisLine: { lineStyle: { color: '#00d4ff' } },
+				splitLine: { lineStyle: { color: '#f0f0f0' } }
+			},
+			{
+				type: 'value',
+				name: 'ROI (%)',
+				position: 'right',
+				min: 200,
+				max: 5600,
+				axisLabel: {
+					formatter: '{value}%',
+					fontSize: 11,
+					color: '#666'
+				},
+				axisLine: { lineStyle: { color: '#FF6B6B' } },
+				splitLine: { show: false }
+			}
+		],
+		series: [
+			{
+				name: 'Annual Net Profit',
+				type: 'bar',
+				yAxisIndex: 0,
+				data: [11173333, 36238333, 78208334],
 				itemStyle: {
-					shadowBlur: 10,
-					shadowOffsetX: 0,
-					shadowColor: 'rgba(0, 0, 0, 0.5)'
+					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+						{ offset: 0, color: '#00d4ff' },
+						{ offset: 0.5, color: '#0099cc' },
+						{ offset: 1, color: '#006699' }
+					])
+				},
+				barWidth: '25%',
+				label: {
+					show: true,
+					position: 'top',
+					fontSize: 11,
+					formatter: function(params) {
+						return '€' + (params.value / 1000000).toFixed(1) + 'M'
+					},
+					color: '#006699',
+					fontWeight: 'bold',
+					offset: [0, -8]
 				}
 			},
-			label: {
-				show: true,
-				formatter: '{b}: {c}%',
-				fontSize: 12
+			{
+				name: 'Cumulative Net Profit',
+				type: 'bar',
+				yAxisIndex: 0,
+				data: [11173333, 47411666, 125620000],
+				itemStyle: {
+					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+						{ offset: 0, color: '#66b3ff' },
+						{ offset: 0.5, color: '#3399ff' },
+						{ offset: 1, color: '#0080ff' }
+					])
+				},
+				barWidth: '25%',
+				label: {
+					show: true,
+					position: 'top',
+					fontSize: 11,
+					formatter: function(params) {
+						return '€' + (params.value / 1000000).toFixed(1) + 'M'
+					},
+					color: '#0080ff',
+					fontWeight: 'bold',
+					offset: [0, -8]
+				}
+			},
+			{
+				name: 'Annual ROI',
+				type: 'line',
+				yAxisIndex: 1,
+				data: [223.5, 724.8, 1564.2],
+				lineStyle: {
+					color: '#FF6B6B',
+					width: 4
+				},
+				itemStyle: {
+					color: '#FF6B6B',
+					borderWidth: 3,
+					borderColor: '#fff'
+				},
+				symbol: 'circle',
+				symbolSize: 8,
+				label: {
+					show: true,
+					position: 'top',
+					fontSize: 12,
+					formatter: '{c}%',
+					color: '#FF6B6B',
+					fontWeight: 'bold',
+					offset: [0, -15]
+				}
+			},
+			{
+				name: 'Cumulative ROI',
+				type: 'line',
+				yAxisIndex: 1,
+				data: [223.5, 948.2, 2512.4],
+				lineStyle: {
+					color: '#FFC107',
+					width: 4,
+					type: 'dashed'
+				},
+				itemStyle: {
+					color: '#FFC107',
+					borderWidth: 3,
+					borderColor: '#fff'
+				},
+				symbol: 'diamond',
+				symbolSize: 8,
+				label: {
+					show: true,
+					position: 'top',
+					fontSize: 12,
+					formatter: '{c}%',
+					color: '#FFC107',
+					fontWeight: 'bold',
+					offset: [0, -15]
+				}
 			}
-		}]
+		],
+		graphic: {
+			type: 'text',
+			left: 'center',
+			bottom: '15%',
+			style: {
+				text: 'Investment Amount: €5M | Cumulative Return Over Three Years: €125.6M | Total Return Rate: 2512.4%',
+				fontSize: 12,
+				fontWeight: 'bold',
+				color: '#666',
+				backgroundColor: '#f8f9fa',
+				padding: [8, 16],
+				borderRadius: 8
+			}
+		}
 	}
 
 	chart5NewInstance.setOption(option)
@@ -2174,55 +2658,176 @@ function renderChart6New() {
 
 	const option = {
 		title: {
-			text: 'Competitive Position',
-			textStyle: { fontSize: 16, color: '#333', fontWeight: 'normal' },
-			top: 20,
+			text: 'Cash Flow Analysis',
+			textStyle: { fontSize: 16, color: '#333', fontWeight: 'bold' },
+			top: 10,
 			left: 'center'
 		},
 		tooltip: {
-			trigger: 'axis'
+			trigger: 'axis',
+			axisPointer: { type: 'cross' },
+			formatter: function(params) {
+				let result = params[0].axisValue + '<br/>'
+				params.forEach(function(item) {
+					if (item.seriesType === 'line') {
+						result += item.marker + item.seriesName + ': €' + (item.value / 1000000).toFixed(2) + 'M<br/>'
+					} else {
+						result += item.marker + item.seriesName + ': €' + (item.value / 1000000).toFixed(2) + 'M<br/>'
+					}
+				})
+				return result
+			}
 		},
 		legend: {
-			data: ['Our Company', 'Competitor A', 'Competitor B'],
-			bottom: 10,
-			textStyle: { fontSize: 12 }
+			data: ['Pre-tax Net Profit', 'Non-cash Amortization', 'Operating Cash Flow', 'Cumulative Cash Flow'],
+			bottom: 5,
+			textStyle: { fontSize: 10 },
+			itemGap: 10
 		},
-		radar: {
-			indicator: [
-				{ name: 'Technology', max: 100 },
-				{ name: 'Market Share', max: 100 },
-				{ name: 'Brand Recognition', max: 100 },
-				{ name: 'Customer Satisfaction', max: 100 },
-				{ name: 'Price Competitiveness', max: 100 },
-				{ name: 'Innovation', max: 100 }
-			],
-			center: ['50%', '55%'],
-			radius: '65%'
+		grid: {
+			left: '8%',
+			right: '8%',
+			top: '25%',
+			bottom: '25%',
+			containLabel: true
 		},
-		series: [{
-			name: 'Company Comparison',
-			type: 'radar',
-			data: [
-				{
-					value: [95, 25, 30, 90, 75, 95],
-					name: 'Our Company',
-					itemStyle: { color: '#00d4ff' },
-					areaStyle: { opacity: 0.3 }
+		xAxis: {
+			type: 'category',
+			data: ['2026', '2027', '2028'],
+			axisLabel: { fontSize: 12, color: '#666' },
+			axisLine: { lineStyle: { color: '#ddd' } }
+		},
+		yAxis: [
+			{
+				type: 'value',
+				name: 'Cash Flow (€M)',
+				position: 'left',
+				min: 0,
+				max: 90000000,
+				axisLabel: {
+					formatter: function(value) {
+						return (value / 1000000).toFixed(0) + 'M'
+					},
+					fontSize: 11,
+					color: '#666'
 				},
-				{
-					value: [70, 60, 80, 75, 80, 60],
-					name: 'Competitor A',
-					itemStyle: { color: '#FFC27A' },
-					areaStyle: { opacity: 0.3 }
+				axisLine: { lineStyle: { color: '#4CAF50' } },
+				splitLine: { lineStyle: { color: '#f0f0f0' } }
+			},
+			{
+				type: 'value',
+				name: 'Cumulative (€M)',
+				position: 'right',
+				min: 0,
+				max: 140000000,
+				axisLabel: {
+					formatter: function(value) {
+						return (value / 1000000).toFixed(0) + 'M'
+					},
+					fontSize: 11,
+					color: '#666'
 				},
-				{
-					value: [60, 45, 70, 70, 85, 50],
-					name: 'Competitor B',
-					itemStyle: { color: '#67E0DC' },
-					areaStyle: { opacity: 0.3 }
+				axisLine: { lineStyle: { color: '#FF6B6B' } },
+				splitLine: { show: false }
+			}
+		],
+		series: [
+			{
+				name: 'Pre-tax Net Profit',
+				type: 'bar',
+				yAxisIndex: 0,
+				data: [11173333, 36238333, 78208334],
+				itemStyle: {
+					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+						{ offset: 0, color: '#00d4ff' },
+						{ offset: 1, color: '#2E7D32' }
+					])
+				},
+				barWidth: '20%',
+				label: {
+					show: true,
+					position: 'top',
+					fontSize: 10,
+					formatter: function(params) {
+						return '€' + (params.value / 1000000).toFixed(1) + 'M'
+					},
+					color: '#2E7D32',
+					fontWeight: 'bold'
 				}
-			]
-		}]
+			},
+			{
+				name: 'Non-cash Amortization',
+				type: 'bar',
+				yAxisIndex: 0,
+				data: [291667, 291667, 291666],
+				itemStyle: {
+					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+						{ offset: 0, color: '#FF9800' },
+						{ offset: 1, color: '#F57C00' }
+					])
+				},
+				barWidth: '20%',
+				label: {
+					show: true,
+					position: 'top',
+					fontSize: 10,
+					formatter: function(params) {
+						return '€' + (params.value / 1000).toFixed(0) + 'K'
+					},
+					color: '#F57C00',
+					fontWeight: 'bold'
+				}
+			},
+			{
+				name: 'Operating Cash Flow',
+				type: 'bar',
+				yAxisIndex: 0,
+				data: [11465000, 36530000, 78500000],
+				itemStyle: {
+					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+						{ offset: 0, color: '#2196F3' },
+						{ offset: 1, color: '#1565C0' }
+					])
+				},
+				barWidth: '20%',
+				label: {
+					show: true,
+					position: 'top',
+					fontSize: 10,
+					formatter: function(params) {
+						return '€' + (params.value / 1000000).toFixed(1) + 'M'
+					},
+					color: '#1565C0',
+					fontWeight: 'bold'
+				}
+			},
+			{
+				name: 'Cumulative Cash Flow',
+				type: 'line',
+				yAxisIndex: 1,
+				data: [11465000, 47995000, 126495000],
+				itemStyle: {
+					color: '#FF6B6B'
+				},
+				lineStyle: {
+					width: 3,
+					color: '#FF6B6B'
+				},
+				symbol: 'circle',
+				symbolSize: 8,
+				label: {
+					show: true,
+					position: 'top',
+					fontSize: 10,
+					formatter: function(params) {
+						return '€' + (params.value / 1000000).toFixed(1) + 'M'
+					},
+					color: '#FF6B6B',
+					fontWeight: 'bold',
+					offset: [0, -10]
+				}
+			}
+		]
 	}
 
 	chart6NewInstance.setOption(option)
@@ -2239,71 +2844,170 @@ function renderChart7New() {
 
 	const option = {
 		title: {
-			text: 'Financial Performance Metrics',
-			textStyle: { fontSize: 18, color: '#333', fontWeight: 'bold' },
-			top: 20,
+			text: 'Key Performance Indicators',
+			textStyle: { fontSize: 16, color: '#333', fontWeight: 'bold' },
+			top: 10,
 			left: 'center'
 		},
 		tooltip: {
 			trigger: 'axis',
-			axisPointer: { type: 'shadow' }
+			axisPointer: { type: 'cross' },
+			formatter: function(params) {
+				let result = params[0].axisValue + '<br/>'
+				params.forEach(function(item) {
+					if (item.seriesName.includes('ROI') && item.value > 100) {
+						result += item.marker + item.seriesName + ': ' + item.value.toFixed(1) + '%<br/>'
+					} else if (item.value !== null && item.value !== undefined) {
+						result += item.marker + item.seriesName + ': ' + item.value + '%<br/>'
+					}
+				})
+				return result
+			}
 		},
 		legend: {
-			data: ['EBITDA', 'Net Profit', 'ROI'],
-			bottom: 10,
-			textStyle: { fontSize: 12 }
+			data: ['Gross Margin', 'Contribution Margin', 'Net Profit Margin', 'Annual ROI'],
+			bottom: 5,
+			textStyle: { fontSize: 10 },
+			itemGap: 15
 		},
 		grid: {
-			left: '3%',
-			right: '4%',
-			bottom: '15%',
-			top: '15%',
+			left: '8%',
+			right: '8%',
+			top: '25%',
+			bottom: '20%',
 			containLabel: true
 		},
 		xAxis: {
 			type: 'category',
-			data: ['2024', '2025', '2026', '2027', '2028', '2029'],
-			axisLabel: { fontSize: 12 }
+			data: ['2026', '2027', '2028'],
+			axisLabel: { fontSize: 12, color: '#666' },
+			axisLine: { lineStyle: { color: '#ddd' } }
 		},
 		yAxis: [
 			{
 				type: 'value',
-				name: 'Amount (€M)',
+				name: 'Profit Margin (%)',
 				position: 'left',
-				axisLabel: { formatter: '{value}M', fontSize: 12 }
+				min: 0,
+				max: 100,
+				axisLabel: {
+					formatter: '{value}%',
+					fontSize: 11,
+					color: '#666'
+				},
+				axisLine: { lineStyle: { color: '#00d4ff' } },
+				splitLine: { lineStyle: { color: '#f0f0f0' } }
 			},
 			{
 				type: 'value',
 				name: 'ROI (%)',
 				position: 'right',
-				axisLabel: { formatter: '{value}%', fontSize: 12 }
+				min: 0,
+				max: 1800,
+				axisLabel: {
+					formatter: '{value}%',
+					fontSize: 11,
+					color: '#666'
+				},
+				axisLine: { lineStyle: { color: '#FF6B6B' } },
+				splitLine: { show: false }
 			}
 		],
 		series: [
 			{
-				name: 'EBITDA',
+				name: 'Gross Margin',
 				type: 'bar',
-				data: [0.5, 1.2, 2.8, 5.2, 9.1, 15.2],
-				itemStyle: { color: '#00d4ff' },
-				label: { show: true, position: 'top', fontSize: 10 }
+				yAxisIndex: 0,
+				data: [88.6, 88.6, 88.6],
+				itemStyle: {
+					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+						{ offset: 0, color: '#00d4ff' },
+						{ offset: 1, color: '#0099cc' }
+					])
+				},
+				barWidth: '15%',
+				label: {
+					show: true,
+					position: 'top',
+					fontSize: 11,
+					formatter: '{c}%',
+					color: '#0099cc',
+					fontWeight: 'bold',
+					offset: [0, -8]
+				}
 			},
 			{
-				name: 'Net Profit',
+				name: 'Contribution Margin',
 				type: 'bar',
-				data: [0.2, 0.8, 1.9, 3.8, 6.7, 11.4],
-				itemStyle: { color: '#FFC27A' },
-				label: { show: true, position: 'top', fontSize: 10 }
+				yAxisIndex: 0,
+				data: [71.2, 73.7, 76.2],
+				itemStyle: {
+					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+						{ offset: 0, color: '#66b3ff' },
+						{ offset: 1, color: '#3399ff' }
+					])
+				},
+				barWidth: '15%',
+				label: {
+					show: true,
+					position: 'top',
+					fontSize: 11,
+					formatter: '{c}%',
+					color: '#3399ff',
+					fontWeight: 'bold',
+					offset: [0, -8]
+				}
 			},
 			{
-				name: 'ROI',
+				name: 'Net Profit Margin',
+				type: 'bar',
+				yAxisIndex: 0,
+				data: [66.5, 71.9, 75.2],
+				itemStyle: {
+					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+						{ offset: 0, color: '#99ccff' },
+						{ offset: 1, color: '#66b3ff' }
+					])
+				},
+				barWidth: '15%',
+				label: {
+					show: true,
+					position: 'top',
+					fontSize: 11,
+					formatter: '{c}%',
+					color: '#66b3ff',
+					fontWeight: 'bold',
+					offset: [0, -8]
+				}
+			},
+			{
+				name: 'Annual ROI',
 				type: 'line',
 				yAxisIndex: 1,
-				data: [8, 15, 22, 28, 32, 35],
-				itemStyle: { color: '#67E0DC' },
-				lineStyle: { width: 3 },
-				label: { show: true, position: 'top', fontSize: 10 }
+				data: [223.5, 724.8, 1564.2],
+				lineStyle: {
+					color: '#FF6B6B',
+					width: 5,
+					type: 'solid'
+				},
+				itemStyle: {
+					color: '#FF6B6B',
+					borderWidth: 4,
+					borderColor: '#fff'
+				},
+				symbol: 'circle',
+				symbolSize: 10,
+				label: {
+					show: true,
+					position: 'bottom',
+					fontSize: 12,
+					formatter: '{c}%',
+					color: '#FF6B6B',
+					fontWeight: 'bold',
+					offset: [0, -45]
+				}
 			}
-		]
+		],
 	}
 
 	chart7NewInstance.setOption(option)
@@ -4474,6 +5178,7 @@ function goHome() {
 	left: 20px;
 	top: 50%;
 	transform: translateY(-50%);
+	font-size: 12px !important;
 }
 
 .nav-btn-left:hover:not(.disabled) {
@@ -4485,6 +5190,7 @@ function goHome() {
 	right: 20px;
 	top: 50%;
 	transform: translateY(-50%);
+	font-size: 12px !important;
 }
 
 .nav-btn-right:hover:not(.disabled) {
@@ -4573,7 +5279,7 @@ function goHome() {
 }
 
 .text-body {
-	font-size: 16px;
+	font-size: 18px;
 	line-height: 1.6;
 	color: #555;
 	text-align: left;
@@ -4600,7 +5306,31 @@ function goHome() {
 	font-weight: 600;
 }
 
-.charts-grid::before {
+/* Investment Highlights Styling */
+.investment-highlights .highlight-section {
+	margin-bottom: 24px;
+}
+
+.investment-highlights .highlight-section h3 {
+	font-size: 20px;
+	color: #2c3e50;
+	margin-bottom: 12px;
+	line-height: 1.4;
+}
+
+.investment-highlights .highlight-section ul {
+	margin-left: 20px;
+}
+
+.investment-highlights .highlight-section li {
+	font-size: 18px;
+	line-height: 1.7;
+	margin-bottom: 10px;
+	color: #34495e;
+	padding-left: 8px;
+}
+
+/* .charts-grid::before {
 	content: '';
 	position: absolute;
 	top: 50%;
@@ -4610,7 +5340,7 @@ function goHome() {
 	background-color: #ffffff;
 	transform: translateY(-50%);
 	z-index: 1;
-}
+} */
 
 .charts-grid.charts-grid-two::before {
 	display: none;
