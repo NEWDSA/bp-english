@@ -2240,6 +2240,30 @@ function renderChart3New() {
 	setTimeout(() => chart3NewInstance?.resize(), 50)
 }
 
+// 创建斜线纹理图案
+function createDiagonalPattern(color) {
+	const canvas = document.createElement('canvas')
+	const ctx = canvas.getContext('2d')
+	canvas.width = 20
+	canvas.height = 20
+
+	// 设置背景色
+	ctx.fillStyle = color
+	ctx.fillRect(0, 0, 20, 20)
+
+	// 绘制斜线
+	ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)'
+	ctx.lineWidth = 1
+	ctx.beginPath()
+	for (let i = -20; i <= 40; i += 5) {
+		ctx.moveTo(i, 0)
+		ctx.lineTo(i + 20, 20)
+	}
+	ctx.stroke()
+
+	return canvas
+}
+
 function renderChart4New() {
 	if (!chart4NewRef.value) return
 
@@ -2270,7 +2294,7 @@ function renderChart4New() {
 			}
 		},
 		legend: {
-			data: ['Total Revenue', 'Gross Profit', 'Contribution Margin', 'Pre-tax Net Profit', 'Gross Margin Rate'],
+			data: ['Total Revenue', 'Cost of Goods Sold', 'Gross Profit', 'Contribution Margin', 'Pre-tax Net Profit', 'Gross Margin Rate'],
 			bottom: 5,
 			textStyle: { fontSize: 12 },
 			itemGap: 12
@@ -2330,6 +2354,7 @@ function renderChart4New() {
 			{
 				name: 'Total Revenue',
 				type: 'bar',
+				stack: 'total',
 				yAxisIndex: 0,
 				data: [16800000, 50400000, 104000000],
 				itemStyle: {
@@ -2338,17 +2363,45 @@ function renderChart4New() {
 						{ offset: 1, color: '#0099cc' }
 					])
 				},
-				barWidth: '20%',
+				barWidth: '40%',
 				label: {
 					show: true,
 					position: 'top',
-					fontSize: 18,
+					fontSize: 14,
 					formatter: function(params) {
-						return '€' + (params.value / 1000000).toFixed(1) + 'M'
+						// 计算堆叠总值：Total Revenue + Cost of Goods Sold
+						const cogsData = [1910000, 5730000, 11900000]
+						const totalValue = params.value + cogsData[params.dataIndex]
+						return '€' + (totalValue / 1000000).toFixed(1) + 'M'
 					},
 					color: '#000000',
 					fontWeight: 'bold',
-					offset: [0, -8]
+					offset: [0, 10]
+				}
+			},
+			{
+				name: 'Cost of Goods Sold',
+				type: 'bar',
+				stack: 'total',
+				yAxisIndex: 0,
+				data: [1910000, 5730000, 11900000],
+				itemStyle: {
+					color: {
+						type: 'pattern',
+						image: createDiagonalPattern('#0099cc'),
+						repeat: 'repeat'
+					}
+				},
+				barWidth: '40%',
+				label: {
+					show: true,
+					position: 'inside',
+					fontSize: 12,
+					formatter: function(params) {
+						return '€' + (params.value / 1000000).toFixed(1) + 'M'
+					},
+					color: '#ffffff',
+					fontWeight: 'bold'
 				}
 			},
 			{
