@@ -2674,7 +2674,13 @@ onUnmounted(() => {
 	}
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1280px) and (max-width: 1600px) {
+	.tab-panel.vs-others-tab .competitor-grid {
+		grid-template-columns: 280px repeat(6, calc((100% - 280px) / 6));
+	}
+}
+
+@media (min-width: 1600px) {
 	.tab-panel.vs-others-tab .competitor-grid {
 		grid-template-columns: 400px repeat(6, calc((100% - 400px) / 6));
 	}
@@ -2697,7 +2703,13 @@ onUnmounted(() => {
 	}
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1280px) and (max-width: 1600px) {
+	.tab-panel.three-col-tab .competitor-grid {
+		grid-template-columns: 350px repeat(3, calc((100% - 350px) / 3));
+	}
+}
+
+@media (min-width: 1600px) {
 	.tab-panel.three-col-tab .competitor-grid {
 		grid-template-columns: 450px repeat(3, calc((100% - 450px) / 3));
 	}
@@ -2720,7 +2732,13 @@ onUnmounted(() => {
 	}
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1280px) and (max-width: 1600px) {
+	.tab-panel.four-col-tab .competitor-grid {
+		grid-template-columns: 350px repeat(4, calc((100% - 350px) / 4));
+	}
+}
+
+@media (min-width: 1600px) {
 	.tab-panel.four-col-tab .competitor-grid {
 		grid-template-columns: 450px repeat(4, calc((100% - 450px) / 4));
 	}
@@ -2730,24 +2748,37 @@ onUnmounted(() => {
 	/* 空白占位符，与表格第一列对齐 */
 	display: block;
 	width: 200px;
+	padding-left: 20px;
+	box-sizing: border-box;
 }
 
 @media (min-width: 640px) {
 	.competitor-spacer {
 		width: 280px;
+		padding-left: 18px;
 	}
 }
 
 @media (min-width: 1024px) {
 	.competitor-spacer {
 		width: 380px;
+		padding-left: 18px;
 	}
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1280px) and (max-width: 1600px) {
+	.competitor-spacer {
+		width: 350px;
+		max-width: 350px;
+		padding-left: 16px;
+	}
+}
+
+@media (min-width: 1600px) {
 	.competitor-spacer {
 		width: 450px;
 		max-width: 450px;
+		padding-left: 18px;
 	}
 }
 
@@ -2755,30 +2786,43 @@ onUnmounted(() => {
 	.competitor-spacer {
 		width: 450px;
 		max-width: 450px;
+		padding-left: 20px;
 	}
 }
 
 /* VS 其他水翼艇 tab的空白占位符需要更宽 */
 .tab-panel.vs-others-tab .competitor-spacer {
 	width: 250px;
+	padding-left: 20px;
 }
 
 @media (min-width: 640px) {
 	.tab-panel.vs-others-tab .competitor-spacer {
 		width: 350px;
+		padding-left: 18px;
 	}
 }
 
 @media (min-width: 1024px) {
 	.tab-panel.vs-others-tab .competitor-spacer {
 		width: 450px;
+		padding-left: 18px;
 	}
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1280px) and (max-width: 1600px) {
+	.tab-panel.vs-others-tab .competitor-spacer {
+		width: 280px;
+		max-width: 280px;
+		padding-left: 16px;
+	}
+}
+
+@media (min-width: 1600px) {
 	.tab-panel.vs-others-tab .competitor-spacer {
 		width: 400px;
 		max-width: 400px;
+		padding-left: 18px;
 	}
 }
 
@@ -2786,6 +2830,7 @@ onUnmounted(() => {
 	.tab-panel.vs-others-tab .competitor-spacer {
 		width: 400px;
 		max-width: 400px;
+		padding-left: 20px;
 	}
 }
 
@@ -2976,7 +3021,16 @@ onUnmounted(() => {
 	}
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1280px) and (max-width: 1600px) {
+
+	.comparison-table th:first-child,
+	.comparison-table td:first-child {
+		width: 350px;
+		max-width: 350px;
+	}
+}
+
+@media (min-width: 1600px) {
 
 	.comparison-table th:first-child,
 	.comparison-table td:first-child {
@@ -3017,7 +3071,16 @@ onUnmounted(() => {
 	}
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1280px) and (max-width: 1600px) {
+
+	.tab-panel.vs-others-tab .comparison-table th:first-child,
+	.tab-panel.vs-others-tab .comparison-table td:first-child {
+		width: 280px;
+		max-width: 280px;
+	}
+}
+
+@media (min-width: 1600px) {
 
 	.tab-panel.vs-others-tab .comparison-table th:first-child,
 	.tab-panel.vs-others-tab .comparison-table td:first-child {
@@ -3070,7 +3133,15 @@ onUnmounted(() => {
 	}
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1280px) and (max-width: 1600px) {
+
+	.tab-panel.vs-others-tab .comparison-table td:not(:first-child),
+	.tab-panel.vs-others-tab .comparison-table th:not(:first-child) {
+		width: calc((100% - 280px) / 6);
+	}
+}
+
+@media (min-width: 1600px) {
 
 	.tab-panel.vs-others-tab .comparison-table td:not(:first-child),
 	.tab-panel.vs-others-tab .comparison-table th:not(:first-child) {
@@ -3100,7 +3171,15 @@ onUnmounted(() => {
 	}
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1280px) and (max-width: 1600px) {
+
+	.tab-panel.three-col-tab .comparison-table td:not(:first-child),
+	.tab-panel.three-col-tab .comparison-table th:not(:first-child) {
+		width: calc((100% - 350px) / 3);
+	}
+}
+
+@media (min-width: 1600px) {
 
 	.tab-panel.three-col-tab .comparison-table td:not(:first-child),
 	.tab-panel.three-col-tab .comparison-table th:not(:first-child) {
@@ -3130,7 +3209,15 @@ onUnmounted(() => {
 	}
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1280px) and (max-width: 1600px) {
+
+	.tab-panel.four-col-tab .comparison-table td:not(:first-child),
+	.tab-panel.four-col-tab .comparison-table th:not(:first-child) {
+		width: calc((100% - 350px) / 4);
+	}
+}
+
+@media (min-width: 1600px) {
 
 	.tab-panel.four-col-tab .comparison-table td:not(:first-child),
 	.tab-panel.four-col-tab .comparison-table th:not(:first-child) {
