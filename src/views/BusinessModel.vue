@@ -2033,7 +2033,7 @@ function renderChart3New() {
 
 	const option = {
 		title: {
-			text: '各年销售情况 (Annual Sales Situation)',
+			text: 'Annual Sales Situation',
 			textStyle: { fontSize: 16, color: '#333', fontWeight: 'bold' },
 			top: 10,
 			left: 'center'
@@ -2044,9 +2044,9 @@ function renderChart3New() {
 			formatter: function(params) {
 				let result = params[0].axisValue + '<br/>'
 				params.forEach(function(item) {
-					if (item.seriesName.includes('销售量')) {
-						result += item.marker + item.seriesName + ': ' + item.value + ' 台<br/>'
-					} else if (item.seriesName.includes('销售额') || item.seriesName.includes('总收入')) {
+					if (item.seriesName.includes('Sales Volume')) {
+						result += item.marker + item.seriesName + ': ' + item.value + ' units<br/>'
+					} else if (item.seriesName.includes('Sales Revenue') || item.seriesName.includes('Total Revenue')) {
 						result += item.marker + item.seriesName + ': €' + (item.value / 1000000).toFixed(1) + 'M<br/>'
 					}
 				})
@@ -2054,7 +2054,7 @@ function renderChart3New() {
 			}
 		},
 		legend: {
-			data: ['产品一销售量', '产品二销售量', '产品一销售额', '产品二销售额', '总收入'],
+			data: ['Product 1 Sales Volume', 'Product 2 Sales Volume', 'Product 1 Sales Revenue', 'Product 2 Sales Revenue', 'Total Revenue'],
 			bottom: 5,
 			textStyle: { fontSize: 10 },
 			itemGap: 15
@@ -2075,7 +2075,7 @@ function renderChart3New() {
 		yAxis: [
 			{
 				type: 'value',
-				name: '销售量 (台)',
+				name: 'Sales Volume (units)',
 				position: 'left',
 				axisLabel: {
 					formatter: '{value}',
@@ -2087,7 +2087,7 @@ function renderChart3New() {
 			},
 			{
 				type: 'value',
-				name: '销售额 (€M)',
+				name: 'Sales Revenue (€M)',
 				position: 'right',
 				axisLabel: {
 					formatter: function(value) {
@@ -2102,7 +2102,7 @@ function renderChart3New() {
 		],
 		series: [
 			{
-				name: '产品一销售量',
+				name: 'Product 1 Sales Volume',
 				type: 'bar',
 				yAxisIndex: 0,
 				data: [40, 120, 248],
@@ -2117,14 +2117,14 @@ function renderChart3New() {
 					show: true,
 					position: 'top',
 					fontSize: 12,
-					formatter: '{c}台',
+					formatter: '{c} units',
 					offset: [0, -12],
 					color: '#333',
 					fontWeight: 'bold'
 				}
 			},
 			{
-				name: '产品二销售量',
+				name: 'Product 2 Sales Volume',
 				type: 'bar',
 				yAxisIndex: 0,
 				data: [60, 180, 371],
@@ -2139,14 +2139,14 @@ function renderChart3New() {
 					show: true,
 					position: 'top',
 					fontSize: 12,
-					formatter: '{c}台',
+					formatter: '{c} units',
 					offset: [0, -12],
 					color: '#333',
 					fontWeight: 'bold'
 				}
 			},
 			{
-				name: '产品一销售额',
+				name: 'Product 1 Sales Revenue',
 				type: 'line',
 				yAxisIndex: 1,
 				data: [4800000, 14400000, 29714286],
@@ -2170,7 +2170,7 @@ function renderChart3New() {
 				}
 			},
 			{
-				name: '产品二销售额',
+				name: 'Product 2 Sales Revenue',
 				type: 'line',
 				yAxisIndex: 1,
 				data: [12000000, 36000000, 74285714],
@@ -2194,7 +2194,7 @@ function renderChart3New() {
 				}
 			},
 			{
-				name: '总收入',
+				name: 'Total Revenue',
 				type: 'line',
 				yAxisIndex: 1,
 				data: [16800000, 50400000, 104000000],
@@ -2239,7 +2239,7 @@ function renderChart4New() {
 
 	const option = {
 		title: {
-			text: 'Profit Statement Analysis / 利润表分析',
+			text: 'Profit Statement Analysis',
 			textStyle: { fontSize: 16, color: '#333', fontWeight: 'bold' },
 			top: 10,
 			left: 'center'
@@ -2249,7 +2249,7 @@ function renderChart4New() {
 			formatter: function(params) {
 				let result = params[0].axisValue + '<br/>'
 				params.forEach(function(item) {
-					if (item.seriesName.includes('毛利率')) {
+					if (item.seriesName.includes('Gross Margin')) {
 						result += item.marker + item.seriesName + ': ' + item.value + '%<br/>'
 					} else if (item.value !== null && item.value !== undefined) {
 						result += item.marker + item.seriesName + ': €' + (Math.abs(item.value) / 1000000).toFixed(1) + 'M<br/>'
@@ -2259,7 +2259,7 @@ function renderChart4New() {
 			}
 		},
 		legend: {
-			data: ['总收入', '毛利润', '贡献毛利', '税前净利润', '毛利率'],
+			data: ['Total Revenue', 'Gross Profit', 'Contribution Margin', 'Pre-tax Net Profit', 'Gross Margin Rate'],
 			bottom: 5,
 			textStyle: { fontSize: 10 },
 			itemGap: 12
@@ -2280,7 +2280,7 @@ function renderChart4New() {
 		yAxis: [
 			{
 				type: 'value',
-				name: '金额 (€M)',
+				name: 'Amount (€M)',
 				position: 'left',
 				axisLabel: {
 					formatter: function(value) {
@@ -2294,7 +2294,7 @@ function renderChart4New() {
 			},
 			{
 				type: 'value',
-				name: '毛利率 (%)',
+				name: 'Gross Margin Rate (%)',
 				position: 'right',
 				min: 85,
 				max: 92,
@@ -2309,7 +2309,7 @@ function renderChart4New() {
 		],
 		series: [
 			{
-				name: '总收入',
+				name: 'Total Revenue',
 				type: 'bar',
 				yAxisIndex: 0,
 				data: [16800000, 50400000, 104000000],
@@ -2333,7 +2333,7 @@ function renderChart4New() {
 				}
 			},
 			{
-				name: '毛利润',
+				name: 'Gross Profit',
 				type: 'bar',
 				yAxisIndex: 0,
 				data: [14890000, 44670000, 92100000],
@@ -2357,7 +2357,7 @@ function renderChart4New() {
 				}
 			},
 			{
-				name: '贡献毛利',
+				name: 'Contribution Margin',
 				type: 'bar',
 				yAxisIndex: 0,
 				data: [11965000, 37155000, 79250000],
@@ -2381,7 +2381,7 @@ function renderChart4New() {
 				}
 			},
 			{
-				name: '税前净利润',
+				name: 'Pre-tax Net Profit',
 				type: 'line',
 				yAxisIndex: 0,
 				data: [11173333, 36238333, 78208334],
@@ -2409,7 +2409,7 @@ function renderChart4New() {
 				}
 			},
 			{
-				name: '毛利率',
+				name: 'Gross Margin Rate',
 				type: 'line',
 				yAxisIndex: 1,
 				data: [88.6, 88.6, 88.6],
@@ -2597,7 +2597,7 @@ function renderChart5New() {
 					formatter: '{c}%',
 					color: '#FF6B6B',
 					fontWeight: 'bold',
-					offset: [0, -15]
+					offset: [0, 45]
 				}
 			},
 			{
