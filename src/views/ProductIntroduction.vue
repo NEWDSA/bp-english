@@ -180,7 +180,7 @@
 						<div class="competitor-tab" :class="{ active: competitorTab === 'vs-others' }"
 							@click="setCompetitorTab('vs-others')">
 							<!-- VS Other Hydrofoils -->
-							YU VS Other Electric Hydrofoils
+							YU VS Other Hydrofoils
 						</div>
 					</div>
 
@@ -474,13 +474,6 @@
 									</div>
 								</div>
 
-								<!-- 友商A -->
-								<div class="competitor-item">
-									<div class="competitor-image-wrapper">
-										<img src="../assets/other1.png" alt="友商A" class="competitor-image" />
-									</div>
-								</div>
-
 								<!-- 友商B -->
 								<div class="competitor-item">
 									<div class="competitor-image-wrapper">
@@ -501,6 +494,20 @@
 										<img src="../assets/other4.png" alt="友商D" class="competitor-image" />
 									</div>
 								</div>
+
+								<!-- 友商E -->
+								<div class="competitor-item">
+									<div class="competitor-image-wrapper">
+										<img src="../assets/other6.png" alt="友商E" class="competitor-image" />
+									</div>
+								</div>
+
+								<!-- 友商F -->
+								<div class="competitor-item">
+									<div class="competitor-image-wrapper">
+										<img src="../assets/other7.png" alt="友商F" class="competitor-image" />
+									</div>
+								</div>
 							</div>
 
 							<!-- 性能对比表格 -->
@@ -510,20 +517,20 @@
 										<tr>
 											<td>Maximum Speed (km/h)</td>
 											<td class="yu-column">65</td>
-											<td>24</td>
 											<td>28</td>
 											<td>80</td>
 											<td>55</td>
-											<!-- <td>26KM/H</td> -->
+											<td>74（hybrid）<br>18.5（all-electric）</td>
+											<td>74 (fuel)</td>
 										</tr>
 										<tr>
 											<td>Range at Full Speed (km)</td>
 											<td class="yu-column">65</td>
-											<td>80</td>
 											<td>50</td>
 											<td>100</td>
 											<td>100</td>
-											<!-- <td>19</td> -->
+											<td>220 (hybrid)</td>
+											<td>186 (fuel)</td>
 										</tr>
 										<tr>
 											<td>Power-to-Speed Ratio (kW / kn)</td>
@@ -531,60 +538,42 @@
 											<td>2:1</td>
 											<td>2:1</td>
 											<td>2:1</td>
-											<td>2:1</td>
+											<td>-</td>
+											<td>-</td>
 										</tr>
 										<tr>
 											<td>Cost-effectiveness</td>
 											<!-- <td>€35,000</td> -->
 											<td class="yu-column">€150,000</td>
-											<td>€35，700</td>
-											<td>€196，800</td>
+											<td>€196,800</td>
 											<td>€700，000</td>
 											<td>€513，800</td>
+											<td>€730,000</td>
+											<td>-</td>
 										</tr>
 										<tr>
 											<td>Battery Weight</td>
 											<td class="yu-column">Approximately 220kg</td>
-											<td>Approximately 100kg</td>
 											<td>Approximately 360kg</td>
 											<td>Approximately 780kg</td>
 											<td>Approximately 1850kg</td>
-											<!-- <td>~320kg</td> -->
+											<td>-</td>
+											<td>-</td>
 										</tr>
-										<!-- <tr>
-											<td>Motor Power</td>
-											<td>40kw</td>
-											<td>30kw</td>
-											<td>120kw</td>
-											<td>2*10kw</td>
-											<td>170kw</td>
-										</tr> -->
 										<tr>
 											<td>Maximum occupant capacity</td>
 											<td class="yu-column">4</td>
-											<td>2</td>
 											<td>4</td>
 											<td>6</td>
 											<td>8</td>
-											<!-- <td>7</td> -->
+											<td>8</td>
+											<td>40</td>
 										</tr>
-										<!-- <tr>
-											<td>Price (New Boat) (€)</td>
-											<td>€150,000</td>
-											<td>€134,800</td>
-											<td>€100,000 ~€155,900</td>
-											<td>€183,000</td>
-											<td>€185,000 from</td>
-										</tr> -->
 										<tr>
 											<td>Human-Computer Interaction Usability</td>
 											<td class="yu-column">
 												<!-- 4星 -->
 												<div class="stars">★★★★</div>
-											</td>
-											<td>
-												<!-- 3.星 -->
-												<div class="stars">★★★</div>
 											</td>
 											<td>
 												<!-- 3.星  -->
@@ -596,9 +585,12 @@
 											<td>
 												<div class="stars">★★</div>
 											</td>
-											<!-- <td>
+											<td>
+												<div class="stars">★★★</div>
+											</td>
+											<td>
 												<div class="stars">★★</div>
-											</td> -->
+											</td>
 										</tr>
 									</tbody>
 								</table>
@@ -717,16 +709,22 @@
 							<div class="panel-section">
 								<div class="section-title !text-[20px]">1. What is a Hydrofoil?</div>
 								<div class="section-text !text-[18px]">
-									A hydrofoil is a boat-like "seaplane" vessel. When accelerating, the hydrofoils beneath the hull
-									generate lift, lifting the entire hull out of the water, with only slender hydrofoil struts
-									touching the water. This design significantly reduces water resistance and dramatically improves
+									A hydrofoil is a boat-like "seaplane" vessel. When accelerating, the hydrofoils
+									beneath the
+									hull
+									generate lift, lifting the entire hull out of the water, with only slender hydrofoil
+									struts
+									touching the water. This design significantly reduces water resistance and
+									dramatically
+									improves
 									sailing speed and efficiency.
 								</div>
 							</div>
 
 							<!-- 第二部分：性能对比 -->
 							<div class="panel-section">
-								<div class="section-title !text-[20px]">2. How does the hydrofoil perform compared to traditional
+								<div class="section-title !text-[20px]">2. How does the hydrofoil perform compared to
+									traditional
 									boats?
 								</div>
 								<div class="performance-list">
@@ -749,13 +747,16 @@
 										</div>
 									</div>
 									<div class="performance-item">
-										<div class="performance-label !text-[18px]">Energy consumption reduction: 30%-50%</div>
+										<div class="performance-label !text-[18px]">Energy consumption reduction:
+											30%-50%</div>
 										<div class="performance-bar">
 											<div class="performance-bar-fill orange-bar" style="width: 50%"></div>
 										</div>
 									</div>
 									<div class="performance-item">
-										<div class="performance-label !text-[18px]">Propulsion efficiency increase: 20%-40%</div>
+										<div class="performance-label !text-[18px]">Propulsion efficiency increase:
+											20%-40%
+										</div>
 										<div class="performance-bar">
 											<div class="performance-bar-fill orange-bar" style="width: 40%"></div>
 										</div>
@@ -2656,26 +2657,32 @@ onUnmounted(() => {
 	margin-bottom: 20px;
 }
 
-/* VS 其他水翼艇 tab的网格布局（5列） */
+/* VS 其他水翼艇 tab的网格布局（6列） */
 .tab-panel.vs-others-tab .competitor-grid {
-	grid-template-columns: 250px repeat(5, calc((100% - 250px) / 5));
+	grid-template-columns: 250px repeat(6, calc((100% - 250px) / 6));
 }
 
 @media (min-width: 640px) {
 	.tab-panel.vs-others-tab .competitor-grid {
-		grid-template-columns: 350px repeat(5, calc((100% - 350px) / 5));
+		grid-template-columns: 350px repeat(6, calc((100% - 350px) / 6));
 	}
 }
 
 @media (min-width: 1024px) {
 	.tab-panel.vs-others-tab .competitor-grid {
-		grid-template-columns: 450px repeat(5, calc((100% - 450px) / 5));
+		grid-template-columns: 450px repeat(6, calc((100% - 450px) / 6));
 	}
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1280px) and (max-width: 1600px) {
 	.tab-panel.vs-others-tab .competitor-grid {
-		grid-template-columns: 550px repeat(5, calc((100% - 550px) / 5));
+		grid-template-columns: 280px repeat(6, calc((100% - 280px) / 6));
+	}
+}
+
+@media (min-width: 1600px) {
+	.tab-panel.vs-others-tab .competitor-grid {
+		grid-template-columns: 400px repeat(6, calc((100% - 400px) / 6));
 	}
 }
 
@@ -2696,7 +2703,13 @@ onUnmounted(() => {
 	}
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1280px) and (max-width: 1600px) {
+	.tab-panel.three-col-tab .competitor-grid {
+		grid-template-columns: 350px repeat(3, calc((100% - 350px) / 3));
+	}
+}
+
+@media (min-width: 1600px) {
 	.tab-panel.three-col-tab .competitor-grid {
 		grid-template-columns: 450px repeat(3, calc((100% - 450px) / 3));
 	}
@@ -2719,7 +2732,13 @@ onUnmounted(() => {
 	}
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1280px) and (max-width: 1600px) {
+	.tab-panel.four-col-tab .competitor-grid {
+		grid-template-columns: 350px repeat(4, calc((100% - 350px) / 4));
+	}
+}
+
+@media (min-width: 1600px) {
 	.tab-panel.four-col-tab .competitor-grid {
 		grid-template-columns: 450px repeat(4, calc((100% - 450px) / 4));
 	}
@@ -2729,24 +2748,37 @@ onUnmounted(() => {
 	/* 空白占位符，与表格第一列对齐 */
 	display: block;
 	width: 200px;
+	padding-left: 20px;
+	box-sizing: border-box;
 }
 
 @media (min-width: 640px) {
 	.competitor-spacer {
 		width: 280px;
+		padding-left: 18px;
 	}
 }
 
 @media (min-width: 1024px) {
 	.competitor-spacer {
 		width: 380px;
+		padding-left: 18px;
 	}
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1280px) and (max-width: 1600px) {
+	.competitor-spacer {
+		width: 350px;
+		max-width: 350px;
+		padding-left: 16px;
+	}
+}
+
+@media (min-width: 1600px) {
 	.competitor-spacer {
 		width: 450px;
 		max-width: 450px;
+		padding-left: 18px;
 	}
 }
 
@@ -2754,37 +2786,51 @@ onUnmounted(() => {
 	.competitor-spacer {
 		width: 450px;
 		max-width: 450px;
+		padding-left: 20px;
 	}
 }
 
 /* VS 其他水翼艇 tab的空白占位符需要更宽 */
 .tab-panel.vs-others-tab .competitor-spacer {
 	width: 250px;
+	padding-left: 20px;
 }
 
 @media (min-width: 640px) {
 	.tab-panel.vs-others-tab .competitor-spacer {
 		width: 350px;
+		padding-left: 18px;
 	}
 }
 
 @media (min-width: 1024px) {
 	.tab-panel.vs-others-tab .competitor-spacer {
 		width: 450px;
+		padding-left: 18px;
 	}
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1280px) and (max-width: 1600px) {
 	.tab-panel.vs-others-tab .competitor-spacer {
-		width: 550px;
-		max-width: 550px;
+		width: 280px;
+		max-width: 280px;
+		padding-left: 16px;
+	}
+}
+
+@media (min-width: 1600px) {
+	.tab-panel.vs-others-tab .competitor-spacer {
+		width: 400px;
+		max-width: 400px;
+		padding-left: 18px;
 	}
 }
 
 @media (min-width: 1920px) {
 	.tab-panel.vs-others-tab .competitor-spacer {
-		width: 550px;
-		max-width: 550px;
+		width: 400px;
+		max-width: 400px;
+		padding-left: 20px;
 	}
 }
 
@@ -2975,7 +3021,16 @@ onUnmounted(() => {
 	}
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1280px) and (max-width: 1600px) {
+
+	.comparison-table th:first-child,
+	.comparison-table td:first-child {
+		width: 350px;
+		max-width: 350px;
+	}
+}
+
+@media (min-width: 1600px) {
 
 	.comparison-table th:first-child,
 	.comparison-table td:first-child {
@@ -3016,12 +3071,21 @@ onUnmounted(() => {
 	}
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1280px) and (max-width: 1600px) {
 
 	.tab-panel.vs-others-tab .comparison-table th:first-child,
 	.tab-panel.vs-others-tab .comparison-table td:first-child {
-		width: 550px;
-		max-width: 550px;
+		width: 280px;
+		max-width: 280px;
+	}
+}
+
+@media (min-width: 1600px) {
+
+	.tab-panel.vs-others-tab .comparison-table th:first-child,
+	.tab-panel.vs-others-tab .comparison-table td:first-child {
+		width: 400px;
+		max-width: 400px;
 	}
 }
 
@@ -3030,8 +3094,8 @@ onUnmounted(() => {
 	/* 超大屏幕限制最大宽度 */
 	.tab-panel.vs-others-tab .comparison-table th:first-child,
 	.tab-panel.vs-others-tab .comparison-table td:first-child {
-		width: 550px;
-		max-width: 550px;
+		width: 400px;
+		max-width: 400px;
 	}
 }
 
@@ -3047,17 +3111,17 @@ onUnmounted(() => {
 	width: auto;
 }
 
-/* VS 其他水翼艇 tab的数据列宽（第一列250px，其他5列等分） */
+/* VS 其他水翼艇 tab的数据列宽（第一列250px，其他6列等分） */
 .tab-panel.vs-others-tab .comparison-table td:not(:first-child),
 .tab-panel.vs-others-tab .comparison-table th:not(:first-child) {
-	width: calc((100% - 250px) / 5);
+	width: calc((100% - 250px) / 6);
 }
 
 @media (min-width: 640px) {
 
 	.tab-panel.vs-others-tab .comparison-table td:not(:first-child),
 	.tab-panel.vs-others-tab .comparison-table th:not(:first-child) {
-		width: calc((100% - 350px) / 5);
+		width: calc((100% - 350px) / 6);
 	}
 }
 
@@ -3065,15 +3129,23 @@ onUnmounted(() => {
 
 	.tab-panel.vs-others-tab .comparison-table td:not(:first-child),
 	.tab-panel.vs-others-tab .comparison-table th:not(:first-child) {
-		width: calc((100% - 450px) / 5);
+		width: calc((100% - 450px) / 6);
 	}
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1280px) and (max-width: 1600px) {
 
 	.tab-panel.vs-others-tab .comparison-table td:not(:first-child),
 	.tab-panel.vs-others-tab .comparison-table th:not(:first-child) {
-		width: calc((100% - 550px) / 5);
+		width: calc((100% - 280px) / 6);
+	}
+}
+
+@media (min-width: 1600px) {
+
+	.tab-panel.vs-others-tab .comparison-table td:not(:first-child),
+	.tab-panel.vs-others-tab .comparison-table th:not(:first-child) {
+		width: calc((100% - 400px) / 6);
 	}
 }
 
@@ -3099,7 +3171,15 @@ onUnmounted(() => {
 	}
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1280px) and (max-width: 1600px) {
+
+	.tab-panel.three-col-tab .comparison-table td:not(:first-child),
+	.tab-panel.three-col-tab .comparison-table th:not(:first-child) {
+		width: calc((100% - 350px) / 3);
+	}
+}
+
+@media (min-width: 1600px) {
 
 	.tab-panel.three-col-tab .comparison-table td:not(:first-child),
 	.tab-panel.three-col-tab .comparison-table th:not(:first-child) {
@@ -3129,7 +3209,15 @@ onUnmounted(() => {
 	}
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1280px) and (max-width: 1600px) {
+
+	.tab-panel.four-col-tab .comparison-table td:not(:first-child),
+	.tab-panel.four-col-tab .comparison-table th:not(:first-child) {
+		width: calc((100% - 350px) / 4);
+	}
+}
+
+@media (min-width: 1600px) {
 
 	.tab-panel.four-col-tab .comparison-table td:not(:first-child),
 	.tab-panel.four-col-tab .comparison-table th:not(:first-child) {
