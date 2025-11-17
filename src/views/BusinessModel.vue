@@ -510,12 +510,91 @@
 		<div class="revenue-modal" v-if="activeContent === 'revenue'" @click="hideContent">
 			<div class="revenue-modal-content" @click.stop>
 				<button class="close-btn" @click="hideContent">×</button>
-				<div class="charts-grid charts-grid-two">
+
+				<!-- 页面导航 - 上一页按钮 (左侧) -->
+				<button
+					class="nav-btn prev-btn nav-btn-left"
+					:class="{ 'disabled': currentRevenuePage === 1 }"
+					@click="prevRevenuePage"
+					:disabled="currentRevenuePage === 1">
+					<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<polyline points="15 18 9 12 15 6"></polyline>
+					</svg>
+				</button>
+
+				<!-- 页面导航 - 下一页按钮 (右侧) -->
+				<button
+					class="nav-btn next-btn nav-btn-right"
+					:class="{ 'disabled': currentRevenuePage === 4 }"
+					@click="nextRevenuePage"
+					:disabled="currentRevenuePage === 4">
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<polyline points="9 18 15 12 9 6"></polyline>
+					</svg>
+				</button>
+
+				<!-- 页面指示器 (底部中心) -->
+				<div class="page-indicators">
+					<span
+						v-for="page in 4"
+						:key="page"
+						class="page-dot"
+						:class="{ 'active': currentRevenuePage === page }"
+						@click="currentRevenuePage = page">
+					</span>
+				</div>
+
+				<!-- 页面1: 现有的图表1和图表2 -->
+				<div v-if="currentRevenuePage === 1" class="charts-grid charts-grid-two">
 					<div class="chart-item">
 						<div ref="chart1Ref" class="modal-chart"></div>
 					</div>
 					<div class="chart-item">
 						<div ref="chart2Ref" class="modal-chart"></div>
+					</div>
+				</div>
+
+				<!-- 页面2: 新增图表3和图表4 -->
+				<div v-if="currentRevenuePage === 2" class="charts-grid charts-grid-two">
+					<div class="chart-item">
+						<div ref="chart3NewRef" class="modal-chart"></div>
+					</div>
+					<div class="chart-item">
+						<div ref="chart4NewRef" class="modal-chart"></div>
+					</div>
+				</div>
+
+				<!-- 页面3: 新增图表5和图表6 -->
+				<div v-if="currentRevenuePage === 3" class="charts-grid charts-grid-two">
+					<div class="chart-item">
+						<div ref="chart5NewRef" class="modal-chart"></div>
+					</div>
+					<div class="chart-item">
+						<div ref="chart6NewRef" class="modal-chart"></div>
+					</div>
+				</div>
+
+				<!-- 页面4: 左侧图表7，右侧文字 -->
+				<div v-if="currentRevenuePage === 4" class="charts-grid charts-grid-mixed">
+					<div class="chart-item">
+						<div ref="chart7NewRef" class="modal-chart"></div>
+					</div>
+					<div class="text-content">
+						<h2 class="text-title">Revenue Growth Strategy</h2>
+						<div class="text-body">
+							<p>Our comprehensive revenue model demonstrates strong growth potential across multiple market segments. The hydrofoil technology offers significant advantages in both B2B and B2C markets.</p>
+							<br/>
+							<p><strong>Key Revenue Drivers:</strong></p>
+							<ul>
+								<li>• Premium pricing for innovative technology</li>
+								<li>• Recurring service and maintenance revenue</li>
+								<li>• Licensing opportunities for technology</li>
+								<li>• Expansion into emerging markets</li>
+							</ul>
+							<br/>
+							<p><strong>Projected Growth:</strong></p>
+							<p>We anticipate a compound annual growth rate (CAGR) of 35% over the next five years, driven by increasing demand for sustainable marine transportation and premium water sports experiences.</p>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -587,30 +666,6 @@
 					<p class="panel-subtitle">Click on the map markers to view detailed information</p>
 				</div> -->
 
-				<!-- Revenue Model 弹窗 -->
-				<div class="revenue-modal" v-if="activeContent === 'revenue'" @click="hideContent">
-					<div class="revenue-modal-content" @click.stop>
-						<button class="close-btn" @click="hideContent">×</button>
-						<div class="charts-grid">
-							<div class="chart-item">
-
-								<div ref="chart1Ref" class="modal-chart"></div>
-							</div>
-							<div class="chart-item">
-								<!-- <h3 class="chart-item-title">Revenue by Product Line</h3> -->
-								<div ref="chart2Ref" class="modal-chart"></div>
-							</div>
-							<div class="chart-item">
-								<!-- <h3 class="chart-item-title">Market Share Distribution</h3> -->
-								<div ref="chart3Ref" class="modal-chart"></div>
-							</div>
-							<div class="chart-item">
-								<!-- <h3 class="chart-item-title">Profit Margin Trends</h3> -->
-								<div ref="chart4Ref" class="modal-chart"></div>
-							</div>
-						</div>
-					</div>
-				</div>
 				<!-- 内容面板 -->
 				<div class="content-panel" v-if="activeContent && activeContent !== 'revenue'">
 
@@ -995,6 +1050,25 @@ const activeContent = ref(null)
 const showLakeDetail = ref(false)
 const isRevenueSelected = ref(false)
 
+// Page navigation functions
+function prevRevenuePage() {
+	if (currentRevenuePage.value > 1) {
+		currentRevenuePage.value--
+		nextTick(() => {
+			renderModalCharts()
+		})
+	}
+}
+
+function nextRevenuePage() {
+	if (currentRevenuePage.value < 4) {
+		currentRevenuePage.value++
+		nextTick(() => {
+			renderModalCharts()
+		})
+	}
+}
+
 // 覆盖层状态
 const showOverlay = ref(true)
 const showCContent = ref(false)
@@ -1080,6 +1154,7 @@ function hideContent() {
 	activeContent.value = null
 	showLakeDetail.value = false
 	isRevenueSelected.value = false
+	currentRevenuePage.value = 1 // Reset to first page
 }
 
 // 显示Lake详情面板
@@ -1117,6 +1192,21 @@ let chart1Instance = null
 let chart2Instance = null
 let chart3Instance = null
 let chart4Instance = null
+
+// New charts for additional pages
+const chart3NewRef = ref(null)
+const chart4NewRef = ref(null)
+const chart5NewRef = ref(null)
+const chart6NewRef = ref(null)
+const chart7NewRef = ref(null)
+let chart3NewInstance = null
+let chart4NewInstance = null
+let chart5NewInstance = null
+let chart6NewInstance = null
+let chart7NewInstance = null
+
+// Page navigation
+const currentRevenuePage = ref(1)
 
 function renderRevenueChart() {
 	if (!revenueChartRef.value) return
@@ -1871,13 +1961,353 @@ function renderModalCharts() {
 		}, 50)
 	}
 
+	// 根据当前页面渲染对应的图表
+	if (currentRevenuePage.value === 1) {
+		// Page 1: existing charts already rendered above
+	} else if (currentRevenuePage.value === 2) {
+		renderChart3New()
+		renderChart4New()
+	} else if (currentRevenuePage.value === 3) {
+		renderChart5New()
+		renderChart6New()
+	} else if (currentRevenuePage.value === 4) {
+		renderChart7New()
+	}
+
 	// 自适应调整
 	setTimeout(() => {
 		chart1Instance?.resize()
 		chart2Instance?.resize()
 		chart3Instance?.resize()
 		chart4Instance?.resize()
+		chart3NewInstance?.resize()
+		chart4NewInstance?.resize()
+		chart5NewInstance?.resize()
+		chart6NewInstance?.resize()
+		chart7NewInstance?.resize()
 	}, 100)
+}
+
+// 新增图表渲染函数
+function renderChart3New() {
+	if (!chart3NewRef.value) return
+
+	if (chart3NewInstance) {
+		chart3NewInstance.dispose()
+	}
+	chart3NewInstance = echarts.init(chart3NewRef.value)
+
+	const option = {
+		title: {
+			text: 'Market Share Analysis',
+			textStyle: { fontSize: 16, color: '#333', fontWeight: 'normal' },
+			top: 20,
+			left: 'center'
+		},
+		tooltip: {
+			trigger: 'item',
+			formatter: '{a} <br/>{b}: {c} ({d}%)'
+		},
+		legend: {
+			data: ['Luxury Segment', 'Tourism', 'Commercial Transport', 'Others'],
+			bottom: 10,
+			textStyle: { fontSize: 12 }
+		},
+		series: [{
+			name: 'Market Share',
+			type: 'pie',
+			radius: ['40%', '70%'],
+			center: ['50%', '55%'],
+			data: [
+				{ value: 45, name: 'Luxury Segment', itemStyle: { color: '#00d4ff' }},
+				{ value: 30, name: 'Tourism', itemStyle: { color: '#FFC27A' }},
+				{ value: 20, name: 'Commercial Transport', itemStyle: { color: '#67E0DC' }},
+				{ value: 5, name: 'Others', itemStyle: { color: '#C7C7CC' }}
+			],
+			emphasis: {
+				itemStyle: {
+					shadowBlur: 10,
+					shadowOffsetX: 0,
+					shadowColor: 'rgba(0, 0, 0, 0.5)'
+				}
+			},
+			label: {
+				show: true,
+				formatter: '{b}: {d}%',
+				fontSize: 12
+			}
+		}]
+	}
+
+	chart3NewInstance.setOption(option)
+	setTimeout(() => chart3NewInstance?.resize(), 50)
+}
+
+function renderChart4New() {
+	if (!chart4NewRef.value) return
+
+	if (chart4NewInstance) {
+		chart4NewInstance.dispose()
+	}
+	chart4NewInstance = echarts.init(chart4NewRef.value)
+
+	const option = {
+		title: {
+			text: 'Revenue Growth Projection',
+			textStyle: { fontSize: 16, color: '#333', fontWeight: 'normal' },
+			top: 20,
+			left: 'center'
+		},
+		tooltip: {
+			trigger: 'axis'
+		},
+		legend: {
+			data: ['Revenue (€M)', 'Growth Rate (%)'],
+			bottom: 10,
+			textStyle: { fontSize: 12 }
+		},
+		xAxis: {
+			type: 'category',
+			data: ['2024', '2025', '2026', '2027', '2028', '2029'],
+			axisLabel: { fontSize: 12 }
+		},
+		yAxis: [
+			{
+				type: 'value',
+				name: 'Revenue (€M)',
+				position: 'left',
+				axisLabel: { formatter: '{value}M', fontSize: 12 }
+			},
+			{
+				type: 'value',
+				name: 'Growth (%)',
+				position: 'right',
+				axisLabel: { formatter: '{value}%', fontSize: 12 }
+			}
+		],
+		series: [
+			{
+				name: 'Revenue (€M)',
+				type: 'bar',
+				data: [2.1, 3.8, 6.7, 11.2, 18.5, 29.8],
+				itemStyle: { color: '#00d4ff' },
+				label: { show: true, position: 'top', fontSize: 10 }
+			},
+			{
+				name: 'Growth Rate (%)',
+				type: 'line',
+				yAxisIndex: 1,
+				data: [null, 81, 76, 67, 65, 61],
+				itemStyle: { color: '#FFC27A' },
+				lineStyle: { width: 3 },
+				label: { show: true, position: 'top', fontSize: 10 }
+			}
+		]
+	}
+
+	chart4NewInstance.setOption(option)
+	setTimeout(() => chart4NewInstance?.resize(), 50)
+}
+
+function renderChart5New() {
+	if (!chart5NewRef.value) return
+
+	if (chart5NewInstance) {
+		chart5NewInstance.dispose()
+	}
+	chart5NewInstance = echarts.init(chart5NewRef.value)
+
+	const option = {
+		title: {
+			text: 'Cost Structure Breakdown',
+			textStyle: { fontSize: 16, color: '#333', fontWeight: 'normal' },
+			top: 20,
+			left: 'center'
+		},
+		tooltip: {
+			trigger: 'item',
+			formatter: '{a} <br/>{b}: {c}% ({d}%)'
+		},
+		legend: {
+			data: ['R&D', 'Manufacturing', 'Marketing', 'Operations', 'Other'],
+			bottom: 10,
+			textStyle: { fontSize: 12 }
+		},
+		series: [{
+			name: 'Cost Structure',
+			type: 'pie',
+			radius: '70%',
+			center: ['50%', '55%'],
+			data: [
+				{ value: 35, name: 'R&D', itemStyle: { color: '#00d4ff' }},
+				{ value: 30, name: 'Manufacturing', itemStyle: { color: '#FFC27A' }},
+				{ value: 15, name: 'Marketing', itemStyle: { color: '#67E0DC' }},
+				{ value: 12, name: 'Operations', itemStyle: { color: '#C7C7CC' }},
+				{ value: 8, name: 'Other', itemStyle: { color: '#FFB6C1' }}
+			],
+			emphasis: {
+				itemStyle: {
+					shadowBlur: 10,
+					shadowOffsetX: 0,
+					shadowColor: 'rgba(0, 0, 0, 0.5)'
+				}
+			},
+			label: {
+				show: true,
+				formatter: '{b}: {c}%',
+				fontSize: 12
+			}
+		}]
+	}
+
+	chart5NewInstance.setOption(option)
+	setTimeout(() => chart5NewInstance?.resize(), 50)
+}
+
+function renderChart6New() {
+	if (!chart6NewRef.value) return
+
+	if (chart6NewInstance) {
+		chart6NewInstance.dispose()
+	}
+	chart6NewInstance = echarts.init(chart6NewRef.value)
+
+	const option = {
+		title: {
+			text: 'Competitive Position',
+			textStyle: { fontSize: 16, color: '#333', fontWeight: 'normal' },
+			top: 20,
+			left: 'center'
+		},
+		tooltip: {
+			trigger: 'axis'
+		},
+		legend: {
+			data: ['Our Company', 'Competitor A', 'Competitor B'],
+			bottom: 10,
+			textStyle: { fontSize: 12 }
+		},
+		radar: {
+			indicator: [
+				{ name: 'Technology', max: 100 },
+				{ name: 'Market Share', max: 100 },
+				{ name: 'Brand Recognition', max: 100 },
+				{ name: 'Customer Satisfaction', max: 100 },
+				{ name: 'Price Competitiveness', max: 100 },
+				{ name: 'Innovation', max: 100 }
+			],
+			center: ['50%', '55%'],
+			radius: '65%'
+		},
+		series: [{
+			name: 'Company Comparison',
+			type: 'radar',
+			data: [
+				{
+					value: [95, 25, 30, 90, 75, 95],
+					name: 'Our Company',
+					itemStyle: { color: '#00d4ff' },
+					areaStyle: { opacity: 0.3 }
+				},
+				{
+					value: [70, 60, 80, 75, 80, 60],
+					name: 'Competitor A',
+					itemStyle: { color: '#FFC27A' },
+					areaStyle: { opacity: 0.3 }
+				},
+				{
+					value: [60, 45, 70, 70, 85, 50],
+					name: 'Competitor B',
+					itemStyle: { color: '#67E0DC' },
+					areaStyle: { opacity: 0.3 }
+				}
+			]
+		}]
+	}
+
+	chart6NewInstance.setOption(option)
+	setTimeout(() => chart6NewInstance?.resize(), 50)
+}
+
+function renderChart7New() {
+	if (!chart7NewRef.value) return
+
+	if (chart7NewInstance) {
+		chart7NewInstance.dispose()
+	}
+	chart7NewInstance = echarts.init(chart7NewRef.value)
+
+	const option = {
+		title: {
+			text: 'Financial Performance Metrics',
+			textStyle: { fontSize: 18, color: '#333', fontWeight: 'bold' },
+			top: 20,
+			left: 'center'
+		},
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: { type: 'shadow' }
+		},
+		legend: {
+			data: ['EBITDA', 'Net Profit', 'ROI'],
+			bottom: 10,
+			textStyle: { fontSize: 12 }
+		},
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '15%',
+			top: '15%',
+			containLabel: true
+		},
+		xAxis: {
+			type: 'category',
+			data: ['2024', '2025', '2026', '2027', '2028', '2029'],
+			axisLabel: { fontSize: 12 }
+		},
+		yAxis: [
+			{
+				type: 'value',
+				name: 'Amount (€M)',
+				position: 'left',
+				axisLabel: { formatter: '{value}M', fontSize: 12 }
+			},
+			{
+				type: 'value',
+				name: 'ROI (%)',
+				position: 'right',
+				axisLabel: { formatter: '{value}%', fontSize: 12 }
+			}
+		],
+		series: [
+			{
+				name: 'EBITDA',
+				type: 'bar',
+				data: [0.5, 1.2, 2.8, 5.2, 9.1, 15.2],
+				itemStyle: { color: '#00d4ff' },
+				label: { show: true, position: 'top', fontSize: 10 }
+			},
+			{
+				name: 'Net Profit',
+				type: 'bar',
+				data: [0.2, 0.8, 1.9, 3.8, 6.7, 11.4],
+				itemStyle: { color: '#FFC27A' },
+				label: { show: true, position: 'top', fontSize: 10 }
+			},
+			{
+				name: 'ROI',
+				type: 'line',
+				yAxisIndex: 1,
+				data: [8, 15, 22, 28, 32, 35],
+				itemStyle: { color: '#67E0DC' },
+				lineStyle: { width: 3 },
+				label: { show: true, position: 'top', fontSize: 10 }
+			}
+		]
+	}
+
+	chart7NewInstance.setOption(option)
+	setTimeout(() => chart7NewInstance?.resize(), 50)
 }
 
 // Lake Como Pie Chart
@@ -4007,6 +4437,97 @@ function goHome() {
 	transform: scale(1.1);
 }
 
+/* Page Navigation Styles */
+.nav-btn {
+	background: rgba(255, 255, 255, 0.8);
+	border: none;
+	border-radius: 50%;
+	width: 48px;
+	height: 48px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	color: #333;
+	position: absolute;
+	z-index: 20;
+	backdrop-filter: blur(10px);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.nav-btn:hover:not(.disabled) {
+	background: rgba(255, 255, 255, 1);
+	transform: scale(1.1);
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.nav-btn.disabled {
+	opacity: 0.4;
+	cursor: not-allowed;
+	background: rgba(255, 255, 255, 0.5);
+}
+
+/* 左侧上一页按钮 */
+.nav-btn-left {
+	left: 20px;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.nav-btn-left:hover:not(.disabled) {
+	transform: translateY(-50%) scale(1.1);
+}
+
+/* 右侧下一页按钮 */
+.nav-btn-right {
+	right: 20px;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.nav-btn-right:hover:not(.disabled) {
+	transform: translateY(-50%) scale(1.1);
+}
+
+/* 底部页面指示器 */
+.page-indicators {
+	position: absolute;
+	bottom: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+	display: flex;
+	gap: 12px;
+	align-items: center;
+	z-index: 20;
+	background: rgba(0, 0, 0, 0.1);
+	backdrop-filter: blur(10px);
+	padding: 8px 16px;
+	border-radius: 20px;
+	border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.page-dot {
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.6);
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+.page-dot.active {
+	background: #00d4ff;
+	transform: scale(1.4);
+	box-shadow: 0 0 10px rgba(0, 212, 255, 0.6);
+}
+
+.page-dot:hover {
+	background: rgba(255, 255, 255, 0.9);
+	transform: scale(1.2);
+}
+
 .charts-grid {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
@@ -4022,8 +4543,61 @@ function goHome() {
 .charts-grid.charts-grid-two {
 	grid-template-columns: 1fr 1fr;
 	grid-template-rows: 1fr;
-	gap: 0;
-	padding: 0;
+}
+
+.charts-grid.charts-grid-mixed {
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr;
+	gap: 30px;
+}
+
+.text-content {
+	background: rgba(255, 255, 255, 0.9);
+	padding: 30px;
+	border-radius: 15px;
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	backdrop-filter: blur(10px);
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	overflow-y: auto;
+}
+
+.text-title {
+	font-size: 24px;
+	font-weight: bold;
+	color: #333;
+	margin-bottom: 20px;
+	text-align: center;
+}
+
+.text-body {
+	font-size: 16px;
+	line-height: 1.6;
+	color: #555;
+	text-align: left;
+}
+
+.text-body p {
+	margin-bottom: 12px;
+}
+
+.text-body ul {
+	margin: 12px 0;
+	padding-left: 0;
+	list-style: none;
+}
+
+.text-body ul li {
+	margin-bottom: 8px;
+	color: #666;
+	padding-left: 16px;
+}
+
+.text-body strong {
+	color: #333;
+	font-weight: 600;
 }
 
 .charts-grid::before {
@@ -4045,11 +4619,11 @@ function goHome() {
 .charts-grid.charts-grid-two::after {
 	content: '';
 	position: absolute;
-	top: 0;
-	bottom: 0;
+	top: 100px;
+	bottom: 120px;
 	left: 50%;
 	width: 1px;
-	background-color: #d0d0d0;
+	background-color: #e0e0e0;
 	transform: translateX(-50%);
 	z-index: 1;
 }
