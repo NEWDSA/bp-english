@@ -2032,11 +2032,43 @@ function renderChart3New() {
 	}
 	chart3NewInstance = echarts.init(chart3NewRef.value)
 
+	// 获取屏幕宽度用于响应式字体大小
+	const screenWidth = window.innerWidth
+
+	// 根据屏幕宽度动态计算字体大小
+	const getTitleFontSize = () => {
+		if (screenWidth <= 1440) return 12
+		if (screenWidth <= 1680) return 13
+		if (screenWidth <= 1920) return 16
+		return 20
+	}
+
+	const getAxisLabelFontSize = () => {
+		if (screenWidth <= 1440) return 10
+		if (screenWidth <= 1680) return 12
+		if (screenWidth <= 1920) return 14
+		return 16
+	}
+
+	const getLegendFontSize = () => {
+		if (screenWidth <= 1440) return 10
+		if (screenWidth <= 1680) return 10
+		if (screenWidth <= 1920) return 11
+		return 12
+	}
+
+	const getSeriesLabelFontSize = () => {
+		if (screenWidth <= 1440) return 12
+		if (screenWidth <= 1680) return 12
+		if (screenWidth <= 1920) return 16
+		return 18
+	}
+
 	const option = {
 		title: {
 			text: 'Annual Sales Situation',
-			textStyle: { fontSize: 20, color: '#333333' },
-			top: 10,
+			textStyle: { fontSize: getTitleFontSize(), color: '#333333' },
+			top: screenWidth <= 1280 ? 30 : 50,
 			left: 'center'
 		},
 		tooltip: {
@@ -2057,20 +2089,20 @@ function renderChart3New() {
 		legend: {
 			data: ['Product 1 Sales Volume', 'Product 2 Sales Volume', 'Product 1 Sales Revenue', 'Product 2 Sales Revenue', 'Total Revenue'],
 			bottom: 5,
-			textStyle: { fontSize: '14px' },
+			textStyle: { fontSize: getLegendFontSize() },
 			itemGap: 15
 		},
 		grid: {
-			left: '8%',
-			right: '8%',
-			top: '15%',
-			bottom: '10%',
+			left: screenWidth <= 1280 ? '8%' : '8%',
+			right: screenWidth <= 1280 ? '8%' : '8%',
+			top: screenWidth <= 1280 ? '20%' : '15%',
+			bottom: screenWidth <= 1280 ? '15%' : '10%',
 			containLabel: true
 		},
 		xAxis: {
 			type: 'category',
 			data: ['2026', '2027', '2028'],
-			axisLabel: { fontSize: 18, color: '#666' },
+			axisLabel: { fontSize: getAxisLabelFontSize(), color: '#666' },
 			axisLine: { lineStyle: { color: '#ddd' } }
 		},
 		yAxis: [
@@ -2080,11 +2112,11 @@ function renderChart3New() {
 				position: 'left',
 				axisLabel: {
       				formatter: '{value}',
-       				fontSize: 14,
+       				fontSize: getAxisLabelFontSize(),
         			color: '#666'
        			},
 				nameTextStyle: {
-					fontSize: 16,
+					fontSize: getAxisLabelFontSize(),
 					padding: [0, 0, 10, 0]
 				},
        			axisLine: { lineStyle: { color: '#00d4ff' } },
@@ -2103,11 +2135,11 @@ function renderChart3New() {
        				formatter: function(value) {
         				return '€' + (value / 1000000).toFixed(0) + 'M'
          			},
-           			fontSize: 14,
+           			fontSize: getAxisLabelFontSize(),
            			color: '#666'
              	},
 				nameTextStyle: {
-					fontSize: 16,
+					fontSize: getAxisLabelFontSize(),
 					color: '#fe7878',
 					padding: [0, 0, 10, 0]
 				},
@@ -2137,7 +2169,7 @@ function renderChart3New() {
 				label: {
 					show: true,
 					position: 'top',
-					fontSize: 18,
+					fontSize: getSeriesLabelFontSize(),
 					formatter: '{c} units',
 					offset: [0, -12],
 					color: '#000000',
@@ -2158,7 +2190,7 @@ function renderChart3New() {
 				label: {
 					show: true,
 					position: 'top',
-					fontSize: 18,
+					fontSize: getSeriesLabelFontSize(),
 					formatter: '{c} units',
 					offset: [0, -12],
 					color: '#000000',
@@ -2180,7 +2212,7 @@ function renderChart3New() {
 				label: {
 					show: true,
 					position: 'bottom',
-					fontSize: 18,
+					fontSize: getSeriesLabelFontSize(),
 					formatter: function(params) {
 						return '€' + (params.value / 1000000).toFixed(1) + 'M'
 					},
@@ -2204,7 +2236,7 @@ function renderChart3New() {
 				label: {
 					show: true,
 					position: 'bottom',
-					fontSize: 18,
+					fontSize: getSeriesLabelFontSize(),
 					formatter: function(params) {
 						return '€' + (params.value / 1000000).toFixed(1) + 'M'
 					},
@@ -2231,7 +2263,7 @@ function renderChart3New() {
 				label: {
 					show: true,
 					position: 'bottom',
-					fontSize: 18,
+					fontSize: getSeriesLabelFontSize(),
 					formatter: function(params) {
 						return '€' + (params.value / 1000000).toFixed(1) + 'M'
 					},
@@ -2278,11 +2310,43 @@ function renderChart4New() {
 	}
 	chart4NewInstance = echarts.init(chart4NewRef.value)
 
+	// 获取屏幕宽度用于响应式字体大小
+	const screenWidth = window.innerWidth
+
+	// 根据屏幕宽度动态计算字体大小
+	const getTitleFontSize = () => {
+		if (screenWidth <= 1440) return 12
+		if (screenWidth <= 1680) return 13
+		if (screenWidth <= 1920) return 16
+		return 20
+	}
+
+	const getAxisLabelFontSize = () => {
+		if (screenWidth <= 1440) return 10
+		if (screenWidth <= 1680) return 12
+		if (screenWidth <= 1920) return 14
+		return 16
+	}
+
+	const getLegendFontSize = () => {
+		if (screenWidth <= 1440) return 10
+		if (screenWidth <= 1680) return 10
+		if (screenWidth <= 1920) return 11
+		return 12
+	}
+
+	const getSeriesLabelFontSize = () => {
+		if (screenWidth <= 1440) return 12
+		if (screenWidth <= 1680) return 12
+		if (screenWidth <= 1920) return 16
+		return 18
+	}
+
 	const option = {
 		title: {
 			text: 'Profit Statement Analysis',
-			textStyle: { fontSize: 20, color: '#333333' },
-			top: 10,
+			textStyle: { fontSize: getTitleFontSize(), color: '#333333' },
+			top: screenWidth <= 1280 ? 30 : 50,
 			left: 'center'
 		},
 		tooltip: {
@@ -2306,20 +2370,20 @@ function renderChart4New() {
 		legend: {
 			data: ['Total Revenue', 'Gross Profit', 'Contribution Margin', 'Pre-tax Net Profit', 'Gross Margin Rate'],
 			bottom: 5,
-			textStyle: { fontSize: '14px' },
+			textStyle: { fontSize: getLegendFontSize() },
 			itemGap: 12
 		},
 		grid: {
-			left: '8%',
-			right: '8%',
-			top: '15%',
-			bottom: '10%',
+			left: screenWidth <= 1280 ? '8%' : '8%',
+			right: screenWidth <= 1280 ? '8%' : '8%',
+			top: screenWidth <= 1280 ? '20%' : '15%',
+			bottom: screenWidth <= 1280 ? '15%' : '10%',
 			containLabel: true
 		},
 		xAxis: {
 			type: 'category',
 			data: ['2026', '2027', '2028'],
-			axisLabel: { fontSize: 18, color: '#666' },
+			axisLabel: { fontSize: getAxisLabelFontSize(), color: '#666' },
 			axisLine: { lineStyle: { color: '#ddd' } }
 		},
 		yAxis: [
@@ -2333,11 +2397,11 @@ function renderChart4New() {
 					formatter: function(value) {
 						return '€' + (value / 1000000).toFixed(0) + 'M'
 					},
-					fontSize: 14,
+					fontSize: getAxisLabelFontSize(),
 					color: '#666'
 				},
 				nameTextStyle: {
-					fontSize: 16,
+					fontSize: getAxisLabelFontSize(),
 					padding: [0, 20, 10, 0]
 				},
 				axisLine: { lineStyle: { color: '#00d4ff' } },
@@ -2355,11 +2419,11 @@ function renderChart4New() {
 				max: 92,
 				axisLabel: {
 					formatter: '{value}%',
-					fontSize: 14,
+					fontSize: getAxisLabelFontSize(),
 					color: '#666'
 				},
 				nameTextStyle: {
-					fontSize: 16,
+					fontSize: getAxisLabelFontSize(),
 					padding: [0, 0, 10, 0]
 				},
 				axisLine: { lineStyle: { color: '#FF6B6B' } },
@@ -2443,7 +2507,7 @@ function renderChart4New() {
 				label: {
 					show: true,
 					position: 'top',
-					fontSize: 18,
+					fontSize: getSeriesLabelFontSize(),
 					formatter: function(params) {
 						// 显示堆叠总值：Total Revenue (净收入) + Cost of Goods Sold = 总收入
 						const totalRevenueData = [16800000, 50400000, 104000000]
@@ -2519,7 +2583,7 @@ function renderChart4New() {
 				label: {
 					show: true,
 					position: 'top',
-					fontSize: 18,
+					fontSize: getSeriesLabelFontSize(),
 					formatter: function(params) {
 						// 显示堆叠总值：Total Revenue (净收入) + Cost of Goods Sold = 总收入
 						const totalRevenueData = [14890000, 44670000, 92100000]
@@ -2546,7 +2610,7 @@ function renderChart4New() {
 				label: {
 					show: false,
 					position: 'top',
-					fontSize: 18,
+					fontSize: getSeriesLabelFontSize(),
 					formatter: function(params) {
 						// 显示堆叠总值：Total Revenue (净收入) + Cost of Goods Sold = 总收入
 						const totalRevenueData = [11965000, 37155000, 79250000] ;
@@ -2572,7 +2636,7 @@ function renderChart4New() {
 				label: {
 					show: true,
 					position: 'inside',
-					fontSize: 12,
+					fontSize: getSeriesLabelFontSize(),
 					formatter: function(params) {
 						// 显示堆叠总值：Gross Profit的原始值
 						const grossProfitData =[500000,625000,750000];
@@ -2603,7 +2667,7 @@ function renderChart4New() {
 				label: {
 					show: true,
 					position: 'top',
-					fontSize: 18,
+					fontSize: getSeriesLabelFontSize(),
 					formatter: function(params) {
 						// 显示堆叠总值：Total Revenue (净收入) + Cost of Goods Sold = 总收入
 						const totalRevenueData = [11965000, 37155000, 79250000] ;
@@ -2635,7 +2699,7 @@ function renderChart4New() {
 				label: {
 					show: true,
 					position: 'bottom',
-					fontSize: 18,
+					fontSize: getSeriesLabelFontSize(),
 					formatter: function(params) {
 						return '€' + (params.value / 1000000).toFixed(1) + 'M'
 					},
@@ -2662,7 +2726,7 @@ function renderChart4New() {
 				label: {
 					show: true,
 					position: 'bottom',
-					fontSize: 18,
+					fontSize: getSeriesLabelFontSize(),
 					formatter: '{c}%',
 					color: '#FF6B6B',
 					offset: [0, 8]
@@ -2683,13 +2747,52 @@ function renderChart5New() {
 	}
 	chart5NewInstance = echarts.init(chart5NewRef.value)
 
+	// 获取屏幕宽度用于响应式字体大小
+	const screenWidth = window.innerWidth
+
+	// 根据屏幕宽度动态计算字体大小
+	const getTitleFontSize = () => {
+		if (screenWidth <= 1440) return 12
+		if (screenWidth <= 1680) return 13
+		if (screenWidth <= 1920) return 16
+		return 20
+	}
+
+	const getSubtitleFontSize = () => {
+		if (screenWidth <= 1440) return 10
+		if (screenWidth <= 1680) return 11
+		if (screenWidth <= 1920) return 12
+		return 16
+	}
+
+	const getAxisLabelFontSize = () => {
+		if (screenWidth <= 1440) return 10
+		if (screenWidth <= 1680) return 12
+		if (screenWidth <= 1920) return 14
+		return 16
+	}
+
+	const getLegendFontSize = () => {
+		if (screenWidth <= 1440) return 10
+		if (screenWidth <= 1680) return 10
+		if (screenWidth <= 1920) return 11
+		return 12
+	}
+
+	const getSeriesLabelFontSize = () => {
+		if (screenWidth <= 1440) return 12
+		if (screenWidth <= 1680) return 12
+		if (screenWidth <= 1920) return 16
+		return 18
+	}
+
 	const option = {
 		title: {
 			text: 'Investment Return Analysis',
 			subtext: 'Based on €5M Total Investment',
-			textStyle: { fontSize: 20, color: '#333333' },
-			subtextStyle: { fontSize: 16, color: '#666' },
-			top: '3%',
+			textStyle: { fontSize: getTitleFontSize(), color: '#333333' },
+			subtextStyle: { fontSize: getSubtitleFontSize(), color: '#666' },
+			top: screenWidth <= 1280 ? '5%' : '3%',
 			left: 'center'
 		},
 		tooltip: {
@@ -2710,20 +2813,20 @@ function renderChart5New() {
 		legend: {
 			data: ['Annual Net Profit', 'Cumulative Net Profit', 'Annual ROI', 'Cumulative ROI'],
 			bottom: '5%',
-			textStyle: { fontSize: '14px' },
+			textStyle: { fontSize: getLegendFontSize() },
 			itemGap: 15
 		},
 		grid: {
-			left: '8%',
-			right: '8%',
-			top: '15%',
-			bottom: '10%',
+			left: screenWidth <= 1280 ? '8%' : '8%',
+			right: screenWidth <= 1280 ? '8%' : '8%',
+			top: screenWidth <= 1280 ? '20%' : '15%',
+			bottom: screenWidth <= 1280 ? '15%' : '10%',
 			containLabel: true
 		},
 		xAxis: {
 			type: 'category',
 			data: ['2026', '2027', '2028'],
-			axisLabel: { fontSize: 18, color: '#666' },
+			axisLabel: { fontSize: getAxisLabelFontSize(), color: '#666' },
 			axisLine: { lineStyle: { color: '#ddd' } }
 		},
 		yAxis: [
@@ -2735,11 +2838,11 @@ function renderChart5New() {
 					formatter: function(value) {
 						return '€' + (value / 1000000).toFixed(0) + 'M'
 					},
-					fontSize: 14,
+					fontSize: getAxisLabelFontSize(),
 					color: '#666'
 				},
 				nameTextStyle: {
-					fontSize: 16,
+					fontSize: getAxisLabelFontSize(),
 					padding: [0, 20, 10, 0]
 				},
 				axisLine: { lineStyle: { color: '#00d4ff' } },
@@ -2757,11 +2860,11 @@ function renderChart5New() {
 				max: 6000,
 				axisLabel: {
 					formatter: '{value}%',
-					fontSize: 14,
+					fontSize: getAxisLabelFontSize(),
 					color: '#666'
 				},
 				nameTextStyle: {
-					fontSize: 16,
+					fontSize: getAxisLabelFontSize(),
 					padding: [0, 0, 10, 60]
 				},
 				axisLine: { lineStyle: { color: '#FF6B6B' } },
@@ -2788,7 +2891,7 @@ function renderChart5New() {
 				label: {
 					show: true,
 					position: 'top',
-					fontSize: 18,
+					fontSize: getSeriesLabelFontSize(),
 					formatter: function(params) {
 						return '€' + (params.value / 1000000).toFixed(1) + 'M'
 					},
@@ -2811,7 +2914,7 @@ function renderChart5New() {
 				label: {
 					show: true,
 					position: 'top',
-					fontSize: 18,
+					fontSize: getSeriesLabelFontSize(),
 					formatter: function(params) {
 						return '€' + (params.value / 1000000).toFixed(1) + 'M'
 					},
@@ -2838,7 +2941,7 @@ function renderChart5New() {
 				label: {
 					show: true,
 					position: 'bottom',
-					fontSize: 18,
+					fontSize: getSeriesLabelFontSize(),
 					formatter: '{c}%',
 					color: '#FF6B6B',
 					fontWeight: 'bold',
@@ -2865,7 +2968,7 @@ function renderChart5New() {
 				label: {
 					show: true,
 					position: 'top',
-					fontSize: 18,
+					fontSize: getSeriesLabelFontSize(),
 					formatter: '{c}%',
 					color: '#FFC107',
 					fontWeight: 'bold',
@@ -2879,7 +2982,7 @@ function renderChart5New() {
 			bottom: '1%',
 			style: {
 				text: 'Investment Amount: €5M | Cumulative Return Over Three Years: €125.6M | Total Return Rate: 2512.4%',
-				fontSize: 14,
+				fontSize: getAxisLabelFontSize(),
 				color: '#666',
 				backgroundColor: '#f8f9fa',
 				padding: [8, 16],
@@ -2900,11 +3003,43 @@ function renderChart6New() {
 	}
 	chart6NewInstance = echarts.init(chart6NewRef.value)
 
+	// 获取屏幕宽度用于响应式字体大小
+	const screenWidth = window.innerWidth
+
+	// 根据屏幕宽度动态计算字体大小
+	const getTitleFontSize = () => {
+		if (screenWidth <= 1440) return 12
+		if (screenWidth <= 1680) return 13
+		if (screenWidth <= 1920) return 16
+		return 20
+	}
+
+	const getAxisLabelFontSize = () => {
+		if (screenWidth <= 1440) return 10
+		if (screenWidth <= 1680) return 12
+		if (screenWidth <= 1920) return 14
+		return 16
+	}
+
+	const getLegendFontSize = () => {
+		if (screenWidth <= 1440) return 10
+		if (screenWidth <= 1680) return 10
+		if (screenWidth <= 1920) return 11
+		return 12
+	}
+
+	const getSeriesLabelFontSize = () => {
+		if (screenWidth <= 1440) return 12
+		if (screenWidth <= 1680) return 12
+		if (screenWidth <= 1920) return 16
+		return 18
+	}
+
 	const option = {
 		title: {
 			text: 'Cash Flow Analysis',
-			textStyle: { fontSize: 20, color: '#333333' },
-			top: '3%',
+			textStyle: { fontSize: getTitleFontSize(), color: '#333333' },
+			top: screenWidth <= 1280 ? '5%' : '3%',
 			left: 'center'
 		},
 		tooltip: {
@@ -2925,20 +3060,20 @@ function renderChart6New() {
 		legend: {
 			data: ['Pre-tax Net Profit', 'Non-cash Amortization', 'Operating Cash Flow', 'Cumulative Cash Flow'],
 			bottom: 5,
-			textStyle: { fontSize: '14px' },
+			textStyle: { fontSize: getLegendFontSize() },
 			itemGap: 10
 		},
 		grid: {
-			left: '8%',
-			right: '8%',
-			top: '15%',
-			bottom: '10%',
+			left: screenWidth <= 1280 ? '8%' : '8%',
+			right: screenWidth <= 1280 ? '8%' : '8%',
+			top: screenWidth <= 1280 ? '20%' : '15%',
+			bottom: screenWidth <= 1280 ? '15%' : '10%',
 			containLabel: true
 		},
 		xAxis: {
 			type: 'category',
 			data: ['2026', '2027', '2028'],
-			axisLabel: { fontSize: 18, color: '#666' },
+			axisLabel: { fontSize: getAxisLabelFontSize(), color: '#666' },
 			axisLine: { lineStyle: { color: '#ddd' } }
 		},
 		yAxis: [
@@ -2952,11 +3087,11 @@ function renderChart6New() {
 					formatter: function(value) {
 						return (value / 1000000).toFixed(0) + 'M'
 					},
-					fontSize: 14,
+					fontSize: getAxisLabelFontSize(),
 					color: '#666'
 				},
 				nameTextStyle: {
-					fontSize: 16,
+					fontSize: getAxisLabelFontSize(),
 					padding: [0, 0, 10, 0],
 					color: '#00d4ff'
 				},
@@ -2973,11 +3108,11 @@ function renderChart6New() {
 					formatter: function(value) {
 						return (value / 1000000).toFixed(0) + 'M'
 					},
-					fontSize: 14,
+					fontSize: getAxisLabelFontSize(),
 					color: '#666'
 				},
 				nameTextStyle: {
-					fontSize: 16,
+					fontSize: getAxisLabelFontSize(),
 					padding: [0, 0, 10, 0]
 				},
 				axisLine: { lineStyle: { color: '#FF6B6B' } },
@@ -3000,7 +3135,7 @@ function renderChart6New() {
 				label: {
 					show: true,
 					position: 'top',
-					fontSize: 18,
+					fontSize: getSeriesLabelFontSize(),
 					formatter: function(params) {
 						return '€' + (params.value / 1000000).toFixed(1) + 'M'
 					},
@@ -3022,7 +3157,7 @@ function renderChart6New() {
 				label: {
 					show: true,
 					position: 'top',
-					fontSize: 18,
+					fontSize: getSeriesLabelFontSize(),
 					formatter: function(params) {
 						return '€' + (params.value / 1000).toFixed(0) + 'K'
 					},
@@ -3044,7 +3179,7 @@ function renderChart6New() {
 				label: {
 					show: true,
 					position: 'top',
-					fontSize: 18,
+					fontSize: getSeriesLabelFontSize(),
 					formatter: function(params) {
 						return '€' + (params.value / 1000000).toFixed(1) + 'M'
 					},
@@ -3068,7 +3203,7 @@ function renderChart6New() {
 				label: {
 					show: true,
 					position: 'bottom',
-					fontSize: 18,
+					fontSize: getSeriesLabelFontSize(),
 					formatter: function(params) {
 						return '€' + (params.value / 1000000).toFixed(1) + 'M'
 					},
@@ -3091,11 +3226,43 @@ function renderChart7New() {
 	}
 	chart7NewInstance = echarts.init(chart7NewRef.value)
 
+	// 获取屏幕宽度用于响应式字体大小
+	const screenWidth = window.innerWidth
+
+	// 根据屏幕宽度动态计算字体大小
+	const getTitleFontSize = () => {
+		if (screenWidth <= 1440) return 12
+		if (screenWidth <= 1680) return 13
+		if (screenWidth <= 1920) return 16
+		return 20
+	}
+
+	const getAxisLabelFontSize = () => {
+		if (screenWidth <= 1440) return 10
+		if (screenWidth <= 1680) return 12
+		if (screenWidth <= 1920) return 14
+		return 16
+	}
+
+	const getLegendFontSize = () => {
+		if (screenWidth <= 1440) return 10
+		if (screenWidth <= 1680) return 10
+		if (screenWidth <= 1920) return 11
+		return 12
+	}
+
+	const getSeriesLabelFontSize = () => {
+		if (screenWidth <= 1440) return 12
+		if (screenWidth <= 1680) return 12
+		if (screenWidth <= 1920) return 16
+		return 18
+	}
+
 	const option = {
 		title: {
 			text: 'Key Performance Indicators',
-			textStyle: { fontSize: 20, color: '#333333' },
-			top: '3%',
+			textStyle: { fontSize: getTitleFontSize(), color: '#333333' },
+			top: screenWidth <= 1280 ? '5%' : '3%',
 			left: 'center'
 		},
 		tooltip: {
@@ -3116,20 +3283,20 @@ function renderChart7New() {
 		legend: {
 			data: ['Gross Margin', 'Contribution Margin', 'Net Profit Margin', 'Annual ROI'],
 			bottom: 5,
-			textStyle: { fontSize: '14px' },
+			textStyle: { fontSize: getLegendFontSize() },
 			itemGap: 15
 		},
 		grid: {
-			left: '8%',
-			right: '8%',
-			top: '15%',
-			bottom: '10%',
+			left: screenWidth <= 1280 ? '8%' : '8%',
+			right: screenWidth <= 1280 ? '8%' : '8%',
+			top: screenWidth <= 1280 ? '20%' : '15%',
+			bottom: screenWidth <= 1280 ? '15%' : '10%',
 			containLabel: true
 		},
 		xAxis: {
 			type: 'category',
 			data: ['2026', '2027', '2028'],
-			axisLabel: { fontSize: 18, color: '#666' },
+			axisLabel: { fontSize: getAxisLabelFontSize(), color: '#666' },
 			axisLine: { lineStyle: { color: '#ddd' } }
 		},
 		yAxis: [
@@ -3141,11 +3308,11 @@ function renderChart7New() {
 				max: 100,
 				axisLabel: {
 					formatter: '{value}%',
-					fontSize: 14,
+					fontSize: getAxisLabelFontSize(),
 					color: '#666666'
 				},
 				nameTextStyle: {
-					fontSize: 16,
+					fontSize: getAxisLabelFontSize(),
 					padding: [0, 0, 10, 0]
 				},
 				axisLine: { lineStyle: { color: '#00d4ff'} },
@@ -3159,12 +3326,12 @@ function renderChart7New() {
 				max: 1600,
 				axisLabel: {
 					formatter: '{value}%',
-					fontSize: 14,
+					fontSize: getAxisLabelFontSize(),
 					color: '#666666'
 				},
 				nameGap: 10,
 				nameTextStyle: {
-					fontSize: 16,
+					fontSize: getAxisLabelFontSize(),
 					padding: [0, 0, 10, 60]
 				},
 				axisLine: { lineStyle: { color: '#FF6B6B' } },
@@ -3187,7 +3354,7 @@ function renderChart7New() {
 				label: {
 					show: true,
 					position: 'top',
-					fontSize: 18,
+					fontSize: getSeriesLabelFontSize(),
 					formatter: '{c}%',
 					color: '#000000',
 					offset: [0, -8]
@@ -3208,7 +3375,7 @@ function renderChart7New() {
 				label: {
 					show: true,
 					position: 'top',
-					fontSize: 18,
+					fontSize: getSeriesLabelFontSize(),
 					formatter: '{c}%',
 					color: '#000000',
 					offset: [0, -8]
@@ -3229,7 +3396,7 @@ function renderChart7New() {
 				label: {
 					show: true,
 					position: 'top',
-					fontSize: 18,
+					fontSize: getSeriesLabelFontSize(),
 					formatter: '{c}%',
 					color: '#000000',
 					offset: [0, -8]
@@ -3255,7 +3422,7 @@ function renderChart7New() {
 				label: {
 					show: true,
 					position: 'bottom',
-					fontSize: 18,
+					fontSize: getSeriesLabelFontSize(),
 					formatter: '{c}%',
 					color: '#FF6B6B',
 					offset: [30, 16]
