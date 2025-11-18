@@ -2132,7 +2132,6 @@ function renderChart3New() {
 					formatter: '{c} units',
 					offset: [0, -12],
 					color: '#333',
-					fontWeight: 'bold'
 				}
 			},
 			{
@@ -2154,7 +2153,6 @@ function renderChart3New() {
 					formatter: '{c} units',
 					offset: [0, -12],
 					color: '#333',
-					fontWeight: 'bold'
 				}
 			},
 			{
@@ -2178,7 +2176,6 @@ function renderChart3New() {
 					},
 					offset: [0, 8],
 					color: '#FFC27A',
-					fontWeight: 'bold'
 				}
 			},
 			{
@@ -2202,7 +2199,6 @@ function renderChart3New() {
 					},
 					offset: [0, 8],
 					color: '#FFB6C1',
-					fontWeight: 'bold'
 				}
 			},
 			{
@@ -2226,7 +2222,6 @@ function renderChart3New() {
 					show: true,
 					position: 'top',
 					fontSize: 13,
-					fontWeight: 'bold',
 					formatter: function(params) {
 						return '€' + (params.value / 1000000).toFixed(1) + 'M'
 					},
@@ -2285,6 +2280,10 @@ function renderChart4New() {
 			formatter: function(params) {
 				let result = params[0].axisValue + '<br/>'
 				params.forEach(function(item) {
+					// Skip label-only series that end with "2"
+					if (item.seriesName.endsWith('2')) {
+						return
+					}
 					if (item.seriesName.includes('Gross Margin')) {
 						result += item.marker + item.seriesName + ': ' + item.value + '%<br/>'
 					} else if (item.value !== null && item.value !== undefined) {
@@ -2405,7 +2404,7 @@ function renderChart4New() {
 			},
 			{
 				// 主要解决Total Revenue label显示问题
-				name: 'Total Revenue',
+				name: 'Total Revenue2',
 				type: 'bar',
 				stack: 'revenue',
 				yAxisIndex: 0,
@@ -2477,7 +2476,7 @@ function renderChart4New() {
 			},
 			{
 				// 主要解决Gross Profit label显示问题
-				name: 'Gross Profit',
+				name: 'Gross Profit2',
 				type: 'bar',
 				stack: 'profit',
 				yAxisIndex: 0,
@@ -2556,7 +2555,8 @@ function renderChart4New() {
 				}
 			},
 			{
-				name: 'Contribution Margin',
+				// 主要解决Contribution Margin label显示问题
+				name: 'Contribution Margin2',
 				type: 'bar',
 				stack: 'margin',
 				yAxisIndex: 0,
@@ -2756,7 +2756,6 @@ function renderChart5New() {
 						return '€' + (params.value / 1000000).toFixed(1) + 'M'
 					},
 					color: '#000000',
-					fontWeight: 'bold',
 					offset: [0, -8]
 				}
 			},
@@ -2781,7 +2780,6 @@ function renderChart5New() {
 						return '€' + (params.value / 1000000).toFixed(1) + 'M'
 					},
 					color: '#000000',
-					fontWeight: 'bold',
 					offset: [0, -8]
 				}
 			},
@@ -3143,7 +3141,6 @@ function renderChart7New() {
 					fontSize: 18,
 					formatter: '{c}%',
 					color: '#000000',
-					fontWeight: 'bold',
 					offset: [0, -8]
 				}
 			},
@@ -3165,7 +3162,6 @@ function renderChart7New() {
 					fontSize: 18,
 					formatter: '{c}%',
 					color: '#000000',
-					fontWeight: 'bold',
 					offset: [0, -8]
 				}
 			},
@@ -3187,7 +3183,6 @@ function renderChart7New() {
 					fontSize: 18,
 					formatter: '{c}%',
 					color: '#000000',
-					fontWeight: 'bold',
 					offset: [0, -8]
 				}
 			},
@@ -3214,7 +3209,6 @@ function renderChart7New() {
 					fontSize: 13,
 					formatter: '{c}%',
 					color: '#FF6B6B',
-					fontWeight: 'bold',
 					offset: [0, -45]
 				}
 			}
