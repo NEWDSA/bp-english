@@ -2035,7 +2035,7 @@ function renderChart3New() {
 	const option = {
 		title: {
 			text: 'Annual Sales Situation',
-			textStyle: { fontSize: 16, color: '#333', fontWeight: 'bold' },
+			textStyle: { fontSize: 20, color: '#333333' },
 			top: 10,
 			left: 'center'
 		},
@@ -2057,7 +2057,7 @@ function renderChart3New() {
 		legend: {
 			data: ['Product 1 Sales Volume', 'Product 2 Sales Volume', 'Product 1 Sales Revenue', 'Product 2 Sales Revenue', 'Total Revenue'],
 			bottom: 5,
-			textStyle: { fontSize: 12 },
+			textStyle: { fontSize: '14px' },
 			itemGap: 15
 		},
 		grid: {
@@ -2083,6 +2083,10 @@ function renderChart3New() {
        				fontSize: 14,
         			color: '#666'
        			},
+				nameTextStyle: {
+					fontSize: 16,
+					padding: [0, 0, 10, 0]
+				},
        			axisLine: { lineStyle: { color: '#00d4ff' } },
        			splitLine: { lineStyle: { color: '#f0f0f0' } }
 				// show: false,
@@ -2102,9 +2106,14 @@ function renderChart3New() {
            			fontSize: 14,
            			color: '#666'
              	},
+				nameTextStyle: {
+					fontSize: 16,
+					color: '#fe7878',
+					padding: [0, 0, 10, 0]
+				},
           		axisLine: { lineStyle: { color: '#FFC27A' } },
-				min: 0,
-				max: 210000000,
+				min: 1000000,
+				max: 110000000,
 				// show: false,
 				// axisLabel: { show: false },
 				// axisLine: { show: false },
@@ -2124,14 +2133,14 @@ function renderChart3New() {
 						{ offset: 1, color: '#0099cc' }
 					])
 				},
-				barWidth: '15%',
+				barWidth: '20%',
 				label: {
 					show: true,
 					position: 'top',
 					fontSize: 18,
 					formatter: '{c} units',
 					offset: [0, -12],
-					color: '#333',
+					color: '#000000',
 				}
 			},
 			{
@@ -2145,14 +2154,14 @@ function renderChart3New() {
 						{ offset: 1, color: '#4db3aa' }
 					])
 				},
-				barWidth: '15%',
+				barWidth: '20%',
 				label: {
 					show: true,
 					position: 'top',
 					fontSize: 18,
 					formatter: '{c} units',
 					offset: [0, -12],
-					color: '#333',
+					color: '#000000',
 				}
 			},
 			{
@@ -2162,7 +2171,8 @@ function renderChart3New() {
 				data: [4800000, 14400000, 29714286],
 				lineStyle: {
 					color: '#FFC27A',
-					width: 3
+					width: 3,
+					type: 'dashed'
 				},
 				itemStyle: { color: '#FFC27A' },
 				symbol: 'circle',
@@ -2170,11 +2180,11 @@ function renderChart3New() {
 				label: {
 					show: true,
 					position: 'bottom',
-					fontSize: 13,
+					fontSize: 18,
 					formatter: function(params) {
 						return '€' + (params.value / 1000000).toFixed(1) + 'M'
 					},
-					offset: [0, 8],
+					offset: [30, -2],
 					color: '#FFC27A',
 				}
 			},
@@ -2184,21 +2194,22 @@ function renderChart3New() {
 				yAxisIndex: 1,
 				data: [12000000, 36000000, 74285714],
 				lineStyle: {
-					color: '#FFB6C1',
-					width: 3
+					color: '#f57f17',
+					width: 3,
+					type: 'dashed'
 				},
-				itemStyle: { color: '#FFB6C1' },
+				itemStyle: { color: '#f57f17' },
 				symbol: 'diamond',
 				symbolSize: 6,
 				label: {
 					show: true,
 					position: 'bottom',
-					fontSize: 13,
+					fontSize: 18,
 					formatter: function(params) {
 						return '€' + (params.value / 1000000).toFixed(1) + 'M'
 					},
-					offset: [0, 8],
-					color: '#FFB6C1',
+					offset: [40, -4],
+					color: '#f57f17',
 				}
 			},
 			{
@@ -2208,8 +2219,7 @@ function renderChart3New() {
 				data: [16800000, 50400000, 104000000],
 				lineStyle: {
 					color: '#FF6B6B',
-					width: 4,
-					type: 'dashed'
+					width: 3,
 				},
 				itemStyle: {
 					color: '#FF6B6B',
@@ -2220,12 +2230,12 @@ function renderChart3New() {
 				symbolSize: 8,
 				label: {
 					show: true,
-					position: 'top',
-					fontSize: 13,
+					position: 'bottom',
+					fontSize: 18,
 					formatter: function(params) {
 						return '€' + (params.value / 1000000).toFixed(1) + 'M'
 					},
-					offset: [0, -10],
+					offset: [40, -6],
 					color: '#FF6B6B'
 				}
 			}
@@ -2271,7 +2281,7 @@ function renderChart4New() {
 	const option = {
 		title: {
 			text: 'Profit Statement Analysis',
-			textStyle: { fontSize: 16, color: '#333', fontWeight: 'bold' },
+			textStyle: { fontSize: 20, color: '#333333' },
 			top: 10,
 			left: 'center'
 		},
@@ -2296,7 +2306,7 @@ function renderChart4New() {
 		legend: {
 			data: ['Total Revenue', 'Gross Profit', 'Contribution Margin', 'Pre-tax Net Profit', 'Gross Margin Rate'],
 			bottom: 5,
-			textStyle: { fontSize: 12 },
+			textStyle: { fontSize: '14px' },
 			itemGap: 12
 		},
 		grid: {
@@ -2309,7 +2319,7 @@ function renderChart4New() {
 		xAxis: {
 			type: 'category',
 			data: ['2026', '2027', '2028'],
-			axisLabel: { fontSize: 12, color: '#666' },
+			axisLabel: { fontSize: 18, color: '#666' },
 			axisLine: { lineStyle: { color: '#ddd' } }
 		},
 		yAxis: [
@@ -2317,12 +2327,18 @@ function renderChart4New() {
 				type: 'value',
 				name: 'Amount (€)',
 				position: 'left',
+				min: 0,
+				max: 110000000,
 				axisLabel: {
 					formatter: function(value) {
 						return '€' + (value / 1000000).toFixed(0) + 'M'
 					},
 					fontSize: 14,
 					color: '#666'
+				},
+				nameTextStyle: {
+					fontSize: 16,
+					padding: [0, 20, 10, 0]
 				},
 				axisLine: { lineStyle: { color: '#00d4ff' } },
 				splitLine: { lineStyle: { color: '#f0f0f0' } }
@@ -2341,6 +2357,10 @@ function renderChart4New() {
 					formatter: '{value}%',
 					fontSize: 14,
 					color: '#666'
+				},
+				nameTextStyle: {
+					fontSize: 16,
+					padding: [0, 0, 10, 0]
 				},
 				axisLine: { lineStyle: { color: '#FF6B6B' } },
 				splitLine: { show: false }
@@ -2399,7 +2419,11 @@ function renderChart4New() {
 						return '€' + (params.value / 1000000).toFixed(1) + 'M'
 					},
 					color: '#ffffff',
-					fontWeight: 'bold'
+					fontWeight: 'bold',
+					textShadowColor: 'rgba(0, 0, 0, 0.6)',   // 阴影颜色
+					textShadowBlur: 4,
+					textShadowOffsetX: 1,
+					textShadowOffsetY: 1
 				}
 			},
 			{
@@ -2471,7 +2495,11 @@ function renderChart4New() {
 						return '€' + (grossProfitData[params.dataIndex] / 1000000).toFixed(1) + 'M'
 					},
 					color: '#ffffff',
-					fontWeight: 'bold'
+					fontWeight: 'bold',
+					textShadowColor: 'rgba(0, 0, 0, 0.6)',   // 阴影颜色
+					textShadowBlur: 4,
+					textShadowOffsetX: 1,
+					textShadowOffsetY: 1
 				}
 			},
 			{
@@ -2510,8 +2538,8 @@ function renderChart4New() {
 				data: [11465000, 36530000, 78500000],
 				itemStyle: {
 					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-						{ offset: 0, color: '#FFC107' },
-						{ offset: 0.5, color: '#F57F17' }
+						{ offset: 0, color: '#ffc27a' },
+						{ offset: 1, color: '#ffc27a' }
 					])
 				},
 				barWidth: '20%',
@@ -2536,7 +2564,7 @@ function renderChart4New() {
 				itemStyle: {
 					color: {
 						type: 'pattern',
-						image: createDiagonalPattern('#4db3aa'),
+						image: createDiagonalPattern('#ce9d63'),
 						repeat: 'repeat'
 					}
 				},
@@ -2551,7 +2579,11 @@ function renderChart4New() {
 						return '€' + (grossProfitData[params.dataIndex] / 1000000).toFixed(1) + 'M'
 					},
 					color: '#ffffff',
-					fontWeight: 'bold'
+					fontWeight: 'bold',
+					textShadowColor: 'rgba(0, 0, 0, 0.6)',   // 阴影颜色
+					textShadowBlur: 4,
+					textShadowOffsetX: 1,
+					textShadowOffsetY: 1
 				}
 			},
 			{
@@ -2589,11 +2621,12 @@ function renderChart4New() {
 				yAxisIndex: 0,
 				data: [11173333, 36238333, 78208334],
 				lineStyle: {
-					color: '#2196F3',
-					width: 4
+					color: '#ffc107',
+					width: 3,
+					type: 'dashed'
 				},
 				itemStyle: {
-					color: '#2196F3',
+					color: '#ffc107',
 					borderWidth: 3,
 					borderColor: '#fff'
 				},
@@ -2602,13 +2635,12 @@ function renderChart4New() {
 				label: {
 					show: true,
 					position: 'bottom',
-					fontSize: 13,
+					fontSize: 18,
 					formatter: function(params) {
 						return '€' + (params.value / 1000000).toFixed(1) + 'M'
 					},
-					color: '#2196F3',
-					fontWeight: 'bold',
-					offset: [0, 12]
+					color: '#ffc107',
+					offset: [10, 12]
 				}
 			},
 			{
@@ -2619,7 +2651,6 @@ function renderChart4New() {
 				lineStyle: {
 					color: '#FF6B6B',
 					width: 3,
-					type: 'dashed'
 				},
 				itemStyle: {
 					color: '#FF6B6B',
@@ -2631,10 +2662,9 @@ function renderChart4New() {
 				label: {
 					show: true,
 					position: 'bottom',
-					fontSize: 13,
+					fontSize: 18,
 					formatter: '{c}%',
 					color: '#FF6B6B',
-					fontWeight: 'bold',
 					offset: [0, 8]
 				}
 			}
@@ -2657,9 +2687,9 @@ function renderChart5New() {
 		title: {
 			text: 'Investment Return Analysis',
 			subtext: 'Based on €5M Total Investment',
-			textStyle: { fontSize: 16, color: '#333', fontWeight: 'bold' },
-			subtextStyle: { fontSize: 12, color: '#666' },
-			top: 10,
+			textStyle: { fontSize: 20, color: '#333333' },
+			subtextStyle: { fontSize: 16, color: '#666' },
+			top: '3%',
 			left: 'center'
 		},
 		tooltip: {
@@ -2680,7 +2710,7 @@ function renderChart5New() {
 		legend: {
 			data: ['Annual Net Profit', 'Cumulative Net Profit', 'Annual ROI', 'Cumulative ROI'],
 			bottom: '5%',
-			textStyle: { fontSize: 12 },
+			textStyle: { fontSize: '14px' },
 			itemGap: 15
 		},
 		grid: {
@@ -2708,6 +2738,10 @@ function renderChart5New() {
 					fontSize: 14,
 					color: '#666'
 				},
+				nameTextStyle: {
+					fontSize: 16,
+					padding: [0, 20, 10, 0]
+				},
 				axisLine: { lineStyle: { color: '#00d4ff' } },
 				splitLine: { lineStyle: { color: '#f0f0f0' } }
 				// axisLabel: { show: false },
@@ -2719,12 +2753,16 @@ function renderChart5New() {
 				type: 'value',
 				name: 'ROI (%)',
 				position: 'right',
-				min: 200,
-				max: 4600,
+				min: 0,
+				max: 6000,
 				axisLabel: {
 					formatter: '{value}%',
 					fontSize: 14,
 					color: '#666'
+				},
+				nameTextStyle: {
+					fontSize: 16,
+					padding: [0, 0, 10, 60]
 				},
 				axisLine: { lineStyle: { color: '#FF6B6B' } },
 				splitLine: { show: false }
@@ -2743,11 +2781,10 @@ function renderChart5New() {
 				itemStyle: {
 					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
 						{ offset: 0, color: '#00d4ff' },
-						{ offset: 0.5, color: '#0099cc' },
-						{ offset: 1, color: '#006699' }
+						{ offset: 1, color: '#0099cc' }
 					])
 				},
-				barWidth: '25%',
+				barWidth: '20%',
 				label: {
 					show: true,
 					position: 'top',
@@ -2766,12 +2803,11 @@ function renderChart5New() {
 				data: [11173333, 47411666, 125620000],
 				itemStyle: {
 					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-						{ offset: 0, color: '#66b3ff' },
-						{ offset: 0.5, color: '#3399ff' },
-						{ offset: 1, color: '#0080ff' }
+						{ offset: 0, color: '#67E0DC' },
+						{ offset: 1, color: '#4db3aa' }
 					])
 				},
-				barWidth: '25%',
+				barWidth: '20%',
 				label: {
 					show: true,
 					position: 'top',
@@ -2801,12 +2837,12 @@ function renderChart5New() {
 				symbolSize: 8,
 				label: {
 					show: true,
-					position: 'top',
-					fontSize: 13,
+					position: 'bottom',
+					fontSize: 18,
 					formatter: '{c}%',
 					color: '#FF6B6B',
 					fontWeight: 'bold',
-					offset: [0, -15]
+					offset: [30, 2]
 				}
 			},
 			{
@@ -2829,11 +2865,11 @@ function renderChart5New() {
 				label: {
 					show: true,
 					position: 'top',
-					fontSize: 13,
+					fontSize: 18,
 					formatter: '{c}%',
 					color: '#FFC107',
 					fontWeight: 'bold',
-					offset: [0, -15]
+					offset: [-10, -2]
 				}
 			}
 		],
@@ -2843,8 +2879,7 @@ function renderChart5New() {
 			bottom: '1%',
 			style: {
 				text: 'Investment Amount: €5M | Cumulative Return Over Three Years: €125.6M | Total Return Rate: 2512.4%',
-				fontSize: 12,
-				fontWeight: 'bold',
+				fontSize: 14,
 				color: '#666',
 				backgroundColor: '#f8f9fa',
 				padding: [8, 16],
@@ -2868,8 +2903,8 @@ function renderChart6New() {
 	const option = {
 		title: {
 			text: 'Cash Flow Analysis',
-			textStyle: { fontSize: 16, color: '#333', fontWeight: 'bold' },
-			top: 10,
+			textStyle: { fontSize: 20, color: '#333333' },
+			top: '3%',
 			left: 'center'
 		},
 		tooltip: {
@@ -2890,7 +2925,7 @@ function renderChart6New() {
 		legend: {
 			data: ['Pre-tax Net Profit', 'Non-cash Amortization', 'Operating Cash Flow', 'Cumulative Cash Flow'],
 			bottom: 5,
-			textStyle: { fontSize: 12 },
+			textStyle: { fontSize: '14px' },
 			itemGap: 10
 		},
 		grid: {
@@ -2920,6 +2955,11 @@ function renderChart6New() {
 					fontSize: 14,
 					color: '#666'
 				},
+				nameTextStyle: {
+					fontSize: 16,
+					padding: [0, 0, 10, 0],
+					color: '#00d4ff'
+				},
 				axisLine: { lineStyle: { color: '#4CAF50' } },
 				splitLine: { lineStyle: { color: '#f0f0f0' } }
 			},
@@ -2928,13 +2968,17 @@ function renderChart6New() {
 				name: 'Cumulative (€)',
 				position: 'right',
 				min: 0,
-				max: 140000000,
+				max: 130000000,
 				axisLabel: {
 					formatter: function(value) {
 						return (value / 1000000).toFixed(0) + 'M'
 					},
 					fontSize: 14,
 					color: '#666'
+				},
+				nameTextStyle: {
+					fontSize: 16,
+					padding: [0, 0, 10, 0]
 				},
 				axisLine: { lineStyle: { color: '#FF6B6B' } },
 				splitLine: { show: false }
@@ -2949,7 +2993,7 @@ function renderChart6New() {
 				itemStyle: {
 					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
 						{ offset: 0, color: '#00d4ff' },
-						{ offset: 1, color: '#2E7D32' }
+						{ offset: 1, color: '#0099cc' }
 					])
 				},
 				barWidth: '20%',
@@ -2961,7 +3005,6 @@ function renderChart6New() {
 						return '€' + (params.value / 1000000).toFixed(1) + 'M'
 					},
 					color: '#000000',
-					fontWeight: 'bold'
 				}
 			},
 			{
@@ -2971,8 +3014,8 @@ function renderChart6New() {
 				data: [291667, 291667, 291666],
 				itemStyle: {
 					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-						{ offset: 0, color: '#FF9800' },
-						{ offset: 1, color: '#F57C00' }
+						{ offset: 0, color: '#67E0DC' },
+						{ offset: 1, color: '#4db3aa' }
 					])
 				},
 				barWidth: '20%',
@@ -2984,7 +3027,6 @@ function renderChart6New() {
 						return '€' + (params.value / 1000).toFixed(0) + 'K'
 					},
 					color: '#000000',
-					fontWeight: 'bold'
 				}
 			},
 			{
@@ -2994,8 +3036,8 @@ function renderChart6New() {
 				data: [11465000, 36530000, 78500000],
 				itemStyle: {
 					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-						{ offset: 0, color: '#2196F3' },
-						{ offset: 1, color: '#1565C0' }
+						{ offset: 0, color: '#ffc27a' },
+						{ offset: 1, color: '#ffc27a' }
 					])
 				},
 				barWidth: '20%',
@@ -3007,7 +3049,6 @@ function renderChart6New() {
 						return '€' + (params.value / 1000000).toFixed(1) + 'M'
 					},
 					color: '#000000',
-					fontWeight: 'bold'
 				}
 			},
 			{
@@ -3026,14 +3067,13 @@ function renderChart6New() {
 				symbolSize: 8,
 				label: {
 					show: true,
-					position: 'top',
-					fontSize: 14,
+					position: 'bottom',
+					fontSize: 18,
 					formatter: function(params) {
 						return '€' + (params.value / 1000000).toFixed(1) + 'M'
 					},
 					color: '#FF6B6B',
-					fontWeight: 'bold',
-					offset: [0, -10]
+					offset: [30, 4]
 				}
 			}
 		]
@@ -3054,8 +3094,8 @@ function renderChart7New() {
 	const option = {
 		title: {
 			text: 'Key Performance Indicators',
-			textStyle: { fontSize: 16, color: '#333', fontWeight: 'bold' },
-			top: 10,
+			textStyle: { fontSize: 20, color: '#333333' },
+			top: '3%',
 			left: 'center'
 		},
 		tooltip: {
@@ -3076,7 +3116,7 @@ function renderChart7New() {
 		legend: {
 			data: ['Gross Margin', 'Contribution Margin', 'Net Profit Margin', 'Annual ROI'],
 			bottom: 5,
-			textStyle: { fontSize: 12 },
+			textStyle: { fontSize: '14px' },
 			itemGap: 15
 		},
 		grid: {
@@ -3102,21 +3142,30 @@ function renderChart7New() {
 				axisLabel: {
 					formatter: '{value}%',
 					fontSize: 14,
-					color: '#666'
+					color: '#666666'
 				},
-				axisLine: { lineStyle: { color: '#00d4ff' } },
+				nameTextStyle: {
+					fontSize: 16,
+					padding: [0, 0, 10, 0]
+				},
+				axisLine: { lineStyle: { color: '#00d4ff'} },
 				splitLine: { lineStyle: { color: '#f0f0f0' } }
 			},
 			{
 				type: 'value',
-				name: 'ROI (%)',
+				name: `ROI (%)`,
 				position: 'right',
 				min: 0,
-				max: 1800,
+				max: 1600,
 				axisLabel: {
 					formatter: '{value}%',
 					fontSize: 14,
-					color: '#666'
+					color: '#666666'
+				},
+				nameGap: 10,
+				nameTextStyle: {
+					fontSize: 16,
+					padding: [0, 0, 10, 60]
 				},
 				axisLine: { lineStyle: { color: '#FF6B6B' } },
 				splitLine: { show: false }
@@ -3134,7 +3183,7 @@ function renderChart7New() {
 						{ offset: 1, color: '#0099cc' }
 					])
 				},
-				barWidth: '15%',
+				barWidth: '20%',
 				label: {
 					show: true,
 					position: 'top',
@@ -3151,11 +3200,11 @@ function renderChart7New() {
 				data: [71.2, 73.7, 76.2],
 				itemStyle: {
 					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-						{ offset: 0, color: '#66b3ff' },
-						{ offset: 1, color: '#3399ff' }
+						{ offset: 0, color: '#67E0DC' },
+						{ offset: 1, color: '#4db3aa' }
 					])
 				},
-				barWidth: '15%',
+				barWidth: '20%',
 				label: {
 					show: true,
 					position: 'top',
@@ -3172,11 +3221,11 @@ function renderChart7New() {
 				data: [66.5, 71.9, 75.2],
 				itemStyle: {
 					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-						{ offset: 0, color: '#99ccff' },
-						{ offset: 1, color: '#66b3ff' }
+						{ offset: 0, color: '#ffc27a' },
+						{ offset: 1, color: '#ffc27a' }
 					])
 				},
-				barWidth: '15%',
+				barWidth: '20%',
 				label: {
 					show: true,
 					position: 'top',
@@ -3193,7 +3242,7 @@ function renderChart7New() {
 				data: [223.5, 724.8, 1564.2],
 				lineStyle: {
 					color: '#FF6B6B',
-					width: 5,
+					width: 3,
 					type: 'solid'
 				},
 				itemStyle: {
@@ -3206,10 +3255,10 @@ function renderChart7New() {
 				label: {
 					show: true,
 					position: 'bottom',
-					fontSize: 13,
+					fontSize: 18,
 					formatter: '{c}%',
 					color: '#FF6B6B',
-					offset: [0, -45]
+					offset: [30, 16]
 				}
 			}
 		],
@@ -5281,8 +5330,13 @@ function goHome() {
 	justify-content: center;
 	align-items: center;
 	animation: fadeIn 0.3s ease-out;
-	padding: 106px 140px;
+	padding: 100px 80px;
 	box-sizing: border-box;
+}
+@media (max-width: 1920px) {
+	.revenue-modal {
+		padding: 60px 40px;
+	}
 }
 
 .revenue-modal-content {
