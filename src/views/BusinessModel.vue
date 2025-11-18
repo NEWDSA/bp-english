@@ -3112,6 +3112,10 @@ function renderChart6New() {
 			formatter: function(params) {
 				let result = params[0].axisValue + '<br/>'
 				params.forEach(function(item) {
+					// Skip label-only series
+					if (item.seriesName === 'Operating Cash Flow Label') {
+						return
+					}
 					if (item.seriesType === 'line') {
 						result += item.marker + item.seriesName + ': €' + (item.value / 1000000).toFixed(2) + 'M<br/>'
 					} else {
@@ -3122,7 +3126,7 @@ function renderChart6New() {
 			}
 		},
 		legend: {
-			data: ['Pre-tax Net Profit', 'Non-cash Amortization', 'Operating Cash Flow', 'Cumulative Cash Flow'],
+			data: ['Pre-tax Net Profit', 'Add: Non-cash Amortization', 'Operating Cash Flow', 'Cumulative Cash Flow'],
 			bottom: 5,
 			textStyle: { fontSize: getLegendFontSize() },
 			itemGap: 10
@@ -3187,6 +3191,7 @@ function renderChart6New() {
 			{
 				name: 'Pre-tax Net Profit',
 				type: 'bar',
+				stack: 'cashflow',
 				yAxisIndex: 0,
 				data: [11173333, 36238333, 78208334],
 				itemStyle: {
@@ -3197,18 +3202,13 @@ function renderChart6New() {
 				},
 				barWidth: '20%',
 				label: {
-					show: true,
-					position: 'top',
-					fontSize: getSeriesLabelFontSize(),
-					formatter: function(params) {
-						return '€' + (params.value / 1000000).toFixed(1) + 'M'
-					},
-					color: '#000000',
+					show: false
 				}
 			},
 			{
-				name: 'Non-cash Amortization',
+				name: 'Add: Non-cash Amortization',
 				type: 'bar',
+				stack: 'cashflow',
 				yAxisIndex: 0,
 				data: [291667, 291667, 291666],
 				itemStyle: {
@@ -3220,12 +3220,40 @@ function renderChart6New() {
 				barWidth: '20%',
 				label: {
 					show: true,
-					position: 'top',
-					fontSize: getSeriesLabelFontSize(),
+					position: 'inside',
+					fontSize: 12,
 					formatter: function(params) {
 						return '€' + (params.value / 1000).toFixed(0) + 'K'
 					},
+					color: '#ffffff',
+					fontWeight: 'bold',
+					textShadowColor: 'rgba(0, 0, 0, 0.6)',
+					textShadowBlur: 4,
+					textShadowOffsetX: 1,
+					textShadowOffsetY: 1
+				}
+			},
+			{
+				// Label display for stacked total
+				name: 'Operating Cash Flow Label',
+				type: 'bar',
+				stack: 'cashflow',
+				yAxisIndex: 0,
+				data: [10, 10, 10],
+				itemStyle: {
+					color: 'transparent'
+				},
+				barWidth: '0%',
+				label: {
+					show: true,
+					position: 'top',
+					fontSize: getSeriesLabelFontSize(),
+					formatter: function(params) {
+						const stackedTotal =  [11173333, 36238333, 78208334];
+						return '€' + (stackedTotal[params.dataIndex] / 1000000).toFixed(1) + 'M'
+					},
 					color: '#000000',
+					offset: [0, -2]
 				}
 			},
 			{
