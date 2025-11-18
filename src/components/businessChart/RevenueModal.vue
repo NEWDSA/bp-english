@@ -429,7 +429,7 @@ function renderChart1() {
 					},
 					borderColor: '#45D9D8',
 					borderWidth: 2,
-					borderRadius: [2, 2, 0, 0],
+					borderRadius: [0, 0, 0, 0],
 					shadowBlur: 15,
 					shadowColor: 'rgba(69, 217, 216, 0.5)',
 					shadowOffsetY: 0
@@ -722,7 +722,7 @@ function renderChart3New() {
 	const option = {
 		title: {
 			text: 'Annual Sales Situation',
-			textStyle: { fontSize: titleFontSize, color: '#333333' },
+			textStyle: { fontSize: titleFontSize, color: '#ffffff' },
 			top: screenWidth <= 1280 ? 30 : 50,
 			left: 'center'
 		},
@@ -743,8 +743,8 @@ function renderChart3New() {
 		},
 		legend: {
 			data: ['Product 1 Sales Volume', 'Product 2 Sales Volume', 'Product 1 Sales Revenue', 'Product 2 Sales Revenue', 'Total Revenue'],
-			bottom: 5,
-			textStyle: { fontSize: legendFontSize },
+			bottom: 40,
+			textStyle: { fontSize: legendFontSize, color: '#ffffff' },
 			itemGap: 15
 		},
 		grid: {
@@ -757,8 +757,10 @@ function renderChart3New() {
 		xAxis: {
 			type: 'category',
 			data: ['2026', '2027', '2028'],
-			axisLabel: { fontSize: axisLabelFontSize, color: '#666' },
-			axisLine: { lineStyle: { color: '#ddd' } }
+			axisLabel: { fontSize: axisLabelFontSize, color: '#ffffff', margin: 20 },
+			axisLine: { show: false },
+			axisTick: { show: false },
+			splitLine: { show: false }
 		},
 		yAxis: [
 			{
@@ -768,14 +770,15 @@ function renderChart3New() {
 				axisLabel: {
 					formatter: '{value}',
 					fontSize: axisLabelFontSize,
-					color: '#666'
+					color: '#ffffff'
 				},
 				nameTextStyle: {
 					fontSize: axisLabelFontSize,
 					padding: [0, 0, 10, 0]
 				},
-				axisLine: { lineStyle: { color: '#00d4ff' } },
-				splitLine: { lineStyle: { color: '#f0f0f0' } }
+				axisLine: { show: false },
+				axisTick: { show: false },
+				splitLine: { show: false }
 			},
 			{
 				type: 'value',
@@ -786,14 +789,16 @@ function renderChart3New() {
 						return '€' + (value / 1000000).toFixed(0) + 'M'
 					},
 					fontSize: axisLabelFontSize,
-					color: '#666'
+					color: '#ffffff'
 				},
 				nameTextStyle: {
 					fontSize: axisLabelFontSize,
 					color: '#fe7878',
 					padding: [0, 0, 10, 60]
 				},
-				axisLine: { lineStyle: { color: '#FFC27A' } },
+				axisLine: { show: false },
+				axisTick: { show: false },
+				splitLine: { show: false },
 				min: 1000000,
 				max: 110000000,
 			}
@@ -805,10 +810,23 @@ function renderChart3New() {
 				yAxisIndex: 0,
 				data: [40, 120, 248],
 				itemStyle: {
-					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-						{ offset: 0, color: '#00d4ff' },
-						{ offset: 1, color: '#0099cc' }
-					])
+					color: {
+						type: 'linear',
+						x: 0,
+						y: 1,
+						x2: 0,
+						y2: 0,
+						colorStops: [
+						{ offset: 1, color: '#0099CC' },
+						{ offset: 0, color: 'rgba(0, 153, 204, 0.1)' }
+						]
+					},
+					borderColor: '#0099CC',
+					borderWidth: 2,
+					borderRadius: [2, 2, 0, 0],
+					shadowBlur: 15,
+					shadowColor: 'rgba(0, 153, 204, 0.5)',
+					shadowOffsetY: 0
 				},
 				barWidth: '20%',
 				label: {
@@ -817,7 +835,7 @@ function renderChart3New() {
 					fontSize: seriesLabelFontSize,
 					formatter: '{c}',
 					offset: [0, -12],
-					color: '#000000',
+					color: '#ffffff',
 				}
 			},
 			{
@@ -826,10 +844,23 @@ function renderChart3New() {
 				yAxisIndex: 0,
 				data: [60, 180, 371],
 				itemStyle: {
-					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-						{ offset: 0, color: '#67E0DC' },
-						{ offset: 1, color: '#4db3aa' }
-					])
+					color: {
+						type: 'linear',
+						x: 0,
+						y: 1,
+						x2: 0,
+						y2: 0,
+						colorStops: [
+						{ offset: 1, color: '#FFC27A' },
+						{ offset: 0, color: 'rgba(255, 194, 122, 0.1)' }
+						]
+					},
+					borderColor: '#FFC27A',
+					borderWidth: 2,
+					borderRadius: [2, 2, 0, 0],
+					shadowBlur: 15,
+					shadowColor: 'rgba(255, 194, 122, 0.5)',
+					shadowOffsetY: 0
 				},
 				barWidth: '20%',
 				label: {
@@ -838,7 +869,7 @@ function renderChart3New() {
 					fontSize: seriesLabelFontSize,
 					formatter: '{c}',
 					offset: [0, -12],
-					color: '#000000',
+					color: '#ffffff',
 				}
 			},
 			{
@@ -847,11 +878,12 @@ function renderChart3New() {
 				yAxisIndex: 1,
 				data: [4800000, 14400000, 29714286],
 				lineStyle: {
-					color: '#FFC27A',
-					width: 3,
-					type: 'dashed'
+					color: '#66DFD8',
+					width: 2,
+					shadowBlur: 6,
+					shadowColor: 'rgba(34, 211, 238, 0.3)',
 				},
-				itemStyle: { color: '#FFC27A' },
+				itemStyle: { color: '#66DFD8' },
 				symbol: 'circle',
 				symbolSize: 6,
 				label: {
@@ -862,7 +894,7 @@ function renderChart3New() {
 						return '€' + (params.value / 1000000).toFixed(1) + 'M'
 					},
 					offset: [30, -2],
-					color: '#FFC27A',
+					color: '#66DFD8',
 				}
 			},
 			{
@@ -871,12 +903,13 @@ function renderChart3New() {
 				yAxisIndex: 1,
 				data: [12000000, 36000000, 74285714],
 				lineStyle: {
-					color: '#f57f17',
-					width: 3,
-					type: 'dashed'
+					color: '#ffffff',
+					width: 2,
+					shadowBlur: 6,
+					shadowColor: 'rgba(34, 211, 238, 0.3)',
 				},
-				itemStyle: { color: '#f57f17' },
-				symbol: 'diamond',
+				itemStyle: { color: '#ffffff' },
+				symbol: 'circle',
 				symbolSize: 6,
 				label: {
 					show: true,
@@ -886,7 +919,7 @@ function renderChart3New() {
 						return '€' + (params.value / 1000000).toFixed(1) + 'M'
 					},
 					offset: [40, -4],
-					color: '#f57f17',
+					color: '#ffffff',
 				}
 			},
 			{
@@ -896,14 +929,14 @@ function renderChart3New() {
 				data: [16800000, 50400000, 104000000],
 				lineStyle: {
 					color: '#FF6B6B',
-					width: 3,
+					width: 2,
+					shadowBlur: 6,
+					shadowColor: 'rgba(34, 211, 238, 0.3)',
 				},
 				itemStyle: {
-					color: '#FF6B6B',
-					borderWidth: 2,
-					borderColor: '#fff'
+					color: '#FF6B6B'
 				},
-				symbol: 'rect',
+				symbol: 'circle',
 				symbolSize: 8,
 				label: {
 					show: true,
@@ -915,7 +948,7 @@ function renderChart3New() {
 					offset: [40, -6],
 					color: '#FF6B6B'
 				}
-			}
+			},
 		]
 	}
 
@@ -941,7 +974,7 @@ function renderChart4New() {
 	const option = {
 		title: {
 			text: 'Profit Statement',
-			textStyle: { fontSize: titleFontSize, color: '#333333' },
+			textStyle: { fontSize: titleFontSize, color: '#ffffff' },
 			top: screenWidth <= 1280 ? 30 : 50,
 			left: 'center'
 		},
@@ -978,9 +1011,9 @@ function renderChart4New() {
 		},
 		legend: {
 			data: ['Total Revenue', 'Gross Profit', 'Contribution Margin', 'EBIT', 'Gross Margin'],
-			bottom: 5,
-			textStyle: { fontSize: legendFontSize },
-			itemGap: 12
+			bottom: 40,
+			textStyle: { fontSize: legendFontSize, color: '#ffffff' },
+			itemGap: 15
 		},
 		grid: {
 			left: screenWidth <= 1280 ? '8%' : '8%',
@@ -992,8 +1025,10 @@ function renderChart4New() {
 		xAxis: {
 			type: 'category',
 			data: ['2026', '2027', '2028'],
-			axisLabel: { fontSize: axisLabelFontSize, color: '#666' },
-			axisLine: { lineStyle: { color: '#ddd' } }
+			axisLabel: { fontSize: axisLabelFontSize, color: '#ffffff', margin: 20 },
+			axisLine: { show: false },
+			axisTick: { show: false },
+			splitLine: { show: false }
 		},
 		yAxis: [
 			{
@@ -1007,14 +1042,15 @@ function renderChart4New() {
 						return '€' + (value / 1000000).toFixed(0) + 'M'
 					},
 					fontSize: axisLabelFontSize,
-					color: '#666'
+					color: '#ffffff'
 				},
 				nameTextStyle: {
 					fontSize: axisLabelFontSize,
 					padding: [0, 20, 10, 0]
 				},
-				axisLine: { lineStyle: { color: '#00d4ff' } },
-				splitLine: { lineStyle: { color: '#f0f0f0' } }
+				axisLine: { show: false },
+				axisTick: { show: false },
+				splitLine: { show: false }
 			},
 			{
 				type: 'value',
@@ -1025,13 +1061,15 @@ function renderChart4New() {
 				axisLabel: {
 					formatter: '{value}%',
 					fontSize: axisLabelFontSize,
-					color: '#666'
+					color: '#ffffff'
 				},
 				nameTextStyle: {
 					fontSize: axisLabelFontSize,
+					color: '#45D9D8',
 					padding: [0, 0, 10, 0]
 				},
-				axisLine: { lineStyle: { color: '#FF6B6B' } },
+				axisLine: { show: false },
+				axisTick: { show: false },
 				splitLine: { show: false }
 			}
 		],
@@ -1043,10 +1081,23 @@ function renderChart4New() {
 				yAxisIndex: 0,
 				data: [14890000, 44670000, 92100000],
 				itemStyle: {
-					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-						{ offset: 0, color: '#00d4ff' },
-						{ offset: 1, color: '#0099cc' }
-					])
+					color: {
+						type: 'linear',
+						x: 0,
+						y: 1,
+						x2: 0,
+						y2: 0,
+						colorStops: [
+						{ offset: 1, color: '#0099CC' },
+						{ offset: 0, color: 'rgba(0, 153, 204, 0.1)' }
+						]
+					},
+					borderColor: '#0099CC',
+					borderWidth: 2,
+					borderRadius: [0, 0, 0, 0],
+					shadowBlur: 15,
+					shadowColor: 'rgba(0, 153, 204, 0.5)',
+					shadowOffsetY: 0
 				},
 				barWidth: '20%',
 				label: {
@@ -1103,7 +1154,7 @@ function renderChart4New() {
 						const totalRevenueData = [16800000, 50400000, 104000000]
 						return '€' + (totalRevenueData[params.dataIndex] / 1000000).toFixed(1) + 'M'
 					},
-					color: '#000000',
+					color: '#ffffff',
 					offset: [0, -2]
 				}
 			},
@@ -1114,10 +1165,23 @@ function renderChart4New() {
 				yAxisIndex: 0,
 				data: [11965000, 37155000, 79250000],
 				itemStyle: {
-					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-						{ offset: 0, color: '#67E0DC' },
-						{ offset: 1, color: '#4db3aa' }
-					])
+					color: {
+						type: 'linear',
+						x: 0,
+						y: 1,
+						x2: 0,
+						y2: 0,
+						colorStops: [
+						{ offset: 1, color: '#45D9D8' },
+						{ offset: 0, color: 'rgba(224, 247, 247, 0.1)' }
+						]
+					},
+					borderColor: '#45D9D8',
+					borderWidth: 2,
+					borderRadius: [0, 0, 0, 0],
+					shadowBlur: 15,
+					shadowColor: 'rgba(69, 217, 216, 0.5)',
+					shadowOffsetY: 0
 				},
 				barWidth: '20%',
 				label: {
@@ -1175,7 +1239,7 @@ function renderChart4New() {
 						const totalRevenueData = [14890000, 44670000, 92100000]
 						return '€' + (totalRevenueData[params.dataIndex] / 1000000).toFixed(1) + 'M'
 					},
-					color: '#000000',
+					color: '#ffffff',
 					offset: [0, -2]
 				}
 			},
@@ -1186,10 +1250,23 @@ function renderChart4New() {
 				yAxisIndex: 0,
 				data: [11465000, 36530000, 78500000],
 				itemStyle: {
-					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-						{ offset: 0, color: '#ffc27a' },
-						{ offset: 1, color: '#ffc27a' }
-					])
+					color: {
+						type: 'linear',
+						x: 0,
+						y: 1,
+						x2: 0,
+						y2: 0,
+						colorStops: [
+						{ offset: 1, color: '#FFC27A' },
+						{ offset: 0, color: 'rgba(255, 194, 122, 0.1)' }
+						]
+					},
+					borderColor: '#FFC27A',
+					borderWidth: 2,
+					borderRadius: [0, 0, 0, 0],
+					shadowBlur: 15,
+					shadowColor: 'rgba(255, 194, 122, 0.5)',
+					shadowOffsetY: 0
 				},
 				barWidth: '20%',
 				label: {
@@ -1247,7 +1324,7 @@ function renderChart4New() {
 						const totalRevenueData = [11965000, 37155000, 79250000]
 						return '€' + (totalRevenueData[params.dataIndex] / 1000000).toFixed(1) + 'M'
 					},
-					color: '#000000',
+					color: '#ffffff',
 					offset: [0, -2]
 				}
 			},
@@ -1258,10 +1335,23 @@ function renderChart4New() {
 				yAxisIndex: 0,
 				data: [11465000, 36530000, 78500000],
 				itemStyle: {
-					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-						{ offset: 0, color: '#f17c7c' },
-						{ offset: 1, color: '#ff6b6b' }
-					])
+					color: {
+						type: 'linear',
+						x: 0,
+						y: 1,
+						x2: 0,
+						y2: 0,
+						colorStops: [
+						{ offset: 1, color: '#F2D302' },
+						{ offset: 0, color: 'rgba(242, 211, 2, 0.1)' }
+						]
+					},
+					borderColor: '#F2D302',
+					borderWidth: 2,
+					borderRadius: [0, 0, 0, 0],
+					shadowBlur: 15,
+					shadowColor: 'rgba(242, 211, 2, 0.5)',
+					shadowOffsetY: 0
 				},
 				barWidth: '20%',
 				label: {
@@ -1277,7 +1367,7 @@ function renderChart4New() {
 				itemStyle: {
 					color: {
 						type: 'pattern',
-						image: createDiagonalPattern('#f17c7c'),
+						image: createDiagonalPattern('#F2D302'),
 						repeat: 'repeat'
 					}
 				},
@@ -1318,7 +1408,7 @@ function renderChart4New() {
 						const ebitData = [11465000, 36530000, 78500000]
 						return '€' + (ebitData[params.dataIndex] / 1000000).toFixed(1) + 'M'
 					},
-					color: '#000000',
+					color: '#ffffff',
 					offset: [0, -2]
 				}
 			},
@@ -1329,14 +1419,16 @@ function renderChart4New() {
 				data: [88.6, 88.6, 88.6],
 				lineStyle: {
 					color: '#4db3aa',
-					width: 3,
+					width: 2,
+					shadowBlur: 6,
+					shadowColor: 'rgba(34, 211, 238, 0.3)',
 				},
 				itemStyle: {
 					color: '#4db3aa',
 					borderWidth: 2,
 					borderColor: '#fff'
 				},
-				symbol: 'diamond',
+				symbol: 'circle',
 				symbolSize: 6,
 				label: {
 					show: true,
@@ -1344,7 +1436,12 @@ function renderChart4New() {
 					fontSize: seriesLabelFontSize,
 					formatter: '{c}%',
 					color: '#4db3aa',
-					offset: [0, 8]
+					offset: [0, 8],
+					fontWeight: 'bold',
+					textShadowColor: 'rgba(0, 0, 0, 0.6)',
+					textShadowBlur: 4,
+					textShadowOffsetX: 1,
+					textShadowOffsetY: 1
 				}
 			}
 		]
@@ -1471,7 +1568,7 @@ function renderChart5New() {
 					formatter: function(params) {
 						return '€' + (params.value / 1000000).toFixed(1) + 'M'
 					},
-					color: '#000000',
+					color: '#ffffff',
 					offset: [0, -8]
 				}
 			},
@@ -1494,7 +1591,7 @@ function renderChart5New() {
 					formatter: function(params) {
 						return '€' + (params.value / 1000000).toFixed(1) + 'M'
 					},
-					color: '#000000',
+					color: '#ffffff',
 					offset: [0, -8]
 				}
 			},
@@ -1737,7 +1834,7 @@ function renderChart6New() {
 						const stackedTotal = [11173333, 36238333, 78208334]
 						return '€' + (stackedTotal[params.dataIndex] / 1000000).toFixed(1) + 'M'
 					},
-					color: '#000000',
+					color: '#ffffff',
 					offset: [0, -2]
 				}
 			},
@@ -1760,7 +1857,7 @@ function renderChart6New() {
 					formatter: function(params) {
 						return '€' + (params.value / 1000000).toFixed(1) + 'M'
 					},
-					color: '#000000',
+					color: '#ffffff',
 				}
 			},
 			{
@@ -1908,7 +2005,7 @@ function renderChart7New() {
 					position: 'top',
 					fontSize: seriesLabelFontSize,
 					formatter: '{c}%',
-					color: '#000000',
+					color: '#ffffff',
 					offset: [0, -8]
 				}
 			},
@@ -1929,7 +2026,7 @@ function renderChart7New() {
 					position: 'top',
 					fontSize: seriesLabelFontSize,
 					formatter: '{c}%',
-					color: '#000000',
+					color: '#ffffff',
 					offset: [0, -8]
 				}
 			},
@@ -1950,7 +2047,7 @@ function renderChart7New() {
 					position: 'top',
 					fontSize: seriesLabelFontSize,
 					formatter: '{c}%',
-					color: '#000000',
+					color: '#ffffff',
 					offset: [0, -8]
 				}
 			},
