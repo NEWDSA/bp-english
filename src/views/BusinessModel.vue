@@ -2338,8 +2338,8 @@ function renderChart4New() {
 	const getSeriesLabelFontSize = () => {
 		if (screenWidth <= 1440) return 12
 		if (screenWidth <= 1680) return 12
-		if (screenWidth <= 1920) return 16
-		return 18
+		if (screenWidth <= 1920) return 14
+		return 16
 	}
 
 	const option = {
@@ -2358,6 +2358,7 @@ function renderChart4New() {
 				const totalRevenueData = [16800000, 50400000, 104000000]
 				const grossProfitData = [14890000, 44670000, 92100000]
 				const contributionMarginData = [11965000, 37155000, 79250000]
+				const ebitData = [11756667, 36821667, 78791666]
 
 				const yearIndex = params[0].dataIndex
 
@@ -2373,6 +2374,8 @@ function renderChart4New() {
 						result += item.marker + item.seriesName + ': €' + (grossProfitData[yearIndex] / 1000000).toFixed(1) + 'M<br/>'
 					} else if (item.seriesName === 'Contribution Margin') {
 						result += item.marker + item.seriesName + ': €' + (contributionMarginData[yearIndex] / 1000000).toFixed(1) + 'M<br/>'
+					} else if (item.seriesName === 'EBIT') {
+						result += item.marker + item.seriesName + ': €' + (ebitData[yearIndex] / 1000000).toFixed(1) + 'M<br/>'
 					} else if (item.seriesName.includes('Gross Margin')) {
 						result += item.marker + item.seriesName + ': ' + item.value + '%<br/>'
 					} else if (item.value !== null && item.value !== undefined) {
@@ -2383,7 +2386,7 @@ function renderChart4New() {
 			}
 		},
 		legend: {
-			data: ['Total Revenue', 'Gross Profit', 'Contribution Margin', 'Pre-tax Net Profit', 'Gross Margin'],
+			data: ['Total Revenue', 'Gross Profit', 'Contribution Margin', 'EBIT', 'Gross Margin'],
 			bottom: 5,
 			textStyle: { fontSize: getLegendFontSize() },
 			itemGap: 12
@@ -2651,7 +2654,7 @@ function renderChart4New() {
 				label: {
 					show: true,
 					position: 'inside',
-					fontSize: getSeriesLabelFontSize(),
+					fontSize: 12,
 					formatter: function(params) {
 						// 显示堆叠总值：Gross Profit的原始值
 						const grossProfitData =[500000,625000,750000];
@@ -2687,6 +2690,81 @@ function renderChart4New() {
 						// 显示堆叠总值：Total Revenue (净收入) + Cost of Goods Sold = 总收入
 						const totalRevenueData = [11965000, 37155000, 79250000] ;
 						return '€' + (totalRevenueData[params.dataIndex] / 1000000).toFixed(1) + 'M'
+					},
+					color: '#000000',
+					offset: [0, -2]
+				}
+			},
+
+			// EBIT series (similar to Contribution Margin pattern)
+			{
+				name: 'EBIT',
+				type: 'bar',
+				stack: 'ebit',
+				yAxisIndex: 0,
+				data: [11465000, 36530000, 78500000],
+				itemStyle: {
+					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+						{ offset: 0, color: '#f17c7c' },
+						{ offset: 1, color: '#ff6b6b' }
+					])
+				},
+				barWidth: '20%',
+				label: {
+					show: false
+				}
+			},
+			{
+				name: 'Less: Mold Amortization',
+				type: 'bar',
+				stack: 'ebit',
+				yAxisIndex: 0,
+				data: [291667, 291667, 291666],
+				itemStyle: {
+					color: {
+						type: 'pattern',
+						image: createDiagonalPattern('#f17c7c'),
+						repeat: 'repeat'
+					}
+				},
+				barWidth: '20%',
+				label: {
+					show: true,
+					position: 'inside',
+					fontSize: 12,
+					formatter: function(params) {
+						return '€' + (params.value / 1000000).toFixed(1) + 'M'
+					},
+					color: '#ffffff',
+					fontWeight: 'bold',
+					textShadowColor: 'rgba(0, 0, 0, 0.6)',
+					textShadowBlur: 4,
+					textShadowOffsetX: 1,
+					textShadowOffsetY: 1
+				}
+			},
+			{
+				// Label display for EBIT
+				name: 'EBIT2',
+				type: 'bar',
+				stack: 'ebit',
+				yAxisIndex: 0,
+				data: [10, 10, 10],
+				itemStyle: {
+					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+						{ offset: 0, color: '#f17c7c' },
+						{ offset: 1, color: '#ff6b6b' }
+					])
+				},
+				barWidth: '0%',
+				label: {
+					show: true,
+					position: 'top',
+					fontSize: getSeriesLabelFontSize(),
+					formatter: function(params) {
+						// EBIT total values
+						const ebitData = [11465000, 36530000, 78500000];
+						return '€' + (ebitData[params.dataIndex] / 1000000).toFixed(1) + 'M'
 					},
 					color: '#000000',
 					offset: [0, -2]
