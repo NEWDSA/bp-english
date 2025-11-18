@@ -1067,6 +1067,7 @@ import { ref, onMounted, onBeforeUnmount, watchEffect, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import * as echarts from 'echarts'
 import TopNavigation from '../components/TopNavigation.vue';
+import { stack } from 'three/tsl';
 
 const router = useRouter()
 
@@ -2056,20 +2057,20 @@ function renderChart3New() {
 		legend: {
 			data: ['Product 1 Sales Volume', 'Product 2 Sales Volume', 'Product 1 Sales Revenue', 'Product 2 Sales Revenue', 'Total Revenue'],
 			bottom: 5,
-			textStyle: { fontSize: 10 },
+			textStyle: { fontSize: 12 },
 			itemGap: 15
 		},
 		grid: {
 			left: '8%',
 			right: '8%',
-			top: '25%',
-			bottom: '20%',
+			top: '15%',
+			bottom: '10%',
 			containLabel: true
 		},
 		xAxis: {
 			type: 'category',
 			data: ['2026', '2027', '2028'],
-			axisLabel: { fontSize: 12, color: '#666' },
+			axisLabel: { fontSize: 18, color: '#666' },
 			axisLine: { lineStyle: { color: '#ddd' } }
 		},
 		yAxis: [
@@ -2078,26 +2079,37 @@ function renderChart3New() {
 				name: 'Sales Volume (units)',
 				position: 'left',
 				axisLabel: {
-					formatter: '{value}',
-					fontSize: 11,
-					color: '#666'
-				},
-				axisLine: { lineStyle: { color: '#00d4ff' } },
-				splitLine: { lineStyle: { color: '#f0f0f0' } }
+      				formatter: '{value}',
+       				fontSize: 14,
+        			color: '#666'
+       			},
+       			axisLine: { lineStyle: { color: '#00d4ff' } },
+       			splitLine: { lineStyle: { color: '#f0f0f0' } }
+				// show: false,
+				// axisLabel: { show: false },
+				// axisLine: { show: false },
+				// axisTick: { show: false },
+				// splitLine: { show: false }
 			},
 			{
 				type: 'value',
-				name: 'Sales Revenue (€M)',
+				name: 'Sales Revenue (€)',
 				position: 'right',
 				axisLabel: {
-					formatter: function(value) {
-						return '€' + (value / 1000000).toFixed(0) + 'M'
-					},
-					fontSize: 11,
-					color: '#666'
-				},
-				axisLine: { lineStyle: { color: '#FFC27A' } },
-				splitLine: { show: false }
+       				formatter: function(value) {
+        				return '€' + (value / 1000000).toFixed(0) + 'M'
+         			},
+           			fontSize: 14,
+           			color: '#666'
+             	},
+          		axisLine: { lineStyle: { color: '#FFC27A' } },
+				min: 0,
+				max: 210000000,
+				// show: false,
+				// axisLabel: { show: false },
+				// axisLine: { show: false },
+				// axisTick: { show: false },
+				// splitLine: { show: false }
 			}
 		],
 		series: [
@@ -2116,11 +2128,10 @@ function renderChart3New() {
 				label: {
 					show: true,
 					position: 'top',
-					fontSize: 12,
+					fontSize: 18,
 					formatter: '{c} units',
 					offset: [0, -12],
 					color: '#333',
-					fontWeight: 'bold'
 				}
 			},
 			{
@@ -2138,11 +2149,10 @@ function renderChart3New() {
 				label: {
 					show: true,
 					position: 'top',
-					fontSize: 12,
+					fontSize: 18,
 					formatter: '{c} units',
 					offset: [0, -12],
 					color: '#333',
-					fontWeight: 'bold'
 				}
 			},
 			{
@@ -2160,13 +2170,12 @@ function renderChart3New() {
 				label: {
 					show: true,
 					position: 'bottom',
-					fontSize: 11,
+					fontSize: 13,
 					formatter: function(params) {
 						return '€' + (params.value / 1000000).toFixed(1) + 'M'
 					},
 					offset: [0, 8],
 					color: '#FFC27A',
-					fontWeight: 'bold'
 				}
 			},
 			{
@@ -2184,13 +2193,12 @@ function renderChart3New() {
 				label: {
 					show: true,
 					position: 'bottom',
-					fontSize: 11,
+					fontSize: 13,
 					formatter: function(params) {
 						return '€' + (params.value / 1000000).toFixed(1) + 'M'
 					},
 					offset: [0, 8],
 					color: '#FFB6C1',
-					fontWeight: 'bold'
 				}
 			},
 			{
@@ -2213,8 +2221,7 @@ function renderChart3New() {
 				label: {
 					show: true,
 					position: 'top',
-					fontSize: 12,
-					fontWeight: 'bold',
+					fontSize: 13,
 					formatter: function(params) {
 						return '€' + (params.value / 1000000).toFixed(1) + 'M'
 					},
@@ -2227,6 +2234,30 @@ function renderChart3New() {
 
 	chart3NewInstance.setOption(option)
 	setTimeout(() => chart3NewInstance?.resize(), 50)
+}
+
+// 创建斜线纹理图案
+function createDiagonalPattern(color) {
+	const canvas = document.createElement('canvas')
+	const ctx = canvas.getContext('2d')
+	canvas.width = 20
+	canvas.height = 20
+
+	// 设置背景色
+	ctx.fillStyle = color
+	ctx.fillRect(0, 0, 20, 20)
+
+	// 绘制斜线
+	ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)'
+	ctx.lineWidth = 1
+	ctx.beginPath()
+	for (let i = -20; i <= 40; i += 5) {
+		ctx.moveTo(i, 0)
+		ctx.lineTo(i + 20, 20)
+	}
+	ctx.stroke()
+
+	return canvas
 }
 
 function renderChart4New() {
@@ -2249,6 +2280,10 @@ function renderChart4New() {
 			formatter: function(params) {
 				let result = params[0].axisValue + '<br/>'
 				params.forEach(function(item) {
+					// Skip label-only series that end with "2"
+					if (item.seriesName.endsWith('2')) {
+						return
+					}
 					if (item.seriesName.includes('Gross Margin')) {
 						result += item.marker + item.seriesName + ': ' + item.value + '%<br/>'
 					} else if (item.value !== null && item.value !== undefined) {
@@ -2261,14 +2296,14 @@ function renderChart4New() {
 		legend: {
 			data: ['Total Revenue', 'Gross Profit', 'Contribution Margin', 'Pre-tax Net Profit', 'Gross Margin Rate'],
 			bottom: 5,
-			textStyle: { fontSize: 10 },
+			textStyle: { fontSize: 12 },
 			itemGap: 12
 		},
 		grid: {
 			left: '8%',
 			right: '8%',
-			top: '25%',
-			bottom: '20%',
+			top: '15%',
+			bottom: '10%',
 			containLabel: true
 		},
 		xAxis: {
@@ -2280,17 +2315,21 @@ function renderChart4New() {
 		yAxis: [
 			{
 				type: 'value',
-				name: 'Amount (€M)',
+				name: 'Amount (€)',
 				position: 'left',
 				axisLabel: {
 					formatter: function(value) {
 						return '€' + (value / 1000000).toFixed(0) + 'M'
 					},
-					fontSize: 11,
+					fontSize: 14,
 					color: '#666'
 				},
 				axisLine: { lineStyle: { color: '#00d4ff' } },
 				splitLine: { lineStyle: { color: '#f0f0f0' } }
+				// axisLabel: { show: false },
+				// axisLine: { show: false },
+				// axisTick: { show: false },
+				// splitLine: { show: false }
 			},
 			{
 				type: 'value',
@@ -2300,86 +2339,250 @@ function renderChart4New() {
 				max: 92,
 				axisLabel: {
 					formatter: '{value}%',
-					fontSize: 11,
+					fontSize: 14,
 					color: '#666'
 				},
 				axisLine: { lineStyle: { color: '#FF6B6B' } },
 				splitLine: { show: false }
+				// axisLabel: { show: false },
+				// axisLine: { show: false },
+				// axisTick: { show: false },
+				// splitLine: { show: false }
 			}
 		],
 		series: [
 			{
 				name: 'Total Revenue',
 				type: 'bar',
-				yAxisIndex: 0,
-				data: [16800000, 50400000, 104000000],
-				itemStyle: {
-					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-						{ offset: 0, color: '#4CAF50' },
-						{ offset: 1, color: '#2E7D32' }
-					])
-				},
-				barWidth: '20%',
-				label: {
-					show: true,
-					position: 'top',
-					fontSize: 11,
-					formatter: function(params) {
-						return '€' + (params.value / 1000000).toFixed(1) + 'M'
-					},
-					color: '#2E7D32',
-					fontWeight: 'bold',
-					offset: [0, -8]
-				}
-			},
-			{
-				name: 'Gross Profit',
-				type: 'bar',
+				stack: 'revenue',
 				yAxisIndex: 0,
 				data: [14890000, 44670000, 92100000],
 				itemStyle: {
 					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-						{ offset: 0, color: '#8BC34A' },
-						{ offset: 1, color: '#689F38' }
+						{ offset: 0, color: '#00d4ff' },
+						{ offset: 1, color: '#0099cc' }
 					])
 				},
 				barWidth: '20%',
 				label: {
-					show: true,
+					show: false,
 					position: 'top',
-					fontSize: 11,
+					fontSize: 14,
 					formatter: function(params) {
-						return '€' + (params.value / 1000000).toFixed(1) + 'M'
+						// 显示堆叠总值：Total Revenue (净收入) + Cost of Goods Sold = 总收入
+						const totalRevenueData = [16800000, 50400000, 104000000]
+						return '€' + (totalRevenueData[params.dataIndex] / 1000000).toFixed(1) + 'M'
 					},
-					color: '#689F38',
-					fontWeight: 'bold',
-					offset: [0, -8]
+					color: '#000000',
+					offset: [0, 10]
 				}
 			},
 			{
-				name: 'Contribution Margin',
+				name: 'Less: Cost of Goods Sold (COGS)',
 				type: 'bar',
+				stack: 'revenue',
+				yAxisIndex: 0,
+				data: [1910000, 5730000, 11900000],
+				itemStyle: {
+					color: {
+						type: 'pattern',
+						image: createDiagonalPattern('#0099cc'),
+						repeat: 'repeat'
+					}
+				},
+				barWidth: '20%',
+				label: {
+					show: true,
+					position: 'inside',
+					fontSize: 12,
+					formatter: function(params) {
+						return '€' + (params.value / 1000000).toFixed(1) + 'M'
+					},
+					color: '#ffffff',
+					fontWeight: 'bold'
+				}
+			},
+			{
+				// 主要解决Total Revenue label显示问题
+				name: 'Total Revenue2',
+				type: 'bar',
+				stack: 'revenue',
+				yAxisIndex: 0,
+				data: [10, 10, 10],
+				itemStyle: {
+					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+						{ offset: 0, color: '#00d4ff' },
+						{ offset: 1, color: '#0099cc' }
+					])
+				},
+				barWidth: '0%',
+				label: {
+					show: true,
+					position: 'top',
+					fontSize: 18,
+					formatter: function(params) {
+						// 显示堆叠总值：Total Revenue (净收入) + Cost of Goods Sold = 总收入
+						const totalRevenueData = [16800000, 50400000, 104000000]
+						return '€' + (totalRevenueData[params.dataIndex] / 1000000).toFixed(1) + 'M'
+					},
+					color: '#000000',
+					offset: [0, -2]
+				}
+			},
+			
+			{
+				name: 'Gross Profit',
+				type: 'bar',
+				stack: 'profit',
 				yAxisIndex: 0,
 				data: [11965000, 37155000, 79250000],
 				itemStyle: {
 					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-						{ offset: 0, color: '#FFC107' },
-						{ offset: 1, color: '#F57F17' }
+						{ offset: 0, color: '#67E0DC' },
+						{ offset: 1, color: '#4db3aa' }
+					])
+				},
+				barWidth: '20%',
+				label: {
+					show: false
+				}
+			},
+			{
+				name: 'Less: Other Variable Costs',
+				type: 'bar',
+				stack: 'profit',
+				yAxisIndex: 0,
+				data: [2925000, 7515000, 12850000],
+				itemStyle: {
+					color: {
+						type: 'pattern',
+						image: createDiagonalPattern('#4db3aa'),
+						repeat: 'repeat'
+					}
+				},
+				barWidth: '20%',
+				label: {
+					show: true,
+					position: 'inside',
+					fontSize: 12,
+					formatter: function(params) {
+						// 显示堆叠总值：Gross Profit的原始值
+						const grossProfitData = [2925000, 7515000, 12850000]
+						return '€' + (grossProfitData[params.dataIndex] / 1000000).toFixed(1) + 'M'
+					},
+					color: '#ffffff',
+					fontWeight: 'bold'
+				}
+			},
+			{
+				// 主要解决Gross Profit label显示问题
+				name: 'Gross Profit2',
+				type: 'bar',
+				stack: 'profit',
+				yAxisIndex: 0,
+				data: [10, 10, 10],
+				itemStyle: {
+					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+						{ offset: 0, color: '#67E0DC' },
+						{ offset: 1, color: '#4db3aa' }
 					])
 				},
 				barWidth: '20%',
 				label: {
 					show: true,
 					position: 'top',
-					fontSize: 11,
+					fontSize: 18,
 					formatter: function(params) {
-						return '€' + (params.value / 1000000).toFixed(1) + 'M'
+						// 显示堆叠总值：Total Revenue (净收入) + Cost of Goods Sold = 总收入
+						const totalRevenueData = [14890000, 44670000, 92100000]
+						return '€' + (totalRevenueData[params.dataIndex] / 1000000).toFixed(1) + 'M'
 					},
-					color: '#F57F17',
-					fontWeight: 'bold',
-					offset: [0, -8]
+					color: '#000000',
+					offset: [0, -2]
 				}
 			},
+
+			{
+				name: 'Contribution Margin',
+				type: 'bar',
+				stack: 'margin',
+				yAxisIndex: 0,
+				data: [11465000, 36530000, 78500000],
+				itemStyle: {
+					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+						{ offset: 0, color: '#FFC107' },
+						{ offset: 0.5, color: '#F57F17' }
+					])
+				},
+				barWidth: '20%',
+				label: {
+					show: false,
+					position: 'top',
+					fontSize: 18,
+					formatter: function(params) {
+						// 显示堆叠总值：Total Revenue (净收入) + Cost of Goods Sold = 总收入
+						const totalRevenueData = [11965000, 37155000, 79250000] ;
+						return '€' + (totalRevenueData[params.dataIndex] / 1000000).toFixed(1) + 'M'
+					},
+					color: '#000000',
+				}
+			},
+			{
+				name: 'Less: Annual Fixed Costs',
+				type: 'bar',
+				stack: 'margin',
+				yAxisIndex: 0,
+				data: [500000,625000,750000],
+				itemStyle: {
+					color: {
+						type: 'pattern',
+						image: createDiagonalPattern('#4db3aa'),
+						repeat: 'repeat'
+					}
+				},
+				barWidth: '20%',
+				label: {
+					show: true,
+					position: 'inside',
+					fontSize: 12,
+					formatter: function(params) {
+						// 显示堆叠总值：Gross Profit的原始值
+						const grossProfitData =[500000,625000,750000];
+						return '€' + (grossProfitData[params.dataIndex] / 1000000).toFixed(1) + 'M'
+					},
+					color: '#ffffff',
+					fontWeight: 'bold'
+				}
+			},
+			{
+				// 主要解决Contribution Margin label显示问题
+				name: 'Contribution Margin2',
+				type: 'bar',
+				stack: 'margin',
+				yAxisIndex: 0,
+				data: [10, 10, 10],
+				itemStyle: {
+					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+						{ offset: 0, color: '#FFC107' },
+						{ offset: 0.5, color: '#F57F17' }
+					])
+				},
+				barWidth: '0%',
+				label: {
+					show: true,
+					position: 'top',
+					fontSize: 18,
+					formatter: function(params) {
+						// 显示堆叠总值：Total Revenue (净收入) + Cost of Goods Sold = 总收入
+						const totalRevenueData = [11965000, 37155000, 79250000] ;
+						return '€' + (totalRevenueData[params.dataIndex] / 1000000).toFixed(1) + 'M'
+					},
+					color: '#000000',
+					offset: [0, -2]
+				}
+			},
+
+
 			{
 				name: 'Pre-tax Net Profit',
 				type: 'line',
@@ -2399,7 +2602,7 @@ function renderChart4New() {
 				label: {
 					show: true,
 					position: 'bottom',
-					fontSize: 12,
+					fontSize: 13,
 					formatter: function(params) {
 						return '€' + (params.value / 1000000).toFixed(1) + 'M'
 					},
@@ -2428,7 +2631,7 @@ function renderChart4New() {
 				label: {
 					show: true,
 					position: 'bottom',
-					fontSize: 11,
+					fontSize: 13,
 					formatter: '{c}%',
 					color: '#FF6B6B',
 					fontWeight: 'bold',
@@ -2476,51 +2679,59 @@ function renderChart5New() {
 		},
 		legend: {
 			data: ['Annual Net Profit', 'Cumulative Net Profit', 'Annual ROI', 'Cumulative ROI'],
-			bottom: 5,
-			textStyle: { fontSize: 10 },
+			bottom: '5%',
+			textStyle: { fontSize: 12 },
 			itemGap: 15
 		},
 		grid: {
 			left: '8%',
 			right: '8%',
-			top: '30%',
-			bottom: '25%',
+			top: '15%',
+			bottom: '10%',
 			containLabel: true
 		},
 		xAxis: {
 			type: 'category',
 			data: ['2026', '2027', '2028'],
-			axisLabel: { fontSize: 12, color: '#666' },
+			axisLabel: { fontSize: 18, color: '#666' },
 			axisLine: { lineStyle: { color: '#ddd' } }
 		},
 		yAxis: [
 			{
 				type: 'value',
-				name: 'Net Profit (€M)',
+				name: 'Net Profit (€)',
 				position: 'left',
 				axisLabel: {
 					formatter: function(value) {
 						return '€' + (value / 1000000).toFixed(0) + 'M'
 					},
-					fontSize: 11,
+					fontSize: 14,
 					color: '#666'
 				},
 				axisLine: { lineStyle: { color: '#00d4ff' } },
 				splitLine: { lineStyle: { color: '#f0f0f0' } }
+				// axisLabel: { show: false },
+				// axisLine: { show: false },
+				// axisTick: { show: false },
+				// splitLine: { show: false }
 			},
 			{
 				type: 'value',
 				name: 'ROI (%)',
 				position: 'right',
 				min: 200,
-				max: 5600,
+				max: 4600,
 				axisLabel: {
 					formatter: '{value}%',
-					fontSize: 11,
+					fontSize: 14,
 					color: '#666'
 				},
 				axisLine: { lineStyle: { color: '#FF6B6B' } },
 				splitLine: { show: false }
+				// axisLabel: { show: false },
+				// axisLine: { show: false },
+				// axisTick: { show: false },
+				// splitLine: { show: false }
 			}
 		],
 		series: [
@@ -2540,12 +2751,11 @@ function renderChart5New() {
 				label: {
 					show: true,
 					position: 'top',
-					fontSize: 11,
+					fontSize: 18,
 					formatter: function(params) {
 						return '€' + (params.value / 1000000).toFixed(1) + 'M'
 					},
-					color: '#006699',
-					fontWeight: 'bold',
+					color: '#000000',
 					offset: [0, -8]
 				}
 			},
@@ -2565,12 +2775,11 @@ function renderChart5New() {
 				label: {
 					show: true,
 					position: 'top',
-					fontSize: 11,
+					fontSize: 18,
 					formatter: function(params) {
 						return '€' + (params.value / 1000000).toFixed(1) + 'M'
 					},
-					color: '#0080ff',
-					fontWeight: 'bold',
+					color: '#000000',
 					offset: [0, -8]
 				}
 			},
@@ -2593,11 +2802,11 @@ function renderChart5New() {
 				label: {
 					show: true,
 					position: 'top',
-					fontSize: 12,
+					fontSize: 13,
 					formatter: '{c}%',
 					color: '#FF6B6B',
 					fontWeight: 'bold',
-					offset: [0, 45]
+					offset: [0, -15]
 				}
 			},
 			{
@@ -2620,7 +2829,7 @@ function renderChart5New() {
 				label: {
 					show: true,
 					position: 'top',
-					fontSize: 12,
+					fontSize: 13,
 					formatter: '{c}%',
 					color: '#FFC107',
 					fontWeight: 'bold',
@@ -2631,7 +2840,7 @@ function renderChart5New() {
 		graphic: {
 			type: 'text',
 			left: 'center',
-			bottom: '15%',
+			bottom: '1%',
 			style: {
 				text: 'Investment Amount: €5M | Cumulative Return Over Three Years: €125.6M | Total Return Rate: 2512.4%',
 				fontSize: 12,
@@ -2681,26 +2890,26 @@ function renderChart6New() {
 		legend: {
 			data: ['Pre-tax Net Profit', 'Non-cash Amortization', 'Operating Cash Flow', 'Cumulative Cash Flow'],
 			bottom: 5,
-			textStyle: { fontSize: 10 },
+			textStyle: { fontSize: 12 },
 			itemGap: 10
 		},
 		grid: {
 			left: '8%',
 			right: '8%',
-			top: '25%',
-			bottom: '25%',
+			top: '15%',
+			bottom: '10%',
 			containLabel: true
 		},
 		xAxis: {
 			type: 'category',
 			data: ['2026', '2027', '2028'],
-			axisLabel: { fontSize: 12, color: '#666' },
+			axisLabel: { fontSize: 18, color: '#666' },
 			axisLine: { lineStyle: { color: '#ddd' } }
 		},
 		yAxis: [
 			{
 				type: 'value',
-				name: 'Cash Flow (€M)',
+				name: 'Cash Flow (€)',
 				position: 'left',
 				min: 0,
 				max: 90000000,
@@ -2708,7 +2917,7 @@ function renderChart6New() {
 					formatter: function(value) {
 						return (value / 1000000).toFixed(0) + 'M'
 					},
-					fontSize: 11,
+					fontSize: 14,
 					color: '#666'
 				},
 				axisLine: { lineStyle: { color: '#4CAF50' } },
@@ -2716,7 +2925,7 @@ function renderChart6New() {
 			},
 			{
 				type: 'value',
-				name: 'Cumulative (€M)',
+				name: 'Cumulative (€)',
 				position: 'right',
 				min: 0,
 				max: 140000000,
@@ -2724,7 +2933,7 @@ function renderChart6New() {
 					formatter: function(value) {
 						return (value / 1000000).toFixed(0) + 'M'
 					},
-					fontSize: 11,
+					fontSize: 14,
 					color: '#666'
 				},
 				axisLine: { lineStyle: { color: '#FF6B6B' } },
@@ -2747,11 +2956,11 @@ function renderChart6New() {
 				label: {
 					show: true,
 					position: 'top',
-					fontSize: 10,
+					fontSize: 18,
 					formatter: function(params) {
 						return '€' + (params.value / 1000000).toFixed(1) + 'M'
 					},
-					color: '#2E7D32',
+					color: '#000000',
 					fontWeight: 'bold'
 				}
 			},
@@ -2770,11 +2979,11 @@ function renderChart6New() {
 				label: {
 					show: true,
 					position: 'top',
-					fontSize: 10,
+					fontSize: 18,
 					formatter: function(params) {
 						return '€' + (params.value / 1000).toFixed(0) + 'K'
 					},
-					color: '#F57C00',
+					color: '#000000',
 					fontWeight: 'bold'
 				}
 			},
@@ -2793,11 +3002,11 @@ function renderChart6New() {
 				label: {
 					show: true,
 					position: 'top',
-					fontSize: 10,
+					fontSize: 18,
 					formatter: function(params) {
 						return '€' + (params.value / 1000000).toFixed(1) + 'M'
 					},
-					color: '#1565C0',
+					color: '#000000',
 					fontWeight: 'bold'
 				}
 			},
@@ -2818,7 +3027,7 @@ function renderChart6New() {
 				label: {
 					show: true,
 					position: 'top',
-					fontSize: 10,
+					fontSize: 14,
 					formatter: function(params) {
 						return '€' + (params.value / 1000000).toFixed(1) + 'M'
 					},
@@ -2867,20 +3076,20 @@ function renderChart7New() {
 		legend: {
 			data: ['Gross Margin', 'Contribution Margin', 'Net Profit Margin', 'Annual ROI'],
 			bottom: 5,
-			textStyle: { fontSize: 10 },
+			textStyle: { fontSize: 12 },
 			itemGap: 15
 		},
 		grid: {
 			left: '8%',
 			right: '8%',
-			top: '25%',
-			bottom: '20%',
+			top: '15%',
+			bottom: '10%',
 			containLabel: true
 		},
 		xAxis: {
 			type: 'category',
 			data: ['2026', '2027', '2028'],
-			axisLabel: { fontSize: 12, color: '#666' },
+			axisLabel: { fontSize: 18, color: '#666' },
 			axisLine: { lineStyle: { color: '#ddd' } }
 		},
 		yAxis: [
@@ -2892,7 +3101,7 @@ function renderChart7New() {
 				max: 100,
 				axisLabel: {
 					formatter: '{value}%',
-					fontSize: 11,
+					fontSize: 14,
 					color: '#666'
 				},
 				axisLine: { lineStyle: { color: '#00d4ff' } },
@@ -2906,7 +3115,7 @@ function renderChart7New() {
 				max: 1800,
 				axisLabel: {
 					formatter: '{value}%',
-					fontSize: 11,
+					fontSize: 14,
 					color: '#666'
 				},
 				axisLine: { lineStyle: { color: '#FF6B6B' } },
@@ -2929,10 +3138,9 @@ function renderChart7New() {
 				label: {
 					show: true,
 					position: 'top',
-					fontSize: 11,
+					fontSize: 18,
 					formatter: '{c}%',
-					color: '#0099cc',
-					fontWeight: 'bold',
+					color: '#000000',
 					offset: [0, -8]
 				}
 			},
@@ -2951,10 +3159,9 @@ function renderChart7New() {
 				label: {
 					show: true,
 					position: 'top',
-					fontSize: 11,
+					fontSize: 18,
 					formatter: '{c}%',
-					color: '#3399ff',
-					fontWeight: 'bold',
+					color: '#000000',
 					offset: [0, -8]
 				}
 			},
@@ -2973,10 +3180,9 @@ function renderChart7New() {
 				label: {
 					show: true,
 					position: 'top',
-					fontSize: 11,
+					fontSize: 18,
 					formatter: '{c}%',
-					color: '#66b3ff',
-					fontWeight: 'bold',
+					color: '#000000',
 					offset: [0, -8]
 				}
 			},
@@ -3000,10 +3206,9 @@ function renderChart7New() {
 				label: {
 					show: true,
 					position: 'bottom',
-					fontSize: 12,
+					fontSize: 13,
 					formatter: '{c}%',
 					color: '#FF6B6B',
-					fontWeight: 'bold',
 					offset: [0, -45]
 				}
 			}
