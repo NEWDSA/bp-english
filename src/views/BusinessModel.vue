@@ -2108,7 +2108,7 @@ function renderChart3New() {
 		yAxis: [
 			{
 				type: 'value',
-				name: 'Sales Volume (units)',
+				name: 'Sales Volume',
 				position: 'left',
 				axisLabel: {
       				formatter: '{value}',
@@ -2129,7 +2129,7 @@ function renderChart3New() {
 			},
 			{
 				type: 'value',
-				name: 'Sales Revenue (€)',
+				name: 'Sales (€)',
 				position: 'right',
 				axisLabel: {
        				formatter: function(value) {
@@ -2141,7 +2141,7 @@ function renderChart3New() {
 				nameTextStyle: {
 					fontSize: getAxisLabelFontSize(),
 					color: '#fe7878',
-					padding: [0, 0, 10, 0]
+					padding: [0, 0, 10, 60]
 				},
           		axisLine: { lineStyle: { color: '#FFC27A' } },
 				min: 1000000,
@@ -2170,7 +2170,7 @@ function renderChart3New() {
 					show: true,
 					position: 'top',
 					fontSize: getSeriesLabelFontSize(),
-					formatter: '{c} units',
+					formatter: '{c}',
 					offset: [0, -12],
 					color: '#000000',
 				}
@@ -2191,7 +2191,7 @@ function renderChart3New() {
 					show: true,
 					position: 'top',
 					fontSize: getSeriesLabelFontSize(),
-					formatter: '{c} units',
+					formatter: '{c}',
 					offset: [0, -12],
 					color: '#000000',
 				}
@@ -2344,7 +2344,7 @@ function renderChart4New() {
 
 	const option = {
 		title: {
-			text: 'Profit Statement Analysis',
+			text: 'Profit Statement',
 			textStyle: { fontSize: getTitleFontSize(), color: '#333333' },
 			top: screenWidth <= 1280 ? 30 : 50,
 			left: 'center'
@@ -2368,7 +2368,7 @@ function renderChart4New() {
 			}
 		},
 		legend: {
-			data: ['Total Revenue', 'Gross Profit', 'Contribution Margin', 'Pre-tax Net Profit', 'Gross Margin Rate'],
+			data: ['Total Revenue', 'Gross Profit', 'Contribution Margin', 'Pre-tax Net Profit', 'Gross Margin'],
 			bottom: 5,
 			textStyle: { fontSize: getLegendFontSize() },
 			itemGap: 12
@@ -2413,7 +2413,7 @@ function renderChart4New() {
 			},
 			{
 				type: 'value',
-				name: 'Gross Margin Rate (%)',
+				name: 'Gross Margin (%)',
 				position: 'right',
 				min: 85,
 				max: 92,
@@ -2708,7 +2708,7 @@ function renderChart4New() {
 				}
 			},
 			{
-				name: 'Gross Margin Rate',
+				name: 'Gross Margin',
 				type: 'line',
 				yAxisIndex: 1,
 				data: [88.6, 88.6, 88.6],
@@ -3281,7 +3281,7 @@ function renderChart7New() {
 			}
 		},
 		legend: {
-			data: ['Gross Margin', 'Contribution Margin', 'Net Profit Margin', 'Annual ROI'],
+			data: ['Gross Margin', 'Contribution Margin Ratio', 'Net Profit Margin', 'Annual ROI'],
 			bottom: 5,
 			textStyle: { fontSize: getLegendFontSize() },
 			itemGap: 15
@@ -3361,7 +3361,7 @@ function renderChart7New() {
 				}
 			},
 			{
-				name: 'Contribution Margin',
+				name: 'Contribution Margin Ratio',
 				type: 'bar',
 				yAxisIndex: 0,
 				data: [71.2, 73.7, 76.2],
