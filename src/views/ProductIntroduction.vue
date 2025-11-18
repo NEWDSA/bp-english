@@ -46,7 +46,7 @@
 							:class="['absolute left-[80px] sm:left-[90px] md:left-[96px] lg:left-[100px] xl:left-[108px] 2xl:left-[114px] top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full z-[3] w-[7px] h-[7px]', activeNavItem === 'pain-points' ? 'bg-[#ff4444] shadow-[0_0_15px_rgba(255,68,68,0.8)]' : 'bg-white shadow-[0_0_8px_rgba(255,255,255,0.5)]']">
 						</div>
 						<span class="nav-text text-[24px] sm:text-[26px] md:text-[28px] lg:text-[30px]">Traditional
-							Electric Boat Pain Points2</span>
+							Electric Boat Pain Points</span>
 					</div>
 					<div class="left-nav-item w-[450px] sm:w-[510px] md:w-[570px] lg:w-[600px] xl:w-[690px] 2xl:w-[730px] max-w-[730px]"
 						:class="{ active: activeNavItem === 'competitor-analysis' }"
@@ -2522,7 +2522,7 @@ onUnmounted(() => {
 
 @media (max-width: 1919px) {
 	.competitor-tab {
-		font-size: 16px;
+		font-size: 18px;
 	}
 }
 
@@ -2976,12 +2976,12 @@ onUnmounted(() => {
 	border-radius: 8px;
 	overflow: hidden;
 	table-layout: fixed;
-	font-size: 16px;
+	font-size: 18px;
 }
 
 @media (max-width: 1919px) {
 	.comparison-table {
-		font-size: 14px;
+		font-size: 18px;
 	}
 }
 
