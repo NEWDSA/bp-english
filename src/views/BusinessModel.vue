@@ -2353,12 +2353,27 @@ function renderChart4New() {
 			trigger: 'axis',
 			formatter: function(params) {
 				let result = params[0].axisValue + '<br/>'
+
+				// Define the actual values to display (matching what labels show)
+				const totalRevenueData = [16800000, 50400000, 104000000]
+				const grossProfitData = [14890000, 44670000, 92100000]
+				const contributionMarginData = [11965000, 37155000, 79250000]
+
+				const yearIndex = params[0].dataIndex
+
 				params.forEach(function(item) {
 					// Skip label-only series that end with "2"
 					if (item.seriesName.endsWith('2')) {
 						return
 					}
-					if (item.seriesName.includes('Gross Margin')) {
+
+					if (item.seriesName === 'Total Revenue') {
+						result += item.marker + item.seriesName + ': €' + (totalRevenueData[yearIndex] / 1000000).toFixed(1) + 'M<br/>'
+					} else if (item.seriesName === 'Gross Profit') {
+						result += item.marker + item.seriesName + ': €' + (grossProfitData[yearIndex] / 1000000).toFixed(1) + 'M<br/>'
+					} else if (item.seriesName === 'Contribution Margin') {
+						result += item.marker + item.seriesName + ': €' + (contributionMarginData[yearIndex] / 1000000).toFixed(1) + 'M<br/>'
+					} else if (item.seriesName.includes('Gross Margin')) {
 						result += item.marker + item.seriesName + ': ' + item.value + '%<br/>'
 					} else if (item.value !== null && item.value !== undefined) {
 						result += item.marker + item.seriesName + ': €' + (Math.abs(item.value) / 1000000).toFixed(1) + 'M<br/>'
@@ -2678,46 +2693,17 @@ function renderChart4New() {
 				}
 			},
 
-
-			{
-				name: 'Pre-tax Net Profit',
-				type: 'line',
-				yAxisIndex: 0,
-				data: [11173333, 36238333, 78208334],
-				lineStyle: {
-					color: '#ffc107',
-					width: 3,
-					type: 'dashed'
-				},
-				itemStyle: {
-					color: '#ffc107',
-					borderWidth: 3,
-					borderColor: '#fff'
-				},
-				symbol: 'circle',
-				symbolSize: 8,
-				label: {
-					show: true,
-					position: 'bottom',
-					fontSize: getSeriesLabelFontSize(),
-					formatter: function(params) {
-						return '€' + (params.value / 1000000).toFixed(1) + 'M'
-					},
-					color: '#ffc107',
-					offset: [10, 12]
-				}
-			},
 			{
 				name: 'Gross Margin',
 				type: 'line',
 				yAxisIndex: 1,
 				data: [88.6, 88.6, 88.6],
 				lineStyle: {
-					color: '#FF6B6B',
+					color: '#4db3aa',
 					width: 3,
 				},
 				itemStyle: {
-					color: '#FF6B6B',
+					color: '#4db3aa',
 					borderWidth: 2,
 					borderColor: '#fff'
 				},
@@ -2728,7 +2714,7 @@ function renderChart4New() {
 					position: 'bottom',
 					fontSize: getSeriesLabelFontSize(),
 					formatter: '{c}%',
-					color: '#FF6B6B',
+					color: '#4db3aa',
 					offset: [0, 8]
 				}
 			}
