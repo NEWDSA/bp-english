@@ -4,7 +4,7 @@
 		<div class="revenue-modal-content bg-gray-900 border border-cyan-500/30 rounded-xl shadow-2xl" @click.stop>
 			<button
 				@click="handleClose"
-				class="absolute z-2 right-6 top-6 text-gray-400 transition-colors p-2 hover:bg-gray-800 rounded-lg"
+				class="absolute z-99 right-6 top-6 text-gray-400 transition-colors p-2 hover:bg-gray-800 rounded-lg"
 				>
 				<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -321,7 +321,7 @@ function renderChart1() {
 	const option = {
 		title: {
 			text: 'When the cost of three single-unit ships is €21,000, the break-even sales volume is reached',
-			textStyle: { fontSize: titleFontSize, color: '#333', fontWeight: 'normal' },
+			textStyle: { fontSize: titleFontSize, color: '#ffffff', fontWeight: 'normal' },
 			top: screenWidth <= 1280 ? 30 : 50,
 			left: 'center'
 		},
@@ -334,7 +334,7 @@ function renderChart1() {
 		legend: {
 			data: ['Annual breakeven sales volume (units)', 'Gross profit margin'],
 			bottom: screenWidth <= 1920 ? '10%' : '6%',
-			textStyle: { fontSize: legendFontSize },
+			textStyle: { fontSize: legendFontSize, color: '#ffffff' },
 			left: 'center',
 			itemGap: screenWidth <= 1920 ? 20 : 40
 		},
@@ -343,18 +343,26 @@ function renderChart1() {
 			left: '40',
 			bottom: screenWidth <= 1920 ? '10%' : '7%',
 			style: {
-				text: 'Horizontal axis (Price: Euro)',
+				text: '{white|Horizontal axis (Price: Euro)}',
 				fontSize: graphicFontSize,
-				color: '#666',
+				fill: '#ffffff',
+				color: '#ffffff',
+				textFill: '#ffffff',
 				textAlign: 'left',
-				textVerticalAlign: 'middle'
+				textVerticalAlign: 'middle',
+				rich: {
+					white: {
+						color: '#ffffff',
+						fontSize: graphicFontSize
+					}
+				}
 			}
 		},
 		xAxis: {
 			type: 'category',
 			data: ['145,000', '140,000', '135,000', '130,000', '125,000', '120,000', '115,000', '110,000', '105,000', '100,000', '95,000'],
 			axisLabel: {
-				color: '#666',
+				color: '#ffffff',
 				fontSize: axisLabelFontSize,
 				show: true,
 				margin: screenWidth <= 1280 ? 15 : 20,
@@ -407,11 +415,30 @@ function renderChart1() {
 				type: 'bar',
 				yAxisIndex: 0,
 				data: [4.4, 4.6, 4.8, 5.1, 5.3, 5.6, 5.9, 6.2, 6.6, 7.1, 7.6],
-				itemStyle: { color: '#00d4ff' },
+				itemStyle: {
+					color: {
+						type: 'linear',
+						x: 0,
+						y: 1,
+						x2: 0,
+						y2: 0,
+						colorStops: [
+						{ offset: 1, color: '#45D9D8' },
+						{ offset: 0, color: 'rgba(224, 247, 247, 0.1)' }
+						]
+					},
+					borderColor: '#45D9D8',
+					borderWidth: 2,
+					borderRadius: [2, 2, 0, 0],
+					shadowBlur: 15,
+					shadowColor: 'rgba(69, 217, 216, 0.5)',
+					shadowOffsetY: 0
+				},
 				label: {
 					show: true,
 					position: 'top',
 					fontSize: seriesLabelFontSize,
+					color: '#ffffff',
 					formatter: function(params) {
 						if (params.dataIndex === 5) {
 							return '{highlight|' + params.value + '}'
@@ -431,11 +458,30 @@ function renderChart1() {
 				type: 'bar',
 				yAxisIndex: 1,
 				data: [75.5, 75.0, 74.4, 73.8, 73.2, 72.5, 71.7, 70.9, 70.0, 69.0, 67.9],
-				itemStyle: { color: '#FFC27A' },
+				itemStyle: {
+					color: {
+						type: 'linear',
+						x: 0,
+						y: 1,
+						x2: 0,
+						y2: 0,
+						colorStops: [
+						{ offset: 1, color: '#FFC27A' },
+						{ offset: 0, color: 'rgba(255, 194, 122, 0.1)' }
+						]
+					},
+					borderColor: '#FFC27A',
+					borderWidth: 2,
+					borderRadius: [2, 2, 0, 0],
+					shadowBlur: 15,
+					shadowColor: 'rgba(255, 194, 122, 0.5)',
+					shadowOffsetY: 0
+				},
 				label: {
 					show: true,
 					position: 'top',
 					fontSize: seriesLabelFontSize,
+					color: '#ffffff',
 					formatter: function(params) {
 						if (params.dataIndex === 5) {
 							return '{highlight|' + params.value + '%}'
@@ -476,7 +522,7 @@ function renderChart2() {
 	const option = {
 		title: {
 			text: 'When the cost of a five-seat version single boat is €36,500, the break-even sales volume is reached',
-			textStyle: { fontSize: titleFontSize, color: '#333', fontWeight: 'normal' },
+			textStyle: { fontSize: titleFontSize, color: '#ffffff', fontWeight: 'normal' },
 			top: screenWidth <= 1280 ? 30 : 50,
 			left: 'center'
 		},
@@ -489,7 +535,7 @@ function renderChart2() {
 		legend: {
 			data: ['Annual breakeven sales volume (units)', 'Gross profit margin'],
 			bottom: screenWidth <= 1920 ? '10%' : '6%',
-			textStyle: { fontSize: legendFontSize },
+			textStyle: { fontSize: legendFontSize, color: '#ffffff' },
 			left: 'center',
 			itemGap: screenWidth <= 1920 ? 20 : 40
 		},
@@ -498,18 +544,26 @@ function renderChart2() {
 			left: '40',
 			bottom: screenWidth <= 1920 ? '10%' : '7%',
 			style: {
-				text: 'Horizontal axis (Price: Euro)',
+				text: '{white|Horizontal axis (Price: Euro)}',
 				fontSize: graphicFontSize,
-				color: '#666',
+				fill: '#ffffff',
+				color: '#ffffff',
+				textFill: '#ffffff',
 				textAlign: 'left',
-				textVerticalAlign: 'middle'
+				textVerticalAlign: 'middle',
+				rich: {
+					white: {
+						color: '#ffffff',
+						fontSize: graphicFontSize
+					}
+				}
 			}
 		},
 		xAxis: {
 			type: 'category',
 			data: ['225,000', '220,000', '215,000', '210,000', '205,000', '200,000', '195,000', '190,000', '185,000', '180,000', '175,000'],
 			axisLabel: {
-				color: '#666',
+				color: '#ffffff',
 				fontSize: axisLabelFontSize,
 				show: true,
 				margin: screenWidth <= 1280 ? 15 : 20,
@@ -562,11 +616,30 @@ function renderChart2() {
 				type: 'bar',
 				yAxisIndex: 0,
 				data: [2.9, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.9, 4.0],
-				itemStyle: { color: '#00d4ff' },
+				itemStyle: {
+					color: {
+						type: 'linear',
+						x: 0,
+						y: 1,
+						x2: 0,
+						y2: 0,
+						colorStops: [
+						{ offset: 1, color: '#45D9D8' },
+						{ offset: 0, color: 'rgba(224, 247, 247, 0.1)' }
+						]
+					},
+					borderColor: '#45D9D8',
+					borderWidth: 2,
+					borderRadius: [2, 2, 0, 0],
+					shadowBlur: 15,
+					shadowColor: 'rgba(69, 217, 216, 0.5)',
+					shadowOffsetY: 0
+				},
 				label: {
 					show: true,
 					position: 'top',
 					fontSize: seriesLabelFontSize,
+					color: '#ffffff',
 					formatter: function(params) {
 						if (params.dataIndex === 5) {
 							return '{highlight|' + params.value + '}'
@@ -586,11 +659,30 @@ function renderChart2() {
 				type: 'bar',
 				yAxisIndex: 1,
 				data: [73.8, 73.4, 73.0, 72.6, 72.2, 71.8, 71.3, 70.8, 70.3, 69.7, 69.1],
-				itemStyle: { color: '#FFC27A' },
+				itemStyle: {
+					color: {
+						type: 'linear',
+						x: 0,
+						y: 1,
+						x2: 0,
+						y2: 0,
+						colorStops: [
+						{ offset: 1, color: '#FFC27A' },
+						{ offset: 0, color: 'rgba(255, 194, 122, 0.1)' }
+						]
+					},
+					borderColor: '#FFC27A',
+					borderWidth: 2,
+					borderRadius: [2, 2, 0, 0],
+					shadowBlur: 15,
+					shadowColor: 'rgba(255, 194, 122, 0.5)',
+					shadowOffsetY: 0
+				},
 				label: {
 					show: true,
 					position: 'top',
 					fontSize: seriesLabelFontSize,
+					color: '#ffffff',
 					formatter: function(params) {
 						if (params.dataIndex === 5) {
 							return '{highlight|' + params.value + '%}'
@@ -2063,7 +2155,6 @@ onBeforeUnmount(() => {
 	width: 100%;
 	height: 100%;
 	position: relative;
-	padding: 20px;
 	box-sizing: border-box;
 }
 
@@ -2085,21 +2176,18 @@ onBeforeUnmount(() => {
 	bottom: 120px;
 	left: 50%;
 	width: 1px;
-	background-color: #e0e0e0;
+	background-color: #292929;
 	transform: translateX(-50%);
 	z-index: 1;
 }
 
-.chart-item {
-	background: rgba(255, 255, 255, 0.98);
+/* .chart-item {
 	border-radius: 15px;
 	padding: 20px;
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-	border: 1px solid rgba(255, 255, 255, 0.3);
 	overflow: hidden;
 	position: relative;
 	z-index: 2;
-}
+} */
 
 .charts-grid-two .chart-item {
 	padding: 0;
