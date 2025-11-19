@@ -79,45 +79,57 @@
 			</div>
 
 			<!-- 页面4: 左侧图表7，右侧文字 -->
-			<div v-if="currentPage === 4" class="charts-grid charts-grid-mixed">
+			<div v-if="currentPage === 4" class="charts-grid charts-grid-mixed charts-grid-two">
 				<!-- 关键绩效指标 -->
 				<div class="chart-item">
 					<div ref="chart7NewRef" class="modal-chart"></div>
 				</div>
 				<!-- 投资亮点 -->
-				<div class="text-content">
-					<h2 class="text-title">Investment Highlights</h2>
-					<div class="text-body investment-highlights">
-						<div class="highlight-section">
-							<h3><strong>1. Extremely High Profitability</strong></h3>
-							<ul>
-								<li>a. ​Stable 88.6% gross margin across three years​</li>
-								<li>b. ​Total net profit reaches €226.23 million in three years​</li>
-							</ul>
+				<div class="text-content-dark">
+					<h2 class="text-title-dark">Investment Highlights</h2>
+					<div class="investment-cards">
+						<div class="highlight-card">
+							<div class="highlight-number">01</div>
+							<div class="highlight-content">
+								<h3 class="highlight-title">Extremely High Profitability</h3>
+								<div class="highlight-items">
+									<div class="highlight-item">a. ​Stable 88.6% gross margin across three years​</div>
+									<div class="highlight-item">b. ​Total net profit reaches €226.23 million in three years​</div>
+								</div>
+							</div>
 						</div>
 
-						<div class="highlight-section">
-							<h3><strong>2. Outstanding Investment Returns</strong></h3>
-							<ul>
-								<li>a. ​First-year ROI reaches 727.3%, recovering initial investment multiple times​</li>
-								<li>b. ​Cumulative ROI exceeds 45x by the third year​</li>
-							</ul>
+						<div class="highlight-card">
+							<div class="highlight-number">02</div>
+							<div class="highlight-content">
+								<h3 class="highlight-title">Outstanding Investment Returns</h3>
+								<div class="highlight-items">
+									<div class="highlight-item">a. ​First-year ROI reaches 727.3%, recovering initial investment multiple times​</div>
+									<div class="highlight-item">b. ​Cumulative ROI exceeds 45x by the third year​</div>
+								</div>
+							</div>
 						</div>
 
-						<div class="highlight-section">
-							<h3><strong>3. Strong Cash Flow Generation</strong></h3>
-							<ul>
-								<li>a. ​Operating cash flow reaches €227.1 million in three years​</li>
-								<li>b. ​Massive positive cash flow from Year 1​</li>
-							</ul>
+						<div class="highlight-card">
+							<div class="highlight-number">03</div>
+							<div class="highlight-content">
+								<h3 class="highlight-title">Strong Cash Flow Generation</h3>
+								<div class="highlight-items">
+									<div class="highlight-item">a. ​Operating cash flow reaches €227.1 million in three years​</div>
+									<div class="highlight-item">b. ​Massive positive cash flow from Year 1​</div>
+								</div>
+							</div>
 						</div>
 
-						<div class="highlight-section">
-							<h3><strong>4. Significant Growth Potential</strong></h3>
-							<ul>
-								<li>a. ​Revenue grows 3x in three years, reaching €151.2M</li>
-								<li>b. ​Enhanced economies of scale demonstrated</li>
-							</ul>
+						<div class="highlight-card">
+							<div class="highlight-number">04</div>
+							<div class="highlight-content">
+								<h3 class="highlight-title">Significant Growth Potential</h3>
+								<div class="highlight-items">
+									<div class="highlight-item">a. ​Revenue grows 3x in three years, reaching €151.2M</div>
+									<div class="highlight-item">b. ​Enhanced economies of scale demonstrated</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -254,10 +266,10 @@ function getSeriesLabelFontSize() {
 
 function getLegendFontSize() {
 	const screenWidth = window.innerWidth
-	if (screenWidth <= 1440) return 10
-	if (screenWidth <= 1680) return 10
-	if (screenWidth <= 1920) return 11
-	return 12
+	if (screenWidth <= 1440) return 12
+	if (screenWidth <= 1680) return 12
+	if (screenWidth <= 1920) return 14
+	return 16
 }
 
 function getGraphicFontSize() {
@@ -1357,15 +1369,15 @@ function renderChart4New() {
 						x2: 0,
 						y2: 0,
 						colorStops: [
-						{ offset: 1, color: '#FFE045' },
-						{ offset: 0, color: 'rgba(255, 224, 69, 0.1)' }
+						{ offset: 1, color: '#ffec8e' },
+						{ offset: 0, color: 'rgba(255, 236, 142, 0.1)' }
 						]
 					},
-					borderColor: '#FFE045',
+					borderColor: '#ffec8e',
 					borderWidth: 2,
 					borderRadius: [2, 2, 0, 0],
 					shadowBlur: 15,
-					shadowColor: 'rgba(255, 224, 69, 0.5)',
+					shadowColor: 'rgba(255, 236, 142, 0.5)',
 					shadowOffsetY: 0
 				}
 			},
@@ -1576,15 +1588,15 @@ function renderChart5New() {
 						x2: 0,
 						y2: 0,
 						colorStops: [
-						{ offset: 1, color: '#0099CC' },
-						{ offset: 0, color: 'rgba(0, 153, 204, 0.1)' }
+						{ offset: 1, color: '#45D9D8' },
+						{ offset: 0, color: 'rgba(224, 247, 247, 0.1)' }
 						]
 					},
-					borderColor: '#0099CC',
+					borderColor: '#45D9D8',
 					borderWidth: 2,
 					borderRadius: [2, 2, 0, 0],
 					shadowBlur: 15,
-					shadowColor: 'rgba(0, 153, 204, 0.5)',
+					shadowColor: 'rgba(69, 217, 216, 0.5)',
 					shadowOffsetY: 0
 				},
 				barWidth: '20%',
@@ -1641,13 +1653,13 @@ function renderChart5New() {
 				yAxisIndex: 1,
 				data: [727.3, 1499.7, 2297.6],
 				lineStyle: {
-					color: '#0098cb',
+					color: '#45D9D8',
 					width: 2,
 					shadowBlur: 6,
 					shadowColor: 'rgba(34, 211, 238, 0.3)',
 				},
 				itemStyle: {
-					color: '#0098cb',
+					color: '#45D9D8',
 				},
 				symbol: 'circle',
 				symbolSize: 8,
@@ -1656,7 +1668,7 @@ function renderChart5New() {
 					position: 'bottom',
 					fontSize: seriesLabelFontSize,
 					formatter: '{c}%',
-					color: '#0098cb',
+					color: '#45D9D8',
 					fontWeight: 'bold',
 					offset: [30, 2],
 					textShadowColor: 'rgba(0, 0, 0, 0.6)',
@@ -2413,7 +2425,7 @@ onBeforeUnmount(() => {
 	bottom: 120px;
 	left: 50%;
 	width: 1px;
-	background-color: #292929;
+	background-color: #3f3f3f;
 	transform: translateX(-50%);
 	z-index: 1;
 }
@@ -2450,6 +2462,12 @@ onBeforeUnmount(() => {
 	max-height: 100%;
 	margin: 60px 100px 60px 0;
 }
+
+.text-content-dark {
+	overflow-y: auto;
+	max-height: 100%;
+	margin: 25px 100px 60px 160px;
+}
 /* 自定义滚动条样式 - 用于核心需求内容区域 */
 .text-content::-webkit-scrollbar {
   width: 6px;
@@ -2482,6 +2500,14 @@ onBeforeUnmount(() => {
 	text-align: center;
 }
 
+.text-title-dark {
+	font-size: 24px;
+	font-weight: bold;
+	color: #ffffff;
+	margin-bottom: 62px;
+	text-align: center;
+}
+
 .text-body {
 	font-size: 18px;
 	line-height: 1.8;
@@ -2509,6 +2535,58 @@ onBeforeUnmount(() => {
 	margin-bottom: 10px;
 	color: #34495e;
 	padding-left: 8px;
+}
+
+.investment-cards {
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+	height: calc(100% - 98px);
+}
+
+.highlight-card {
+	flex: 1;
+	display: flex;
+	align-items: center;
+	padding: 20px 60px;
+	border: 1px solid rgba(255, 255, 255, 1);
+	border-radius: 8px;
+	background: rgba(0, 0, 0, 0.1);
+}
+
+.highlight-number {
+	font-size: 80px;
+	font-weight: 300;
+	color: #101828;
+	margin-right: 60px;
+	line-height: 1;
+	min-width: 80px;
+	text-align: center;
+	-webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);  /* 描边宽度 + 白色 */
+}
+
+.highlight-content {
+	flex: 1;
+}
+
+.highlight-title {
+	font-size: 24px;
+	font-weight: bold;
+	color: #ffffff;
+	margin-bottom: 12px;
+	line-height: 1.3;
+}
+
+.highlight-items {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.highlight-item {
+	font-size: 18px;
+	color: rgba(255, 255, 255, 0.9);
+	line-height: 1.5;
 }
 
 @keyframes fadeIn {
