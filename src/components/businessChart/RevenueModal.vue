@@ -799,8 +799,8 @@ function renderChart3New() {
 				axisLine: { show: false },
 				axisTick: { show: false },
 				splitLine: { show: false },
-				min: 1000000,
-				max: 110000000,
+				min: 10000000,
+				max: 260000000,
 			}
 		],
 		series: [
@@ -808,7 +808,7 @@ function renderChart3New() {
 				name: 'Product 1 Sales Volume',
 				type: 'bar',
 				yAxisIndex: 0,
-				data: [40, 120, 248],
+				data: [120, 240, 360],
 				itemStyle: {
 					color: {
 						type: 'linear',
@@ -842,7 +842,7 @@ function renderChart3New() {
 				name: 'Product 2 Sales Volume',
 				type: 'bar',
 				yAxisIndex: 0,
-				data: [60, 180, 371],
+				data: [180, 360, 540],
 				itemStyle: {
 					color: {
 						type: 'linear',
@@ -876,7 +876,7 @@ function renderChart3New() {
 				name: 'Product 1 Sales Revenue',
 				type: 'line',
 				yAxisIndex: 1,
-				data: [4800000, 14400000, 29714286],
+				data: [14400000, 28800000, 43200000],
 				lineStyle: {
 					color: '#66DFD8',
 					width: 2,
@@ -906,7 +906,7 @@ function renderChart3New() {
 				name: 'Product 2 Sales Revenue',
 				type: 'line',
 				yAxisIndex: 1,
-				data: [12000000, 36000000, 74285714],
+				data: [36000000, 72000000, 108000000],
 				lineStyle: {
 					color: '#ffffff',
 					width: 2,
@@ -936,7 +936,7 @@ function renderChart3New() {
 				name: 'Total Revenue',
 				type: 'line',
 				yAxisIndex: 1,
-				data: [16800000, 50400000, 104000000],
+				data: [50400000, 100800000, 151200000],
 				lineStyle: {
 					color: '#FF6B6B',
 					width: 2,
