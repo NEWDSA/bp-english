@@ -878,12 +878,12 @@ function renderChart3New() {
 				yAxisIndex: 1,
 				data: [14400000, 28800000, 43200000],
 				lineStyle: {
-					color: '#66DFD8',
+					color: '#0098cb',
 					width: 2,
 					shadowBlur: 6,
 					shadowColor: 'rgba(34, 211, 238, 0.3)',
 				},
-				itemStyle: { color: '#66DFD8' },
+				itemStyle: { color: '#0098cb' },
 				symbol: 'circle',
 				symbolSize: 6,
 				label: {
@@ -894,7 +894,7 @@ function renderChart3New() {
 						return '€' + (params.value / 1000000).toFixed(1) + 'M'
 					},
 					offset: [30, -2],
-					color: '#66DFD8',
+					color: '#0098cb',
 					fontWeight: 'bold',
 					textShadowColor: 'rgba(0, 0, 0, 0.6)',
 					textShadowBlur: 4,
@@ -908,12 +908,12 @@ function renderChart3New() {
 				yAxisIndex: 1,
 				data: [36000000, 72000000, 108000000],
 				lineStyle: {
-					color: '#ffffff',
+					color: '#fdc079',
 					width: 2,
 					shadowBlur: 6,
 					shadowColor: 'rgba(34, 211, 238, 0.3)',
 				},
-				itemStyle: { color: '#ffffff' },
+				itemStyle: { color: '#fdc079' },
 				symbol: 'circle',
 				symbolSize: 6,
 				label: {
@@ -924,7 +924,7 @@ function renderChart3New() {
 						return '€' + (params.value / 1000000).toFixed(1) + 'M'
 					},
 					offset: [40, -4],
-					color: '#ffffff',
+					color: '#fdc079',
 					fontWeight: 'bold',
 					textShadowColor: 'rgba(0, 0, 0, 0.6)',
 					textShadowBlur: 4,
@@ -1641,13 +1641,13 @@ function renderChart5New() {
 				yAxisIndex: 1,
 				data: [727.3, 1499.7, 2297.6],
 				lineStyle: {
-					color: '#FF6B6B',
+					color: '#0098cb',
 					width: 2,
 					shadowBlur: 6,
 					shadowColor: 'rgba(34, 211, 238, 0.3)',
 				},
 				itemStyle: {
-					color: '#FF6B6B',
+					color: '#0098cb',
 				},
 				symbol: 'circle',
 				symbolSize: 8,
@@ -1656,7 +1656,7 @@ function renderChart5New() {
 					position: 'bottom',
 					fontSize: seriesLabelFontSize,
 					formatter: '{c}%',
-					color: '#FF6B6B',
+					color: '#0098cb',
 					fontWeight: 'bold',
 					offset: [30, 2],
 					textShadowColor: 'rgba(0, 0, 0, 0.6)',
@@ -1671,13 +1671,13 @@ function renderChart5New() {
 				yAxisIndex: 1,
 				data: [727.3, 2226.9, 4524.5],
 				lineStyle: {
-					color: '#66DFD8',
+					color: '#fdc079',
 					width: 2,
 					shadowBlur: 6,
 					shadowColor: 'rgba(34, 211, 238, 0.3)',
 				},
 				itemStyle: {
-					color: '#66DFD8',
+					color: '#fdc079',
 				},
 				symbol: 'circle',
 				symbolSize: 8,
@@ -1686,7 +1686,7 @@ function renderChart5New() {
 					position: 'top',
 					fontSize: seriesLabelFontSize,
 					formatter: '{c}%',
-					color: '#66DFD8',
+					color: '#fdc079',
 					offset: [-10, -2],
 					fontWeight: 'bold',
 					textShadowColor: 'rgba(0, 0, 0, 0.6)',
@@ -1791,7 +1791,7 @@ function renderChart6New() {
 				name: 'Cash Flow (€)',
 				position: 'left',
 				min: 0,
-				max: 90000000,
+				max: 120000000,
 				axisLabel: {
 					formatter: function(value) {
 						return (value / 1000000).toFixed(0) + 'M'
@@ -1812,7 +1812,7 @@ function renderChart6New() {
 				name: 'Cumulative (€)',
 				position: 'right',
 				min: 0,
-				max: 130000000,
+				max: 250000000,
 				axisLabel: {
 					formatter: function(value) {
 						return (value / 1000000).toFixed(0) + 'M'
@@ -1836,7 +1836,7 @@ function renderChart6New() {
 				type: 'bar',
 				stack: 'cashflow',
 				yAxisIndex: 0,
-				data: [11173333, 36238333, 78208334],
+				data: [36363333, 74983333, 114878334],
 				itemStyle: {
 					color: {
 						type: 'linear',
@@ -1904,7 +1904,7 @@ function renderChart6New() {
 					position: 'top',
 					fontSize: seriesLabelFontSize,
 					formatter: function(params) {
-						const stackedTotal = [11173333, 36238333, 78208334]
+						const stackedTotal = [36655000, 75275000, 115170000]
 						return '€' + (stackedTotal[params.dataIndex] / 1000000).toFixed(1) + 'M'
 					},
 					color: '#ffffff',
@@ -1915,7 +1915,7 @@ function renderChart6New() {
 				name: 'Operating Cash Flow',
 				type: 'bar',
 				yAxisIndex: 0,
-				data: [11465000, 36530000, 78500000],
+				data: [36655000, 75275000, 115170000],
 				itemStyle: {
 					color: {
 						type: 'linear',
@@ -1950,7 +1950,7 @@ function renderChart6New() {
 				name: 'Cumulative Cash Flow',
 				type: 'line',
 				yAxisIndex: 1,
-				data: [11465000, 47995000, 126495000],
+				data: [36655000, 111930000, 227100000],
 				itemStyle: {
 					color: '#FF6B6B'
 				},
