@@ -765,7 +765,7 @@ function renderChart3New() {
 		yAxis: [
 			{
 				type: 'value',
-				name: 'Sales Volume',
+				name: 'Sales Volume(ships)',
 				position: 'left',
 				axisLabel: {
 					formatter: '{value}',
@@ -833,7 +833,7 @@ function renderChart3New() {
 					show: true,
 					position: 'top',
 					fontSize: seriesLabelFontSize,
-					formatter: '{c}',
+					formatter: '{c}(ships)',
 					offset: [0, -12],
 					color: '#ffffff',
 				}
@@ -867,7 +867,7 @@ function renderChart3New() {
 					show: true,
 					position: 'top',
 					fontSize: seriesLabelFontSize,
-					formatter: '{c}',
+					formatter: '{c}(ships)',
 					offset: [0, -12],
 					color: '#ffffff',
 				}
