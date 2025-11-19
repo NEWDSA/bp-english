@@ -91,32 +91,32 @@
 						<div class="highlight-section">
 							<h3><strong>1. Extremely High Profitability</strong></h3>
 							<ul>
-								<li>a. Stable 88.6% gross margin across three years</li>
-								<li>b. Total net profit reaches €125.62 million in three years</li>
+								<li>a. ​Stable 88.6% gross margin across three years​</li>
+								<li>b. ​Total net profit reaches €226.23 million in three years​</li>
 							</ul>
 						</div>
 
 						<div class="highlight-section">
 							<h3><strong>2. Outstanding Investment Returns</strong></h3>
 							<ul>
-								<li>a. First-year ROI reaches 223.5%, recovering initial investment</li>
-								<li>b. Cumulative ROI exceeds 25x by the third year</li>
+								<li>a. ​First-year ROI reaches 727.3%, recovering initial investment multiple times​</li>
+								<li>b. ​Cumulative ROI exceeds 45x by the third year​</li>
 							</ul>
 						</div>
 
 						<div class="highlight-section">
 							<h3><strong>3. Strong Cash Flow Generation</strong></h3>
 							<ul>
-								<li>a. Operating cash flow reaches €126.5 million in three years</li>
-								<li>b. Positive cash flow from the first year</li>
+								<li>a. ​Operating cash flow reaches €227.1 million in three years​</li>
+								<li>b. ​Massive positive cash flow from Year 1​</li>
 							</ul>
 						</div>
 
 						<div class="highlight-section">
 							<h3><strong>4. Significant Growth Potential</strong></h3>
 							<ul>
-								<li>a. Revenue grows exponentially from €16.8M to €104M</li>
-								<li>b. Clear economies of scale demonstrated</li>
+								<li>a. ​Revenue grows 3x in three years, reaching €151.2M</li>
+								<li>b. ​Enhanced economies of scale demonstrated</li>
 							</ul>
 						</div>
 					</div>
