@@ -1471,8 +1471,8 @@ function renderChart5New() {
 		title: {
 			text: 'Investment Return Analysis',
 			subtext: 'Based on €5M Total Investment',
-			textStyle: { fontSize: titleFontSize, color: '#333333' },
-			subtextStyle: { fontSize: subtitleFontSize, color: '#666' },
+			textStyle: { fontSize: titleFontSize, color: '#ffffff' },
+			subtextStyle: { fontSize: subtitleFontSize, color: '#ffffff' },
 			top: screenWidth <= 1280 ? '5%' : '3%',
 			left: 'center'
 		},
@@ -1494,7 +1494,7 @@ function renderChart5New() {
 		legend: {
 			data: ['Annual Net Profit', 'Cumulative Net Profit', 'Annual ROI', 'Cumulative ROI'],
 			bottom: '5%',
-			textStyle: { fontSize: legendFontSize },
+			textStyle: { fontSize: legendFontSize, color: '#ffffff' },
 			itemGap: 15
 		},
 		grid: {
@@ -1507,8 +1507,10 @@ function renderChart5New() {
 		xAxis: {
 			type: 'category',
 			data: ['2026', '2027', '2028'],
-			axisLabel: { fontSize: axisLabelFontSize, color: '#666' },
-			axisLine: { lineStyle: { color: '#ddd' } }
+			axisLabel: { fontSize: axisLabelFontSize, color: '#ffffff',margin: 20 },
+			axisLine: { show: false },
+			axisTick: { show: false },
+			splitLine: { show: false }
 		},
 		yAxis: [
 			{
@@ -1520,14 +1522,15 @@ function renderChart5New() {
 						return '€' + (value / 1000000).toFixed(0) + 'M'
 					},
 					fontSize: axisLabelFontSize,
-					color: '#666'
+					color: '#ffffff'
 				},
 				nameTextStyle: {
 					fontSize: axisLabelFontSize,
 					padding: [0, 20, 10, 0]
 				},
-				axisLine: { lineStyle: { color: '#00d4ff' } },
-				splitLine: { lineStyle: { color: '#f0f0f0' } }
+				axisLine: { show: false },
+				axisTick: { show: false },
+				splitLine: { show: false }
 			},
 			{
 				type: 'value',
@@ -1538,13 +1541,15 @@ function renderChart5New() {
 				axisLabel: {
 					formatter: '{value}%',
 					fontSize: axisLabelFontSize,
-					color: '#666'
+					color: '#ffffff'
 				},
 				nameTextStyle: {
 					fontSize: axisLabelFontSize,
-					padding: [0, 0, 10, 60]
+					padding: [0, 0, 10, 60],
+					color: '#fe7878',
 				},
-				axisLine: { lineStyle: { color: '#FF6B6B' } },
+				axisLine: { show: false },
+				axisTick: { show: false },
 				splitLine: { show: false }
 			}
 		],
@@ -1555,10 +1560,23 @@ function renderChart5New() {
 				yAxisIndex: 0,
 				data: [11173333, 36238333, 78208334],
 				itemStyle: {
-					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-						{ offset: 0, color: '#00d4ff' },
-						{ offset: 1, color: '#0099cc' }
-					])
+					color: {
+						type: 'linear',
+						x: 0,
+						y: 1,
+						x2: 0,
+						y2: 0,
+						colorStops: [
+						{ offset: 1, color: '#0099CC' },
+						{ offset: 0, color: 'rgba(0, 153, 204, 0.1)' }
+						]
+					},
+					borderColor: '#0099CC',
+					borderWidth: 2,
+					borderRadius: [2, 2, 0, 0],
+					shadowBlur: 15,
+					shadowColor: 'rgba(0, 153, 204, 0.5)',
+					shadowOffsetY: 0
 				},
 				barWidth: '20%',
 				label: {
@@ -1578,10 +1596,23 @@ function renderChart5New() {
 				yAxisIndex: 0,
 				data: [11173333, 47411666, 125620000],
 				itemStyle: {
-					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-						{ offset: 0, color: '#67E0DC' },
-						{ offset: 1, color: '#4db3aa' }
-					])
+					color: {
+						type: 'linear',
+						x: 0,
+						y: 1,
+						x2: 0,
+						y2: 0,
+						colorStops: [
+						{ offset: 1, color: '#FFC27A' },
+						{ offset: 0, color: 'rgba(255, 194, 122, 0.1)' }
+						]
+					},
+					borderColor: '#FFC27A',
+					borderWidth: 2,
+					borderRadius: [2, 2, 0, 0],
+					shadowBlur: 15,
+					shadowColor: 'rgba(255, 194, 122, 0.5)',
+					shadowOffsetY: 0
 				},
 				barWidth: '20%',
 				label: {
@@ -1602,7 +1633,9 @@ function renderChart5New() {
 				data: [223.5, 724.8, 1564.2],
 				lineStyle: {
 					color: '#FF6B6B',
-					width: 4
+					width: 2,
+					shadowBlur: 6,
+					shadowColor: 'rgba(34, 211, 238, 0.3)',
 				},
 				itemStyle: {
 					color: '#FF6B6B',
@@ -1627,23 +1660,24 @@ function renderChart5New() {
 				yAxisIndex: 1,
 				data: [223.5, 948.2, 2512.4],
 				lineStyle: {
-					color: '#FFC107',
-					width: 4,
-					type: 'dashed'
+					color: '#66DFD8',
+					width: 2,
+					shadowBlur: 6,
+					shadowColor: 'rgba(34, 211, 238, 0.3)',
 				},
 				itemStyle: {
-					color: '#FFC107',
+					color: '#66DFD8',
 					borderWidth: 3,
 					borderColor: '#fff'
 				},
-				symbol: 'diamond',
+				symbol: 'circle',
 				symbolSize: 8,
 				label: {
 					show: true,
 					position: 'top',
 					fontSize: seriesLabelFontSize,
 					formatter: '{c}%',
-					color: '#FFC107',
+					color: '#66DFD8',
 					fontWeight: 'bold',
 					offset: [-10, -2]
 				}
@@ -1654,12 +1688,21 @@ function renderChart5New() {
 			left: 'center',
 			bottom: '1%',
 			style: {
-				text: 'Investment Amount: €5M | Cumulative Return Over Three Years: €125.6M | Total Return Rate: 2512.4%',
+				text: '{white|Investment Amount: €5M | Cumulative Return Over Three Years: €125.6M | Total Return Rate: 2512.4%}',
 				fontSize: axisLabelFontSize,
-				color: '#666',
-				backgroundColor: '#f8f9fa',
+				fill: '#ffffff',
+				color: '#ffffff',
+				textFill: '#ffffff',
+				backgroundColor: 'rgba(255, 255, 255, 0.1)',
 				padding: [8, 16],
-				borderRadius: 8
+				borderRadius: 8,
+				rich: {
+					white: {
+						color: '#ffffff',
+						fill: 'rgba(255, 255, 255, 0.7)',
+						fontSize: axisLabelFontSize
+					}
+				}
 			}
 		}
 	}
@@ -1686,7 +1729,7 @@ function renderChart6New() {
 	const option = {
 		title: {
 			text: 'Cash Flow Analysis',
-			textStyle: { fontSize: titleFontSize, color: '#333333' },
+			textStyle: { fontSize: titleFontSize, color: '#ffffff' },
 			top: screenWidth <= 1280 ? '5%' : '3%',
 			left: 'center'
 		},
@@ -1710,9 +1753,9 @@ function renderChart6New() {
 		},
 		legend: {
 			data: ['Pre-tax Net Profit', 'Add: Non-cash Amortization', 'Operating Cash Flow', 'Cumulative Cash Flow'],
-			bottom: 5,
-			textStyle: { fontSize: legendFontSize },
-			itemGap: 10
+			bottom: 40,
+			textStyle: { fontSize: legendFontSize, color: '#ffffff' },
+			itemGap: 15
 		},
 		grid: {
 			left: screenWidth <= 1280 ? '8%' : '8%',
@@ -1724,8 +1767,10 @@ function renderChart6New() {
 		xAxis: {
 			type: 'category',
 			data: ['2026', '2027', '2028'],
-			axisLabel: { fontSize: axisLabelFontSize, color: '#666' },
-			axisLine: { lineStyle: { color: '#ddd' } }
+			axisLabel: { fontSize: axisLabelFontSize, color: '#ffffff', margin: 20 },
+			axisLine: { show: false },
+			axisTick: { show: false },
+			splitLine: { show: false }
 		},
 		yAxis: [
 			{
@@ -1739,15 +1784,15 @@ function renderChart6New() {
 						return (value / 1000000).toFixed(0) + 'M'
 					},
 					fontSize: axisLabelFontSize,
-					color: '#666'
+					color: '#ffffff'
 				},
 				nameTextStyle: {
 					fontSize: axisLabelFontSize,
 					padding: [0, 0, 10, 0],
-					color: '#00d4ff'
 				},
-				axisLine: { lineStyle: { color: '#4CAF50' } },
-				splitLine: { lineStyle: { color: '#f0f0f0' } }
+				axisLine: { show: false },
+				axisTick: { show: false },
+				splitLine: { show: false }
 			},
 			{
 				type: 'value',
@@ -1760,13 +1805,15 @@ function renderChart6New() {
 						return (value / 1000000).toFixed(0) + 'M'
 					},
 					fontSize: axisLabelFontSize,
-					color: '#666'
+					color: '#ffffff'
 				},
 				nameTextStyle: {
 					fontSize: axisLabelFontSize,
-					padding: [0, 0, 10, 0]
+					padding: [0, 0, 10, 0],
+					color: '#fe7878',
 				},
-				axisLine: { lineStyle: { color: '#FF6B6B' } },
+				axisLine: { show: false },
+				axisTick: { show: false },
 				splitLine: { show: false }
 			}
 		],
@@ -1778,10 +1825,23 @@ function renderChart6New() {
 				yAxisIndex: 0,
 				data: [11173333, 36238333, 78208334],
 				itemStyle: {
-					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-						{ offset: 0, color: '#00d4ff' },
-						{ offset: 1, color: '#0099cc' }
-					])
+					color: {
+						type: 'linear',
+						x: 0,
+						y: 1,
+						x2: 0,
+						y2: 0,
+						colorStops: [
+						{ offset: 1, color: '#45D9D8' },
+						{ offset: 0, color: 'rgba(224, 247, 247, 0.1)' }
+						]
+					},
+					borderColor: '#45D9D8',
+					borderWidth: 2,
+					borderRadius: [0, 0, 0, 0],
+					shadowBlur: 15,
+					shadowColor: 'rgba(69, 217, 216, 0.5)',
+					shadowOffsetY: 0
 				},
 				barWidth: '20%',
 				label: {
@@ -1796,8 +1856,8 @@ function renderChart6New() {
 				data: [291667, 291667, 291666],
 				itemStyle: {
 					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-						{ offset: 0, color: '#67E0DC' },
-						{ offset: 1, color: '#4db3aa' }
+						{ offset: 0, color: '#0099CC' },
+						{ offset: 1, color: '#0099CC' }
 					])
 				},
 				barWidth: '20%',
@@ -1844,10 +1904,23 @@ function renderChart6New() {
 				yAxisIndex: 0,
 				data: [11465000, 36530000, 78500000],
 				itemStyle: {
-					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-						{ offset: 0, color: '#ffc27a' },
-						{ offset: 1, color: '#ffc27a' }
-					])
+					color: {
+						type: 'linear',
+						x: 0,
+						y: 1,
+						x2: 0,
+						y2: 0,
+						colorStops: [
+						{ offset: 1, color: '#FFC27A' },
+						{ offset: 0, color: 'rgba(255, 194, 122, 0.1)' }
+						]
+					},
+					borderColor: '#FFC27A',
+					borderWidth: 2,
+					borderRadius: [2, 2, 0, 0],
+					shadowBlur: 15,
+					shadowColor: 'rgba(255, 194, 122, 0.5)',
+					shadowOffsetY: 0
 				},
 				barWidth: '20%',
 				label: {
@@ -1910,7 +1983,7 @@ function renderChart7New() {
 	const option = {
 		title: {
 			text: 'Key Performance Indicators',
-			textStyle: { fontSize: titleFontSize, color: '#333333' },
+			textStyle: { fontSize: titleFontSize, color: '#ffffff' },
 			top: screenWidth <= 1280 ? '5%' : '3%',
 			left: 'center'
 		},
@@ -1932,7 +2005,7 @@ function renderChart7New() {
 		legend: {
 			data: ['Gross Margin', 'Contribution Margin Ratio', 'Net Profit Margin', 'Annual ROI'],
 			bottom: 5,
-			textStyle: { fontSize: legendFontSize },
+			textStyle: { fontSize: legendFontSize, color: '#ffffff' },
 			itemGap: 15
 		},
 		grid: {
@@ -1945,7 +2018,7 @@ function renderChart7New() {
 		xAxis: {
 			type: 'category',
 			data: ['2026', '2027', '2028'],
-			axisLabel: { fontSize: axisLabelFontSize, color: '#666' },
+			axisLabel: { fontSize: axisLabelFontSize, color: '#ffffff' },
 			axisLine: { lineStyle: { color: '#ddd' } }
 		},
 		yAxis: [
@@ -1958,7 +2031,7 @@ function renderChart7New() {
 				axisLabel: {
 					formatter: '{value}%',
 					fontSize: axisLabelFontSize,
-					color: '#666666'
+					color: '#ffffff'
 				},
 				nameTextStyle: {
 					fontSize: axisLabelFontSize,
@@ -1976,7 +2049,7 @@ function renderChart7New() {
 				axisLabel: {
 					formatter: '{value}%',
 					fontSize: axisLabelFontSize,
-					color: '#666666'
+					color: '#ffffff'
 				},
 				nameGap: 10,
 				nameTextStyle: {
@@ -2073,7 +2146,7 @@ function renderChart7New() {
 					position: 'bottom',
 					fontSize: seriesLabelFontSize,
 					formatter: '{c}%',
-					color: '#FF6B6B',
+					color: '#ffffff',
 					offset: [30, 16]
 				}
 			}
@@ -2308,6 +2381,7 @@ onBeforeUnmount(() => {
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 	overflow-y: auto;
 	max-height: 100%;
+	margin: 60px 100px 60px 0;
 }
 
 .text-title {
