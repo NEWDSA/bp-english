@@ -997,10 +997,10 @@ function renderChart4New() {
 			trigger: 'axis',
 			formatter: function(params) {
 				let result = params[0].axisValue + '<br/>'
-				const totalRevenueData = [16800000, 50400000, 104000000]
-				const grossProfitData = [14890000, 44670000, 92100000]
-				const contributionMarginData = [11965000, 37155000, 79250000]
-				const ebitData = [11756667, 36821667, 78791666]
+				const totalRevenueData = [50400000, 100800000, 151200000]
+				const grossProfitData = [44670000, 89340000, 134010000]
+				const contributionMarginData = [37155000, 75900000, 115920000]
+				const ebitData = [36655000, 75275000, 115170000]
 				const yearIndex = params[0].dataIndex
 
 				params.forEach(function(item) {
@@ -1051,7 +1051,7 @@ function renderChart4New() {
 				name: 'Amount (€)',
 				position: 'left',
 				min: 0,
-				max: 110000000,
+				max: 160000000,
 				axisLabel: {
 					formatter: function(value) {
 						return '€' + (value / 1000000).toFixed(0) + 'M'
@@ -1071,7 +1071,7 @@ function renderChart4New() {
 				type: 'value',
 				name: 'Gross Margin (%)',
 				position: 'right',
-				min: 85,
+				min: 80,
 				max: 92,
 				axisLabel: {
 					formatter: '{value}%',
@@ -1094,7 +1094,7 @@ function renderChart4New() {
 				type: 'bar',
 				stack: 'revenue',
 				yAxisIndex: 0,
-				data: [14890000, 44670000, 92100000],
+				data: [44670000, 89340000, 134010000],
 				itemStyle: {
 					color: {
 						type: 'linear',
@@ -1124,7 +1124,7 @@ function renderChart4New() {
 				type: 'bar',
 				stack: 'revenue',
 				yAxisIndex: 0,
-				data: [1910000, 5730000, 11900000],
+				data: [5730000, 11460000, 17190000],
 				itemStyle: {
 					color: {
 						type: 'pattern',
@@ -1166,7 +1166,7 @@ function renderChart4New() {
 					position: 'top',
 					fontSize: seriesLabelFontSize,
 					formatter: function(params) {
-						const totalRevenueData = [16800000, 50400000, 104000000]
+						const totalRevenueData = [50400000, 100800000, 151200000]
 						return '€' + (totalRevenueData[params.dataIndex] / 1000000).toFixed(1) + 'M'
 					},
 					color: '#ffffff',
@@ -1178,7 +1178,7 @@ function renderChart4New() {
 				type: 'bar',
 				stack: 'profit',
 				yAxisIndex: 0,
-				data: [11965000, 37155000, 79250000],
+				data: [37155000, 75900000, 115920000],
 				itemStyle: {
 					color: {
 						type: 'linear',
@@ -1208,7 +1208,7 @@ function renderChart4New() {
 				type: 'bar',
 				stack: 'profit',
 				yAxisIndex: 0,
-				data: [2925000, 7515000, 12850000],
+				data: [7515000, 13440000, 18090000],
 				itemStyle: {
 					color: {
 						type: 'pattern',
@@ -1222,7 +1222,7 @@ function renderChart4New() {
 					position: 'inside',
 					fontSize: 12,
 					formatter: function(params) {
-						const grossProfitData = [2925000, 7515000, 12850000]
+						const grossProfitData = [7515000, 13440000, 18090000]
 						return '€' + (grossProfitData[params.dataIndex] / 1000000).toFixed(1) + 'M'
 					},
 					color: '#ffffff',
@@ -1251,7 +1251,7 @@ function renderChart4New() {
 					position: 'top',
 					fontSize: seriesLabelFontSize,
 					formatter: function(params) {
-						const totalRevenueData = [14890000, 44670000, 92100000]
+						const totalRevenueData = [44670000, 89340000, 134010000]
 						return '€' + (totalRevenueData[params.dataIndex] / 1000000).toFixed(1) + 'M'
 					},
 					color: '#ffffff',
@@ -1263,7 +1263,7 @@ function renderChart4New() {
 				type: 'bar',
 				stack: 'margin',
 				yAxisIndex: 0,
-				data: [11465000, 36530000, 78500000],
+				data: [36655000, 75275000, 115170000],
 				itemStyle: {
 					color: {
 						type: 'linear',
@@ -1336,7 +1336,7 @@ function renderChart4New() {
 					position: 'top',
 					fontSize: seriesLabelFontSize,
 					formatter: function(params) {
-						const totalRevenueData = [11965000, 37155000, 79250000]
+						const totalRevenueData = [37155000, 75900000, 115920000]
 						return '€' + (totalRevenueData[params.dataIndex] / 1000000).toFixed(1) + 'M'
 					},
 					color: '#ffffff',
@@ -1348,7 +1348,7 @@ function renderChart4New() {
 				type: 'bar',
 				stack: 'ebit',
 				yAxisIndex: 0,
-				data: [11465000, 36530000, 78500000],
+				data: [36655000, 75275000, 115170000],
 				itemStyle: {
 					color: {
 						type: 'linear',
@@ -1416,7 +1416,7 @@ function renderChart4New() {
 					position: 'top',
 					fontSize: seriesLabelFontSize,
 					formatter: function(params) {
-						const ebitData = [11465000, 36530000, 78500000]
+						const ebitData = [36655000, 75275000, 115170000]
 						return '€' + (ebitData[params.dataIndex] / 1000000).toFixed(1) + 'M'
 					},
 					color: '#ffffff',
