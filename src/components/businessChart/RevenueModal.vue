@@ -1357,20 +1357,16 @@ function renderChart4New() {
 						x2: 0,
 						y2: 0,
 						colorStops: [
-						{ offset: 1, color: '#F2D302' },
-						{ offset: 0, color: 'rgba(242, 211, 2, 0.1)' }
+						{ offset: 1, color: '#FFE045' },
+						{ offset: 0, color: 'rgba(255, 224, 69, 0.1)' }
 						]
 					},
-					borderColor: '#F2D302',
+					borderColor: '#FFE045',
 					borderWidth: 2,
-					borderRadius: [0, 0, 0, 0],
+					borderRadius: [2, 2, 0, 0],
 					shadowBlur: 15,
-					shadowColor: 'rgba(242, 211, 2, 0.5)',
+					shadowColor: 'rgba(255, 224, 69, 0.5)',
 					shadowOffsetY: 0
-				},
-				barWidth: '20%',
-				label: {
-					show: false
 				}
 			},
 			{
@@ -2459,6 +2455,29 @@ onBeforeUnmount(() => {
 	overflow-y: auto;
 	max-height: 100%;
 	margin: 60px 100px 60px 0;
+}
+/* 自定义滚动条样式 - 用于核心需求内容区域 */
+.text-content::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.text-content::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 3px;
+}
+
+.text-content::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+.text-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.text-content::-webkit-scrollbar-corner {
+  background: transparent;
 }
 
 .text-title {
