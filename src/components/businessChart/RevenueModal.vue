@@ -895,6 +895,11 @@ function renderChart3New() {
 					},
 					offset: [30, -2],
 					color: '#66DFD8',
+					fontWeight: 'bold',
+					textShadowColor: 'rgba(0, 0, 0, 0.6)',
+					textShadowBlur: 4,
+					textShadowOffsetX: 1,
+					textShadowOffsetY: 1
 				}
 			},
 			{
@@ -920,6 +925,11 @@ function renderChart3New() {
 					},
 					offset: [40, -4],
 					color: '#ffffff',
+					fontWeight: 'bold',
+					textShadowColor: 'rgba(0, 0, 0, 0.6)',
+					textShadowBlur: 4,
+					textShadowOffsetX: 1,
+					textShadowOffsetY: 1
 				}
 			},
 			{
@@ -946,7 +956,12 @@ function renderChart3New() {
 						return '€' + (params.value / 1000000).toFixed(1) + 'M'
 					},
 					offset: [40, -6],
-					color: '#FF6B6B'
+					color: '#FF6B6B',
+					fontWeight: 'bold',
+					textShadowColor: 'rgba(0, 0, 0, 0.6)',
+					textShadowBlur: 4,
+					textShadowOffsetX: 1,
+					textShadowOffsetY: 1
 				}
 			},
 		]
@@ -1651,7 +1666,11 @@ function renderChart5New() {
 					formatter: '{c}%',
 					color: '#FF6B6B',
 					fontWeight: 'bold',
-					offset: [30, 2]
+					offset: [30, 2],
+					textShadowColor: 'rgba(0, 0, 0, 0.6)',
+					textShadowBlur: 4,
+					textShadowOffsetX: 1,
+					textShadowOffsetY: 1
 				}
 			},
 			{
@@ -1678,8 +1697,12 @@ function renderChart5New() {
 					fontSize: seriesLabelFontSize,
 					formatter: '{c}%',
 					color: '#66DFD8',
+					offset: [-10, -2],
 					fontWeight: 'bold',
-					offset: [-10, -2]
+					textShadowColor: 'rgba(0, 0, 0, 0.6)',
+					textShadowBlur: 4,
+					textShadowOffsetX: 1,
+					textShadowOffsetY: 1
 				}
 			}
 		],
@@ -1955,7 +1978,12 @@ function renderChart6New() {
 						return '€' + (params.value / 1000000).toFixed(1) + 'M'
 					},
 					color: '#FF6B6B',
-					offset: [30, 4]
+					offset: [30, 4],
+					fontWeight: 'bold',
+					textShadowColor: 'rgba(0, 0, 0, 0.6)',
+					textShadowBlur: 4,
+					textShadowOffsetX: 1,
+					textShadowOffsetY: 1
 				}
 			}
 		]
@@ -2004,7 +2032,7 @@ function renderChart7New() {
 		},
 		legend: {
 			data: ['Gross Margin', 'Contribution Margin Ratio', 'Net Profit Margin', 'Annual ROI'],
-			bottom: 5,
+			bottom: 40,
 			textStyle: { fontSize: legendFontSize, color: '#ffffff' },
 			itemGap: 15
 		},
@@ -2018,8 +2046,10 @@ function renderChart7New() {
 		xAxis: {
 			type: 'category',
 			data: ['2026', '2027', '2028'],
-			axisLabel: { fontSize: axisLabelFontSize, color: '#ffffff' },
-			axisLine: { lineStyle: { color: '#ddd' } }
+			axisLabel: { fontSize: axisLabelFontSize, color: '#ffffff', margin: 20 },
+			axisLine: { show: false },
+			axisTick: { show: false },
+			splitLine: { show: false }
 		},
 		yAxis: [
 			{
@@ -2037,8 +2067,9 @@ function renderChart7New() {
 					fontSize: axisLabelFontSize,
 					padding: [0, 0, 10, 0]
 				},
-				axisLine: { lineStyle: { color: '#00d4ff'} },
-				splitLine: { lineStyle: { color: '#f0f0f0' } }
+				axisLine: { show: false },
+				axisTick: { show: false },
+				splitLine: { show: false }
 			},
 			{
 				type: 'value',
@@ -2054,10 +2085,12 @@ function renderChart7New() {
 				nameGap: 10,
 				nameTextStyle: {
 					fontSize: axisLabelFontSize,
+					color: '#fe7878',
 					padding: [0, 0, 10, 60]
 				},
-				axisLine: { lineStyle: { color: '#FF6B6B' } },
-				splitLine: { show: false }
+				axisLine: { show: false },
+				axisTick: { show: false },
+				splitLine: { show: false },
 			}
 		],
 		series: [
@@ -2067,10 +2100,23 @@ function renderChart7New() {
 				yAxisIndex: 0,
 				data: [88.6, 88.6, 88.6],
 				itemStyle: {
-					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-						{ offset: 0, color: '#00d4ff' },
-						{ offset: 1, color: '#0099cc' }
-					])
+					color: {
+						type: 'linear',
+						x: 0,
+						y: 1,
+						x2: 0,
+						y2: 0,
+						colorStops: [
+						{ offset: 1, color: '#0099CC' },
+						{ offset: 0, color: 'rgba(0, 153, 204, 0.1)' }
+						]
+					},
+					borderColor: '#0099CC',
+					borderWidth: 2,
+					borderRadius: [2, 2, 0, 0],
+					shadowBlur: 15,
+					shadowColor: 'rgba(0, 153, 204, 0.5)',
+					shadowOffsetY: 0
 				},
 				barWidth: '20%',
 				label: {
@@ -2088,10 +2134,23 @@ function renderChart7New() {
 				yAxisIndex: 0,
 				data: [71.2, 73.7, 76.2],
 				itemStyle: {
-					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-						{ offset: 0, color: '#67E0DC' },
-						{ offset: 1, color: '#4db3aa' }
-					])
+					color: {
+						type: 'linear',
+						x: 0,
+						y: 1,
+						x2: 0,
+						y2: 0,
+						colorStops: [
+						{ offset: 1, color: '#45D9D8' },
+						{ offset: 0, color: 'rgba(224, 247, 247, 0.1)' }
+						]
+					},
+					borderColor: '#45D9D8',
+					borderWidth: 2,
+					borderRadius: [2, 2, 0, 0],
+					shadowBlur: 15,
+					shadowColor: 'rgba(69, 217, 216, 0.5)',
+					shadowOffsetY: 0
 				},
 				barWidth: '20%',
 				label: {
@@ -2109,10 +2168,23 @@ function renderChart7New() {
 				yAxisIndex: 0,
 				data: [66.5, 71.9, 75.2],
 				itemStyle: {
-					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-						{ offset: 0, color: '#ffc27a' },
-						{ offset: 1, color: '#ffc27a' }
-					])
+					color: {
+						type: 'linear',
+						x: 0,
+						y: 1,
+						x2: 0,
+						y2: 0,
+						colorStops: [
+						{ offset: 1, color: '#FFC27A' },
+						{ offset: 0, color: 'rgba(255, 194, 122, 0.1)' }
+						]
+					},
+					borderColor: '#FFC27A',
+					borderWidth: 2,
+					borderRadius: [2, 2, 0, 0],
+					shadowBlur: 15,
+					shadowColor: 'rgba(255, 194, 122, 0.5)',
+					shadowOffsetY: 0
 				},
 				barWidth: '20%',
 				label: {
@@ -2131,13 +2203,12 @@ function renderChart7New() {
 				data: [223.5, 724.8, 1564.2],
 				lineStyle: {
 					color: '#FF6B6B',
-					width: 3,
-					type: 'solid'
+					width: 2,
+					shadowBlur: 6,
+					shadowColor: 'rgba(34, 211, 238, 0.3)',
 				},
 				itemStyle: {
 					color: '#FF6B6B',
-					borderWidth: 4,
-					borderColor: '#fff'
 				},
 				symbol: 'circle',
 				symbolSize: 10,
@@ -2146,8 +2217,13 @@ function renderChart7New() {
 					position: 'bottom',
 					fontSize: seriesLabelFontSize,
 					formatter: '{c}%',
-					color: '#ffffff',
-					offset: [30, 16]
+					color: '#FF6B6B',
+					offset: [30, 16],
+					fontWeight: 'bold',
+					textShadowColor: 'rgba(0, 0, 0, 0.6)',
+					textShadowBlur: 4,
+					textShadowOffsetX: 1,
+					textShadowOffsetY: 1
 				}
 			}
 		]
@@ -2231,7 +2307,7 @@ onBeforeUnmount(() => {
 }
 
 .nav-btn {
-	background: rgba(255, 255, 255, 0.8);
+	background: rgba(255, 255, 255, 0.9);
 	border: none;
 	border-radius: 50%;
 	width: 48px;
@@ -2244,6 +2320,7 @@ onBeforeUnmount(() => {
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 	position: absolute;
 	z-index: 10;
+	color: #99a1af;
 }
 
 .nav-btn:hover:not(.disabled) {
