@@ -1436,8 +1436,6 @@ function renderChart4New() {
 				},
 				itemStyle: {
 					color: '#4db3aa',
-					borderWidth: 2,
-					borderColor: '#fff'
 				},
 				symbol: 'circle',
 				symbolSize: 6,
@@ -1547,8 +1545,8 @@ function renderChart5New() {
 				type: 'value',
 				name: 'ROI (%)',
 				position: 'right',
-				min: 0,
-				max: 6000,
+				min: 400,
+				max: 7500,
 				axisLabel: {
 					formatter: '{value}%',
 					fontSize: axisLabelFontSize,
@@ -1569,7 +1567,7 @@ function renderChart5New() {
 				name: 'Annual Net Profit',
 				type: 'bar',
 				yAxisIndex: 0,
-				data: [11173333, 36238333, 78208334],
+				data: [36363333, 74983333, 114878334],
 				itemStyle: {
 					color: {
 						type: 'linear',
@@ -1605,7 +1603,7 @@ function renderChart5New() {
 				name: 'Cumulative Net Profit',
 				type: 'bar',
 				yAxisIndex: 0,
-				data: [11173333, 47411666, 125620000],
+				data: [36363333, 111346666, 226225000],
 				itemStyle: {
 					color: {
 						type: 'linear',
@@ -1641,7 +1639,7 @@ function renderChart5New() {
 				name: 'Annual ROI',
 				type: 'line',
 				yAxisIndex: 1,
-				data: [223.5, 724.8, 1564.2],
+				data: [727.3, 1499.7, 2297.6],
 				lineStyle: {
 					color: '#FF6B6B',
 					width: 2,
@@ -1650,8 +1648,6 @@ function renderChart5New() {
 				},
 				itemStyle: {
 					color: '#FF6B6B',
-					borderWidth: 3,
-					borderColor: '#fff'
 				},
 				symbol: 'circle',
 				symbolSize: 8,
@@ -1673,7 +1669,7 @@ function renderChart5New() {
 				name: 'Cumulative ROI',
 				type: 'line',
 				yAxisIndex: 1,
-				data: [223.5, 948.2, 2512.4],
+				data: [727.3, 2226.9, 4524.5],
 				lineStyle: {
 					color: '#66DFD8',
 					width: 2,
@@ -1682,8 +1678,6 @@ function renderChart5New() {
 				},
 				itemStyle: {
 					color: '#66DFD8',
-					borderWidth: 3,
-					borderColor: '#fff'
 				},
 				symbol: 'circle',
 				symbolSize: 8,
@@ -1707,7 +1701,7 @@ function renderChart5New() {
 			left: 'center',
 			bottom: '1%',
 			style: {
-				text: '{white|Investment Amount: €5M | Cumulative Return Over Three Years: €125.6M | Total Return Rate: 2512.4%}',
+				text: '{white|Investment Amount: €5M | Cumulative Return Over Three Years: €226.2M | Total Return Rate: 4524.5%}',
 				fontSize: axisLabelFontSize,
 				fill: '#ffffff',
 				color: '#ffffff',
