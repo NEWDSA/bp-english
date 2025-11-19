@@ -2066,7 +2066,7 @@ function renderChart7New() {
 				name: 'ROI (%)',
 				position: 'right',
 				min: 0,
-				max: 1600,
+				max: 2500,
 				axisLabel: {
 					formatter: '{value}%',
 					fontSize: axisLabelFontSize,
@@ -2122,7 +2122,7 @@ function renderChart7New() {
 				name: 'Contribution Margin Ratio',
 				type: 'bar',
 				yAxisIndex: 0,
-				data: [71.2, 73.7, 76.2],
+				data: [73.7, 75.3, 76.7],
 				itemStyle: {
 					color: {
 						type: 'linear',
@@ -2156,7 +2156,7 @@ function renderChart7New() {
 				name: 'Net Profit Margin',
 				type: 'bar',
 				yAxisIndex: 0,
-				data: [66.5, 71.9, 75.2],
+				data: [72.1, 74.4, 76.0],
 				itemStyle: {
 					color: {
 						type: 'linear',
@@ -2190,7 +2190,7 @@ function renderChart7New() {
 				name: 'Annual ROI',
 				type: 'line',
 				yAxisIndex: 1,
-				data: [223.5, 724.8, 1564.2],
+				data: [727.3, 1499.7, 2297.6],
 				lineStyle: {
 					color: '#FF6B6B',
 					width: 2,
