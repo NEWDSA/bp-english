@@ -598,10 +598,10 @@
                     </svg>
                 </div>
                 <div class="w-full h-full overflow-hidden relative">
-                    <div class="absolute top-4 left-1/2 -translate-x-1/2 z-[1011]">
-                        <p class="font-bold text-white" style="font-size: clamp(20px, 2.6vw, 30px);">Past Experience</p>
+                    <div class="absolute top-4 left-1/2 -translate-x-1/2 z-10">
+                        <p class="text-[30px] font-bold text-white">Past Experience</p>
                     </div>
-                    <div class="flex flex-col items-center justify-center h-full w-full px-2 relative" style="padding-bottom: clamp(140px, 18vh, 200px); padding-top: clamp(80px, 10vh, 120px);">
+                    <div class="flex flex-col items-center justify-center h-full w-full px-2 relative">
                         <div v-if="pastExperienceSlides.length" class="relative w-full flex items-center justify-center overflow-hidden" style="flex: 1; display: flex; align-items: center; justify-content: center;">
                             <swiper
                                 ref="pastExperienceSwiperRef"
@@ -647,8 +647,8 @@
                             Image assets are loading...
                         </div>
                     </div>
-                    <!-- 指示点 - 固定在视口底部 -->
-                    <div v-if="pastExperienceSlides.length" class="past-experience-pagination"></div>
+                    <!-- 指示点 - 相对于最外层容器居中 -->
+                    <div v-if="pastExperienceSlides.length" class="past-experience-pagination absolute bottom-[150px] left-1/2 -translate-x-1/2 flex items-center justify-center gap-2 z-10"></div>
                 </div>
             </div>
         </div>
@@ -1749,9 +1749,9 @@ button {
     align-items: center !important;
 }
 
-/* Past Experience Slide 样式 - 使用相对单位实现响应式 */
+/* Past Experience Slide 样式 */
 .past-experience-slide {
-    width: clamp(200px, 23.4vw, 450px) !important;
+    width: 450px !important;
     transition: width 0.5s ease;
     display: flex !important;
     align-items: center !important;
@@ -1759,14 +1759,15 @@ button {
 }
 
 .past-experience-slide.swiper-slide-active {
-    width: clamp(360px, 42vw, 850px) !important;
+    width: 700px !important;
 }
 
 .past-experience-slide-content {
     width: 100%;
-    height: clamp(280px, 29.2vh, 500px);
+    height: 500px;
     transform: scale(1);
     transition: all 0.5s ease;
+    /* border-radius: 1rem !important; */
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -1777,181 +1778,54 @@ button {
 }
 
 .past-experience-slide.swiper-slide-active .past-experience-slide-content {
-    height: clamp(520px, 56vh, 980px);
-    max-height: calc(100vh - clamp(200px, 25vh, 250px)) !important; /* 为标题和pagination留出空间 */
+    height: 850px;
     transform: scale(1.1);
     border-radius: 1rem !important;
 }
 
-/* 响应式调整 - 移动端 (≤768px) */
+/* 响应式调整 */
 @media (max-width: 768px) {
     .past-experience-slide {
-        width: clamp(150px, 26vw, 200px) !important;
+        width: 200px !important;
     }
     
     .past-experience-slide.swiper-slide-active {
-        width: clamp(300px, 45vw, 360px) !important;
+        width: 300px !important;
     }
     
     .past-experience-slide-content {
-        height: clamp(200px, 35vh, 280px);
+        height: 280px;
     }
     
     .past-experience-slide.swiper-slide-active .past-experience-slide-content {
-        height: clamp(420px, 60vh, 530px);
-        max-height: calc(100vh - clamp(150px, 20vh, 180px)) !important;
+        height: 450px;
     }
 }
 
-/* 小屏幕 - 平板 (769px - 1023px) */
-@media (min-width: 769px) and (max-width: 1023px) {
-    .past-experience-slide {
-        width: clamp(300px, 29vw, 400px) !important;
-    }
-    
-    .past-experience-slide.swiper-slide-active {
-        width: clamp(580px, 56vw, 700px) !important;
-    }
-    
-    .past-experience-slide-content {
-        height: clamp(400px, 38vh, 500px);
-    }
-    
-    .past-experience-slide.swiper-slide-active .past-experience-slide-content {
-        height: clamp(740px, 70vh, 860px);
-        max-height: calc(100vh - clamp(180px, 22vh, 220px)) !important;
-    }
-}
-
-/* 中等屏幕 - 桌面 (1024px - 1535px) */
-@media (min-width: 1024px) and (max-width: 1535px) {
-    .past-experience-slide {
-        width: clamp(450px, 29.3vw, 550px) !important;
-    }
-    
-    .past-experience-slide.swiper-slide-active {
-        width: clamp(800px, 52vw, 980px) !important;
-    }
-    
-    .past-experience-slide-content {
-        height: clamp(500px, 32.5vh, 600px);
-    }
-    
-    .past-experience-slide.swiper-slide-active .past-experience-slide-content {
-        height: clamp(860px, 55vh, 920px);
-        max-height: calc(100vh - clamp(200px, 25vh, 250px)) !important;
-    }
-}
-
-/* 大屏幕 - 2K (1536px - 1919px) */
-@media (min-width: 1536px) and (max-width: 1919px) {
-    .past-experience-slide {
-        width: clamp(550px, 28.6vw, 650px) !important;
-    }
-    
-    .past-experience-slide.swiper-slide-active {
-        width: clamp(980px, 50vw, 1150px) !important;
-    }
-    
-    .past-experience-slide-content {
-        height: clamp(600px, 31.3vh, 700px);
-    }
-    
-    .past-experience-slide.swiper-slide-active .past-experience-slide-content {
-        height: clamp(920px, 48vh, 1020px);
-        max-height: calc(100vh - clamp(200px, 25vh, 250px)) !important;
-    }
-}
-
-/* 超大屏幕 - 2K (1920px - 2559px) */
-@media (min-width: 1920px) and (max-width: 2559px) {
-    .past-experience-slide {
-        width: clamp(650px, 20.3vw, 800px) !important;
-    }
-    
-    .past-experience-slide.swiper-slide-active {
-        width: clamp(1150px, 35vw, 1380px) !important;
-    }
-    
-    .past-experience-slide-content {
-        height: clamp(700px, 21.9vh, 850px);
-    }
-    
-    .past-experience-slide.swiper-slide-active .past-experience-slide-content {
-        height: clamp(980px, 30vh, 1150px);
-        max-height: calc(100vh - clamp(200px, 25vh, 250px)) !important;
-    }
-}
-
-/* 4K 高分辨率 (2560px - 3839px) */
-@media (min-width: 2560px) and (max-width: 3839px) {
-    .past-experience-slide {
-        width: clamp(800px, 18.75vw, 1000px) !important;
-    }
-    
-    .past-experience-slide.swiper-slide-active {
-        width: clamp(1380px, 32vw, 1720px) !important;
-    }
-    
-    .past-experience-slide-content {
-        height: clamp(850px, 19.9vh, 1000px);
-    }
-    
-    .past-experience-slide.swiper-slide-active .past-experience-slide-content {
-        height: clamp(1150px, 27vh, 1380px);
-        max-height: calc(100vh - clamp(200px, 25vh, 250px)) !important;
-    }
-}
-
-/* 超高分辨率 4K (≥3840px) - 针对您的 3840x2160 屏幕 */
-@media (min-width: 3840px) {
-    .past-experience-slide {
-        width: clamp(1000px, 15.6vw, 1200px) !important;
-    }
-    
-    .past-experience-slide.swiper-slide-active {
-        width: clamp(1720px, 26.9vw, 2080px) !important;
-    }
-    
-    .past-experience-slide-content {
-        height: clamp(1000px, 15.6vh, 1200px);
-    }
-    
-    .past-experience-slide.swiper-slide-active .past-experience-slide-content {
-        height: clamp(1380px, 21.6vh, 1600px);
-        max-height: calc(100vh - clamp(200px, 25vh, 250px)) !important;
-    }
-}
-
-/* Pagination 容器样式 - 固定在视口底部，确保不被图片遮挡 */
+/* Pagination 容器样式 */
 .past-experience-pagination {
     position: fixed !important;
-    bottom: clamp(120px, 15vh, 180px) !important;
+    bottom: 150px !important;
     left: 50vw !important;
     transform: translateX(-50%) !important;
     z-index: 1010 !important;
     width: auto !important;
     max-width: none !important;
-    pointer-events: auto !important; /* 确保可以点击 */
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: clamp(6px, 0.42vw, 8px) !important;
 }
 
 .past-experience-pagination :deep(.swiper-pagination-bullet) {
-    width: clamp(12px, 0.83vw, 16px) !important;
-    height: clamp(3px, 0.21vh, 4px) !important;
+    width: 16px !important;
+    height: 4px !important;
     border-radius: 2px !important;
     background: rgba(255, 255, 255, 0.5) !important;
     opacity: 1 !important;
     transition: all 0.3s ease !important;
-    margin: 0 clamp(3px, 0.21vw, 4px) !important;
+    margin: 0 4px !important;
     display: inline-block !important;
 }
 
 .past-experience-pagination :deep(.swiper-pagination-bullet-active) {
-    width: clamp(30px, 2.08vw, 40px) !important;
+    width: 40px !important;
     background: #00d4ff !important;
     opacity: 1 !important;
 }
