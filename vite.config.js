@@ -15,21 +15,13 @@ export default defineConfig({
       ext: '.gz',
       threshold: 1024, // 只压缩大于 1KB 的文件
       deleteOriginFile: false, // 保留原文件
-      filter: /\.(js|mjs|json|css|html|svg|xml)$/i, // 只压缩这些类型的文件，排除视频和图片
-      compressionOptions: {
-        level: 9, // 最高压缩级别
-      },
     }),
     // Brotli 压缩（更好的压缩率）
     viteCompression({
       algorithm: 'brotliCompress',
       ext: '.br',
       threshold: 1024,
-      deleteOriginFile: false,
-      filter: /\.(js|mjs|json|css|html|svg|xml)$/i, // 只压缩这些类型的文件，排除视频和图片
-      compressionOptions: {
-        level: 11, // Brotli 最高压缩级别
-      },
+      deleteOriginFile: false
     }),
   ],
   resolve: {
