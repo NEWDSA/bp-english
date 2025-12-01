@@ -1,6 +1,7 @@
 <template>
 	<div class="flex flex-col h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900 relative">
 		<!-- 顶部导航栏 -->
+		 <!-- cdn 网络优化 -->
 		<TopNavigation />
 
 		<!-- 背景视频 -->
@@ -82,7 +83,7 @@
 
 
 				<!-- 弹窗标题 -->
-				<div class="modal-title flex justify-between">Traditional Electric Boat Pain Points3
+				<div class="modal-title flex justify-between">Traditional Electric Boat Pain Points
 					<div class="modal-close-btn" @click="closePainPointsModal">×</div>
 				</div>
 

@@ -14,13 +14,17 @@
 		<!-- 视频背景黑色遮罩 -->
 		<div class="absolute top-0 left-0 w-full h-full bg-black/10 z-[2] pointer-events-none"></div>
 		
-		<!-- 背景音乐 -->
+		<!-- 背景音乐 - 使用流式加载 -->
 		<audio
 			ref="audioRef"
 			:src="bgMusic"
 			loop
-			preload="none"
+			preload="metadata"
 			:volume="0.5"
+			@loadstart="onAudioLoadStart"
+			@progress="onAudioProgress"
+			@canplay="onAudioCanPlay"
+			@error="onAudioError"
 		></audio>
 		
 		<!-- 音乐控制按钮 -->
@@ -40,11 +44,10 @@
 				'bg-white/15 backdrop-blur-[10px] rounded-2xl p-6 pb-3 border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)]': showCatalogue 
 			}"
 		>
-			<div 
+			<div
 				class="text-[#DCDCDC] text-[28px] tracking-[0.08em] uppercase bg-transparent border-none cursor-pointer relative transition-all duration-300 py-2 px-4 rounded-lg font-bold drop-shadow-[2px_2px_4px_rgba(0,0,0,0.8)] hover:bg-white/10 hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(255,255,255,0.2)] md:py-1.5 md:px-3"
-				:class="{ 'after:w-0': showCatalogue }"
-				@click="toggleCatalogue" 
-				:aria-expanded="showCatalogue ? 'true' : 'false'"
+				@click="toggleCatalogue"
+				:aria-expanded="String(showCatalogue)"
 			>
 				CATALOGUE
 			</div>
@@ -135,7 +138,7 @@
 	</section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 // 使用 new URL 获取资源路径，避免将视频打包到 JS bundle 中
@@ -150,6 +153,10 @@ const showCatalogue = ref(false)
 const showCompanyInfo = ref(false)
 const audioRef = ref(null)
 const isPlaying = ref(false)
+const audioLoading = ref(false)
+const audioProgress = ref(0)
+// 记录用户是否曾经播放过音乐（用户偏好）
+const hasUserPlayedMusic = ref(false)
 
 // 页面相关状态
 
@@ -188,15 +195,55 @@ function stopMusic() {
 	}
 }
 
+// 音频加载事件处理
+function onAudioLoadStart() {
+	audioLoading.value = true
+	audioProgress.value = 0
+	console.log('音频开始加载（流式加载）')
+}
+
+function onAudioProgress() {
+	if (audioRef.value) {
+		// 计算已缓冲的百分比
+		const buffered = audioRef.value.buffered
+		if (buffered.length > 0) {
+			const bufferedEnd = buffered.end(buffered.length - 1)
+			const duration = audioRef.value.duration
+			if (duration && duration > 0) {
+				audioProgress.value = Math.round((bufferedEnd / duration) * 100)
+			}
+		}
+	}
+}
+
+function onAudioCanPlay() {
+	audioLoading.value = false
+	console.log('音频可以播放（流式加载完成）')
+}
+
+function onAudioError(error: any) {
+	audioLoading.value = false
+	console.error('音频加载错误:', error)
+}
+
 function toggleMusic() {
 	if (audioRef.value) {
 		if (audioRef.value.paused) {
+			// 记录用户主动播放音乐
+			hasUserPlayedMusic.value = true
+			
+			// 流式加载：浏览器会自动使用 Range Requests
+			// 如果音频还没有加载元数据，先加载元数据
+			if (audioRef.value.readyState === 0) {
+				audioRef.value.load()
+			}
 			audioRef.value.volume = 0.5
 			audioRef.value.play().then(() => {
 				isPlaying.value = true
-				console.log('音乐开始播放')
+				console.log('音乐开始播放（流式加载）')
 			}).catch(error => {
 				console.log('播放失败:', error)
+				isPlaying.value = false
 			})
 		} else {
 			audioRef.value.pause()
@@ -238,48 +285,78 @@ function navigateToProduct() {
 onMounted(() => {
 	document.addEventListener('keydown', onKeydown)
 
-	// 延迟加载音频资源（用户交互后再加载）
+	// 智能播放音频（性能优化版本）
 	const tryPlayMusic = () => {
-		if (audioRef.value) {
-			// 如果音频还没有加载，先加载
-			if (audioRef.value.readyState === 0) {
-				audioRef.value.load()
+		if (!audioRef.value) return
+		
+		// 检查网络连接状态（避免在慢速网络时自动播放）
+		const nav = navigator as any
+		const connection = nav.connection || nav.mozConnection || nav.webkitConnection
+		if (connection) {
+			// 如果是慢速网络（2G），不自动播放
+			if (connection.effectiveType === 'slow-2g' || connection.effectiveType === '2g') {
+				console.log('网络较慢，跳过自动播放音乐')
+				return
 			}
-			audioRef.value.volume = 0.5
-			audioRef.value.play().then(() => {
-				isPlaying.value = true
-				console.log('音乐播放成功')
-			}).catch(() => {
-				// 静默处理自动播放失败，用户可以手动点击播放按钮
-				isPlaying.value = false
-			})
 		}
-	}
-
-	// 延迟加载音频，等待用户交互
-	setTimeout(() => {
-		if (audioRef.value) {
+		
+		// 流式加载：只在需要时加载元数据
+		if (audioRef.value.readyState === 0) {
 			audioRef.value.load()
 		}
-	}, 1000)
+		
+		audioRef.value.volume = 0.5
+		audioRef.value.play().then(() => {
+			isPlaying.value = true
+			console.log('音乐播放成功（流式加载）')
+		}).catch(() => {
+			// 静默处理自动播放失败，用户可以手动点击播放按钮
+			isPlaying.value = false
+		})
+	}
 
 	// 监听页面可见性变化
 	document.addEventListener('visibilitychange', () => {
-		if (!document.hidden && audioRef.value && audioRef.value.paused) {
+		if (!document.hidden && audioRef.value && audioRef.value.paused && isPlaying.value) {
 			tryPlayMusic()
 		}
 	})
+	
+	// 将 tryPlayMusic 暴露给路由监听使用
+	const win = window as any
+	win.__tryPlayMusic = tryPlayMusic
 })
 
 // 监听路由变化
-watch(() => route.path, (newPath) => {
+watch(() => route.path, (newPath, oldPath) => {
 	// 如果不是首页，停止音乐
 	if (newPath !== '/' && audioRef.value) {
 		stopMusic()
 	}
-	// 如果回到首页，尝试播放音乐
-	else if (newPath === '/' && audioRef.value) {
-		tryPlayMusic()
+	// 如果回到首页，智能尝试播放音乐（性能优化）
+	else if (newPath === '/' && audioRef.value && hasUserPlayedMusic.value) {
+		// 只在用户之前播放过音乐时才自动播放（记住用户偏好）
+		// 使用 requestIdleCallback 在浏览器空闲时执行，不影响页面性能
+		const win = window as any
+		if ('requestIdleCallback' in window) {
+			requestIdleCallback(() => {
+				// 延迟一点时间，确保页面已完全加载
+				setTimeout(() => {
+					const tryPlayMusic = win.__tryPlayMusic
+					if (tryPlayMusic) {
+						tryPlayMusic()
+					}
+				}, 500)
+			}, { timeout: 2000 })
+		} else {
+			// 降级方案：使用 setTimeout
+			setTimeout(() => {
+				const tryPlayMusic = win.__tryPlayMusic
+				if (tryPlayMusic) {
+					tryPlayMusic()
+				}
+			}, 1000)
+		}
 	}
 })
 
