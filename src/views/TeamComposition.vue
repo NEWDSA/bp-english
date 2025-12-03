@@ -439,11 +439,21 @@
                             <div
                                 class="relative flex flex-col items-center justify-start bg-black/10 rounded-none overflow-hidden transition-all duration-300 cursor-pointer h-full hover:scale-[1.02] hover:border-cyan-400/30 hover:shadow-[0_10px_30px_rgba(0,212,255,0.2)]">
                                 <div
-                                    class="relative w-full h-[350px] flex-shrink-0 block overflow-hidden mb-0 leading-[0]">
+                                    class="relative w-full h-[350px] flex-shrink-0 block overflow-hidden mb-0 leading-[0] video-container">
                                     <video :src="getWorkVideo(1)"
                                         class="w-full h-full block object-cover object-center transition-all duration-300 hover:scale-105"
                                         autoplay muted loop playsinline>
                                     </video>
+                                    <!-- 全屏按钮 -->
+                                    <div @click="(e) => toggleVideoFullscreen(1, e)"
+                                        class="absolute bottom-2 right-2 bg-black/50 hover:bg-black/70 border border-white/30 text-white cursor-pointer p-2 w-8 h-8 flex items-center justify-center rounded transition-all duration-300 z-10 hover:scale-110">
+                                        <svg v-if="!videoFullscreenState[1]" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                        <svg v-else width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                            <path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
                                 </div>
                                 <div
                                     class="flex-1 flex flex-col items-center text-center text-white px-2.5 py-[15px] w-full box-border mb-10 mt-[6vh]">
@@ -461,11 +471,21 @@
                             <div
                                 class="relative flex flex-col items-center justify-start bg-black/10 rounded-none overflow-hidden transition-all duration-300 cursor-pointer h-full hover:scale-[1.02] hover:border-cyan-400/30 hover:shadow-[0_10px_30px_rgba(0,212,255,0.2)]">
                                 <div
-                                    class="relative w-full h-[350px] flex-shrink-0 block overflow-hidden mb-0 leading-[0]">
+                                    class="relative w-full h-[350px] flex-shrink-0 block overflow-hidden mb-0 leading-[0] video-container">
                                     <video :src="getWorkVideo(2)"
                                         class="w-full h-full block object-cover object-center transition-all duration-300 hover:scale-105"
                                         autoplay muted loop playsinline>
                                     </video>
+                                    <!-- 全屏按钮 -->
+                                    <div @click="(e) => toggleVideoFullscreen(2, e)"
+                                        class="absolute bottom-2 right-2 bg-black/50 hover:bg-black/70 border border-white/30 text-white cursor-pointer p-2 w-8 h-8 flex items-center justify-center rounded transition-all duration-300 z-10 hover:scale-110">
+                                        <svg v-if="!videoFullscreenState[2]" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                        <svg v-else width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                            <path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
                                 </div>
                                 <div
                                     class="flex-1 flex flex-col items-center text-center text-white px-2.5 py-[15px] w-full box-border mb-10 mt-[6vh]">
@@ -482,8 +502,18 @@
                             <!-- 第三个项目 - 图片 -->
                             <div
                                 class="relative flex flex-col items-center justify-start bg-black/10 rounded-none overflow-hidden transition-all duration-300 cursor-pointer h-full hover:scale-[1.02] hover:border-cyan-400/30 hover:shadow-[0_10px_30px_rgba(0,212,255,0.2)]">
-                                <div class="relative w-full h-[350px] flex-shrink-0 block mb-0 bg-cover bg-bottom bg-no-repeat transition-all duration-300 hover:scale-105"
+                                <div class="relative w-full h-[350px] flex-shrink-0 block mb-0 bg-cover bg-bottom bg-no-repeat transition-all duration-300 hover:scale-105 image-container"
                                     :style="{ backgroundImage: `url(${getWorkImage(3)})` }">
+                                    <!-- 全屏按钮 -->
+                                    <div @click="(e) => toggleImageFullscreen(3, e)"
+                                        class="absolute bottom-2 right-2 bg-black/50 hover:bg-black/70 border border-white/30 text-white cursor-pointer p-2 w-8 h-8 flex items-center justify-center rounded transition-all duration-300 z-10 hover:scale-110">
+                                        <svg v-if="!imageFullscreenState[3]" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                        <svg v-else width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                            <path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
                                 </div>
                                 <div
                                     class="flex-1 flex flex-col items-center text-center text-white px-2.5 py-[15px] w-full box-border mb-10 mt-[6vh]">
@@ -501,11 +531,21 @@
                             <div
                                 class="relative flex flex-col items-center justify-start bg-black/10 rounded-none overflow-hidden transition-all duration-300 cursor-pointer h-full hover:scale-[1.02] hover:border-cyan-400/30 hover:shadow-[0_10px_30px_rgba(0,212,255,0.2)]">
                                 <div
-                                    class="relative w-full h-[350px] flex-shrink-0 block overflow-hidden mb-0 leading-[0]">
+                                    class="relative w-full h-[350px] flex-shrink-0 block overflow-hidden mb-0 leading-[0] video-container">
                                     <video :src="getWorkVideo(4)"
                                         class="w-full h-full block object-cover object-center transition-all duration-300 hover:scale-105"
                                         autoplay muted loop playsinline>
                                     </video>
+                                    <!-- 全屏按钮 -->
+                                    <div @click="(e) => toggleVideoFullscreen(4, e)"
+                                        class="absolute bottom-2 right-2 bg-black/50 hover:bg-black/70 border border-white/30 text-white cursor-pointer p-2 w-8 h-8 flex items-center justify-center rounded transition-all duration-300 z-10 hover:scale-110">
+                                        <svg v-if="!videoFullscreenState[4]" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                        <svg v-else width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                            <path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
                                 </div>
                                 <div
                                     class="flex-1 flex flex-col items-center text-center text-white px-2.5 py-[15px] w-full box-border mb-10 mt-[6vh]">
@@ -523,11 +563,21 @@
                             <div
                                 class="relative flex flex-col items-center justify-start bg-black/10 rounded-none overflow-hidden transition-all duration-300 cursor-pointer h-full hover:scale-[1.02] hover:border-cyan-400/30 hover:shadow-[0_10px_30px_rgba(0,212,255,0.2)]">
                                 <div
-                                    class="relative w-full h-[350px] flex-shrink-0 block overflow-hidden mb-0 leading-[0]">
+                                    class="relative w-full h-[350px] flex-shrink-0 block overflow-hidden mb-0 leading-[0] video-container">
                                     <video :src="getWorkVideo(5)"
                                         class="w-full h-full block object-cover object-center transition-all duration-300 hover:scale-105"
                                         autoplay muted loop playsinline>
                                     </video>
+                                    <!-- 全屏按钮 -->
+                                    <div @click="(e) => toggleVideoFullscreen(5, e)"
+                                        class="absolute bottom-2 right-2 bg-black/50 hover:bg-black/70 border border-white/30 text-white cursor-pointer p-2 w-8 h-8 flex items-center justify-center rounded transition-all duration-300 z-10 hover:scale-110">
+                                        <svg v-if="!videoFullscreenState[5]" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                        <svg v-else width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                            <path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
                                 </div>
                                 <div
                                     class="flex-1 flex flex-col items-center text-center text-white px-2.5 py-[15px] w-full box-border mb-10 mt-[6vh]">
@@ -549,11 +599,21 @@
                                      :style="{ backgroundImage: `url(${getWorkImage(6)})` }">
                                 </div> -->
                                 <div
-                                    class="relative w-full h-[350px] flex-shrink-0 block overflow-hidden mb-0 leading-[0]">
+                                    class="relative w-full h-[350px] flex-shrink-0 block overflow-hidden mb-0 leading-[0] video-container">
                                     <video :src="getWorkVideo(6)"
                                         class="w-full h-full block object-cover object-center transition-all duration-300 hover:scale-105"
                                         autoplay muted loop playsinline>
                                     </video>
+                                    <!-- 全屏按钮 -->
+                                    <div @click="(e) => toggleVideoFullscreen(6, e)"
+                                        class="absolute bottom-2 right-2 bg-black/50 hover:bg-black/70 border border-white/30 text-white cursor-pointer p-2 w-8 h-8 flex items-center justify-center rounded transition-all duration-300 z-10 hover:scale-110">
+                                        <svg v-if="!videoFullscreenState[6]" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                        <svg v-else width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                            <path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
                                 </div>
                                 <div
                                     class="flex-1 flex flex-col text-center text-white px-2.5 py-[15px] w-full box-border mt-[6vh]">
@@ -657,7 +717,7 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import { ref, computed, watch, nextTick } from 'vue'
+import { ref, computed, watch, nextTick, onMounted, onUnmounted } from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Pagination } from 'swiper/modules'
 import 'swiper/css'
@@ -705,7 +765,7 @@ const teamMembers = ref([
         role: 'CFO',
         image: CFO,
         description: '• Founding Partner of Micro Light Innovation Investment • Responsible for tax laws, investment and financing',
-        professionalQualifications: '1. Bachelor of Accounting, Sichuan Normal University; currently a Master is Supervisor at the School of Economics and Management, Sichuan Normal University.2. Master of Economic Law, China University of Political Science and Law. 3. Master of Finance (Alternative Asset Management), Stanford University. 4. Private Equity Fund Manager (Primary Market). 5. Entrepreneurship Mentor at Shanghai Jiao Tong University, Sichuan University, University of Electronic Science and Technology of China, Hong Kong University of Science and Technology, and Macau University of Science and Technology. 6. Long-term experience in private equity investment, technology transfer, and IPO consulting.',
+        professionalQualifications: '1. Bachelor of Accounting, Sichuan Normal University; currently a Master is Supervisor at the School of Economics and Management, Sichuan Normal University.2. Master of Economic Law, China University of Political Science and Law. 3. Master of Finance (Training program), Stanford University. 4. Private Equity Fund Manager (Primary Market). 5. Entrepreneurship Mentor at Shanghai Jiao Tong University, Sichuan University, University of Electronic Science and Technology of China, Hong Kong University of Science and Technology, and Macau University of Science and Technology. 6. Long-term experience in private equity investment, technology transfer, and IPO consulting.',
         areasOfExpertise: '1. Private Equity Investment and Capital Operation; 2. Technology Transfer and Industrial Incubation; 3. Mergers & Acquisitions and IPO Planning (Mainland China, Hong Kong, Singapore, USA); 4. Innovation and Entrepreneurship Mentoring and Business Model Innovation Training; 5. Industrial Fund Management in Medical Devices, New Materials, Optoelectronics, and Military Industries.',
         introduction: 'A seasoned private equity fund manager with a combined legal and financial background, he studied at China University of Political Science and Law and Stanford University, possessing solid industrial and capital operation capabilities. He has long been involved in technology transfer, industrial fund management, and IPO consulting, leading investments and exits in several well-known projects such as BLT, Andon Health, and Tengdun Technology, accumulating rich experience in capital operations and practical application. He previously worked at Blackstone Group, participating in numerous mergers and acquisitions of internationally renowned companies. Currently, he serves as an entrepreneurship mentor at several universities, dedicated to promoting the integration of technological innovation and capital, and contributing to high-quality industrial development.',
     },
@@ -833,6 +893,12 @@ const showWhoWeAreContent = ref(false)
 
 // Investment Highlights 内容显示状态
 const showInvestmentHighlightsContent = ref(false)
+
+// 视频全屏状态
+const videoFullscreenState = ref<{ [key: number]: boolean }>({})
+
+// 图片全屏状态
+const imageFullscreenState = ref<{ [key: number]: boolean }>({})
 
 // 卡片总宽度（包含间距）
 // const CARD_TOTAL_WIDTH = 230 // 200px宽度 + 30px间距
@@ -1176,6 +1242,85 @@ function getWorkImage(index: number) {
 function getWorkVideo(index: number) {
     return new URL(`../assets/work${index}.mp4`, import.meta.url).href
 }
+
+// 视频全屏切换函数
+const toggleVideoFullscreen = async (videoIndex: number, event: Event) => {
+    event.stopPropagation() // 阻止事件冒泡
+    try {
+        const videoElement = event.currentTarget as HTMLElement
+        const video = videoElement.closest('.video-container')?.querySelector('video') as HTMLVideoElement
+        
+        if (!video) return
+
+        if (!document.fullscreenElement) {
+            // 进入全屏
+            await video.requestFullscreen()
+            videoFullscreenState.value[videoIndex] = true
+        } else {
+            // 退出全屏
+            await document.exitFullscreen()
+            videoFullscreenState.value[videoIndex] = false
+        }
+    } catch (error) {
+        console.error('视频全屏操作失败:', error)
+    }
+}
+
+// 图片全屏切换函数
+const toggleImageFullscreen = async (imageIndex: number, event: Event) => {
+    event.stopPropagation() // 阻止事件冒泡
+    try {
+        const imageElement = event.currentTarget as HTMLElement
+        const imageContainer = imageElement.closest('.image-container') as HTMLElement
+        
+        if (!imageContainer) return
+
+        if (!document.fullscreenElement) {
+            // 进入全屏
+            await imageContainer.requestFullscreen()
+            imageFullscreenState.value[imageIndex] = true
+        } else {
+            // 退出全屏
+            await document.exitFullscreen()
+            imageFullscreenState.value[imageIndex] = false
+        }
+    } catch (error) {
+        console.error('图片全屏操作失败:', error)
+    }
+}
+
+// 监听全屏状态变化
+const handleVideoFullscreenChange = () => {
+    if (!document.fullscreenElement) {
+        // 退出全屏时，将所有视频状态设为 false
+        Object.keys(videoFullscreenState.value).forEach(key => {
+            const index = Number(key)
+            videoFullscreenState.value[index] = false
+        })
+        // 退出全屏时，将所有图片状态设为 false
+        Object.keys(imageFullscreenState.value).forEach(key => {
+            const index = Number(key)
+            imageFullscreenState.value[index] = false
+        })
+    }
+    // 进入全屏时的状态由 toggleVideoFullscreen 或 toggleImageFullscreen 函数设置
+}
+
+// 在组件挂载时添加全屏监听器
+onMounted(() => {
+    document.addEventListener('fullscreenchange', handleVideoFullscreenChange)
+    // 兼容不同浏览器的全屏事件
+    document.addEventListener('webkitfullscreenchange', handleVideoFullscreenChange)
+    document.addEventListener('mozfullscreenchange', handleVideoFullscreenChange)
+    document.addEventListener('MSFullscreenChange', handleVideoFullscreenChange)
+})
+
+onUnmounted(() => {
+    document.removeEventListener('fullscreenchange', handleVideoFullscreenChange)
+    document.removeEventListener('webkitfullscreenchange', handleVideoFullscreenChange)
+    document.removeEventListener('mozfullscreenchange', handleVideoFullscreenChange)
+    document.removeEventListener('MSFullscreenChange', handleVideoFullscreenChange)
+})
 
 // 上一个成员 - 履带式向左移动
 const previousMember = () => {

@@ -111,7 +111,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 
-const PASSWORD = 'bp2024' // 默认密码，可以根据需要修改
+const PASSWORD = 'bp2025' // 默认密码，可以根据需要修改
 const STORAGE_KEY = 'bp_english_auth'
 
 const password = ref('')

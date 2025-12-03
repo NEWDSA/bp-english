@@ -139,7 +139,7 @@
 </template>
 
 <script setup>
-import { ref, nextTick, watch, onBeforeUnmount } from 'vue'
+import { ref, nextTick, watch, onBeforeUnmount, onMounted } from 'vue'
 import * as echarts from 'echarts'
 
 // Props
@@ -316,7 +316,23 @@ function renderCharts() {
 
 // Chart 1: 左上角 - 年度数据柱状图
 function renderChart1() {
-	if (!chart1Ref.value) return
+	if (!chart1Ref.value) {
+		// 如果 ref 还没有，延迟重试
+		setTimeout(() => {
+			renderChart1()
+		}, 100)
+		return
+	}
+
+	// 确保容器有尺寸
+	const container = chart1Ref.value
+	if (container.offsetWidth === 0 || container.offsetHeight === 0) {
+		// 如果容器没有尺寸，延迟重试
+		setTimeout(() => {
+			renderChart1()
+		}, 100)
+		return
+	}
 
 	if (chart1Instance) {
 		chart1Instance.dispose()
@@ -2236,11 +2252,38 @@ function renderChart7New() {
 }
 
 // Watch for visibility changes
+// 渲染图表的辅助函数
+function tryRenderCharts() {
+	if (!props.visible) return
+	
+	nextTick(() => {
+		// 延迟确保 DOM 完全渲染和容器有尺寸
+		setTimeout(() => {
+			// 再次检查 visible 和容器是否存在
+			if (props.visible && chart1Ref.value) {
+				renderCharts()
+			} else {
+				// 如果容器还不存在，再延迟重试
+				setTimeout(() => {
+					if (props.visible) {
+						renderCharts()
+					}
+				}, 200)
+			}
+		}, 300)
+	})
+}
+
 watch(() => props.visible, (newVal) => {
 	if (newVal) {
-		nextTick(() => {
-			renderCharts()
-		})
+		tryRenderCharts()
+	}
+})
+
+// 组件挂载后，如果 visible 为 true，也触发渲染
+onMounted(() => {
+	if (props.visible) {
+		tryRenderCharts()
 	}
 })
 

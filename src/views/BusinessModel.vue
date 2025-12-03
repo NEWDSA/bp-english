@@ -9,27 +9,44 @@
 					<!-- B区域 - 左侧 -->
 					<div class="region-b-left" @click="showBContentPanel">
 						<div class="region-content">
-							<div class="region-label text-[80px] sm:text-[100px] md:text-[120px] lg:text-[140px]">B</div>
+							<div class="region-label text-[80px] sm:text-[100px] md:text-[120px] lg:text-[140px]">B
+							</div>
 							<div class="region-text text-lg sm:text-xl md:text-2xl">Business</div>
 						</div>
 					</div>
 					<!-- C区域 - 右侧 -->
 					<div class="region-c-right" @click="showCContentPanel">
 						<div class="region-content">
-							<div class="region-label text-[80px] sm:text-[100px] md:text-[120px] lg:text-[140px]">C</div>
+							<div class="region-label text-[80px] sm:text-[100px] md:text-[120px] lg:text-[140px]">C
+							</div>
 							<div class="region-text text-lg sm:text-xl md:text-2xl">Consumer</div>
 						</div>
 					</div>
 					<!-- 中间分割线 -->
 					<div class="center-divider"></div>
+					<!-- 中间圆形商业模式 -->
+					<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 cursor-pointer pointer-events-auto"
+						@click="showFinancialModal = true">
+
+						<div
+							class="group flex flex-col items-center justify-center gap-5 p-8 bg-black/30 backdrop-blur-[20px] backdrop-saturate-120 rounded-full w-[320px] h-[320px] md:w-[300px] md:h-[300px] md:p-7 md:gap-4 sm:w-[260px] sm:h-[260px] sm:p-6 sm:gap-3 border-2 border-white/20 transition-all duration-500 ease-in-out shadow-[0_0_30px_rgba(0,212,255,0.3),0_0_60px_rgba(0,212,255,0.2),inset_0_0_20px_rgba(0,212,255,0.1)] hover:scale-110 hover:border-[rgba(0,212,255,0.6)] hover:shadow-[0_0_40px_rgba(0,212,255,0.5),0_0_80px_rgba(0,212,255,0.3),inset_0_0_30px_rgba(0,212,255,0.2)] hover:bg-black/40">
+							<div class="region-label text-[80px] sm:text-[100px] md:text-[120px] lg:text-[140px]">
+								F
+							</div>
+							<div
+								class="text-lg sm:text-xl md:text-2xl font-medium text-white/90 uppercase tracking-[2px] md:tracking-[1.5px] sm:tracking-[0.5px] text-center leading-tight transition-all duration-300 ease-in-out [text-shadow:0_0_10px_rgba(0,212,255,0.5),0_0_20px_rgba(0,212,255,0.3)] group-hover:text-white group-hover:tracking-[3px] group-hover:[text-shadow:0_0_15px_rgba(0,212,255,0.8),0_0_30px_rgba(0,212,255,0.5)]">
+								<div>Financial</div>
+								<div>Model</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 
 			<!-- C方块的内容面板 - 全屏 -->
 			<div class="c-content-panel" v-if="showCContent">
 				<!-- 关闭按钮 -->
-				<button
-					@click="backToBlocks"
+				<button @click="backToBlocks"
 					class="button-focus absolute top-2 md:top-4 right-2 md:right-4 text-gray-300 bg-black/50 backdrop-blur-sm hover:bg-black/70 rounded-full p-2 md:p-2 z-50 transition-all duration-300 group">
 					<img src="../assets/icon-17.png" alt="返回" class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6">
 				</button>
@@ -38,13 +55,21 @@
 				<div class="c-content-wrapper">
 					<!-- 图片左上角 -->
 					<div class="content-section top-left">
-						<h3 class="content-section-title text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl">High-end events such as competitions</h3>
-						<p class="section-text text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg">Participate in or sponsor high-end water sports events; <br/>organize product appreciation events and water driving experience days.</p>
+						<h3
+							class="content-section-title text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl">
+							High-end events such as competitions</h3>
+						<p class="section-text text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg">Participate in
+							or sponsor high-end water sports events; <br />organize product appreciation events and
+							water driving experience days.</p>
 					</div>
 					<!-- 图片左下角 -->
 					<div class="content-section bottom-left">
-						<h3 class="content-section-title text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl">Online platforms and digital touchpoints</h3>
-						<p class="section-text text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg">Official independent website (brand story/technical details/online test drive booking)<br/>Social media matrix: Instagram/YouTube/TikTok</p>
+						<h3
+							class="content-section-title text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl">
+							Online platforms and digital touchpoints</h3>
+						<p class="section-text text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg">Official
+							independent website (brand story/technical details/online test drive booking)<br />Social
+							media matrix: Instagram/YouTube/TikTok</p>
 					</div>
 					<!-- 中间图片 -->
 					<div class="center-image-container">
@@ -52,13 +77,22 @@
 					</div>
 					<!-- 图片右上角 -->
 					<div class="content-section top-right">
-						<h3 class="content-section-title text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl">Industry exhibitions and media</h3>
-						<p class="section-text text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg">Participate in mainstream yacht shows<br/>Yacht industry association platform exposed</br>Leading industry media/KOL cooperation</p>
+						<h3
+							class="content-section-title text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl">
+							Industry exhibitions and media</h3>
+						<p class="section-text text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg">Participate in
+							mainstream yacht shows<br />Yacht industry association platform exposed</br>Leading industry
+							media/KOL cooperation</p>
 					</div>
 					<!-- 图片右下角 -->
 					<div class="content-section bottom-right">
-						<h3 class="content-section-title text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl">Offline sales network</h3>
-						<p class="section-text text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg">Overseas Sales/Partnerships: <br/>Establishing partnerships with internationally renowned yacht dealers<br/>Domestic channels: <br/>Establish a presence in high-end yacht clubs and collaborate with upscale tourist resorts.</p>
+						<h3
+							class="content-section-title text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl">
+							Offline sales network</h3>
+						<p class="section-text text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg">Overseas
+							Sales/Partnerships: <br />Establishing partnerships with internationally renowned yacht
+							dealers<br />Domestic channels: <br />Establish a presence in high-end yacht clubs and
+							collaborate with upscale tourist resorts.</p>
 					</div>
 				</div>
 			</div>
@@ -66,8 +100,7 @@
 			<!-- B方块的内容面板 - 全屏 -->
 			<div class="b-content-panel" v-if="showBContent">
 				<!-- 关闭按钮 -->
-				<button
-					@click="backToBlocks"
+				<button @click="backToBlocks"
 					class="button-focus absolute top-8 md:top-30 right-8 md:right-4 text-gray-300 bg-black/50 backdrop-blur-sm hover:bg-black/70 rounded-full p-2 md:p-2 z-50 transition-all duration-300 group">
 					<img src="../assets/icon-17.png" alt="返回" class="w-6 h-6">
 				</button>
@@ -75,84 +108,119 @@
 				<!-- B方块显示主要内容 -->
 				<div class="main-content">
 					<!-- 左侧面板：Revenue Model + Channel Strategy -->
-					<div class="left-panel !w-[550px] !min-w-[550px] !max-w-[550px]">
-						<!-- 收入模型图表 -->
-						<div class="chart-card revenue-hover-card w-[514px] h-[304px]" :class="{ 'revenue-selected': isRevenueSelected }"
-							@click="showContent('revenue')">
-							<h3 class="chart-title text-[20px]">Revenue Model</h3>
-							<div class="chart-container h-[230px]">
-								<div ref="revenueChartRef" class="revenue-echart"></div>
-							</div>
-						</div>
-
+					<div ref="leftPanelRef" class="left-panel mt-16 md:mt-20">
 						<!-- 渠道策略 -->
-						<div class="strategy-card">
-							<h3 class="strategy-title text-[26px]">Channel Strategy</h3>
+						<div
+							class="strategy-card bg-white/5 backdrop-blur-[30px] border border-white/15 rounded-xl p-6 shadow-xl">
+							<h3 class="strategy-title text-[36px] font-semibold text-white mb-4">Channel Strategy</h3>
+							<div class="border-b-2 border-white mb-6"></div>
 
-							<div class="strategy-section">
-								<div class="strategy-subtitle text-[22px] whitespace-nowrap">Domestic (B-end water area operator)</div>
-								<div class="strategy-content">
-									<p class="strategy-label text-[21px]">Positioning:</p>
-									<p class="strategy-text text-[18px]">To provide a full cycle hydrofoil operation solution for
+							<div class="strategy-section pb-6 mb-6 border-b-2 border-white">
+								<div class="strategy-subtitle flex items-baseline gap-3 mb-5">
+									<span class="text-6xl font-light text-white leading-none">01</span>
+									<span class="text-slate-400/40 text-6xl font-light">/</span>
+									<span class="text-[24px] text-white font-medium">Domestic (B-end water area
+										operator)</span>
+								</div>
+								<div class="strategy-content ml-[22px]">
+									<p class="strategy-label text-[20px] font-semibold text-white mb-2">Positioning:</p>
+									<p class="strategy-text text-[18px] text-white/90 mb-4 leading-relaxed">To provide a
+										full cycle hydrofoil operation
+										solution for
 										scenic
 										spots, passenger transport companies, and hotels.</p>
 
-									<p class="strategy-label text-[21px]">Core module:</p>
-									<p class="strategy-text text-[18px]">Fleet operation and maintenance (equipment support)+safety
+									<p class="strategy-label text-[20px] font-semibold text-white mb-2">Core module:</p>
+									<p class="strategy-text text-[18px] text-white/90 mb-2 leading-relaxed">Fleet
+										operation and maintenance (equipment
+										support)+safety
 										management (real-time monitoring)</p>
-									<p class="strategy-text text-[18px]">Product operation (leasing system)+dock support
+									<p class="strategy-text text-[18px] text-white/90 leading-relaxed">Product operation
+										(leasing system)+dock support
 										(infrastructure
 										support)</p>
 								</div>
 							</div>
 
 							<div class="strategy-section">
-								<h4 class="strategy-subtitle text-[22px]">Overseas business (C-end private enterprises/private berth
-									users)
-								</h4>
-								<div class="strategy-content">
-									<p class="strategy-label text-[21px]">Positioning:</p>
-									<p class="strategy-text text-[18px]">To build an intelligent hydrofoil boat lifestyle ecosystem
+								<div class="strategy-subtitle flex items-baseline gap-3 mb-5">
+									<span class="text-6xl font-light text-white leading-none">02</span>
+									<span class="text-slate-400/40 text-6xl font-light">/</span>
+									<span class="text-[24px] text-white font-medium">Overseas business (C-end private
+										enterprises/private berth
+										users)</span>
+								</div>
+								<div class="strategy-content ml-[22px]">
+									<p class="strategy-label text-[20px] font-semibold text-white mb-2">Positioning:</p>
+									<p class="strategy-text text-[18px] text-white/90 mb-4 leading-relaxed">To build an
+										intelligent hydrofoil boat
+										lifestyle ecosystem
 										for
 										middle-class private berth users.</p>
 
-									<p class="strategy-label text-[21px]">Core module:</p>
-									<p class="strategy-text text-[18px]">Map service (navigation planning)+APP service (remote
+									<p class="strategy-label text-[20px] font-semibold text-white mb-2">Core module:</p>
+									<p class="strategy-text text-[18px] text-white/90 mb-2 leading-relaxed">Map service
+										(navigation planning)+APP service
+										(remote
 										control)</p>
-									<p class="strategy-text text-[18px]">Additional services (customized maintenance/social
+									<p class="strategy-text text-[18px] text-white/90 leading-relaxed">Additional
+										services (customized
+										maintenance/social
 										functions)</p>
 								</div>
 							</div>
 						</div>
 					</div>
 
-					<!-- 中间面板：Lake Como 地图 -->
-					<div class="middle-panel">
-						<div class="map-container" @click="showContent('lake')">
-						</div>
-					</div>
-
 					<!-- 右侧面板：详细内容 -->
-					<div class="right-panel">
+					<div ref="rightPanelRef" class="right-panel -mt-[100px]">
 						<!-- 内容面板 -->
-						<div class="content-panel w-[614px]" v-if="activeContent && activeContent !== 'revenue'">
+						<div class="content-panel w-full bg-white/5 rounded-[10px] backdrop-blur-[30px]"
+							v-if="activeContent && activeContent !== 'revenue'">
 							<!-- Lake Como 案例内容 -->
 							<div v-if="activeContent === 'lake' && !showLakeDetail" class="lake-content"
-								@click="showLakeDetailPanel">
-								<div class="content-title text-[26px] mb-[10.67px]">The case of Lake Como</div>
-								<div class="content-subtitle text-[18px] mb-[26.67px]">Daily average number of tourists</div>
-
-								<!-- ECharts 圆环图 -->
-								<div class="pie-chart-container">
-									<div ref="pieChartRef" class="pie-chart-echarts"></div>
+								@click="toggleEchart">
+								<div class="content-title text-[36px] mb-[10.67px]">The case of Lake Como</div>
+								<div class="content-subtitle text-[24px] mb-[26.67px]">Daily average number of tourists
 								</div>
 
-								<!-- 描述文字 -->
-								<p class="description-text text-[18px] my-[26.67px]">
+								<!-- ECharts 圆环图 -->
+								<div v-if="!showDemandChart" class="pie-chart-container">
+									<div ref="pieChartRef" class="pie-chart-echarts"></div>
+								</div>
+								
+								<!-- ECharts 半环形图 -->
+								<div v-if="showDemandChart" class="demand-chart-container">
+									<div ref="demandChartRef" class="demand-chart-echarts"></div>
+									<!-- 引导线连接的文字 -->
+									<div class="chart-labels">
+										<div class="chart-label-left">
+											<div class="label-text text-[18px]">Daily transportation demand</div>
+											<div class="label-text text-[18px]">in the lake area</div>
+										</div>
+										<div class="chart-label-right">
+											<div class="label-text text-[18px]">Connection
+												Requirements</div>
+										</div>
+										<div class="chart-label-bottom">
+											<div class="label-text text-[18px]">Other
+												Requirements</div>
+										</div>
+									</div>
+								</div>
+
+								<!-- 描述文字 - 根据echart切换 -->
+								<p v-if="!showDemandChart" class="description-text text-[18px] my-[26.67px]">
 									Each hotel has an average of 100 rooms, totaling 400 rooms, calculated based on the
 									number
 									of tourists during the off-season.
 								</p>
+								
+								<!-- 描述文字 - 半环形图 -->
+								<div v-if="showDemandChart" class="demand-description my-[26.67px]">
+									<p class="text-[18px]">Each ship has a passenger capacity of 4 people</p>
+									<p class="text-[18px]">The total demand for hydrofoil boats is 25-38</p>
+								</div>
 
 								<!-- 柱状图 -->
 								<div class="bar-charts my-[26.67px]">
@@ -250,7 +318,8 @@
 										<span class="legend-value text-[18px]">1200 people</span>
 									</div>
 									<div class="legend-item">
-										<span class="legend-label text-[18px]">Overnight tourists (50% occupancy rate)</span>
+										<span class="legend-label text-[18px]">Overnight tourists (50% occupancy
+											rate)</span>
 										<span class="legend-value text-[18px]">400-600 people</span>
 									</div>
 								</div>
@@ -261,8 +330,9 @@
 								@click="hideContent">
 								<!-- Transportation Demand 部分 -->
 								<div class="transportation-demand-section">
-								<div class="main-title text-xs sm:text-sm md:text-base mb-[13px]">Daily average number of boat tourists</div>
-								<div class="section-title text-[18px] mb-[13px]">Transportation Demand</div>
+									<div class="main-title text-[24px] mb-[13px]">Daily average
+										number of boat tourists</div>
+									<div class="section-title text-[20px] mb-[13px]">Transportation Demand</div>
 
 									<!-- ECharts 半环形图 -->
 									<div class="demand-chart-container">
@@ -270,27 +340,32 @@
 										<!-- 引导线连接的文字 -->
 										<div class="chart-labels">
 											<div class="chart-label-left">
-												<div class="label-text">Daily transportation demand</div>
-												<div class="label-text">in the lake area</div>
+												<div class="label-text text-[18px]">Daily transportation demand</div>
+												<div class="label-text text-[18px]">in the lake area</div>
 											</div>
 											<div class="chart-label-right">
-												<div class="label-text text-xs sm:text-sm md:text-base">Connection Requirements</div>
+												<div class="label-text text-[18px]">Connection
+													Requirements</div>
 											</div>
 											<div class="chart-label-bottom">
-												<div class="label-text text-xs sm:text-sm md:text-base">Other Requirements</div>
+												<div class="label-text text-[18px]">Other
+													Requirements</div>
 											</div>
 										</div>
 									</div>
 									<!-- 描述文字 -->
 									<div class="demand-description">
-										<p class="text-[10px] sm:text-xs md:text-sm">Each ship has a passenger capacity of 4 people</p>
-										<p class="text-[10px] sm:text-xs md:text-sm">The total demand for hydrofoil boats is 25-38</p>
+										<p class="text-[18px]">Each ship has a passenger capacity
+											of 4 people</p>
+										<p class="text-[18px]">The total demand for hydrofoil
+											boats is 25-38</p>
 									</div>
 								</div>
 
 								<!-- 游客数据部分 -->
 								<div class="tourist-data-section mt-[12px]">
-									<div class="section-title mb-[13px]">The daily average number of tourists taking boats on Lake
+									<div class="section-title text-[20px] mb-[13px]">The daily average number of tourists taking
+										boats on Lake
 										Como,
 										calculated based on the peak and off peak seasons</div>
 
@@ -463,28 +538,52 @@
 									<!-- 详细数据列表 -->
 									<div class="data-list">
 										<div class="data-item mb-[6px]">
-											<span class="data-label text-[10px] sm:text-xs md:text-sm whitespace-nowrap">Proportion of boat tourists during the off-season (7.5%)</span>
-											<span class="data-value text-[10px] sm:text-xs md:text-sm whitespace-nowrap">750 people</span>
+											<span
+												class="data-label text-[18px] whitespace-nowrap">Proportion
+												of boat tourists during the off-season (7.5%)</span>
+											<span
+												class="data-value text-[18px] whitespace-nowrap">750
+												people</span>
 										</div>
 										<div class="data-item mb-[6px]">
-											<span class="data-label text-[10px] sm:text-xs md:text-sm whitespace-nowrap">During the off-season, tourists staying overnight use boats (75%)</span>
-											<span class="data-value text-[10px] sm:text-xs md:text-sm whitespace-nowrap">450 people</span>
+											<span
+												class="data-label text-[18px] whitespace-nowrap">During
+												the off-season, tourists staying overnight use boats (75%)</span>
+											<span
+												class="data-value text-[18px] whitespace-nowrap">450
+												people</span>
 										</div>
 										<div class="data-item mb-[6px]">
-											<span class="data-label text-[10px] sm:text-xs md:text-sm whitespace-nowrap">Proportion of boat tourists during peak season (7.5%)</span>
-											<span class="data-value text-[10px] sm:text-xs md:text-sm whitespace-nowrap">1312 people</span>
+											<span
+												class="data-label text-[18px] whitespace-nowrap">Proportion
+												of boat tourists during peak season (7.5%)</span>
+											<span
+												class="data-value text-[18px] whitespace-nowrap">1312
+												people</span>
 										</div>
 										<div class="data-item mb-[6px]">
-											<span class="data-label text-[10px] sm:text-xs md:text-sm whitespace-nowrap">Tourists staying overnight during peak season use boats (75%)</span>
-											<span class="data-value text-[10px] sm:text-xs md:text-sm whitespace-nowrap">900 people</span>
+											<span
+												class="data-label text-[18px] whitespace-nowrap">Tourists
+												staying overnight during peak season use boats (75%)</span>
+											<span
+												class="data-value text-[18px] whitespace-nowrap">900
+												people</span>
 										</div>
 										<div class="data-item mb-[6px]">
-											<span class="data-label text-[10px] sm:text-xs md:text-sm whitespace-nowrap">Average daily number of boat tourists during the off-season</span>
-											<span class="data-value text-[10px] sm:text-xs md:text-sm whitespace-nowrap">1200 people</span>
+											<span
+												class="data-label text-[18px] whitespace-nowrap">Average
+												daily number of boat tourists during the off-season</span>
+											<span
+												class="data-value text-[18px] whitespace-nowrap">1200
+												people</span>
 										</div>
 										<div class="data-item">
-											<span class="data-label text-[10px] sm:text-xs md:text-sm whitespace-nowrap">Average daily number of boat tourists during peak season</span>
-											<span class="data-value text-[10px] sm:text-xs md:text-sm whitespace-nowrap">2212 people</span>
+											<span
+												class="data-label text-[18px] whitespace-nowrap">Average
+												daily number of boat tourists during peak season</span>
+											<span
+												class="data-value text-[18px] whitespace-nowrap">2212
+												people</span>
 										</div>
 									</div>
 								</div>
@@ -492,13 +591,17 @@
 
 							<!-- 其他内容面板可以在这里添加 -->
 							<div v-if="activeContent === 'tourists'" class="tourists-content">
-								<div class="content-title text-base sm:text-lg md:text-xl lg:text-2xl">Daily average number of boat tourists</div>
-								<p class="text-xs sm:text-sm md:text-base">Tourist data content will be displayed here.</p>
+								<div class="content-title text-base sm:text-lg md:text-xl lg:text-2xl">Daily average
+									number of boat tourists</div>
+								<p class="text-xs sm:text-sm md:text-base">Tourist data content will be displayed here.
+								</p>
 							</div>
 
 							<div v-if="activeContent === 'profit'" class="profit-content">
-								<div class="content-title text-base sm:text-lg md:text-xl lg:text-2xl">Operating profit and loss statement</div>
-								<p class="text-xs sm:text-sm md:text-base">Profit and loss data will be displayed here.</p>
+								<div class="content-title text-base sm:text-lg md:text-xl lg:text-2xl">Operating profit
+									and loss statement</div>
+								<p class="text-xs sm:text-sm md:text-base">Profit and loss data will be displayed here.
+								</p>
 							</div>
 						</div>
 					</div>
@@ -507,10 +610,7 @@
 		</div>
 
 		<!-- Revenue Model 弹窗组件 -->
-		<RevenueModal
-			:visible="activeContent === 'revenue'"
-			@close="hideContent"
-		/>
+		<RevenueModal :visible="activeContent === 'revenue'" @close="hideContent" />
 
 
 		<!-- 顶部导航栏 -->
@@ -521,8 +621,8 @@
 			<!-- 左侧面板：Revenue Model + Channel Strategy -->
 			<div class="left-panel">
 				<!-- 收入模型图表 -->
-				<div class="chart-card revenue-hover-card w-[514px] h-[304px]" :class="{ 'revenue-selected': isRevenueSelected }"
-					@click="showContent('revenue')">
+				<div class="chart-card revenue-hover-card w-[514px] h-[304px]"
+					:class="{ 'revenue-selected': isRevenueSelected }" @click="showContent('revenue')">
 					<h3 class="chart-title text-[20px]">Revenue Model</h3>
 					<div class="chart-container">
 						<div ref="revenueChartRef" class="revenue-echart"></div>
@@ -535,31 +635,39 @@
 					<h3 class="strategy-title text-[26px]">Channel Strategy</h3>
 
 					<div class="strategy-section">
-						<div class="strategy-subtitle text-[22px] whitespace-nowrap">Domestic (B-end water area operator)</div>
+						<div class="strategy-subtitle text-[22px] whitespace-nowrap">Domestic (B-end water area
+							operator)</div>
 						<div class="strategy-content">
 							<p class="strategy-label text-[21px]">Positioning:</p>
-							<p class="strategy-text text-[18px]">To provide a full cycle hydrofoil operation solution for scenic
+							<p class="strategy-text text-[18px]">To provide a full cycle hydrofoil operation solution
+								for scenic
 								spots, passenger transport companies, and hotels.</p>
 
 							<p class="strategy-label text-[21px]">Core module:</p>
-							<p class="strategy-text text-[18px]">Fleet operation and maintenance (equipment support)+safety
+							<p class="strategy-text text-[18px]">Fleet operation and maintenance (equipment
+								support)+safety
 								management (real-time monitoring)</p>
-							<p class="strategy-text text-[18px]">Product operation (leasing system)+dock support (infrastructure
+							<p class="strategy-text text-[18px]">Product operation (leasing system)+dock support
+								(infrastructure
 								support)</p>
 						</div>
 					</div>
 
 					<div class="strategy-section">
-						<h4 class="strategy-subtitle text-[22px]">Overseas business (C-end private enterprises/private berth users)
+						<h4 class="strategy-subtitle text-[22px]">Overseas business (C-end private enterprises/private
+							berth users)
 						</h4>
 						<div class="strategy-content">
 							<p class="strategy-label text-[21px]">Positioning:</p>
-							<p class="strategy-text text-[18px]">To build an intelligent hydrofoil boat lifestyle ecosystem for
+							<p class="strategy-text text-[18px]">To build an intelligent hydrofoil boat lifestyle
+								ecosystem for
 								middle-class private berth users.</p>
 
 							<p class="strategy-label text-[21px]">Core module:</p>
-							<p class="strategy-text text-[18px]">Map service (navigation planning)+APP service (remote control)</p>
-							<p class="strategy-text text-[18px]">Additional services (customized maintenance/social functions)</p>
+							<p class="strategy-text text-[18px]">Map service (navigation planning)+APP service (remote
+								control)</p>
+							<p class="strategy-text text-[18px]">Additional services (customized maintenance/social
+								functions)</p>
 						</div>
 					</div>
 				</div>
@@ -584,8 +692,8 @@
 					<!-- Lake Como 案例内容 -->
 					<div v-if="activeContent === 'lake' && !showLakeDetail" class="lake-content"
 						@click="showLakeDetailPanel">
-						<div class="content-title text-[26px] mb-[10.67px]">The case of Lake Como</div>
-						<div class="content-subtitle text-[18px] mb-[26.67px]">Daily average number of tourists</div>
+						<div class="content-title text-[36px] mb-[10.67px]">The case of Lake Como</div>
+						<div class="content-subtitle text-[24px] mb-[26.67px]">Daily average number of tourists</div>
 
 						<!-- ECharts 圆环图 -->
 						<div class="pie-chart-container">
@@ -601,85 +709,85 @@
 						<!-- 柱状图 -->
 						<div class="bar-charts my-[26.67px]">
 							<div class="bar-row">
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
+								<div class="bar-item filled w-[16px] h-[16px]"></div>
+								<div class="bar-item filled w-[16px] h-[16px]"></div>
+								<div class="bar-item filled w-[16px] h-[16px]"></div>
+								<div class="bar-item filled w-[16px] h-[16px]"></div>
+								<div class="bar-item filled w-[16px] h-[16px]"></div>
+								<div class="bar-item filled w-[16px] h-[16px]"></div>
+								<div class="bar-item filled w-[16px] h-[16px]"></div>
+								<div class="bar-item filled w-[16px] h-[16px]"></div>
+								<div class="bar-item filled w-[16px] h-[16px]"></div>
+								<div class="bar-item filled w-[16px] h-[16px]"></div>
+								<div class="bar-item filled w-[16px] h-[16px]"></div>
+								<div class="bar-item filled w-[16px] h-[16px]"></div>
+								<div class="bar-item filled w-[16px] h-[16px]"></div>
+								<div class="bar-item filled w-[16px] h-[16px]"></div>
+								<div class="bar-item filled w-[16px] h-[16px]"></div>
+								<div class="bar-item filled w-[16px] h-[16px]"></div>
+								<div class="bar-item filled w-[16px] h-[16px]"></div>
+								<div class="bar-item filled w-[16px] h-[16px]"></div>
+								<div class="bar-item filled w-[16px] h-[16px]"></div>
+								<div class="bar-item filled w-[16px] h-[16px]"></div>
+								<div class="bar-item empty w-[16px] h-[16px]"></div>
+								<div class="bar-item empty w-[16px] h-[16px]"></div>
+								<div class="bar-item empty w-[16px] h-[16px]"></div>
+								<div class="bar-item empty w-[16px] h-[16px]"></div>
+								<div class="bar-item empty w-[16px] h-[16px]"></div>
 							</div>
 							<div class="bar-row">
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
+								<div class="bar-item filled w-[16px] h-[16px]"></div>
+								<div class="bar-item filled w-[16px] h-[16px]"></div>
+								<div class="bar-item filled w-[16px] h-[16px]"></div>
+								<div class="bar-item filled w-[16px] h-[16px]"></div>
+								<div class="bar-item filled w-[16px] h-[16px]"></div>
+								<div class="bar-item filled w-[16px] h-[16px]"></div>
+								<div class="bar-item filled w-[16px] h-[16px]"></div>
+								<div class="bar-item filled w-[16px] h-[16px]"></div>
+								<div class="bar-item filled w-[16px] h-[16px]"></div>
+								<div class="bar-item filled w-[16px] h-[16px]"></div>
+								<div class="bar-item filled w-[16px] h-[16px]"></div>
+								<div class="bar-item filled w-[16px] h-[16px]"></div>
+								<div class="bar-item empty w-[16px] h-[16px]"></div>
+								<div class="bar-item empty w-[16px] h-[16px]"></div>
+								<div class="bar-item empty w-[16px] h-[16px]"></div>
+								<div class="bar-item empty w-[16px] h-[16px]"></div>
+								<div class="bar-item empty w-[16px] h-[16px]"></div>
+								<div class="bar-item empty w-[16px] h-[16px]"></div>
+								<div class="bar-item empty w-[16px] h-[16px]"></div>
+								<div class="bar-item empty w-[16px] h-[16px]"></div>
+								<div class="bar-item empty w-[16px] h-[16px]"></div>
+								<div class="bar-item empty w-[16px] h-[16px]"></div>
+								<div class="bar-item empty w-[16px] h-[16px]"></div>
+								<div class="bar-item empty w-[16px] h-[16px]"></div>
+								<div class="bar-item empty w-[16px] h-[16px]"></div>
 							</div>
 							<div class="bar-row">
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
+								<div class="bar-item filled w-[16px] h-[16px]"></div>
+								<div class="bar-item filled w-[16px] h-[16px]"></div>
+								<div class="bar-item filled w-[16px] h-[16px]"></div>
+								<div class="bar-item filled w-[16px] h-[16px]"></div>
+								<div class="bar-item empty w-[16px] h-[16px]"></div>
+								<div class="bar-item empty w-[16px] h-[16px]"></div>
+								<div class="bar-item empty w-[16px] h-[16px]"></div>
+								<div class="bar-item empty w-[16px] h-[16px]"></div>
+								<div class="bar-item empty w-[16px] h-[16px]"></div>
+								<div class="bar-item empty w-[16px] h-[16px]"></div>
+								<div class="bar-item empty w-[16px] h-[16px]"></div>
+								<div class="bar-item empty w-[16px] h-[16px]"></div>
+								<div class="bar-item empty w-[16px] h-[16px]"></div>
+								<div class="bar-item empty w-[16px] h-[16px]"></div>
+								<div class="bar-item empty w-[16px] h-[16px]"></div>
+								<div class="bar-item empty w-[16px] h-[16px]"></div>
+								<div class="bar-item empty w-[16px] h-[16px]"></div>
+								<div class="bar-item empty w-[16px] h-[16px]"></div>
+								<div class="bar-item empty w-[16px] h-[16px]"></div>
+								<div class="bar-item empty w-[16px] h-[16px]"></div>
+								<div class="bar-item empty w-[16px] h-[16px]"></div>
+								<div class="bar-item empty w-[16px] h-[16px]"></div>
+								<div class="bar-item empty w-[16px] h-[16px]"></div>
+								<div class="bar-item empty w-[16px] h-[16px]"></div>
+								<div class="bar-item empty w-[16px] h-[16px]"></div>
 							</div>
 						</div>
 
@@ -704,8 +812,9 @@
 					<div v-if="activeContent === 'lake' && showLakeDetail" class="lake-content" @click="hideContent">
 						<!-- Transportation Demand 部分 -->
 						<div class="transportation-demand-section">
-								<div class="main-title text-xs sm:text-sm md:text-base mb-[13px]">Daily average number of boat tourists</div>
-								<div class="section-title text-[18px] mb-[13px]">Transportation Demand</div>
+							<div class="main-title text-[20px] mb-[13px]">Daily average number of
+								boat tourists</div>
+							<div class="section-title text-[18px] mb-[13px]">Transportation Demand</div>
 
 							<!-- ECharts 半环形图 -->
 							<div class="demand-chart-container">
@@ -713,221 +822,230 @@
 								<!-- 引导线连接的文字 -->
 								<div class="chart-labels">
 									<div class="chart-label-left">
-										<div class="label-text text-xs sm:text-sm md:text-base">Daily transportation demand</div>
-										<div class="label-text text-xs sm:text-sm md:text-base">in the lake area</div>
+										<div class="label-text text-[18px]">Daily transportation
+											demand</div>
+										<div class="label-text text-[18px]">in the lake area</div>
 									</div>
 									<div class="chart-label-right">
-										<div class="label-text text-xs sm:text-sm md:text-base">Connection Requirements</div>
+										<div class="label-text text-[18px]">Connection Requirements
+										</div>
 									</div>
 									<div class="chart-label-bottom">
-										<div class="label-text text-xs sm:text-sm md:text-base">Other Requirements</div>
+										<div class="label-text text-[18px]">Other Requirements</div>
 									</div>
 								</div>
 							</div>
 							<!-- 描述文字 -->
 							<div class="demand-description">
-								<p>Each ship has a passenger capacity of 4 people</p>
-								<p>The total demand for hydrofoil boats is 25-38</p>
+								<p class="text-[18px]">Each ship has a passenger capacity of 4 people</p>
+								<p class="text-[18px]">The total demand for hydrofoil boats is 25-38</p>
 							</div>
 						</div>
 
 						<!-- 游客数据部分 -->
 						<div class="tourist-data-section mt-[12px]">
-									<div class="section-title text-[11px] sm:text-xs md:text-sm mb-[13px]">The daily average number of tourists taking boats on Lake Como,
-										calculated based on the peak and off peak seasons</div>
+							<div class="section-title text-[18px] mb-[13px]">The daily average
+								number of tourists taking boats on Lake Como,
+								calculated based on the peak and off peak seasons</div>
 
 							<!-- 柱状图 -->
 							<div class="bar-charts my-[26.67px]">
 								<!-- 第一行：11个filled + 4个empty = 15个方块 -->
 								<div class="bar-row">
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
 								</div>
 								<div class="bar-row">
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
 								</div>
 								<div class="bar-row">
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
 								</div>
 								<div class="bar-row">
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
 								</div>
 								<div class="bar-row">
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
-											<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
+									<div class="bar-item empty w-[16px] h-[16px]"></div>
 								</div>
 								<div class="bar-row">
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
-											<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
+									<div class="bar-item filled w-[16px] h-[16px]"></div>
 								</div>
 							</div>
 
 							<!-- 详细数据列表 -->
 							<div class="data-list">
 								<div class="data-item mb-[6px]">
-									<span class="data-label whitespace-nowrap">Proportion of boat tourists during the off-season (7.5%)</span>
-									<span class="data-value whitespace-nowrap">750 people</span>
+									<span class="data-label text-[18px] whitespace-nowrap">Proportion of boat tourists during the
+										off-season (7.5%)</span>
+									<span class="data-value text-[18px] whitespace-nowrap">750 people</span>
 								</div>
 								<div class="data-item mb-[6px]">
-									<span class="data-label whitespace-nowrap">During the off-season, tourists staying overnight use boats (75%)</span>
-									<span class="data-value whitespace-nowrap">450 people</span>
+									<span class="data-label text-[18px] whitespace-nowrap">During the off-season, tourists staying
+										overnight use boats (75%)</span>
+									<span class="data-value text-[18px] whitespace-nowrap">450 people</span>
 								</div>
 								<div class="data-item mb-[6px]">
-									<span class="data-label whitespace-nowrap">Proportion of boat tourists during peak season (7.5%)</span>
-									<span class="data-value whitespace-nowrap">1312 people</span>
+									<span class="data-label text-[18px] whitespace-nowrap">Proportion of boat tourists during peak
+										season (7.5%)</span>
+									<span class="data-value text-[18px] whitespace-nowrap">1312 people</span>
 								</div>
 								<div class="data-item mb-[6px]">
-									<span class="data-label whitespace-nowrap">Tourists staying overnight during peak season use boats (75%)</span>
-									<span class="data-value whitespace-nowrap">900 people</span>
+									<span class="data-label text-[18px] whitespace-nowrap">Tourists staying overnight during peak
+										season use boats (75%)</span>
+									<span class="data-value text-[18px] whitespace-nowrap">900 people</span>
 								</div>
 								<div class="data-item mb-[6px]">
-									<span class="data-label whitespace-nowrap">Average daily number of boat tourists during the off-season</span>
-									<span class="data-value whitespace-nowrap">1200 people</span>
+									<span class="data-label text-[18px] whitespace-nowrap">Average daily number of boat tourists
+										during the off-season</span>
+									<span class="data-value text-[18px] whitespace-nowrap">1200 people</span>
 								</div>
 								<div class="data-item">
-									<span class="data-label whitespace-nowrap">Average daily number of boat tourists during peak season</span>
-									<span class="data-value whitespace-nowrap">2212 people</span>
+									<span class="data-label text-[18px] whitespace-nowrap">Average daily number of boat tourists
+										during peak season</span>
+									<span class="data-value text-[18px] whitespace-nowrap">2212 people</span>
 								</div>
 							</div>
 						</div>
@@ -947,10 +1065,19 @@
 			</div>
 		</div>
 	</div>
+
+	<!-- Financial Model 弹窗 - 使用 RevenueModal 组件 -->
+	<div v-if="showFinancialModal"
+		class="fixed inset-0 z-[10000] mt-[71px] sm:mt-[60px] w-full h-[calc(100%-71px)] sm:h-[calc(100%-60px)] bg-[#121727] overflow-hidden">
+		<div class="relative w-full h-full financial-modal-wrapper">
+			<!-- RevenueModal 内容 -->
+			<RevenueModal :visible="showFinancialModal" @close="showFinancialModal = false" />
+		</div>
+	</div>
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount, watchEffect, nextTick } from 'vue'
+import { ref, onMounted, onBeforeUnmount, watchEffect, watch, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import * as echarts from 'echarts'
 import TopNavigation from '../components/TopNavigation.vue';
@@ -960,9 +1087,10 @@ import { stack } from 'three/tsl';
 const router = useRouter()
 
 // 内容面板状态
-const activeContent = ref(null)
+const activeContent = ref('lake')
 const showLakeDetail = ref(false)
 const isRevenueSelected = ref(false)
+const showDemandChart = ref(false) // 控制显示哪个echart
 
 // Page navigation functions
 // Revenue page navigation methods removed - now handled in RevenueModal component
@@ -971,6 +1099,9 @@ const isRevenueSelected = ref(false)
 const showOverlay = ref(true)
 const showCContent = ref(false)
 const showBContent = ref(false)
+
+// Financial Model 弹窗状态
+const showFinancialModal = ref(false)
 
 // 隐藏覆盖层（完全关闭）
 function hideOverlay() {
@@ -1035,11 +1166,22 @@ async function showContent(contentType) {
 
 	// 如果是lake类型，渲染饼图
 	if (contentType === 'lake') {
+		// 重置echart显示状态
+		showDemandChart.value = false
 		renderPieChart()
 		// 如果显示详情面板，也渲染需求图表
 		if (showLakeDetail.value) {
 			renderDemandChart()
 		}
+		// 渲染完成后同步面板高度
+		setTimeout(() => {
+			syncPanelHeight()
+		}, 200)
+	} else {
+		// 其他内容类型也同步高度
+		setTimeout(() => {
+			syncPanelHeight()
+		}, 100)
 	}
 }
 
@@ -1059,6 +1201,23 @@ function showLakeDetailPanel() {
 	})
 }
 
+// 切换echart显示
+function toggleEchart() {
+	showDemandChart.value = !showDemandChart.value
+	// 等待DOM更新后渲染对应的图表
+	nextTick(() => {
+		if (showDemandChart.value) {
+			renderDemandChart()
+		} else {
+			renderPieChart()
+		}
+		// 渲染完成后同步面板高度
+		setTimeout(() => {
+			syncPanelHeight()
+		}, 200)
+	})
+}
+
 // 隐藏Lake详情面板
 function hideLakeDetailPanel() {
 	showLakeDetail.value = false
@@ -1075,6 +1234,10 @@ let pieChartInstance = null
 // Transportation Demand Chart
 const demandChartRef = ref(null)
 let demandChartInstance = null
+
+// 面板高度同步
+const leftPanelRef = ref(null)
+const rightPanelRef = ref(null)
 
 // Page navigation (removed, now handled in RevenueModal component)
 
@@ -1178,6 +1341,35 @@ function renderPieChart() {
 	// 重新创建实例
 	pieChartInstance = echarts.init(pieChartRef.value)
 
+	// 根据屏幕宽度计算响应式字体大小和labelLine长度
+	const viewportWidth = window.innerWidth
+	let labelFontSize = 15
+	let labelLineHeight = 19
+	let labelLineLength = 10
+	let labelLineLength2 = 5
+	
+	if (viewportWidth <= 1366) {
+		labelFontSize = 12
+		labelLineHeight = 15
+		labelLineLength = 5
+		labelLineLength2 = 3
+	} else if (viewportWidth <= 1600) {
+		labelFontSize = 12
+		labelLineHeight = 15
+		labelLineLength = 5
+		labelLineLength2 = 3
+	} else if (viewportWidth <= 1920) {
+		labelFontSize = 14
+		labelLineHeight = 18
+		labelLineLength = 10
+		labelLineLength2 = 5
+	} else {
+		labelFontSize = 15
+		labelLineHeight = 19
+		labelLineLength = 10
+		labelLineLength2 = 5
+	}
+
 	const option = {
 		tooltip: {
 			trigger: 'item',
@@ -1203,15 +1395,15 @@ function renderPieChart() {
 							show: true,
 							position: 'outside',
 							formatter: 'Peak Season\nJune-September\nDaily average number of tourists\n15000-20000 people/time',
-							fontSize: 8,
+							fontSize: labelFontSize,
 							// fontWeight: 'bold',
 							color: '#ffffff',
-							lineHeight: 12
+							lineHeight: labelLineHeight
 						},
 						labelLine: {
 							show: true,
-							length: 10,
-							length2: 5,
+							length: labelLineLength,
+							length2: labelLineLength2,
 							lineStyle: {
 								color: '#FF9A4E',
 								width: 1
@@ -1228,15 +1420,15 @@ function renderPieChart() {
 							show: true,
 							position: 'outside',
 							formatter: 'Off-Season\nOctober-May\nDaily average number of tourists\n5000-10000 people/time',
-							fontSize: 8,
+							fontSize: labelFontSize,
 							// fontWeight: 'bold',
 							color: '#ffffff',
-							lineHeight: 12
+							lineHeight: labelLineHeight
 						},
 						labelLine: {
 							show: true,
-							length: 10,
-							length2: 5,
+							length: labelLineLength,
+							length2: labelLineLength2,
 							lineStyle: {
 								color: '#00d4ff',
 								width: 1
@@ -1408,6 +1600,18 @@ function renderDemandChart() {
 
 onMounted(() => {
 	window.addEventListener('resize', onWindowResize)
+	// 初始同步面板高度，等待内容渲染完成
+	setTimeout(() => {
+		// 如果默认显示lake内容，等待echart渲染完成
+		if (activeContent.value === 'lake') {
+			renderPieChart()
+			setTimeout(() => {
+				syncPanelHeight()
+			}, 300)
+		} else {
+			syncPanelHeight()
+		}
+	}, 200)
 })
 
 // 监听B内容面板显示或覆盖层关闭，渲染图表
@@ -1419,16 +1623,158 @@ watchEffect(() => {
 				if (showBContent.value || !showOverlay.value) {
 					renderRevenueChart()
 					renderPieChart()
+					// 图表渲染完成后同步面板高度
+					setTimeout(() => {
+						syncPanelHeight()
+					}, 300)
 				}
 			}, 100)
 		})
 	}
 })
 
+// 同步左右面板高度，响应屏幕大小变化
+function syncPanelHeight() {
+	if (leftPanelRef.value && rightPanelRef.value) {
+		nextTick(() => {
+			const viewportHeight = window.innerHeight
+			
+			// 获取左侧面板的顶部位置
+			const leftRect = leftPanelRef.value.getBoundingClientRect()
+			const leftTopOffset = leftRect.top
+			
+			// 获取右侧面板的顶部位置
+			const rightRect = rightPanelRef.value.getBoundingClientRect()
+			const rightTopOffset = rightRect.top
+			
+			// 当浏览器高度小于1080px时，面板底部距离视口底部120px
+			if (viewportHeight < 1080) {
+				// 计算左侧面板的最大高度：视口高度 - 顶部距离 - 底部距离(120px)
+				const leftMaxHeight = viewportHeight - leftTopOffset - 120
+				
+				// 设置左侧面板的最大高度，但不设置滚动（滚动条在 strategy-card 内显示）
+				leftPanelRef.value.style.maxHeight = `${leftMaxHeight}px`
+				leftPanelRef.value.style.height = 'auto'
+				leftPanelRef.value.style.overflowY = 'visible'
+				leftPanelRef.value.style.overflowX = 'visible'
+				
+				// 等待左侧面板高度更新后，获取实际高度
+				requestAnimationFrame(() => {
+					// 获取左侧面板的实际高度（包括内容）
+					const leftActualHeight = leftPanelRef.value.offsetHeight
+					
+					// 设置右侧面板的高度与左侧面板一致
+					rightPanelRef.value.style.maxHeight = `${leftActualHeight}px`
+					rightPanelRef.value.style.height = `${leftActualHeight}px`
+					rightPanelRef.value.style.overflowY = 'visible'
+					rightPanelRef.value.style.overflowX = 'visible'
+					
+					// 设置 strategy-card 的最大高度和滚动，让滚动条在这里显示
+					const strategyCard = leftPanelRef.value.querySelector('.strategy-card')
+					if (strategyCard) {
+						// 计算 strategy-card 的最大高度：左侧面板高度 - Revenue Model 卡片高度 - padding - gap
+						const revenueCard = leftPanelRef.value.querySelector('.revenue-hover-card')
+						const revenueCardHeight = revenueCard ? revenueCard.offsetHeight : 0
+						const leftPanelPadding = parseFloat(window.getComputedStyle(leftPanelRef.value).paddingTop) + parseFloat(window.getComputedStyle(leftPanelRef.value).paddingBottom)
+						const leftPanelGap = parseFloat(window.getComputedStyle(leftPanelRef.value).gap) || 12
+						const strategyCardMaxHeight = leftActualHeight - revenueCardHeight - leftPanelPadding - leftPanelGap
+						
+						strategyCard.style.maxHeight = `${strategyCardMaxHeight}px`
+						strategyCard.style.height = 'auto'
+						strategyCard.style.overflowY = 'auto'
+						strategyCard.style.overflowX = 'visible'
+					}
+					
+					// 设置右侧面板的 content-panel，让滚动条在这里显示
+					const contentPanel = rightPanelRef.value.querySelector('.content-panel')
+					if (contentPanel) {
+						// 计算 content-panel 的最大高度：右侧面板高度 - padding
+						const rightPanelPadding = parseFloat(window.getComputedStyle(rightPanelRef.value).paddingTop) + parseFloat(window.getComputedStyle(rightPanelRef.value).paddingBottom)
+						const contentPanelMaxHeight = leftActualHeight - rightPanelPadding
+						contentPanel.style.maxHeight = `${contentPanelMaxHeight}px`
+						contentPanel.style.height = 'auto'
+						contentPanel.style.overflowY = 'auto'
+						contentPanel.style.overflowX = 'visible'
+					}
+				})
+			} else {
+				// 当浏览器高度 >= 1080px 时，使用自适应高度，但保持左右面板高度一致
+				// 先让左侧面板自适应内容
+				leftPanelRef.value.style.maxHeight = 'none'
+				leftPanelRef.value.style.height = 'auto'
+				leftPanelRef.value.style.overflow = 'visible'
+				
+				// 等待左侧面板高度更新后，获取实际高度
+				requestAnimationFrame(() => {
+					// 获取左侧面板的实际高度（包括内容）
+					const leftActualHeight = leftPanelRef.value.offsetHeight
+					
+					// 设置右侧面板的高度与左侧面板一致
+					rightPanelRef.value.style.maxHeight = 'none'
+					rightPanelRef.value.style.height = `${leftActualHeight}px`
+					rightPanelRef.value.style.overflow = 'visible'
+					
+					const strategyCard = leftPanelRef.value.querySelector('.strategy-card')
+					if (strategyCard) {
+						// 计算 strategy-card 的最大高度：左侧面板高度 - Revenue Model 卡片高度 - padding - gap
+						const revenueCard = leftPanelRef.value.querySelector('.revenue-hover-card')
+						const revenueCardHeight = revenueCard ? revenueCard.offsetHeight : 0
+						const leftPanelPadding = parseFloat(window.getComputedStyle(leftPanelRef.value).paddingTop) + parseFloat(window.getComputedStyle(leftPanelRef.value).paddingBottom)
+						const leftPanelGap = parseFloat(window.getComputedStyle(leftPanelRef.value).gap) || 12
+						const strategyCardMaxHeight = leftActualHeight - revenueCardHeight - leftPanelPadding - leftPanelGap
+						
+						strategyCard.style.maxHeight = `${strategyCardMaxHeight}px`
+						strategyCard.style.height = 'auto'
+						
+						// 如果内容超出，在 strategy-card 上显示滚动条
+						const strategyCardContentHeight = strategyCard.scrollHeight
+						if (strategyCardContentHeight > strategyCardMaxHeight) {
+							strategyCard.style.overflowY = 'auto'
+						} else {
+							strategyCard.style.overflowY = 'visible'
+						}
+						strategyCard.style.overflowX = 'visible'
+					}
+					
+					// content-panel 在内容超出时显示滚动条
+					const contentPanel = rightPanelRef.value.querySelector('.content-panel')
+					if (contentPanel) {
+						// 计算 content-panel 的最大高度：右侧面板高度 - padding
+						const rightPanelPadding = parseFloat(window.getComputedStyle(rightPanelRef.value).paddingTop) + parseFloat(window.getComputedStyle(rightPanelRef.value).paddingBottom)
+						const contentPanelMaxHeight = leftActualHeight - rightPanelPadding
+						
+						contentPanel.style.maxHeight = `${contentPanelMaxHeight}px`
+						contentPanel.style.height = 'auto'
+						
+						// 如果内容超出，在 content-panel 上显示滚动条
+						const contentHeight = contentPanel.scrollHeight
+						if (contentHeight > contentPanelMaxHeight) {
+							contentPanel.style.overflowY = 'auto'
+						} else {
+							contentPanel.style.overflowY = 'visible'
+						}
+						contentPanel.style.overflowX = 'visible'
+					}
+				})
+			}
+		})
+	}
+}
+
+// 监听内容变化，同步面板高度（固定高度不需要频繁更新，但窗口大小变化时需要）
+watch([activeContent, showLakeDetail, showBContent], () => {
+	// 内容变化时确保高度已设置
+	nextTick(() => {
+		syncPanelHeight()
+	})
+})
+
 function onWindowResize() {
 	// 使用防抖来优化性能，避免频繁重绘
 	clearTimeout(window.resizeTimer)
 	window.resizeTimer = setTimeout(() => {
+		// 同步面板高度（窗口大小变化时重新计算固定高度）
+		syncPanelHeight()
 		// 重新渲染所有图表以确保正确缩放
 		if (revenueChartInstance) {
 			revenueChartInstance.resize()
@@ -1550,8 +1896,8 @@ function goHome() {
 	right: 0;
 	bottom: 0;
 	background: linear-gradient(135deg,
-		rgba(20, 30, 48, 0.32) 0%,
-		rgba(36, 59, 85, 0.2) 100%);
+			rgba(20, 30, 48, 0.32) 0%,
+			rgba(36, 59, 85, 0.2) 100%);
 	backdrop-filter: blur(15px) saturate(120%);
 	-webkit-backdrop-filter: blur(15px) saturate(120%);
 	z-index: 1;
@@ -1565,9 +1911,9 @@ function goHome() {
 	right: 0;
 	bottom: 0;
 	background: linear-gradient(135deg,
-		rgba(0, 212, 255, 0.08) 0%,
-		transparent 50%,
-		rgba(0, 150, 255, 0.05) 100%);
+			rgba(0, 212, 255, 0.08) 0%,
+			transparent 50%,
+			rgba(0, 150, 255, 0.05) 100%);
 	z-index: 2;
 	opacity: 0;
 	transition: opacity 0.3s ease;
@@ -1603,8 +1949,8 @@ function goHome() {
 	right: 0;
 	bottom: 0;
 	background: linear-gradient(135deg,
-		rgba(36, 59, 85, 0.2) 0%,
-		rgba(20, 30, 48, 0.32) 100%);
+			rgba(36, 59, 85, 0.2) 0%,
+			rgba(20, 30, 48, 0.32) 100%);
 	backdrop-filter: blur(15px) saturate(120%);
 	-webkit-backdrop-filter: blur(15px) saturate(120%);
 	z-index: 1;
@@ -1618,9 +1964,9 @@ function goHome() {
 	right: 0;
 	bottom: 0;
 	background: linear-gradient(135deg,
-		rgba(94, 165, 170, 0.05) 0%,
-		transparent 50%,
-		rgba(0, 212, 255, 0.08) 100%);
+			rgba(94, 165, 170, 0.05) 0%,
+			transparent 50%,
+			rgba(0, 212, 255, 0.08) 100%);
 	z-index: 2;
 	opacity: 0;
 	transition: opacity 0.3s ease;
@@ -1696,19 +2042,18 @@ function goHome() {
 	transform: translateX(-50%);
 	width: 1px;
 	height: 80%;
-	background: linear-gradient(
-		180deg,
-		transparent 0%,
-		rgba(255, 255, 255, 0.1) 10%,
-		rgba(255, 255, 255, 0.2) 50%,
-		rgba(255, 255, 255, 0.1) 90%,
-		transparent 100%
-	);
+	background: linear-gradient(180deg,
+			transparent 0%,
+			rgba(255, 255, 255, 0.1) 10%,
+			rgba(255, 255, 255, 0.2) 50%,
+			rgba(255, 255, 255, 0.1) 90%,
+			transparent 100%);
 	z-index: 10;
 	box-shadow:
 		0 0 10px rgba(0, 212, 255, 0.2),
 		0 0 20px rgba(0, 212, 255, 0.1);
 }
+
 
 /* 响应式断点 - 内层容器 - 平板 */
 @media (max-width: 1024px) {
@@ -1900,21 +2245,11 @@ function goHome() {
 	}
 }
 
-/* B方块样式 - 左上角 */
-/* 删除不再需要的 block-b 和 block-c 样式 */
-
-/* 删除不再需要的方块响应式样式 */
-
-
 /* C方块内容面板 - 全屏 */
 .c-content-panel {
 	margin-top: 71px;
 	width: 100%;
 	height: calc(100% - 71px);
-	/*  background-image: url('../assets/c_clinet_bg.png');
-	background-size: 100% 100%;
-	background-position: center;
-	background-repeat: no-repeat; */
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -1935,7 +2270,7 @@ function goHome() {
 .b-content-panel {
 	width: 100%;
 	height: 100%;
-	background: url('../assets/bs_bg.png') center/contain;
+	background: url('../assets/bs_bg.png') center/cover no-repeat;
 	background-color: #000000;
 	position: absolute;
 	top: 0;
@@ -1945,48 +2280,66 @@ function goHome() {
 }
 
 .b-content-panel .main-content {
-	height: calc(100vh - 80px);
-	max-height: calc(100vh - 80px);
+	min-height: calc(100vh - 80px - 150px);
+	height: auto;
+	max-height: none;
 	padding-top: 80px;
-	padding-left: 150px;
-	padding-right: 10px;
+	padding-left: 80px;
+	padding-right: 50px;
+	padding-bottom: 20px;
+	overflow: visible;
 }
 
 /* 响应式布局 - 修复比例问题 */
-@media (max-width: 1920px) {
+@media (max-width: 1920px) and (min-width: 1601px) {
 	.b-content-panel .main-content {
-		padding-left: 100px;
-		padding-right: 20px;
+		padding-left: 80px;
+		padding-right: 60px;
+		gap: 12px;
 	}
-	
+
 	.b-content-panel .left-panel {
-		width: 480px !important;
-		min-width: 480px !important;
-		max-width: 480px !important;
+		flex: 0 0 520px !important;
+		min-width: 520px !important;
+		max-width: 520px !important;
 	}
-	
+
+	.b-content-panel .right-panel {
+		flex: 0 0 600px !important;
+		min-width: 600px !important;
+		max-width: 600px !important;
+		margin-right: 40px !important;
+	}
+
 	.b-content-panel .content-panel {
-		width: 540px !important;
+		width: 100% !important;
 	}
 }
 
 @media (max-width: 1600px) {
 	.b-content-panel .main-content {
 		padding-left: 60px;
-		padding-right: 20px;
+		padding-right: 40px;
 		gap: 12px;
 	}
-	
+
 	.b-content-panel .left-panel {
-		width: 420px !important;
-		min-width: 420px !important;
-		max-width: 420px !important;
+		width: 520px !important;
+		min-width: 520px !important;
+		max-width: 520px !important;
 	}
 	
+	.b-content-panel .right-panel {
+		flex: 0 0 550px !important;
+		min-width: 550px !important;
+		max-width: 550px !important;
+		margin-right: 30px !important;
+	}
+
 	.b-content-panel .content-panel {
 		width: 480px !important;
 	}
-	
+
 	.b-content-panel .chart-card.revenue-hover-card {
 		width: 100% !important;
 		max-width: 100% !important;
@@ -1996,10 +2349,10 @@ function goHome() {
 @media (max-width: 1366px) {
 	.b-content-panel .main-content {
 		padding-left: 40px;
-		padding-right: 15px;
+		padding-right: 30px;
 		gap: 10px;
 	}
-	
+
 	.b-content-panel .left-panel {
 		width: 380px !important;
 		min-width: 380px !important;
@@ -2007,16 +2360,23 @@ function goHome() {
 		padding: 12px;
 	}
 	
+	.b-content-panel .right-panel {
+		flex: 0 0 500px !important;
+		min-width: 500px !important;
+		max-width: 500px !important;
+		margin-right: 20px !important;
+	}
+
 	.b-content-panel .content-panel {
 		width: 420px !important;
 	}
-	
+
 	.b-content-panel .chart-card.revenue-hover-card {
 		width: 100% !important;
 		height: auto !important;
 		min-height: 260px;
 	}
-	
+
 	.b-content-panel .chart-container {
 		height: 200px !important;
 	}
@@ -2029,7 +2389,7 @@ function goHome() {
 		flex-direction: column;
 		overflow-y: auto;
 	}
-	
+
 	.b-content-panel .left-panel {
 		width: 100% !important;
 		min-width: 100% !important;
@@ -2037,6 +2397,13 @@ function goHome() {
 		height: auto !important;
 	}
 	
+	.b-content-panel .right-panel {
+		flex: 1 1 100% !important;
+		min-width: 100% !important;
+		max-width: 100% !important;
+		margin-right: 15px !important;
+	}
+
 	.b-content-panel .content-panel {
 		width: 100% !important;
 	}
@@ -2066,7 +2433,7 @@ function goHome() {
 .c-content-panel .close-content-btn {
 	color: #333333;
 	/* background: rgba(0, 0, 0, 0.1); */
-	background:#ffffff;
+	background: #ffffff;
 }
 
 .b-content-panel .close-content-btn {
@@ -2081,7 +2448,7 @@ function goHome() {
 
 .c-content-panel .close-content-btn:hover {
 	/* background: rgba(0, 0, 0, 0.2); */
-	background:#ffffff;
+	background: #ffffff;
 }
 
 .b-content-panel .close-content-btn:hover {
@@ -2171,6 +2538,7 @@ function goHome() {
 
 /* 小屏幕适配 */
 @media (max-width: 1024px) {
+
 	.c-content-wrapper .content-section.top-left,
 	.c-content-wrapper .content-section.top-right {
 		padding-bottom: 50%;
@@ -2183,6 +2551,7 @@ function goHome() {
 }
 
 @media (max-width: 640px) {
+
 	.c-content-wrapper .content-section.top-left,
 	.c-content-wrapper .content-section.top-right {
 		padding-bottom: 20px;
@@ -2342,36 +2711,47 @@ function goHome() {
 /* 主要内容区域 */
 .main-content {
 	display: flex;
-	height: calc(100vh - 80px);
-	max-height: calc(100vh - 80px);
+	min-height: calc(100vh - 80px - 150px);
+	height: auto;
+	max-height: none;
 	padding-top: 80px;
 	gap: 15px;
-	overflow: hidden;
-	padding-left: 150px;
-	padding-right: 10px;
+	overflow: visible;
+	padding-left: 80px;
+	padding-right: 50px;
+	padding-bottom: 20px;
 }
 
 /* 响应式布局 - 主内容区域 */
 @media (max-width: 1920px) {
 	.main-content {
-		padding-left: 100px;
-		padding-right: 20px;
+		padding-left: 80px;
+		padding-right: 60px;
+		gap: 12px;
 	}
 }
 
 @media (max-width: 1600px) {
 	.main-content {
 		padding-left: 60px;
-		padding-right: 20px;
+		padding-right: 40px;
 		gap: 12px;
+	}
+	
+	.right-panel {
+		margin-right: 30px;
 	}
 }
 
 @media (max-width: 1366px) {
 	.main-content {
 		padding-left: 40px;
-		padding-right: 15px;
+		padding-right: 30px;
 		gap: 10px;
+	}
+	
+	.right-panel {
+		margin-right: 20px;
 	}
 }
 
@@ -2382,35 +2762,39 @@ function goHome() {
 		flex-direction: column;
 		overflow-y: auto;
 	}
+	
+	.right-panel {
+		margin-right: 15px;
+	}
 }
 
 /* 左侧面板：Revenue Model + Channel Strategy */
 .left-panel {
-	flex: 0 0 416px;
-	min-width: 416px;
-	max-width: 416px;
+	flex: 0 0 520px;
+	min-width: 520px;
+	max-width: 520px;
 	padding: 15px;
 	display: flex;
 	flex-direction: column;
 	gap: 12px;
-	overflow: hidden;
-	height: calc(100vh - 80px);
+	overflow: visible;
+	/* 高度由 JavaScript 动态设置为固定值，overflow: visible 确保内容全部显示 */
 }
 
 /* 响应式布局 - 左侧面板 */
 @media (max-width: 1920px) {
 	.left-panel {
-		flex: 0 0 480px;
-		min-width: 480px;
-		max-width: 480px;
+		flex: 0 0 520px;
+		min-width: 520px;
+		max-width: 520px;
 	}
 }
 
 @media (max-width: 1600px) {
 	.left-panel {
-		flex: 0 0 420px;
-		min-width: 420px;
-		max-width: 420px;
+		flex: 0 0 520px;
+		min-width: 520px;
+		max-width: 520px;
 	}
 }
 
@@ -2464,13 +2848,95 @@ function goHome() {
 
 /* 右侧面板：详细内容 */
 .right-panel {
-	flex: 0 0 280px;
-	min-width: 280px;
-	max-width: 320px;
+	flex: 0 0 650px;
+	min-width: 650px;
+	max-width: 650px;
 	padding: 15px;
 	display: flex;
 	flex-direction: column;
-	overflow: hidden;
+	overflow: visible;
+	align-items: flex-start;
+	margin-left: auto;
+	margin-right: 40px;
+	margin-top: -100px; /* 往上移动100px */
+	/* 高度由 JavaScript 动态设置为固定值，margin-left: auto 确保面板在最右侧 */
+	/* 滚动条在 content-panel 内部显示，不在 right-panel 上 */
+}
+
+/* 响应式布局 - 右侧面板 */
+@media (max-width: 1920px) {
+	.right-panel {
+		flex: 0 0 600px;
+		min-width: 600px;
+		max-width: 600px;
+		margin-right: 40px;
+	}
+}
+
+@media (max-width: 1600px) {
+	.right-panel {
+		flex: 0 0 550px;
+		min-width: 550px;
+		max-width: 550px;
+		margin-right: 30px;
+	}
+}
+
+@media (max-width: 1366px) {
+	.right-panel {
+		flex: 0 0 500px;
+		min-width: 500px;
+		max-width: 500px;
+		margin-right: 20px;
+	}
+}
+
+@media (max-width: 1024px) {
+	.right-panel {
+		flex: 1 1 100%;
+		min-width: 100%;
+		max-width: 100%;
+		margin-right: 15px;
+	}
+}
+
+.right-panel .content-panel {
+	width: 100% !important;
+	max-width: 100% !important;
+	height: auto !important;
+	max-height: none !important;
+	overflow-y: auto;
+	overflow-x: visible;
+	box-sizing: border-box;
+	position: relative !important;
+	margin: 0 !important;
+	background: rgba(255, 255, 255, 0.05) !important;
+	backdrop-filter: blur(30px);
+	border: 1px solid rgba(255, 255, 255, 0.15) !important;
+	/* 滚动条在 content-panel 内部显示，不在 right-panel 上 */
+}
+
+/* 自定义滚动条样式 - 右侧面板 content-panel */
+.right-panel .content-panel::-webkit-scrollbar {
+	width: 6px;
+}
+
+.right-panel .content-panel::-webkit-scrollbar-track {
+	background: rgba(255, 255, 255, 0.1);
+	border-radius: 3px;
+}
+
+.right-panel .content-panel::-webkit-scrollbar-thumb {
+	background: rgba(255, 255, 255, 0.3);
+	border-radius: 3px;
+}
+
+.right-panel .content-panel::-webkit-scrollbar-thumb:hover {
+	background: rgba(255, 255, 255, 0.5);
+}
+
+.right-panel .content-panel::-webkit-scrollbar-corner {
+	background: transparent;
 }
 
 /* 默认内容样式 */
@@ -2634,30 +3100,31 @@ function goHome() {
 .strategy-card {
 	padding: 10px;
 	flex: 1;
-	overflow-y: auto;
-	max-height: calc(100vh - 280px);
+	overflow: visible;
+	/* 移除 max-height 限制，确保内容全部显示 */
 }
+
 /* 自定义滚动条样式 */
 .strategy-card::-webkit-scrollbar {
-  width: 6px;
+	width: 6px;
 }
 
 .strategy-card::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 3px;
+	background: rgba(255, 255, 255, 0.1);
+	border-radius: 3px;
 }
 
 .strategy-card::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 3px;
+	background: rgba(255, 255, 255, 0.3);
+	border-radius: 3px;
 }
 
 .strategy-card::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.5);
+	background: rgba(255, 255, 255, 0.5);
 }
 
 .strategy-card::-webkit-scrollbar-corner {
-  background: transparent;
+	background: transparent;
 }
 
 
@@ -3000,7 +3467,7 @@ function goHome() {
 
 .demand-chart-container .demand-chart-echarts {
 	width: 100%;
-	height: 160px;
+	height: 200px;
 	/* height: 100%; */
 }
 
@@ -3134,8 +3601,8 @@ function goHome() {
 }
 
 .pie-chart-echarts {
-	width: 120%;
-	height: 120px;
+	width: 140%;
+	height: 160px;
 }
 
 .description-text {
@@ -3177,6 +3644,7 @@ function goHome() {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	gap: 8px;
 	/* padding: 10px 0; */
 	/* border-bottom: 1px solid rgba(255, 255, 255, 0.1); */
 }
@@ -3187,11 +3655,17 @@ function goHome() {
 
 .legend-label {
 	color: #cccccc;
+	flex: 1;
+	min-width: 0;
+	word-break: break-word;
+	overflow-wrap: break-word;
 }
 
 .legend-value {
 	font-weight: 600;
 	color: #00d4ff;
+	flex-shrink: 0;
+	white-space: nowrap;
 }
 
 
@@ -3212,6 +3686,7 @@ function goHome() {
 	padding: 100px 80px;
 	box-sizing: border-box;
 }
+
 @media (max-width: 1920px) {
 	.revenue-modal {
 		padding: 60px 40px;
@@ -3518,5 +3993,25 @@ function goHome() {
 		opacity: 1;
 		transform: scale(1);
 	}
+}
+
+/* Financial Model 弹窗样式覆盖 */
+.financial-modal-wrapper :deep(.revenue-modal) {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: transparent;
+	backdrop-filter: none;
+	padding: 0;
+}
+
+.financial-modal-wrapper :deep(.revenue-modal-content) {
+	background: transparent;
+	border: none;
+	box-shadow: none;
+	width: 100%;
+	height: 100%;
 }
 </style>
