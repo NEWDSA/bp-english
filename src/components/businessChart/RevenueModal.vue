@@ -2509,29 +2509,29 @@ onBeforeUnmount(() => {
 .text-content-dark {
 	overflow-y: auto;
 	max-height: 100%;
-	margin: 25px 100px 60px 160px;
+	margin: 25px 10% 6% 16%;
 }
 /* 自定义滚动条样式 - 用于核心需求内容区域 */
-.text-content::-webkit-scrollbar {
+.text-content-dark::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
-.text-content::-webkit-scrollbar-track {
+.text-content-dark::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.05);
   border-radius: 3px;
 }
 
-.text-content::-webkit-scrollbar-thumb {
+.text-content-dark::-webkit-scrollbar-thumb {
   background: rgba(0, 0, 0, 0.2);
   border-radius: 3px;
 }
 
-.text-content::-webkit-scrollbar-thumb:hover {
+.text-content-dark::-webkit-scrollbar-thumb:hover {
   background: rgba(0, 0, 0, 0.3);
 }
 
-.text-content::-webkit-scrollbar-corner {
+.text-content-dark::-webkit-scrollbar-corner {
   background: transparent;
 }
 
