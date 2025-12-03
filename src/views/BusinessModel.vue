@@ -34,7 +34,7 @@
 								F
 							</div>
 							<div
-								class="text-lg sm:text-xl md:text-2xl font-medium text-white/90 uppercase tracking-[2px] md:tracking-[1.5px] sm:tracking-[0.5px] text-center leading-tight transition-all duration-300 ease-in-out [text-shadow:0_0_10px_rgba(0,212,255,0.5),0_0_20px_rgba(0,212,255,0.3)] group-hover:text-white group-hover:tracking-[3px] group-hover:[text-shadow:0_0_15px_rgba(0,212,255,0.8),0_0_30px_rgba(0,212,255,0.5)]">
+								class="region-text text-lg sm:text-xl md:text-2xl tracking-[2px] md:tracking-[1.5px] sm:tracking-[0.5px] text-center leading-tight transition-all duration-300 ease-in-out [text-shadow:0_0_10px_rgba(0,212,255,0.5),0_0_20px_rgba(0,212,255,0.3)] group-hover:text-white group-hover:tracking-[3px] group-hover:[text-shadow:0_0_15px_rgba(0,212,255,0.8),0_0_30px_rgba(0,212,255,0.5)]">
 								<div>Financial</div>
 								<div>Model</div>
 							</div>
