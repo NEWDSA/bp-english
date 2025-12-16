@@ -112,7 +112,7 @@
 import { ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
 
-const PASSWORD = 'bp2025' // 默认密码，可以根据需要修改
+const PASSWORD = 'bp@fly!?6'
 const STORAGE_KEY = 'bp_english_auth'
 
 const route = useRoute()
@@ -124,9 +124,9 @@ const isLoading = ref(false)
 // 检查是否已认证
 const isAuthenticated = computed(() => {
   // /team-composition 路径不需要密码验证
-  if (route.path.includes('/team-composition')) {
-    return true
-  }
+  // if (route.path.includes('/team-composition')) {
+  //   return true
+  // }
   const authStatus = localStorage.getItem(STORAGE_KEY)
   return authStatus === 'authenticated'
 })

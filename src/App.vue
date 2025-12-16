@@ -10,9 +10,9 @@ const route = useRoute()
 // 检查认证状态
 const isAuthenticated = computed(() => {
   // /team-composition 路径不需要密码验证
-  if (route.path.includes('/team-composition')) {
-    return true
-  }
+  // if (route.path.includes('/team-composition')) {
+  //   return true
+  // }
   const authStatus = localStorage.getItem('bp_english_auth')
   return authStatus === 'authenticated'
 })
