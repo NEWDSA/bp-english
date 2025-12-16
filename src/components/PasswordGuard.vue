@@ -103,6 +103,20 @@
         <div class="mt-8 text-center">
           <p class="text-xs text-slate-500">安全访问 · 受保护内容</p>
         </div>
+
+        <!-- 设置入口 -->
+        <div class="mt-4 text-center">
+          <router-link
+            to="/settings"
+            class="inline-flex items-center gap-2 text-slate-500 hover:text-slate-300 transition-colors duration-300 text-sm"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <span>修改密码</span>
+          </router-link>
+        </div>
       </div>
     </div>
   </div>
@@ -112,7 +126,6 @@
 import { ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
 
-const PASSWORD = 'bp@fly!?6'
 const STORAGE_KEY = 'bp_english_auth'
 
 const route = useRoute()
@@ -132,9 +145,9 @@ const isAuthenticated = computed(() => {
 })
 
 // 处理表单提交
-const handleSubmit = () => {
+const handleSubmit = async () => {
   error.value = ''
-  
+
   if (!password.value) {
     error.value = '请输入密码'
     return
@@ -142,19 +155,32 @@ const handleSubmit = () => {
 
   isLoading.value = true
 
-  // 模拟验证延迟，提供更好的用户体验
-  setTimeout(() => {
-    if (password.value === PASSWORD) {
+  try {
+    const response = await fetch('/api/auth/verify', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ password: password.value })
+    })
+
+    const data = await response.json()
+
+    if (data.success) {
       // 保存认证状态到 localStorage
       localStorage.setItem(STORAGE_KEY, 'authenticated')
       // 触发页面重新加载以显示应用内容
       window.location.reload()
     } else {
-      error.value = '密码错误，请重试'
+      error.value = data.message || '密码错误，请重试'
       password.value = ''
-      isLoading.value = false
     }
-  }, 300)
+  } catch (err) {
+    error.value = '网络错误，请稍后重试'
+    console.error('验证请求失败:', err)
+  } finally {
+    isLoading.value = false
+  }
 }
 </script>
 

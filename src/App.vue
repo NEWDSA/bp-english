@@ -13,6 +13,11 @@ const isAuthenticated = computed(() => {
   // if (route.path.includes('/team-composition')) {
   //   return true
   // }
+
+  // /settings 路径不需要密码验证
+  if (route.path === '/settings') {
+    return true
+  }
   const authStatus = localStorage.getItem('bp_english_auth')
   return authStatus === 'authenticated'
 })

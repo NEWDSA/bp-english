@@ -6,6 +6,7 @@ const MarketDemand = () => import('../views/MarketDemand.vue')
 const BusinessModel = () => import('../views/BusinessModel.vue')
 const TeamComposition = () => import('../views/TeamComposition.vue')
 const ProductIntroduction = () => import('../views/ProductIntroduction.vue')
+const Settings = () => import('../views/Settings.vue')
 
 export const router = createRouter({
 	history: createWebHistory(),
@@ -15,7 +16,8 @@ export const router = createRouter({
 		{ path: '/industry-background', name: 'industry-background', component: IndustryBackground },
 		{ path: '/market-demand', name: 'market-demand', component: MarketDemand },
 		{ path: '/business-model', name: 'business-model', component: BusinessModel },
-		{ path: '/team-composition', name: 'team-composition', component: TeamComposition }
+		{ path: '/team-composition', name: 'team-composition', component: TeamComposition },
+		{ path: '/settings', name: 'settings', component: Settings }
 	]
 })
 

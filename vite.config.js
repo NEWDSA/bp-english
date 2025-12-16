@@ -112,6 +112,13 @@ export default defineConfig({
     open: true,
     // 启用 HTTP/2
     http2: true,
+    // API 代理配置
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3001',
+        changeOrigin: true,
+      },
+    },
   },
   // 优化依赖预构建
   optimizeDeps: {
