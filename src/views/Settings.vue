@@ -30,7 +30,7 @@
             </svg>
           </div>
           <h1 class="text-4xl font-bold text-white mb-3 tracking-tight">系统设置</h1>
-          <p class="text-slate-400 text-lg">修改访问密码</p>
+          <p class="text-slate-300 text-lg">修改访问密码</p>
         </div>
 
         <form @submit.prevent="handleSubmit" class="space-y-5">
@@ -145,7 +145,7 @@
         <div class="mt-6 text-center">
           <a
             @click="goToLogin"
-            class="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors duration-300 cursor-pointer"
+            class="inline-flex items-center gap-2 text-slate-300 hover:text-white transition-colors duration-300 cursor-pointer"
           >
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />

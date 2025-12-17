@@ -115,7 +115,7 @@ export default defineConfig({
     // API 代理配置
     proxy: {
       '/api': {
-        target: 'http://localhost:3001',
+        target: 'http://0.0.0.0:3001',
         changeOrigin: true,
       },
     },

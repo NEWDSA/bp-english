@@ -136,12 +136,14 @@ const isLoading = ref(false)
 
 // 检查是否已认证
 const isAuthenticated = computed(() => {
-  // /team-composition 路径不需要密码验证
-  // if (route.path.includes('/team-composition')) {
-  //   return true
-  // }
-  const authStatus = localStorage.getItem(STORAGE_KEY)
-  return authStatus === 'authenticated'
+  try {
+    const authData = localStorage.getItem(STORAGE_KEY)
+    if (!authData) return false
+    const { status } = JSON.parse(authData)
+    return status === 'authenticated'
+  } catch {
+    return false
+  }
 })
 
 // 处理表单提交
@@ -167,8 +169,11 @@ const handleSubmit = async () => {
     const data = await response.json()
 
     if (data.success) {
-      // 保存认证状态到 localStorage
-      localStorage.setItem(STORAGE_KEY, 'authenticated')
+      // 保存认证状态和版本号到 localStorage
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        status: 'authenticated',
+        version: data.passwordVersion
+      }))
       // 触发页面重新加载以显示应用内容
       window.location.reload()
     } else {

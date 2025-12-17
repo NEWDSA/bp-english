@@ -14,12 +14,12 @@ const PORT = 3001
 app.use(cors())
 app.use(express.json())
 
-// 读取密码配置
-const getPassword = () => {
+// 读取配置
+const getConfig = () => {
   try {
     const configPath = join(__dirname, 'config.json')
     const config = JSON.parse(readFileSync(configPath, 'utf-8'))
-    return config.password
+    return config
   } catch (error) {
     console.error('读取配置文件失败:', error)
     return null
@@ -37,19 +37,20 @@ app.post('/api/auth/verify', (req, res) => {
     })
   }
 
-  const correctPassword = getPassword()
+  const config = getConfig()
 
-  if (!correctPassword) {
+  if (!config) {
     return res.status(500).json({
       success: false,
       message: '服务器配置错误'
     })
   }
 
-  if (password === correctPassword) {
+  if (password === config.password) {
     return res.json({
       success: true,
-      message: '验证成功'
+      message: '验证成功',
+      passwordVersion: config.passwordVersion
     })
   } else {
     return res.status(401).json({
@@ -77,16 +78,16 @@ app.post('/api/auth/change-password', (req, res) => {
     })
   }
 
-  const currentPassword = getPassword()
+  const config = getConfig()
 
-  if (!currentPassword) {
+  if (!config) {
     return res.status(500).json({
       success: false,
       message: '服务器配置错误'
     })
   }
 
-  if (oldPassword !== currentPassword) {
+  if (oldPassword !== config.password) {
     return res.status(401).json({
       success: false,
       message: '旧密码错误'
@@ -95,8 +96,11 @@ app.post('/api/auth/change-password', (req, res) => {
 
   try {
     const configPath = join(__dirname, 'config.json')
-    const config = { password: newPassword }
-    writeFileSync(configPath, JSON.stringify(config, null, 2), 'utf-8')
+    const newConfig = {
+      password: newPassword,
+      passwordVersion: (config.passwordVersion || 0) + 1
+    }
+    writeFileSync(configPath, JSON.stringify(newConfig, null, 2), 'utf-8')
 
     return res.json({
       success: true,
@@ -109,6 +113,24 @@ app.post('/api/auth/change-password', (req, res) => {
       message: '保存密码失败'
     })
   }
+})
+
+// 版本验证接口
+app.post('/api/auth/check-version', (req, res) => {
+  const { passwordVersion } = req.body
+  const config = getConfig()
+
+  if (!config) {
+    return res.status(500).json({
+      valid: false,
+      message: '服务器配置错误'
+    })
+  }
+
+  if (passwordVersion === config.passwordVersion) {
+    return res.json({ valid: true })
+  }
+  return res.json({ valid: false })
 })
 
 // 健康检查接口

@@ -19,6 +19,13 @@
 			<router-link to="/business-model" :class="['px-3 py-2 cursor-pointer transition-all duration-300 relative text-lg font-medium no-underline text-center whitespace-nowrap lg:px-5 lg:py-[10px] md:px-[15px] md:py-2 hover:text-[#00d4ff]', isActive('/business-model') ? 'text-[#00d4ff] after:content-[\'\'] after:absolute after:-bottom-[5px] after:left-0 after:right-0 after:h-0.5 after:bg-[#00d4ff]' : 'text-white']">Business Model</router-link>
 			<div class="w-px h-5 bg-white/30 flex-shrink-0"></div>
 			<router-link to="/team-composition" :class="['px-3 py-2 cursor-pointer transition-all duration-300 relative text-lg font-medium no-underline text-center whitespace-nowrap lg:px-5 lg:py-[10px] md:px-[15px] md:py-2 hover:text-[#00d4ff]', isActive('/team-composition') ? 'text-[#00d4ff] after:content-[\'\'] after:absolute after:-bottom-[5px] after:left-0 after:right-0 after:h-0.5 after:bg-[#00d4ff]' : 'text-white']">Team Composition</router-link>
+			<div class="w-px h-5 bg-white/30 flex-shrink-0"></div>
+			<!-- Settings Icon -->
+			<div class="cursor-pointer transition-all duration-300 p-[5px] rounded-full backdrop-blur-[10px] hover:bg-[rgba(0,212,255,0.2)] hover:scale-110" @click="router.push('/settings')">
+				<div class="w-[25px] h-[25px] flex items-center justify-center">
+					<img src="@/assets/setting.png" alt="Settings" class="w-full h-full object-contain" />
+				</div>
+			</div>
 		</div>
 	</nav>
 </template>
