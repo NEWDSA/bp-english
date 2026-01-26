@@ -137,6 +137,11 @@ const isLoading = ref(false)
 // 检查是否已认证
 const isAuthenticated = computed(() => {
   try {
+    // /team-composition 路径不需要密码验证
+    if (route.path.includes('/team-composition')) {
+      return true
+    }
+
     const authData = localStorage.getItem(STORAGE_KEY)
     if (!authData) return false
     const { status } = JSON.parse(authData)
