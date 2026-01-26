@@ -33,8 +33,8 @@ onMounted(async () => {
 
 // 检查认证状态
 const isAuthenticated = computed(() => {
-  // /settings 路径 和 团队  不需要密码验证
-  if (route.path === '/settings' || route.path.includes('/team-composition')) {
+  // /settings 路径不需要密码验证
+  if (route.path === '/settings') {
     return true
   }
   try {
