@@ -450,9 +450,9 @@
                                     <div
                                         class="text-white text-[20px] font-bold flex items-center justify-center mb-10">
                                         1</div>
-                                    <div class="text-[20px] mb-2">The Definer of the Future Water-X Pontoon</div>
+                                    <div class="text-[20px] mb-2">The Definer of the Future – the 128-Meter Cultural Tourism Vessel</div>
                                     <div class="text-[18px] mb-1 text-white/70">Project: Wuhu Pearl</div>
-                                    <div class="text-[18px] mb-1 text-white/70">Launch Date: September 2022</div>
+                                    <div class="text-[18px] mb-1 text-white/70">Expected release date: May 2026</div>
                                     <div class="text-[18px] mb-1 text-white/70">Location: Wuhu, Anhui</div>
                                 </div>
                             </div>
